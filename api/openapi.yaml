@@ -1627,8 +1627,7 @@ paths:
           content:
             application/json:
               schema:
-                oneOf:
-                - $ref: '#/components/schemas/ValidationProblemDetails'
+                $ref: '#/components/schemas/ValidationProblemDetails'
           description: Not Found
       security:
       - oauth2:
@@ -1664,8 +1663,7 @@ paths:
           content:
             application/json:
               schema:
-                oneOf:
-                - $ref: '#/components/schemas/ValidationProblemDetails'
+                $ref: '#/components/schemas/ValidationProblemDetails'
           description: Not Found
       security:
       - oauth2:
@@ -1697,8 +1695,7 @@ paths:
           content:
             application/json:
               schema:
-                oneOf:
-                - $ref: '#/components/schemas/ValidationProblemDetails'
+                $ref: '#/components/schemas/ValidationProblemDetails'
           description: Not Found
         "422":
           content:
@@ -1744,12 +1741,10 @@ paths:
           content:
             application/json:
               schema:
-                oneOf:
-                - $ref: '#/components/schemas/ValidationProblemDetails'
+                $ref: '#/components/schemas/ValidationProblemDetails'
             application/pdf:
               schema:
-                oneOf:
-                - $ref: '#/components/schemas/ValidationProblemDetails'
+                $ref: '#/components/schemas/ValidationProblemDetails'
           description: Bad Request
         "401":
           description: Authorization missing or invalid
@@ -1760,12 +1755,10 @@ paths:
           content:
             application/json:
               schema:
-                oneOf:
-                - $ref: '#/components/schemas/ValidationProblemDetails'
+                $ref: '#/components/schemas/ValidationProblemDetails'
             application/pdf:
               schema:
-                oneOf:
-                - $ref: '#/components/schemas/ValidationProblemDetails'
+                $ref: '#/components/schemas/ValidationProblemDetails'
           description: Not Found
       security:
       - oauth2:
@@ -1990,8 +1983,7 @@ paths:
           content:
             application/json:
               schema:
-                oneOf:
-                - $ref: '#/components/schemas/ValidationProblemDetails'
+                $ref: '#/components/schemas/ValidationProblemDetails'
           description: Bad Request
         "401":
           description: Authorization missing or invalid
@@ -2002,8 +1994,7 @@ paths:
           content:
             application/json:
               schema:
-                oneOf:
-                - $ref: '#/components/schemas/ValidationProblemDetails'
+                $ref: '#/components/schemas/ValidationProblemDetails'
           description: Client Error
       security:
       - oauth2:
@@ -2048,8 +2039,7 @@ paths:
           content:
             application/json:
               schema:
-                oneOf:
-                - $ref: '#/components/schemas/ValidationProblemDetails'
+                $ref: '#/components/schemas/ValidationProblemDetails'
           description: Not Found
       security:
       - oauth2:
@@ -2103,8 +2093,7 @@ paths:
           content:
             application/json:
               schema:
-                oneOf:
-                - $ref: '#/components/schemas/ValidationProblemDetails'
+                $ref: '#/components/schemas/ValidationProblemDetails'
           description: Bad Request
         "401":
           description: Authorization missing or invalid
@@ -2115,8 +2104,7 @@ paths:
           content:
             application/json:
               schema:
-                oneOf:
-                - $ref: '#/components/schemas/ValidationProblemDetails'
+                $ref: '#/components/schemas/ValidationProblemDetails'
           description: Client Error
       security:
       - oauth2:
@@ -2161,15 +2149,13 @@ paths:
           content:
             application/json:
               schema:
-                oneOf:
-                - $ref: '#/components/schemas/ValidationProblemDetails'
+                $ref: '#/components/schemas/ValidationProblemDetails'
           description: Not Found
         "422":
           content:
             application/json:
               schema:
-                oneOf:
-                - $ref: '#/components/schemas/ValidationProblemDetails'
+                $ref: '#/components/schemas/ValidationProblemDetails'
           description: Client Error
       security:
       - oauth2:
@@ -2214,8 +2200,7 @@ paths:
           content:
             application/json:
               schema:
-                oneOf:
-                - $ref: '#/components/schemas/ValidationProblemDetails'
+                $ref: '#/components/schemas/ValidationProblemDetails'
           description: Not Found
       security:
       - oauth2:
@@ -2761,8 +2746,7 @@ paths:
           content:
             application/json:
               schema:
-                oneOf:
-                - $ref: '#/components/schemas/ValidationProblemDetails'
+                $ref: '#/components/schemas/ValidationProblemDetails'
           description: Not Found
       security:
       - oauth2: []
