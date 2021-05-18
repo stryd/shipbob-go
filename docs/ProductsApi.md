@@ -14,7 +14,7 @@ Method | HTTP request | Description
 
 ## ProductBatchPost
 
-> []ShipbobProductsApiViewModelsPublicProductViewModel ProductBatchPost(ctx).ShipbobChannelId(shipbobChannelId).ShipbobProductsApiModelsPublicCreateProductModel(shipbobProductsApiModelsPublicCreateProductModel).Execute()
+> []ProductsProductViewModel ProductBatchPost(ctx).ShipbobChannelId(shipbobChannelId).ProductsCreateProductModel(productsCreateProductModel).Execute()
 
 Add multiple products to the store
 
@@ -32,16 +32,16 @@ import (
 
 func main() {
     shipbobChannelId := int32(56) // int32 | Channel Id for Operation
-    shipbobProductsApiModelsPublicCreateProductModel := []openapiclient.ShipbobProductsApiModelsPublicCreateProductModel{*openapiclient.NewShipbobProductsApiModelsPublicCreateProductModel("Medium Blue T-Shirt", "TShirtBlueM")} // []ShipbobProductsApiModelsPublicCreateProductModel | List of products to add (optional)
+    productsCreateProductModel := []openapiclient.ProductsCreateProductModel{*openapiclient.NewProductsCreateProductModel("Medium Blue T-Shirt", "TShirtBlueM")} // []ProductsCreateProductModel | List of products to add (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ProductsApi.ProductBatchPost(context.Background()).ShipbobChannelId(shipbobChannelId).ShipbobProductsApiModelsPublicCreateProductModel(shipbobProductsApiModelsPublicCreateProductModel).Execute()
+    resp, r, err := api_client.ProductsApi.ProductBatchPost(context.Background()).ShipbobChannelId(shipbobChannelId).ProductsCreateProductModel(productsCreateProductModel).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ProductsApi.ProductBatchPost``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `ProductBatchPost`: []ShipbobProductsApiViewModelsPublicProductViewModel
+    // response from `ProductBatchPost`: []ProductsProductViewModel
     fmt.Fprintf(os.Stdout, "Response from `ProductsApi.ProductBatchPost`: %v\n", resp)
 }
 ```
@@ -58,11 +58,11 @@ Other parameters are passed through a pointer to a apiProductBatchPostRequest st
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **shipbobChannelId** | **int32** | Channel Id for Operation | 
- **shipbobProductsApiModelsPublicCreateProductModel** | [**[]ShipbobProductsApiModelsPublicCreateProductModel**](Shipbob.Products.Api.Models.Public.CreateProductModel.md) | List of products to add | 
+ **productsCreateProductModel** | [**[]ProductsCreateProductModel**](Products.CreateProductModel.md) | List of products to add | 
 
 ### Return type
 
-[**[]ShipbobProductsApiViewModelsPublicProductViewModel**](Shipbob.Products.Api.ViewModels.Public.ProductViewModel.md)
+[**[]ProductsProductViewModel**](Products.ProductViewModel.md)
 
 ### Authorization
 
@@ -80,7 +80,7 @@ Name | Type | Description  | Notes
 
 ## ProductGet
 
-> []ShipbobProductsApiViewModelsPublicProductViewModel ProductGet(ctx).Page(page).Limit(limit).IDs(iDs).ReferenceIds(referenceIds).Search(search).ActiveStatus(activeStatus).BundleStatus(bundleStatus).ShipbobChannelId(shipbobChannelId).Execute()
+> []ProductsProductViewModel ProductGet(ctx).Page(page).Limit(limit).IDs(iDs).ReferenceIds(referenceIds).Search(search).ActiveStatus(activeStatus).BundleStatus(bundleStatus).ShipbobChannelId(shipbobChannelId).Execute()
 
 Get multiple products
 
@@ -102,8 +102,8 @@ func main() {
     iDs := []int32{int32(123)} // []int32 | Comma separated list of product ids to filter by (optional)
     referenceIds := []string{"Inner_example"} // []string | Comma separated list of reference ids to filter by (optional)
     search := "search_example" // string | Search is available for 2 fields of the inventory record related to the product: Inventory ID and Name -\\r\\n1. Expected behavior for search by Inventory ID is exact match\\r\\n2. Expected behavior for search by Inventory Name is partial match, i.e. does not have to be start of word, \\r\\nbut must be consecutive characters. This is not case sensitive. (optional)
-    activeStatus := openapiclient.Shipbob.Products.Common.Models.ProductActiveStatus("Any") // ShipbobProductsCommonModelsProductActiveStatus | Status filter for products:\\r\\n- Any: Include both active and inactive\\r\\n- Active: Filter products that are Active\\r\\n- Inactive: Filter products that are Inactive (optional)
-    bundleStatus := openapiclient.Shipbob.Products.Common.Models.ProductBundleStatus("Any") // ShipbobProductsCommonModelsProductBundleStatus | Bundle filter for products:\\r\\n- Any: Don't filter and consider products that are bundles or not bundles\\r\\n- Bundle: Filter by products that are bundles\\r\\n- NotBundle: Filter by products that are not bundles (optional)
+    activeStatus := openapiclient.Products.ProductActiveStatus("Any") // ProductsProductActiveStatus | Status filter for products:\\r\\n- Any: Include both active and inactive\\r\\n- Active: Filter products that are Active\\r\\n- Inactive: Filter products that are Inactive (optional)
+    bundleStatus := openapiclient.Products.ProductBundleStatus("Any") // ProductsProductBundleStatus | Bundle filter for products:\\r\\n- Any: Don't filter and consider products that are bundles or not bundles\\r\\n- Bundle: Filter by products that are bundles\\r\\n- NotBundle: Filter by products that are not bundles (optional)
     shipbobChannelId := int32(56) // int32 | Channel Id for Operation (optional)
 
     configuration := openapiclient.NewConfiguration()
@@ -113,7 +113,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `ProductsApi.ProductGet``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `ProductGet`: []ShipbobProductsApiViewModelsPublicProductViewModel
+    // response from `ProductGet`: []ProductsProductViewModel
     fmt.Fprintf(os.Stdout, "Response from `ProductsApi.ProductGet`: %v\n", resp)
 }
 ```
@@ -134,13 +134,13 @@ Name | Type | Description  | Notes
  **iDs** | **[]int32** | Comma separated list of product ids to filter by | 
  **referenceIds** | **[]string** | Comma separated list of reference ids to filter by | 
  **search** | **string** | Search is available for 2 fields of the inventory record related to the product: Inventory ID and Name -\\r\\n1. Expected behavior for search by Inventory ID is exact match\\r\\n2. Expected behavior for search by Inventory Name is partial match, i.e. does not have to be start of word, \\r\\nbut must be consecutive characters. This is not case sensitive. | 
- **activeStatus** | [**ShipbobProductsCommonModelsProductActiveStatus**](ShipbobProductsCommonModelsProductActiveStatus.md) | Status filter for products:\\r\\n- Any: Include both active and inactive\\r\\n- Active: Filter products that are Active\\r\\n- Inactive: Filter products that are Inactive | 
- **bundleStatus** | [**ShipbobProductsCommonModelsProductBundleStatus**](ShipbobProductsCommonModelsProductBundleStatus.md) | Bundle filter for products:\\r\\n- Any: Don&#39;t filter and consider products that are bundles or not bundles\\r\\n- Bundle: Filter by products that are bundles\\r\\n- NotBundle: Filter by products that are not bundles | 
+ **activeStatus** | [**ProductsProductActiveStatus**](ProductsProductActiveStatus.md) | Status filter for products:\\r\\n- Any: Include both active and inactive\\r\\n- Active: Filter products that are Active\\r\\n- Inactive: Filter products that are Inactive | 
+ **bundleStatus** | [**ProductsProductBundleStatus**](ProductsProductBundleStatus.md) | Bundle filter for products:\\r\\n- Any: Don&#39;t filter and consider products that are bundles or not bundles\\r\\n- Bundle: Filter by products that are bundles\\r\\n- NotBundle: Filter by products that are not bundles | 
  **shipbobChannelId** | **int32** | Channel Id for Operation | 
 
 ### Return type
 
-[**[]ShipbobProductsApiViewModelsPublicProductViewModel**](Shipbob.Products.Api.ViewModels.Public.ProductViewModel.md)
+[**[]ProductsProductViewModel**](Products.ProductViewModel.md)
 
 ### Authorization
 
@@ -158,7 +158,7 @@ Name | Type | Description  | Notes
 
 ## ProductPost
 
-> []ShipbobProductsApiViewModelsPublicProductViewModel ProductPost(ctx).ShipbobChannelId(shipbobChannelId).ShipbobProductsApiModelsPublicCreateProductModel(shipbobProductsApiModelsPublicCreateProductModel).Execute()
+> []ProductsProductViewModel ProductPost(ctx).ShipbobChannelId(shipbobChannelId).ProductsCreateProductModel(productsCreateProductModel).Execute()
 
 Add a single product to the store
 
@@ -176,16 +176,16 @@ import (
 
 func main() {
     shipbobChannelId := int32(56) // int32 | Channel Id for Operation
-    shipbobProductsApiModelsPublicCreateProductModel := *openapiclient.NewShipbobProductsApiModelsPublicCreateProductModel("Medium Blue T-Shirt", "TShirtBlueM") // ShipbobProductsApiModelsPublicCreateProductModel | The product to add (optional)
+    productsCreateProductModel := *openapiclient.NewProductsCreateProductModel("Medium Blue T-Shirt", "TShirtBlueM") // ProductsCreateProductModel | The product to add (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ProductsApi.ProductPost(context.Background()).ShipbobChannelId(shipbobChannelId).ShipbobProductsApiModelsPublicCreateProductModel(shipbobProductsApiModelsPublicCreateProductModel).Execute()
+    resp, r, err := api_client.ProductsApi.ProductPost(context.Background()).ShipbobChannelId(shipbobChannelId).ProductsCreateProductModel(productsCreateProductModel).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ProductsApi.ProductPost``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `ProductPost`: []ShipbobProductsApiViewModelsPublicProductViewModel
+    // response from `ProductPost`: []ProductsProductViewModel
     fmt.Fprintf(os.Stdout, "Response from `ProductsApi.ProductPost`: %v\n", resp)
 }
 ```
@@ -202,11 +202,11 @@ Other parameters are passed through a pointer to a apiProductPostRequest struct 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **shipbobChannelId** | **int32** | Channel Id for Operation | 
- **shipbobProductsApiModelsPublicCreateProductModel** | [**ShipbobProductsApiModelsPublicCreateProductModel**](ShipbobProductsApiModelsPublicCreateProductModel.md) | The product to add | 
+ **productsCreateProductModel** | [**ProductsCreateProductModel**](ProductsCreateProductModel.md) | The product to add | 
 
 ### Return type
 
-[**[]ShipbobProductsApiViewModelsPublicProductViewModel**](Shipbob.Products.Api.ViewModels.Public.ProductViewModel.md)
+[**[]ProductsProductViewModel**](Products.ProductViewModel.md)
 
 ### Authorization
 
@@ -224,7 +224,7 @@ Name | Type | Description  | Notes
 
 ## ProductProductIdGet
 
-> ShipbobProductsApiViewModelsPublicProductViewModel ProductProductIdGet(ctx, productId).ShipbobChannelId(shipbobChannelId).Execute()
+> ProductsProductViewModel ProductProductIdGet(ctx, productId).ShipbobChannelId(shipbobChannelId).Execute()
 
 Get a single product
 
@@ -251,7 +251,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `ProductsApi.ProductProductIdGet``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `ProductProductIdGet`: ShipbobProductsApiViewModelsPublicProductViewModel
+    // response from `ProductProductIdGet`: ProductsProductViewModel
     fmt.Fprintf(os.Stdout, "Response from `ProductsApi.ProductProductIdGet`: %v\n", resp)
 }
 ```
@@ -276,7 +276,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ShipbobProductsApiViewModelsPublicProductViewModel**](Shipbob.Products.Api.ViewModels.Public.ProductViewModel.md)
+[**ProductsProductViewModel**](Products.ProductViewModel.md)
 
 ### Authorization
 
@@ -294,7 +294,7 @@ Name | Type | Description  | Notes
 
 ## ProductProductIdPut
 
-> []ShipbobProductsApiViewModelsPublicProductViewModel ProductProductIdPut(ctx, productId).ShipbobChannelId(shipbobChannelId).ShipbobProductsApiModelsPublicUpdateProductModel(shipbobProductsApiModelsPublicUpdateProductModel).Execute()
+> []ProductsProductViewModel ProductProductIdPut(ctx, productId).ShipbobChannelId(shipbobChannelId).ProductsUpdateProductModel(productsUpdateProductModel).Execute()
 
 Modify a single product
 
@@ -313,16 +313,16 @@ import (
 func main() {
     productId := int32(56) // int32 | Unique identifier of the product to modify
     shipbobChannelId := int32(56) // int32 | Channel Id for Operation
-    shipbobProductsApiModelsPublicUpdateProductModel := *openapiclient.NewShipbobProductsApiModelsPublicUpdateProductModel("Medium Blue T-Shirt") // ShipbobProductsApiModelsPublicUpdateProductModel | Updated fields to the product (optional)
+    productsUpdateProductModel := *openapiclient.NewProductsUpdateProductModel("Medium Blue T-Shirt") // ProductsUpdateProductModel | Updated fields to the product (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ProductsApi.ProductProductIdPut(context.Background(), productId).ShipbobChannelId(shipbobChannelId).ShipbobProductsApiModelsPublicUpdateProductModel(shipbobProductsApiModelsPublicUpdateProductModel).Execute()
+    resp, r, err := api_client.ProductsApi.ProductProductIdPut(context.Background(), productId).ShipbobChannelId(shipbobChannelId).ProductsUpdateProductModel(productsUpdateProductModel).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ProductsApi.ProductProductIdPut``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `ProductProductIdPut`: []ShipbobProductsApiViewModelsPublicProductViewModel
+    // response from `ProductProductIdPut`: []ProductsProductViewModel
     fmt.Fprintf(os.Stdout, "Response from `ProductsApi.ProductProductIdPut`: %v\n", resp)
 }
 ```
@@ -344,11 +344,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
  **shipbobChannelId** | **int32** | Channel Id for Operation | 
- **shipbobProductsApiModelsPublicUpdateProductModel** | [**ShipbobProductsApiModelsPublicUpdateProductModel**](ShipbobProductsApiModelsPublicUpdateProductModel.md) | Updated fields to the product | 
+ **productsUpdateProductModel** | [**ProductsUpdateProductModel**](ProductsUpdateProductModel.md) | Updated fields to the product | 
 
 ### Return type
 
-[**[]ShipbobProductsApiViewModelsPublicProductViewModel**](Shipbob.Products.Api.ViewModels.Public.ProductViewModel.md)
+[**[]ProductsProductViewModel**](Products.ProductViewModel.md)
 
 ### Authorization
 

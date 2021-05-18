@@ -12,7 +12,7 @@ Method | HTTP request | Description
 
 ## InventoryGet
 
-> []ShipbobInventoryApiViewModelsInventoryViewModel InventoryGet(ctx).Page(page).Limit(limit).IsActive(isActive).IsDigital(isDigital).IDs(iDs).Sort(sort).Search(search).ShipbobChannelId(shipbobChannelId).Execute()
+> []InventoryInventoryViewModel InventoryGet(ctx).Page(page).Limit(limit).IsActive(isActive).IsDigital(isDigital).IDs(iDs).Sort(sort).Search(search).ShipbobChannelId(shipbobChannelId).Execute()
 
 List inventory items
 
@@ -45,7 +45,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `InventoryApi.InventoryGet``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `InventoryGet`: []ShipbobInventoryApiViewModelsInventoryViewModel
+    // response from `InventoryGet`: []InventoryInventoryViewModel
     fmt.Fprintf(os.Stdout, "Response from `InventoryApi.InventoryGet`: %v\n", resp)
 }
 ```
@@ -72,7 +72,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]ShipbobInventoryApiViewModelsInventoryViewModel**](Shipbob.Inventory.Api.ViewModels.InventoryViewModel.md)
+[**[]InventoryInventoryViewModel**](Inventory.InventoryViewModel.md)
 
 ### Authorization
 
@@ -90,7 +90,7 @@ Name | Type | Description  | Notes
 
 ## InventoryInventoryIdGet
 
-> ShipbobInventoryApiViewModelsInventoryViewModel InventoryInventoryIdGet(ctx, inventoryId).Execute()
+> InventoryInventoryViewModel InventoryInventoryIdGet(ctx, inventoryId).Execute()
 
 Get an inventory item
 
@@ -116,7 +116,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `InventoryApi.InventoryInventoryIdGet``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `InventoryInventoryIdGet`: ShipbobInventoryApiViewModelsInventoryViewModel
+    // response from `InventoryInventoryIdGet`: InventoryInventoryViewModel
     fmt.Fprintf(os.Stdout, "Response from `InventoryApi.InventoryInventoryIdGet`: %v\n", resp)
 }
 ```
@@ -140,7 +140,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ShipbobInventoryApiViewModelsInventoryViewModel**](Shipbob.Inventory.Api.ViewModels.InventoryViewModel.md)
+[**InventoryInventoryViewModel**](Inventory.InventoryViewModel.md)
 
 ### Authorization
 
@@ -158,7 +158,7 @@ Name | Type | Description  | Notes
 
 ## ProductProductIdInventoryGet
 
-> []ShipbobInventoryApiViewModelsInventoryViewModel ProductProductIdInventoryGet(ctx, productId).ShipbobChannelId(shipbobChannelId).Execute()
+> []InventoryInventoryViewModel ProductProductIdInventoryGet(ctx, productId).ShipbobChannelId(shipbobChannelId).Execute()
 
 Get a list of inventory items by product id
 
@@ -185,7 +185,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `InventoryApi.ProductProductIdInventoryGet``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `ProductProductIdInventoryGet`: []ShipbobInventoryApiViewModelsInventoryViewModel
+    // response from `ProductProductIdInventoryGet`: []InventoryInventoryViewModel
     fmt.Fprintf(os.Stdout, "Response from `InventoryApi.ProductProductIdInventoryGet`: %v\n", resp)
 }
 ```
@@ -210,7 +210,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]ShipbobInventoryApiViewModelsInventoryViewModel**](Shipbob.Inventory.Api.ViewModels.InventoryViewModel.md)
+[**[]InventoryInventoryViewModel**](Inventory.InventoryViewModel.md)
 
 ### Authorization
 

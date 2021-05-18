@@ -1,0 +1,56 @@
+# OrdersEstimateViewModel
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**Estimates** | Pointer to [**[]OrdersEstimateDetailViewModel**](OrdersEstimateDetailViewModel.md) | Array of estimates for each shipping method | [optional] 
+
+## Methods
+
+### NewOrdersEstimateViewModel
+
+`func NewOrdersEstimateViewModel() *OrdersEstimateViewModel`
+
+NewOrdersEstimateViewModel instantiates a new OrdersEstimateViewModel object
+This constructor will assign default values to properties that have it defined,
+and makes sure properties required by API are set, but the set of arguments
+will change when the set of required properties is changed
+
+### NewOrdersEstimateViewModelWithDefaults
+
+`func NewOrdersEstimateViewModelWithDefaults() *OrdersEstimateViewModel`
+
+NewOrdersEstimateViewModelWithDefaults instantiates a new OrdersEstimateViewModel object
+This constructor will only assign default values to properties that have it defined,
+but it doesn't guarantee that properties required by API are set
+
+### GetEstimates
+
+`func (o *OrdersEstimateViewModel) GetEstimates() []OrdersEstimateDetailViewModel`
+
+GetEstimates returns the Estimates field if non-nil, zero value otherwise.
+
+### GetEstimatesOk
+
+`func (o *OrdersEstimateViewModel) GetEstimatesOk() (*[]OrdersEstimateDetailViewModel, bool)`
+
+GetEstimatesOk returns a tuple with the Estimates field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEstimates
+
+`func (o *OrdersEstimateViewModel) SetEstimates(v []OrdersEstimateDetailViewModel)`
+
+SetEstimates sets Estimates field to given value.
+
+### HasEstimates
+
+`func (o *OrdersEstimateViewModel) HasEstimates() bool`
+
+HasEstimates returns a boolean if a field has been set.
+
+
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

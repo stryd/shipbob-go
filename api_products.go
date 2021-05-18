@@ -32,19 +32,19 @@ type ApiProductBatchPostRequest struct {
 	ctx _context.Context
 	ApiService *ProductsApiService
 	shipbobChannelId *int32
-	shipbobProductsApiModelsPublicCreateProductModel *[]ShipbobProductsApiModelsPublicCreateProductModel
+	productsCreateProductModel *[]ProductsCreateProductModel
 }
 
 func (r ApiProductBatchPostRequest) ShipbobChannelId(shipbobChannelId int32) ApiProductBatchPostRequest {
 	r.shipbobChannelId = &shipbobChannelId
 	return r
 }
-func (r ApiProductBatchPostRequest) ShipbobProductsApiModelsPublicCreateProductModel(shipbobProductsApiModelsPublicCreateProductModel []ShipbobProductsApiModelsPublicCreateProductModel) ApiProductBatchPostRequest {
-	r.shipbobProductsApiModelsPublicCreateProductModel = &shipbobProductsApiModelsPublicCreateProductModel
+func (r ApiProductBatchPostRequest) ProductsCreateProductModel(productsCreateProductModel []ProductsCreateProductModel) ApiProductBatchPostRequest {
+	r.productsCreateProductModel = &productsCreateProductModel
 	return r
 }
 
-func (r ApiProductBatchPostRequest) Execute() ([]ShipbobProductsApiViewModelsPublicProductViewModel, *_nethttp.Response, error) {
+func (r ApiProductBatchPostRequest) Execute() ([]ProductsProductViewModel, *_nethttp.Response, error) {
 	return r.ApiService.ProductBatchPostExecute(r)
 }
 
@@ -62,16 +62,16 @@ func (a *ProductsApiService) ProductBatchPost(ctx _context.Context) ApiProductBa
 
 /*
  * Execute executes the request
- * @return []ShipbobProductsApiViewModelsPublicProductViewModel
+ * @return []ProductsProductViewModel
  */
-func (a *ProductsApiService) ProductBatchPostExecute(r ApiProductBatchPostRequest) ([]ShipbobProductsApiViewModelsPublicProductViewModel, *_nethttp.Response, error) {
+func (a *ProductsApiService) ProductBatchPostExecute(r ApiProductBatchPostRequest) ([]ProductsProductViewModel, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  []ShipbobProductsApiViewModelsPublicProductViewModel
+		localVarReturnValue  []ProductsProductViewModel
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProductsApiService.ProductBatchPost")
@@ -107,7 +107,7 @@ func (a *ProductsApiService) ProductBatchPostExecute(r ApiProductBatchPostReques
 	}
 	localVarHeaderParams["shipbob_channel_id"] = parameterToString(*r.shipbobChannelId, "")
 	// body params
-	localVarPostBody = r.shipbobProductsApiModelsPublicCreateProductModel
+	localVarPostBody = r.productsCreateProductModel
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -172,8 +172,8 @@ type ApiProductGetRequest struct {
 	iDs *[]int32
 	referenceIds *[]string
 	search *string
-	activeStatus *ShipbobProductsCommonModelsProductActiveStatus
-	bundleStatus *ShipbobProductsCommonModelsProductBundleStatus
+	activeStatus *ProductsProductActiveStatus
+	bundleStatus *ProductsProductBundleStatus
 	shipbobChannelId *int32
 }
 
@@ -197,11 +197,11 @@ func (r ApiProductGetRequest) Search(search string) ApiProductGetRequest {
 	r.search = &search
 	return r
 }
-func (r ApiProductGetRequest) ActiveStatus(activeStatus ShipbobProductsCommonModelsProductActiveStatus) ApiProductGetRequest {
+func (r ApiProductGetRequest) ActiveStatus(activeStatus ProductsProductActiveStatus) ApiProductGetRequest {
 	r.activeStatus = &activeStatus
 	return r
 }
-func (r ApiProductGetRequest) BundleStatus(bundleStatus ShipbobProductsCommonModelsProductBundleStatus) ApiProductGetRequest {
+func (r ApiProductGetRequest) BundleStatus(bundleStatus ProductsProductBundleStatus) ApiProductGetRequest {
 	r.bundleStatus = &bundleStatus
 	return r
 }
@@ -210,7 +210,7 @@ func (r ApiProductGetRequest) ShipbobChannelId(shipbobChannelId int32) ApiProduc
 	return r
 }
 
-func (r ApiProductGetRequest) Execute() ([]ShipbobProductsApiViewModelsPublicProductViewModel, *_nethttp.Response, error) {
+func (r ApiProductGetRequest) Execute() ([]ProductsProductViewModel, *_nethttp.Response, error) {
 	return r.ApiService.ProductGetExecute(r)
 }
 
@@ -228,16 +228,16 @@ func (a *ProductsApiService) ProductGet(ctx _context.Context) ApiProductGetReque
 
 /*
  * Execute executes the request
- * @return []ShipbobProductsApiViewModelsPublicProductViewModel
+ * @return []ProductsProductViewModel
  */
-func (a *ProductsApiService) ProductGetExecute(r ApiProductGetRequest) ([]ShipbobProductsApiViewModelsPublicProductViewModel, *_nethttp.Response, error) {
+func (a *ProductsApiService) ProductGetExecute(r ApiProductGetRequest) ([]ProductsProductViewModel, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  []ShipbobProductsApiViewModelsPublicProductViewModel
+		localVarReturnValue  []ProductsProductViewModel
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProductsApiService.ProductGet")
@@ -359,19 +359,19 @@ type ApiProductPostRequest struct {
 	ctx _context.Context
 	ApiService *ProductsApiService
 	shipbobChannelId *int32
-	shipbobProductsApiModelsPublicCreateProductModel *ShipbobProductsApiModelsPublicCreateProductModel
+	productsCreateProductModel *ProductsCreateProductModel
 }
 
 func (r ApiProductPostRequest) ShipbobChannelId(shipbobChannelId int32) ApiProductPostRequest {
 	r.shipbobChannelId = &shipbobChannelId
 	return r
 }
-func (r ApiProductPostRequest) ShipbobProductsApiModelsPublicCreateProductModel(shipbobProductsApiModelsPublicCreateProductModel ShipbobProductsApiModelsPublicCreateProductModel) ApiProductPostRequest {
-	r.shipbobProductsApiModelsPublicCreateProductModel = &shipbobProductsApiModelsPublicCreateProductModel
+func (r ApiProductPostRequest) ProductsCreateProductModel(productsCreateProductModel ProductsCreateProductModel) ApiProductPostRequest {
+	r.productsCreateProductModel = &productsCreateProductModel
 	return r
 }
 
-func (r ApiProductPostRequest) Execute() ([]ShipbobProductsApiViewModelsPublicProductViewModel, *_nethttp.Response, error) {
+func (r ApiProductPostRequest) Execute() ([]ProductsProductViewModel, *_nethttp.Response, error) {
 	return r.ApiService.ProductPostExecute(r)
 }
 
@@ -389,16 +389,16 @@ func (a *ProductsApiService) ProductPost(ctx _context.Context) ApiProductPostReq
 
 /*
  * Execute executes the request
- * @return []ShipbobProductsApiViewModelsPublicProductViewModel
+ * @return []ProductsProductViewModel
  */
-func (a *ProductsApiService) ProductPostExecute(r ApiProductPostRequest) ([]ShipbobProductsApiViewModelsPublicProductViewModel, *_nethttp.Response, error) {
+func (a *ProductsApiService) ProductPostExecute(r ApiProductPostRequest) ([]ProductsProductViewModel, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  []ShipbobProductsApiViewModelsPublicProductViewModel
+		localVarReturnValue  []ProductsProductViewModel
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProductsApiService.ProductPost")
@@ -434,7 +434,7 @@ func (a *ProductsApiService) ProductPostExecute(r ApiProductPostRequest) ([]Ship
 	}
 	localVarHeaderParams["shipbob_channel_id"] = parameterToString(*r.shipbobChannelId, "")
 	// body params
-	localVarPostBody = r.shipbobProductsApiModelsPublicCreateProductModel
+	localVarPostBody = r.productsCreateProductModel
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -503,7 +503,7 @@ func (r ApiProductProductIdGetRequest) ShipbobChannelId(shipbobChannelId int32) 
 	return r
 }
 
-func (r ApiProductProductIdGetRequest) Execute() (ShipbobProductsApiViewModelsPublicProductViewModel, *_nethttp.Response, error) {
+func (r ApiProductProductIdGetRequest) Execute() (ProductsProductViewModel, *_nethttp.Response, error) {
 	return r.ApiService.ProductProductIdGetExecute(r)
 }
 
@@ -523,16 +523,16 @@ func (a *ProductsApiService) ProductProductIdGet(ctx _context.Context, productId
 
 /*
  * Execute executes the request
- * @return ShipbobProductsApiViewModelsPublicProductViewModel
+ * @return ProductsProductViewModel
  */
-func (a *ProductsApiService) ProductProductIdGetExecute(r ApiProductProductIdGetRequest) (ShipbobProductsApiViewModelsPublicProductViewModel, *_nethttp.Response, error) {
+func (a *ProductsApiService) ProductProductIdGetExecute(r ApiProductProductIdGetRequest) (ProductsProductViewModel, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  ShipbobProductsApiViewModelsPublicProductViewModel
+		localVarReturnValue  ProductsProductViewModel
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProductsApiService.ProductProductIdGet")
@@ -619,19 +619,19 @@ type ApiProductProductIdPutRequest struct {
 	ApiService *ProductsApiService
 	productId int32
 	shipbobChannelId *int32
-	shipbobProductsApiModelsPublicUpdateProductModel *ShipbobProductsApiModelsPublicUpdateProductModel
+	productsUpdateProductModel *ProductsUpdateProductModel
 }
 
 func (r ApiProductProductIdPutRequest) ShipbobChannelId(shipbobChannelId int32) ApiProductProductIdPutRequest {
 	r.shipbobChannelId = &shipbobChannelId
 	return r
 }
-func (r ApiProductProductIdPutRequest) ShipbobProductsApiModelsPublicUpdateProductModel(shipbobProductsApiModelsPublicUpdateProductModel ShipbobProductsApiModelsPublicUpdateProductModel) ApiProductProductIdPutRequest {
-	r.shipbobProductsApiModelsPublicUpdateProductModel = &shipbobProductsApiModelsPublicUpdateProductModel
+func (r ApiProductProductIdPutRequest) ProductsUpdateProductModel(productsUpdateProductModel ProductsUpdateProductModel) ApiProductProductIdPutRequest {
+	r.productsUpdateProductModel = &productsUpdateProductModel
 	return r
 }
 
-func (r ApiProductProductIdPutRequest) Execute() ([]ShipbobProductsApiViewModelsPublicProductViewModel, *_nethttp.Response, error) {
+func (r ApiProductProductIdPutRequest) Execute() ([]ProductsProductViewModel, *_nethttp.Response, error) {
 	return r.ApiService.ProductProductIdPutExecute(r)
 }
 
@@ -651,16 +651,16 @@ func (a *ProductsApiService) ProductProductIdPut(ctx _context.Context, productId
 
 /*
  * Execute executes the request
- * @return []ShipbobProductsApiViewModelsPublicProductViewModel
+ * @return []ProductsProductViewModel
  */
-func (a *ProductsApiService) ProductProductIdPutExecute(r ApiProductProductIdPutRequest) ([]ShipbobProductsApiViewModelsPublicProductViewModel, *_nethttp.Response, error) {
+func (a *ProductsApiService) ProductProductIdPutExecute(r ApiProductProductIdPutRequest) ([]ProductsProductViewModel, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPut
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  []ShipbobProductsApiViewModelsPublicProductViewModel
+		localVarReturnValue  []ProductsProductViewModel
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProductsApiService.ProductProductIdPut")
@@ -697,7 +697,7 @@ func (a *ProductsApiService) ProductProductIdPutExecute(r ApiProductProductIdPut
 	}
 	localVarHeaderParams["shipbob_channel_id"] = parameterToString(*r.shipbobChannelId, "")
 	// body params
-	localVarPostBody = r.shipbobProductsApiModelsPublicUpdateProductModel
+	localVarPostBody = r.productsUpdateProductModel
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err

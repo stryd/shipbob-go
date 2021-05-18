@@ -10,7 +10,7 @@ Method | HTTP request | Description
 
 ## LocationGet
 
-> []IntegrationsLocationPublicApiViewModelsLocationViewModel LocationGet(ctx).IncludeInactive(includeInactive).ReceivingEnabled(receivingEnabled).AccessGranted(accessGranted).Execute()
+> []LocationLocationViewModel LocationGet(ctx).IncludeInactive(includeInactive).ReceivingEnabled(receivingEnabled).AccessGranted(accessGranted).Execute()
 
 Get locations
 
@@ -38,7 +38,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `LocationsApi.LocationGet``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `LocationGet`: []IntegrationsLocationPublicApiViewModelsLocationViewModel
+    // response from `LocationGet`: []LocationLocationViewModel
     fmt.Fprintf(os.Stdout, "Response from `LocationsApi.LocationGet`: %v\n", resp)
 }
 ```
@@ -60,7 +60,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]IntegrationsLocationPublicApiViewModelsLocationViewModel**](Integrations.Location.Public.Api.ViewModels.LocationViewModel.md)
+[**[]LocationLocationViewModel**](Location.LocationViewModel.md)
 
 ### Authorization
 

@@ -74,7 +74,7 @@ func (r ApiInventoryGetRequest) ShipbobChannelId(shipbobChannelId int32) ApiInve
 	return r
 }
 
-func (r ApiInventoryGetRequest) Execute() ([]ShipbobInventoryApiViewModelsInventoryViewModel, *_nethttp.Response, error) {
+func (r ApiInventoryGetRequest) Execute() ([]InventoryInventoryViewModel, *_nethttp.Response, error) {
 	return r.ApiService.InventoryGetExecute(r)
 }
 
@@ -92,16 +92,16 @@ func (a *InventoryApiService) InventoryGet(ctx _context.Context) ApiInventoryGet
 
 /*
  * Execute executes the request
- * @return []ShipbobInventoryApiViewModelsInventoryViewModel
+ * @return []InventoryInventoryViewModel
  */
-func (a *InventoryApiService) InventoryGetExecute(r ApiInventoryGetRequest) ([]ShipbobInventoryApiViewModelsInventoryViewModel, *_nethttp.Response, error) {
+func (a *InventoryApiService) InventoryGetExecute(r ApiInventoryGetRequest) ([]InventoryInventoryViewModel, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  []ShipbobInventoryApiViewModelsInventoryViewModel
+		localVarReturnValue  []InventoryInventoryViewModel
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "InventoryApiService.InventoryGet")
@@ -218,7 +218,7 @@ type ApiInventoryInventoryIdGetRequest struct {
 }
 
 
-func (r ApiInventoryInventoryIdGetRequest) Execute() (ShipbobInventoryApiViewModelsInventoryViewModel, *_nethttp.Response, error) {
+func (r ApiInventoryInventoryIdGetRequest) Execute() (InventoryInventoryViewModel, *_nethttp.Response, error) {
 	return r.ApiService.InventoryInventoryIdGetExecute(r)
 }
 
@@ -238,16 +238,16 @@ func (a *InventoryApiService) InventoryInventoryIdGet(ctx _context.Context, inve
 
 /*
  * Execute executes the request
- * @return ShipbobInventoryApiViewModelsInventoryViewModel
+ * @return InventoryInventoryViewModel
  */
-func (a *InventoryApiService) InventoryInventoryIdGetExecute(r ApiInventoryInventoryIdGetRequest) (ShipbobInventoryApiViewModelsInventoryViewModel, *_nethttp.Response, error) {
+func (a *InventoryApiService) InventoryInventoryIdGetExecute(r ApiInventoryInventoryIdGetRequest) (InventoryInventoryViewModel, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  ShipbobInventoryApiViewModelsInventoryViewModel
+		localVarReturnValue  InventoryInventoryViewModel
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "InventoryApiService.InventoryInventoryIdGet")
@@ -338,7 +338,7 @@ func (r ApiProductProductIdInventoryGetRequest) ShipbobChannelId(shipbobChannelI
 	return r
 }
 
-func (r ApiProductProductIdInventoryGetRequest) Execute() ([]ShipbobInventoryApiViewModelsInventoryViewModel, *_nethttp.Response, error) {
+func (r ApiProductProductIdInventoryGetRequest) Execute() ([]InventoryInventoryViewModel, *_nethttp.Response, error) {
 	return r.ApiService.ProductProductIdInventoryGetExecute(r)
 }
 
@@ -358,16 +358,16 @@ func (a *InventoryApiService) ProductProductIdInventoryGet(ctx _context.Context,
 
 /*
  * Execute executes the request
- * @return []ShipbobInventoryApiViewModelsInventoryViewModel
+ * @return []InventoryInventoryViewModel
  */
-func (a *InventoryApiService) ProductProductIdInventoryGetExecute(r ApiProductProductIdInventoryGetRequest) ([]ShipbobInventoryApiViewModelsInventoryViewModel, *_nethttp.Response, error) {
+func (a *InventoryApiService) ProductProductIdInventoryGetExecute(r ApiProductProductIdInventoryGetRequest) ([]InventoryInventoryViewModel, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  []ShipbobInventoryApiViewModelsInventoryViewModel
+		localVarReturnValue  []InventoryInventoryViewModel
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "InventoryApiService.ProductProductIdInventoryGet")

@@ -25,7 +25,7 @@ Method | HTTP request | Description
 
 ## OrderEstimatePost
 
-> ShipBobOrdersPresentationViewModelsEstimateViewModel OrderEstimatePost(ctx).ShipbobChannelId(shipbobChannelId).ShipBobOrdersPresentationModelsEstimateFulfillmentRequestModel(shipBobOrdersPresentationModelsEstimateFulfillmentRequestModel).Execute()
+> OrdersEstimateViewModel OrderEstimatePost(ctx).ShipbobChannelId(shipbobChannelId).OrdersEstimateFulfillmentRequestModel(ordersEstimateFulfillmentRequestModel).Execute()
 
 Estimate Fulfillment Cost For Order
 
@@ -45,16 +45,16 @@ import (
 
 func main() {
     shipbobChannelId := int32(56) // int32 | Channel Id for Operation
-    shipBobOrdersPresentationModelsEstimateFulfillmentRequestModel := *openapiclient.NewShipBobOrdersPresentationModelsEstimateFulfillmentRequestModel(*openapiclient.NewShipBobOrdersPresentationViewModelsEstimationAddressViewModel("US"), []openapiclient.ShipBobOrdersPresentationModelsEstimateProductInfoModel{*openapiclient.NewShipBobOrdersPresentationModelsEstimateProductInfoModel(int32(123))}) // ShipBobOrdersPresentationModelsEstimateFulfillmentRequestModel |  (optional)
+    ordersEstimateFulfillmentRequestModel := *openapiclient.NewOrdersEstimateFulfillmentRequestModel(*openapiclient.NewOrdersEstimationAddressViewModel("US"), []openapiclient.OrdersEstimateProductInfoModel{*openapiclient.NewOrdersEstimateProductInfoModel(int32(123))}) // OrdersEstimateFulfillmentRequestModel |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.OrdersApi.OrderEstimatePost(context.Background()).ShipbobChannelId(shipbobChannelId).ShipBobOrdersPresentationModelsEstimateFulfillmentRequestModel(shipBobOrdersPresentationModelsEstimateFulfillmentRequestModel).Execute()
+    resp, r, err := api_client.OrdersApi.OrderEstimatePost(context.Background()).ShipbobChannelId(shipbobChannelId).OrdersEstimateFulfillmentRequestModel(ordersEstimateFulfillmentRequestModel).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `OrdersApi.OrderEstimatePost``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `OrderEstimatePost`: ShipBobOrdersPresentationViewModelsEstimateViewModel
+    // response from `OrderEstimatePost`: OrdersEstimateViewModel
     fmt.Fprintf(os.Stdout, "Response from `OrdersApi.OrderEstimatePost`: %v\n", resp)
 }
 ```
@@ -71,11 +71,11 @@ Other parameters are passed through a pointer to a apiOrderEstimatePostRequest s
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **shipbobChannelId** | **int32** | Channel Id for Operation | 
- **shipBobOrdersPresentationModelsEstimateFulfillmentRequestModel** | [**ShipBobOrdersPresentationModelsEstimateFulfillmentRequestModel**](ShipBobOrdersPresentationModelsEstimateFulfillmentRequestModel.md) |  | 
+ **ordersEstimateFulfillmentRequestModel** | [**OrdersEstimateFulfillmentRequestModel**](OrdersEstimateFulfillmentRequestModel.md) |  | 
 
 ### Return type
 
-[**ShipBobOrdersPresentationViewModelsEstimateViewModel**](ShipBob.Orders.Presentation.ViewModels.EstimateViewModel.md)
+[**OrdersEstimateViewModel**](Orders.EstimateViewModel.md)
 
 ### Authorization
 
@@ -93,7 +93,7 @@ Name | Type | Description  | Notes
 
 ## OrderGet
 
-> []ShipBobOrdersPresentationViewModelsOrderViewModel OrderGet(ctx).Page(page).Limit(limit).IDs(iDs).ReferenceIds(referenceIds).StartDate(startDate).EndDate(endDate).SortOrder(sortOrder).HasTracking(hasTracking).LastUpdateStartDate(lastUpdateStartDate).LastUpdateEndDate(lastUpdateEndDate).ShipbobChannelId(shipbobChannelId).Execute()
+> []OrdersOrderViewModel OrderGet(ctx).Page(page).Limit(limit).IDs(iDs).ReferenceIds(referenceIds).StartDate(startDate).EndDate(endDate).SortOrder(sortOrder).HasTracking(hasTracking).LastUpdateStartDate(lastUpdateStartDate).LastUpdateEndDate(lastUpdateEndDate).ShipbobChannelId(shipbobChannelId).Execute()
 
 Get Orders
 
@@ -132,7 +132,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `OrdersApi.OrderGet``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `OrderGet`: []ShipBobOrdersPresentationViewModelsOrderViewModel
+    // response from `OrderGet`: []OrdersOrderViewModel
     fmt.Fprintf(os.Stdout, "Response from `OrdersApi.OrderGet`: %v\n", resp)
 }
 ```
@@ -162,7 +162,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]ShipBobOrdersPresentationViewModelsOrderViewModel**](ShipBob.Orders.Presentation.ViewModels.OrderViewModel.md)
+[**[]OrdersOrderViewModel**](Orders.OrderViewModel.md)
 
 ### Authorization
 
@@ -180,7 +180,7 @@ Name | Type | Description  | Notes
 
 ## OrderOrderIdCancelPost
 
-> ShipBobOrdersPresentationViewModelsCanceledOrderViewModel OrderOrderIdCancelPost(ctx, orderId).ShipbobChannelId(shipbobChannelId).Execute()
+> OrdersCanceledOrderViewModel OrderOrderIdCancelPost(ctx, orderId).ShipbobChannelId(shipbobChannelId).Execute()
 
 Cancel single Order by Order ID
 
@@ -207,7 +207,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `OrdersApi.OrderOrderIdCancelPost``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `OrderOrderIdCancelPost`: ShipBobOrdersPresentationViewModelsCanceledOrderViewModel
+    // response from `OrderOrderIdCancelPost`: OrdersCanceledOrderViewModel
     fmt.Fprintf(os.Stdout, "Response from `OrdersApi.OrderOrderIdCancelPost`: %v\n", resp)
 }
 ```
@@ -232,7 +232,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ShipBobOrdersPresentationViewModelsCanceledOrderViewModel**](ShipBob.Orders.Presentation.ViewModels.CanceledOrderViewModel.md)
+[**OrdersCanceledOrderViewModel**](Orders.CanceledOrderViewModel.md)
 
 ### Authorization
 
@@ -250,7 +250,7 @@ Name | Type | Description  | Notes
 
 ## OrderOrderIdGet
 
-> ShipBobOrdersPresentationViewModelsOrderViewModel OrderOrderIdGet(ctx, orderId).ShipbobChannelId(shipbobChannelId).Execute()
+> OrdersOrderViewModel OrderOrderIdGet(ctx, orderId).ShipbobChannelId(shipbobChannelId).Execute()
 
 Get Order
 
@@ -277,7 +277,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `OrdersApi.OrderOrderIdGet``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `OrderOrderIdGet`: ShipBobOrdersPresentationViewModelsOrderViewModel
+    // response from `OrderOrderIdGet`: OrdersOrderViewModel
     fmt.Fprintf(os.Stdout, "Response from `OrdersApi.OrderOrderIdGet`: %v\n", resp)
 }
 ```
@@ -302,7 +302,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ShipBobOrdersPresentationViewModelsOrderViewModel**](ShipBob.Orders.Presentation.ViewModels.OrderViewModel.md)
+[**OrdersOrderViewModel**](Orders.OrderViewModel.md)
 
 ### Authorization
 
@@ -320,7 +320,7 @@ Name | Type | Description  | Notes
 
 ## OrderOrderIdShipmentGet
 
-> []ShipBobOrdersPresentationViewModelsShipmentViewModel OrderOrderIdShipmentGet(ctx, orderId).ShipbobChannelId(shipbobChannelId).Execute()
+> []OrdersShipmentViewModel OrderOrderIdShipmentGet(ctx, orderId).ShipbobChannelId(shipbobChannelId).Execute()
 
 Get all Shipments for Order
 
@@ -347,7 +347,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `OrdersApi.OrderOrderIdShipmentGet``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `OrderOrderIdShipmentGet`: []ShipBobOrdersPresentationViewModelsShipmentViewModel
+    // response from `OrderOrderIdShipmentGet`: []OrdersShipmentViewModel
     fmt.Fprintf(os.Stdout, "Response from `OrdersApi.OrderOrderIdShipmentGet`: %v\n", resp)
 }
 ```
@@ -372,7 +372,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]ShipBobOrdersPresentationViewModelsShipmentViewModel**](ShipBob.Orders.Presentation.ViewModels.ShipmentViewModel.md)
+[**[]OrdersShipmentViewModel**](Orders.ShipmentViewModel.md)
 
 ### Authorization
 
@@ -390,7 +390,7 @@ Name | Type | Description  | Notes
 
 ## OrderOrderIdShipmentShipmentIdCancelPost
 
-> ShipBobOrdersPresentationViewModelsShipmentViewModel OrderOrderIdShipmentShipmentIdCancelPost(ctx, shipmentId, orderId).ShipbobChannelId(shipbobChannelId).Execute()
+> OrdersShipmentViewModel OrderOrderIdShipmentShipmentIdCancelPost(ctx, shipmentId, orderId).ShipbobChannelId(shipbobChannelId).Execute()
 
 Cancel one Shipment by Order Id and Shipment Id
 
@@ -418,7 +418,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `OrdersApi.OrderOrderIdShipmentShipmentIdCancelPost``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `OrderOrderIdShipmentShipmentIdCancelPost`: ShipBobOrdersPresentationViewModelsShipmentViewModel
+    // response from `OrderOrderIdShipmentShipmentIdCancelPost`: OrdersShipmentViewModel
     fmt.Fprintf(os.Stdout, "Response from `OrdersApi.OrderOrderIdShipmentShipmentIdCancelPost`: %v\n", resp)
 }
 ```
@@ -445,7 +445,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ShipBobOrdersPresentationViewModelsShipmentViewModel**](ShipBob.Orders.Presentation.ViewModels.ShipmentViewModel.md)
+[**OrdersShipmentViewModel**](Orders.ShipmentViewModel.md)
 
 ### Authorization
 
@@ -463,7 +463,7 @@ Name | Type | Description  | Notes
 
 ## OrderOrderIdShipmentShipmentIdGet
 
-> ShipBobOrdersPresentationViewModelsShipmentViewModel OrderOrderIdShipmentShipmentIdGet(ctx, orderId, shipmentId).ShipbobChannelId(shipbobChannelId).Execute()
+> OrdersShipmentViewModel OrderOrderIdShipmentShipmentIdGet(ctx, orderId, shipmentId).ShipbobChannelId(shipbobChannelId).Execute()
 
 Get one Shipment by Order Id and Shipment Id
 
@@ -491,7 +491,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `OrdersApi.OrderOrderIdShipmentShipmentIdGet``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `OrderOrderIdShipmentShipmentIdGet`: ShipBobOrdersPresentationViewModelsShipmentViewModel
+    // response from `OrderOrderIdShipmentShipmentIdGet`: OrdersShipmentViewModel
     fmt.Fprintf(os.Stdout, "Response from `OrdersApi.OrderOrderIdShipmentShipmentIdGet`: %v\n", resp)
 }
 ```
@@ -518,7 +518,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ShipBobOrdersPresentationViewModelsShipmentViewModel**](ShipBob.Orders.Presentation.ViewModels.ShipmentViewModel.md)
+[**OrdersShipmentViewModel**](Orders.ShipmentViewModel.md)
 
 ### Authorization
 
@@ -536,7 +536,7 @@ Name | Type | Description  | Notes
 
 ## OrderOrderIdShipmentShipmentIdLogsGet
 
-> []ShipBobOrdersPresentationViewModelsShipmentLogViewModel OrderOrderIdShipmentShipmentIdLogsGet(ctx, orderId, shipmentId).ShipbobChannelId(shipbobChannelId).Execute()
+> []OrdersShipmentLogViewModel OrderOrderIdShipmentShipmentIdLogsGet(ctx, orderId, shipmentId).ShipbobChannelId(shipbobChannelId).Execute()
 
 Get logs for one Shipment by Order Id and Shipment Id
 
@@ -564,7 +564,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `OrdersApi.OrderOrderIdShipmentShipmentIdLogsGet``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `OrderOrderIdShipmentShipmentIdLogsGet`: []ShipBobOrdersPresentationViewModelsShipmentLogViewModel
+    // response from `OrderOrderIdShipmentShipmentIdLogsGet`: []OrdersShipmentLogViewModel
     fmt.Fprintf(os.Stdout, "Response from `OrdersApi.OrderOrderIdShipmentShipmentIdLogsGet`: %v\n", resp)
 }
 ```
@@ -591,7 +591,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]ShipBobOrdersPresentationViewModelsShipmentLogViewModel**](ShipBob.Orders.Presentation.ViewModels.ShipmentLogViewModel.md)
+[**[]OrdersShipmentLogViewModel**](Orders.ShipmentLogViewModel.md)
 
 ### Authorization
 
@@ -609,7 +609,7 @@ Name | Type | Description  | Notes
 
 ## OrderOrderIdShipmentShipmentIdTimelineGet
 
-> []ShipBobOrdersPresentationViewModelsShipmentLogViewModel OrderOrderIdShipmentShipmentIdTimelineGet(ctx, orderId, shipmentId).ShipbobChannelId(shipbobChannelId).Execute()
+> []OrdersShipmentLogViewModel OrderOrderIdShipmentShipmentIdTimelineGet(ctx, orderId, shipmentId).ShipbobChannelId(shipbobChannelId).Execute()
 
 Get one Shipment's status timeline by Order Id and Shipment Id
 
@@ -637,7 +637,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `OrdersApi.OrderOrderIdShipmentShipmentIdTimelineGet``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `OrderOrderIdShipmentShipmentIdTimelineGet`: []ShipBobOrdersPresentationViewModelsShipmentLogViewModel
+    // response from `OrderOrderIdShipmentShipmentIdTimelineGet`: []OrdersShipmentLogViewModel
     fmt.Fprintf(os.Stdout, "Response from `OrdersApi.OrderOrderIdShipmentShipmentIdTimelineGet`: %v\n", resp)
 }
 ```
@@ -664,7 +664,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]ShipBobOrdersPresentationViewModelsShipmentLogViewModel**](ShipBob.Orders.Presentation.ViewModels.ShipmentLogViewModel.md)
+[**[]OrdersShipmentLogViewModel**](Orders.ShipmentLogViewModel.md)
 
 ### Authorization
 
@@ -682,7 +682,7 @@ Name | Type | Description  | Notes
 
 ## OrderPost
 
-> ShipBobOrdersPresentationViewModelsOrderViewModel OrderPost(ctx).ShipbobChannelId(shipbobChannelId).ShipBobOrdersPresentationModelsCreateOrderModel(shipBobOrdersPresentationModelsCreateOrderModel).Execute()
+> OrdersOrderViewModel OrderPost(ctx).ShipbobChannelId(shipbobChannelId).OrdersCreateOrderModel(ordersCreateOrderModel).Execute()
 
 Create Order
 
@@ -700,16 +700,16 @@ import (
 
 func main() {
     shipbobChannelId := int32(56) // int32 | Channel Id for Operation
-    shipBobOrdersPresentationModelsCreateOrderModel := *openapiclient.NewShipBobOrdersPresentationModelsCreateOrderModel([]openapiclient.ShipBobOrdersPresentationModelsAddProductToOrderModel{openapiclient.ShipBob.Orders.Presentation.Models.AddProductToOrderModel{ShipBobOrdersPresentationModelsAddProductToOrderByProductIdModel: openapiclient.NewShipBobOrdersPresentationModelsAddProductToOrderByProductIdModel(int32(123), int32(123))}}, *openapiclient.NewShipBobOrdersPresentationViewModelsRecipientInfoViewModel(*openapiclient.NewShipBobOrdersPresentationViewModelsAddressViewModel("100 Nowhere Blvd", "Gotham City", "US"), "John Doe"), "ReferenceId_example", "ShippingMethod_example") // ShipBobOrdersPresentationModelsCreateOrderModel |  (optional)
+    ordersCreateOrderModel := *openapiclient.NewOrdersCreateOrderModel([]openapiclient.OrdersAddProductToOrderModel{openapiclient.Orders.AddProductToOrderModel{OrdersAddProductToOrderByProductIdModel: openapiclient.NewOrdersAddProductToOrderByProductIdModel(int32(123), int32(123))}}, *openapiclient.NewOrdersRecipientInfoViewModel(*openapiclient.NewOrdersAddressViewModel("100 Nowhere Blvd", "Gotham City", "US"), "John Doe"), "ReferenceId_example", "ShippingMethod_example") // OrdersCreateOrderModel |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.OrdersApi.OrderPost(context.Background()).ShipbobChannelId(shipbobChannelId).ShipBobOrdersPresentationModelsCreateOrderModel(shipBobOrdersPresentationModelsCreateOrderModel).Execute()
+    resp, r, err := api_client.OrdersApi.OrderPost(context.Background()).ShipbobChannelId(shipbobChannelId).OrdersCreateOrderModel(ordersCreateOrderModel).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `OrdersApi.OrderPost``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `OrderPost`: ShipBobOrdersPresentationViewModelsOrderViewModel
+    // response from `OrderPost`: OrdersOrderViewModel
     fmt.Fprintf(os.Stdout, "Response from `OrdersApi.OrderPost`: %v\n", resp)
 }
 ```
@@ -726,11 +726,11 @@ Other parameters are passed through a pointer to a apiOrderPostRequest struct vi
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **shipbobChannelId** | **int32** | Channel Id for Operation | 
- **shipBobOrdersPresentationModelsCreateOrderModel** | [**ShipBobOrdersPresentationModelsCreateOrderModel**](ShipBobOrdersPresentationModelsCreateOrderModel.md) |  | 
+ **ordersCreateOrderModel** | [**OrdersCreateOrderModel**](OrdersCreateOrderModel.md) |  | 
 
 ### Return type
 
-[**ShipBobOrdersPresentationViewModelsOrderViewModel**](ShipBob.Orders.Presentation.ViewModels.OrderViewModel.md)
+[**OrdersOrderViewModel**](Orders.OrderViewModel.md)
 
 ### Authorization
 
@@ -748,7 +748,7 @@ Name | Type | Description  | Notes
 
 ## ShipmentCancelbulkPost
 
-> ShipBobOrdersPresentationViewModelsCanceledShipmentsViewModel ShipmentCancelbulkPost(ctx).ShipbobChannelId(shipbobChannelId).ShipBobOrdersPresentationModelsCancelShipmentsModel(shipBobOrdersPresentationModelsCancelShipmentsModel).Execute()
+> OrdersCanceledShipmentsViewModel ShipmentCancelbulkPost(ctx).ShipbobChannelId(shipbobChannelId).OrdersCancelShipmentsModel(ordersCancelShipmentsModel).Execute()
 
 Cancel multiple Shipments by Shipment Id
 
@@ -766,16 +766,16 @@ import (
 
 func main() {
     shipbobChannelId := int32(56) // int32 | Channel ID for Operation
-    shipBobOrdersPresentationModelsCancelShipmentsModel := *openapiclient.NewShipBobOrdersPresentationModelsCancelShipmentsModel() // ShipBobOrdersPresentationModelsCancelShipmentsModel |  (optional)
+    ordersCancelShipmentsModel := *openapiclient.NewOrdersCancelShipmentsModel() // OrdersCancelShipmentsModel |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.OrdersApi.ShipmentCancelbulkPost(context.Background()).ShipbobChannelId(shipbobChannelId).ShipBobOrdersPresentationModelsCancelShipmentsModel(shipBobOrdersPresentationModelsCancelShipmentsModel).Execute()
+    resp, r, err := api_client.OrdersApi.ShipmentCancelbulkPost(context.Background()).ShipbobChannelId(shipbobChannelId).OrdersCancelShipmentsModel(ordersCancelShipmentsModel).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `OrdersApi.ShipmentCancelbulkPost``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `ShipmentCancelbulkPost`: ShipBobOrdersPresentationViewModelsCanceledShipmentsViewModel
+    // response from `ShipmentCancelbulkPost`: OrdersCanceledShipmentsViewModel
     fmt.Fprintf(os.Stdout, "Response from `OrdersApi.ShipmentCancelbulkPost`: %v\n", resp)
 }
 ```
@@ -792,11 +792,11 @@ Other parameters are passed through a pointer to a apiShipmentCancelbulkPostRequ
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **shipbobChannelId** | **int32** | Channel ID for Operation | 
- **shipBobOrdersPresentationModelsCancelShipmentsModel** | [**ShipBobOrdersPresentationModelsCancelShipmentsModel**](ShipBobOrdersPresentationModelsCancelShipmentsModel.md) |  | 
+ **ordersCancelShipmentsModel** | [**OrdersCancelShipmentsModel**](OrdersCancelShipmentsModel.md) |  | 
 
 ### Return type
 
-[**ShipBobOrdersPresentationViewModelsCanceledShipmentsViewModel**](ShipBob.Orders.Presentation.ViewModels.CanceledShipmentsViewModel.md)
+[**OrdersCanceledShipmentsViewModel**](Orders.CanceledShipmentsViewModel.md)
 
 ### Authorization
 
@@ -814,7 +814,7 @@ Name | Type | Description  | Notes
 
 ## ShipmentShipmentIdCancelPost
 
-> ShipBobOrdersPresentationViewModelsShipmentViewModel ShipmentShipmentIdCancelPost(ctx, shipmentId).ShipbobChannelId(shipbobChannelId).Execute()
+> OrdersShipmentViewModel ShipmentShipmentIdCancelPost(ctx, shipmentId).ShipbobChannelId(shipbobChannelId).Execute()
 
 Cancel one Shipment by Shipment Id
 
@@ -841,7 +841,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `OrdersApi.ShipmentShipmentIdCancelPost``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `ShipmentShipmentIdCancelPost`: ShipBobOrdersPresentationViewModelsShipmentViewModel
+    // response from `ShipmentShipmentIdCancelPost`: OrdersShipmentViewModel
     fmt.Fprintf(os.Stdout, "Response from `OrdersApi.ShipmentShipmentIdCancelPost`: %v\n", resp)
 }
 ```
@@ -866,7 +866,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ShipBobOrdersPresentationViewModelsShipmentViewModel**](ShipBob.Orders.Presentation.ViewModels.ShipmentViewModel.md)
+[**OrdersShipmentViewModel**](Orders.ShipmentViewModel.md)
 
 ### Authorization
 
@@ -884,7 +884,7 @@ Name | Type | Description  | Notes
 
 ## ShipmentShipmentIdGet
 
-> ShipBobOrdersPresentationViewModelsShipmentViewModel ShipmentShipmentIdGet(ctx, shipmentId).ShipbobChannelId(shipbobChannelId).Execute()
+> OrdersShipmentViewModel ShipmentShipmentIdGet(ctx, shipmentId).ShipbobChannelId(shipbobChannelId).Execute()
 
 Get one Shipment by Shipment Id
 
@@ -911,7 +911,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `OrdersApi.ShipmentShipmentIdGet``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `ShipmentShipmentIdGet`: ShipBobOrdersPresentationViewModelsShipmentViewModel
+    // response from `ShipmentShipmentIdGet`: OrdersShipmentViewModel
     fmt.Fprintf(os.Stdout, "Response from `OrdersApi.ShipmentShipmentIdGet`: %v\n", resp)
 }
 ```
@@ -936,7 +936,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ShipBobOrdersPresentationViewModelsShipmentViewModel**](ShipBob.Orders.Presentation.ViewModels.ShipmentViewModel.md)
+[**OrdersShipmentViewModel**](Orders.ShipmentViewModel.md)
 
 ### Authorization
 
@@ -954,7 +954,7 @@ Name | Type | Description  | Notes
 
 ## ShipmentShipmentIdLogsGet
 
-> []ShipBobOrdersPresentationViewModelsShipmentLogViewModel ShipmentShipmentIdLogsGet(ctx, shipmentId).ShipbobChannelId(shipbobChannelId).Execute()
+> []OrdersShipmentLogViewModel ShipmentShipmentIdLogsGet(ctx, shipmentId).ShipbobChannelId(shipbobChannelId).Execute()
 
 Get logs for one Shipment by Shipment Id
 
@@ -981,7 +981,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `OrdersApi.ShipmentShipmentIdLogsGet``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `ShipmentShipmentIdLogsGet`: []ShipBobOrdersPresentationViewModelsShipmentLogViewModel
+    // response from `ShipmentShipmentIdLogsGet`: []OrdersShipmentLogViewModel
     fmt.Fprintf(os.Stdout, "Response from `OrdersApi.ShipmentShipmentIdLogsGet`: %v\n", resp)
 }
 ```
@@ -1006,7 +1006,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]ShipBobOrdersPresentationViewModelsShipmentLogViewModel**](ShipBob.Orders.Presentation.ViewModels.ShipmentLogViewModel.md)
+[**[]OrdersShipmentLogViewModel**](Orders.ShipmentLogViewModel.md)
 
 ### Authorization
 
@@ -1024,7 +1024,7 @@ Name | Type | Description  | Notes
 
 ## ShipmentShipmentIdTimelineGet
 
-> []ShipBobOrdersPresentationViewModelsShipmentLogViewModel ShipmentShipmentIdTimelineGet(ctx, shipmentId).ShipbobChannelId(shipbobChannelId).Execute()
+> []OrdersShipmentLogViewModel ShipmentShipmentIdTimelineGet(ctx, shipmentId).ShipbobChannelId(shipbobChannelId).Execute()
 
 Get one Shipment's status timeline by Shipment Id
 
@@ -1051,7 +1051,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `OrdersApi.ShipmentShipmentIdTimelineGet``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `ShipmentShipmentIdTimelineGet`: []ShipBobOrdersPresentationViewModelsShipmentLogViewModel
+    // response from `ShipmentShipmentIdTimelineGet`: []OrdersShipmentLogViewModel
     fmt.Fprintf(os.Stdout, "Response from `OrdersApi.ShipmentShipmentIdTimelineGet`: %v\n", resp)
 }
 ```
@@ -1076,7 +1076,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]ShipBobOrdersPresentationViewModelsShipmentLogViewModel**](ShipBob.Orders.Presentation.ViewModels.ShipmentLogViewModel.md)
+[**[]OrdersShipmentLogViewModel**](Orders.ShipmentLogViewModel.md)
 
 ### Authorization
 
@@ -1094,7 +1094,7 @@ Name | Type | Description  | Notes
 
 ## ShippingmethodGet
 
-> []ShipBobOrdersPresentationViewModelsShipMethodDetailViewModel ShippingmethodGet(ctx).Page(page).Limit(limit).Execute()
+> []OrdersShipMethodDetailViewModel ShippingmethodGet(ctx).Page(page).Limit(limit).Execute()
 
 Get shipping methods
 
@@ -1123,7 +1123,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `OrdersApi.ShippingmethodGet``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `ShippingmethodGet`: []ShipBobOrdersPresentationViewModelsShipMethodDetailViewModel
+    // response from `ShippingmethodGet`: []OrdersShipMethodDetailViewModel
     fmt.Fprintf(os.Stdout, "Response from `OrdersApi.ShippingmethodGet`: %v\n", resp)
 }
 ```
@@ -1144,7 +1144,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]ShipBobOrdersPresentationViewModelsShipMethodDetailViewModel**](ShipBob.Orders.Presentation.ViewModels.ShipMethodDetailViewModel.md)
+[**[]OrdersShipMethodDetailViewModel**](Orders.ShipMethodDetailViewModel.md)
 
 ### Authorization
 

@@ -10,7 +10,7 @@ Method | HTTP request | Description
 
 ## ChannelGet
 
-> []ShipBobChannelsApiViewModelsChannelViewModel ChannelGet(ctx).Execute()
+> []ChannelsChannelViewModel ChannelGet(ctx).Execute()
 
 Get user-authorized channel info
 
@@ -35,7 +35,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `ChannelsApi.ChannelGet``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `ChannelGet`: []ShipBobChannelsApiViewModelsChannelViewModel
+    // response from `ChannelGet`: []ChannelsChannelViewModel
     fmt.Fprintf(os.Stdout, "Response from `ChannelsApi.ChannelGet`: %v\n", resp)
 }
 ```
@@ -51,7 +51,7 @@ Other parameters are passed through a pointer to a apiChannelGetRequest struct v
 
 ### Return type
 
-[**[]ShipBobChannelsApiViewModelsChannelViewModel**](ShipBob.Channels.Api.ViewModels.ChannelViewModel.md)
+[**[]ChannelsChannelViewModel**](Channels.ChannelViewModel.md)
 
 ### Authorization
 

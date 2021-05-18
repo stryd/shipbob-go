@@ -12,7 +12,7 @@ Method | HTTP request | Description
 
 ## WebhookGet
 
-> []ShipBobWebhooksPublicApiModelsWebhookViewModel WebhookGet(ctx).Topic(topic).Page(page).Limit(limit).Execute()
+> []WebhooksWebhookViewModel WebhookGet(ctx).Topic(topic).Page(page).Limit(limit).Execute()
 
 Get Webhooks
 
@@ -31,7 +31,7 @@ import (
 )
 
 func main() {
-    topic := openapiclient.ShipBob.Webhooks.Public.Common.Topics("order_shipped") // ShipBobWebhooksPublicCommonTopics | Topic of the webhooks requested (optional)
+    topic := openapiclient.Webhooks.Topics("order_shipped") // WebhooksTopics | Topic of the webhooks requested (optional)
     page := int32(56) // int32 | Page of Webhooks to get (optional)
     limit := int32(56) // int32 | Amount of Webhooks per page to request (optional)
 
@@ -42,7 +42,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `WebhooksApi.WebhookGet``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `WebhookGet`: []ShipBobWebhooksPublicApiModelsWebhookViewModel
+    // response from `WebhookGet`: []WebhooksWebhookViewModel
     fmt.Fprintf(os.Stdout, "Response from `WebhooksApi.WebhookGet`: %v\n", resp)
 }
 ```
@@ -58,13 +58,13 @@ Other parameters are passed through a pointer to a apiWebhookGetRequest struct v
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **topic** | [**ShipBobWebhooksPublicCommonTopics**](ShipBobWebhooksPublicCommonTopics.md) | Topic of the webhooks requested | 
+ **topic** | [**WebhooksTopics**](WebhooksTopics.md) | Topic of the webhooks requested | 
  **page** | **int32** | Page of Webhooks to get | 
  **limit** | **int32** | Amount of Webhooks per page to request | 
 
 ### Return type
 
-[**[]ShipBobWebhooksPublicApiModelsWebhookViewModel**](ShipBob.Webhooks.Public.Api.Models.WebhookViewModel.md)
+[**[]WebhooksWebhookViewModel**](Webhooks.WebhookViewModel.md)
 
 ### Authorization
 
@@ -148,7 +148,7 @@ Name | Type | Description  | Notes
 
 ## WebhookPost
 
-> ShipBobWebhooksPublicApiModelsWebhookViewModel WebhookPost(ctx).ShipbobChannelId(shipbobChannelId).ShipBobWebhooksPublicApiModelsCreateWebhookSubscriptionModel(shipBobWebhooksPublicApiModelsCreateWebhookSubscriptionModel).Execute()
+> WebhooksWebhookViewModel WebhookPost(ctx).ShipbobChannelId(shipbobChannelId).WebhooksCreateWebhookSubscriptionModel(webhooksCreateWebhookSubscriptionModel).Execute()
 
 Create a new webhook subscription
 
@@ -166,16 +166,16 @@ import (
 
 func main() {
     shipbobChannelId := int32(56) // int32 |  (optional)
-    shipBobWebhooksPublicApiModelsCreateWebhookSubscriptionModel := *openapiclient.NewShipBobWebhooksPublicApiModelsCreateWebhookSubscriptionModel("https://mywebsite.com/shipbob/handler", openapiclient.ShipBob.Webhooks.Public.Common.Topics("order_shipped")) // ShipBobWebhooksPublicApiModelsCreateWebhookSubscriptionModel |  (optional)
+    webhooksCreateWebhookSubscriptionModel := *openapiclient.NewWebhooksCreateWebhookSubscriptionModel("https://mywebsite.com/shipbob/handler", openapiclient.Webhooks.Topics("order_shipped")) // WebhooksCreateWebhookSubscriptionModel |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.WebhooksApi.WebhookPost(context.Background()).ShipbobChannelId(shipbobChannelId).ShipBobWebhooksPublicApiModelsCreateWebhookSubscriptionModel(shipBobWebhooksPublicApiModelsCreateWebhookSubscriptionModel).Execute()
+    resp, r, err := api_client.WebhooksApi.WebhookPost(context.Background()).ShipbobChannelId(shipbobChannelId).WebhooksCreateWebhookSubscriptionModel(webhooksCreateWebhookSubscriptionModel).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `WebhooksApi.WebhookPost``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `WebhookPost`: ShipBobWebhooksPublicApiModelsWebhookViewModel
+    // response from `WebhookPost`: WebhooksWebhookViewModel
     fmt.Fprintf(os.Stdout, "Response from `WebhooksApi.WebhookPost`: %v\n", resp)
 }
 ```
@@ -192,11 +192,11 @@ Other parameters are passed through a pointer to a apiWebhookPostRequest struct 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **shipbobChannelId** | **int32** |  | 
- **shipBobWebhooksPublicApiModelsCreateWebhookSubscriptionModel** | [**ShipBobWebhooksPublicApiModelsCreateWebhookSubscriptionModel**](ShipBobWebhooksPublicApiModelsCreateWebhookSubscriptionModel.md) |  | 
+ **webhooksCreateWebhookSubscriptionModel** | [**WebhooksCreateWebhookSubscriptionModel**](WebhooksCreateWebhookSubscriptionModel.md) |  | 
 
 ### Return type
 
-[**ShipBobWebhooksPublicApiModelsWebhookViewModel**](ShipBob.Webhooks.Public.Api.Models.WebhookViewModel.md)
+[**WebhooksWebhookViewModel**](Webhooks.WebhookViewModel.md)
 
 ### Authorization
 

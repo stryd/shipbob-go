@@ -33,7 +33,7 @@ type ApiFulfillmentCenterGetRequest struct {
 }
 
 
-func (r ApiFulfillmentCenterGetRequest) Execute() ([]ShipbobReceivingPublicApiModelsFulfillmentCenterViewModel, *_nethttp.Response, error) {
+func (r ApiFulfillmentCenterGetRequest) Execute() ([]ReceivingFulfillmentCenterViewModel, *_nethttp.Response, error) {
 	return r.ApiService.FulfillmentCenterGetExecute(r)
 }
 
@@ -51,16 +51,16 @@ func (a *ReceivingApiService) FulfillmentCenterGet(ctx _context.Context) ApiFulf
 
 /*
  * Execute executes the request
- * @return []ShipbobReceivingPublicApiModelsFulfillmentCenterViewModel
+ * @return []ReceivingFulfillmentCenterViewModel
  */
-func (a *ReceivingApiService) FulfillmentCenterGetExecute(r ApiFulfillmentCenterGetRequest) ([]ShipbobReceivingPublicApiModelsFulfillmentCenterViewModel, *_nethttp.Response, error) {
+func (a *ReceivingApiService) FulfillmentCenterGetExecute(r ApiFulfillmentCenterGetRequest) ([]ReceivingFulfillmentCenterViewModel, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  []ShipbobReceivingPublicApiModelsFulfillmentCenterViewModel
+		localVarReturnValue  []ReceivingFulfillmentCenterViewModel
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ReceivingApiService.FulfillmentCenterGet")
@@ -217,7 +217,7 @@ func (a *ReceivingApiService) ReceivingIdCancelPostExecute(r ApiReceivingIdCance
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v OneOfMicrosoftAspNetCoreMvcValidationProblemDetails
+			var v OneOfValidationProblemDetails
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -248,7 +248,7 @@ type ApiReceivingIdGetRequest struct {
 }
 
 
-func (r ApiReceivingIdGetRequest) Execute() (ShipbobReceivingPublicApiModelsReceivingOrderViewModel, *_nethttp.Response, error) {
+func (r ApiReceivingIdGetRequest) Execute() (ReceivingReceivingOrderViewModel, *_nethttp.Response, error) {
 	return r.ApiService.ReceivingIdGetExecute(r)
 }
 
@@ -268,16 +268,16 @@ func (a *ReceivingApiService) ReceivingIdGet(ctx _context.Context, id int32) Api
 
 /*
  * Execute executes the request
- * @return ShipbobReceivingPublicApiModelsReceivingOrderViewModel
+ * @return ReceivingReceivingOrderViewModel
  */
-func (a *ReceivingApiService) ReceivingIdGetExecute(r ApiReceivingIdGetRequest) (ShipbobReceivingPublicApiModelsReceivingOrderViewModel, *_nethttp.Response, error) {
+func (a *ReceivingApiService) ReceivingIdGetExecute(r ApiReceivingIdGetRequest) (ReceivingReceivingOrderViewModel, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  ShipbobReceivingPublicApiModelsReceivingOrderViewModel
+		localVarReturnValue  ReceivingReceivingOrderViewModel
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ReceivingApiService.ReceivingIdGet")
@@ -332,7 +332,7 @@ func (a *ReceivingApiService) ReceivingIdGetExecute(r ApiReceivingIdGetRequest) 
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v OneOfMicrosoftAspNetCoreMvcValidationProblemDetails
+			var v OneOfValidationProblemDetails
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -446,7 +446,7 @@ func (a *ReceivingApiService) ReceivingIdLabelsGetExecute(r ApiReceivingIdLabels
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v OneOfMicrosoftAspNetCoreMvcValidationProblemDetails
+			var v OneOfValidationProblemDetails
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -456,7 +456,7 @@ func (a *ReceivingApiService) ReceivingIdLabelsGetExecute(r ApiReceivingIdLabels
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v OneOfMicrosoftAspNetCoreMvcValidationProblemDetails
+			var v OneOfValidationProblemDetails
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -482,15 +482,15 @@ func (a *ReceivingApiService) ReceivingIdLabelsGetExecute(r ApiReceivingIdLabels
 type ApiReceivingPostRequest struct {
 	ctx _context.Context
 	ApiService *ReceivingApiService
-	shipbobReceivingPublicApiModelsCreateReceivingOrderModel *ShipbobReceivingPublicApiModelsCreateReceivingOrderModel
+	receivingCreateReceivingOrderModel *ReceivingCreateReceivingOrderModel
 }
 
-func (r ApiReceivingPostRequest) ShipbobReceivingPublicApiModelsCreateReceivingOrderModel(shipbobReceivingPublicApiModelsCreateReceivingOrderModel ShipbobReceivingPublicApiModelsCreateReceivingOrderModel) ApiReceivingPostRequest {
-	r.shipbobReceivingPublicApiModelsCreateReceivingOrderModel = &shipbobReceivingPublicApiModelsCreateReceivingOrderModel
+func (r ApiReceivingPostRequest) ReceivingCreateReceivingOrderModel(receivingCreateReceivingOrderModel ReceivingCreateReceivingOrderModel) ApiReceivingPostRequest {
+	r.receivingCreateReceivingOrderModel = &receivingCreateReceivingOrderModel
 	return r
 }
 
-func (r ApiReceivingPostRequest) Execute() (ShipbobReceivingPublicApiModelsReceivingOrderViewModel, *_nethttp.Response, error) {
+func (r ApiReceivingPostRequest) Execute() (ReceivingReceivingOrderViewModel, *_nethttp.Response, error) {
 	return r.ApiService.ReceivingPostExecute(r)
 }
 
@@ -508,16 +508,16 @@ func (a *ReceivingApiService) ReceivingPost(ctx _context.Context) ApiReceivingPo
 
 /*
  * Execute executes the request
- * @return ShipbobReceivingPublicApiModelsReceivingOrderViewModel
+ * @return ReceivingReceivingOrderViewModel
  */
-func (a *ReceivingApiService) ReceivingPostExecute(r ApiReceivingPostRequest) (ShipbobReceivingPublicApiModelsReceivingOrderViewModel, *_nethttp.Response, error) {
+func (a *ReceivingApiService) ReceivingPostExecute(r ApiReceivingPostRequest) (ReceivingReceivingOrderViewModel, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  ShipbobReceivingPublicApiModelsReceivingOrderViewModel
+		localVarReturnValue  ReceivingReceivingOrderViewModel
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ReceivingApiService.ReceivingPost")
@@ -549,7 +549,7 @@ func (a *ReceivingApiService) ReceivingPostExecute(r ApiReceivingPostRequest) (S
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.shipbobReceivingPublicApiModelsCreateReceivingOrderModel
+	localVarPostBody = r.receivingCreateReceivingOrderModel
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -583,7 +583,7 @@ func (a *ReceivingApiService) ReceivingPostExecute(r ApiReceivingPostRequest) (S
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v OneOfMicrosoftAspNetCoreMvcValidationProblemDetails
+			var v OneOfValidationProblemDetails
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()

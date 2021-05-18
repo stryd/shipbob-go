@@ -33,19 +33,19 @@ type ApiOrderEstimatePostRequest struct {
 	ctx _context.Context
 	ApiService *OrdersApiService
 	shipbobChannelId *int32
-	shipBobOrdersPresentationModelsEstimateFulfillmentRequestModel *ShipBobOrdersPresentationModelsEstimateFulfillmentRequestModel
+	ordersEstimateFulfillmentRequestModel *OrdersEstimateFulfillmentRequestModel
 }
 
 func (r ApiOrderEstimatePostRequest) ShipbobChannelId(shipbobChannelId int32) ApiOrderEstimatePostRequest {
 	r.shipbobChannelId = &shipbobChannelId
 	return r
 }
-func (r ApiOrderEstimatePostRequest) ShipBobOrdersPresentationModelsEstimateFulfillmentRequestModel(shipBobOrdersPresentationModelsEstimateFulfillmentRequestModel ShipBobOrdersPresentationModelsEstimateFulfillmentRequestModel) ApiOrderEstimatePostRequest {
-	r.shipBobOrdersPresentationModelsEstimateFulfillmentRequestModel = &shipBobOrdersPresentationModelsEstimateFulfillmentRequestModel
+func (r ApiOrderEstimatePostRequest) OrdersEstimateFulfillmentRequestModel(ordersEstimateFulfillmentRequestModel OrdersEstimateFulfillmentRequestModel) ApiOrderEstimatePostRequest {
+	r.ordersEstimateFulfillmentRequestModel = &ordersEstimateFulfillmentRequestModel
 	return r
 }
 
-func (r ApiOrderEstimatePostRequest) Execute() (ShipBobOrdersPresentationViewModelsEstimateViewModel, *_nethttp.Response, error) {
+func (r ApiOrderEstimatePostRequest) Execute() (OrdersEstimateViewModel, *_nethttp.Response, error) {
 	return r.ApiService.OrderEstimatePostExecute(r)
 }
 
@@ -64,16 +64,16 @@ func (a *OrdersApiService) OrderEstimatePost(ctx _context.Context) ApiOrderEstim
 
 /*
  * Execute executes the request
- * @return ShipBobOrdersPresentationViewModelsEstimateViewModel
+ * @return OrdersEstimateViewModel
  */
-func (a *OrdersApiService) OrderEstimatePostExecute(r ApiOrderEstimatePostRequest) (ShipBobOrdersPresentationViewModelsEstimateViewModel, *_nethttp.Response, error) {
+func (a *OrdersApiService) OrderEstimatePostExecute(r ApiOrderEstimatePostRequest) (OrdersEstimateViewModel, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  ShipBobOrdersPresentationViewModelsEstimateViewModel
+		localVarReturnValue  OrdersEstimateViewModel
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrdersApiService.OrderEstimatePost")
@@ -109,7 +109,7 @@ func (a *OrdersApiService) OrderEstimatePostExecute(r ApiOrderEstimatePostReques
 	}
 	localVarHeaderParams["shipbob_channel_id"] = parameterToString(*r.shipbobChannelId, "")
 	// body params
-	localVarPostBody = r.shipBobOrdersPresentationModelsEstimateFulfillmentRequestModel
+	localVarPostBody = r.ordersEstimateFulfillmentRequestModel
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -227,7 +227,7 @@ func (r ApiOrderGetRequest) ShipbobChannelId(shipbobChannelId int32) ApiOrderGet
 	return r
 }
 
-func (r ApiOrderGetRequest) Execute() ([]ShipBobOrdersPresentationViewModelsOrderViewModel, *_nethttp.Response, error) {
+func (r ApiOrderGetRequest) Execute() ([]OrdersOrderViewModel, *_nethttp.Response, error) {
 	return r.ApiService.OrderGetExecute(r)
 }
 
@@ -246,16 +246,16 @@ func (a *OrdersApiService) OrderGet(ctx _context.Context) ApiOrderGetRequest {
 
 /*
  * Execute executes the request
- * @return []ShipBobOrdersPresentationViewModelsOrderViewModel
+ * @return []OrdersOrderViewModel
  */
-func (a *OrdersApiService) OrderGetExecute(r ApiOrderGetRequest) ([]ShipBobOrdersPresentationViewModelsOrderViewModel, *_nethttp.Response, error) {
+func (a *OrdersApiService) OrderGetExecute(r ApiOrderGetRequest) ([]OrdersOrderViewModel, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  []ShipBobOrdersPresentationViewModelsOrderViewModel
+		localVarReturnValue  []OrdersOrderViewModel
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrdersApiService.OrderGet")
@@ -394,7 +394,7 @@ func (r ApiOrderOrderIdCancelPostRequest) ShipbobChannelId(shipbobChannelId int3
 	return r
 }
 
-func (r ApiOrderOrderIdCancelPostRequest) Execute() (ShipBobOrdersPresentationViewModelsCanceledOrderViewModel, *_nethttp.Response, error) {
+func (r ApiOrderOrderIdCancelPostRequest) Execute() (OrdersCanceledOrderViewModel, *_nethttp.Response, error) {
 	return r.ApiService.OrderOrderIdCancelPostExecute(r)
 }
 
@@ -414,16 +414,16 @@ func (a *OrdersApiService) OrderOrderIdCancelPost(ctx _context.Context, orderId 
 
 /*
  * Execute executes the request
- * @return ShipBobOrdersPresentationViewModelsCanceledOrderViewModel
+ * @return OrdersCanceledOrderViewModel
  */
-func (a *OrdersApiService) OrderOrderIdCancelPostExecute(r ApiOrderOrderIdCancelPostRequest) (ShipBobOrdersPresentationViewModelsCanceledOrderViewModel, *_nethttp.Response, error) {
+func (a *OrdersApiService) OrderOrderIdCancelPostExecute(r ApiOrderOrderIdCancelPostRequest) (OrdersCanceledOrderViewModel, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  ShipBobOrdersPresentationViewModelsCanceledOrderViewModel
+		localVarReturnValue  OrdersCanceledOrderViewModel
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrdersApiService.OrderOrderIdCancelPost")
@@ -537,7 +537,7 @@ func (r ApiOrderOrderIdGetRequest) ShipbobChannelId(shipbobChannelId int32) ApiO
 	return r
 }
 
-func (r ApiOrderOrderIdGetRequest) Execute() (ShipBobOrdersPresentationViewModelsOrderViewModel, *_nethttp.Response, error) {
+func (r ApiOrderOrderIdGetRequest) Execute() (OrdersOrderViewModel, *_nethttp.Response, error) {
 	return r.ApiService.OrderOrderIdGetExecute(r)
 }
 
@@ -557,16 +557,16 @@ func (a *OrdersApiService) OrderOrderIdGet(ctx _context.Context, orderId int32) 
 
 /*
  * Execute executes the request
- * @return ShipBobOrdersPresentationViewModelsOrderViewModel
+ * @return OrdersOrderViewModel
  */
-func (a *OrdersApiService) OrderOrderIdGetExecute(r ApiOrderOrderIdGetRequest) (ShipBobOrdersPresentationViewModelsOrderViewModel, *_nethttp.Response, error) {
+func (a *OrdersApiService) OrderOrderIdGetExecute(r ApiOrderOrderIdGetRequest) (OrdersOrderViewModel, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  ShipBobOrdersPresentationViewModelsOrderViewModel
+		localVarReturnValue  OrdersOrderViewModel
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrdersApiService.OrderOrderIdGet")
@@ -660,7 +660,7 @@ func (r ApiOrderOrderIdShipmentGetRequest) ShipbobChannelId(shipbobChannelId int
 	return r
 }
 
-func (r ApiOrderOrderIdShipmentGetRequest) Execute() ([]ShipBobOrdersPresentationViewModelsShipmentViewModel, *_nethttp.Response, error) {
+func (r ApiOrderOrderIdShipmentGetRequest) Execute() ([]OrdersShipmentViewModel, *_nethttp.Response, error) {
 	return r.ApiService.OrderOrderIdShipmentGetExecute(r)
 }
 
@@ -680,16 +680,16 @@ func (a *OrdersApiService) OrderOrderIdShipmentGet(ctx _context.Context, orderId
 
 /*
  * Execute executes the request
- * @return []ShipBobOrdersPresentationViewModelsShipmentViewModel
+ * @return []OrdersShipmentViewModel
  */
-func (a *OrdersApiService) OrderOrderIdShipmentGetExecute(r ApiOrderOrderIdShipmentGetRequest) ([]ShipBobOrdersPresentationViewModelsShipmentViewModel, *_nethttp.Response, error) {
+func (a *OrdersApiService) OrderOrderIdShipmentGetExecute(r ApiOrderOrderIdShipmentGetRequest) ([]OrdersShipmentViewModel, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  []ShipBobOrdersPresentationViewModelsShipmentViewModel
+		localVarReturnValue  []OrdersShipmentViewModel
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrdersApiService.OrderOrderIdShipmentGet")
@@ -784,7 +784,7 @@ func (r ApiOrderOrderIdShipmentShipmentIdCancelPostRequest) ShipbobChannelId(shi
 	return r
 }
 
-func (r ApiOrderOrderIdShipmentShipmentIdCancelPostRequest) Execute() (ShipBobOrdersPresentationViewModelsShipmentViewModel, *_nethttp.Response, error) {
+func (r ApiOrderOrderIdShipmentShipmentIdCancelPostRequest) Execute() (OrdersShipmentViewModel, *_nethttp.Response, error) {
 	return r.ApiService.OrderOrderIdShipmentShipmentIdCancelPostExecute(r)
 }
 
@@ -806,16 +806,16 @@ func (a *OrdersApiService) OrderOrderIdShipmentShipmentIdCancelPost(ctx _context
 
 /*
  * Execute executes the request
- * @return ShipBobOrdersPresentationViewModelsShipmentViewModel
+ * @return OrdersShipmentViewModel
  */
-func (a *OrdersApiService) OrderOrderIdShipmentShipmentIdCancelPostExecute(r ApiOrderOrderIdShipmentShipmentIdCancelPostRequest) (ShipBobOrdersPresentationViewModelsShipmentViewModel, *_nethttp.Response, error) {
+func (a *OrdersApiService) OrderOrderIdShipmentShipmentIdCancelPostExecute(r ApiOrderOrderIdShipmentShipmentIdCancelPostRequest) (OrdersShipmentViewModel, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  ShipBobOrdersPresentationViewModelsShipmentViewModel
+		localVarReturnValue  OrdersShipmentViewModel
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrdersApiService.OrderOrderIdShipmentShipmentIdCancelPost")
@@ -930,7 +930,7 @@ func (r ApiOrderOrderIdShipmentShipmentIdGetRequest) ShipbobChannelId(shipbobCha
 	return r
 }
 
-func (r ApiOrderOrderIdShipmentShipmentIdGetRequest) Execute() (ShipBobOrdersPresentationViewModelsShipmentViewModel, *_nethttp.Response, error) {
+func (r ApiOrderOrderIdShipmentShipmentIdGetRequest) Execute() (OrdersShipmentViewModel, *_nethttp.Response, error) {
 	return r.ApiService.OrderOrderIdShipmentShipmentIdGetExecute(r)
 }
 
@@ -952,16 +952,16 @@ func (a *OrdersApiService) OrderOrderIdShipmentShipmentIdGet(ctx _context.Contex
 
 /*
  * Execute executes the request
- * @return ShipBobOrdersPresentationViewModelsShipmentViewModel
+ * @return OrdersShipmentViewModel
  */
-func (a *OrdersApiService) OrderOrderIdShipmentShipmentIdGetExecute(r ApiOrderOrderIdShipmentShipmentIdGetRequest) (ShipBobOrdersPresentationViewModelsShipmentViewModel, *_nethttp.Response, error) {
+func (a *OrdersApiService) OrderOrderIdShipmentShipmentIdGetExecute(r ApiOrderOrderIdShipmentShipmentIdGetRequest) (OrdersShipmentViewModel, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  ShipBobOrdersPresentationViewModelsShipmentViewModel
+		localVarReturnValue  OrdersShipmentViewModel
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrdersApiService.OrderOrderIdShipmentShipmentIdGet")
@@ -1057,7 +1057,7 @@ func (r ApiOrderOrderIdShipmentShipmentIdLogsGetRequest) ShipbobChannelId(shipbo
 	return r
 }
 
-func (r ApiOrderOrderIdShipmentShipmentIdLogsGetRequest) Execute() ([]ShipBobOrdersPresentationViewModelsShipmentLogViewModel, *_nethttp.Response, error) {
+func (r ApiOrderOrderIdShipmentShipmentIdLogsGetRequest) Execute() ([]OrdersShipmentLogViewModel, *_nethttp.Response, error) {
 	return r.ApiService.OrderOrderIdShipmentShipmentIdLogsGetExecute(r)
 }
 
@@ -1079,16 +1079,16 @@ func (a *OrdersApiService) OrderOrderIdShipmentShipmentIdLogsGet(ctx _context.Co
 
 /*
  * Execute executes the request
- * @return []ShipBobOrdersPresentationViewModelsShipmentLogViewModel
+ * @return []OrdersShipmentLogViewModel
  */
-func (a *OrdersApiService) OrderOrderIdShipmentShipmentIdLogsGetExecute(r ApiOrderOrderIdShipmentShipmentIdLogsGetRequest) ([]ShipBobOrdersPresentationViewModelsShipmentLogViewModel, *_nethttp.Response, error) {
+func (a *OrdersApiService) OrderOrderIdShipmentShipmentIdLogsGetExecute(r ApiOrderOrderIdShipmentShipmentIdLogsGetRequest) ([]OrdersShipmentLogViewModel, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  []ShipBobOrdersPresentationViewModelsShipmentLogViewModel
+		localVarReturnValue  []OrdersShipmentLogViewModel
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrdersApiService.OrderOrderIdShipmentShipmentIdLogsGet")
@@ -1184,7 +1184,7 @@ func (r ApiOrderOrderIdShipmentShipmentIdTimelineGetRequest) ShipbobChannelId(sh
 	return r
 }
 
-func (r ApiOrderOrderIdShipmentShipmentIdTimelineGetRequest) Execute() ([]ShipBobOrdersPresentationViewModelsShipmentLogViewModel, *_nethttp.Response, error) {
+func (r ApiOrderOrderIdShipmentShipmentIdTimelineGetRequest) Execute() ([]OrdersShipmentLogViewModel, *_nethttp.Response, error) {
 	return r.ApiService.OrderOrderIdShipmentShipmentIdTimelineGetExecute(r)
 }
 
@@ -1206,16 +1206,16 @@ func (a *OrdersApiService) OrderOrderIdShipmentShipmentIdTimelineGet(ctx _contex
 
 /*
  * Execute executes the request
- * @return []ShipBobOrdersPresentationViewModelsShipmentLogViewModel
+ * @return []OrdersShipmentLogViewModel
  */
-func (a *OrdersApiService) OrderOrderIdShipmentShipmentIdTimelineGetExecute(r ApiOrderOrderIdShipmentShipmentIdTimelineGetRequest) ([]ShipBobOrdersPresentationViewModelsShipmentLogViewModel, *_nethttp.Response, error) {
+func (a *OrdersApiService) OrderOrderIdShipmentShipmentIdTimelineGetExecute(r ApiOrderOrderIdShipmentShipmentIdTimelineGetRequest) ([]OrdersShipmentLogViewModel, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  []ShipBobOrdersPresentationViewModelsShipmentLogViewModel
+		localVarReturnValue  []OrdersShipmentLogViewModel
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrdersApiService.OrderOrderIdShipmentShipmentIdTimelineGet")
@@ -1302,19 +1302,19 @@ type ApiOrderPostRequest struct {
 	ctx _context.Context
 	ApiService *OrdersApiService
 	shipbobChannelId *int32
-	shipBobOrdersPresentationModelsCreateOrderModel *ShipBobOrdersPresentationModelsCreateOrderModel
+	ordersCreateOrderModel *OrdersCreateOrderModel
 }
 
 func (r ApiOrderPostRequest) ShipbobChannelId(shipbobChannelId int32) ApiOrderPostRequest {
 	r.shipbobChannelId = &shipbobChannelId
 	return r
 }
-func (r ApiOrderPostRequest) ShipBobOrdersPresentationModelsCreateOrderModel(shipBobOrdersPresentationModelsCreateOrderModel ShipBobOrdersPresentationModelsCreateOrderModel) ApiOrderPostRequest {
-	r.shipBobOrdersPresentationModelsCreateOrderModel = &shipBobOrdersPresentationModelsCreateOrderModel
+func (r ApiOrderPostRequest) OrdersCreateOrderModel(ordersCreateOrderModel OrdersCreateOrderModel) ApiOrderPostRequest {
+	r.ordersCreateOrderModel = &ordersCreateOrderModel
 	return r
 }
 
-func (r ApiOrderPostRequest) Execute() (ShipBobOrdersPresentationViewModelsOrderViewModel, *_nethttp.Response, error) {
+func (r ApiOrderPostRequest) Execute() (OrdersOrderViewModel, *_nethttp.Response, error) {
 	return r.ApiService.OrderPostExecute(r)
 }
 
@@ -1332,16 +1332,16 @@ func (a *OrdersApiService) OrderPost(ctx _context.Context) ApiOrderPostRequest {
 
 /*
  * Execute executes the request
- * @return ShipBobOrdersPresentationViewModelsOrderViewModel
+ * @return OrdersOrderViewModel
  */
-func (a *OrdersApiService) OrderPostExecute(r ApiOrderPostRequest) (ShipBobOrdersPresentationViewModelsOrderViewModel, *_nethttp.Response, error) {
+func (a *OrdersApiService) OrderPostExecute(r ApiOrderPostRequest) (OrdersOrderViewModel, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  ShipBobOrdersPresentationViewModelsOrderViewModel
+		localVarReturnValue  OrdersOrderViewModel
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrdersApiService.OrderPost")
@@ -1377,7 +1377,7 @@ func (a *OrdersApiService) OrderPostExecute(r ApiOrderPostRequest) (ShipBobOrder
 	}
 	localVarHeaderParams["shipbob_channel_id"] = parameterToString(*r.shipbobChannelId, "")
 	// body params
-	localVarPostBody = r.shipBobOrdersPresentationModelsCreateOrderModel
+	localVarPostBody = r.ordersCreateOrderModel
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -1438,19 +1438,19 @@ type ApiShipmentCancelbulkPostRequest struct {
 	ctx _context.Context
 	ApiService *OrdersApiService
 	shipbobChannelId *int32
-	shipBobOrdersPresentationModelsCancelShipmentsModel *ShipBobOrdersPresentationModelsCancelShipmentsModel
+	ordersCancelShipmentsModel *OrdersCancelShipmentsModel
 }
 
 func (r ApiShipmentCancelbulkPostRequest) ShipbobChannelId(shipbobChannelId int32) ApiShipmentCancelbulkPostRequest {
 	r.shipbobChannelId = &shipbobChannelId
 	return r
 }
-func (r ApiShipmentCancelbulkPostRequest) ShipBobOrdersPresentationModelsCancelShipmentsModel(shipBobOrdersPresentationModelsCancelShipmentsModel ShipBobOrdersPresentationModelsCancelShipmentsModel) ApiShipmentCancelbulkPostRequest {
-	r.shipBobOrdersPresentationModelsCancelShipmentsModel = &shipBobOrdersPresentationModelsCancelShipmentsModel
+func (r ApiShipmentCancelbulkPostRequest) OrdersCancelShipmentsModel(ordersCancelShipmentsModel OrdersCancelShipmentsModel) ApiShipmentCancelbulkPostRequest {
+	r.ordersCancelShipmentsModel = &ordersCancelShipmentsModel
 	return r
 }
 
-func (r ApiShipmentCancelbulkPostRequest) Execute() (ShipBobOrdersPresentationViewModelsCanceledShipmentsViewModel, *_nethttp.Response, error) {
+func (r ApiShipmentCancelbulkPostRequest) Execute() (OrdersCanceledShipmentsViewModel, *_nethttp.Response, error) {
 	return r.ApiService.ShipmentCancelbulkPostExecute(r)
 }
 
@@ -1468,16 +1468,16 @@ func (a *OrdersApiService) ShipmentCancelbulkPost(ctx _context.Context) ApiShipm
 
 /*
  * Execute executes the request
- * @return ShipBobOrdersPresentationViewModelsCanceledShipmentsViewModel
+ * @return OrdersCanceledShipmentsViewModel
  */
-func (a *OrdersApiService) ShipmentCancelbulkPostExecute(r ApiShipmentCancelbulkPostRequest) (ShipBobOrdersPresentationViewModelsCanceledShipmentsViewModel, *_nethttp.Response, error) {
+func (a *OrdersApiService) ShipmentCancelbulkPostExecute(r ApiShipmentCancelbulkPostRequest) (OrdersCanceledShipmentsViewModel, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  ShipBobOrdersPresentationViewModelsCanceledShipmentsViewModel
+		localVarReturnValue  OrdersCanceledShipmentsViewModel
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrdersApiService.ShipmentCancelbulkPost")
@@ -1513,7 +1513,7 @@ func (a *OrdersApiService) ShipmentCancelbulkPostExecute(r ApiShipmentCancelbulk
 	}
 	localVarHeaderParams["shipbob_channel_id"] = parameterToString(*r.shipbobChannelId, "")
 	// body params
-	localVarPostBody = r.shipBobOrdersPresentationModelsCancelShipmentsModel
+	localVarPostBody = r.ordersCancelShipmentsModel
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -1582,7 +1582,7 @@ func (r ApiShipmentShipmentIdCancelPostRequest) ShipbobChannelId(shipbobChannelI
 	return r
 }
 
-func (r ApiShipmentShipmentIdCancelPostRequest) Execute() (ShipBobOrdersPresentationViewModelsShipmentViewModel, *_nethttp.Response, error) {
+func (r ApiShipmentShipmentIdCancelPostRequest) Execute() (OrdersShipmentViewModel, *_nethttp.Response, error) {
 	return r.ApiService.ShipmentShipmentIdCancelPostExecute(r)
 }
 
@@ -1602,16 +1602,16 @@ func (a *OrdersApiService) ShipmentShipmentIdCancelPost(ctx _context.Context, sh
 
 /*
  * Execute executes the request
- * @return ShipBobOrdersPresentationViewModelsShipmentViewModel
+ * @return OrdersShipmentViewModel
  */
-func (a *OrdersApiService) ShipmentShipmentIdCancelPostExecute(r ApiShipmentShipmentIdCancelPostRequest) (ShipBobOrdersPresentationViewModelsShipmentViewModel, *_nethttp.Response, error) {
+func (a *OrdersApiService) ShipmentShipmentIdCancelPostExecute(r ApiShipmentShipmentIdCancelPostRequest) (OrdersShipmentViewModel, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  ShipBobOrdersPresentationViewModelsShipmentViewModel
+		localVarReturnValue  OrdersShipmentViewModel
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrdersApiService.ShipmentShipmentIdCancelPost")
@@ -1724,7 +1724,7 @@ func (r ApiShipmentShipmentIdGetRequest) ShipbobChannelId(shipbobChannelId int32
 	return r
 }
 
-func (r ApiShipmentShipmentIdGetRequest) Execute() (ShipBobOrdersPresentationViewModelsShipmentViewModel, *_nethttp.Response, error) {
+func (r ApiShipmentShipmentIdGetRequest) Execute() (OrdersShipmentViewModel, *_nethttp.Response, error) {
 	return r.ApiService.ShipmentShipmentIdGetExecute(r)
 }
 
@@ -1744,16 +1744,16 @@ func (a *OrdersApiService) ShipmentShipmentIdGet(ctx _context.Context, shipmentI
 
 /*
  * Execute executes the request
- * @return ShipBobOrdersPresentationViewModelsShipmentViewModel
+ * @return OrdersShipmentViewModel
  */
-func (a *OrdersApiService) ShipmentShipmentIdGetExecute(r ApiShipmentShipmentIdGetRequest) (ShipBobOrdersPresentationViewModelsShipmentViewModel, *_nethttp.Response, error) {
+func (a *OrdersApiService) ShipmentShipmentIdGetExecute(r ApiShipmentShipmentIdGetRequest) (OrdersShipmentViewModel, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  ShipBobOrdersPresentationViewModelsShipmentViewModel
+		localVarReturnValue  OrdersShipmentViewModel
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrdersApiService.ShipmentShipmentIdGet")
@@ -1847,7 +1847,7 @@ func (r ApiShipmentShipmentIdLogsGetRequest) ShipbobChannelId(shipbobChannelId i
 	return r
 }
 
-func (r ApiShipmentShipmentIdLogsGetRequest) Execute() ([]ShipBobOrdersPresentationViewModelsShipmentLogViewModel, *_nethttp.Response, error) {
+func (r ApiShipmentShipmentIdLogsGetRequest) Execute() ([]OrdersShipmentLogViewModel, *_nethttp.Response, error) {
 	return r.ApiService.ShipmentShipmentIdLogsGetExecute(r)
 }
 
@@ -1867,16 +1867,16 @@ func (a *OrdersApiService) ShipmentShipmentIdLogsGet(ctx _context.Context, shipm
 
 /*
  * Execute executes the request
- * @return []ShipBobOrdersPresentationViewModelsShipmentLogViewModel
+ * @return []OrdersShipmentLogViewModel
  */
-func (a *OrdersApiService) ShipmentShipmentIdLogsGetExecute(r ApiShipmentShipmentIdLogsGetRequest) ([]ShipBobOrdersPresentationViewModelsShipmentLogViewModel, *_nethttp.Response, error) {
+func (a *OrdersApiService) ShipmentShipmentIdLogsGetExecute(r ApiShipmentShipmentIdLogsGetRequest) ([]OrdersShipmentLogViewModel, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  []ShipBobOrdersPresentationViewModelsShipmentLogViewModel
+		localVarReturnValue  []OrdersShipmentLogViewModel
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrdersApiService.ShipmentShipmentIdLogsGet")
@@ -1970,7 +1970,7 @@ func (r ApiShipmentShipmentIdTimelineGetRequest) ShipbobChannelId(shipbobChannel
 	return r
 }
 
-func (r ApiShipmentShipmentIdTimelineGetRequest) Execute() ([]ShipBobOrdersPresentationViewModelsShipmentLogViewModel, *_nethttp.Response, error) {
+func (r ApiShipmentShipmentIdTimelineGetRequest) Execute() ([]OrdersShipmentLogViewModel, *_nethttp.Response, error) {
 	return r.ApiService.ShipmentShipmentIdTimelineGetExecute(r)
 }
 
@@ -1990,16 +1990,16 @@ func (a *OrdersApiService) ShipmentShipmentIdTimelineGet(ctx _context.Context, s
 
 /*
  * Execute executes the request
- * @return []ShipBobOrdersPresentationViewModelsShipmentLogViewModel
+ * @return []OrdersShipmentLogViewModel
  */
-func (a *OrdersApiService) ShipmentShipmentIdTimelineGetExecute(r ApiShipmentShipmentIdTimelineGetRequest) ([]ShipBobOrdersPresentationViewModelsShipmentLogViewModel, *_nethttp.Response, error) {
+func (a *OrdersApiService) ShipmentShipmentIdTimelineGetExecute(r ApiShipmentShipmentIdTimelineGetRequest) ([]OrdersShipmentLogViewModel, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  []ShipBobOrdersPresentationViewModelsShipmentLogViewModel
+		localVarReturnValue  []OrdersShipmentLogViewModel
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrdersApiService.ShipmentShipmentIdTimelineGet")
@@ -2097,7 +2097,7 @@ func (r ApiShippingmethodGetRequest) Limit(limit int32) ApiShippingmethodGetRequ
 	return r
 }
 
-func (r ApiShippingmethodGetRequest) Execute() ([]ShipBobOrdersPresentationViewModelsShipMethodDetailViewModel, *_nethttp.Response, error) {
+func (r ApiShippingmethodGetRequest) Execute() ([]OrdersShipMethodDetailViewModel, *_nethttp.Response, error) {
 	return r.ApiService.ShippingmethodGetExecute(r)
 }
 
@@ -2116,16 +2116,16 @@ func (a *OrdersApiService) ShippingmethodGet(ctx _context.Context) ApiShippingme
 
 /*
  * Execute executes the request
- * @return []ShipBobOrdersPresentationViewModelsShipMethodDetailViewModel
+ * @return []OrdersShipMethodDetailViewModel
  */
-func (a *OrdersApiService) ShippingmethodGetExecute(r ApiShippingmethodGetRequest) ([]ShipBobOrdersPresentationViewModelsShipMethodDetailViewModel, *_nethttp.Response, error) {
+func (a *OrdersApiService) ShippingmethodGetExecute(r ApiShippingmethodGetRequest) ([]OrdersShipMethodDetailViewModel, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  []ShipBobOrdersPresentationViewModelsShipMethodDetailViewModel
+		localVarReturnValue  []OrdersShipMethodDetailViewModel
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrdersApiService.ShippingmethodGet")

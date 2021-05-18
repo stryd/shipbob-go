@@ -30,12 +30,12 @@ type WebhooksApiService service
 type ApiWebhookGetRequest struct {
 	ctx _context.Context
 	ApiService *WebhooksApiService
-	topic *ShipBobWebhooksPublicCommonTopics
+	topic *WebhooksTopics
 	page *int32
 	limit *int32
 }
 
-func (r ApiWebhookGetRequest) Topic(topic ShipBobWebhooksPublicCommonTopics) ApiWebhookGetRequest {
+func (r ApiWebhookGetRequest) Topic(topic WebhooksTopics) ApiWebhookGetRequest {
 	r.topic = &topic
 	return r
 }
@@ -48,7 +48,7 @@ func (r ApiWebhookGetRequest) Limit(limit int32) ApiWebhookGetRequest {
 	return r
 }
 
-func (r ApiWebhookGetRequest) Execute() ([]ShipBobWebhooksPublicApiModelsWebhookViewModel, *_nethttp.Response, error) {
+func (r ApiWebhookGetRequest) Execute() ([]WebhooksWebhookViewModel, *_nethttp.Response, error) {
 	return r.ApiService.WebhookGetExecute(r)
 }
 
@@ -67,16 +67,16 @@ func (a *WebhooksApiService) WebhookGet(ctx _context.Context) ApiWebhookGetReque
 
 /*
  * Execute executes the request
- * @return []ShipBobWebhooksPublicApiModelsWebhookViewModel
+ * @return []WebhooksWebhookViewModel
  */
-func (a *WebhooksApiService) WebhookGetExecute(r ApiWebhookGetRequest) ([]ShipBobWebhooksPublicApiModelsWebhookViewModel, *_nethttp.Response, error) {
+func (a *WebhooksApiService) WebhookGetExecute(r ApiWebhookGetRequest) ([]WebhooksWebhookViewModel, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  []ShipBobWebhooksPublicApiModelsWebhookViewModel
+		localVarReturnValue  []WebhooksWebhookViewModel
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WebhooksApiService.WebhookGet")
@@ -252,7 +252,7 @@ func (a *WebhooksApiService) WebhookIdDeleteExecute(r ApiWebhookIdDeleteRequest)
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v OneOfMicrosoftAspNetCoreMvcValidationProblemDetails
+			var v OneOfValidationProblemDetails
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -270,19 +270,19 @@ type ApiWebhookPostRequest struct {
 	ctx _context.Context
 	ApiService *WebhooksApiService
 	shipbobChannelId *int32
-	shipBobWebhooksPublicApiModelsCreateWebhookSubscriptionModel *ShipBobWebhooksPublicApiModelsCreateWebhookSubscriptionModel
+	webhooksCreateWebhookSubscriptionModel *WebhooksCreateWebhookSubscriptionModel
 }
 
 func (r ApiWebhookPostRequest) ShipbobChannelId(shipbobChannelId int32) ApiWebhookPostRequest {
 	r.shipbobChannelId = &shipbobChannelId
 	return r
 }
-func (r ApiWebhookPostRequest) ShipBobWebhooksPublicApiModelsCreateWebhookSubscriptionModel(shipBobWebhooksPublicApiModelsCreateWebhookSubscriptionModel ShipBobWebhooksPublicApiModelsCreateWebhookSubscriptionModel) ApiWebhookPostRequest {
-	r.shipBobWebhooksPublicApiModelsCreateWebhookSubscriptionModel = &shipBobWebhooksPublicApiModelsCreateWebhookSubscriptionModel
+func (r ApiWebhookPostRequest) WebhooksCreateWebhookSubscriptionModel(webhooksCreateWebhookSubscriptionModel WebhooksCreateWebhookSubscriptionModel) ApiWebhookPostRequest {
+	r.webhooksCreateWebhookSubscriptionModel = &webhooksCreateWebhookSubscriptionModel
 	return r
 }
 
-func (r ApiWebhookPostRequest) Execute() (ShipBobWebhooksPublicApiModelsWebhookViewModel, *_nethttp.Response, error) {
+func (r ApiWebhookPostRequest) Execute() (WebhooksWebhookViewModel, *_nethttp.Response, error) {
 	return r.ApiService.WebhookPostExecute(r)
 }
 
@@ -300,16 +300,16 @@ func (a *WebhooksApiService) WebhookPost(ctx _context.Context) ApiWebhookPostReq
 
 /*
  * Execute executes the request
- * @return ShipBobWebhooksPublicApiModelsWebhookViewModel
+ * @return WebhooksWebhookViewModel
  */
-func (a *WebhooksApiService) WebhookPostExecute(r ApiWebhookPostRequest) (ShipBobWebhooksPublicApiModelsWebhookViewModel, *_nethttp.Response, error) {
+func (a *WebhooksApiService) WebhookPostExecute(r ApiWebhookPostRequest) (WebhooksWebhookViewModel, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  ShipBobWebhooksPublicApiModelsWebhookViewModel
+		localVarReturnValue  WebhooksWebhookViewModel
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WebhooksApiService.WebhookPost")
@@ -344,7 +344,7 @@ func (a *WebhooksApiService) WebhookPostExecute(r ApiWebhookPostRequest) (ShipBo
 		localVarHeaderParams["shipbob_channel_id"] = parameterToString(*r.shipbobChannelId, "")
 	}
 	// body params
-	localVarPostBody = r.shipBobWebhooksPublicApiModelsCreateWebhookSubscriptionModel
+	localVarPostBody = r.webhooksCreateWebhookSubscriptionModel
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err

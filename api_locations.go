@@ -47,7 +47,7 @@ func (r ApiLocationGetRequest) AccessGranted(accessGranted bool) ApiLocationGetR
 	return r
 }
 
-func (r ApiLocationGetRequest) Execute() ([]IntegrationsLocationPublicApiViewModelsLocationViewModel, *_nethttp.Response, error) {
+func (r ApiLocationGetRequest) Execute() ([]LocationLocationViewModel, *_nethttp.Response, error) {
 	return r.ApiService.LocationGetExecute(r)
 }
 
@@ -65,16 +65,16 @@ func (a *LocationsApiService) LocationGet(ctx _context.Context) ApiLocationGetRe
 
 /*
  * Execute executes the request
- * @return []IntegrationsLocationPublicApiViewModelsLocationViewModel
+ * @return []LocationLocationViewModel
  */
-func (a *LocationsApiService) LocationGetExecute(r ApiLocationGetRequest) ([]IntegrationsLocationPublicApiViewModelsLocationViewModel, *_nethttp.Response, error) {
+func (a *LocationsApiService) LocationGetExecute(r ApiLocationGetRequest) ([]LocationLocationViewModel, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  []IntegrationsLocationPublicApiViewModelsLocationViewModel
+		localVarReturnValue  []LocationLocationViewModel
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "LocationsApiService.LocationGet")

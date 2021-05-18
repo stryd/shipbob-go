@@ -14,7 +14,7 @@ Method | HTTP request | Description
 
 ## FulfillmentCenterGet
 
-> []ShipbobReceivingPublicApiModelsFulfillmentCenterViewModel FulfillmentCenterGet(ctx).Execute()
+> []ReceivingFulfillmentCenterViewModel FulfillmentCenterGet(ctx).Execute()
 
 Get Fulfillment Centers
 
@@ -39,7 +39,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `ReceivingApi.FulfillmentCenterGet``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `FulfillmentCenterGet`: []ShipbobReceivingPublicApiModelsFulfillmentCenterViewModel
+    // response from `FulfillmentCenterGet`: []ReceivingFulfillmentCenterViewModel
     fmt.Fprintf(os.Stdout, "Response from `ReceivingApi.FulfillmentCenterGet`: %v\n", resp)
 }
 ```
@@ -55,7 +55,7 @@ Other parameters are passed through a pointer to a apiFulfillmentCenterGetReques
 
 ### Return type
 
-[**[]ShipbobReceivingPublicApiModelsFulfillmentCenterViewModel**](Shipbob.Receiving.Public.Api.Models.FulfillmentCenterViewModel.md)
+[**[]ReceivingFulfillmentCenterViewModel**](Receiving.FulfillmentCenterViewModel.md)
 
 ### Authorization
 
@@ -139,7 +139,7 @@ Name | Type | Description  | Notes
 
 ## ReceivingIdGet
 
-> ShipbobReceivingPublicApiModelsReceivingOrderViewModel ReceivingIdGet(ctx, id).Execute()
+> ReceivingReceivingOrderViewModel ReceivingIdGet(ctx, id).Execute()
 
 Get Warehouse Receiving Order
 
@@ -165,7 +165,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `ReceivingApi.ReceivingIdGet``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `ReceivingIdGet`: ShipbobReceivingPublicApiModelsReceivingOrderViewModel
+    // response from `ReceivingIdGet`: ReceivingReceivingOrderViewModel
     fmt.Fprintf(os.Stdout, "Response from `ReceivingApi.ReceivingIdGet`: %v\n", resp)
 }
 ```
@@ -189,7 +189,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ShipbobReceivingPublicApiModelsReceivingOrderViewModel**](Shipbob.Receiving.Public.Api.Models.ReceivingOrderViewModel.md)
+[**ReceivingReceivingOrderViewModel**](Receiving.ReceivingOrderViewModel.md)
 
 ### Authorization
 
@@ -275,7 +275,7 @@ Name | Type | Description  | Notes
 
 ## ReceivingPost
 
-> ShipbobReceivingPublicApiModelsReceivingOrderViewModel ReceivingPost(ctx).ShipbobReceivingPublicApiModelsCreateReceivingOrderModel(shipbobReceivingPublicApiModelsCreateReceivingOrderModel).Execute()
+> ReceivingReceivingOrderViewModel ReceivingPost(ctx).ReceivingCreateReceivingOrderModel(receivingCreateReceivingOrderModel).Execute()
 
 Create Warehouse Receiving Order
 
@@ -293,16 +293,16 @@ import (
 )
 
 func main() {
-    shipbobReceivingPublicApiModelsCreateReceivingOrderModel := *openapiclient.NewShipbobReceivingPublicApiModelsCreateReceivingOrderModel(openapiclient.Shipbob.Receiving.Public.Common.Models.PackingType("EverythingInOneBox"), []openapiclient.ShipbobReceivingPublicApiModelsAddBoxToOrderModel{*openapiclient.NewShipbobReceivingPublicApiModelsAddBoxToOrderModel([]openapiclient.ShipbobReceivingPublicApiModelsAddBoxItemToBoxModel{*openapiclient.NewShipbobReceivingPublicApiModelsAddBoxItemToBoxModel(int32(123), int32(123))}, "860C8CDC8F0B4FC7AB69AC86C20539EC")}, time.Now(), *openapiclient.NewShipbobReceivingPublicApiModelsAssignOrderToFulfillmentCenterModel(int32(123)), openapiclient.Shipbob.Receiving.Public.Common.Models.PackageType("Package")) // ShipbobReceivingPublicApiModelsCreateReceivingOrderModel | The receiving order to create (optional)
+    receivingCreateReceivingOrderModel := *openapiclient.NewReceivingCreateReceivingOrderModel(openapiclient.Receiving.PackingType("EverythingInOneBox"), []openapiclient.ReceivingAddBoxToOrderModel{*openapiclient.NewReceivingAddBoxToOrderModel([]openapiclient.ReceivingAddBoxItemToBoxModel{*openapiclient.NewReceivingAddBoxItemToBoxModel(int32(123), int32(123))}, "860C8CDC8F0B4FC7AB69AC86C20539EC")}, time.Now(), *openapiclient.NewReceivingAssignOrderToFulfillmentCenterModel(int32(123)), openapiclient.Receiving.PackageType("Package")) // ReceivingCreateReceivingOrderModel | The receiving order to create (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ReceivingApi.ReceivingPost(context.Background()).ShipbobReceivingPublicApiModelsCreateReceivingOrderModel(shipbobReceivingPublicApiModelsCreateReceivingOrderModel).Execute()
+    resp, r, err := api_client.ReceivingApi.ReceivingPost(context.Background()).ReceivingCreateReceivingOrderModel(receivingCreateReceivingOrderModel).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ReceivingApi.ReceivingPost``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `ReceivingPost`: ShipbobReceivingPublicApiModelsReceivingOrderViewModel
+    // response from `ReceivingPost`: ReceivingReceivingOrderViewModel
     fmt.Fprintf(os.Stdout, "Response from `ReceivingApi.ReceivingPost`: %v\n", resp)
 }
 ```
@@ -318,11 +318,11 @@ Other parameters are passed through a pointer to a apiReceivingPostRequest struc
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **shipbobReceivingPublicApiModelsCreateReceivingOrderModel** | [**ShipbobReceivingPublicApiModelsCreateReceivingOrderModel**](ShipbobReceivingPublicApiModelsCreateReceivingOrderModel.md) | The receiving order to create | 
+ **receivingCreateReceivingOrderModel** | [**ReceivingCreateReceivingOrderModel**](ReceivingCreateReceivingOrderModel.md) | The receiving order to create | 
 
 ### Return type
 
-[**ShipbobReceivingPublicApiModelsReceivingOrderViewModel**](Shipbob.Receiving.Public.Api.Models.ReceivingOrderViewModel.md)
+[**ReceivingReceivingOrderViewModel**](Receiving.ReceivingOrderViewModel.md)
 
 ### Authorization
 

@@ -32,7 +32,7 @@ type ApiChannelGetRequest struct {
 }
 
 
-func (r ApiChannelGetRequest) Execute() ([]ShipBobChannelsApiViewModelsChannelViewModel, *_nethttp.Response, error) {
+func (r ApiChannelGetRequest) Execute() ([]ChannelsChannelViewModel, *_nethttp.Response, error) {
 	return r.ApiService.ChannelGetExecute(r)
 }
 
@@ -50,16 +50,16 @@ func (a *ChannelsApiService) ChannelGet(ctx _context.Context) ApiChannelGetReque
 
 /*
  * Execute executes the request
- * @return []ShipBobChannelsApiViewModelsChannelViewModel
+ * @return []ChannelsChannelViewModel
  */
-func (a *ChannelsApiService) ChannelGetExecute(r ApiChannelGetRequest) ([]ShipBobChannelsApiViewModelsChannelViewModel, *_nethttp.Response, error) {
+func (a *ChannelsApiService) ChannelGetExecute(r ApiChannelGetRequest) ([]ChannelsChannelViewModel, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  []ShipBobChannelsApiViewModelsChannelViewModel
+		localVarReturnValue  []ChannelsChannelViewModel
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ChannelsApiService.ChannelGet")

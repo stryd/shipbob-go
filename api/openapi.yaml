@@ -154,7 +154,7 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/ShipBob.Channels.Api.ViewModels.ChannelViewModel'
+                  $ref: '#/components/schemas/Channels.ChannelViewModel'
                 type: array
           description: Success
         "400":
@@ -185,7 +185,7 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/Shipbob.Receiving.Public.Api.Models.FulfillmentCenterViewModel'
+                  $ref: '#/components/schemas/Receiving.FulfillmentCenterViewModel'
                 type: array
           description: Success
         "401":
@@ -287,7 +287,7 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/Shipbob.Inventory.Api.ViewModels.InventoryViewModel'
+                  $ref: '#/components/schemas/Inventory.InventoryViewModel'
                 type: array
           description: Success
         "400":
@@ -329,7 +329,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Shipbob.Inventory.Api.ViewModels.InventoryViewModel'
+                $ref: '#/components/schemas/Inventory.InventoryViewModel'
           description: Success
         "400":
           content:
@@ -392,7 +392,7 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/Integrations.Location.Public.Api.ViewModels.LocationViewModel'
+                  $ref: '#/components/schemas/Location.LocationViewModel'
                 type: array
           description: Success
         "401":
@@ -525,7 +525,7 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/ShipBob.Orders.Presentation.ViewModels.OrderViewModel'
+                  $ref: '#/components/schemas/Orders.OrderViewModel'
                 type: array
           description: Success
         "400":
@@ -563,22 +563,22 @@ paths:
         content:
           application/*+json:
             schema:
-              $ref: '#/components/schemas/ShipBob.Orders.Presentation.Models.CreateOrderModel'
+              $ref: '#/components/schemas/Orders.CreateOrderModel'
           application/json:
             schema:
-              $ref: '#/components/schemas/ShipBob.Orders.Presentation.Models.CreateOrderModel'
+              $ref: '#/components/schemas/Orders.CreateOrderModel'
           application/json-patch+json:
             schema:
-              $ref: '#/components/schemas/ShipBob.Orders.Presentation.Models.CreateOrderModel'
+              $ref: '#/components/schemas/Orders.CreateOrderModel'
           text/json:
             schema:
-              $ref: '#/components/schemas/ShipBob.Orders.Presentation.Models.CreateOrderModel'
+              $ref: '#/components/schemas/Orders.CreateOrderModel'
       responses:
         "201":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ShipBob.Orders.Presentation.ViewModels.OrderViewModel'
+                $ref: '#/components/schemas/Orders.OrderViewModel'
           description: Success
         "400":
           content:
@@ -634,22 +634,22 @@ paths:
         content:
           application/*+json:
             schema:
-              $ref: '#/components/schemas/ShipBob.Orders.Presentation.Models.EstimateFulfillmentRequestModel'
+              $ref: '#/components/schemas/Orders.EstimateFulfillmentRequestModel'
           application/json:
             schema:
-              $ref: '#/components/schemas/ShipBob.Orders.Presentation.Models.EstimateFulfillmentRequestModel'
+              $ref: '#/components/schemas/Orders.EstimateFulfillmentRequestModel'
           application/json-patch+json:
             schema:
-              $ref: '#/components/schemas/ShipBob.Orders.Presentation.Models.EstimateFulfillmentRequestModel'
+              $ref: '#/components/schemas/Orders.EstimateFulfillmentRequestModel'
           text/json:
             schema:
-              $ref: '#/components/schemas/ShipBob.Orders.Presentation.Models.EstimateFulfillmentRequestModel'
+              $ref: '#/components/schemas/Orders.EstimateFulfillmentRequestModel'
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ShipBob.Orders.Presentation.ViewModels.EstimateViewModel'
+                $ref: '#/components/schemas/Orders.EstimateViewModel'
           description: Success
         "400":
           content:
@@ -707,7 +707,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ShipBob.Orders.Presentation.ViewModels.OrderViewModel'
+                $ref: '#/components/schemas/Orders.OrderViewModel'
           description: Success
         "400":
           content:
@@ -757,7 +757,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ShipBob.Orders.Presentation.ViewModels.CanceledOrderViewModel'
+                $ref: '#/components/schemas/Orders.CanceledOrderViewModel'
           description: Success
         "400":
           content:
@@ -829,7 +829,7 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/ShipBob.Orders.Presentation.ViewModels.ShipmentViewModel'
+                  $ref: '#/components/schemas/Orders.ShipmentViewModel'
                 type: array
           description: Success
         "400":
@@ -890,7 +890,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ShipBob.Orders.Presentation.ViewModels.ShipmentViewModel'
+                $ref: '#/components/schemas/Orders.ShipmentViewModel'
           description: Success
         "400":
           content:
@@ -948,7 +948,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ShipBob.Orders.Presentation.ViewModels.ShipmentViewModel'
+                $ref: '#/components/schemas/Orders.ShipmentViewModel'
           description: Success
         "400":
           content:
@@ -1029,7 +1029,7 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/ShipBob.Orders.Presentation.ViewModels.ShipmentLogViewModel'
+                  $ref: '#/components/schemas/Orders.ShipmentLogViewModel'
                 type: array
           description: Success
         "400":
@@ -1091,7 +1091,7 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/ShipBob.Orders.Presentation.ViewModels.ShipmentLogViewModel'
+                  $ref: '#/components/schemas/Orders.ShipmentLogViewModel'
                 type: array
           description: Success
         "400":
@@ -1178,7 +1178,7 @@ paths:
         name: ActiveStatus
         required: false
         schema:
-          $ref: '#/components/schemas/Shipbob.Products.Common.Models.ProductActiveStatus'
+          $ref: '#/components/schemas/Products.ProductActiveStatus'
         style: form
       - description: 'Bundle filter for products:\r\n- Any: Don''t filter and consider
           products that are bundles or not bundles\r\n- Bundle: Filter by products
@@ -1188,7 +1188,7 @@ paths:
         name: BundleStatus
         required: false
         schema:
-          $ref: '#/components/schemas/Shipbob.Products.Common.Models.ProductBundleStatus'
+          $ref: '#/components/schemas/Products.ProductBundleStatus'
         style: form
       - description: Channel Id for Operation
         explode: false
@@ -1205,7 +1205,7 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/Shipbob.Products.Api.ViewModels.Public.ProductViewModel'
+                  $ref: '#/components/schemas/Products.ProductViewModel'
                 type: array
           description: Success
           headers:
@@ -1281,16 +1281,16 @@ paths:
         content:
           application/*+json:
             schema:
-              $ref: '#/components/schemas/Shipbob.Products.Api.Models.Public.CreateProductModel'
+              $ref: '#/components/schemas/Products.CreateProductModel'
           application/json:
             schema:
-              $ref: '#/components/schemas/Shipbob.Products.Api.Models.Public.CreateProductModel'
+              $ref: '#/components/schemas/Products.CreateProductModel'
           application/json-patch+json:
             schema:
-              $ref: '#/components/schemas/Shipbob.Products.Api.Models.Public.CreateProductModel'
+              $ref: '#/components/schemas/Products.CreateProductModel'
           text/json:
             schema:
-              $ref: '#/components/schemas/Shipbob.Products.Api.Models.Public.CreateProductModel'
+              $ref: '#/components/schemas/Products.CreateProductModel'
         description: The product to add
       responses:
         "200":
@@ -1298,7 +1298,7 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/Shipbob.Products.Api.ViewModels.Public.ProductViewModel'
+                  $ref: '#/components/schemas/Products.ProductViewModel'
                 type: array
           description: Success
         "400":
@@ -1348,22 +1348,22 @@ paths:
           application/*+json:
             schema:
               items:
-                $ref: '#/components/schemas/Shipbob.Products.Api.Models.Public.CreateProductModel'
+                $ref: '#/components/schemas/Products.CreateProductModel'
               type: array
           application/json:
             schema:
               items:
-                $ref: '#/components/schemas/Shipbob.Products.Api.Models.Public.CreateProductModel'
+                $ref: '#/components/schemas/Products.CreateProductModel'
               type: array
           application/json-patch+json:
             schema:
               items:
-                $ref: '#/components/schemas/Shipbob.Products.Api.Models.Public.CreateProductModel'
+                $ref: '#/components/schemas/Products.CreateProductModel'
               type: array
           text/json:
             schema:
               items:
-                $ref: '#/components/schemas/Shipbob.Products.Api.Models.Public.CreateProductModel'
+                $ref: '#/components/schemas/Products.CreateProductModel'
               type: array
         description: List of products to add
       responses:
@@ -1372,7 +1372,7 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/Shipbob.Products.Api.ViewModels.Public.ProductViewModel'
+                  $ref: '#/components/schemas/Products.ProductViewModel'
                 type: array
           description: Success
         "400":
@@ -1431,7 +1431,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Shipbob.Products.Api.ViewModels.Public.ProductViewModel'
+                $ref: '#/components/schemas/Products.ProductViewModel'
           description: Success
         "400":
           content:
@@ -1479,16 +1479,16 @@ paths:
         content:
           application/*+json:
             schema:
-              $ref: '#/components/schemas/Shipbob.Products.Api.Models.Public.UpdateProductModel'
+              $ref: '#/components/schemas/Products.UpdateProductModel'
           application/json:
             schema:
-              $ref: '#/components/schemas/Shipbob.Products.Api.Models.Public.UpdateProductModel'
+              $ref: '#/components/schemas/Products.UpdateProductModel'
           application/json-patch+json:
             schema:
-              $ref: '#/components/schemas/Shipbob.Products.Api.Models.Public.UpdateProductModel'
+              $ref: '#/components/schemas/Products.UpdateProductModel'
           text/json:
             schema:
-              $ref: '#/components/schemas/Shipbob.Products.Api.Models.Public.UpdateProductModel'
+              $ref: '#/components/schemas/Products.UpdateProductModel'
         description: Updated fields to the product
       responses:
         "200":
@@ -1496,7 +1496,7 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/Shipbob.Products.Api.ViewModels.Public.ProductViewModel'
+                  $ref: '#/components/schemas/Products.ProductViewModel'
                 type: array
           description: Success
         "400":
@@ -1559,7 +1559,7 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/Shipbob.Inventory.Api.ViewModels.InventoryViewModel'
+                  $ref: '#/components/schemas/Inventory.InventoryViewModel'
                 type: array
           description: Success
         "400":
@@ -1590,23 +1590,23 @@ paths:
         content:
           application/*+json:
             schema:
-              $ref: '#/components/schemas/Shipbob.Receiving.Public.Api.Models.CreateReceivingOrderModel'
+              $ref: '#/components/schemas/Receiving.CreateReceivingOrderModel'
           application/json:
             schema:
-              $ref: '#/components/schemas/Shipbob.Receiving.Public.Api.Models.CreateReceivingOrderModel'
+              $ref: '#/components/schemas/Receiving.CreateReceivingOrderModel'
           application/json-patch+json:
             schema:
-              $ref: '#/components/schemas/Shipbob.Receiving.Public.Api.Models.CreateReceivingOrderModel'
+              $ref: '#/components/schemas/Receiving.CreateReceivingOrderModel'
           text/json:
             schema:
-              $ref: '#/components/schemas/Shipbob.Receiving.Public.Api.Models.CreateReceivingOrderModel'
+              $ref: '#/components/schemas/Receiving.CreateReceivingOrderModel'
         description: The receiving order to create
       responses:
         "201":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Shipbob.Receiving.Public.Api.Models.ReceivingOrderViewModel'
+                $ref: '#/components/schemas/Receiving.ReceivingOrderViewModel'
           description: Success
         "400":
           content:
@@ -1628,7 +1628,7 @@ paths:
             application/json:
               schema:
                 oneOf:
-                - $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+                - $ref: '#/components/schemas/ValidationProblemDetails'
           description: Not Found
       security:
       - oauth2:
@@ -1653,7 +1653,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Shipbob.Receiving.Public.Api.Models.ReceivingOrderViewModel'
+                $ref: '#/components/schemas/Receiving.ReceivingOrderViewModel'
           description: Success
         "401":
           description: Authorization missing or invalid
@@ -1665,7 +1665,7 @@ paths:
             application/json:
               schema:
                 oneOf:
-                - $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+                - $ref: '#/components/schemas/ValidationProblemDetails'
           description: Not Found
       security:
       - oauth2:
@@ -1698,7 +1698,7 @@ paths:
             application/json:
               schema:
                 oneOf:
-                - $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+                - $ref: '#/components/schemas/ValidationProblemDetails'
           description: Not Found
         "422":
           content:
@@ -1745,11 +1745,11 @@ paths:
             application/json:
               schema:
                 oneOf:
-                - $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+                - $ref: '#/components/schemas/ValidationProblemDetails'
             application/pdf:
               schema:
                 oneOf:
-                - $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+                - $ref: '#/components/schemas/ValidationProblemDetails'
           description: Bad Request
         "401":
           description: Authorization missing or invalid
@@ -1761,11 +1761,11 @@ paths:
             application/json:
               schema:
                 oneOf:
-                - $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+                - $ref: '#/components/schemas/ValidationProblemDetails'
             application/pdf:
               schema:
                 oneOf:
-                - $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+                - $ref: '#/components/schemas/ValidationProblemDetails'
           description: Not Found
       security:
       - oauth2:
@@ -1800,7 +1800,7 @@ paths:
         name: SortOrder
         required: false
         schema:
-          $ref: '#/components/schemas/Shipbob.Returns.Public.Common.SortOrder'
+          $ref: '#/components/schemas/Returns.SortOrder'
         style: form
       - description: Start date to filter orders inserted later than
         explode: true
@@ -1848,7 +1848,7 @@ paths:
         required: false
         schema:
           items:
-            $ref: '#/components/schemas/Shipbob.Returns.Public.Common.ReturnStatus'
+            $ref: '#/components/schemas/Returns.ReturnStatus'
           type: array
         style: form
       - description: Comma separated list of destination fulfillment center IDs to
@@ -1910,7 +1910,7 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/Shipbob.Returns.Public.Api.ViewModels.ReturnOrderViewModel'
+                  $ref: '#/components/schemas/Returns.ReturnOrderViewModel'
                 type: array
           description: Success
           headers:
@@ -1968,30 +1968,30 @@ paths:
         content:
           application/*+json:
             schema:
-              $ref: '#/components/schemas/Shipbob.Returns.Public.Api.ViewModels.CreateReturnViewModel'
+              $ref: '#/components/schemas/Returns.CreateReturnViewModel'
           application/json:
             schema:
-              $ref: '#/components/schemas/Shipbob.Returns.Public.Api.ViewModels.CreateReturnViewModel'
+              $ref: '#/components/schemas/Returns.CreateReturnViewModel'
           application/json-patch+json:
             schema:
-              $ref: '#/components/schemas/Shipbob.Returns.Public.Api.ViewModels.CreateReturnViewModel'
+              $ref: '#/components/schemas/Returns.CreateReturnViewModel'
           text/json:
             schema:
-              $ref: '#/components/schemas/Shipbob.Returns.Public.Api.ViewModels.CreateReturnViewModel'
+              $ref: '#/components/schemas/Returns.CreateReturnViewModel'
         description: Model defining the return
       responses:
         "201":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Shipbob.Returns.Public.Api.ViewModels.ReturnOrderViewModel'
+                $ref: '#/components/schemas/Returns.ReturnOrderViewModel'
           description: Success
         "400":
           content:
             application/json:
               schema:
                 oneOf:
-                - $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+                - $ref: '#/components/schemas/ValidationProblemDetails'
           description: Bad Request
         "401":
           description: Authorization missing or invalid
@@ -2003,7 +2003,7 @@ paths:
             application/json:
               schema:
                 oneOf:
-                - $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+                - $ref: '#/components/schemas/ValidationProblemDetails'
           description: Client Error
       security:
       - oauth2:
@@ -2037,7 +2037,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Shipbob.Returns.Public.Api.ViewModels.ReturnOrderViewModel'
+                $ref: '#/components/schemas/Returns.ReturnOrderViewModel'
           description: Success
         "401":
           description: Authorization missing or invalid
@@ -2049,7 +2049,7 @@ paths:
             application/json:
               schema:
                 oneOf:
-                - $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+                - $ref: '#/components/schemas/ValidationProblemDetails'
           description: Not Found
       security:
       - oauth2:
@@ -2081,30 +2081,30 @@ paths:
         content:
           application/*+json:
             schema:
-              $ref: '#/components/schemas/Shipbob.Returns.Public.Api.ViewModels.CreateReturnViewModel'
+              $ref: '#/components/schemas/Returns.CreateReturnViewModel'
           application/json:
             schema:
-              $ref: '#/components/schemas/Shipbob.Returns.Public.Api.ViewModels.CreateReturnViewModel'
+              $ref: '#/components/schemas/Returns.CreateReturnViewModel'
           application/json-patch+json:
             schema:
-              $ref: '#/components/schemas/Shipbob.Returns.Public.Api.ViewModels.CreateReturnViewModel'
+              $ref: '#/components/schemas/Returns.CreateReturnViewModel'
           text/json:
             schema:
-              $ref: '#/components/schemas/Shipbob.Returns.Public.Api.ViewModels.CreateReturnViewModel'
+              $ref: '#/components/schemas/Returns.CreateReturnViewModel'
         description: Model defining the return
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Shipbob.Returns.Public.Api.ViewModels.ReturnOrderViewModel'
+                $ref: '#/components/schemas/Returns.ReturnOrderViewModel'
           description: Success
         "400":
           content:
             application/json:
               schema:
                 oneOf:
-                - $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+                - $ref: '#/components/schemas/ValidationProblemDetails'
           description: Bad Request
         "401":
           description: Authorization missing or invalid
@@ -2116,7 +2116,7 @@ paths:
             application/json:
               schema:
                 oneOf:
-                - $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+                - $ref: '#/components/schemas/ValidationProblemDetails'
           description: Client Error
       security:
       - oauth2:
@@ -2150,7 +2150,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Shipbob.Returns.Public.Api.ViewModels.ReturnOrderViewModel'
+                $ref: '#/components/schemas/Returns.ReturnOrderViewModel'
           description: Success
         "401":
           description: Authorization missing or invalid
@@ -2162,14 +2162,14 @@ paths:
             application/json:
               schema:
                 oneOf:
-                - $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+                - $ref: '#/components/schemas/ValidationProblemDetails'
           description: Not Found
         "422":
           content:
             application/json:
               schema:
                 oneOf:
-                - $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+                - $ref: '#/components/schemas/ValidationProblemDetails'
           description: Client Error
       security:
       - oauth2:
@@ -2203,7 +2203,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Shipbob.Returns.Public.Api.ViewModels.ReturnOrderStatusHistoryViewModel'
+                $ref: '#/components/schemas/Returns.ReturnOrderStatusHistoryViewModel'
           description: Success
         "401":
           description: Authorization missing or invalid
@@ -2215,7 +2215,7 @@ paths:
             application/json:
               schema:
                 oneOf:
-                - $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+                - $ref: '#/components/schemas/ValidationProblemDetails'
           description: Not Found
       security:
       - oauth2:
@@ -2240,22 +2240,22 @@ paths:
         content:
           application/*+json:
             schema:
-              $ref: '#/components/schemas/ShipBob.Orders.Presentation.Models.CancelShipmentsModel'
+              $ref: '#/components/schemas/Orders.CancelShipmentsModel'
           application/json:
             schema:
-              $ref: '#/components/schemas/ShipBob.Orders.Presentation.Models.CancelShipmentsModel'
+              $ref: '#/components/schemas/Orders.CancelShipmentsModel'
           application/json-patch+json:
             schema:
-              $ref: '#/components/schemas/ShipBob.Orders.Presentation.Models.CancelShipmentsModel'
+              $ref: '#/components/schemas/Orders.CancelShipmentsModel'
           text/json:
             schema:
-              $ref: '#/components/schemas/ShipBob.Orders.Presentation.Models.CancelShipmentsModel'
+              $ref: '#/components/schemas/Orders.CancelShipmentsModel'
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ShipBob.Orders.Presentation.ViewModels.CanceledShipmentsViewModel'
+                $ref: '#/components/schemas/Orders.CanceledShipmentsViewModel'
           description: Success
         "401":
           description: No access right at this time
@@ -2314,7 +2314,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ShipBob.Orders.Presentation.ViewModels.ShipmentViewModel'
+                $ref: '#/components/schemas/Orders.ShipmentViewModel'
           description: Success
         "400":
           content:
@@ -2365,7 +2365,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ShipBob.Orders.Presentation.ViewModels.ShipmentViewModel'
+                $ref: '#/components/schemas/Orders.ShipmentViewModel'
           description: Success
         "400":
           content:
@@ -2437,7 +2437,7 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/ShipBob.Orders.Presentation.ViewModels.ShipmentLogViewModel'
+                  $ref: '#/components/schemas/Orders.ShipmentLogViewModel'
                 type: array
           description: Success
         "400":
@@ -2490,7 +2490,7 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/ShipBob.Orders.Presentation.ViewModels.ShipmentLogViewModel'
+                  $ref: '#/components/schemas/Orders.ShipmentLogViewModel'
                 type: array
           description: Success
         "400":
@@ -2543,7 +2543,7 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/ShipBob.Orders.Presentation.ViewModels.ShipMethodDetailViewModel'
+                  $ref: '#/components/schemas/Orders.ShipMethodDetailViewModel'
                 type: array
           description: Success
         "400":
@@ -2586,7 +2586,7 @@ paths:
         name: Topic
         required: false
         schema:
-          $ref: '#/components/schemas/ShipBob.Webhooks.Public.Common.Topics'
+          $ref: '#/components/schemas/Webhooks.Topics'
         style: form
       - description: Page of Webhooks to get
         explode: true
@@ -2618,7 +2618,7 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/ShipBob.Webhooks.Public.Api.Models.WebhookViewModel'
+                  $ref: '#/components/schemas/Webhooks.WebhookViewModel'
                 type: array
           description: Success
           headers:
@@ -2693,22 +2693,22 @@ paths:
         content:
           application/*+json:
             schema:
-              $ref: '#/components/schemas/ShipBob.Webhooks.Public.Api.Models.CreateWebhookSubscriptionModel'
+              $ref: '#/components/schemas/Webhooks.CreateWebhookSubscriptionModel'
           application/json:
             schema:
-              $ref: '#/components/schemas/ShipBob.Webhooks.Public.Api.Models.CreateWebhookSubscriptionModel'
+              $ref: '#/components/schemas/Webhooks.CreateWebhookSubscriptionModel'
           application/json-patch+json:
             schema:
-              $ref: '#/components/schemas/ShipBob.Webhooks.Public.Api.Models.CreateWebhookSubscriptionModel'
+              $ref: '#/components/schemas/Webhooks.CreateWebhookSubscriptionModel'
           text/json:
             schema:
-              $ref: '#/components/schemas/ShipBob.Webhooks.Public.Api.Models.CreateWebhookSubscriptionModel'
+              $ref: '#/components/schemas/Webhooks.CreateWebhookSubscriptionModel'
       responses:
         "201":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ShipBob.Webhooks.Public.Api.Models.WebhookViewModel'
+                $ref: '#/components/schemas/Webhooks.WebhookViewModel'
           description: Success
         "400":
           content:
@@ -2762,7 +2762,7 @@ paths:
             application/json:
               schema:
                 oneOf:
-                - $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+                - $ref: '#/components/schemas/ValidationProblemDetails'
           description: Not Found
       security:
       - oauth2: []
@@ -2771,7 +2771,7 @@ paths:
       - Webhooks
 components:
   schemas:
-    Integrations.Location.Public.Api.ViewModels.AddressViewModel:
+    Location.AddressViewModel:
       additionalProperties: false
       description: The service-specific address of the location. Each object contains
         address type, address1, address2, city, state, country, zip code, phone number,
@@ -2824,7 +2824,7 @@ components:
           nullable: true
           type: string
       type: object
-    Integrations.Location.Public.Api.ViewModels.LocationViewModel:
+    Location.LocationViewModel:
       additionalProperties: false
       example:
         is_receiving_enabled: true
@@ -2899,11 +2899,11 @@ components:
           nullable: true
           type: string
         region:
-          $ref: '#/components/schemas/Integrations.Location.Public.Api.ViewModels.RegionViewModel'
+          $ref: '#/components/schemas/Location.RegionViewModel'
         services:
           description: Services provided by the location
           items:
-            $ref: '#/components/schemas/Integrations.Location.Public.Api.ViewModels.ServiceViewModel'
+            $ref: '#/components/schemas/Location.ServiceViewModel'
           nullable: true
           type: array
         timezone:
@@ -2911,7 +2911,7 @@ components:
           nullable: true
           type: string
       type: object
-    Integrations.Location.Public.Api.ViewModels.RegionViewModel:
+    Location.RegionViewModel:
       additionalProperties: false
       example:
         name: name
@@ -2926,7 +2926,7 @@ components:
           nullable: true
           type: string
       type: object
-    Integrations.Location.Public.Api.ViewModels.ServiceViewModel:
+    Location.ServiceViewModel:
       additionalProperties: false
       example:
         address:
@@ -2942,20 +2942,20 @@ components:
         enabled: true
       properties:
         address:
-          $ref: '#/components/schemas/Integrations.Location.Public.Api.ViewModels.AddressViewModel'
+          $ref: '#/components/schemas/Location.AddressViewModel'
         enabled:
           description: Indicates if the user is authorized to access this service
             at the location
           type: boolean
         service_type:
-          $ref: '#/components/schemas/Integrations.Location.Public.Common.ServiceTypeEnum'
+          $ref: '#/components/schemas/Location.ServiceTypeEnum'
       type: object
-    Integrations.Location.Public.Common.ServiceTypeEnum:
+    Location.ServiceTypeEnum:
       enum:
       - Receiving
       - Returns
       type: string
-    Microsoft.AspNetCore.Mvc.ProblemDetails:
+    ProblemDetails:
       additionalProperties: false
       discriminator:
         propertyName: $type
@@ -2988,11 +2988,11 @@ components:
       required:
       - $type
       type: object
-    Microsoft.AspNetCore.Mvc.ValidationProblemDetails:
+    ValidationProblemDetails:
       additionalProperties: false
       allOf:
-      - $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
-      - $ref: '#/components/schemas/Microsoft_AspNetCore_Mvc_ValidationProblemDetails_allOf'
+      - $ref: '#/components/schemas/ProblemDetails'
+      - $ref: '#/components/schemas/ValidationProblemDetails_allOf'
       properties:
         detail:
           nullable: true
@@ -3026,7 +3026,7 @@ components:
           nullable: true
           type: string
       type: object
-    ShipBob.Channels.Api.ViewModels.ChannelViewModel:
+    Channels.ChannelViewModel:
       additionalProperties: false
       example:
         application_name: Api
@@ -3056,7 +3056,7 @@ components:
           nullable: true
           type: array
       type: object
-    ShipBob.Orders.Presentation.Models.AddProductToOrderByProductIdModel:
+    Orders.AddProductToOrderByProductIdModel:
       additionalProperties: false
       properties:
         id:
@@ -3071,7 +3071,7 @@ components:
       - id
       - quantity
       type: object
-    ShipBob.Orders.Presentation.Models.AddProductToOrderByReferenceIdModel:
+    Orders.AddProductToOrderByReferenceIdModel:
       additionalProperties: false
       properties:
         name:
@@ -3090,11 +3090,11 @@ components:
       - quantity
       - reference_id
       type: object
-    ShipBob.Orders.Presentation.Models.AddProductToOrderModel:
+    Orders.AddProductToOrderModel:
       oneOf:
-      - $ref: '#/components/schemas/ShipBob.Orders.Presentation.Models.AddProductToOrderByProductIdModel'
-      - $ref: '#/components/schemas/ShipBob.Orders.Presentation.Models.AddProductToOrderByReferenceIdModel'
-    ShipBob.Orders.Presentation.Models.CancelShipmentsModel:
+      - $ref: '#/components/schemas/Orders.AddProductToOrderByProductIdModel'
+      - $ref: '#/components/schemas/Orders.AddProductToOrderByReferenceIdModel'
+    Orders.CancelShipmentsModel:
       additionalProperties: false
       description: Model for cancel multiple shipments at once
       properties:
@@ -3105,7 +3105,7 @@ components:
             type: integer
           type: array
       type: object
-    ShipBob.Orders.Presentation.Models.CreateOrderModel:
+    Orders.CreateOrderModel:
       additionalProperties: false
       properties:
         order_number:
@@ -3115,7 +3115,7 @@ components:
           type: string
         products:
           items:
-            $ref: '#/components/schemas/ShipBob.Orders.Presentation.Models.AddProductToOrderModel'
+            $ref: '#/components/schemas/Orders.AddProductToOrderModel'
           minLength: 1
           type: array
         purchase_date:
@@ -3124,7 +3124,7 @@ components:
           nullable: true
           type: string
         recipient:
-          $ref: '#/components/schemas/ShipBob.Orders.Presentation.ViewModels.RecipientInfoViewModel'
+          $ref: '#/components/schemas/Orders.RecipientInfoViewModel'
         reference_id:
           maxLength: 300
           type: string
@@ -3132,7 +3132,7 @@ components:
           type: string
         tags:
           items:
-            $ref: '#/components/schemas/ShipBob.Orders.Presentation.ViewModels.TagViewModel'
+            $ref: '#/components/schemas/Orders.TagViewModel'
           type: array
         type:
           description: 'Defaults to Direct to Consumer (DTC) if not provided. Note:
@@ -3148,16 +3148,16 @@ components:
       - reference_id
       - shipping_method
       type: object
-    ShipBob.Orders.Presentation.Models.EstimateFulfillmentRequestModel:
+    Orders.EstimateFulfillmentRequestModel:
       additionalProperties: false
       properties:
         address:
-          $ref: '#/components/schemas/ShipBob.Orders.Presentation.ViewModels.EstimationAddressViewModel'
+          $ref: '#/components/schemas/Orders.EstimationAddressViewModel'
         products:
           description: Products to be included in the order. Each product must include
             one of reference_id or id
           items:
-            $ref: '#/components/schemas/ShipBob.Orders.Presentation.Models.EstimateProductInfoModel'
+            $ref: '#/components/schemas/Orders.EstimateProductInfoModel'
           type: array
         shipping_methods:
           description: Array of strings specifying shipping methods for which to fetch
@@ -3170,7 +3170,7 @@ components:
       - address
       - products
       type: object
-    ShipBob.Orders.Presentation.Models.EstimateProductInfoModel:
+    Orders.EstimateProductInfoModel:
       additionalProperties: false
       properties:
         id:
@@ -3193,7 +3193,7 @@ components:
       required:
       - quantity
       type: object
-    ShipBob.Orders.Presentation.ViewModels.AddressViewModel:
+    Orders.AddressViewModel:
       additionalProperties: false
       example:
         country: US
@@ -3237,7 +3237,7 @@ components:
       - city
       - country
       type: object
-    ShipBob.Orders.Presentation.ViewModels.CanceledOrderViewModel:
+    Orders.CanceledOrderViewModel:
       additionalProperties: false
       example:
         canceled_shipment_results:
@@ -3496,10 +3496,10 @@ components:
         canceled_shipment_results:
           description: Results of camceling the shipments associated with the order
           items:
-            $ref: '#/components/schemas/ShipBob.Orders.Presentation.ViewModels.CanceledShipmentViewModel'
+            $ref: '#/components/schemas/Orders.CanceledShipmentViewModel'
           type: array
         order:
-          $ref: '#/components/schemas/ShipBob.Orders.Presentation.ViewModels.OrderViewModel'
+          $ref: '#/components/schemas/Orders.OrderViewModel'
         order_id:
           description: The ID of the canceled order
           format: int32
@@ -3513,7 +3513,7 @@ components:
           - PartialSuccess
           type: string
       type: object
-    ShipBob.Orders.Presentation.ViewModels.CanceledShipmentViewModel:
+    Orders.CanceledShipmentViewModel:
       additionalProperties: false
       example:
         reason: reason
@@ -3536,7 +3536,7 @@ components:
           format: int64
           type: integer
       type: object
-    ShipBob.Orders.Presentation.ViewModels.CanceledShipmentsViewModel:
+    Orders.CanceledShipmentsViewModel:
       additionalProperties: false
       example:
         results:
@@ -3552,10 +3552,10 @@ components:
         results:
           description: The results of all cancellation actions
           items:
-            $ref: '#/components/schemas/ShipBob.Orders.Presentation.ViewModels.CanceledShipmentViewModel'
+            $ref: '#/components/schemas/Orders.CanceledShipmentViewModel'
           type: array
       type: object
-    ShipBob.Orders.Presentation.ViewModels.ChannelInfoViewModel:
+    Orders.ChannelInfoViewModel:
       additionalProperties: false
       description: Created by channel metadata
       example:
@@ -3571,7 +3571,7 @@ components:
           example: ShipBobs-Shopify-Store
           type: string
       type: object
-    ShipBob.Orders.Presentation.ViewModels.EstimateDetailViewModel:
+    Orders.EstimateDetailViewModel:
       additionalProperties: false
       example:
         estimated_price: 0.8008281904610115
@@ -3585,12 +3585,12 @@ components:
           format: double
           type: number
         fulfillment_center:
-          $ref: '#/components/schemas/ShipBob.Orders.Presentation.ViewModels.FulfillmentCenterViewModel'
+          $ref: '#/components/schemas/Orders.FulfillmentCenterViewModel'
         shipping_method:
           description: Provided shipping method. Maps to ship option in ShipBob.
           type: string
       type: object
-    ShipBob.Orders.Presentation.ViewModels.EstimateViewModel:
+    Orders.EstimateViewModel:
       additionalProperties: false
       example:
         estimates:
@@ -3608,10 +3608,10 @@ components:
         estimates:
           description: Array of estimates for each shipping method
           items:
-            $ref: '#/components/schemas/ShipBob.Orders.Presentation.ViewModels.EstimateDetailViewModel'
+            $ref: '#/components/schemas/Orders.EstimateDetailViewModel'
           type: array
       type: object
-    ShipBob.Orders.Presentation.ViewModels.EstimationAddressViewModel:
+    Orders.EstimationAddressViewModel:
       additionalProperties: false
       properties:
         address1:
@@ -3645,7 +3645,7 @@ components:
       required:
       - country
       type: object
-    ShipBob.Orders.Presentation.ViewModels.FulfillmentCenterViewModel:
+    Orders.FulfillmentCenterViewModel:
       additionalProperties: false
       description: Information about a fulfillment center that a shipment can belong
         to
@@ -3662,7 +3662,7 @@ components:
           example: Cicero (IL)
           type: string
       type: object
-    ShipBob.Orders.Presentation.ViewModels.InventoryViewModel:
+    Orders.InventoryViewModel:
       additionalProperties: false
       description: Information about inventory belonging to a store product
       example:
@@ -3715,7 +3715,7 @@ components:
             type: string
           type: array
       type: object
-    ShipBob.Orders.Presentation.ViewModels.MeasurementsViewModel:
+    Orders.MeasurementsViewModel:
       additionalProperties: false
       description: Measurements of a shipment
       example:
@@ -3741,7 +3741,7 @@ components:
           format: int32
           type: integer
       type: object
-    ShipBob.Orders.Presentation.ViewModels.OrderViewModel:
+    Orders.OrderViewModel:
       additionalProperties: false
       example:
         reference_id: reference_id
@@ -3986,7 +3986,7 @@ components:
         status: Processing
       properties:
         channel:
-          $ref: '#/components/schemas/ShipBob.Orders.Presentation.ViewModels.ChannelInfoViewModel'
+          $ref: '#/components/schemas/Orders.ChannelInfoViewModel'
         created_date:
           description: Date this order was created
           format: date-time
@@ -4002,7 +4002,7 @@ components:
         products:
           description: List of products included in the order
           items:
-            $ref: '#/components/schemas/ShipBob.Orders.Presentation.ViewModels.ProductInfoViewModel'
+            $ref: '#/components/schemas/Orders.ProductInfoViewModel'
           type: array
         purchase_date:
           description: Date this order was purchase by the end user
@@ -4010,14 +4010,14 @@ components:
           nullable: true
           type: string
         recipient:
-          $ref: '#/components/schemas/ShipBob.Orders.Presentation.ViewModels.RecipientInfoViewModel'
+          $ref: '#/components/schemas/Orders.RecipientInfoViewModel'
         reference_id:
           description: Client-defined external unique id of the order
           type: string
         shipments:
           description: Shipments affiliated with the order
           items:
-            $ref: '#/components/schemas/ShipBob.Orders.Presentation.ViewModels.ShipmentViewModel'
+            $ref: '#/components/schemas/Orders.ShipmentViewModel'
           type: array
         shipping_method:
           description: Client-defined shipping method
@@ -4036,7 +4036,7 @@ components:
         tags:
           description: Client-defined order tags
           items:
-            $ref: '#/components/schemas/ShipBob.Orders.Presentation.ViewModels.TagViewModel'
+            $ref: '#/components/schemas/Orders.TagViewModel'
           type: array
         type:
           description: Shipment type of the order
@@ -4047,7 +4047,7 @@ components:
           example: DTC
           type: string
       type: object
-    ShipBob.Orders.Presentation.ViewModels.ProductInfoViewModel:
+    Orders.ProductInfoViewModel:
       additionalProperties: false
       example:
         quantity: 5
@@ -4073,7 +4073,7 @@ components:
           example: TShirtBlueM
           type: string
       type: object
-    ShipBob.Orders.Presentation.ViewModels.RecipientInfoViewModel:
+    Orders.RecipientInfoViewModel:
       additionalProperties: false
       description: Information about the recipient of an order
       example:
@@ -4090,7 +4090,7 @@ components:
         email: john@example.com
       properties:
         address:
-          $ref: '#/components/schemas/ShipBob.Orders.Presentation.ViewModels.AddressViewModel'
+          $ref: '#/components/schemas/Orders.AddressViewModel'
         email:
           description: Email address of the recipient
           example: john@example.com
@@ -4108,7 +4108,7 @@ components:
       - address
       - name
       type: object
-    ShipBob.Orders.Presentation.ViewModels.RecipientViewModel:
+    Orders.RecipientViewModel:
       additionalProperties: false
       description: Information about the recipient of a shipment
       example:
@@ -4125,7 +4125,7 @@ components:
         email: john@example.com
       properties:
         address:
-          $ref: '#/components/schemas/ShipBob.Orders.Presentation.ViewModels.AddressViewModel'
+          $ref: '#/components/schemas/Orders.AddressViewModel'
         email:
           description: Email address of the recipient
           example: john@example.com
@@ -4139,7 +4139,7 @@ components:
           example: 555-555-5555
           type: string
       type: object
-    ShipBob.Orders.Presentation.ViewModels.ServiceLevelDetailViewModel:
+    Orders.ServiceLevelDetailViewModel:
       additionalProperties: false
       example:
         name: name
@@ -4153,7 +4153,7 @@ components:
           description: The name or title of the service level
           type: string
       type: object
-    ShipBob.Orders.Presentation.ViewModels.ShipMethodDetailViewModel:
+    Orders.ShipMethodDetailViewModel:
       additionalProperties: false
       example:
         default: true
@@ -4181,9 +4181,9 @@ components:
             \ to the shipping_method field in the Orders API."
           type: string
         service_level:
-          $ref: '#/components/schemas/ShipBob.Orders.Presentation.ViewModels.ServiceLevelDetailViewModel'
+          $ref: '#/components/schemas/Orders.ServiceLevelDetailViewModel'
       type: object
-    ShipBob.Orders.Presentation.ViewModels.ShipmentLogViewModel:
+    Orders.ShipmentLogViewModel:
       additionalProperties: false
       example:
         log_type_text: log_type_text
@@ -4213,7 +4213,7 @@ components:
           format: date-time
           type: string
       type: object
-    ShipBob.Orders.Presentation.ViewModels.ShipmentProductViewModel:
+    Orders.ShipmentProductViewModel:
       additionalProperties: false
       description: Information about a store product belonging to a shipment
       example:
@@ -4251,7 +4251,7 @@ components:
           description: Information about fulfillable inventory items belonging to
             this product
           items:
-            $ref: '#/components/schemas/ShipBob.Orders.Presentation.ViewModels.InventoryViewModel'
+            $ref: '#/components/schemas/Orders.InventoryViewModel'
           type: array
         name:
           description: Name of the product
@@ -4266,7 +4266,7 @@ components:
           example: TShirtBlueM
           type: string
       type: object
-    ShipBob.Orders.Presentation.ViewModels.ShipmentViewModel:
+    Orders.ShipmentViewModel:
       additionalProperties: false
       description: Information about a shipment
       example:
@@ -4421,9 +4421,9 @@ components:
           nullable: true
           type: string
         location:
-          $ref: '#/components/schemas/ShipBob.Orders.Presentation.ViewModels.FulfillmentCenterViewModel'
+          $ref: '#/components/schemas/Orders.FulfillmentCenterViewModel'
         measurements:
-          $ref: '#/components/schemas/ShipBob.Orders.Presentation.ViewModels.MeasurementsViewModel'
+          $ref: '#/components/schemas/Orders.MeasurementsViewModel'
         order_id:
           description: Id of the order this shipment belongs to
           format: int32
@@ -4446,10 +4446,10 @@ components:
         products:
           description: Information about the products contained in this shipment
           items:
-            $ref: '#/components/schemas/ShipBob.Orders.Presentation.ViewModels.ShipmentProductViewModel'
+            $ref: '#/components/schemas/Orders.ShipmentProductViewModel'
           type: array
         recipient:
-          $ref: '#/components/schemas/ShipBob.Orders.Presentation.ViewModels.RecipientViewModel'
+          $ref: '#/components/schemas/Orders.RecipientViewModel'
         reference_id:
           description: Client-defined external unique id of the order this shipment
             belongs to
@@ -4478,12 +4478,12 @@ components:
         status_details:
           description: Additional details about the shipment status
           items:
-            $ref: '#/components/schemas/ShipBob.Orders.Presentation.ViewModels.StatusDetailViewModel'
+            $ref: '#/components/schemas/Orders.StatusDetailViewModel'
           type: array
         tracking:
-          $ref: '#/components/schemas/ShipBob.Orders.Presentation.ViewModels.TrackingViewModel'
+          $ref: '#/components/schemas/Orders.TrackingViewModel'
       type: object
-    ShipBob.Orders.Presentation.ViewModels.StatusDetailViewModel:
+    Orders.StatusDetailViewModel:
       additionalProperties: false
       example:
         inventory_id: 5
@@ -4512,7 +4512,7 @@ components:
           description: Short name of the status detail
           type: string
       type: object
-    ShipBob.Orders.Presentation.ViewModels.TagViewModel:
+    Orders.TagViewModel:
       additionalProperties: false
       example:
         name: Handling instructions
@@ -4532,7 +4532,7 @@ components:
       - name
       - value
       type: object
-    ShipBob.Orders.Presentation.ViewModels.TrackingViewModel:
+    Orders.TrackingViewModel:
       additionalProperties: false
       description: Tracking information for a shipment
       example:
@@ -4558,7 +4558,7 @@ components:
           example: https://www.example.com/tracking?id=860C8CDC8F0B4FC7AB69AC86C20539EC
           type: string
       type: object
-    ShipBob.Webhooks.Public.Api.Models.CreateWebhookSubscriptionModel:
+    Webhooks.CreateWebhookSubscriptionModel:
       additionalProperties: false
       properties:
         subscription_url:
@@ -4569,12 +4569,12 @@ components:
           format: uri
           type: string
         topic:
-          $ref: '#/components/schemas/ShipBob.Webhooks.Public.Common.Topics'
+          $ref: '#/components/schemas/Webhooks.Topics'
       required:
       - subscription_url
       - topic
       type: object
-    ShipBob.Webhooks.Public.Api.Models.WebhookViewModel:
+    Webhooks.WebhookViewModel:
       additionalProperties: false
       example:
         created_at: 2000-01-23T04:56:07.000+00:00
@@ -4596,16 +4596,16 @@ components:
           nullable: true
           type: string
         topic:
-          $ref: '#/components/schemas/ShipBob.Webhooks.Public.Common.Topics'
+          $ref: '#/components/schemas/Webhooks.Topics'
       type: object
-    ShipBob.Webhooks.Public.Common.Topics:
+    Webhooks.Topics:
       enum:
       - order_shipped
       - shipment_delivered
       - shipment_exception
       - shipment_onhold
       type: string
-    Shipbob.Inventory.Api.ViewModels.DimensionViewModel:
+    Inventory.DimensionViewModel:
       additionalProperties: false
       description: Information about an inventory item's dimensions
       example:
@@ -4631,7 +4631,7 @@ components:
           format: double
           type: number
       type: object
-    Shipbob.Inventory.Api.ViewModels.FulfillmentCenterQuantityViewModel:
+    Inventory.FulfillmentCenterQuantityViewModel:
       additionalProperties: false
       description: Break down of fulfillable quantity by fulfillment center
       example:
@@ -4677,7 +4677,7 @@ components:
           format: int32
           type: integer
       type: object
-    Shipbob.Inventory.Api.ViewModels.InventoryViewModel:
+    Inventory.InventoryViewModel:
       additionalProperties: false
       description: Information about an inventory item
       example:
@@ -4762,18 +4762,18 @@ components:
           weight: 1.4658129805029452
       properties:
         dimensions:
-          $ref: '#/components/schemas/Shipbob.Inventory.Api.ViewModels.DimensionViewModel'
+          $ref: '#/components/schemas/Inventory.DimensionViewModel'
         fulfillable_quantity_by_fulfillment_center:
           description: Fulfillable quantity of this inventory item broken down by
             fulfillment center location
           items:
-            $ref: '#/components/schemas/Shipbob.Inventory.Api.ViewModels.FulfillmentCenterQuantityViewModel'
+            $ref: '#/components/schemas/Inventory.FulfillmentCenterQuantityViewModel'
           type: array
         fulfillable_quantity_by_lot:
           description: Fulfillable quantity of this inventory item broken down by
             lot
           items:
-            $ref: '#/components/schemas/Shipbob.Inventory.Api.ViewModels.LotQuantityViewModel'
+            $ref: '#/components/schemas/Inventory.LotQuantityViewModel'
           type: array
         id:
           description: Unique id of the inventory item
@@ -4849,7 +4849,7 @@ components:
           format: int32
           type: integer
       type: object
-    Shipbob.Inventory.Api.ViewModels.LotQuantityViewModel:
+    Inventory.LotQuantityViewModel:
       additionalProperties: false
       description: Break down of fulfillable quantity by lot
       example:
@@ -4898,7 +4898,7 @@ components:
           description: Fulfillable quantity of inventory items belonging to this lot
             broken down by fulfillment center location
           items:
-            $ref: '#/components/schemas/Shipbob.Inventory.Api.ViewModels.FulfillmentCenterQuantityViewModel'
+            $ref: '#/components/schemas/Inventory.FulfillmentCenterQuantityViewModel'
           type: array
         internal_transfer_quantity:
           description: The quantity of all items belonging to this lot that are in
@@ -4918,7 +4918,7 @@ components:
           format: int32
           type: integer
       type: object
-    Shipbob.Products.Api.Models.Public.CreateProductModel:
+    Products.CreateProductModel:
       additionalProperties: false
       description: The product to create
       example:
@@ -4952,7 +4952,7 @@ components:
       - name
       - reference_id
       type: object
-    Shipbob.Products.Api.Models.Public.UpdateProductModel:
+    Products.UpdateProductModel:
       additionalProperties: false
       description: Updates to an existing product product
       properties:
@@ -4974,7 +4974,7 @@ components:
       required:
       - name
       type: object
-    Shipbob.Products.Api.ViewModels.Public.BundleRootInformationViewModel:
+    Products.BundleRootInformationViewModel:
       additionalProperties: false
       example:
         name: name
@@ -4989,7 +4989,7 @@ components:
           nullable: true
           type: string
       type: object
-    Shipbob.Products.Api.ViewModels.Public.ChannelViewModel:
+    Products.ChannelViewModel:
       additionalProperties: false
       description: Information about a store channel
       example:
@@ -5006,7 +5006,7 @@ components:
           nullable: true
           type: string
       type: object
-    Shipbob.Products.Api.ViewModels.Public.FulfillmentCenterQuantityViewModel:
+    Products.FulfillmentCenterQuantityViewModel:
       additionalProperties: false
       description: Break down of quantities by fulfillment center
       example:
@@ -5038,7 +5038,7 @@ components:
           format: int32
           type: integer
       type: object
-    Shipbob.Products.Api.ViewModels.Public.InventoryItemViewModel:
+    Products.InventoryItemViewModel:
       additionalProperties: false
       description: The inventory that store products can resolve to when packing a
         shipment
@@ -5061,7 +5061,7 @@ components:
           format: int32
           type: integer
       type: object
-    Shipbob.Products.Api.ViewModels.Public.ProductViewModel:
+    Products.ProductViewModel:
       additionalProperties: false
       example:
         total_fulfillable_quantity: 4
@@ -5104,9 +5104,9 @@ components:
           nullable: true
           type: string
         bundle_root_information:
-          $ref: '#/components/schemas/Shipbob.Products.Api.ViewModels.Public.BundleRootInformationViewModel'
+          $ref: '#/components/schemas/Products.BundleRootInformationViewModel'
         channel:
-          $ref: '#/components/schemas/Shipbob.Products.Api.ViewModels.Public.ChannelViewModel'
+          $ref: '#/components/schemas/Products.ChannelViewModel'
         created_date:
           description: Date the product was created
           format: date-time
@@ -5115,14 +5115,14 @@ components:
           description: The inventory that this product will resolve to when packing
             a shipment
           items:
-            $ref: '#/components/schemas/Shipbob.Products.Api.ViewModels.Public.InventoryItemViewModel'
+            $ref: '#/components/schemas/Products.InventoryItemViewModel'
           nullable: true
           type: array
         fulfillable_quantity_by_fulfillment_center:
           description: Fulfillable quantity of this product broken down by fulfillment
             center location
           items:
-            $ref: '#/components/schemas/Shipbob.Products.Api.ViewModels.Public.FulfillmentCenterQuantityViewModel'
+            $ref: '#/components/schemas/Products.FulfillmentCenterQuantityViewModel'
           nullable: true
           type: array
         id:
@@ -5157,19 +5157,19 @@ components:
           format: int32
           type: integer
       type: object
-    Shipbob.Products.Common.Models.ProductActiveStatus:
+    Products.ProductActiveStatus:
       enum:
       - Any
       - Active
       - Inactive
       type: string
-    Shipbob.Products.Common.Models.ProductBundleStatus:
+    Products.ProductBundleStatus:
       enum:
       - Any
       - Bundle
       - NotBundle
       type: string
-    Shipbob.Receiving.Public.Api.Models.AddBoxItemToBoxModel:
+    Receiving.AddBoxItemToBoxModel:
       additionalProperties: false
       description: Information about an inventory item contained inside a receiving
         order box
@@ -5198,14 +5198,14 @@ components:
       - inventory_id
       - quantity
       type: object
-    Shipbob.Receiving.Public.Api.Models.AddBoxToOrderModel:
+    Receiving.AddBoxToOrderModel:
       additionalProperties: false
       description: Information about a box shipment to be added to a receiving order
       properties:
         box_items:
           description: Items contained in this box
           items:
-            $ref: '#/components/schemas/Shipbob.Receiving.Public.Api.Models.AddBoxItemToBoxModel'
+            $ref: '#/components/schemas/Receiving.AddBoxItemToBoxModel'
           nullable: true
           type: array
         tracking_number:
@@ -5217,7 +5217,7 @@ components:
       - box_items
       - tracking_number
       type: object
-    Shipbob.Receiving.Public.Api.Models.AssignOrderToFulfillmentCenterModel:
+    Receiving.AssignOrderToFulfillmentCenterModel:
       additionalProperties: false
       description: Model containing information that assigns a receiving order to
         a fulfillment center
@@ -5230,7 +5230,7 @@ components:
       required:
       - id
       type: object
-    Shipbob.Receiving.Public.Api.Models.BoxItemViewModel:
+    Receiving.BoxItemViewModel:
       additionalProperties: false
       description: Information about an item contained inside a box as part of a receiving
         order
@@ -5264,7 +5264,7 @@ components:
           format: int32
           type: integer
       type: object
-    Shipbob.Receiving.Public.Api.Models.BoxViewModel:
+    Receiving.BoxViewModel:
       additionalProperties: false
       description: Information about a box shipment included in a receiving order
       example:
@@ -5293,7 +5293,7 @@ components:
         box_items:
           description: Information about the items included in the box
           items:
-            $ref: '#/components/schemas/Shipbob.Receiving.Public.Api.Models.BoxItemViewModel'
+            $ref: '#/components/schemas/Receiving.BoxItemViewModel'
           nullable: true
           type: array
         box_number:
@@ -5301,7 +5301,7 @@ components:
           format: int32
           type: integer
         box_status:
-          $ref: '#/components/schemas/Shipbob.Receiving.Public.Common.Models.BoxStatus'
+          $ref: '#/components/schemas/Receiving.BoxStatus'
         counting_started_date:
           description: Date counting of the box's inventory items started
           format: date-time
@@ -5318,16 +5318,16 @@ components:
           nullable: true
           type: string
       type: object
-    Shipbob.Receiving.Public.Api.Models.CreateReceivingOrderModel:
+    Receiving.CreateReceivingOrderModel:
       additionalProperties: false
       description: Information to create a new receiving order
       properties:
         box_packaging_type:
-          $ref: '#/components/schemas/Shipbob.Receiving.Public.Common.Models.PackingType'
+          $ref: '#/components/schemas/Receiving.PackingType'
         boxes:
           description: Box shipments to be added to this receiving order
           items:
-            $ref: '#/components/schemas/Shipbob.Receiving.Public.Api.Models.AddBoxToOrderModel'
+            $ref: '#/components/schemas/Receiving.AddBoxToOrderModel'
           nullable: true
           type: array
         expected_arrival_date:
@@ -5336,9 +5336,9 @@ components:
           format: date-time
           type: string
         fulfillment_center:
-          $ref: '#/components/schemas/Shipbob.Receiving.Public.Api.Models.AssignOrderToFulfillmentCenterModel'
+          $ref: '#/components/schemas/Receiving.AssignOrderToFulfillmentCenterModel'
         package_type:
-          $ref: '#/components/schemas/Shipbob.Receiving.Public.Common.Models.PackageType'
+          $ref: '#/components/schemas/Receiving.PackageType'
       required:
       - box_packaging_type
       - boxes
@@ -5346,7 +5346,7 @@ components:
       - fulfillment_center
       - package_type
       type: object
-    Shipbob.Receiving.Public.Api.Models.FulfillmentCenterViewModel:
+    Receiving.FulfillmentCenterViewModel:
       additionalProperties: false
       description: Information about a fulfillment center
       example:
@@ -5417,7 +5417,7 @@ components:
           nullable: true
           type: string
       type: object
-    Shipbob.Receiving.Public.Api.Models.ReceivingOrderViewModel:
+    Receiving.ReceivingOrderViewModel:
       additionalProperties: false
       description: Information about a receiving order
       example:
@@ -5479,12 +5479,12 @@ components:
           nullable: true
           type: string
         box_packaging_type:
-          $ref: '#/components/schemas/Shipbob.Receiving.Public.Common.Models.PackingType'
+          $ref: '#/components/schemas/Receiving.PackingType'
         boxes:
           description: Information about the boxes being shipped in this receiving
             order
           items:
-            $ref: '#/components/schemas/Shipbob.Receiving.Public.Api.Models.BoxViewModel'
+            $ref: '#/components/schemas/Receiving.BoxViewModel'
           nullable: true
           type: array
         expected_arrival_date:
@@ -5492,7 +5492,7 @@ components:
           format: date-time
           type: string
         fulfillment_center:
-          $ref: '#/components/schemas/Shipbob.Receiving.Public.Api.Models.FulfillmentCenterViewModel'
+          $ref: '#/components/schemas/Receiving.FulfillmentCenterViewModel'
         id:
           description: Unique id of the warehouse receiving order
           format: int32
@@ -5506,11 +5506,11 @@ components:
           format: date-time
           type: string
         package_type:
-          $ref: '#/components/schemas/Shipbob.Receiving.Public.Common.Models.PackageType'
+          $ref: '#/components/schemas/Receiving.PackageType'
         status:
-          $ref: '#/components/schemas/Shipbob.Receiving.Public.Common.Models.ReceivingStatus'
+          $ref: '#/components/schemas/Receiving.ReceivingStatus'
       type: object
-    Shipbob.Receiving.Public.Common.Models.BoxStatus:
+    Receiving.BoxStatus:
       enum:
       - Awaiting
       - Arrived
@@ -5519,19 +5519,19 @@ components:
       - Stowing
       - Cancelled
       type: string
-    Shipbob.Receiving.Public.Common.Models.PackageType:
+    Receiving.PackageType:
       enum:
       - Package
       - Pallet
       - FloorLoadedContainer
       type: string
-    Shipbob.Receiving.Public.Common.Models.PackingType:
+    Receiving.PackingType:
       enum:
       - EverythingInOneBox
       - OneSkuPerBox
       - MultipleSkuPerBox
       type: string
-    Shipbob.Receiving.Public.Common.Models.ReceivingStatus:
+    Receiving.ReceivingStatus:
       enum:
       - Awaiting
       - Processing
@@ -5541,7 +5541,7 @@ components:
       - Arrived
       - PartiallyArrived
       type: string
-    Shipbob.Returns.Public.Api.ViewModels.ChannelInfoViewModel:
+    Returns.ChannelInfoViewModel:
       additionalProperties: false
       description: Created by channel metadata
       example:
@@ -5558,15 +5558,15 @@ components:
           nullable: true
           type: string
       type: object
-    Shipbob.Returns.Public.Api.ViewModels.CreateReturnViewModel:
+    Returns.CreateReturnViewModel:
       additionalProperties: false
       properties:
         fulfillment_center:
-          $ref: '#/components/schemas/Shipbob.Returns.Public.Api.ViewModels.FulfillmentCenterViewModel'
+          $ref: '#/components/schemas/Returns.FulfillmentCenterViewModel'
         inventory:
           description: Array of inventory items being returned
           items:
-            $ref: '#/components/schemas/Shipbob.Returns.Public.Api.ViewModels.ReturnInventoryViewModel'
+            $ref: '#/components/schemas/Returns.ReturnInventoryViewModel'
           minLength: 1
           nullable: true
           type: array
@@ -5593,7 +5593,7 @@ components:
       - inventory
       - reference_id
       type: object
-    Shipbob.Returns.Public.Api.ViewModels.FulfillmentCenterViewModel:
+    Returns.FulfillmentCenterViewModel:
       additionalProperties: false
       description: Information about a fulfillment center
       example:
@@ -5612,7 +5612,7 @@ components:
       required:
       - id
       type: object
-    Shipbob.Returns.Public.Api.ViewModels.InventoryItemViewModel:
+    Returns.InventoryItemViewModel:
       additionalProperties: false
       example:
         action_requested:
@@ -5627,11 +5627,11 @@ components:
         id: 5
       properties:
         action_requested:
-          $ref: '#/components/schemas/Shipbob.Returns.Public.Api.ViewModels.ReturnActionRequestedViewModel'
+          $ref: '#/components/schemas/Returns.ReturnActionRequestedViewModel'
         action_taken:
           description: Action(s) taken when processing the return
           items:
-            $ref: '#/components/schemas/Shipbob.Returns.Public.Api.ViewModels.ReturnActionTakenViewModel'
+            $ref: '#/components/schemas/Returns.ReturnActionTakenViewModel'
           nullable: true
           type: array
         id:
@@ -5647,29 +5647,29 @@ components:
           format: int32
           type: integer
       type: object
-    Shipbob.Returns.Public.Api.ViewModels.ReturnActionRequestedViewModel:
+    Returns.ReturnActionRequestedViewModel:
       additionalProperties: false
       example:
         instructions: instructions
       properties:
         action:
-          $ref: '#/components/schemas/Shipbob.Returns.Public.Common.ReturnAction'
+          $ref: '#/components/schemas/Returns.ReturnAction'
         action_type:
-          $ref: '#/components/schemas/Shipbob.Returns.Public.Common.ReturnActionSource'
+          $ref: '#/components/schemas/Returns.ReturnActionSource'
         instructions:
           description: Specific instructions to be taken for the inventory when processing
             the return
           nullable: true
           type: string
       type: object
-    Shipbob.Returns.Public.Api.ViewModels.ReturnActionTakenViewModel:
+    Returns.ReturnActionTakenViewModel:
       additionalProperties: false
       example:
         quantity_processed: 1280358509
         action_reason: action_reason
       properties:
         action:
-          $ref: '#/components/schemas/Shipbob.Returns.Public.Common.ReturnAction'
+          $ref: '#/components/schemas/Returns.ReturnAction'
         action_reason:
           description: Reason the given action was taken
           nullable: true
@@ -5681,7 +5681,7 @@ components:
           minimum: 1
           type: integer
       type: object
-    Shipbob.Returns.Public.Api.ViewModels.ReturnInventoryViewModel:
+    Returns.ReturnInventoryViewModel:
       additionalProperties: false
       properties:
         id:
@@ -5697,24 +5697,24 @@ components:
           minimum: 1
           type: integer
         requested_action:
-          $ref: '#/components/schemas/Shipbob.Returns.Public.Common.ReturnAction'
+          $ref: '#/components/schemas/Returns.ReturnAction'
       required:
       - id
       - quantity
       type: object
-    Shipbob.Returns.Public.Api.ViewModels.ReturnOrderStatusHistoryViewModel:
+    Returns.ReturnOrderStatusHistoryViewModel:
       additionalProperties: false
       example:
         time_stamp: 2000-01-23T04:56:07.000+00:00
       properties:
         status:
-          $ref: '#/components/schemas/Shipbob.Returns.Public.Common.ReturnStatus'
+          $ref: '#/components/schemas/Returns.ReturnStatus'
         time_stamp:
           description: Date this corresponding return order status was created
           format: date-time
           type: string
       type: object
-    Shipbob.Returns.Public.Api.ViewModels.ReturnOrderViewModel:
+    Returns.ReturnOrderViewModel:
       additionalProperties: false
       example:
         fulfillment_center:
@@ -5755,9 +5755,9 @@ components:
         invoice_amount: 7.061401241503109
       properties:
         channel:
-          $ref: '#/components/schemas/Shipbob.Returns.Public.Api.ViewModels.ChannelInfoViewModel'
+          $ref: '#/components/schemas/Returns.ChannelInfoViewModel'
         fulfillment_center:
-          $ref: '#/components/schemas/Shipbob.Returns.Public.Api.ViewModels.FulfillmentCenterViewModel'
+          $ref: '#/components/schemas/Returns.FulfillmentCenterViewModel'
         id:
           description: Unique id of the Return Order
           format: int32
@@ -5769,7 +5769,7 @@ components:
         inventory:
           description: List of inventory included in the return order
           items:
-            $ref: '#/components/schemas/Shipbob.Returns.Public.Api.ViewModels.InventoryItemViewModel'
+            $ref: '#/components/schemas/Returns.InventoryItemViewModel'
           nullable: true
           type: array
         invoice_amount:
@@ -5787,9 +5787,9 @@ components:
           nullable: true
           type: string
         return_type:
-          $ref: '#/components/schemas/Shipbob.Returns.Public.Common.ReturnType'
+          $ref: '#/components/schemas/Returns.ReturnType'
         status:
-          $ref: '#/components/schemas/Shipbob.Returns.Public.Common.ReturnStatus'
+          $ref: '#/components/schemas/Returns.ReturnStatus'
         tracking_number:
           description: Tracking number of the return shipment
           example: 860C8CDC8F0B4FC7AB69AC86C20539EC
@@ -5798,11 +5798,11 @@ components:
         transactions:
           description: Array of transactions affiliated with the return order
           items:
-            $ref: '#/components/schemas/Shipbob.Returns.Public.Api.ViewModels.TransactionViewModel'
+            $ref: '#/components/schemas/Returns.TransactionViewModel'
           nullable: true
           type: array
       type: object
-    Shipbob.Returns.Public.Api.ViewModels.TransactionViewModel:
+    Returns.TransactionViewModel:
       additionalProperties: false
       example:
         amount: 2.5
@@ -5813,21 +5813,21 @@ components:
           format: double
           type: number
         transaction_type:
-          $ref: '#/components/schemas/Shipbob.Returns.Public.Common.TransactionLogSource'
+          $ref: '#/components/schemas/Returns.TransactionLogSource'
       type: object
-    Shipbob.Returns.Public.Common.ReturnAction:
+    Returns.ReturnAction:
       enum:
       - Default
       - Restock
       - Quarantine
       - Dispose
       type: string
-    Shipbob.Returns.Public.Common.ReturnActionSource:
+    Returns.ReturnActionSource:
       enum:
       - InventoryDefault
       - Override
       type: string
-    Shipbob.Returns.Public.Common.ReturnStatus:
+    Returns.ReturnStatus:
       enum:
       - AwaitingArrival
       - Arrived
@@ -5835,23 +5835,23 @@ components:
       - Completed
       - Cancelled
       type: string
-    Shipbob.Returns.Public.Common.ReturnType:
+    Returns.ReturnType:
       enum:
       - Regular
       - ReturnToSender
       type: string
-    Shipbob.Returns.Public.Common.SortOrder:
+    Returns.SortOrder:
       enum:
       - Newest
       - Oldest
       type: string
-    Shipbob.Returns.Public.Common.TransactionLogSource:
+    Returns.TransactionLogSource:
       enum:
       - ReturnLabelInvoice
       - ReturnProcessingFee
       - ReturnToSenderFee
       type: string
-    Microsoft_AspNetCore_Mvc_ValidationProblemDetails_allOf:
+    ValidationProblemDetails_allOf:
       properties:
         errors:
           additionalProperties:

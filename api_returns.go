@@ -34,12 +34,12 @@ type ApiReturnGetRequest struct {
 	ApiService *ReturnsApiService
 	page *int32
 	limit *int32
-	sortOrder *ShipbobReturnsPublicCommonSortOrder
+	sortOrder *ReturnsSortOrder
 	startDate *time.Time
 	endDate *time.Time
 	iDs *[]int32
 	referenceIds *[]string
-	status *[]ShipbobReturnsPublicCommonReturnStatus
+	status *[]ReturnsReturnStatus
 	fulfillmentCenterIds *[]int32
 	trackingNumbers *[]string
 	originalShipmentIds *[]int32
@@ -55,7 +55,7 @@ func (r ApiReturnGetRequest) Limit(limit int32) ApiReturnGetRequest {
 	r.limit = &limit
 	return r
 }
-func (r ApiReturnGetRequest) SortOrder(sortOrder ShipbobReturnsPublicCommonSortOrder) ApiReturnGetRequest {
+func (r ApiReturnGetRequest) SortOrder(sortOrder ReturnsSortOrder) ApiReturnGetRequest {
 	r.sortOrder = &sortOrder
 	return r
 }
@@ -75,7 +75,7 @@ func (r ApiReturnGetRequest) ReferenceIds(referenceIds []string) ApiReturnGetReq
 	r.referenceIds = &referenceIds
 	return r
 }
-func (r ApiReturnGetRequest) Status(status []ShipbobReturnsPublicCommonReturnStatus) ApiReturnGetRequest {
+func (r ApiReturnGetRequest) Status(status []ReturnsReturnStatus) ApiReturnGetRequest {
 	r.status = &status
 	return r
 }
@@ -100,7 +100,7 @@ func (r ApiReturnGetRequest) ShipbobChannelId(shipbobChannelId int32) ApiReturnG
 	return r
 }
 
-func (r ApiReturnGetRequest) Execute() ([]ShipbobReturnsPublicApiViewModelsReturnOrderViewModel, *_nethttp.Response, error) {
+func (r ApiReturnGetRequest) Execute() ([]ReturnsReturnOrderViewModel, *_nethttp.Response, error) {
 	return r.ApiService.ReturnGetExecute(r)
 }
 
@@ -118,16 +118,16 @@ func (a *ReturnsApiService) ReturnGet(ctx _context.Context) ApiReturnGetRequest 
 
 /*
  * Execute executes the request
- * @return []ShipbobReturnsPublicApiViewModelsReturnOrderViewModel
+ * @return []ReturnsReturnOrderViewModel
  */
-func (a *ReturnsApiService) ReturnGetExecute(r ApiReturnGetRequest) ([]ShipbobReturnsPublicApiViewModelsReturnOrderViewModel, *_nethttp.Response, error) {
+func (a *ReturnsApiService) ReturnGetExecute(r ApiReturnGetRequest) ([]ReturnsReturnOrderViewModel, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  []ShipbobReturnsPublicApiViewModelsReturnOrderViewModel
+		localVarReturnValue  []ReturnsReturnOrderViewModel
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ReturnsApiService.ReturnGet")
@@ -302,7 +302,7 @@ func (r ApiReturnIdCancelPostRequest) ShipbobChannelId(shipbobChannelId int32) A
 	return r
 }
 
-func (r ApiReturnIdCancelPostRequest) Execute() (ShipbobReturnsPublicApiViewModelsReturnOrderViewModel, *_nethttp.Response, error) {
+func (r ApiReturnIdCancelPostRequest) Execute() (ReturnsReturnOrderViewModel, *_nethttp.Response, error) {
 	return r.ApiService.ReturnIdCancelPostExecute(r)
 }
 
@@ -322,16 +322,16 @@ func (a *ReturnsApiService) ReturnIdCancelPost(ctx _context.Context, id int32) A
 
 /*
  * Execute executes the request
- * @return ShipbobReturnsPublicApiViewModelsReturnOrderViewModel
+ * @return ReturnsReturnOrderViewModel
  */
-func (a *ReturnsApiService) ReturnIdCancelPostExecute(r ApiReturnIdCancelPostRequest) (ShipbobReturnsPublicApiViewModelsReturnOrderViewModel, *_nethttp.Response, error) {
+func (a *ReturnsApiService) ReturnIdCancelPostExecute(r ApiReturnIdCancelPostRequest) (ReturnsReturnOrderViewModel, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  ShipbobReturnsPublicApiViewModelsReturnOrderViewModel
+		localVarReturnValue  ReturnsReturnOrderViewModel
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ReturnsApiService.ReturnIdCancelPost")
@@ -390,7 +390,7 @@ func (a *ReturnsApiService) ReturnIdCancelPostExecute(r ApiReturnIdCancelPostReq
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v OneOfMicrosoftAspNetCoreMvcValidationProblemDetails
+			var v OneOfValidationProblemDetails
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -400,7 +400,7 @@ func (a *ReturnsApiService) ReturnIdCancelPostExecute(r ApiReturnIdCancelPostReq
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 422 {
-			var v OneOfMicrosoftAspNetCoreMvcValidationProblemDetails
+			var v OneOfValidationProblemDetails
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -435,7 +435,7 @@ func (r ApiReturnIdGetRequest) ShipbobChannelId(shipbobChannelId int32) ApiRetur
 	return r
 }
 
-func (r ApiReturnIdGetRequest) Execute() (ShipbobReturnsPublicApiViewModelsReturnOrderViewModel, *_nethttp.Response, error) {
+func (r ApiReturnIdGetRequest) Execute() (ReturnsReturnOrderViewModel, *_nethttp.Response, error) {
 	return r.ApiService.ReturnIdGetExecute(r)
 }
 
@@ -455,16 +455,16 @@ func (a *ReturnsApiService) ReturnIdGet(ctx _context.Context, id int32) ApiRetur
 
 /*
  * Execute executes the request
- * @return ShipbobReturnsPublicApiViewModelsReturnOrderViewModel
+ * @return ReturnsReturnOrderViewModel
  */
-func (a *ReturnsApiService) ReturnIdGetExecute(r ApiReturnIdGetRequest) (ShipbobReturnsPublicApiViewModelsReturnOrderViewModel, *_nethttp.Response, error) {
+func (a *ReturnsApiService) ReturnIdGetExecute(r ApiReturnIdGetRequest) (ReturnsReturnOrderViewModel, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  ShipbobReturnsPublicApiViewModelsReturnOrderViewModel
+		localVarReturnValue  ReturnsReturnOrderViewModel
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ReturnsApiService.ReturnIdGet")
@@ -522,7 +522,7 @@ func (a *ReturnsApiService) ReturnIdGetExecute(r ApiReturnIdGetRequest) (Shipbob
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v OneOfMicrosoftAspNetCoreMvcValidationProblemDetails
+			var v OneOfValidationProblemDetails
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -550,19 +550,19 @@ type ApiReturnIdPutRequest struct {
 	ApiService *ReturnsApiService
 	shipbobChannelId *int32
 	id int32
-	shipbobReturnsPublicApiViewModelsCreateReturnViewModel *ShipbobReturnsPublicApiViewModelsCreateReturnViewModel
+	returnsCreateReturnViewModel *ReturnsCreateReturnViewModel
 }
 
 func (r ApiReturnIdPutRequest) ShipbobChannelId(shipbobChannelId int32) ApiReturnIdPutRequest {
 	r.shipbobChannelId = &shipbobChannelId
 	return r
 }
-func (r ApiReturnIdPutRequest) ShipbobReturnsPublicApiViewModelsCreateReturnViewModel(shipbobReturnsPublicApiViewModelsCreateReturnViewModel ShipbobReturnsPublicApiViewModelsCreateReturnViewModel) ApiReturnIdPutRequest {
-	r.shipbobReturnsPublicApiViewModelsCreateReturnViewModel = &shipbobReturnsPublicApiViewModelsCreateReturnViewModel
+func (r ApiReturnIdPutRequest) ReturnsCreateReturnViewModel(returnsCreateReturnViewModel ReturnsCreateReturnViewModel) ApiReturnIdPutRequest {
+	r.returnsCreateReturnViewModel = &returnsCreateReturnViewModel
 	return r
 }
 
-func (r ApiReturnIdPutRequest) Execute() (ShipbobReturnsPublicApiViewModelsReturnOrderViewModel, *_nethttp.Response, error) {
+func (r ApiReturnIdPutRequest) Execute() (ReturnsReturnOrderViewModel, *_nethttp.Response, error) {
 	return r.ApiService.ReturnIdPutExecute(r)
 }
 
@@ -582,16 +582,16 @@ func (a *ReturnsApiService) ReturnIdPut(ctx _context.Context, id int32) ApiRetur
 
 /*
  * Execute executes the request
- * @return ShipbobReturnsPublicApiViewModelsReturnOrderViewModel
+ * @return ReturnsReturnOrderViewModel
  */
-func (a *ReturnsApiService) ReturnIdPutExecute(r ApiReturnIdPutRequest) (ShipbobReturnsPublicApiViewModelsReturnOrderViewModel, *_nethttp.Response, error) {
+func (a *ReturnsApiService) ReturnIdPutExecute(r ApiReturnIdPutRequest) (ReturnsReturnOrderViewModel, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPut
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  ShipbobReturnsPublicApiViewModelsReturnOrderViewModel
+		localVarReturnValue  ReturnsReturnOrderViewModel
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ReturnsApiService.ReturnIdPut")
@@ -628,7 +628,7 @@ func (a *ReturnsApiService) ReturnIdPutExecute(r ApiReturnIdPutRequest) (Shipbob
 	}
 	localVarHeaderParams["shipbob_channel_id"] = parameterToString(*r.shipbobChannelId, "")
 	// body params
-	localVarPostBody = r.shipbobReturnsPublicApiViewModelsCreateReturnViewModel
+	localVarPostBody = r.returnsCreateReturnViewModel
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -652,7 +652,7 @@ func (a *ReturnsApiService) ReturnIdPutExecute(r ApiReturnIdPutRequest) (Shipbob
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v OneOfMicrosoftAspNetCoreMvcValidationProblemDetails
+			var v OneOfValidationProblemDetails
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -662,7 +662,7 @@ func (a *ReturnsApiService) ReturnIdPutExecute(r ApiReturnIdPutRequest) (Shipbob
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 422 {
-			var v OneOfMicrosoftAspNetCoreMvcValidationProblemDetails
+			var v OneOfValidationProblemDetails
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -697,7 +697,7 @@ func (r ApiReturnIdStatushistoryGetRequest) ShipbobChannelId(shipbobChannelId in
 	return r
 }
 
-func (r ApiReturnIdStatushistoryGetRequest) Execute() (ShipbobReturnsPublicApiViewModelsReturnOrderStatusHistoryViewModel, *_nethttp.Response, error) {
+func (r ApiReturnIdStatushistoryGetRequest) Execute() (ReturnsReturnOrderStatusHistoryViewModel, *_nethttp.Response, error) {
 	return r.ApiService.ReturnIdStatushistoryGetExecute(r)
 }
 
@@ -717,16 +717,16 @@ func (a *ReturnsApiService) ReturnIdStatushistoryGet(ctx _context.Context, id in
 
 /*
  * Execute executes the request
- * @return ShipbobReturnsPublicApiViewModelsReturnOrderStatusHistoryViewModel
+ * @return ReturnsReturnOrderStatusHistoryViewModel
  */
-func (a *ReturnsApiService) ReturnIdStatushistoryGetExecute(r ApiReturnIdStatushistoryGetRequest) (ShipbobReturnsPublicApiViewModelsReturnOrderStatusHistoryViewModel, *_nethttp.Response, error) {
+func (a *ReturnsApiService) ReturnIdStatushistoryGetExecute(r ApiReturnIdStatushistoryGetRequest) (ReturnsReturnOrderStatusHistoryViewModel, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  ShipbobReturnsPublicApiViewModelsReturnOrderStatusHistoryViewModel
+		localVarReturnValue  ReturnsReturnOrderStatusHistoryViewModel
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ReturnsApiService.ReturnIdStatushistoryGet")
@@ -784,7 +784,7 @@ func (a *ReturnsApiService) ReturnIdStatushistoryGetExecute(r ApiReturnIdStatush
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v OneOfMicrosoftAspNetCoreMvcValidationProblemDetails
+			var v OneOfValidationProblemDetails
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -811,19 +811,19 @@ type ApiReturnPostRequest struct {
 	ctx _context.Context
 	ApiService *ReturnsApiService
 	shipbobChannelId *int32
-	shipbobReturnsPublicApiViewModelsCreateReturnViewModel *ShipbobReturnsPublicApiViewModelsCreateReturnViewModel
+	returnsCreateReturnViewModel *ReturnsCreateReturnViewModel
 }
 
 func (r ApiReturnPostRequest) ShipbobChannelId(shipbobChannelId int32) ApiReturnPostRequest {
 	r.shipbobChannelId = &shipbobChannelId
 	return r
 }
-func (r ApiReturnPostRequest) ShipbobReturnsPublicApiViewModelsCreateReturnViewModel(shipbobReturnsPublicApiViewModelsCreateReturnViewModel ShipbobReturnsPublicApiViewModelsCreateReturnViewModel) ApiReturnPostRequest {
-	r.shipbobReturnsPublicApiViewModelsCreateReturnViewModel = &shipbobReturnsPublicApiViewModelsCreateReturnViewModel
+func (r ApiReturnPostRequest) ReturnsCreateReturnViewModel(returnsCreateReturnViewModel ReturnsCreateReturnViewModel) ApiReturnPostRequest {
+	r.returnsCreateReturnViewModel = &returnsCreateReturnViewModel
 	return r
 }
 
-func (r ApiReturnPostRequest) Execute() (ShipbobReturnsPublicApiViewModelsReturnOrderViewModel, *_nethttp.Response, error) {
+func (r ApiReturnPostRequest) Execute() (ReturnsReturnOrderViewModel, *_nethttp.Response, error) {
 	return r.ApiService.ReturnPostExecute(r)
 }
 
@@ -841,16 +841,16 @@ func (a *ReturnsApiService) ReturnPost(ctx _context.Context) ApiReturnPostReques
 
 /*
  * Execute executes the request
- * @return ShipbobReturnsPublicApiViewModelsReturnOrderViewModel
+ * @return ReturnsReturnOrderViewModel
  */
-func (a *ReturnsApiService) ReturnPostExecute(r ApiReturnPostRequest) (ShipbobReturnsPublicApiViewModelsReturnOrderViewModel, *_nethttp.Response, error) {
+func (a *ReturnsApiService) ReturnPostExecute(r ApiReturnPostRequest) (ReturnsReturnOrderViewModel, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  ShipbobReturnsPublicApiViewModelsReturnOrderViewModel
+		localVarReturnValue  ReturnsReturnOrderViewModel
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ReturnsApiService.ReturnPost")
@@ -886,7 +886,7 @@ func (a *ReturnsApiService) ReturnPostExecute(r ApiReturnPostRequest) (ShipbobRe
 	}
 	localVarHeaderParams["shipbob_channel_id"] = parameterToString(*r.shipbobChannelId, "")
 	// body params
-	localVarPostBody = r.shipbobReturnsPublicApiViewModelsCreateReturnViewModel
+	localVarPostBody = r.returnsCreateReturnViewModel
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -910,7 +910,7 @@ func (a *ReturnsApiService) ReturnPostExecute(r ApiReturnPostRequest) (ShipbobRe
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v OneOfMicrosoftAspNetCoreMvcValidationProblemDetails
+			var v OneOfValidationProblemDetails
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -920,7 +920,7 @@ func (a *ReturnsApiService) ReturnPostExecute(r ApiReturnPostRequest) (ShipbobRe
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 422 {
-			var v OneOfMicrosoftAspNetCoreMvcValidationProblemDetails
+			var v OneOfValidationProblemDetails
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()

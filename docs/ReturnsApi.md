@@ -15,7 +15,7 @@ Method | HTTP request | Description
 
 ## ReturnGet
 
-> []ShipbobReturnsPublicApiViewModelsReturnOrderViewModel ReturnGet(ctx).Page(page).Limit(limit).SortOrder(sortOrder).StartDate(startDate).EndDate(endDate).IDs(iDs).ReferenceIds(referenceIds).Status(status).FulfillmentCenterIds(fulfillmentCenterIds).TrackingNumbers(trackingNumbers).OriginalShipmentIds(originalShipmentIds).InventoryIds(inventoryIds).ShipbobChannelId(shipbobChannelId).Execute()
+> []ReturnsReturnOrderViewModel ReturnGet(ctx).Page(page).Limit(limit).SortOrder(sortOrder).StartDate(startDate).EndDate(endDate).IDs(iDs).ReferenceIds(referenceIds).Status(status).FulfillmentCenterIds(fulfillmentCenterIds).TrackingNumbers(trackingNumbers).OriginalShipmentIds(originalShipmentIds).InventoryIds(inventoryIds).ShipbobChannelId(shipbobChannelId).Execute()
 
 Get Return Orders
 
@@ -35,12 +35,12 @@ import (
 func main() {
     page := int32(56) // int32 | Page of return orders to get (optional)
     limit := int32(56) // int32 | Amount of return orders per page to request (optional)
-    sortOrder := openapiclient.Shipbob.Returns.Public.Common.SortOrder("Newest") // ShipbobReturnsPublicCommonSortOrder | Order to sort results by (optional)
+    sortOrder := openapiclient.Returns.SortOrder("Newest") // ReturnsSortOrder | Order to sort results by (optional)
     startDate := time.Now() // time.Time | Start date to filter orders inserted later than (optional)
     endDate := time.Now() // time.Time | End date to filter orders inserted earlier than (optional)
     iDs := []int32{int32(123)} // []int32 | Comma separated list of return orders ids to filter by (optional)
     referenceIds := []string{"Inner_example"} // []string | Comma separated list of reference ids to filter by (optional)
-    status := []openapiclient.ShipbobReturnsPublicCommonReturnStatus{openapiclient.Shipbob.Returns.Public.Common.ReturnStatus("AwaitingArrival")} // []ShipbobReturnsPublicCommonReturnStatus | Comma separated list of statuses to filter by (optional)
+    status := []openapiclient.ReturnsReturnStatus{openapiclient.Returns.ReturnStatus("AwaitingArrival")} // []ReturnsReturnStatus | Comma separated list of statuses to filter by (optional)
     fulfillmentCenterIds := []int32{int32(123)} // []int32 | Comma separated list of destination fulfillment center IDs to filter by (optional)
     trackingNumbers := []string{"Inner_example"} // []string | Comma separated list of tracking numbers to filter by (optional)
     originalShipmentIds := []int32{int32(123)} // []int32 | Comma separated list of original shipment IDs to filter by (optional)
@@ -54,7 +54,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `ReturnsApi.ReturnGet``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `ReturnGet`: []ShipbobReturnsPublicApiViewModelsReturnOrderViewModel
+    // response from `ReturnGet`: []ReturnsReturnOrderViewModel
     fmt.Fprintf(os.Stdout, "Response from `ReturnsApi.ReturnGet`: %v\n", resp)
 }
 ```
@@ -72,12 +72,12 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **page** | **int32** | Page of return orders to get | 
  **limit** | **int32** | Amount of return orders per page to request | 
- **sortOrder** | [**ShipbobReturnsPublicCommonSortOrder**](ShipbobReturnsPublicCommonSortOrder.md) | Order to sort results by | 
+ **sortOrder** | [**ReturnsSortOrder**](ReturnsSortOrder.md) | Order to sort results by | 
  **startDate** | **time.Time** | Start date to filter orders inserted later than | 
  **endDate** | **time.Time** | End date to filter orders inserted earlier than | 
  **iDs** | **[]int32** | Comma separated list of return orders ids to filter by | 
  **referenceIds** | **[]string** | Comma separated list of reference ids to filter by | 
- **status** | [**[]ShipbobReturnsPublicCommonReturnStatus**](Shipbob.Returns.Public.Common.ReturnStatus.md) | Comma separated list of statuses to filter by | 
+ **status** | [**[]ReturnsReturnStatus**](Returns.ReturnStatus.md) | Comma separated list of statuses to filter by | 
  **fulfillmentCenterIds** | **[]int32** | Comma separated list of destination fulfillment center IDs to filter by | 
  **trackingNumbers** | **[]string** | Comma separated list of tracking numbers to filter by | 
  **originalShipmentIds** | **[]int32** | Comma separated list of original shipment IDs to filter by | 
@@ -86,7 +86,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]ShipbobReturnsPublicApiViewModelsReturnOrderViewModel**](Shipbob.Returns.Public.Api.ViewModels.ReturnOrderViewModel.md)
+[**[]ReturnsReturnOrderViewModel**](Returns.ReturnOrderViewModel.md)
 
 ### Authorization
 
@@ -104,7 +104,7 @@ Name | Type | Description  | Notes
 
 ## ReturnIdCancelPost
 
-> ShipbobReturnsPublicApiViewModelsReturnOrderViewModel ReturnIdCancelPost(ctx, id).ShipbobChannelId(shipbobChannelId).Execute()
+> ReturnsReturnOrderViewModel ReturnIdCancelPost(ctx, id).ShipbobChannelId(shipbobChannelId).Execute()
 
 Cancel Return Order
 
@@ -131,7 +131,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `ReturnsApi.ReturnIdCancelPost``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `ReturnIdCancelPost`: ShipbobReturnsPublicApiViewModelsReturnOrderViewModel
+    // response from `ReturnIdCancelPost`: ReturnsReturnOrderViewModel
     fmt.Fprintf(os.Stdout, "Response from `ReturnsApi.ReturnIdCancelPost`: %v\n", resp)
 }
 ```
@@ -156,7 +156,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ShipbobReturnsPublicApiViewModelsReturnOrderViewModel**](Shipbob.Returns.Public.Api.ViewModels.ReturnOrderViewModel.md)
+[**ReturnsReturnOrderViewModel**](Returns.ReturnOrderViewModel.md)
 
 ### Authorization
 
@@ -174,7 +174,7 @@ Name | Type | Description  | Notes
 
 ## ReturnIdGet
 
-> ShipbobReturnsPublicApiViewModelsReturnOrderViewModel ReturnIdGet(ctx, id).ShipbobChannelId(shipbobChannelId).Execute()
+> ReturnsReturnOrderViewModel ReturnIdGet(ctx, id).ShipbobChannelId(shipbobChannelId).Execute()
 
 Get Return Order
 
@@ -201,7 +201,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `ReturnsApi.ReturnIdGet``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `ReturnIdGet`: ShipbobReturnsPublicApiViewModelsReturnOrderViewModel
+    // response from `ReturnIdGet`: ReturnsReturnOrderViewModel
     fmt.Fprintf(os.Stdout, "Response from `ReturnsApi.ReturnIdGet`: %v\n", resp)
 }
 ```
@@ -226,7 +226,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ShipbobReturnsPublicApiViewModelsReturnOrderViewModel**](Shipbob.Returns.Public.Api.ViewModels.ReturnOrderViewModel.md)
+[**ReturnsReturnOrderViewModel**](Returns.ReturnOrderViewModel.md)
 
 ### Authorization
 
@@ -244,7 +244,7 @@ Name | Type | Description  | Notes
 
 ## ReturnIdPut
 
-> ShipbobReturnsPublicApiViewModelsReturnOrderViewModel ReturnIdPut(ctx, id).ShipbobChannelId(shipbobChannelId).ShipbobReturnsPublicApiViewModelsCreateReturnViewModel(shipbobReturnsPublicApiViewModelsCreateReturnViewModel).Execute()
+> ReturnsReturnOrderViewModel ReturnIdPut(ctx, id).ShipbobChannelId(shipbobChannelId).ReturnsCreateReturnViewModel(returnsCreateReturnViewModel).Execute()
 
 Modify Return Order
 
@@ -263,16 +263,16 @@ import (
 func main() {
     shipbobChannelId := int32(56) // int32 | Channel Id for Operation
     id := int32(56) // int32 | Id of the return order
-    shipbobReturnsPublicApiViewModelsCreateReturnViewModel := *openapiclient.NewShipbobReturnsPublicApiViewModelsCreateReturnViewModel(*openapiclient.NewShipbobReturnsPublicApiViewModelsFulfillmentCenterViewModel(int32(123)), []openapiclient.ShipbobReturnsPublicApiViewModelsReturnInventoryViewModel{*openapiclient.NewShipbobReturnsPublicApiViewModelsReturnInventoryViewModel(int32(111222), int32(1))}, "ShipBob_Return_123") // ShipbobReturnsPublicApiViewModelsCreateReturnViewModel | Model defining the return (optional)
+    returnsCreateReturnViewModel := *openapiclient.NewReturnsCreateReturnViewModel(*openapiclient.NewReturnsFulfillmentCenterViewModel(int32(123)), []openapiclient.ReturnsReturnInventoryViewModel{*openapiclient.NewReturnsReturnInventoryViewModel(int32(111222), int32(1))}, "ShipBob_Return_123") // ReturnsCreateReturnViewModel | Model defining the return (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ReturnsApi.ReturnIdPut(context.Background(), id).ShipbobChannelId(shipbobChannelId).ShipbobReturnsPublicApiViewModelsCreateReturnViewModel(shipbobReturnsPublicApiViewModelsCreateReturnViewModel).Execute()
+    resp, r, err := api_client.ReturnsApi.ReturnIdPut(context.Background(), id).ShipbobChannelId(shipbobChannelId).ReturnsCreateReturnViewModel(returnsCreateReturnViewModel).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ReturnsApi.ReturnIdPut``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `ReturnIdPut`: ShipbobReturnsPublicApiViewModelsReturnOrderViewModel
+    // response from `ReturnIdPut`: ReturnsReturnOrderViewModel
     fmt.Fprintf(os.Stdout, "Response from `ReturnsApi.ReturnIdPut`: %v\n", resp)
 }
 ```
@@ -294,11 +294,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **shipbobChannelId** | **int32** | Channel Id for Operation | 
 
- **shipbobReturnsPublicApiViewModelsCreateReturnViewModel** | [**ShipbobReturnsPublicApiViewModelsCreateReturnViewModel**](ShipbobReturnsPublicApiViewModelsCreateReturnViewModel.md) | Model defining the return | 
+ **returnsCreateReturnViewModel** | [**ReturnsCreateReturnViewModel**](ReturnsCreateReturnViewModel.md) | Model defining the return | 
 
 ### Return type
 
-[**ShipbobReturnsPublicApiViewModelsReturnOrderViewModel**](Shipbob.Returns.Public.Api.ViewModels.ReturnOrderViewModel.md)
+[**ReturnsReturnOrderViewModel**](Returns.ReturnOrderViewModel.md)
 
 ### Authorization
 
@@ -316,7 +316,7 @@ Name | Type | Description  | Notes
 
 ## ReturnIdStatushistoryGet
 
-> ShipbobReturnsPublicApiViewModelsReturnOrderStatusHistoryViewModel ReturnIdStatushistoryGet(ctx, id).ShipbobChannelId(shipbobChannelId).Execute()
+> ReturnsReturnOrderStatusHistoryViewModel ReturnIdStatushistoryGet(ctx, id).ShipbobChannelId(shipbobChannelId).Execute()
 
 Get One Return's status history
 
@@ -343,7 +343,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `ReturnsApi.ReturnIdStatushistoryGet``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `ReturnIdStatushistoryGet`: ShipbobReturnsPublicApiViewModelsReturnOrderStatusHistoryViewModel
+    // response from `ReturnIdStatushistoryGet`: ReturnsReturnOrderStatusHistoryViewModel
     fmt.Fprintf(os.Stdout, "Response from `ReturnsApi.ReturnIdStatushistoryGet`: %v\n", resp)
 }
 ```
@@ -368,7 +368,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ShipbobReturnsPublicApiViewModelsReturnOrderStatusHistoryViewModel**](Shipbob.Returns.Public.Api.ViewModels.ReturnOrderStatusHistoryViewModel.md)
+[**ReturnsReturnOrderStatusHistoryViewModel**](Returns.ReturnOrderStatusHistoryViewModel.md)
 
 ### Authorization
 
@@ -386,7 +386,7 @@ Name | Type | Description  | Notes
 
 ## ReturnPost
 
-> ShipbobReturnsPublicApiViewModelsReturnOrderViewModel ReturnPost(ctx).ShipbobChannelId(shipbobChannelId).ShipbobReturnsPublicApiViewModelsCreateReturnViewModel(shipbobReturnsPublicApiViewModelsCreateReturnViewModel).Execute()
+> ReturnsReturnOrderViewModel ReturnPost(ctx).ShipbobChannelId(shipbobChannelId).ReturnsCreateReturnViewModel(returnsCreateReturnViewModel).Execute()
 
 Create Return Order
 
@@ -404,16 +404,16 @@ import (
 
 func main() {
     shipbobChannelId := int32(56) // int32 | Channel Id for Operation
-    shipbobReturnsPublicApiViewModelsCreateReturnViewModel := *openapiclient.NewShipbobReturnsPublicApiViewModelsCreateReturnViewModel(*openapiclient.NewShipbobReturnsPublicApiViewModelsFulfillmentCenterViewModel(int32(123)), []openapiclient.ShipbobReturnsPublicApiViewModelsReturnInventoryViewModel{*openapiclient.NewShipbobReturnsPublicApiViewModelsReturnInventoryViewModel(int32(111222), int32(1))}, "ShipBob_Return_123") // ShipbobReturnsPublicApiViewModelsCreateReturnViewModel | Model defining the return (optional)
+    returnsCreateReturnViewModel := *openapiclient.NewReturnsCreateReturnViewModel(*openapiclient.NewReturnsFulfillmentCenterViewModel(int32(123)), []openapiclient.ReturnsReturnInventoryViewModel{*openapiclient.NewReturnsReturnInventoryViewModel(int32(111222), int32(1))}, "ShipBob_Return_123") // ReturnsCreateReturnViewModel | Model defining the return (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ReturnsApi.ReturnPost(context.Background()).ShipbobChannelId(shipbobChannelId).ShipbobReturnsPublicApiViewModelsCreateReturnViewModel(shipbobReturnsPublicApiViewModelsCreateReturnViewModel).Execute()
+    resp, r, err := api_client.ReturnsApi.ReturnPost(context.Background()).ShipbobChannelId(shipbobChannelId).ReturnsCreateReturnViewModel(returnsCreateReturnViewModel).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ReturnsApi.ReturnPost``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `ReturnPost`: ShipbobReturnsPublicApiViewModelsReturnOrderViewModel
+    // response from `ReturnPost`: ReturnsReturnOrderViewModel
     fmt.Fprintf(os.Stdout, "Response from `ReturnsApi.ReturnPost`: %v\n", resp)
 }
 ```
@@ -430,11 +430,11 @@ Other parameters are passed through a pointer to a apiReturnPostRequest struct v
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **shipbobChannelId** | **int32** | Channel Id for Operation | 
- **shipbobReturnsPublicApiViewModelsCreateReturnViewModel** | [**ShipbobReturnsPublicApiViewModelsCreateReturnViewModel**](ShipbobReturnsPublicApiViewModelsCreateReturnViewModel.md) | Model defining the return | 
+ **returnsCreateReturnViewModel** | [**ReturnsCreateReturnViewModel**](ReturnsCreateReturnViewModel.md) | Model defining the return | 
 
 ### Return type
 
-[**ShipbobReturnsPublicApiViewModelsReturnOrderViewModel**](Shipbob.Returns.Public.Api.ViewModels.ReturnOrderViewModel.md)
+[**ReturnsReturnOrderViewModel**](Returns.ReturnOrderViewModel.md)
 
 ### Authorization
 
