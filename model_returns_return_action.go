@@ -20,10 +20,10 @@ type ReturnsReturnAction string
 
 // List of Returns.ReturnAction
 const (
-	DEFAULT ReturnsReturnAction = "Default"
-	RESTOCK ReturnsReturnAction = "Restock"
-	QUARANTINE ReturnsReturnAction = "Quarantine"
-	DISPOSE ReturnsReturnAction = "Dispose"
+	ReturnsReturnActionDEFAULT ReturnsReturnAction = "Default"
+	ReturnsReturnActionRESTOCK ReturnsReturnAction = "Restock"
+	ReturnsReturnActionQUARANTINE ReturnsReturnAction = "Quarantine"
+	ReturnsReturnActionDISPOSE ReturnsReturnAction = "Dispose"
 )
 
 func (v *ReturnsReturnAction) UnmarshalJSON(src []byte) error {

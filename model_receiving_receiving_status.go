@@ -20,13 +20,13 @@ type ReceivingReceivingStatus string
 
 // List of Receiving.ReceivingStatus
 const (
-	AWAITING ReceivingReceivingStatus = "Awaiting"
-	PROCESSING ReceivingReceivingStatus = "Processing"
-	COMPLETED ReceivingReceivingStatus = "Completed"
-	CANCELLED ReceivingReceivingStatus = "Cancelled"
-	INCOMPLETE ReceivingReceivingStatus = "Incomplete"
-	ARRIVED ReceivingReceivingStatus = "Arrived"
-	PARTIALLY_ARRIVED ReceivingReceivingStatus = "PartiallyArrived"
+	ReceivingReceivingStatusAWAITING ReceivingReceivingStatus = "Awaiting"
+	ReceivingReceivingStatusPROCESSING ReceivingReceivingStatus = "Processing"
+	ReceivingReceivingStatusCOMPLETED ReceivingReceivingStatus = "Completed"
+	ReceivingReceivingStatusCANCELLED ReceivingReceivingStatus = "Cancelled"
+	ReceivingReceivingStatusINCOMPLETE ReceivingReceivingStatus = "Incomplete"
+	ReceivingReceivingStatusARRIVED ReceivingReceivingStatus = "Arrived"
+	ReceivingReceivingStatusPARTIALLY_ARRIVED ReceivingReceivingStatus = "PartiallyArrived"
 )
 
 func (v *ReceivingReceivingStatus) UnmarshalJSON(src []byte) error {

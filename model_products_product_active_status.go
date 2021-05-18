@@ -20,9 +20,9 @@ type ProductsProductActiveStatus string
 
 // List of Products.ProductActiveStatus
 const (
-	ANY ProductsProductActiveStatus = "Any"
-	ACTIVE ProductsProductActiveStatus = "Active"
-	INACTIVE ProductsProductActiveStatus = "Inactive"
+	ProductsProductActiveStatusANY ProductsProductActiveStatus = "Any"
+	ProductsProductActiveStatusACTIVE ProductsProductActiveStatus = "Active"
+	ProductsProductActiveStatusINACTIVE ProductsProductActiveStatus = "Inactive"
 )
 
 func (v *ProductsProductActiveStatus) UnmarshalJSON(src []byte) error {

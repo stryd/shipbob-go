@@ -20,8 +20,8 @@ type ReturnsSortOrder string
 
 // List of Returns.SortOrder
 const (
-	NEWEST ReturnsSortOrder = "Newest"
-	OLDEST ReturnsSortOrder = "Oldest"
+	ReturnsSortOrderNEWEST ReturnsSortOrder = "Newest"
+	ReturnsSortOrderOLDEST ReturnsSortOrder = "Oldest"
 )
 
 func (v *ReturnsSortOrder) UnmarshalJSON(src []byte) error {

@@ -20,8 +20,8 @@ type ReturnsReturnActionSource string
 
 // List of Returns.ReturnActionSource
 const (
-	INVENTORY_DEFAULT ReturnsReturnActionSource = "InventoryDefault"
-	OVERRIDE ReturnsReturnActionSource = "Override"
+	ReturnsReturnActionSourceINVENTORY_DEFAULT ReturnsReturnActionSource = "InventoryDefault"
+	ReturnsReturnActionSourceOVERRIDE ReturnsReturnActionSource = "Override"
 )
 
 func (v *ReturnsReturnActionSource) UnmarshalJSON(src []byte) error {

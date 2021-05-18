@@ -20,8 +20,8 @@ type ReturnsReturnType string
 
 // List of Returns.ReturnType
 const (
-	REGULAR ReturnsReturnType = "Regular"
-	RETURN_TO_SENDER ReturnsReturnType = "ReturnToSender"
+	ReturnsReturnTypeREGULAR ReturnsReturnType = "Regular"
+	ReturnsReturnTypeRETURN_TO_SENDER ReturnsReturnType = "ReturnToSender"
 )
 
 func (v *ReturnsReturnType) UnmarshalJSON(src []byte) error {

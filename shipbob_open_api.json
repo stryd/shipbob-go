@@ -159,7 +159,7 @@
           "propertyName": "$type"
         },
         "properties": {
-          "$type": {
+          "ttype": {
             "type": "string"
           },
           "detail": {

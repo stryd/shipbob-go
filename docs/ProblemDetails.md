@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Type** | **string** |  | 
+**Ttype** | Pointer to **string** |  | [optional] 
 **Detail** | Pointer to **NullableString** |  | [optional] 
 **Extensions** | Pointer to **map[string]map[string]interface{}** |  | [optional] [readonly] 
 **Instance** | Pointer to **NullableString** |  | [optional] 
@@ -16,7 +16,7 @@ Name | Type | Description | Notes
 
 ### NewProblemDetails
 
-`func NewProblemDetails(type_ string, ) *ProblemDetails`
+`func NewProblemDetails() *ProblemDetails`
 
 NewProblemDetails instantiates a new ProblemDetails object
 This constructor will assign default values to properties that have it defined,
@@ -31,25 +31,30 @@ NewProblemDetailsWithDefaults instantiates a new ProblemDetails object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
-### GetType
+### GetTtype
 
-`func (o *ProblemDetails) GetType() string`
+`func (o *ProblemDetails) GetTtype() string`
 
-GetType returns the Type field if non-nil, zero value otherwise.
+GetTtype returns the Ttype field if non-nil, zero value otherwise.
 
-### GetTypeOk
+### GetTtypeOk
 
-`func (o *ProblemDetails) GetTypeOk() (*string, bool)`
+`func (o *ProblemDetails) GetTtypeOk() (*string, bool)`
 
-GetTypeOk returns a tuple with the Type field if it's non-nil, zero value otherwise
+GetTtypeOk returns a tuple with the Ttype field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetType
+### SetTtype
 
-`func (o *ProblemDetails) SetType(v string)`
+`func (o *ProblemDetails) SetTtype(v string)`
 
-SetType sets Type field to given value.
+SetTtype sets Ttype field to given value.
 
+### HasTtype
+
+`func (o *ProblemDetails) HasTtype() bool`
+
+HasTtype returns a boolean if a field has been set.
 
 ### GetDetail
 

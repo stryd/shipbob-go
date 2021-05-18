@@ -20,9 +20,9 @@ type ReceivingPackingType string
 
 // List of Receiving.PackingType
 const (
-	EVERYTHING_IN_ONE_BOX ReceivingPackingType = "EverythingInOneBox"
-	ONE_SKU_PER_BOX ReceivingPackingType = "OneSkuPerBox"
-	MULTIPLE_SKU_PER_BOX ReceivingPackingType = "MultipleSkuPerBox"
+	ReceivingPackingTypeEVERYTHING_IN_ONE_BOX ReceivingPackingType = "EverythingInOneBox"
+	ReceivingPackingTypeONE_SKU_PER_BOX ReceivingPackingType = "OneSkuPerBox"
+	ReceivingPackingTypeMULTIPLE_SKU_PER_BOX ReceivingPackingType = "MultipleSkuPerBox"
 )
 
 func (v *ReceivingPackingType) UnmarshalJSON(src []byte) error {

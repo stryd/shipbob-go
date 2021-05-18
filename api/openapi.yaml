@@ -2944,7 +2944,7 @@ components:
       discriminator:
         propertyName: $type
       properties:
-        $type:
+        ttype:
           type: string
         detail:
           nullable: true

@@ -16,7 +16,7 @@ import (
 
 // ProblemDetails struct for ProblemDetails
 type ProblemDetails struct {
-	Type string `json:"$type"`
+	Ttype *string `json:"ttype,omitempty"`
 	Detail NullableString `json:"detail,omitempty"`
 	Extensions map[string]map[string]interface{} `json:"extensions,omitempty"`
 	Instance NullableString `json:"instance,omitempty"`
@@ -29,9 +29,8 @@ type ProblemDetails struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewProblemDetails(type_ string, ) *ProblemDetails {
+func NewProblemDetails() *ProblemDetails {
 	this := ProblemDetails{}
-	this.Type = type_
 	return &this
 }
 
@@ -43,28 +42,36 @@ func NewProblemDetailsWithDefaults() *ProblemDetails {
 	return &this
 }
 
-// GetType returns the Type field value
-func (o *ProblemDetails) GetType() string {
-	if o == nil  {
+// GetTtype returns the Ttype field value if set, zero value otherwise.
+func (o *ProblemDetails) GetTtype() string {
+	if o == nil || o.Ttype == nil {
 		var ret string
 		return ret
 	}
-
-	return o.Type
+	return *o.Ttype
 }
 
-// GetTypeOk returns a tuple with the Type field value
+// GetTtypeOk returns a tuple with the Ttype field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ProblemDetails) GetTypeOk() (*string, bool) {
-	if o == nil  {
+func (o *ProblemDetails) GetTtypeOk() (*string, bool) {
+	if o == nil || o.Ttype == nil {
 		return nil, false
 	}
-	return &o.Type, true
+	return o.Ttype, true
 }
 
-// SetType sets field value
-func (o *ProblemDetails) SetType(v string) {
-	o.Type = v
+// HasTtype returns a boolean if a field has been set.
+func (o *ProblemDetails) HasTtype() bool {
+	if o != nil && o.Ttype != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetTtype gets a reference to the given string and assigns it to the Ttype field.
+func (o *ProblemDetails) SetTtype(v string) {
+	o.Ttype = &v
 }
 
 // GetDetail returns the Detail field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -312,8 +319,8 @@ func (o *ProblemDetails) UnsetType() {
 
 func (o ProblemDetails) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["$type"] = o.Type
+	if o.Ttype != nil {
+		toSerialize["ttype"] = o.Ttype
 	}
 	if o.Detail.IsSet() {
 		toSerialize["detail"] = o.Detail.Get()

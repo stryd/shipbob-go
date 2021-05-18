@@ -20,11 +20,11 @@ type ReturnsReturnStatus string
 
 // List of Returns.ReturnStatus
 const (
-	AWAITING_ARRIVAL ReturnsReturnStatus = "AwaitingArrival"
-	ARRIVED ReturnsReturnStatus = "Arrived"
-	PROCESSING ReturnsReturnStatus = "Processing"
-	COMPLETED ReturnsReturnStatus = "Completed"
-	CANCELLED ReturnsReturnStatus = "Cancelled"
+	ReturnsReturnStatusAWAITING_ARRIVAL ReturnsReturnStatus = "AwaitingArrival"
+	ReturnsReturnStatusARRIVED ReturnsReturnStatus = "Arrived"
+	ReturnsReturnStatusPROCESSING ReturnsReturnStatus = "Processing"
+	ReturnsReturnStatusCOMPLETED ReturnsReturnStatus = "Completed"
+	ReturnsReturnStatusCANCELLED ReturnsReturnStatus = "Cancelled"
 )
 
 func (v *ReturnsReturnStatus) UnmarshalJSON(src []byte) error {

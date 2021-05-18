@@ -20,8 +20,8 @@ type LocationServiceTypeEnum string
 
 // List of Location.ServiceTypeEnum
 const (
-	RECEIVING LocationServiceTypeEnum = "Receiving"
-	RETURNS LocationServiceTypeEnum = "Returns"
+	LocationServiceTypeEnumRECEIVING LocationServiceTypeEnum = "Receiving"
+	LocationServiceTypeEnumRETURNS LocationServiceTypeEnum = "Returns"
 )
 
 func (v *LocationServiceTypeEnum) UnmarshalJSON(src []byte) error {

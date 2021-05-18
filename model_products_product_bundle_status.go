@@ -20,9 +20,9 @@ type ProductsProductBundleStatus string
 
 // List of Products.ProductBundleStatus
 const (
-	ANY ProductsProductBundleStatus = "Any"
-	BUNDLE ProductsProductBundleStatus = "Bundle"
-	NOT_BUNDLE ProductsProductBundleStatus = "NotBundle"
+	ProductsProductBundleStatusANY ProductsProductBundleStatus = "Any"
+	ProductsProductBundleStatusBUNDLE ProductsProductBundleStatus = "Bundle"
+	ProductsProductBundleStatusNOT_BUNDLE ProductsProductBundleStatus = "NotBundle"
 )
 
 func (v *ProductsProductBundleStatus) UnmarshalJSON(src []byte) error {

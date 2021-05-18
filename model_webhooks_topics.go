@@ -20,10 +20,10 @@ type WebhooksTopics string
 
 // List of Webhooks.Topics
 const (
-	ORDER_SHIPPED WebhooksTopics = "order_shipped"
-	SHIPMENT_DELIVERED WebhooksTopics = "shipment_delivered"
-	SHIPMENT_EXCEPTION WebhooksTopics = "shipment_exception"
-	SHIPMENT_ONHOLD WebhooksTopics = "shipment_onhold"
+	WebhooksTopicsORDER_SHIPPED WebhooksTopics = "order_shipped"
+	WebhooksTopicsSHIPMENT_DELIVERED WebhooksTopics = "shipment_delivered"
+	WebhooksTopicsSHIPMENT_EXCEPTION WebhooksTopics = "shipment_exception"
+	WebhooksTopicsSHIPMENT_ONHOLD WebhooksTopics = "shipment_onhold"
 )
 
 func (v *WebhooksTopics) UnmarshalJSON(src []byte) error {

@@ -20,9 +20,9 @@ type ReturnsTransactionLogSource string
 
 // List of Returns.TransactionLogSource
 const (
-	RETURN_LABEL_INVOICE ReturnsTransactionLogSource = "ReturnLabelInvoice"
-	RETURN_PROCESSING_FEE ReturnsTransactionLogSource = "ReturnProcessingFee"
-	RETURN_TO_SENDER_FEE ReturnsTransactionLogSource = "ReturnToSenderFee"
+	ReturnsTransactionLogSourceRETURN_LABEL_INVOICE ReturnsTransactionLogSource = "ReturnLabelInvoice"
+	ReturnsTransactionLogSourceRETURN_PROCESSING_FEE ReturnsTransactionLogSource = "ReturnProcessingFee"
+	ReturnsTransactionLogSourceRETURN_TO_SENDER_FEE ReturnsTransactionLogSource = "ReturnToSenderFee"
 )
 
 func (v *ReturnsTransactionLogSource) UnmarshalJSON(src []byte) error {

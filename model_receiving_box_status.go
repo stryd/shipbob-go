@@ -20,12 +20,12 @@ type ReceivingBoxStatus string
 
 // List of Receiving.BoxStatus
 const (
-	AWAITING ReceivingBoxStatus = "Awaiting"
-	ARRIVED ReceivingBoxStatus = "Arrived"
-	COMPLETED ReceivingBoxStatus = "Completed"
-	COUNTING ReceivingBoxStatus = "Counting"
-	STOWING ReceivingBoxStatus = "Stowing"
-	CANCELLED ReceivingBoxStatus = "Cancelled"
+	ReceivingBoxStatusAWAITING ReceivingBoxStatus = "Awaiting"
+	ReceivingBoxStatusARRIVED ReceivingBoxStatus = "Arrived"
+	ReceivingBoxStatusCOMPLETED ReceivingBoxStatus = "Completed"
+	ReceivingBoxStatusCOUNTING ReceivingBoxStatus = "Counting"
+	ReceivingBoxStatusSTOWING ReceivingBoxStatus = "Stowing"
+	ReceivingBoxStatusCANCELLED ReceivingBoxStatus = "Cancelled"
 )
 
 func (v *ReceivingBoxStatus) UnmarshalJSON(src []byte) error {

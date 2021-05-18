@@ -20,9 +20,9 @@ type ReceivingPackageType string
 
 // List of Receiving.PackageType
 const (
-	PACKAGE ReceivingPackageType = "Package"
-	PALLET ReceivingPackageType = "Pallet"
-	FLOOR_LOADED_CONTAINER ReceivingPackageType = "FloorLoadedContainer"
+	ReceivingPackageTypePACKAGE ReceivingPackageType = "Package"
+	ReceivingPackageTypePALLET ReceivingPackageType = "Pallet"
+	ReceivingPackageTypeFLOOR_LOADED_CONTAINER ReceivingPackageType = "FloorLoadedContainer"
 )
 
 func (v *ReceivingPackageType) UnmarshalJSON(src []byte) error {
