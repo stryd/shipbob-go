@@ -1,0 +1,282 @@
+# MicrosoftAspNetCoreMvcValidationProblemDetails
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**Detail** | Pointer to **NullableString** |  | [optional] 
+**Errors** | Pointer to **map[string][]string** |  | [optional] [readonly] 
+**Extensions** | Pointer to **map[string]map[string]interface{}** |  | [optional] [readonly] 
+**Instance** | Pointer to **NullableString** |  | [optional] 
+**Status** | Pointer to **NullableInt32** |  | [optional] 
+**Title** | Pointer to **NullableString** |  | [optional] 
+**Type** | Pointer to **NullableString** |  | [optional] 
+
+## Methods
+
+### NewMicrosoftAspNetCoreMvcValidationProblemDetails
+
+`func NewMicrosoftAspNetCoreMvcValidationProblemDetails() *MicrosoftAspNetCoreMvcValidationProblemDetails`
+
+NewMicrosoftAspNetCoreMvcValidationProblemDetails instantiates a new MicrosoftAspNetCoreMvcValidationProblemDetails object
+This constructor will assign default values to properties that have it defined,
+and makes sure properties required by API are set, but the set of arguments
+will change when the set of required properties is changed
+
+### NewMicrosoftAspNetCoreMvcValidationProblemDetailsWithDefaults
+
+`func NewMicrosoftAspNetCoreMvcValidationProblemDetailsWithDefaults() *MicrosoftAspNetCoreMvcValidationProblemDetails`
+
+NewMicrosoftAspNetCoreMvcValidationProblemDetailsWithDefaults instantiates a new MicrosoftAspNetCoreMvcValidationProblemDetails object
+This constructor will only assign default values to properties that have it defined,
+but it doesn't guarantee that properties required by API are set
+
+### GetDetail
+
+`func (o *MicrosoftAspNetCoreMvcValidationProblemDetails) GetDetail() string`
+
+GetDetail returns the Detail field if non-nil, zero value otherwise.
+
+### GetDetailOk
+
+`func (o *MicrosoftAspNetCoreMvcValidationProblemDetails) GetDetailOk() (*string, bool)`
+
+GetDetailOk returns a tuple with the Detail field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDetail
+
+`func (o *MicrosoftAspNetCoreMvcValidationProblemDetails) SetDetail(v string)`
+
+SetDetail sets Detail field to given value.
+
+### HasDetail
+
+`func (o *MicrosoftAspNetCoreMvcValidationProblemDetails) HasDetail() bool`
+
+HasDetail returns a boolean if a field has been set.
+
+### SetDetailNil
+
+`func (o *MicrosoftAspNetCoreMvcValidationProblemDetails) SetDetailNil(b bool)`
+
+ SetDetailNil sets the value for Detail to be an explicit nil
+
+### UnsetDetail
+`func (o *MicrosoftAspNetCoreMvcValidationProblemDetails) UnsetDetail()`
+
+UnsetDetail ensures that no value is present for Detail, not even an explicit nil
+### GetErrors
+
+`func (o *MicrosoftAspNetCoreMvcValidationProblemDetails) GetErrors() map[string][]string`
+
+GetErrors returns the Errors field if non-nil, zero value otherwise.
+
+### GetErrorsOk
+
+`func (o *MicrosoftAspNetCoreMvcValidationProblemDetails) GetErrorsOk() (*map[string][]string, bool)`
+
+GetErrorsOk returns a tuple with the Errors field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetErrors
+
+`func (o *MicrosoftAspNetCoreMvcValidationProblemDetails) SetErrors(v map[string][]string)`
+
+SetErrors sets Errors field to given value.
+
+### HasErrors
+
+`func (o *MicrosoftAspNetCoreMvcValidationProblemDetails) HasErrors() bool`
+
+HasErrors returns a boolean if a field has been set.
+
+### SetErrorsNil
+
+`func (o *MicrosoftAspNetCoreMvcValidationProblemDetails) SetErrorsNil(b bool)`
+
+ SetErrorsNil sets the value for Errors to be an explicit nil
+
+### UnsetErrors
+`func (o *MicrosoftAspNetCoreMvcValidationProblemDetails) UnsetErrors()`
+
+UnsetErrors ensures that no value is present for Errors, not even an explicit nil
+### GetExtensions
+
+`func (o *MicrosoftAspNetCoreMvcValidationProblemDetails) GetExtensions() map[string]map[string]interface{}`
+
+GetExtensions returns the Extensions field if non-nil, zero value otherwise.
+
+### GetExtensionsOk
+
+`func (o *MicrosoftAspNetCoreMvcValidationProblemDetails) GetExtensionsOk() (*map[string]map[string]interface{}, bool)`
+
+GetExtensionsOk returns a tuple with the Extensions field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetExtensions
+
+`func (o *MicrosoftAspNetCoreMvcValidationProblemDetails) SetExtensions(v map[string]map[string]interface{})`
+
+SetExtensions sets Extensions field to given value.
+
+### HasExtensions
+
+`func (o *MicrosoftAspNetCoreMvcValidationProblemDetails) HasExtensions() bool`
+
+HasExtensions returns a boolean if a field has been set.
+
+### SetExtensionsNil
+
+`func (o *MicrosoftAspNetCoreMvcValidationProblemDetails) SetExtensionsNil(b bool)`
+
+ SetExtensionsNil sets the value for Extensions to be an explicit nil
+
+### UnsetExtensions
+`func (o *MicrosoftAspNetCoreMvcValidationProblemDetails) UnsetExtensions()`
+
+UnsetExtensions ensures that no value is present for Extensions, not even an explicit nil
+### GetInstance
+
+`func (o *MicrosoftAspNetCoreMvcValidationProblemDetails) GetInstance() string`
+
+GetInstance returns the Instance field if non-nil, zero value otherwise.
+
+### GetInstanceOk
+
+`func (o *MicrosoftAspNetCoreMvcValidationProblemDetails) GetInstanceOk() (*string, bool)`
+
+GetInstanceOk returns a tuple with the Instance field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetInstance
+
+`func (o *MicrosoftAspNetCoreMvcValidationProblemDetails) SetInstance(v string)`
+
+SetInstance sets Instance field to given value.
+
+### HasInstance
+
+`func (o *MicrosoftAspNetCoreMvcValidationProblemDetails) HasInstance() bool`
+
+HasInstance returns a boolean if a field has been set.
+
+### SetInstanceNil
+
+`func (o *MicrosoftAspNetCoreMvcValidationProblemDetails) SetInstanceNil(b bool)`
+
+ SetInstanceNil sets the value for Instance to be an explicit nil
+
+### UnsetInstance
+`func (o *MicrosoftAspNetCoreMvcValidationProblemDetails) UnsetInstance()`
+
+UnsetInstance ensures that no value is present for Instance, not even an explicit nil
+### GetStatus
+
+`func (o *MicrosoftAspNetCoreMvcValidationProblemDetails) GetStatus() int32`
+
+GetStatus returns the Status field if non-nil, zero value otherwise.
+
+### GetStatusOk
+
+`func (o *MicrosoftAspNetCoreMvcValidationProblemDetails) GetStatusOk() (*int32, bool)`
+
+GetStatusOk returns a tuple with the Status field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStatus
+
+`func (o *MicrosoftAspNetCoreMvcValidationProblemDetails) SetStatus(v int32)`
+
+SetStatus sets Status field to given value.
+
+### HasStatus
+
+`func (o *MicrosoftAspNetCoreMvcValidationProblemDetails) HasStatus() bool`
+
+HasStatus returns a boolean if a field has been set.
+
+### SetStatusNil
+
+`func (o *MicrosoftAspNetCoreMvcValidationProblemDetails) SetStatusNil(b bool)`
+
+ SetStatusNil sets the value for Status to be an explicit nil
+
+### UnsetStatus
+`func (o *MicrosoftAspNetCoreMvcValidationProblemDetails) UnsetStatus()`
+
+UnsetStatus ensures that no value is present for Status, not even an explicit nil
+### GetTitle
+
+`func (o *MicrosoftAspNetCoreMvcValidationProblemDetails) GetTitle() string`
+
+GetTitle returns the Title field if non-nil, zero value otherwise.
+
+### GetTitleOk
+
+`func (o *MicrosoftAspNetCoreMvcValidationProblemDetails) GetTitleOk() (*string, bool)`
+
+GetTitleOk returns a tuple with the Title field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTitle
+
+`func (o *MicrosoftAspNetCoreMvcValidationProblemDetails) SetTitle(v string)`
+
+SetTitle sets Title field to given value.
+
+### HasTitle
+
+`func (o *MicrosoftAspNetCoreMvcValidationProblemDetails) HasTitle() bool`
+
+HasTitle returns a boolean if a field has been set.
+
+### SetTitleNil
+
+`func (o *MicrosoftAspNetCoreMvcValidationProblemDetails) SetTitleNil(b bool)`
+
+ SetTitleNil sets the value for Title to be an explicit nil
+
+### UnsetTitle
+`func (o *MicrosoftAspNetCoreMvcValidationProblemDetails) UnsetTitle()`
+
+UnsetTitle ensures that no value is present for Title, not even an explicit nil
+### GetType
+
+`func (o *MicrosoftAspNetCoreMvcValidationProblemDetails) GetType() string`
+
+GetType returns the Type field if non-nil, zero value otherwise.
+
+### GetTypeOk
+
+`func (o *MicrosoftAspNetCoreMvcValidationProblemDetails) GetTypeOk() (*string, bool)`
+
+GetTypeOk returns a tuple with the Type field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetType
+
+`func (o *MicrosoftAspNetCoreMvcValidationProblemDetails) SetType(v string)`
+
+SetType sets Type field to given value.
+
+### HasType
+
+`func (o *MicrosoftAspNetCoreMvcValidationProblemDetails) HasType() bool`
+
+HasType returns a boolean if a field has been set.
+
+### SetTypeNil
+
+`func (o *MicrosoftAspNetCoreMvcValidationProblemDetails) SetTypeNil(b bool)`
+
+ SetTypeNil sets the value for Type to be an explicit nil
+
+### UnsetType
+`func (o *MicrosoftAspNetCoreMvcValidationProblemDetails) UnsetType()`
+
+UnsetType ensures that no value is present for Type, not even an explicit nil
+
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+
