@@ -16,13 +16,13 @@ import (
 
 // ProblemDetails struct for ProblemDetails
 type ProblemDetails struct {
-	Ttype *string `json:"ttype,omitempty"`
-	Detail NullableString `json:"detail,omitempty"`
+	Ttype      *string                           `json:"ttype,omitempty"`
+	Detail     NullableString                    `json:"detail,omitempty"`
 	Extensions map[string]map[string]interface{} `json:"extensions,omitempty"`
-	Instance NullableString `json:"instance,omitempty"`
-	Status NullableInt32 `json:"status,omitempty"`
-	Title NullableString `json:"title,omitempty"`
-	Type NullableString `json:"type,omitempty"`
+	Instance   NullableString                    `json:"instance,omitempty"`
+	Status     NullableInt32                     `json:"status,omitempty"`
+	Title      NullableString                    `json:"title,omitempty"`
+	Type       NullableString                    `json:"type,omitempty"`
 }
 
 // NewProblemDetails instantiates a new ProblemDetails object
@@ -87,7 +87,7 @@ func (o *ProblemDetails) GetDetail() string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ProblemDetails) GetDetailOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return o.Detail.Get(), o.Detail.IsSet()
@@ -106,6 +106,7 @@ func (o *ProblemDetails) HasDetail() bool {
 func (o *ProblemDetails) SetDetail(v string) {
 	o.Detail.Set(&v)
 }
+
 // SetDetailNil sets the value for Detail to be an explicit nil
 func (o *ProblemDetails) SetDetailNil() {
 	o.Detail.Set(nil)
@@ -118,7 +119,7 @@ func (o *ProblemDetails) UnsetDetail() {
 
 // GetExtensions returns the Extensions field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ProblemDetails) GetExtensions() map[string]map[string]interface{} {
-	if o == nil  {
+	if o == nil {
 		var ret map[string]map[string]interface{}
 		return ret
 	}
@@ -162,7 +163,7 @@ func (o *ProblemDetails) GetInstance() string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ProblemDetails) GetInstanceOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return o.Instance.Get(), o.Instance.IsSet()
@@ -181,6 +182,7 @@ func (o *ProblemDetails) HasInstance() bool {
 func (o *ProblemDetails) SetInstance(v string) {
 	o.Instance.Set(&v)
 }
+
 // SetInstanceNil sets the value for Instance to be an explicit nil
 func (o *ProblemDetails) SetInstanceNil() {
 	o.Instance.Set(nil)
@@ -204,7 +206,7 @@ func (o *ProblemDetails) GetStatus() int32 {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ProblemDetails) GetStatusOk() (*int32, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return o.Status.Get(), o.Status.IsSet()
@@ -223,6 +225,7 @@ func (o *ProblemDetails) HasStatus() bool {
 func (o *ProblemDetails) SetStatus(v int32) {
 	o.Status.Set(&v)
 }
+
 // SetStatusNil sets the value for Status to be an explicit nil
 func (o *ProblemDetails) SetStatusNil() {
 	o.Status.Set(nil)
@@ -246,7 +249,7 @@ func (o *ProblemDetails) GetTitle() string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ProblemDetails) GetTitleOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return o.Title.Get(), o.Title.IsSet()
@@ -265,6 +268,7 @@ func (o *ProblemDetails) HasTitle() bool {
 func (o *ProblemDetails) SetTitle(v string) {
 	o.Title.Set(&v)
 }
+
 // SetTitleNil sets the value for Title to be an explicit nil
 func (o *ProblemDetails) SetTitleNil() {
 	o.Title.Set(nil)
@@ -288,7 +292,7 @@ func (o *ProblemDetails) GetType() string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ProblemDetails) GetTypeOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return o.Type.Get(), o.Type.IsSet()
@@ -307,6 +311,7 @@ func (o *ProblemDetails) HasType() bool {
 func (o *ProblemDetails) SetType(v string) {
 	o.Type.Set(&v)
 }
+
 // SetTypeNil sets the value for Type to be an explicit nil
 func (o *ProblemDetails) SetTypeNil() {
 	o.Type.Set(nil)
@@ -378,5 +383,3 @@ func (v *NullableProblemDetails) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

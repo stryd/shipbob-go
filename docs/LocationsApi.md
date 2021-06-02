@@ -4,13 +4,13 @@ All URIs are relative to *https://api.shipbob.com/1.0*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**LocationGet**](LocationsApi.md#LocationGet) | **Get** /location | Get locations
+[**GetLocations**](LocationsApi.md#GetLocations) | **Get** /location | Get locations
 
 
 
-## LocationGet
+## GetLocations
 
-> []LocationLocationViewModel LocationGet(ctx).IncludeInactive(includeInactive).ReceivingEnabled(receivingEnabled).AccessGranted(accessGranted).Execute()
+> []Location GetLocations(ctx).IncludeInactive(includeInactive).ReceivingEnabled(receivingEnabled).AccessGranted(accessGranted).Execute()
 
 Get locations
 
@@ -33,13 +33,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.LocationsApi.LocationGet(context.Background()).IncludeInactive(includeInactive).ReceivingEnabled(receivingEnabled).AccessGranted(accessGranted).Execute()
+    resp, r, err := api_client.LocationsApi.GetLocations(context.Background()).IncludeInactive(includeInactive).ReceivingEnabled(receivingEnabled).AccessGranted(accessGranted).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `LocationsApi.LocationGet``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `LocationsApi.GetLocations``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `LocationGet`: []LocationLocationViewModel
-    fmt.Fprintf(os.Stdout, "Response from `LocationsApi.LocationGet`: %v\n", resp)
+    // response from `GetLocations`: []Location
+    fmt.Fprintf(os.Stdout, "Response from `LocationsApi.GetLocations`: %v\n", resp)
 }
 ```
 
@@ -49,7 +49,7 @@ func main() {
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiLocationGetRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiGetLocationsRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -60,7 +60,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]LocationLocationViewModel**](Location.LocationViewModel.md)
+[**[]Location**](Location.md)
 
 ### Authorization
 

@@ -26,43 +26,42 @@ var (
 // ChannelsApiService ChannelsApi service
 type ChannelsApiService service
 
-type ApiChannelGetRequest struct {
-	ctx _context.Context
+type ApiGetChannelsRequest struct {
+	ctx        _context.Context
 	ApiService *ChannelsApiService
 }
 
-
-func (r ApiChannelGetRequest) Execute() ([]ChannelsChannelViewModel, *_nethttp.Response, error) {
-	return r.ApiService.ChannelGetExecute(r)
+func (r ApiGetChannelsRequest) Execute() ([]Channel, *_nethttp.Response, error) {
+	return r.ApiService.GetChannelsExecute(r)
 }
 
 /*
- * ChannelGet Get user-authorized channel info
+ * GetChannels Get user-authorized channel info
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @return ApiChannelGetRequest
+ * @return ApiGetChannelsRequest
  */
-func (a *ChannelsApiService) ChannelGet(ctx _context.Context) ApiChannelGetRequest {
-	return ApiChannelGetRequest{
+func (a *ChannelsApiService) GetChannels(ctx _context.Context) ApiGetChannelsRequest {
+	return ApiGetChannelsRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 /*
  * Execute executes the request
- * @return []ChannelsChannelViewModel
+ * @return []Channel
  */
-func (a *ChannelsApiService) ChannelGetExecute(r ApiChannelGetRequest) ([]ChannelsChannelViewModel, *_nethttp.Response, error) {
+func (a *ChannelsApiService) GetChannelsExecute(r ApiGetChannelsRequest) ([]Channel, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  []ChannelsChannelViewModel
+		localVarReturnValue  []Channel
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ChannelsApiService.ChannelGet")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ChannelsApiService.GetChannels")
 	if err != nil {
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}

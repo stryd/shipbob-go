@@ -16,8 +16,8 @@ import (
 	_ioutil "io/ioutil"
 	_nethttp "net/http"
 	_neturl "net/url"
-	"strings"
 	"reflect"
+	"strings"
 )
 
 // Linger please
@@ -28,58 +28,58 @@ var (
 // ProductsApiService ProductsApi service
 type ProductsApiService service
 
-type ApiProductBatchPostRequest struct {
-	ctx _context.Context
-	ApiService *ProductsApiService
+type ApiCreateProductRequest struct {
+	ctx              _context.Context
+	ApiService       *ProductsApiService
 	shipbobChannelId *int32
-	productsCreateProductModel *[]ProductsCreateProductModel
+	createProduct    *CreateProduct
 }
 
-func (r ApiProductBatchPostRequest) ShipbobChannelId(shipbobChannelId int32) ApiProductBatchPostRequest {
+func (r ApiCreateProductRequest) ShipbobChannelId(shipbobChannelId int32) ApiCreateProductRequest {
 	r.shipbobChannelId = &shipbobChannelId
 	return r
 }
-func (r ApiProductBatchPostRequest) ProductsCreateProductModel(productsCreateProductModel []ProductsCreateProductModel) ApiProductBatchPostRequest {
-	r.productsCreateProductModel = &productsCreateProductModel
+func (r ApiCreateProductRequest) CreateProduct(createProduct CreateProduct) ApiCreateProductRequest {
+	r.createProduct = &createProduct
 	return r
 }
 
-func (r ApiProductBatchPostRequest) Execute() ([]ProductsProductViewModel, *_nethttp.Response, error) {
-	return r.ApiService.ProductBatchPostExecute(r)
+func (r ApiCreateProductRequest) Execute() ([]Product, *_nethttp.Response, error) {
+	return r.ApiService.CreateProductExecute(r)
 }
 
 /*
- * ProductBatchPost Add multiple products to the store
+ * CreateProduct Add a single product to the store
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @return ApiProductBatchPostRequest
+ * @return ApiCreateProductRequest
  */
-func (a *ProductsApiService) ProductBatchPost(ctx _context.Context) ApiProductBatchPostRequest {
-	return ApiProductBatchPostRequest{
+func (a *ProductsApiService) CreateProduct(ctx _context.Context) ApiCreateProductRequest {
+	return ApiCreateProductRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 /*
  * Execute executes the request
- * @return []ProductsProductViewModel
+ * @return []Product
  */
-func (a *ProductsApiService) ProductBatchPostExecute(r ApiProductBatchPostRequest) ([]ProductsProductViewModel, *_nethttp.Response, error) {
+func (a *ProductsApiService) CreateProductExecute(r ApiCreateProductRequest) ([]Product, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  []ProductsProductViewModel
+		localVarReturnValue  []Product
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProductsApiService.ProductBatchPost")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProductsApiService.CreateProduct")
 	if err != nil {
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/product/batch"
+	localVarPath := localBasePath + "/product"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -89,7 +89,7 @@ func (a *ProductsApiService) ProductBatchPostExecute(r ApiProductBatchPostReques
 	}
 
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/_*+json", "application/json", "application/json-patch+json", "text/json"}
+	localVarHTTPContentTypes := []string{"application/json"}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -107,7 +107,7 @@ func (a *ProductsApiService) ProductBatchPostExecute(r ApiProductBatchPostReques
 	}
 	localVarHeaderParams["shipbob_channel_id"] = parameterToString(*r.shipbobChannelId, "")
 	// body params
-	localVarPostBody = r.productsCreateProductModel
+	localVarPostBody = r.createProduct
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -164,83 +164,342 @@ func (a *ProductsApiService) ProductBatchPostExecute(r ApiProductBatchPostReques
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiProductGetRequest struct {
-	ctx _context.Context
-	ApiService *ProductsApiService
-	page *int32
-	limit *int32
-	iDs *[]int32
-	referenceIds *[]string
-	search *string
-	activeStatus *ProductsProductActiveStatus
-	bundleStatus *ProductsProductBundleStatus
+type ApiCreateProductBatchRequest struct {
+	ctx              _context.Context
+	ApiService       *ProductsApiService
 	shipbobChannelId *int32
+	createProduct    *[]CreateProduct
 }
 
-func (r ApiProductGetRequest) Page(page int32) ApiProductGetRequest {
-	r.page = &page
-	return r
-}
-func (r ApiProductGetRequest) Limit(limit int32) ApiProductGetRequest {
-	r.limit = &limit
-	return r
-}
-func (r ApiProductGetRequest) IDs(iDs []int32) ApiProductGetRequest {
-	r.iDs = &iDs
-	return r
-}
-func (r ApiProductGetRequest) ReferenceIds(referenceIds []string) ApiProductGetRequest {
-	r.referenceIds = &referenceIds
-	return r
-}
-func (r ApiProductGetRequest) Search(search string) ApiProductGetRequest {
-	r.search = &search
-	return r
-}
-func (r ApiProductGetRequest) ActiveStatus(activeStatus ProductsProductActiveStatus) ApiProductGetRequest {
-	r.activeStatus = &activeStatus
-	return r
-}
-func (r ApiProductGetRequest) BundleStatus(bundleStatus ProductsProductBundleStatus) ApiProductGetRequest {
-	r.bundleStatus = &bundleStatus
-	return r
-}
-func (r ApiProductGetRequest) ShipbobChannelId(shipbobChannelId int32) ApiProductGetRequest {
+func (r ApiCreateProductBatchRequest) ShipbobChannelId(shipbobChannelId int32) ApiCreateProductBatchRequest {
 	r.shipbobChannelId = &shipbobChannelId
 	return r
 }
+func (r ApiCreateProductBatchRequest) CreateProduct(createProduct []CreateProduct) ApiCreateProductBatchRequest {
+	r.createProduct = &createProduct
+	return r
+}
 
-func (r ApiProductGetRequest) Execute() ([]ProductsProductViewModel, *_nethttp.Response, error) {
-	return r.ApiService.ProductGetExecute(r)
+func (r ApiCreateProductBatchRequest) Execute() ([]Product, *_nethttp.Response, error) {
+	return r.ApiService.CreateProductBatchExecute(r)
 }
 
 /*
- * ProductGet Get multiple products
+ * CreateProductBatch Add multiple products to the store
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @return ApiProductGetRequest
+ * @return ApiCreateProductBatchRequest
  */
-func (a *ProductsApiService) ProductGet(ctx _context.Context) ApiProductGetRequest {
-	return ApiProductGetRequest{
+func (a *ProductsApiService) CreateProductBatch(ctx _context.Context) ApiCreateProductBatchRequest {
+	return ApiCreateProductBatchRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 /*
  * Execute executes the request
- * @return []ProductsProductViewModel
+ * @return []Product
  */
-func (a *ProductsApiService) ProductGetExecute(r ApiProductGetRequest) ([]ProductsProductViewModel, *_nethttp.Response, error) {
+func (a *ProductsApiService) CreateProductBatchExecute(r ApiCreateProductBatchRequest) ([]Product, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  []Product
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProductsApiService.CreateProductBatch")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/product/batch"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+	if r.shipbobChannelId == nil {
+		return localVarReturnValue, nil, reportError("shipbobChannelId is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	localVarHeaderParams["shipbob_channel_id"] = parameterToString(*r.shipbobChannelId, "")
+	// body params
+	localVarPostBody = r.createProduct
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v map[string][]string
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v map[string][]string
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetProductRequest struct {
+	ctx              _context.Context
+	ApiService       *ProductsApiService
+	productId        int32
+	shipbobChannelId *int32
+}
+
+func (r ApiGetProductRequest) ShipbobChannelId(shipbobChannelId int32) ApiGetProductRequest {
+	r.shipbobChannelId = &shipbobChannelId
+	return r
+}
+
+func (r ApiGetProductRequest) Execute() (Product, *_nethttp.Response, error) {
+	return r.ApiService.GetProductExecute(r)
+}
+
+/*
+ * GetProduct Get a single product
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param productId Unique identifier of the product
+ * @return ApiGetProductRequest
+ */
+func (a *ProductsApiService) GetProduct(ctx _context.Context, productId int32) ApiGetProductRequest {
+	return ApiGetProductRequest{
+		ApiService: a,
+		ctx:        ctx,
+		productId:  productId,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return Product
+ */
+func (a *ProductsApiService) GetProductExecute(r ApiGetProductRequest) (Product, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  []ProductsProductViewModel
+		localVarReturnValue  Product
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProductsApiService.ProductGet")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProductsApiService.GetProduct")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/product/{productId}"
+	localVarPath = strings.Replace(localVarPath, "{"+"productId"+"}", _neturl.PathEscape(parameterToString(r.productId, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.shipbobChannelId != nil {
+		localVarHeaderParams["shipbob_channel_id"] = parameterToString(*r.shipbobChannelId, "")
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v map[string][]string
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetProductsRequest struct {
+	ctx              _context.Context
+	ApiService       *ProductsApiService
+	page             *int32
+	limit            *int32
+	iDs              *[]int32
+	referenceIds     *[]string
+	search           *string
+	activeStatus     *string
+	bundleStatus     *ProductBundle
+	shipbobChannelId *int32
+}
+
+func (r ApiGetProductsRequest) Page(page int32) ApiGetProductsRequest {
+	r.page = &page
+	return r
+}
+func (r ApiGetProductsRequest) Limit(limit int32) ApiGetProductsRequest {
+	r.limit = &limit
+	return r
+}
+func (r ApiGetProductsRequest) IDs(iDs []int32) ApiGetProductsRequest {
+	r.iDs = &iDs
+	return r
+}
+func (r ApiGetProductsRequest) ReferenceIds(referenceIds []string) ApiGetProductsRequest {
+	r.referenceIds = &referenceIds
+	return r
+}
+func (r ApiGetProductsRequest) Search(search string) ApiGetProductsRequest {
+	r.search = &search
+	return r
+}
+func (r ApiGetProductsRequest) ActiveStatus(activeStatus string) ApiGetProductsRequest {
+	r.activeStatus = &activeStatus
+	return r
+}
+func (r ApiGetProductsRequest) BundleStatus(bundleStatus ProductBundle) ApiGetProductsRequest {
+	r.bundleStatus = &bundleStatus
+	return r
+}
+func (r ApiGetProductsRequest) ShipbobChannelId(shipbobChannelId int32) ApiGetProductsRequest {
+	r.shipbobChannelId = &shipbobChannelId
+	return r
+}
+
+func (r ApiGetProductsRequest) Execute() ([]Product, *_nethttp.Response, error) {
+	return r.ApiService.GetProductsExecute(r)
+}
+
+/*
+ * GetProducts Get multiple products
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @return ApiGetProductsRequest
+ */
+func (a *ProductsApiService) GetProducts(ctx _context.Context) ApiGetProductsRequest {
+	return ApiGetProductsRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return []Product
+ */
+func (a *ProductsApiService) GetProductsExecute(r ApiGetProductsRequest) ([]Product, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  []Product
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProductsApiService.GetProducts")
 	if err != nil {
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
@@ -355,315 +614,56 @@ func (a *ProductsApiService) ProductGetExecute(r ApiProductGetRequest) ([]Produc
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiProductPostRequest struct {
-	ctx _context.Context
-	ApiService *ProductsApiService
+type ApiUpdateProductRequest struct {
+	ctx              _context.Context
+	ApiService       *ProductsApiService
+	productId        int32
 	shipbobChannelId *int32
-	productsCreateProductModel *ProductsCreateProductModel
+	updateProduct    *UpdateProduct
 }
 
-func (r ApiProductPostRequest) ShipbobChannelId(shipbobChannelId int32) ApiProductPostRequest {
+func (r ApiUpdateProductRequest) ShipbobChannelId(shipbobChannelId int32) ApiUpdateProductRequest {
 	r.shipbobChannelId = &shipbobChannelId
 	return r
 }
-func (r ApiProductPostRequest) ProductsCreateProductModel(productsCreateProductModel ProductsCreateProductModel) ApiProductPostRequest {
-	r.productsCreateProductModel = &productsCreateProductModel
+func (r ApiUpdateProductRequest) UpdateProduct(updateProduct UpdateProduct) ApiUpdateProductRequest {
+	r.updateProduct = &updateProduct
 	return r
 }
 
-func (r ApiProductPostRequest) Execute() ([]ProductsProductViewModel, *_nethttp.Response, error) {
-	return r.ApiService.ProductPostExecute(r)
+func (r ApiUpdateProductRequest) Execute() ([]Product, *_nethttp.Response, error) {
+	return r.ApiService.UpdateProductExecute(r)
 }
 
 /*
- * ProductPost Add a single product to the store
- * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @return ApiProductPostRequest
- */
-func (a *ProductsApiService) ProductPost(ctx _context.Context) ApiProductPostRequest {
-	return ApiProductPostRequest{
-		ApiService: a,
-		ctx: ctx,
-	}
-}
-
-/*
- * Execute executes the request
- * @return []ProductsProductViewModel
- */
-func (a *ProductsApiService) ProductPostExecute(r ApiProductPostRequest) ([]ProductsProductViewModel, *_nethttp.Response, error) {
-	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  []ProductsProductViewModel
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProductsApiService.ProductPost")
-	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/product"
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
-	if r.shipbobChannelId == nil {
-		return localVarReturnValue, nil, reportError("shipbobChannelId is required and must be specified")
-	}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/_*+json", "application/json", "application/json-patch+json", "text/json"}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	localVarHeaderParams["shipbob_channel_id"] = parameterToString(*r.shipbobChannelId, "")
-	// body params
-	localVarPostBody = r.productsCreateProductModel
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v map[string][]string
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 422 {
-			var v map[string][]string
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiProductProductIdGetRequest struct {
-	ctx _context.Context
-	ApiService *ProductsApiService
-	productId int32
-	shipbobChannelId *int32
-}
-
-func (r ApiProductProductIdGetRequest) ShipbobChannelId(shipbobChannelId int32) ApiProductProductIdGetRequest {
-	r.shipbobChannelId = &shipbobChannelId
-	return r
-}
-
-func (r ApiProductProductIdGetRequest) Execute() (ProductsProductViewModel, *_nethttp.Response, error) {
-	return r.ApiService.ProductProductIdGetExecute(r)
-}
-
-/*
- * ProductProductIdGet Get a single product
- * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param productId Unique identifier of the product
- * @return ApiProductProductIdGetRequest
- */
-func (a *ProductsApiService) ProductProductIdGet(ctx _context.Context, productId int32) ApiProductProductIdGetRequest {
-	return ApiProductProductIdGetRequest{
-		ApiService: a,
-		ctx: ctx,
-		productId: productId,
-	}
-}
-
-/*
- * Execute executes the request
- * @return ProductsProductViewModel
- */
-func (a *ProductsApiService) ProductProductIdGetExecute(r ApiProductProductIdGetRequest) (ProductsProductViewModel, *_nethttp.Response, error) {
-	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  ProductsProductViewModel
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProductsApiService.ProductProductIdGet")
-	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/product/{productId}"
-	localVarPath = strings.Replace(localVarPath, "{"+"productId"+"}", _neturl.PathEscape(parameterToString(r.productId, "")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.shipbobChannelId != nil {
-		localVarHeaderParams["shipbob_channel_id"] = parameterToString(*r.shipbobChannelId, "")
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v map[string][]string
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiProductProductIdPutRequest struct {
-	ctx _context.Context
-	ApiService *ProductsApiService
-	productId int32
-	shipbobChannelId *int32
-	productsUpdateProductModel *ProductsUpdateProductModel
-}
-
-func (r ApiProductProductIdPutRequest) ShipbobChannelId(shipbobChannelId int32) ApiProductProductIdPutRequest {
-	r.shipbobChannelId = &shipbobChannelId
-	return r
-}
-func (r ApiProductProductIdPutRequest) ProductsUpdateProductModel(productsUpdateProductModel ProductsUpdateProductModel) ApiProductProductIdPutRequest {
-	r.productsUpdateProductModel = &productsUpdateProductModel
-	return r
-}
-
-func (r ApiProductProductIdPutRequest) Execute() ([]ProductsProductViewModel, *_nethttp.Response, error) {
-	return r.ApiService.ProductProductIdPutExecute(r)
-}
-
-/*
- * ProductProductIdPut Modify a single product
+ * UpdateProduct Modify a single product
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param productId Unique identifier of the product to modify
- * @return ApiProductProductIdPutRequest
+ * @return ApiUpdateProductRequest
  */
-func (a *ProductsApiService) ProductProductIdPut(ctx _context.Context, productId int32) ApiProductProductIdPutRequest {
-	return ApiProductProductIdPutRequest{
+func (a *ProductsApiService) UpdateProduct(ctx _context.Context, productId int32) ApiUpdateProductRequest {
+	return ApiUpdateProductRequest{
 		ApiService: a,
-		ctx: ctx,
-		productId: productId,
+		ctx:        ctx,
+		productId:  productId,
 	}
 }
 
 /*
  * Execute executes the request
- * @return []ProductsProductViewModel
+ * @return []Product
  */
-func (a *ProductsApiService) ProductProductIdPutExecute(r ApiProductProductIdPutRequest) ([]ProductsProductViewModel, *_nethttp.Response, error) {
+func (a *ProductsApiService) UpdateProductExecute(r ApiUpdateProductRequest) ([]Product, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPut
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  []ProductsProductViewModel
+		localVarReturnValue  []Product
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProductsApiService.ProductProductIdPut")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProductsApiService.UpdateProduct")
 	if err != nil {
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
@@ -679,7 +679,7 @@ func (a *ProductsApiService) ProductProductIdPutExecute(r ApiProductProductIdPut
 	}
 
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/_*+json", "application/json", "application/json-patch+json", "text/json"}
+	localVarHTTPContentTypes := []string{"application/json"}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -697,7 +697,7 @@ func (a *ProductsApiService) ProductProductIdPutExecute(r ApiProductProductIdPut
 	}
 	localVarHeaderParams["shipbob_channel_id"] = parameterToString(*r.shipbobChannelId, "")
 	// body params
-	localVarPostBody = r.productsUpdateProductModel
+	localVarPostBody = r.updateProduct
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err

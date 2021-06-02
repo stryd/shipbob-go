@@ -16,8 +16,8 @@ import (
 	_ioutil "io/ioutil"
 	_nethttp "net/http"
 	_neturl "net/url"
-	"strings"
 	"reflect"
+	"strings"
 	"time"
 )
 
@@ -29,59 +29,57 @@ var (
 // OrdersApiService OrdersApi service
 type OrdersApiService service
 
-type ApiOrderEstimatePostRequest struct {
-	ctx _context.Context
-	ApiService *OrdersApiService
+type ApiCancelOrderRequest struct {
+	ctx              _context.Context
+	ApiService       *OrdersApiService
+	orderId          int32
 	shipbobChannelId *int32
-	ordersEstimateFulfillmentRequestModel *OrdersEstimateFulfillmentRequestModel
 }
 
-func (r ApiOrderEstimatePostRequest) ShipbobChannelId(shipbobChannelId int32) ApiOrderEstimatePostRequest {
+func (r ApiCancelOrderRequest) ShipbobChannelId(shipbobChannelId int32) ApiCancelOrderRequest {
 	r.shipbobChannelId = &shipbobChannelId
 	return r
 }
-func (r ApiOrderEstimatePostRequest) OrdersEstimateFulfillmentRequestModel(ordersEstimateFulfillmentRequestModel OrdersEstimateFulfillmentRequestModel) ApiOrderEstimatePostRequest {
-	r.ordersEstimateFulfillmentRequestModel = &ordersEstimateFulfillmentRequestModel
-	return r
-}
 
-func (r ApiOrderEstimatePostRequest) Execute() (OrdersEstimateViewModel, *_nethttp.Response, error) {
-	return r.ApiService.OrderEstimatePostExecute(r)
+func (r ApiCancelOrderRequest) Execute() (CanceledOrder, *_nethttp.Response, error) {
+	return r.ApiService.CancelOrderExecute(r)
 }
 
 /*
- * OrderEstimatePost Estimate Fulfillment Cost For Order
- * This endpoint will provide, where possible, an estimate of pricing and fulfillment center assignment of a potential standard (direct to consumer) order. \r\nKeep in mind that there are ways for the merchant to change FC assignment or product configuration after order creation that could invalidate this estimate. \r\nEstimates cannot be returned for items that are unknown, out of stock, or too large for fulfillment using standard box sizes. \r\nAdditional services such as high-pick fees, shipping insurance, auto-splitting or auto-adding items to orders, and signature required are not included in this estimate.
+ * CancelOrder Cancel single Order by Order ID
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @return ApiOrderEstimatePostRequest
+ * @param orderId The order ID to cancel
+ * @return ApiCancelOrderRequest
  */
-func (a *OrdersApiService) OrderEstimatePost(ctx _context.Context) ApiOrderEstimatePostRequest {
-	return ApiOrderEstimatePostRequest{
+func (a *OrdersApiService) CancelOrder(ctx _context.Context, orderId int32) ApiCancelOrderRequest {
+	return ApiCancelOrderRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
+		orderId:    orderId,
 	}
 }
 
 /*
  * Execute executes the request
- * @return OrdersEstimateViewModel
+ * @return CanceledOrder
  */
-func (a *OrdersApiService) OrderEstimatePostExecute(r ApiOrderEstimatePostRequest) (OrdersEstimateViewModel, *_nethttp.Response, error) {
+func (a *OrdersApiService) CancelOrderExecute(r ApiCancelOrderRequest) (CanceledOrder, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  OrdersEstimateViewModel
+		localVarReturnValue  CanceledOrder
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrdersApiService.OrderEstimatePost")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrdersApiService.CancelOrder")
 	if err != nil {
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/order/estimate"
+	localVarPath := localBasePath + "/order/{orderId}/cancel"
+	localVarPath = strings.Replace(localVarPath, "{"+"orderId"+"}", _neturl.PathEscape(parameterToString(r.orderId, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -91,7 +89,439 @@ func (a *OrdersApiService) OrderEstimatePostExecute(r ApiOrderEstimatePostReques
 	}
 
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/_*+json", "application/json", "application/json-patch+json", "text/json"}
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	localVarHeaderParams["shipbob_channel_id"] = parameterToString(*r.shipbobChannelId, "")
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v map[string][]string
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v map[string][]string
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v map[string][]string
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiCancelOrderShipmentRequest struct {
+	ctx              _context.Context
+	ApiService       *OrdersApiService
+	shipmentId       int32
+	orderId          string
+	shipbobChannelId *int32
+}
+
+func (r ApiCancelOrderShipmentRequest) ShipbobChannelId(shipbobChannelId int32) ApiCancelOrderShipmentRequest {
+	r.shipbobChannelId = &shipbobChannelId
+	return r
+}
+
+func (r ApiCancelOrderShipmentRequest) Execute() (Shipment, *_nethttp.Response, error) {
+	return r.ApiService.CancelOrderShipmentExecute(r)
+}
+
+/*
+ * CancelOrderShipment Cancel one Shipment by Order Id and Shipment Id
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param shipmentId The shipment id to get
+ * @param orderId
+ * @return ApiCancelOrderShipmentRequest
+ */
+func (a *OrdersApiService) CancelOrderShipment(ctx _context.Context, shipmentId int32, orderId string) ApiCancelOrderShipmentRequest {
+	return ApiCancelOrderShipmentRequest{
+		ApiService: a,
+		ctx:        ctx,
+		shipmentId: shipmentId,
+		orderId:    orderId,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return Shipment
+ */
+func (a *OrdersApiService) CancelOrderShipmentExecute(r ApiCancelOrderShipmentRequest) (Shipment, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  Shipment
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrdersApiService.CancelOrderShipment")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/order/{orderId}/shipment/{shipmentId}/cancel"
+	localVarPath = strings.Replace(localVarPath, "{"+"shipmentId"+"}", _neturl.PathEscape(parameterToString(r.shipmentId, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"orderId"+"}", _neturl.PathEscape(parameterToString(r.orderId, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.shipbobChannelId != nil {
+		localVarHeaderParams["shipbob_channel_id"] = parameterToString(*r.shipbobChannelId, "")
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v map[string][]string
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v map[string][]string
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v map[string][]string
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiCancelShipmentRequest struct {
+	ctx              _context.Context
+	ApiService       *OrdersApiService
+	shipmentId       int32
+	shipbobChannelId *int32
+}
+
+func (r ApiCancelShipmentRequest) ShipbobChannelId(shipbobChannelId int32) ApiCancelShipmentRequest {
+	r.shipbobChannelId = &shipbobChannelId
+	return r
+}
+
+func (r ApiCancelShipmentRequest) Execute() (Shipment, *_nethttp.Response, error) {
+	return r.ApiService.CancelShipmentExecute(r)
+}
+
+/*
+ * CancelShipment Cancel one Shipment by Shipment Id
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param shipmentId The shipment id to get
+ * @return ApiCancelShipmentRequest
+ */
+func (a *OrdersApiService) CancelShipment(ctx _context.Context, shipmentId int32) ApiCancelShipmentRequest {
+	return ApiCancelShipmentRequest{
+		ApiService: a,
+		ctx:        ctx,
+		shipmentId: shipmentId,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return Shipment
+ */
+func (a *OrdersApiService) CancelShipmentExecute(r ApiCancelShipmentRequest) (Shipment, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  Shipment
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrdersApiService.CancelShipment")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/shipment/{shipmentId}/cancel"
+	localVarPath = strings.Replace(localVarPath, "{"+"shipmentId"+"}", _neturl.PathEscape(parameterToString(r.shipmentId, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.shipbobChannelId != nil {
+		localVarHeaderParams["shipbob_channel_id"] = parameterToString(*r.shipbobChannelId, "")
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v map[string][]string
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v map[string][]string
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v map[string][]string
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiCancelShipmentBulkRequest struct {
+	ctx              _context.Context
+	ApiService       *OrdersApiService
+	shipbobChannelId *int32
+	cancelShipment   *CancelShipment
+}
+
+func (r ApiCancelShipmentBulkRequest) ShipbobChannelId(shipbobChannelId int32) ApiCancelShipmentBulkRequest {
+	r.shipbobChannelId = &shipbobChannelId
+	return r
+}
+func (r ApiCancelShipmentBulkRequest) CancelShipment(cancelShipment CancelShipment) ApiCancelShipmentBulkRequest {
+	r.cancelShipment = &cancelShipment
+	return r
+}
+
+func (r ApiCancelShipmentBulkRequest) Execute() (InlineResponse200, *_nethttp.Response, error) {
+	return r.ApiService.CancelShipmentBulkExecute(r)
+}
+
+/*
+ * CancelShipmentBulk Cancel multiple Shipments by Shipment Id
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @return ApiCancelShipmentBulkRequest
+ */
+func (a *OrdersApiService) CancelShipmentBulk(ctx _context.Context) ApiCancelShipmentBulkRequest {
+	return ApiCancelShipmentBulkRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return InlineResponse200
+ */
+func (a *OrdersApiService) CancelShipmentBulkExecute(r ApiCancelShipmentBulkRequest) (InlineResponse200, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  InlineResponse200
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrdersApiService.CancelShipmentBulk")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/shipment/cancelbulk"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+	if r.shipbobChannelId == nil {
+		return localVarReturnValue, nil, reportError("shipbobChannelId is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -109,7 +539,143 @@ func (a *OrdersApiService) OrderEstimatePostExecute(r ApiOrderEstimatePostReques
 	}
 	localVarHeaderParams["shipbob_channel_id"] = parameterToString(*r.shipbobChannelId, "")
 	// body params
-	localVarPostBody = r.ordersEstimateFulfillmentRequestModel
+	localVarPostBody = r.cancelShipment
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v map[string][]string
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v map[string][]string
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiCreateOrderRequest struct {
+	ctx              _context.Context
+	ApiService       *OrdersApiService
+	shipbobChannelId *int32
+	createOrder      *CreateOrder
+}
+
+func (r ApiCreateOrderRequest) ShipbobChannelId(shipbobChannelId int32) ApiCreateOrderRequest {
+	r.shipbobChannelId = &shipbobChannelId
+	return r
+}
+func (r ApiCreateOrderRequest) CreateOrder(createOrder CreateOrder) ApiCreateOrderRequest {
+	r.createOrder = &createOrder
+	return r
+}
+
+func (r ApiCreateOrderRequest) Execute() (Order, *_nethttp.Response, error) {
+	return r.ApiService.CreateOrderExecute(r)
+}
+
+/*
+ * CreateOrder Create Order
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @return ApiCreateOrderRequest
+ */
+func (a *OrdersApiService) CreateOrder(ctx _context.Context) ApiCreateOrderRequest {
+	return ApiCreateOrderRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return Order
+ */
+func (a *OrdersApiService) CreateOrderExecute(r ApiCreateOrderRequest) (Order, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  Order
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrdersApiService.CreateOrder")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/order"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+	if r.shipbobChannelId == nil {
+		return localVarReturnValue, nil, reportError("shipbobChannelId is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	localVarHeaderParams["shipbob_channel_id"] = parameterToString(*r.shipbobChannelId, "")
+	// body params
+	localVarPostBody = r.createOrder
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -166,99 +732,863 @@ func (a *OrdersApiService) OrderEstimatePostExecute(r ApiOrderEstimatePostReques
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiOrderGetRequest struct {
-	ctx _context.Context
-	ApiService *OrdersApiService
-	page *int32
-	limit *int32
-	iDs *[]int32
-	referenceIds *[]string
-	startDate *time.Time
-	endDate *time.Time
-	sortOrder *string
-	hasTracking *bool
-	lastUpdateStartDate *time.Time
-	lastUpdateEndDate *time.Time
-	shipbobChannelId *int32
+type ApiCreateOrderEstimateRequest struct {
+	ctx                        _context.Context
+	ApiService                 *OrdersApiService
+	shipbobChannelId           *int32
+	estimateFulfillmentRequest *EstimateFulfillmentRequest
 }
 
-func (r ApiOrderGetRequest) Page(page int32) ApiOrderGetRequest {
-	r.page = &page
-	return r
-}
-func (r ApiOrderGetRequest) Limit(limit int32) ApiOrderGetRequest {
-	r.limit = &limit
-	return r
-}
-func (r ApiOrderGetRequest) IDs(iDs []int32) ApiOrderGetRequest {
-	r.iDs = &iDs
-	return r
-}
-func (r ApiOrderGetRequest) ReferenceIds(referenceIds []string) ApiOrderGetRequest {
-	r.referenceIds = &referenceIds
-	return r
-}
-func (r ApiOrderGetRequest) StartDate(startDate time.Time) ApiOrderGetRequest {
-	r.startDate = &startDate
-	return r
-}
-func (r ApiOrderGetRequest) EndDate(endDate time.Time) ApiOrderGetRequest {
-	r.endDate = &endDate
-	return r
-}
-func (r ApiOrderGetRequest) SortOrder(sortOrder string) ApiOrderGetRequest {
-	r.sortOrder = &sortOrder
-	return r
-}
-func (r ApiOrderGetRequest) HasTracking(hasTracking bool) ApiOrderGetRequest {
-	r.hasTracking = &hasTracking
-	return r
-}
-func (r ApiOrderGetRequest) LastUpdateStartDate(lastUpdateStartDate time.Time) ApiOrderGetRequest {
-	r.lastUpdateStartDate = &lastUpdateStartDate
-	return r
-}
-func (r ApiOrderGetRequest) LastUpdateEndDate(lastUpdateEndDate time.Time) ApiOrderGetRequest {
-	r.lastUpdateEndDate = &lastUpdateEndDate
-	return r
-}
-func (r ApiOrderGetRequest) ShipbobChannelId(shipbobChannelId int32) ApiOrderGetRequest {
+func (r ApiCreateOrderEstimateRequest) ShipbobChannelId(shipbobChannelId int32) ApiCreateOrderEstimateRequest {
 	r.shipbobChannelId = &shipbobChannelId
 	return r
 }
+func (r ApiCreateOrderEstimateRequest) EstimateFulfillmentRequest(estimateFulfillmentRequest EstimateFulfillmentRequest) ApiCreateOrderEstimateRequest {
+	r.estimateFulfillmentRequest = &estimateFulfillmentRequest
+	return r
+}
 
-func (r ApiOrderGetRequest) Execute() ([]OrdersOrderViewModel, *_nethttp.Response, error) {
-	return r.ApiService.OrderGetExecute(r)
+func (r ApiCreateOrderEstimateRequest) Execute() (OrderEstimate, *_nethttp.Response, error) {
+	return r.ApiService.CreateOrderEstimateExecute(r)
 }
 
 /*
- * OrderGet Get Orders
- * All parameters are AND filters
+ * CreateOrderEstimate Estimate Fulfillment Cost For Order
+ * This endpoint will provide, where possible, an estimate of pricing and fulfillment center assignment of a potential standard (direct to consumer) order. \r\nKeep in mind that there are ways for the merchant to change FC assignment or product configuration after order creation that could invalidate this estimate. \r\nEstimates cannot be returned for items that are unknown, out of stock, or too large for fulfillment using standard box sizes. \r\nAdditional services such as high-pick fees, shipping insurance, auto-splitting or auto-adding items to orders, and signature required are not included in this estimate.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @return ApiOrderGetRequest
+ * @return ApiCreateOrderEstimateRequest
  */
-func (a *OrdersApiService) OrderGet(ctx _context.Context) ApiOrderGetRequest {
-	return ApiOrderGetRequest{
+func (a *OrdersApiService) CreateOrderEstimate(ctx _context.Context) ApiCreateOrderEstimateRequest {
+	return ApiCreateOrderEstimateRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 /*
  * Execute executes the request
- * @return []OrdersOrderViewModel
+ * @return OrderEstimate
  */
-func (a *OrdersApiService) OrderGetExecute(r ApiOrderGetRequest) ([]OrdersOrderViewModel, *_nethttp.Response, error) {
+func (a *OrdersApiService) CreateOrderEstimateExecute(r ApiCreateOrderEstimateRequest) (OrderEstimate, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  OrderEstimate
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrdersApiService.CreateOrderEstimate")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/order/estimate"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+	if r.shipbobChannelId == nil {
+		return localVarReturnValue, nil, reportError("shipbobChannelId is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	localVarHeaderParams["shipbob_channel_id"] = parameterToString(*r.shipbobChannelId, "")
+	// body params
+	localVarPostBody = r.estimateFulfillmentRequest
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v map[string][]string
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v map[string][]string
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetOrderRequest struct {
+	ctx              _context.Context
+	ApiService       *OrdersApiService
+	orderId          int32
+	shipbobChannelId *int32
+}
+
+func (r ApiGetOrderRequest) ShipbobChannelId(shipbobChannelId int32) ApiGetOrderRequest {
+	r.shipbobChannelId = &shipbobChannelId
+	return r
+}
+
+func (r ApiGetOrderRequest) Execute() (Order, *_nethttp.Response, error) {
+	return r.ApiService.GetOrderExecute(r)
+}
+
+/*
+ * GetOrder Get Order
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param orderId
+ * @return ApiGetOrderRequest
+ */
+func (a *OrdersApiService) GetOrder(ctx _context.Context, orderId int32) ApiGetOrderRequest {
+	return ApiGetOrderRequest{
+		ApiService: a,
+		ctx:        ctx,
+		orderId:    orderId,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return Order
+ */
+func (a *OrdersApiService) GetOrderExecute(r ApiGetOrderRequest) (Order, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  []OrdersOrderViewModel
+		localVarReturnValue  Order
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrdersApiService.OrderGet")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrdersApiService.GetOrder")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/order/{orderId}"
+	localVarPath = strings.Replace(localVarPath, "{"+"orderId"+"}", _neturl.PathEscape(parameterToString(r.orderId, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.shipbobChannelId != nil {
+		localVarHeaderParams["shipbob_channel_id"] = parameterToString(*r.shipbobChannelId, "")
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v map[string][]string
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetOrderShipmentRequest struct {
+	ctx              _context.Context
+	ApiService       *OrdersApiService
+	orderId          int32
+	shipmentId       int32
+	shipbobChannelId *int32
+}
+
+func (r ApiGetOrderShipmentRequest) ShipbobChannelId(shipbobChannelId int32) ApiGetOrderShipmentRequest {
+	r.shipbobChannelId = &shipbobChannelId
+	return r
+}
+
+func (r ApiGetOrderShipmentRequest) Execute() (Shipment, *_nethttp.Response, error) {
+	return r.ApiService.GetOrderShipmentExecute(r)
+}
+
+/*
+ * GetOrderShipment Get one Shipment by Order Id and Shipment Id
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param orderId The order id to get the shipment for
+ * @param shipmentId The shipment id to get
+ * @return ApiGetOrderShipmentRequest
+ */
+func (a *OrdersApiService) GetOrderShipment(ctx _context.Context, orderId int32, shipmentId int32) ApiGetOrderShipmentRequest {
+	return ApiGetOrderShipmentRequest{
+		ApiService: a,
+		ctx:        ctx,
+		orderId:    orderId,
+		shipmentId: shipmentId,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return Shipment
+ */
+func (a *OrdersApiService) GetOrderShipmentExecute(r ApiGetOrderShipmentRequest) (Shipment, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  Shipment
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrdersApiService.GetOrderShipment")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/order/{orderId}/shipment/{shipmentId}"
+	localVarPath = strings.Replace(localVarPath, "{"+"orderId"+"}", _neturl.PathEscape(parameterToString(r.orderId, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"shipmentId"+"}", _neturl.PathEscape(parameterToString(r.shipmentId, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.shipbobChannelId != nil {
+		localVarHeaderParams["shipbob_channel_id"] = parameterToString(*r.shipbobChannelId, "")
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v map[string][]string
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetOrderShipmentLogsRequest struct {
+	ctx              _context.Context
+	ApiService       *OrdersApiService
+	orderId          int32
+	shipmentId       int32
+	shipbobChannelId *int32
+}
+
+func (r ApiGetOrderShipmentLogsRequest) ShipbobChannelId(shipbobChannelId int32) ApiGetOrderShipmentLogsRequest {
+	r.shipbobChannelId = &shipbobChannelId
+	return r
+}
+
+func (r ApiGetOrderShipmentLogsRequest) Execute() ([]ShipmentLog, *_nethttp.Response, error) {
+	return r.ApiService.GetOrderShipmentLogsExecute(r)
+}
+
+/*
+ * GetOrderShipmentLogs Get logs for one Shipment by Order Id and Shipment Id
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param orderId The order id to get the shipment for
+ * @param shipmentId The shipment id to get
+ * @return ApiGetOrderShipmentLogsRequest
+ */
+func (a *OrdersApiService) GetOrderShipmentLogs(ctx _context.Context, orderId int32, shipmentId int32) ApiGetOrderShipmentLogsRequest {
+	return ApiGetOrderShipmentLogsRequest{
+		ApiService: a,
+		ctx:        ctx,
+		orderId:    orderId,
+		shipmentId: shipmentId,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return []ShipmentLog
+ */
+func (a *OrdersApiService) GetOrderShipmentLogsExecute(r ApiGetOrderShipmentLogsRequest) ([]ShipmentLog, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  []ShipmentLog
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrdersApiService.GetOrderShipmentLogs")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/order/{orderId}/shipment/{shipmentId}/logs"
+	localVarPath = strings.Replace(localVarPath, "{"+"orderId"+"}", _neturl.PathEscape(parameterToString(r.orderId, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"shipmentId"+"}", _neturl.PathEscape(parameterToString(r.shipmentId, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.shipbobChannelId != nil {
+		localVarHeaderParams["shipbob_channel_id"] = parameterToString(*r.shipbobChannelId, "")
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v map[string][]string
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetOrderShipmentTimelineRequest struct {
+	ctx              _context.Context
+	ApiService       *OrdersApiService
+	orderId          int32
+	shipmentId       int32
+	shipbobChannelId *int32
+}
+
+func (r ApiGetOrderShipmentTimelineRequest) ShipbobChannelId(shipbobChannelId int32) ApiGetOrderShipmentTimelineRequest {
+	r.shipbobChannelId = &shipbobChannelId
+	return r
+}
+
+func (r ApiGetOrderShipmentTimelineRequest) Execute() ([]ShipmentLog, *_nethttp.Response, error) {
+	return r.ApiService.GetOrderShipmentTimelineExecute(r)
+}
+
+/*
+ * GetOrderShipmentTimeline Get one Shipment's status timeline by Order Id and Shipment Id
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param orderId The order id to get the shipment for
+ * @param shipmentId The shipment id to get
+ * @return ApiGetOrderShipmentTimelineRequest
+ */
+func (a *OrdersApiService) GetOrderShipmentTimeline(ctx _context.Context, orderId int32, shipmentId int32) ApiGetOrderShipmentTimelineRequest {
+	return ApiGetOrderShipmentTimelineRequest{
+		ApiService: a,
+		ctx:        ctx,
+		orderId:    orderId,
+		shipmentId: shipmentId,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return []ShipmentLog
+ */
+func (a *OrdersApiService) GetOrderShipmentTimelineExecute(r ApiGetOrderShipmentTimelineRequest) ([]ShipmentLog, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  []ShipmentLog
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrdersApiService.GetOrderShipmentTimeline")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/order/{orderId}/shipment/{shipmentId}/timeline"
+	localVarPath = strings.Replace(localVarPath, "{"+"orderId"+"}", _neturl.PathEscape(parameterToString(r.orderId, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"shipmentId"+"}", _neturl.PathEscape(parameterToString(r.shipmentId, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.shipbobChannelId != nil {
+		localVarHeaderParams["shipbob_channel_id"] = parameterToString(*r.shipbobChannelId, "")
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v map[string][]string
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetOrderShipmentsRequest struct {
+	ctx              _context.Context
+	ApiService       *OrdersApiService
+	orderId          int32
+	shipbobChannelId *int32
+}
+
+func (r ApiGetOrderShipmentsRequest) ShipbobChannelId(shipbobChannelId int32) ApiGetOrderShipmentsRequest {
+	r.shipbobChannelId = &shipbobChannelId
+	return r
+}
+
+func (r ApiGetOrderShipmentsRequest) Execute() ([]Shipment, *_nethttp.Response, error) {
+	return r.ApiService.GetOrderShipmentsExecute(r)
+}
+
+/*
+ * GetOrderShipments Get all Shipments for Order
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param orderId The order id to get shipments for
+ * @return ApiGetOrderShipmentsRequest
+ */
+func (a *OrdersApiService) GetOrderShipments(ctx _context.Context, orderId int32) ApiGetOrderShipmentsRequest {
+	return ApiGetOrderShipmentsRequest{
+		ApiService: a,
+		ctx:        ctx,
+		orderId:    orderId,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return []Shipment
+ */
+func (a *OrdersApiService) GetOrderShipmentsExecute(r ApiGetOrderShipmentsRequest) ([]Shipment, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  []Shipment
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrdersApiService.GetOrderShipments")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/order/{orderId}/shipment"
+	localVarPath = strings.Replace(localVarPath, "{"+"orderId"+"}", _neturl.PathEscape(parameterToString(r.orderId, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.shipbobChannelId != nil {
+		localVarHeaderParams["shipbob_channel_id"] = parameterToString(*r.shipbobChannelId, "")
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v map[string][]string
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetOrdersRequest struct {
+	ctx                 _context.Context
+	ApiService          *OrdersApiService
+	page                *int32
+	limit               *int32
+	iDs                 *[]int32
+	referenceIds        *[]string
+	startDate           *time.Time
+	endDate             *time.Time
+	sortOrder           *string
+	hasTracking         *bool
+	lastUpdateStartDate *time.Time
+	lastUpdateEndDate   *time.Time
+	shipbobChannelId    *int32
+}
+
+func (r ApiGetOrdersRequest) Page(page int32) ApiGetOrdersRequest {
+	r.page = &page
+	return r
+}
+func (r ApiGetOrdersRequest) Limit(limit int32) ApiGetOrdersRequest {
+	r.limit = &limit
+	return r
+}
+func (r ApiGetOrdersRequest) IDs(iDs []int32) ApiGetOrdersRequest {
+	r.iDs = &iDs
+	return r
+}
+func (r ApiGetOrdersRequest) ReferenceIds(referenceIds []string) ApiGetOrdersRequest {
+	r.referenceIds = &referenceIds
+	return r
+}
+func (r ApiGetOrdersRequest) StartDate(startDate time.Time) ApiGetOrdersRequest {
+	r.startDate = &startDate
+	return r
+}
+func (r ApiGetOrdersRequest) EndDate(endDate time.Time) ApiGetOrdersRequest {
+	r.endDate = &endDate
+	return r
+}
+func (r ApiGetOrdersRequest) SortOrder(sortOrder string) ApiGetOrdersRequest {
+	r.sortOrder = &sortOrder
+	return r
+}
+func (r ApiGetOrdersRequest) HasTracking(hasTracking bool) ApiGetOrdersRequest {
+	r.hasTracking = &hasTracking
+	return r
+}
+func (r ApiGetOrdersRequest) LastUpdateStartDate(lastUpdateStartDate time.Time) ApiGetOrdersRequest {
+	r.lastUpdateStartDate = &lastUpdateStartDate
+	return r
+}
+func (r ApiGetOrdersRequest) LastUpdateEndDate(lastUpdateEndDate time.Time) ApiGetOrdersRequest {
+	r.lastUpdateEndDate = &lastUpdateEndDate
+	return r
+}
+func (r ApiGetOrdersRequest) ShipbobChannelId(shipbobChannelId int32) ApiGetOrdersRequest {
+	r.shipbobChannelId = &shipbobChannelId
+	return r
+}
+
+func (r ApiGetOrdersRequest) Execute() ([]Order, *_nethttp.Response, error) {
+	return r.ApiService.GetOrdersExecute(r)
+}
+
+/*
+ * GetOrders Get Orders
+ * All parameters are AND filters
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @return ApiGetOrdersRequest
+ */
+func (a *OrdersApiService) GetOrders(ctx _context.Context) ApiGetOrdersRequest {
+	return ApiGetOrdersRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return []Order
+ */
+func (a *OrdersApiService) GetOrdersExecute(r ApiGetOrdersRequest) ([]Order, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  []Order
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrdersApiService.GetOrders")
 	if err != nil {
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
@@ -382,1381 +1712,51 @@ func (a *OrdersApiService) OrderGetExecute(r ApiOrderGetRequest) ([]OrdersOrderV
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiOrderOrderIdCancelPostRequest struct {
-	ctx _context.Context
-	ApiService *OrdersApiService
-	orderId int32
+type ApiGetShipmentRequest struct {
+	ctx              _context.Context
+	ApiService       *OrdersApiService
+	shipmentId       int32
 	shipbobChannelId *int32
 }
 
-func (r ApiOrderOrderIdCancelPostRequest) ShipbobChannelId(shipbobChannelId int32) ApiOrderOrderIdCancelPostRequest {
+func (r ApiGetShipmentRequest) ShipbobChannelId(shipbobChannelId int32) ApiGetShipmentRequest {
 	r.shipbobChannelId = &shipbobChannelId
 	return r
 }
 
-func (r ApiOrderOrderIdCancelPostRequest) Execute() (OrdersCanceledOrderViewModel, *_nethttp.Response, error) {
-	return r.ApiService.OrderOrderIdCancelPostExecute(r)
+func (r ApiGetShipmentRequest) Execute() (Shipment, *_nethttp.Response, error) {
+	return r.ApiService.GetShipmentExecute(r)
 }
 
 /*
- * OrderOrderIdCancelPost Cancel single Order by Order ID
- * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param orderId The order ID to cancel
- * @return ApiOrderOrderIdCancelPostRequest
- */
-func (a *OrdersApiService) OrderOrderIdCancelPost(ctx _context.Context, orderId int32) ApiOrderOrderIdCancelPostRequest {
-	return ApiOrderOrderIdCancelPostRequest{
-		ApiService: a,
-		ctx: ctx,
-		orderId: orderId,
-	}
-}
-
-/*
- * Execute executes the request
- * @return OrdersCanceledOrderViewModel
- */
-func (a *OrdersApiService) OrderOrderIdCancelPostExecute(r ApiOrderOrderIdCancelPostRequest) (OrdersCanceledOrderViewModel, *_nethttp.Response, error) {
-	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  OrdersCanceledOrderViewModel
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrdersApiService.OrderOrderIdCancelPost")
-	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/order/{orderId}/cancel"
-	localVarPath = strings.Replace(localVarPath, "{"+"orderId"+"}", _neturl.PathEscape(parameterToString(r.orderId, "")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
-	if r.shipbobChannelId == nil {
-		return localVarReturnValue, nil, reportError("shipbobChannelId is required and must be specified")
-	}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	localVarHeaderParams["shipbob_channel_id"] = parameterToString(*r.shipbobChannelId, "")
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v map[string][]string
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 422 {
-			var v map[string][]string
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 500 {
-			var v map[string][]string
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiOrderOrderIdGetRequest struct {
-	ctx _context.Context
-	ApiService *OrdersApiService
-	orderId int32
-	shipbobChannelId *int32
-}
-
-func (r ApiOrderOrderIdGetRequest) ShipbobChannelId(shipbobChannelId int32) ApiOrderOrderIdGetRequest {
-	r.shipbobChannelId = &shipbobChannelId
-	return r
-}
-
-func (r ApiOrderOrderIdGetRequest) Execute() (OrdersOrderViewModel, *_nethttp.Response, error) {
-	return r.ApiService.OrderOrderIdGetExecute(r)
-}
-
-/*
- * OrderOrderIdGet Get Order
- * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param orderId
- * @return ApiOrderOrderIdGetRequest
- */
-func (a *OrdersApiService) OrderOrderIdGet(ctx _context.Context, orderId int32) ApiOrderOrderIdGetRequest {
-	return ApiOrderOrderIdGetRequest{
-		ApiService: a,
-		ctx: ctx,
-		orderId: orderId,
-	}
-}
-
-/*
- * Execute executes the request
- * @return OrdersOrderViewModel
- */
-func (a *OrdersApiService) OrderOrderIdGetExecute(r ApiOrderOrderIdGetRequest) (OrdersOrderViewModel, *_nethttp.Response, error) {
-	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  OrdersOrderViewModel
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrdersApiService.OrderOrderIdGet")
-	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/order/{orderId}"
-	localVarPath = strings.Replace(localVarPath, "{"+"orderId"+"}", _neturl.PathEscape(parameterToString(r.orderId, "")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.shipbobChannelId != nil {
-		localVarHeaderParams["shipbob_channel_id"] = parameterToString(*r.shipbobChannelId, "")
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v map[string][]string
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiOrderOrderIdShipmentGetRequest struct {
-	ctx _context.Context
-	ApiService *OrdersApiService
-	orderId int32
-	shipbobChannelId *int32
-}
-
-func (r ApiOrderOrderIdShipmentGetRequest) ShipbobChannelId(shipbobChannelId int32) ApiOrderOrderIdShipmentGetRequest {
-	r.shipbobChannelId = &shipbobChannelId
-	return r
-}
-
-func (r ApiOrderOrderIdShipmentGetRequest) Execute() ([]OrdersShipmentViewModel, *_nethttp.Response, error) {
-	return r.ApiService.OrderOrderIdShipmentGetExecute(r)
-}
-
-/*
- * OrderOrderIdShipmentGet Get all Shipments for Order
- * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param orderId The order id to get shipments for
- * @return ApiOrderOrderIdShipmentGetRequest
- */
-func (a *OrdersApiService) OrderOrderIdShipmentGet(ctx _context.Context, orderId int32) ApiOrderOrderIdShipmentGetRequest {
-	return ApiOrderOrderIdShipmentGetRequest{
-		ApiService: a,
-		ctx: ctx,
-		orderId: orderId,
-	}
-}
-
-/*
- * Execute executes the request
- * @return []OrdersShipmentViewModel
- */
-func (a *OrdersApiService) OrderOrderIdShipmentGetExecute(r ApiOrderOrderIdShipmentGetRequest) ([]OrdersShipmentViewModel, *_nethttp.Response, error) {
-	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  []OrdersShipmentViewModel
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrdersApiService.OrderOrderIdShipmentGet")
-	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/order/{orderId}/shipment"
-	localVarPath = strings.Replace(localVarPath, "{"+"orderId"+"}", _neturl.PathEscape(parameterToString(r.orderId, "")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.shipbobChannelId != nil {
-		localVarHeaderParams["shipbob_channel_id"] = parameterToString(*r.shipbobChannelId, "")
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v map[string][]string
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiOrderOrderIdShipmentShipmentIdCancelPostRequest struct {
-	ctx _context.Context
-	ApiService *OrdersApiService
-	shipmentId int32
-	orderId string
-	shipbobChannelId *int32
-}
-
-func (r ApiOrderOrderIdShipmentShipmentIdCancelPostRequest) ShipbobChannelId(shipbobChannelId int32) ApiOrderOrderIdShipmentShipmentIdCancelPostRequest {
-	r.shipbobChannelId = &shipbobChannelId
-	return r
-}
-
-func (r ApiOrderOrderIdShipmentShipmentIdCancelPostRequest) Execute() (OrdersShipmentViewModel, *_nethttp.Response, error) {
-	return r.ApiService.OrderOrderIdShipmentShipmentIdCancelPostExecute(r)
-}
-
-/*
- * OrderOrderIdShipmentShipmentIdCancelPost Cancel one Shipment by Order Id and Shipment Id
+ * GetShipment Get one Shipment by Shipment Id
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param shipmentId The shipment id to get
- * @param orderId
- * @return ApiOrderOrderIdShipmentShipmentIdCancelPostRequest
+ * @return ApiGetShipmentRequest
  */
-func (a *OrdersApiService) OrderOrderIdShipmentShipmentIdCancelPost(ctx _context.Context, shipmentId int32, orderId string) ApiOrderOrderIdShipmentShipmentIdCancelPostRequest {
-	return ApiOrderOrderIdShipmentShipmentIdCancelPostRequest{
+func (a *OrdersApiService) GetShipment(ctx _context.Context, shipmentId int32) ApiGetShipmentRequest {
+	return ApiGetShipmentRequest{
 		ApiService: a,
-		ctx: ctx,
-		shipmentId: shipmentId,
-		orderId: orderId,
-	}
-}
-
-/*
- * Execute executes the request
- * @return OrdersShipmentViewModel
- */
-func (a *OrdersApiService) OrderOrderIdShipmentShipmentIdCancelPostExecute(r ApiOrderOrderIdShipmentShipmentIdCancelPostRequest) (OrdersShipmentViewModel, *_nethttp.Response, error) {
-	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  OrdersShipmentViewModel
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrdersApiService.OrderOrderIdShipmentShipmentIdCancelPost")
-	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/order/{orderId}/shipment/{shipmentId}/cancel"
-	localVarPath = strings.Replace(localVarPath, "{"+"shipmentId"+"}", _neturl.PathEscape(parameterToString(r.shipmentId, "")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"orderId"+"}", _neturl.PathEscape(parameterToString(r.orderId, "")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.shipbobChannelId != nil {
-		localVarHeaderParams["shipbob_channel_id"] = parameterToString(*r.shipbobChannelId, "")
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v map[string][]string
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 422 {
-			var v map[string][]string
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 500 {
-			var v map[string][]string
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiOrderOrderIdShipmentShipmentIdGetRequest struct {
-	ctx _context.Context
-	ApiService *OrdersApiService
-	orderId int32
-	shipmentId int32
-	shipbobChannelId *int32
-}
-
-func (r ApiOrderOrderIdShipmentShipmentIdGetRequest) ShipbobChannelId(shipbobChannelId int32) ApiOrderOrderIdShipmentShipmentIdGetRequest {
-	r.shipbobChannelId = &shipbobChannelId
-	return r
-}
-
-func (r ApiOrderOrderIdShipmentShipmentIdGetRequest) Execute() (OrdersShipmentViewModel, *_nethttp.Response, error) {
-	return r.ApiService.OrderOrderIdShipmentShipmentIdGetExecute(r)
-}
-
-/*
- * OrderOrderIdShipmentShipmentIdGet Get one Shipment by Order Id and Shipment Id
- * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param orderId The order id to get the shipment for
- * @param shipmentId The shipment id to get
- * @return ApiOrderOrderIdShipmentShipmentIdGetRequest
- */
-func (a *OrdersApiService) OrderOrderIdShipmentShipmentIdGet(ctx _context.Context, orderId int32, shipmentId int32) ApiOrderOrderIdShipmentShipmentIdGetRequest {
-	return ApiOrderOrderIdShipmentShipmentIdGetRequest{
-		ApiService: a,
-		ctx: ctx,
-		orderId: orderId,
+		ctx:        ctx,
 		shipmentId: shipmentId,
 	}
 }
 
 /*
  * Execute executes the request
- * @return OrdersShipmentViewModel
+ * @return Shipment
  */
-func (a *OrdersApiService) OrderOrderIdShipmentShipmentIdGetExecute(r ApiOrderOrderIdShipmentShipmentIdGetRequest) (OrdersShipmentViewModel, *_nethttp.Response, error) {
+func (a *OrdersApiService) GetShipmentExecute(r ApiGetShipmentRequest) (Shipment, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  OrdersShipmentViewModel
+		localVarReturnValue  Shipment
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrdersApiService.OrderOrderIdShipmentShipmentIdGet")
-	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/order/{orderId}/shipment/{shipmentId}"
-	localVarPath = strings.Replace(localVarPath, "{"+"orderId"+"}", _neturl.PathEscape(parameterToString(r.orderId, "")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"shipmentId"+"}", _neturl.PathEscape(parameterToString(r.shipmentId, "")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.shipbobChannelId != nil {
-		localVarHeaderParams["shipbob_channel_id"] = parameterToString(*r.shipbobChannelId, "")
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v map[string][]string
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiOrderOrderIdShipmentShipmentIdLogsGetRequest struct {
-	ctx _context.Context
-	ApiService *OrdersApiService
-	orderId int32
-	shipmentId int32
-	shipbobChannelId *int32
-}
-
-func (r ApiOrderOrderIdShipmentShipmentIdLogsGetRequest) ShipbobChannelId(shipbobChannelId int32) ApiOrderOrderIdShipmentShipmentIdLogsGetRequest {
-	r.shipbobChannelId = &shipbobChannelId
-	return r
-}
-
-func (r ApiOrderOrderIdShipmentShipmentIdLogsGetRequest) Execute() ([]OrdersShipmentLogViewModel, *_nethttp.Response, error) {
-	return r.ApiService.OrderOrderIdShipmentShipmentIdLogsGetExecute(r)
-}
-
-/*
- * OrderOrderIdShipmentShipmentIdLogsGet Get logs for one Shipment by Order Id and Shipment Id
- * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param orderId The order id to get the shipment for
- * @param shipmentId The shipment id to get
- * @return ApiOrderOrderIdShipmentShipmentIdLogsGetRequest
- */
-func (a *OrdersApiService) OrderOrderIdShipmentShipmentIdLogsGet(ctx _context.Context, orderId int32, shipmentId int32) ApiOrderOrderIdShipmentShipmentIdLogsGetRequest {
-	return ApiOrderOrderIdShipmentShipmentIdLogsGetRequest{
-		ApiService: a,
-		ctx: ctx,
-		orderId: orderId,
-		shipmentId: shipmentId,
-	}
-}
-
-/*
- * Execute executes the request
- * @return []OrdersShipmentLogViewModel
- */
-func (a *OrdersApiService) OrderOrderIdShipmentShipmentIdLogsGetExecute(r ApiOrderOrderIdShipmentShipmentIdLogsGetRequest) ([]OrdersShipmentLogViewModel, *_nethttp.Response, error) {
-	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  []OrdersShipmentLogViewModel
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrdersApiService.OrderOrderIdShipmentShipmentIdLogsGet")
-	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/order/{orderId}/shipment/{shipmentId}/logs"
-	localVarPath = strings.Replace(localVarPath, "{"+"orderId"+"}", _neturl.PathEscape(parameterToString(r.orderId, "")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"shipmentId"+"}", _neturl.PathEscape(parameterToString(r.shipmentId, "")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.shipbobChannelId != nil {
-		localVarHeaderParams["shipbob_channel_id"] = parameterToString(*r.shipbobChannelId, "")
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v map[string][]string
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiOrderOrderIdShipmentShipmentIdTimelineGetRequest struct {
-	ctx _context.Context
-	ApiService *OrdersApiService
-	orderId int32
-	shipmentId int32
-	shipbobChannelId *int32
-}
-
-func (r ApiOrderOrderIdShipmentShipmentIdTimelineGetRequest) ShipbobChannelId(shipbobChannelId int32) ApiOrderOrderIdShipmentShipmentIdTimelineGetRequest {
-	r.shipbobChannelId = &shipbobChannelId
-	return r
-}
-
-func (r ApiOrderOrderIdShipmentShipmentIdTimelineGetRequest) Execute() ([]OrdersShipmentLogViewModel, *_nethttp.Response, error) {
-	return r.ApiService.OrderOrderIdShipmentShipmentIdTimelineGetExecute(r)
-}
-
-/*
- * OrderOrderIdShipmentShipmentIdTimelineGet Get one Shipment's status timeline by Order Id and Shipment Id
- * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param orderId The order id to get the shipment for
- * @param shipmentId The shipment id to get
- * @return ApiOrderOrderIdShipmentShipmentIdTimelineGetRequest
- */
-func (a *OrdersApiService) OrderOrderIdShipmentShipmentIdTimelineGet(ctx _context.Context, orderId int32, shipmentId int32) ApiOrderOrderIdShipmentShipmentIdTimelineGetRequest {
-	return ApiOrderOrderIdShipmentShipmentIdTimelineGetRequest{
-		ApiService: a,
-		ctx: ctx,
-		orderId: orderId,
-		shipmentId: shipmentId,
-	}
-}
-
-/*
- * Execute executes the request
- * @return []OrdersShipmentLogViewModel
- */
-func (a *OrdersApiService) OrderOrderIdShipmentShipmentIdTimelineGetExecute(r ApiOrderOrderIdShipmentShipmentIdTimelineGetRequest) ([]OrdersShipmentLogViewModel, *_nethttp.Response, error) {
-	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  []OrdersShipmentLogViewModel
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrdersApiService.OrderOrderIdShipmentShipmentIdTimelineGet")
-	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/order/{orderId}/shipment/{shipmentId}/timeline"
-	localVarPath = strings.Replace(localVarPath, "{"+"orderId"+"}", _neturl.PathEscape(parameterToString(r.orderId, "")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"shipmentId"+"}", _neturl.PathEscape(parameterToString(r.shipmentId, "")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.shipbobChannelId != nil {
-		localVarHeaderParams["shipbob_channel_id"] = parameterToString(*r.shipbobChannelId, "")
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v map[string][]string
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiOrderPostRequest struct {
-	ctx _context.Context
-	ApiService *OrdersApiService
-	shipbobChannelId *int32
-	ordersCreateOrderModel *OrdersCreateOrderModel
-}
-
-func (r ApiOrderPostRequest) ShipbobChannelId(shipbobChannelId int32) ApiOrderPostRequest {
-	r.shipbobChannelId = &shipbobChannelId
-	return r
-}
-func (r ApiOrderPostRequest) OrdersCreateOrderModel(ordersCreateOrderModel OrdersCreateOrderModel) ApiOrderPostRequest {
-	r.ordersCreateOrderModel = &ordersCreateOrderModel
-	return r
-}
-
-func (r ApiOrderPostRequest) Execute() (OrdersOrderViewModel, *_nethttp.Response, error) {
-	return r.ApiService.OrderPostExecute(r)
-}
-
-/*
- * OrderPost Create Order
- * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @return ApiOrderPostRequest
- */
-func (a *OrdersApiService) OrderPost(ctx _context.Context) ApiOrderPostRequest {
-	return ApiOrderPostRequest{
-		ApiService: a,
-		ctx: ctx,
-	}
-}
-
-/*
- * Execute executes the request
- * @return OrdersOrderViewModel
- */
-func (a *OrdersApiService) OrderPostExecute(r ApiOrderPostRequest) (OrdersOrderViewModel, *_nethttp.Response, error) {
-	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  OrdersOrderViewModel
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrdersApiService.OrderPost")
-	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/order"
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
-	if r.shipbobChannelId == nil {
-		return localVarReturnValue, nil, reportError("shipbobChannelId is required and must be specified")
-	}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/_*+json", "application/json", "application/json-patch+json", "text/json"}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	localVarHeaderParams["shipbob_channel_id"] = parameterToString(*r.shipbobChannelId, "")
-	// body params
-	localVarPostBody = r.ordersCreateOrderModel
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v map[string][]string
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 422 {
-			var v map[string][]string
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiShipmentCancelbulkPostRequest struct {
-	ctx _context.Context
-	ApiService *OrdersApiService
-	shipbobChannelId *int32
-	ordersCancelShipmentsModel *OrdersCancelShipmentsModel
-}
-
-func (r ApiShipmentCancelbulkPostRequest) ShipbobChannelId(shipbobChannelId int32) ApiShipmentCancelbulkPostRequest {
-	r.shipbobChannelId = &shipbobChannelId
-	return r
-}
-func (r ApiShipmentCancelbulkPostRequest) OrdersCancelShipmentsModel(ordersCancelShipmentsModel OrdersCancelShipmentsModel) ApiShipmentCancelbulkPostRequest {
-	r.ordersCancelShipmentsModel = &ordersCancelShipmentsModel
-	return r
-}
-
-func (r ApiShipmentCancelbulkPostRequest) Execute() (OrdersCanceledShipmentsViewModel, *_nethttp.Response, error) {
-	return r.ApiService.ShipmentCancelbulkPostExecute(r)
-}
-
-/*
- * ShipmentCancelbulkPost Cancel multiple Shipments by Shipment Id
- * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @return ApiShipmentCancelbulkPostRequest
- */
-func (a *OrdersApiService) ShipmentCancelbulkPost(ctx _context.Context) ApiShipmentCancelbulkPostRequest {
-	return ApiShipmentCancelbulkPostRequest{
-		ApiService: a,
-		ctx: ctx,
-	}
-}
-
-/*
- * Execute executes the request
- * @return OrdersCanceledShipmentsViewModel
- */
-func (a *OrdersApiService) ShipmentCancelbulkPostExecute(r ApiShipmentCancelbulkPostRequest) (OrdersCanceledShipmentsViewModel, *_nethttp.Response, error) {
-	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  OrdersCanceledShipmentsViewModel
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrdersApiService.ShipmentCancelbulkPost")
-	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/shipment/cancelbulk"
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
-	if r.shipbobChannelId == nil {
-		return localVarReturnValue, nil, reportError("shipbobChannelId is required and must be specified")
-	}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/_*+json", "application/json", "application/json-patch+json", "text/json"}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	localVarHeaderParams["shipbob_channel_id"] = parameterToString(*r.shipbobChannelId, "")
-	// body params
-	localVarPostBody = r.ordersCancelShipmentsModel
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 422 {
-			var v map[string][]string
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 500 {
-			var v map[string][]string
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiShipmentShipmentIdCancelPostRequest struct {
-	ctx _context.Context
-	ApiService *OrdersApiService
-	shipmentId int32
-	shipbobChannelId *int32
-}
-
-func (r ApiShipmentShipmentIdCancelPostRequest) ShipbobChannelId(shipbobChannelId int32) ApiShipmentShipmentIdCancelPostRequest {
-	r.shipbobChannelId = &shipbobChannelId
-	return r
-}
-
-func (r ApiShipmentShipmentIdCancelPostRequest) Execute() (OrdersShipmentViewModel, *_nethttp.Response, error) {
-	return r.ApiService.ShipmentShipmentIdCancelPostExecute(r)
-}
-
-/*
- * ShipmentShipmentIdCancelPost Cancel one Shipment by Shipment Id
- * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param shipmentId The shipment id to get
- * @return ApiShipmentShipmentIdCancelPostRequest
- */
-func (a *OrdersApiService) ShipmentShipmentIdCancelPost(ctx _context.Context, shipmentId int32) ApiShipmentShipmentIdCancelPostRequest {
-	return ApiShipmentShipmentIdCancelPostRequest{
-		ApiService: a,
-		ctx: ctx,
-		shipmentId: shipmentId,
-	}
-}
-
-/*
- * Execute executes the request
- * @return OrdersShipmentViewModel
- */
-func (a *OrdersApiService) ShipmentShipmentIdCancelPostExecute(r ApiShipmentShipmentIdCancelPostRequest) (OrdersShipmentViewModel, *_nethttp.Response, error) {
-	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  OrdersShipmentViewModel
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrdersApiService.ShipmentShipmentIdCancelPost")
-	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/shipment/{shipmentId}/cancel"
-	localVarPath = strings.Replace(localVarPath, "{"+"shipmentId"+"}", _neturl.PathEscape(parameterToString(r.shipmentId, "")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.shipbobChannelId != nil {
-		localVarHeaderParams["shipbob_channel_id"] = parameterToString(*r.shipbobChannelId, "")
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v map[string][]string
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 422 {
-			var v map[string][]string
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 500 {
-			var v map[string][]string
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiShipmentShipmentIdGetRequest struct {
-	ctx _context.Context
-	ApiService *OrdersApiService
-	shipmentId int32
-	shipbobChannelId *int32
-}
-
-func (r ApiShipmentShipmentIdGetRequest) ShipbobChannelId(shipbobChannelId int32) ApiShipmentShipmentIdGetRequest {
-	r.shipbobChannelId = &shipbobChannelId
-	return r
-}
-
-func (r ApiShipmentShipmentIdGetRequest) Execute() (OrdersShipmentViewModel, *_nethttp.Response, error) {
-	return r.ApiService.ShipmentShipmentIdGetExecute(r)
-}
-
-/*
- * ShipmentShipmentIdGet Get one Shipment by Shipment Id
- * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param shipmentId The shipment id to get
- * @return ApiShipmentShipmentIdGetRequest
- */
-func (a *OrdersApiService) ShipmentShipmentIdGet(ctx _context.Context, shipmentId int32) ApiShipmentShipmentIdGetRequest {
-	return ApiShipmentShipmentIdGetRequest{
-		ApiService: a,
-		ctx: ctx,
-		shipmentId: shipmentId,
-	}
-}
-
-/*
- * Execute executes the request
- * @return OrdersShipmentViewModel
- */
-func (a *OrdersApiService) ShipmentShipmentIdGetExecute(r ApiShipmentShipmentIdGetRequest) (OrdersShipmentViewModel, *_nethttp.Response, error) {
-	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  OrdersShipmentViewModel
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrdersApiService.ShipmentShipmentIdGet")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrdersApiService.GetShipment")
 	if err != nil {
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
@@ -1835,51 +1835,51 @@ func (a *OrdersApiService) ShipmentShipmentIdGetExecute(r ApiShipmentShipmentIdG
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiShipmentShipmentIdLogsGetRequest struct {
-	ctx _context.Context
-	ApiService *OrdersApiService
-	shipmentId int32
+type ApiGetShipmentLogsRequest struct {
+	ctx              _context.Context
+	ApiService       *OrdersApiService
+	shipmentId       int32
 	shipbobChannelId *int32
 }
 
-func (r ApiShipmentShipmentIdLogsGetRequest) ShipbobChannelId(shipbobChannelId int32) ApiShipmentShipmentIdLogsGetRequest {
+func (r ApiGetShipmentLogsRequest) ShipbobChannelId(shipbobChannelId int32) ApiGetShipmentLogsRequest {
 	r.shipbobChannelId = &shipbobChannelId
 	return r
 }
 
-func (r ApiShipmentShipmentIdLogsGetRequest) Execute() ([]OrdersShipmentLogViewModel, *_nethttp.Response, error) {
-	return r.ApiService.ShipmentShipmentIdLogsGetExecute(r)
+func (r ApiGetShipmentLogsRequest) Execute() ([]ShipmentLog, *_nethttp.Response, error) {
+	return r.ApiService.GetShipmentLogsExecute(r)
 }
 
 /*
- * ShipmentShipmentIdLogsGet Get logs for one Shipment by Shipment Id
+ * GetShipmentLogs Get logs for one Shipment by Shipment Id
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param shipmentId The shipment id to get
- * @return ApiShipmentShipmentIdLogsGetRequest
+ * @return ApiGetShipmentLogsRequest
  */
-func (a *OrdersApiService) ShipmentShipmentIdLogsGet(ctx _context.Context, shipmentId int32) ApiShipmentShipmentIdLogsGetRequest {
-	return ApiShipmentShipmentIdLogsGetRequest{
+func (a *OrdersApiService) GetShipmentLogs(ctx _context.Context, shipmentId int32) ApiGetShipmentLogsRequest {
+	return ApiGetShipmentLogsRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 		shipmentId: shipmentId,
 	}
 }
 
 /*
  * Execute executes the request
- * @return []OrdersShipmentLogViewModel
+ * @return []ShipmentLog
  */
-func (a *OrdersApiService) ShipmentShipmentIdLogsGetExecute(r ApiShipmentShipmentIdLogsGetRequest) ([]OrdersShipmentLogViewModel, *_nethttp.Response, error) {
+func (a *OrdersApiService) GetShipmentLogsExecute(r ApiGetShipmentLogsRequest) ([]ShipmentLog, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  []OrdersShipmentLogViewModel
+		localVarReturnValue  []ShipmentLog
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrdersApiService.ShipmentShipmentIdLogsGet")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrdersApiService.GetShipmentLogs")
 	if err != nil {
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
@@ -1958,51 +1958,51 @@ func (a *OrdersApiService) ShipmentShipmentIdLogsGetExecute(r ApiShipmentShipmen
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiShipmentShipmentIdTimelineGetRequest struct {
-	ctx _context.Context
-	ApiService *OrdersApiService
-	shipmentId int32
+type ApiGetShipmentTimelineRequest struct {
+	ctx              _context.Context
+	ApiService       *OrdersApiService
+	shipmentId       int32
 	shipbobChannelId *int32
 }
 
-func (r ApiShipmentShipmentIdTimelineGetRequest) ShipbobChannelId(shipbobChannelId int32) ApiShipmentShipmentIdTimelineGetRequest {
+func (r ApiGetShipmentTimelineRequest) ShipbobChannelId(shipbobChannelId int32) ApiGetShipmentTimelineRequest {
 	r.shipbobChannelId = &shipbobChannelId
 	return r
 }
 
-func (r ApiShipmentShipmentIdTimelineGetRequest) Execute() ([]OrdersShipmentLogViewModel, *_nethttp.Response, error) {
-	return r.ApiService.ShipmentShipmentIdTimelineGetExecute(r)
+func (r ApiGetShipmentTimelineRequest) Execute() ([]ShipmentLog, *_nethttp.Response, error) {
+	return r.ApiService.GetShipmentTimelineExecute(r)
 }
 
 /*
- * ShipmentShipmentIdTimelineGet Get one Shipment's status timeline by Shipment Id
+ * GetShipmentTimeline Get one Shipment's status timeline by Shipment Id
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param shipmentId The shipment id to get
- * @return ApiShipmentShipmentIdTimelineGetRequest
+ * @return ApiGetShipmentTimelineRequest
  */
-func (a *OrdersApiService) ShipmentShipmentIdTimelineGet(ctx _context.Context, shipmentId int32) ApiShipmentShipmentIdTimelineGetRequest {
-	return ApiShipmentShipmentIdTimelineGetRequest{
+func (a *OrdersApiService) GetShipmentTimeline(ctx _context.Context, shipmentId int32) ApiGetShipmentTimelineRequest {
+	return ApiGetShipmentTimelineRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 		shipmentId: shipmentId,
 	}
 }
 
 /*
  * Execute executes the request
- * @return []OrdersShipmentLogViewModel
+ * @return []ShipmentLog
  */
-func (a *OrdersApiService) ShipmentShipmentIdTimelineGetExecute(r ApiShipmentShipmentIdTimelineGetRequest) ([]OrdersShipmentLogViewModel, *_nethttp.Response, error) {
+func (a *OrdersApiService) GetShipmentTimelineExecute(r ApiGetShipmentTimelineRequest) ([]ShipmentLog, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  []OrdersShipmentLogViewModel
+		localVarReturnValue  []ShipmentLog
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrdersApiService.ShipmentShipmentIdTimelineGet")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrdersApiService.GetShipmentTimeline")
 	if err != nil {
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
@@ -2081,54 +2081,54 @@ func (a *OrdersApiService) ShipmentShipmentIdTimelineGetExecute(r ApiShipmentShi
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiShippingmethodGetRequest struct {
-	ctx _context.Context
+type ApiGetShippingMethodCollectionRequest struct {
+	ctx        _context.Context
 	ApiService *OrdersApiService
-	page *int32
-	limit *int32
+	page       *int32
+	limit      *int32
 }
 
-func (r ApiShippingmethodGetRequest) Page(page int32) ApiShippingmethodGetRequest {
+func (r ApiGetShippingMethodCollectionRequest) Page(page int32) ApiGetShippingMethodCollectionRequest {
 	r.page = &page
 	return r
 }
-func (r ApiShippingmethodGetRequest) Limit(limit int32) ApiShippingmethodGetRequest {
+func (r ApiGetShippingMethodCollectionRequest) Limit(limit int32) ApiGetShippingMethodCollectionRequest {
 	r.limit = &limit
 	return r
 }
 
-func (r ApiShippingmethodGetRequest) Execute() ([]OrdersShipMethodDetailViewModel, *_nethttp.Response, error) {
-	return r.ApiService.ShippingmethodGetExecute(r)
+func (r ApiGetShippingMethodCollectionRequest) Execute() ([]ShipMethodDetail, *_nethttp.Response, error) {
+	return r.ApiService.GetShippingMethodCollectionExecute(r)
 }
 
 /*
- * ShippingmethodGet Get shipping methods
+ * GetShippingMethodCollection Get shipping methods
  * Get all merchants shipping methods
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @return ApiShippingmethodGetRequest
+ * @return ApiGetShippingMethodCollectionRequest
  */
-func (a *OrdersApiService) ShippingmethodGet(ctx _context.Context) ApiShippingmethodGetRequest {
-	return ApiShippingmethodGetRequest{
+func (a *OrdersApiService) GetShippingMethodCollection(ctx _context.Context) ApiGetShippingMethodCollectionRequest {
+	return ApiGetShippingMethodCollectionRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 /*
  * Execute executes the request
- * @return []OrdersShipMethodDetailViewModel
+ * @return []ShipMethodDetail
  */
-func (a *OrdersApiService) ShippingmethodGetExecute(r ApiShippingmethodGetRequest) ([]OrdersShipMethodDetailViewModel, *_nethttp.Response, error) {
+func (a *OrdersApiService) GetShippingMethodCollectionExecute(r ApiGetShippingMethodCollectionRequest) ([]ShipMethodDetail, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  []OrdersShipMethodDetailViewModel
+		localVarReturnValue  []ShipMethodDetail
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrdersApiService.ShippingmethodGet")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrdersApiService.GetShippingMethodCollection")
 	if err != nil {
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}

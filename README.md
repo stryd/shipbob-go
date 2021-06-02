@@ -78,133 +78,123 @@ All URIs are relative to *https://api.shipbob.com/1.0*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*ChannelsApi* | [**ChannelGet**](docs/ChannelsApi.md#channelget) | **Get** /channel | Get user-authorized channel info
-*InventoryApi* | [**InventoryGet**](docs/InventoryApi.md#inventoryget) | **Get** /inventory | List inventory items
-*InventoryApi* | [**InventoryInventoryIdGet**](docs/InventoryApi.md#inventoryinventoryidget) | **Get** /inventory/{inventoryId} | Get an inventory item
-*InventoryApi* | [**ProductProductIdInventoryGet**](docs/InventoryApi.md#productproductidinventoryget) | **Get** /product/{productId}/inventory | Get a list of inventory items by product id
-*LocationsApi* | [**LocationGet**](docs/LocationsApi.md#locationget) | **Get** /location | Get locations
-*OrdersApi* | [**OrderEstimatePost**](docs/OrdersApi.md#orderestimatepost) | **Post** /order/estimate | Estimate Fulfillment Cost For Order
-*OrdersApi* | [**OrderGet**](docs/OrdersApi.md#orderget) | **Get** /order | Get Orders
-*OrdersApi* | [**OrderOrderIdCancelPost**](docs/OrdersApi.md#orderorderidcancelpost) | **Post** /order/{orderId}/cancel | Cancel single Order by Order ID
-*OrdersApi* | [**OrderOrderIdGet**](docs/OrdersApi.md#orderorderidget) | **Get** /order/{orderId} | Get Order
-*OrdersApi* | [**OrderOrderIdShipmentGet**](docs/OrdersApi.md#orderorderidshipmentget) | **Get** /order/{orderId}/shipment | Get all Shipments for Order
-*OrdersApi* | [**OrderOrderIdShipmentShipmentIdCancelPost**](docs/OrdersApi.md#orderorderidshipmentshipmentidcancelpost) | **Post** /order/{orderId}/shipment/{shipmentId}/cancel | Cancel one Shipment by Order Id and Shipment Id
-*OrdersApi* | [**OrderOrderIdShipmentShipmentIdGet**](docs/OrdersApi.md#orderorderidshipmentshipmentidget) | **Get** /order/{orderId}/shipment/{shipmentId} | Get one Shipment by Order Id and Shipment Id
-*OrdersApi* | [**OrderOrderIdShipmentShipmentIdLogsGet**](docs/OrdersApi.md#orderorderidshipmentshipmentidlogsget) | **Get** /order/{orderId}/shipment/{shipmentId}/logs | Get logs for one Shipment by Order Id and Shipment Id
-*OrdersApi* | [**OrderOrderIdShipmentShipmentIdTimelineGet**](docs/OrdersApi.md#orderorderidshipmentshipmentidtimelineget) | **Get** /order/{orderId}/shipment/{shipmentId}/timeline | Get one Shipment&#39;s status timeline by Order Id and Shipment Id
-*OrdersApi* | [**OrderPost**](docs/OrdersApi.md#orderpost) | **Post** /order | Create Order
-*OrdersApi* | [**ShipmentCancelbulkPost**](docs/OrdersApi.md#shipmentcancelbulkpost) | **Post** /shipment/cancelbulk | Cancel multiple Shipments by Shipment Id
-*OrdersApi* | [**ShipmentShipmentIdCancelPost**](docs/OrdersApi.md#shipmentshipmentidcancelpost) | **Post** /shipment/{shipmentId}/cancel | Cancel one Shipment by Shipment Id
-*OrdersApi* | [**ShipmentShipmentIdGet**](docs/OrdersApi.md#shipmentshipmentidget) | **Get** /shipment/{shipmentId} | Get one Shipment by Shipment Id
-*OrdersApi* | [**ShipmentShipmentIdLogsGet**](docs/OrdersApi.md#shipmentshipmentidlogsget) | **Get** /shipment/{shipmentId}/logs | Get logs for one Shipment by Shipment Id
-*OrdersApi* | [**ShipmentShipmentIdTimelineGet**](docs/OrdersApi.md#shipmentshipmentidtimelineget) | **Get** /shipment/{shipmentId}/timeline | Get one Shipment&#39;s status timeline by Shipment Id
-*OrdersApi* | [**ShippingmethodGet**](docs/OrdersApi.md#shippingmethodget) | **Get** /shippingmethod | Get shipping methods
-*ProductsApi* | [**ProductBatchPost**](docs/ProductsApi.md#productbatchpost) | **Post** /product/batch | Add multiple products to the store
-*ProductsApi* | [**ProductGet**](docs/ProductsApi.md#productget) | **Get** /product | Get multiple products
-*ProductsApi* | [**ProductPost**](docs/ProductsApi.md#productpost) | **Post** /product | Add a single product to the store
-*ProductsApi* | [**ProductProductIdGet**](docs/ProductsApi.md#productproductidget) | **Get** /product/{productId} | Get a single product
-*ProductsApi* | [**ProductProductIdPut**](docs/ProductsApi.md#productproductidput) | **Put** /product/{productId} | Modify a single product
-*ReceivingApi* | [**FulfillmentCenterGet**](docs/ReceivingApi.md#fulfillmentcenterget) | **Get** /fulfillmentCenter | Get Fulfillment Centers
-*ReceivingApi* | [**ReceivingIdCancelPost**](docs/ReceivingApi.md#receivingidcancelpost) | **Post** /receiving/{id}/cancel | Cancel Warehouse Receiving Order
-*ReceivingApi* | [**ReceivingIdGet**](docs/ReceivingApi.md#receivingidget) | **Get** /receiving/{id} | Get Warehouse Receiving Order
-*ReceivingApi* | [**ReceivingIdLabelsGet**](docs/ReceivingApi.md#receivingidlabelsget) | **Get** /receiving/{id}/labels | Get Warehouse Receiving Order Box Labels
-*ReceivingApi* | [**ReceivingPost**](docs/ReceivingApi.md#receivingpost) | **Post** /receiving | Create Warehouse Receiving Order
-*ReturnsApi* | [**ReturnGet**](docs/ReturnsApi.md#returnget) | **Get** /return | Get Return Orders
-*ReturnsApi* | [**ReturnIdCancelPost**](docs/ReturnsApi.md#returnidcancelpost) | **Post** /return/{id}/cancel | Cancel Return Order
-*ReturnsApi* | [**ReturnIdGet**](docs/ReturnsApi.md#returnidget) | **Get** /return/{id} | Get Return Order
-*ReturnsApi* | [**ReturnIdPut**](docs/ReturnsApi.md#returnidput) | **Put** /return/{id} | Modify Return Order
-*ReturnsApi* | [**ReturnIdStatushistoryGet**](docs/ReturnsApi.md#returnidstatushistoryget) | **Get** /return/{id}/statushistory | Get One Return&#39;s status history
-*ReturnsApi* | [**ReturnPost**](docs/ReturnsApi.md#returnpost) | **Post** /return | Create Return Order
-*WebhooksApi* | [**WebhookGet**](docs/WebhooksApi.md#webhookget) | **Get** /webhook | Get Webhooks
-*WebhooksApi* | [**WebhookIdDelete**](docs/WebhooksApi.md#webhookiddelete) | **Delete** /webhook/{id} | Delete an existing webhook subscription
-*WebhooksApi* | [**WebhookPost**](docs/WebhooksApi.md#webhookpost) | **Post** /webhook | Create a new webhook subscription
+*ChannelsApi* | [**GetChannels**](docs/ChannelsApi.md#getchannels) | **Get** /channel | Get user-authorized channel info
+*InventoryApi* | [**GetInventories**](docs/InventoryApi.md#getinventories) | **Get** /inventory | List inventory items
+*InventoryApi* | [**GetInventory**](docs/InventoryApi.md#getinventory) | **Get** /inventory/{inventoryId} | Get an inventory item
+*InventoryApi* | [**GetProductInventory**](docs/InventoryApi.md#getproductinventory) | **Get** /product/{productId}/inventory | Get a list of inventory items by product id
+*LocationsApi* | [**GetLocations**](docs/LocationsApi.md#getlocations) | **Get** /location | Get locations
+*OrdersApi* | [**CancelOrder**](docs/OrdersApi.md#cancelorder) | **Post** /order/{orderId}/cancel | Cancel single Order by Order ID
+*OrdersApi* | [**CancelOrderShipment**](docs/OrdersApi.md#cancelordershipment) | **Post** /order/{orderId}/shipment/{shipmentId}/cancel | Cancel one Shipment by Order Id and Shipment Id
+*OrdersApi* | [**CancelShipment**](docs/OrdersApi.md#cancelshipment) | **Post** /shipment/{shipmentId}/cancel | Cancel one Shipment by Shipment Id
+*OrdersApi* | [**CancelShipmentBulk**](docs/OrdersApi.md#cancelshipmentbulk) | **Post** /shipment/cancelbulk | Cancel multiple Shipments by Shipment Id
+*OrdersApi* | [**CreateOrder**](docs/OrdersApi.md#createorder) | **Post** /order | Create Order
+*OrdersApi* | [**CreateOrderEstimate**](docs/OrdersApi.md#createorderestimate) | **Post** /order/estimate | Estimate Fulfillment Cost For Order
+*OrdersApi* | [**GetOrder**](docs/OrdersApi.md#getorder) | **Get** /order/{orderId} | Get Order
+*OrdersApi* | [**GetOrderShipment**](docs/OrdersApi.md#getordershipment) | **Get** /order/{orderId}/shipment/{shipmentId} | Get one Shipment by Order Id and Shipment Id
+*OrdersApi* | [**GetOrderShipmentLogs**](docs/OrdersApi.md#getordershipmentlogs) | **Get** /order/{orderId}/shipment/{shipmentId}/logs | Get logs for one Shipment by Order Id and Shipment Id
+*OrdersApi* | [**GetOrderShipmentTimeline**](docs/OrdersApi.md#getordershipmenttimeline) | **Get** /order/{orderId}/shipment/{shipmentId}/timeline | Get one Shipment&#39;s status timeline by Order Id and Shipment Id
+*OrdersApi* | [**GetOrderShipments**](docs/OrdersApi.md#getordershipments) | **Get** /order/{orderId}/shipment | Get all Shipments for Order
+*OrdersApi* | [**GetOrders**](docs/OrdersApi.md#getorders) | **Get** /order | Get Orders
+*OrdersApi* | [**GetShipment**](docs/OrdersApi.md#getshipment) | **Get** /shipment/{shipmentId} | Get one Shipment by Shipment Id
+*OrdersApi* | [**GetShipmentLogs**](docs/OrdersApi.md#getshipmentlogs) | **Get** /shipment/{shipmentId}/logs | Get logs for one Shipment by Shipment Id
+*OrdersApi* | [**GetShipmentTimeline**](docs/OrdersApi.md#getshipmenttimeline) | **Get** /shipment/{shipmentId}/timeline | Get one Shipment&#39;s status timeline by Shipment Id
+*OrdersApi* | [**GetShippingMethodCollection**](docs/OrdersApi.md#getshippingmethodcollection) | **Get** /shippingmethod | Get shipping methods
+*ProductsApi* | [**CreateProduct**](docs/ProductsApi.md#createproduct) | **Post** /product | Add a single product to the store
+*ProductsApi* | [**CreateProductBatch**](docs/ProductsApi.md#createproductbatch) | **Post** /product/batch | Add multiple products to the store
+*ProductsApi* | [**GetProduct**](docs/ProductsApi.md#getproduct) | **Get** /product/{productId} | Get a single product
+*ProductsApi* | [**GetProducts**](docs/ProductsApi.md#getproducts) | **Get** /product | Get multiple products
+*ProductsApi* | [**UpdateProduct**](docs/ProductsApi.md#updateproduct) | **Put** /product/{productId} | Modify a single product
+*ReceivingApi* | [**CancelReceivingOrder**](docs/ReceivingApi.md#cancelreceivingorder) | **Post** /receiving/{id}/cancel | Cancel Warehouse Receiving Order
+*ReceivingApi* | [**CreateReceivingOrder**](docs/ReceivingApi.md#createreceivingorder) | **Post** /receiving | Create Warehouse Receiving Order
+*ReceivingApi* | [**GetFulfillmentCenters**](docs/ReceivingApi.md#getfulfillmentcenters) | **Get** /fulfillmentCenter | Get Fulfillment Centers
+*ReceivingApi* | [**GetReceivingOrder**](docs/ReceivingApi.md#getreceivingorder) | **Get** /receiving/{id} | Get Warehouse Receiving Order
+*ReceivingApi* | [**GetReceivingOrderLabels**](docs/ReceivingApi.md#getreceivingorderlabels) | **Get** /receiving/{id}/labels | Get Warehouse Receiving Order Box Labels
+*ReturnsApi* | [**CancelReturn**](docs/ReturnsApi.md#cancelreturn) | **Post** /return/{id}/cancel | Cancel Return Order
+*ReturnsApi* | [**CreateReturn**](docs/ReturnsApi.md#createreturn) | **Post** /return | Create Return Order
+*ReturnsApi* | [**GetReturn**](docs/ReturnsApi.md#getreturn) | **Get** /return/{id} | Get Return Order
+*ReturnsApi* | [**GetReturnStatusHistory**](docs/ReturnsApi.md#getreturnstatushistory) | **Get** /return/{id}/statushistory | Get One Return&#39;s status history
+*ReturnsApi* | [**GetReturns**](docs/ReturnsApi.md#getreturns) | **Get** /return | Get Return Orders
+*ReturnsApi* | [**UpdateReturn**](docs/ReturnsApi.md#updatereturn) | **Put** /return/{id} | Modify Return Order
+*WebhooksApi* | [**CreateWebhook**](docs/WebhooksApi.md#createwebhook) | **Post** /webhook | Create a new webhook subscription
+*WebhooksApi* | [**DeleteWebhook**](docs/WebhooksApi.md#deletewebhook) | **Delete** /webhook/{id} | Delete an existing webhook subscription
+*WebhooksApi* | [**GetWebhooks**](docs/WebhooksApi.md#getwebhooks) | **Get** /webhook | Get Webhooks
 
 
 ## Documentation For Models
 
- - [ChannelsChannelViewModel](docs/ChannelsChannelViewModel.md)
- - [InventoryDimensionViewModel](docs/InventoryDimensionViewModel.md)
- - [InventoryFulfillmentCenterQuantityViewModel](docs/InventoryFulfillmentCenterQuantityViewModel.md)
- - [InventoryInventoryViewModel](docs/InventoryInventoryViewModel.md)
- - [InventoryLotQuantityViewModel](docs/InventoryLotQuantityViewModel.md)
- - [LocationAddressViewModel](docs/LocationAddressViewModel.md)
- - [LocationLocationViewModel](docs/LocationLocationViewModel.md)
- - [LocationRegionViewModel](docs/LocationRegionViewModel.md)
- - [LocationServiceTypeEnum](docs/LocationServiceTypeEnum.md)
- - [LocationServiceViewModel](docs/LocationServiceViewModel.md)
- - [OrdersAddProductToOrderByProductIdModel](docs/OrdersAddProductToOrderByProductIdModel.md)
- - [OrdersAddProductToOrderByReferenceIdModel](docs/OrdersAddProductToOrderByReferenceIdModel.md)
- - [OrdersAddProductToOrderModel](docs/OrdersAddProductToOrderModel.md)
- - [OrdersAddressViewModel](docs/OrdersAddressViewModel.md)
- - [OrdersCancelShipmentsModel](docs/OrdersCancelShipmentsModel.md)
- - [OrdersCanceledOrderViewModel](docs/OrdersCanceledOrderViewModel.md)
- - [OrdersCanceledShipmentViewModel](docs/OrdersCanceledShipmentViewModel.md)
- - [OrdersCanceledShipmentsViewModel](docs/OrdersCanceledShipmentsViewModel.md)
- - [OrdersChannelInfoViewModel](docs/OrdersChannelInfoViewModel.md)
- - [OrdersCreateOrderModel](docs/OrdersCreateOrderModel.md)
- - [OrdersEstimateDetailViewModel](docs/OrdersEstimateDetailViewModel.md)
- - [OrdersEstimateFulfillmentRequestModel](docs/OrdersEstimateFulfillmentRequestModel.md)
- - [OrdersEstimateProductInfoModel](docs/OrdersEstimateProductInfoModel.md)
- - [OrdersEstimateViewModel](docs/OrdersEstimateViewModel.md)
- - [OrdersEstimationAddressViewModel](docs/OrdersEstimationAddressViewModel.md)
- - [OrdersFulfillmentCenterViewModel](docs/OrdersFulfillmentCenterViewModel.md)
- - [OrdersInventoryViewModel](docs/OrdersInventoryViewModel.md)
- - [OrdersMeasurementsViewModel](docs/OrdersMeasurementsViewModel.md)
- - [OrdersOrderViewModel](docs/OrdersOrderViewModel.md)
- - [OrdersProductInfoViewModel](docs/OrdersProductInfoViewModel.md)
- - [OrdersRecipientInfoViewModel](docs/OrdersRecipientInfoViewModel.md)
- - [OrdersRecipientViewModel](docs/OrdersRecipientViewModel.md)
- - [OrdersServiceLevelDetailViewModel](docs/OrdersServiceLevelDetailViewModel.md)
- - [OrdersShipMethodDetailViewModel](docs/OrdersShipMethodDetailViewModel.md)
- - [OrdersShipmentLogViewModel](docs/OrdersShipmentLogViewModel.md)
- - [OrdersShipmentProductViewModel](docs/OrdersShipmentProductViewModel.md)
- - [OrdersShipmentViewModel](docs/OrdersShipmentViewModel.md)
- - [OrdersStatusDetailViewModel](docs/OrdersStatusDetailViewModel.md)
- - [OrdersTagViewModel](docs/OrdersTagViewModel.md)
- - [OrdersTrackingViewModel](docs/OrdersTrackingViewModel.md)
+ - [CancelShipment](docs/CancelShipment.md)
+ - [CanceledOrder](docs/CanceledOrder.md)
+ - [CanceledShipment](docs/CanceledShipment.md)
+ - [Channel](docs/Channel.md)
+ - [ChannelInfo](docs/ChannelInfo.md)
+ - [CreateOrder](docs/CreateOrder.md)
+ - [CreateOrderProducts](docs/CreateOrderProducts.md)
+ - [CreateProduct](docs/CreateProduct.md)
+ - [CreateReceivingOrder](docs/CreateReceivingOrder.md)
+ - [CreateReceivingOrderBoxItems](docs/CreateReceivingOrderBoxItems.md)
+ - [CreateReceivingOrderBoxes](docs/CreateReceivingOrderBoxes.md)
+ - [CreateReceivingOrderFulfillmentCenter](docs/CreateReceivingOrderFulfillmentCenter.md)
+ - [CreateReturn](docs/CreateReturn.md)
+ - [Dimension](docs/Dimension.md)
+ - [EstimateFulfillmentRequest](docs/EstimateFulfillmentRequest.md)
+ - [EstimateFulfillmentRequestProducts](docs/EstimateFulfillmentRequestProducts.md)
+ - [EstimationAddress](docs/EstimationAddress.md)
+ - [FulfillmentCenter](docs/FulfillmentCenter.md)
+ - [InlineResponse200](docs/InlineResponse200.md)
+ - [Inventory](docs/Inventory.md)
+ - [InventoryFulfillmentCenterQuantity](docs/InventoryFulfillmentCenterQuantity.md)
+ - [InventoryLotQuantity](docs/InventoryLotQuantity.md)
+ - [Location](docs/Location.md)
+ - [LocationAddress](docs/LocationAddress.md)
+ - [LocationRegion](docs/LocationRegion.md)
+ - [LocationService](docs/LocationService.md)
+ - [Order](docs/Order.md)
+ - [OrderAddress](docs/OrderAddress.md)
+ - [OrderEstimate](docs/OrderEstimate.md)
+ - [OrderEstimateEstimates](docs/OrderEstimateEstimates.md)
+ - [OrderInventory](docs/OrderInventory.md)
+ - [OrderMeasurements](docs/OrderMeasurements.md)
+ - [OrderStatusDetails](docs/OrderStatusDetails.md)
+ - [PackageType](docs/PackageType.md)
+ - [PackingType](docs/PackingType.md)
  - [ProblemDetails](docs/ProblemDetails.md)
- - [ProductsBundleRootInformationViewModel](docs/ProductsBundleRootInformationViewModel.md)
- - [ProductsChannelViewModel](docs/ProductsChannelViewModel.md)
- - [ProductsCreateProductModel](docs/ProductsCreateProductModel.md)
- - [ProductsFulfillmentCenterQuantityViewModel](docs/ProductsFulfillmentCenterQuantityViewModel.md)
- - [ProductsInventoryItemViewModel](docs/ProductsInventoryItemViewModel.md)
- - [ProductsProductActiveStatus](docs/ProductsProductActiveStatus.md)
- - [ProductsProductBundleStatus](docs/ProductsProductBundleStatus.md)
- - [ProductsProductViewModel](docs/ProductsProductViewModel.md)
- - [ProductsUpdateProductModel](docs/ProductsUpdateProductModel.md)
- - [ReceivingAddBoxItemToBoxModel](docs/ReceivingAddBoxItemToBoxModel.md)
- - [ReceivingAddBoxToOrderModel](docs/ReceivingAddBoxToOrderModel.md)
- - [ReceivingAssignOrderToFulfillmentCenterModel](docs/ReceivingAssignOrderToFulfillmentCenterModel.md)
- - [ReceivingBoxItemViewModel](docs/ReceivingBoxItemViewModel.md)
- - [ReceivingBoxStatus](docs/ReceivingBoxStatus.md)
- - [ReceivingBoxViewModel](docs/ReceivingBoxViewModel.md)
- - [ReceivingCreateReceivingOrderModel](docs/ReceivingCreateReceivingOrderModel.md)
- - [ReceivingFulfillmentCenterViewModel](docs/ReceivingFulfillmentCenterViewModel.md)
- - [ReceivingPackageType](docs/ReceivingPackageType.md)
- - [ReceivingPackingType](docs/ReceivingPackingType.md)
- - [ReceivingReceivingOrderViewModel](docs/ReceivingReceivingOrderViewModel.md)
- - [ReceivingReceivingStatus](docs/ReceivingReceivingStatus.md)
- - [ReturnsChannelInfoViewModel](docs/ReturnsChannelInfoViewModel.md)
- - [ReturnsCreateReturnViewModel](docs/ReturnsCreateReturnViewModel.md)
- - [ReturnsFulfillmentCenterViewModel](docs/ReturnsFulfillmentCenterViewModel.md)
- - [ReturnsInventoryItemViewModel](docs/ReturnsInventoryItemViewModel.md)
- - [ReturnsReturnAction](docs/ReturnsReturnAction.md)
- - [ReturnsReturnActionRequestedViewModel](docs/ReturnsReturnActionRequestedViewModel.md)
- - [ReturnsReturnActionSource](docs/ReturnsReturnActionSource.md)
- - [ReturnsReturnActionTakenViewModel](docs/ReturnsReturnActionTakenViewModel.md)
- - [ReturnsReturnInventoryViewModel](docs/ReturnsReturnInventoryViewModel.md)
- - [ReturnsReturnOrderStatusHistoryViewModel](docs/ReturnsReturnOrderStatusHistoryViewModel.md)
- - [ReturnsReturnOrderViewModel](docs/ReturnsReturnOrderViewModel.md)
- - [ReturnsReturnStatus](docs/ReturnsReturnStatus.md)
- - [ReturnsReturnType](docs/ReturnsReturnType.md)
- - [ReturnsSortOrder](docs/ReturnsSortOrder.md)
- - [ReturnsTransactionLogSource](docs/ReturnsTransactionLogSource.md)
- - [ReturnsTransactionViewModel](docs/ReturnsTransactionViewModel.md)
+ - [Product](docs/Product.md)
+ - [ProductBundle](docs/ProductBundle.md)
+ - [ProductBundleRootInformation](docs/ProductBundleRootInformation.md)
+ - [ProductChannel](docs/ProductChannel.md)
+ - [ProductFulfillmentCenterQuantity](docs/ProductFulfillmentCenterQuantity.md)
+ - [ProductInfo](docs/ProductInfo.md)
+ - [ProductInventoryItem](docs/ProductInventoryItem.md)
+ - [ReceivingFulfillmentCenter](docs/ReceivingFulfillmentCenter.md)
+ - [ReceivingOrder](docs/ReceivingOrder.md)
+ - [ReceivingOrderBoxItems](docs/ReceivingOrderBoxItems.md)
+ - [ReceivingOrderBoxes](docs/ReceivingOrderBoxes.md)
+ - [Recipient](docs/Recipient.md)
+ - [RecipientInfo](docs/RecipientInfo.md)
+ - [ReturnAction](docs/ReturnAction.md)
+ - [ReturnActionRequested](docs/ReturnActionRequested.md)
+ - [ReturnActionTaken](docs/ReturnActionTaken.md)
+ - [ReturnChannelInfo](docs/ReturnChannelInfo.md)
+ - [ReturnFulfillmentCenter](docs/ReturnFulfillmentCenter.md)
+ - [ReturnInventory](docs/ReturnInventory.md)
+ - [ReturnInventoryItem](docs/ReturnInventoryItem.md)
+ - [ReturnOrder](docs/ReturnOrder.md)
+ - [ReturnOrderStatusHistory](docs/ReturnOrderStatusHistory.md)
+ - [ReturnStatus](docs/ReturnStatus.md)
+ - [ReturnTransaction](docs/ReturnTransaction.md)
+ - [ServiceLevelDetail](docs/ServiceLevelDetail.md)
+ - [ShipMethodDetail](docs/ShipMethodDetail.md)
+ - [Shipment](docs/Shipment.md)
+ - [ShipmentLog](docs/ShipmentLog.md)
+ - [ShipmentProduct](docs/ShipmentProduct.md)
+ - [Tag](docs/Tag.md)
+ - [Topics](docs/Topics.md)
+ - [Tracking](docs/Tracking.md)
+ - [UpdateProduct](docs/UpdateProduct.md)
  - [ValidationProblemDetails](docs/ValidationProblemDetails.md)
  - [ValidationProblemDetailsAllOf](docs/ValidationProblemDetailsAllOf.md)
- - [WebhooksCreateWebhookSubscriptionModel](docs/WebhooksCreateWebhookSubscriptionModel.md)
- - [WebhooksTopics](docs/WebhooksTopics.md)
- - [WebhooksWebhookViewModel](docs/WebhooksWebhookViewModel.md)
+ - [Webhook](docs/Webhook.md)
+ - [WebhookSubscription](docs/WebhookSubscription.md)
 
 
 ## Documentation For Authorization

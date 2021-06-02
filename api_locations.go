@@ -26,58 +26,58 @@ var (
 // LocationsApiService LocationsApi service
 type LocationsApiService service
 
-type ApiLocationGetRequest struct {
-	ctx _context.Context
-	ApiService *LocationsApiService
-	includeInactive *bool
+type ApiGetLocationsRequest struct {
+	ctx              _context.Context
+	ApiService       *LocationsApiService
+	includeInactive  *bool
 	receivingEnabled *bool
-	accessGranted *bool
+	accessGranted    *bool
 }
 
-func (r ApiLocationGetRequest) IncludeInactive(includeInactive bool) ApiLocationGetRequest {
+func (r ApiGetLocationsRequest) IncludeInactive(includeInactive bool) ApiGetLocationsRequest {
 	r.includeInactive = &includeInactive
 	return r
 }
-func (r ApiLocationGetRequest) ReceivingEnabled(receivingEnabled bool) ApiLocationGetRequest {
+func (r ApiGetLocationsRequest) ReceivingEnabled(receivingEnabled bool) ApiGetLocationsRequest {
 	r.receivingEnabled = &receivingEnabled
 	return r
 }
-func (r ApiLocationGetRequest) AccessGranted(accessGranted bool) ApiLocationGetRequest {
+func (r ApiGetLocationsRequest) AccessGranted(accessGranted bool) ApiGetLocationsRequest {
 	r.accessGranted = &accessGranted
 	return r
 }
 
-func (r ApiLocationGetRequest) Execute() ([]LocationLocationViewModel, *_nethttp.Response, error) {
-	return r.ApiService.LocationGetExecute(r)
+func (r ApiGetLocationsRequest) Execute() ([]Location, *_nethttp.Response, error) {
+	return r.ApiService.GetLocationsExecute(r)
 }
 
 /*
- * LocationGet Get locations
+ * GetLocations Get locations
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @return ApiLocationGetRequest
+ * @return ApiGetLocationsRequest
  */
-func (a *LocationsApiService) LocationGet(ctx _context.Context) ApiLocationGetRequest {
-	return ApiLocationGetRequest{
+func (a *LocationsApiService) GetLocations(ctx _context.Context) ApiGetLocationsRequest {
+	return ApiGetLocationsRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 /*
  * Execute executes the request
- * @return []LocationLocationViewModel
+ * @return []Location
  */
-func (a *LocationsApiService) LocationGetExecute(r ApiLocationGetRequest) ([]LocationLocationViewModel, *_nethttp.Response, error) {
+func (a *LocationsApiService) GetLocationsExecute(r ApiGetLocationsRequest) ([]Location, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  []LocationLocationViewModel
+		localVarReturnValue  []Location
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "LocationsApiService.LocationGet")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "LocationsApiService.GetLocations")
 	if err != nil {
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}

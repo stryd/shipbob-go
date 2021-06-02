@@ -4,19 +4,17 @@ All URIs are relative to *https://api.shipbob.com/1.0*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**WebhookGet**](WebhooksApi.md#WebhookGet) | **Get** /webhook | Get Webhooks
-[**WebhookIdDelete**](WebhooksApi.md#WebhookIdDelete) | **Delete** /webhook/{id} | Delete an existing webhook subscription
-[**WebhookPost**](WebhooksApi.md#WebhookPost) | **Post** /webhook | Create a new webhook subscription
+[**CreateWebhook**](WebhooksApi.md#CreateWebhook) | **Post** /webhook | Create a new webhook subscription
+[**DeleteWebhook**](WebhooksApi.md#DeleteWebhook) | **Delete** /webhook/{id} | Delete an existing webhook subscription
+[**GetWebhooks**](WebhooksApi.md#GetWebhooks) | **Get** /webhook | Get Webhooks
 
 
 
-## WebhookGet
+## CreateWebhook
 
-> []WebhooksWebhookViewModel WebhookGet(ctx).Topic(topic).Page(page).Limit(limit).Execute()
+> Webhook CreateWebhook(ctx).ShipbobChannelId(shipbobChannelId).WebhookSubscription(webhookSubscription).Execute()
 
-Get Webhooks
-
-
+Create a new webhook subscription
 
 ### Example
 
@@ -31,19 +29,18 @@ import (
 )
 
 func main() {
-    topic := openapiclient.Webhooks.Topics("order_shipped") // WebhooksTopics | Topic of the webhooks requested (optional)
-    page := int32(56) // int32 | Page of Webhooks to get (optional)
-    limit := int32(56) // int32 | Amount of Webhooks per page to request (optional)
+    shipbobChannelId := int32(56) // int32 |  (optional)
+    webhookSubscription := *openapiclient.NewWebhookSubscription("https://mywebsite.com/shipbob/handler", openapiclient.Topics("order_shipped")) // WebhookSubscription |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.WebhooksApi.WebhookGet(context.Background()).Topic(topic).Page(page).Limit(limit).Execute()
+    resp, r, err := api_client.WebhooksApi.CreateWebhook(context.Background()).ShipbobChannelId(shipbobChannelId).WebhookSubscription(webhookSubscription).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `WebhooksApi.WebhookGet``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `WebhooksApi.CreateWebhook``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `WebhookGet`: []WebhooksWebhookViewModel
-    fmt.Fprintf(os.Stdout, "Response from `WebhooksApi.WebhookGet`: %v\n", resp)
+    // response from `CreateWebhook`: Webhook
+    fmt.Fprintf(os.Stdout, "Response from `WebhooksApi.CreateWebhook`: %v\n", resp)
 }
 ```
 
@@ -53,18 +50,17 @@ func main() {
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiWebhookGetRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiCreateWebhookRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **topic** | [**WebhooksTopics**](WebhooksTopics.md) | Topic of the webhooks requested | 
- **page** | **int32** | Page of Webhooks to get | 
- **limit** | **int32** | Amount of Webhooks per page to request | 
+ **shipbobChannelId** | **int32** |  | 
+ **webhookSubscription** | [**WebhookSubscription**](WebhookSubscription.md) |  | 
 
 ### Return type
 
-[**[]WebhooksWebhookViewModel**](Webhooks.WebhookViewModel.md)
+[**Webhook**](Webhook.md)
 
 ### Authorization
 
@@ -72,7 +68,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
@@ -80,9 +76,9 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## WebhookIdDelete
+## DeleteWebhook
 
-> WebhookIdDelete(ctx, id).Execute()
+> DeleteWebhook(ctx, id).Execute()
 
 Delete an existing webhook subscription
 
@@ -103,9 +99,9 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.WebhooksApi.WebhookIdDelete(context.Background(), id).Execute()
+    resp, r, err := api_client.WebhooksApi.DeleteWebhook(context.Background(), id).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `WebhooksApi.WebhookIdDelete``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `WebhooksApi.DeleteWebhook``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
 }
@@ -121,7 +117,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiWebhookIdDeleteRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiDeleteWebhookRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -146,11 +142,13 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## WebhookPost
+## GetWebhooks
 
-> WebhooksWebhookViewModel WebhookPost(ctx).ShipbobChannelId(shipbobChannelId).WebhooksCreateWebhookSubscriptionModel(webhooksCreateWebhookSubscriptionModel).Execute()
+> []Webhook GetWebhooks(ctx).Topic(topic).Page(page).Limit(limit).Execute()
 
-Create a new webhook subscription
+Get Webhooks
+
+
 
 ### Example
 
@@ -165,18 +163,19 @@ import (
 )
 
 func main() {
-    shipbobChannelId := int32(56) // int32 |  (optional)
-    webhooksCreateWebhookSubscriptionModel := *openapiclient.NewWebhooksCreateWebhookSubscriptionModel("https://mywebsite.com/shipbob/handler", openapiclient.Webhooks.Topics("order_shipped")) // WebhooksCreateWebhookSubscriptionModel |  (optional)
+    topic := openapiclient.Topics("order_shipped") // Topics | Topic of the webhooks requested (optional)
+    page := int32(56) // int32 | Page of Webhooks to get (optional)
+    limit := int32(56) // int32 | Amount of Webhooks per page to request (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.WebhooksApi.WebhookPost(context.Background()).ShipbobChannelId(shipbobChannelId).WebhooksCreateWebhookSubscriptionModel(webhooksCreateWebhookSubscriptionModel).Execute()
+    resp, r, err := api_client.WebhooksApi.GetWebhooks(context.Background()).Topic(topic).Page(page).Limit(limit).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `WebhooksApi.WebhookPost``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `WebhooksApi.GetWebhooks``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `WebhookPost`: WebhooksWebhookViewModel
-    fmt.Fprintf(os.Stdout, "Response from `WebhooksApi.WebhookPost`: %v\n", resp)
+    // response from `GetWebhooks`: []Webhook
+    fmt.Fprintf(os.Stdout, "Response from `WebhooksApi.GetWebhooks`: %v\n", resp)
 }
 ```
 
@@ -186,17 +185,18 @@ func main() {
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiWebhookPostRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiGetWebhooksRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **shipbobChannelId** | **int32** |  | 
- **webhooksCreateWebhookSubscriptionModel** | [**WebhooksCreateWebhookSubscriptionModel**](WebhooksCreateWebhookSubscriptionModel.md) |  | 
+ **topic** | [**Topics**](Topics.md) | Topic of the webhooks requested | 
+ **page** | **int32** | Page of Webhooks to get | 
+ **limit** | **int32** | Amount of Webhooks per page to request | 
 
 ### Return type
 
-[**WebhooksWebhookViewModel**](Webhooks.WebhookViewModel.md)
+[**[]Webhook**](Webhook.md)
 
 ### Authorization
 
@@ -204,7 +204,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
-- **Content-Type**: application/_*+json, application/json, application/json-patch+json, text/json
+- **Content-Type**: Not defined
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

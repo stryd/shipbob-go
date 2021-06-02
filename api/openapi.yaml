@@ -6,155 +6,148 @@ info:
 servers:
 - url: https://api.shipbob.com/1.0/
 tags:
-- description: " >  Note: The orderId in the API response will not match the Id displayed\
-    \ in the ShipBob Merchant Portal when you navigate to the Orders page. ShipBob\
-    \ is currently undergoing a schema migration and the Id displayed in the ShipBob\
-    \ Merchant Portal is the shipmentId not the orderId. In the future, the portal\
-    \ will display both orderId(s) and shipmentId(s). \\n\\n Use the Orders Resource\
-    \ to create and retrieve orders in ShipBob. \\n\\n An order a digital record of\
-    \ a complete purchase that comes from an upstream source (i.e. Shopify) and is\
-    \ intended for ShipBob to fulfill. The order object includes products purchased,\
-    \ shipping address details, shipping method selected etc. Orders are created in\
-    \ ShipBob via a channel. \\n\\n When ShipBob fulfills the order, one or more shipments\
-    \ are created for that order. A shipment is a record of the physical package(s)\
-    \ sent out via a carrier. If an order is shipped in multiple packages then 2 or\
-    \ more shipments can be created for that order. \\n\\n ### Tips for creating orders\
-    \ in ShipBob via the POST Order endpoint: \\n\\n * Populate the referenceId with\
-    \ a unique and immutable order identifier from your upstream system. This field\
-    \ was created to allow you to tieback records in ShipBob with your upstream system.\
-    \ \\n\\n * Ensure that the <em> shipping method </em> passed in the API request\
-    \ matches exactly what the user has listed as the <em> shipping method </em> on\
-    \ the <em>  Ship Option Mapping </em> setup page in the ShipBob Merchant Portal.\
-    \ If they donâ\x80\x99t match, ShipBob will assume that the user wants to leverage\
-    \ ShipBobâ\x80\x99s default shipping method. \\n\\n * You can leverage either\
-    \ productId (the ShipBob productId) or the product referenceId (your system's\
-    \  unique Identifier for products) when creating an order. \\n\\n Use the Shipments\
-    \ endpoints to retrieve fulfillment information for shipments or orders. \\n\\\
-    n A shipment is an object that is the result of a fulfillment of an order. An\
-    \ order can have one or more shipments. Say Shopify order #122323 contains 3 different\
-    \ products, shipped in two separate packages, there would be 2 shipments for that\
-    \ order. \\n\\n  Serial numbers are unique identifiers for an individual item\
-    \ (e.g. your specific iPhone X that you bought at the Apple Store). No inventory\
-    \ item can possess duplicate serial numbers. Merchants can request â\x80\x9cserial\
-    \ scanâ\x80\x9d, which means ShipBob will capture the serial number(s) upon sending\
-    \ a shipment so the merchant knows which customer received which individual item(s)."
+- description: ' >  Note: The orderId in the API response will not match the Id displayed
+    in the ShipBob Merchant Portal when you navigate to the Orders page. ShipBob is
+    currently undergoing a schema migration and the Id displayed in the ShipBob Merchant
+    Portal is the shipmentId not the orderId. In the future, the portal will display
+    both orderId(s) and shipmentId(s).  Use the Orders Resource to create and retrieve
+    orders in ShipBob.  An order a digital record of a complete purchase that comes
+    from an upstream source (i.e. Shopify) and is intended for ShipBob to fulfill.
+    The order object includes products purchased, shipping address details, shipping
+    method selected etc. Orders are created in ShipBob via a channel.  When ShipBob
+    fulfills the order, one or more shipments are created for that order. A shipment
+    is a record of the physical package(s) sent out via a carrier. If an order is
+    shipped in multiple packages then 2 or more shipments can be created for that
+    order.  ### Tips for creating orders in ShipBob via the POST Order endpoint:  *
+    Populate the referenceId with a unique and immutable order identifier from your
+    upstream system. This field was created to allow you to tieback records in ShipBob
+    with your upstream system.  * Ensure that the <em> shipping method </em> passed
+    in the API request matches exactly what the user has listed as the <em> shipping
+    method </em> on the <em>  Ship Option Mapping </em> setup page in the ShipBob
+    Merchant Portal. If they don''t match, ShipBob will assume that the user wants
+    to leverage ShipBob''s default shipping method.  * You can leverage either productId
+    (the ShipBob productId) or the product referenceId (your system''s  unique Identifier
+    for products) when creating an order.  Use the Shipments endpoints to retrieve
+    fulfillment information for shipments or orders.  A shipment is an object that
+    is the result of a fulfillment of an order. An order can have one or more shipments.
+    Say Shopify order #122323 contains 3 different products, shipped in two separate
+    packages, there would be 2 shipments for that order.   Serial numbers are unique
+    identifiers for an individual item (e.g. your specific iPhone X that you bought
+    at the Apple Store). No inventory item can possess duplicate serial numbers. Merchants
+    can request serial scan, which means ShipBob will capture the serial number(s)
+    upon sending a shipment so the merchant knows which customer received which individual
+    item(s).'
   name: Orders
-- description: "Use the Products Resource to retrieve and create product records in\
-    \ ShipBob. \\n\\n A product is a virtual record created in ShipBobâ\x80\x99s system\
-    \ via a channel. Say a merchant has two Shopify stores (each store would have\
-    \ its own channel), Kevinâ\x80\x99s Shopify Store #133 and Kevinâ\x80\x99s Shopify\
-    \ store #134. If the same SKU was sold on both stores, two products would be created\
-    \ for that SKU, one product would be created to represent the SKU sold on Store\
-    \ #133 and one to represent it on Store on #134, with productIds 3884009 and 3884008\
-    \ respectively. \\n\\n While a product is a virtual record, the inventory item\
-    \ is a representation of a physical good. So in the above example, as product\
-    \ 3884009 and product 3884008 represent the same SKU sold on different channels,\
-    \ the same inventory item will be mapped to both products. Every product will\
-    \ have one or more inventory items mapped to it. Bundle products, a set of products\
-    \ that are sold to consumers as one combined package, think gift or multi packs,\
-    \ may have 2 or more inventory items mapped to them. \\n\\n ### Tips for creating\
-    \ products in ShipBob via the POST Product endpoints: \\n\\n * ShipBob needs products\
-    \ to be created at the lowest level. So if a product has 3 variants, small, medium\
-    \ and large, a separate product needs to be created in ShipBob for all three.\\\
-    n\\n * Populate the referenceId with a unique and immutable product identifier\
-    \ from your upstream system. This field was created to allow you to tie back records\
-    \ in ShipBob with your upstream system. \\n\\n * Use specific and/or unique names\
-    \ to describe each product so they can be easily identified by users in the ShipBob\
-    \ Merchant Portal. In particular, when creating variants, please give them distinguishable\
-    \ names i.e. for a Blue shirt that comes in two sizes, small and medium, strong\
-    \ product names would be Blue shirt size:small and Blue shirt size:medium. \\\
-    n\\n > **NOTE:** The productId returned in the API response will not match the\
-    \ id displayed in the ShipBob Merchant Portal when you navigate to Inventory >\
-    \ Products. ShipBob is currently undergoing a schema migration and the Id displayed\
-    \ in the ShipBob Merchant Portal is the inventoryId not the productId. In the\
-    \ future, the portal will display both productId(s) and inventoryId(s)"
+- description: 'Use the Products Resource to retrieve and create product records in
+    ShipBob.  A product is a virtual record created in ShipBob''s system via a channel.
+    Say a merchant has two Shopify stores (each store would have its own channel),
+    Kevin''s Shopify Store #133 and Kevin''s Shopify store #134. If the same SKU was
+    sold on both stores, two products would be created for that SKU, one product would
+    be created to represent the SKU sold on Store #133 and one to represent it on
+    Store on #134, with productIds 3884009 and 3884008 respectively.  While a product
+    is a virtual record, the inventory item is a representation of a physical good.
+    So in the above example, as product 3884009 and product 3884008 represent the
+    same SKU sold on different channels, the same inventory item will be mapped to
+    both products. Every product will have one or more inventory items mapped to it.
+    Bundle products, a set of products that are sold to consumers as one combined
+    package, think gift or multi packs, may have 2 or more inventory items mapped
+    to them.  ### Tips for creating products in ShipBob via the POST Product endpoints:  *
+    ShipBob needs products to be created at the lowest level. So if a product has
+    3 variants, small, medium and large, a separate product needs to be created in
+    ShipBob for all three. * Populate the referenceId with a unique and immutable
+    product identifier from your upstream system. This field was created to allow
+    you to tie back records in ShipBob with your upstream system.  * Use specific
+    and/or unique names to describe each product so they can be easily identified
+    by users in the ShipBob Merchant Portal. In particular, when creating variants,
+    please give them distinguishable names i.e. for a Blue shirt that comes in two
+    sizes, small and medium, strong product names would be Blue shirt size:small and
+    Blue shirt size:medium.  > **NOTE:** The productId returned in the API response
+    will not match the id displayed in the ShipBob Merchant Portal when you navigate
+    to Inventory > Products. ShipBob is currently undergoing a schema migration and
+    the Id displayed in the ShipBob Merchant Portal is the inventoryId not the productId.
+    In the future, the portal will display both productId(s) and inventoryId(s)'
   name: Products
-- description: " Use the Inventory Resource to retrieve ShipBob  inventory items and\
-    \ quantities. \\n\\n An inventory item is a representation of a physical good,\
-    \ that may or may not have physical stock in ShipBobâ\x80\x99s fulfillment centers.\
-    \ Every product will have one or more inventory items mapped to it. A bundle product\
-    \ (a set of products that are sold as one combined package - e.g.  gift or multi\
-    \ packs) is an example of a product that has  2 or more inventory items mapped\
-    \ to it. \\n\\n Lot items are physical items that have expiration dates or batch\
-    \ numbers that should be fulfilled in a FIFO (first in, first out) manner. Most\
-    \ food items are lot items. Quantities by lot # and/or expiration date are also\
-    \ listed in the Inventory object."
+- description: ' Use the Inventory Resource to retrieve ShipBob  inventory items and
+    quantities.  An inventory item is a representation of a physical good, that may
+    or may not have physical stock in ShipBob''s fulfillment centers. Every product
+    will have one or more inventory items mapped to it. A bundle product (a set of
+    products that are sold as one combined package - e.g.  gift or multi packs) is
+    an example of a product that has  2 or more inventory items mapped to it.  Lot
+    items are physical items that have expiration dates or batch numbers that should
+    be fulfilled in a FIFO (first in, first out) manner. Most food items are lot items.
+    Quantities by lot # and/or expiration date are also listed in the Inventory object.'
   name: Inventory
-- description: "Use the Channel Resource to list â\x80\x9cchannelsâ\x80\x9d which\
-    \ you have access to. You will use this channelId for subsequent API calls made\
-    \ to ShipBob endpoints. \\n\\n A channel is a specific installation of an application\
-    \ built by a vendor on top of our API â\x80\x93 e.g. Kevinâ\x80\x99s Shopify Store\
-    \ #133432.  All write and most read endpoints require a channel to be passed in\
-    \ the header to complete the request. The channel is used to Identify where the\
-    \ data originally came from.  \\n\\n Applications that are granted multi-channel\
-    \ permissions will be able to read data from all channels that belong to a user.\
-    \ However, multi-channel applications will only be able to write on behalf of\
-    \ their own channel."
+- description: 'Use the Channel Resource to list channels which you have access to.
+    You will use this channelId for subsequent API calls made to ShipBob endpoints.  A
+    channel is a specific installation of an application built by a vendor on top
+    of our API e.g. Kevin''s Shopify Store #133432.  All write and most read endpoints
+    require a channel to be passed in the header to complete the request. The channel
+    is used to Identify where the data originally came from.   Applications that are
+    granted multi-channel permissions will be able to read data from all channels
+    that belong to a user. However, multi-channel applications will only be able to
+    write on behalf of their own channel.'
   name: Channels
-- description: "**While the Returns API is live, ShipBob's end to end Returns process\
-    \ will not go live until the beginning of March. As a result, any returns arriving\
-    \ at ShipBob's fulfillment centers prior to March 12st, 2020 will NOT be processed**.\
-    \ \\n\\n Use the Returns resource to retrieve, create, edit and cancel return\
-    \ records in ShipBob. \\n\\n A return is a request for ShipBob to perform an action\
-    \ on inventory that is coming back into our fulfillment centers. Typically, the\
-    \ return is a result of an order being requested to be refunded or exchanged.\
-    \ ShipBob does not handle refunds or exchanges - we simply process the inventory\
-    \ according to the merchant specifications. \\n\\n Returns can only be **modified**\
-    \ or **cancelled** when they are in the Awaiting Arrival status. Returns that\
-    \ are being Processed or have been Completed cannot be modified or cancelled.\
-    \ \\n\\n ### Tips for creating return orders: \\n\\n * Populate the referenceId\
-    \ with a unique and immutable return identifier from your upstream system. This\
-    \ field was created to allow you to tie back records in ShipBob with your upstream\
-    \ system. \\n\\n *Include each inventoryId exactly once in the inventory object.\
-    \ If an inventoryId is included more than once, the call will return an error\
-    \ code \\n\\n * Provide a tracking # when submitting a return, while it is not\
-    \ a required field, it is the the most surefire way for ShipBob staff to properly\
-    \ and quickly identify the return package when it reaches our fulfillment center.\
-    \ \\n\\n * Only include inventory items to the return record that will be returned\
-    \ in the same box i.e. if InventoryId 12232 and InventoryId 12039 will be returned\
-    \ in two seperate boxes, two return orders should be created. \\n\\n * ShipBob\
-    \ does not process returns for digital items or bundle inventory items. Return\
-    \ calls that include digital inventory  items (e.g. ebooks) or bundle inventory\
-    \ items (i.e. multipacks, combination of multiple inventory items)  will return\
-    \ an error code. \\n\\n * If you choose to provide a requested action (it is an\
-    \ optional field), only provide one requested action per inventory item. So if\
-    \  you have more than 1 quantity of a given item being returned within the same\
-    \ box, all quantities of the item have to have the same action associated with\
-    \ them. If you donâ\x80\x99t provide a requested action, it will default to the\
-    \ action the User set for that inventory item in the ShipBob Merchant portal."
+- description: '**While the Returns API is live, ShipBob''s end to end Returns process
+    will not go live until the beginning of March. As a result, any returns arriving
+    at ShipBob''s fulfillment centers prior to March 12st, 2020 will NOT be processed**.  Use
+    the Returns resource to retrieve, create, edit and cancel return records in ShipBob.  A
+    return is a request for ShipBob to perform an action on inventory that is coming
+    back into our fulfillment centers. Typically, the return is a result of an order
+    being requested to be refunded or exchanged. ShipBob does not handle refunds or
+    exchanges - we simply process the inventory according to the merchant specifications.  Returns
+    can only be **modified** or **cancelled** when they are in the Awaiting Arrival
+    status. Returns that are being Processed or have been Completed cannot be modified
+    or cancelled.  ### Tips for creating return orders:  * Populate the referenceId
+    with a unique and immutable return identifier from your upstream system. This
+    field was created to allow you to tie back records in ShipBob with your upstream
+    system.  *Include each inventoryId exactly once in the inventory object. If an
+    inventoryId is included more than once, the call will return an error code  *
+    Provide a tracking # when submitting a return, while it is not a required field,
+    it is the the most surefire way for ShipBob staff to properly and quickly identify
+    the return package when it reaches our fulfillment center.  * Only include inventory
+    items to the return record that will be returned in the same box i.e. if InventoryId
+    12232 and InventoryId 12039 will be returned in two seperate boxes, two return
+    orders should be created.  * ShipBob does not process returns for digital items
+    or bundle inventory items. Return calls that include digital inventory  items
+    (e.g. ebooks) or bundle inventory items (i.e. multipacks, combination of multiple
+    inventory items)  will return an error code.  * If you choose to provide a requested
+    action (it is an optional field), only provide one requested action per inventory
+    item. So if  you have more than 1 quantity of a given item being returned within
+    the same box, all quantities of the item have to have the same action associated
+    with them. If you don''t provide a requested action, it will default to the action
+    the User set for that inventory item in the ShipBob Merchant portal.'
   name: Returns
-- description: "Use the Receiving Resource to retrieve, create and cancel Warehouse\
-    \ Receiving Orders (WROs). \\n\\n A WRO is a request form that tells ShipBob's\
-    \ fulfillment centers what inventory should be received and stocked. Some other\
-    \ solutions call this an â\x80\x9cASNâ\x80\x9d or Advanced Ship Notice. WROs may\
-    \ include multiple inventory items with specific quantities. More details on creating\
-    \ a WRO can be found [here](https://support.shipbob.com/s/article/New-Send-Inventory-to-ShipBob-WRO).\
-    \ \\n\\n A WRO can only be **canceled** if it is in the Awaiting status. WROs\
-    \ in Awaiting status are considered to still be in transit to ShipBob FCs. WROs\
-    \ that have Partially Arrived, have been Processed or are Completed, cannot be\
-    \ canceled."
+- description: Use the Receiving Resource to retrieve, create and cancel Warehouse
+    Receiving Orders (WROs).  A WRO is a request form that tells ShipBob's fulfillment
+    centers what inventory should be received and stocked. Some other solutions call
+    this an ASN or Advanced Ship Notice. WROs may include multiple inventory items
+    with specific quantities. More details on creating a WRO can be found [here](https://support.shipbob.com/s/article/New-Send-Inventory-to-ShipBob-WRO).  A
+    WRO can only be **canceled** if it is in the Awaiting status. WROs in Awaiting
+    status are considered to still be in transit to ShipBob FCs. WROs that have Partially
+    Arrived, have been Processed or are Completed, cannot be canceled.
   name: Receiving
 - description: Use the Webhooks Resource to create, view or delete subscriptions for
     a user.
   name: Webhooks
 - description: Use this API to interact with the physical locations across ShipBob's
-    fulfillment network. \n\n An active ShipBob location is operational for fulfillment
+    fulfillment network.  An active ShipBob location is operational for fulfillment
     processes, including receiving inventory and processing returns. It's important
     to note that some locations, access is granted to all merchants by default, while
-    some locations require special request for merchants to be granted access. \n\n
-    For each location, determine if it can be leveraged for the user by viewing the
-    access_granted & receiving_enabled fields.
+    some locations require special request for merchants to be granted access.  For
+    each location, determine if it can be leveraged for the user by viewing the access_granted
+    & receiving_enabled fields.
   name: Locations
 paths:
   /channel:
     get:
+      operationId: getChannels
       responses:
         "200":
           content:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/Channels.ChannelViewModel'
+                  $ref: '#/components/schemas/Channel'
                 type: array
           description: Success
         "400":
@@ -179,13 +172,14 @@ paths:
       - Channels
   /fulfillmentCenter:
     get:
+      operationId: getFulfillmentCenters
       responses:
         "200":
           content:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/Receiving.FulfillmentCenterViewModel'
+                  $ref: '#/components/schemas/ReceivingFulfillmentCenter'
                 type: array
           description: Success
         "401":
@@ -201,6 +195,7 @@ paths:
       - Receiving
   /inventory:
     get:
+      operationId: getInventories
       parameters:
       - description: Page of inventory items to get
         explode: true
@@ -287,7 +282,7 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/Inventory.InventoryViewModel'
+                  $ref: '#/components/schemas/Inventory'
                 type: array
           description: Success
         "400":
@@ -314,6 +309,7 @@ paths:
       - Inventory
   /inventory/{inventoryId}:
     get:
+      operationId: getInventory
       parameters:
       - description: The inventory id to get
         explode: false
@@ -329,7 +325,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Inventory.InventoryViewModel'
+                $ref: '#/components/schemas/Inventory'
           description: Success
         "400":
           content:
@@ -355,6 +351,7 @@ paths:
       - Inventory
   /location:
     get:
+      operationId: getLocations
       parameters:
       - description: Whether the inactive locations should be included or not
         explode: true
@@ -392,7 +389,7 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/Location.LocationViewModel'
+                  $ref: '#/components/schemas/Location'
                 type: array
           description: Success
         "401":
@@ -409,6 +406,7 @@ paths:
   /order:
     get:
       description: All parameters are AND filters
+      operationId: getOrders
       parameters:
       - description: Page of orders to get
         explode: true
@@ -525,7 +523,7 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/Orders.OrderViewModel'
+                  $ref: '#/components/schemas/Order'
                 type: array
           description: Success
         "400":
@@ -549,6 +547,7 @@ paths:
       tags:
       - Orders
     post:
+      operationId: createOrder
       parameters:
       - description: Channel Id for Operation
         explode: false
@@ -561,24 +560,15 @@ paths:
         style: simple
       requestBody:
         content:
-          application/*+json:
-            schema:
-              $ref: '#/components/schemas/Orders.CreateOrderModel'
           application/json:
             schema:
-              $ref: '#/components/schemas/Orders.CreateOrderModel'
-          application/json-patch+json:
-            schema:
-              $ref: '#/components/schemas/Orders.CreateOrderModel'
-          text/json:
-            schema:
-              $ref: '#/components/schemas/Orders.CreateOrderModel'
+              $ref: '#/components/schemas/CreateOrder'
       responses:
         "201":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Orders.OrderViewModel'
+                $ref: '#/components/schemas/Order'
           description: Success
         "400":
           content:
@@ -620,6 +610,7 @@ paths:
         out of stock, or too large for fulfillment using standard box sizes. \r\nAdditional
         services such as high-pick fees, shipping insurance, auto-splitting or auto-adding
         items to orders, and signature required are not included in this estimate.
+      operationId: createOrderEstimate
       parameters:
       - description: Channel Id for Operation
         explode: false
@@ -632,24 +623,15 @@ paths:
         style: simple
       requestBody:
         content:
-          application/*+json:
-            schema:
-              $ref: '#/components/schemas/Orders.EstimateFulfillmentRequestModel'
           application/json:
             schema:
-              $ref: '#/components/schemas/Orders.EstimateFulfillmentRequestModel'
-          application/json-patch+json:
-            schema:
-              $ref: '#/components/schemas/Orders.EstimateFulfillmentRequestModel'
-          text/json:
-            schema:
-              $ref: '#/components/schemas/Orders.EstimateFulfillmentRequestModel'
+              $ref: '#/components/schemas/EstimateFulfillmentRequest'
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Orders.EstimateViewModel'
+                $ref: '#/components/schemas/OrderEstimate'
           description: Success
         "400":
           content:
@@ -683,6 +665,7 @@ paths:
       - Orders
   /order/{orderId}:
     get:
+      operationId: getOrder
       parameters:
       - explode: false
         in: path
@@ -707,7 +690,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Orders.OrderViewModel'
+                $ref: '#/components/schemas/Order'
           description: Success
         "400":
           content:
@@ -733,6 +716,7 @@ paths:
       - Orders
   /order/{orderId}/cancel:
     post:
+      operationId: cancelOrder
       parameters:
       - description: The order ID to cancel
         explode: false
@@ -757,7 +741,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Orders.CanceledOrderViewModel'
+                $ref: '#/components/schemas/CanceledOrder'
           description: Success
         "400":
           content:
@@ -803,6 +787,7 @@ paths:
       - Orders
   /order/{orderId}/shipment:
     get:
+      operationId: getOrderShipments
       parameters:
       - description: The order id to get shipments for
         explode: false
@@ -829,7 +814,7 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/Orders.ShipmentViewModel'
+                  $ref: '#/components/schemas/Shipment'
                 type: array
           description: Success
         "400":
@@ -856,6 +841,7 @@ paths:
       - Orders
   /order/{orderId}/shipment/{shipmentId}:
     get:
+      operationId: getOrderShipment
       parameters:
       - description: The order id to get the shipment for
         explode: false
@@ -890,7 +876,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Orders.ShipmentViewModel'
+                $ref: '#/components/schemas/Shipment'
           description: Success
         "400":
           content:
@@ -916,6 +902,7 @@ paths:
       - Orders
   /order/{orderId}/shipment/{shipmentId}/cancel:
     post:
+      operationId: cancelOrderShipment
       parameters:
       - description: The shipment id to get
         explode: false
@@ -948,7 +935,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Orders.ShipmentViewModel'
+                $ref: '#/components/schemas/Shipment'
           description: Success
         "400":
           content:
@@ -994,6 +981,7 @@ paths:
       - Orders
   /order/{orderId}/shipment/{shipmentId}/logs:
     get:
+      operationId: getOrderShipmentLogs
       parameters:
       - description: The order id to get the shipment for
         explode: false
@@ -1029,7 +1017,7 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/Orders.ShipmentLogViewModel'
+                  $ref: '#/components/schemas/ShipmentLog'
                 type: array
           description: Success
         "400":
@@ -1056,6 +1044,7 @@ paths:
       - Orders
   /order/{orderId}/shipment/{shipmentId}/timeline:
     get:
+      operationId: getOrderShipmentTimeline
       parameters:
       - description: The order id to get the shipment for
         explode: false
@@ -1091,7 +1080,7 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/Orders.ShipmentLogViewModel'
+                  $ref: '#/components/schemas/ShipmentLog'
                 type: array
           description: Success
         "400":
@@ -1118,6 +1107,7 @@ paths:
       - Orders
   /product:
     get:
+      operationId: getProducts
       parameters:
       - description: Page of products to get
         explode: true
@@ -1170,25 +1160,29 @@ paths:
         schema:
           type: string
         style: form
-      - description: 'Status filter for products:\r\n- Any: Include both active and
-          inactive\r\n- Active: Filter products that are Active\r\n- Inactive: Filter
-          products that are Inactive'
+      - description: 'Status filter for products:- Any: Include both active and inactive-
+          Active: Filter products that are Active- Inactive: Filter products that
+          are Inactive'
         explode: true
         in: query
         name: ActiveStatus
         required: false
         schema:
-          $ref: '#/components/schemas/Products.ProductActiveStatus'
+          enum:
+          - Any
+          - Active
+          - Inactive
+          type: string
         style: form
-      - description: 'Bundle filter for products:\r\n- Any: Don''t filter and consider
-          products that are bundles or not bundles\r\n- Bundle: Filter by products
-          that are bundles\r\n- NotBundle: Filter by products that are not bundles'
+      - description: 'Bundle filter for products:- Any: Don''t filter and consider
+          products that are bundles or not bundles- Bundle: Filter by products that
+          are bundles- NotBundle: Filter by products that are not bundles'
         explode: true
         in: query
         name: BundleStatus
         required: false
         schema:
-          $ref: '#/components/schemas/Products.ProductBundleStatus'
+          $ref: '#/components/schemas/ProductBundle'
         style: form
       - description: Channel Id for Operation
         explode: false
@@ -1205,7 +1199,7 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/Products.ProductViewModel'
+                  $ref: '#/components/schemas/Product'
                 type: array
           description: Success
           headers:
@@ -1223,28 +1217,28 @@ paths:
               explode: false
               schema:
                 description: Number of the current page
-                type: int
+                type: integer
               style: simple
             Page-Size:
               description: Number of results per page
               explode: false
               schema:
                 description: Number of results per page
-                type: int
+                type: integer
               style: simple
             Total-Count:
               description: Total number of results
               explode: false
               schema:
                 description: Total number of results
-                type: int
+                type: integer
               style: simple
             Total-Pages:
               description: Total number of pages of results
               explode: false
               schema:
                 description: Total number of pages of results
-                type: int
+                type: integer
               style: simple
         "400":
           content:
@@ -1267,6 +1261,7 @@ paths:
       tags:
       - Products
     post:
+      operationId: createProduct
       parameters:
       - description: Channel Id for Operation
         explode: false
@@ -1279,18 +1274,9 @@ paths:
         style: simple
       requestBody:
         content:
-          application/*+json:
-            schema:
-              $ref: '#/components/schemas/Products.CreateProductModel'
           application/json:
             schema:
-              $ref: '#/components/schemas/Products.CreateProductModel'
-          application/json-patch+json:
-            schema:
-              $ref: '#/components/schemas/Products.CreateProductModel'
-          text/json:
-            schema:
-              $ref: '#/components/schemas/Products.CreateProductModel'
+              $ref: '#/components/schemas/CreateProduct'
         description: The product to add
       responses:
         "200":
@@ -1298,7 +1284,7 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/Products.ProductViewModel'
+                  $ref: '#/components/schemas/Product'
                 type: array
           description: Success
         "400":
@@ -1333,6 +1319,7 @@ paths:
       - Products
   /product/batch:
     post:
+      operationId: createProductBatch
       parameters:
       - description: Channel Id for Operation
         explode: false
@@ -1345,25 +1332,10 @@ paths:
         style: simple
       requestBody:
         content:
-          application/*+json:
-            schema:
-              items:
-                $ref: '#/components/schemas/Products.CreateProductModel'
-              type: array
           application/json:
             schema:
               items:
-                $ref: '#/components/schemas/Products.CreateProductModel'
-              type: array
-          application/json-patch+json:
-            schema:
-              items:
-                $ref: '#/components/schemas/Products.CreateProductModel'
-              type: array
-          text/json:
-            schema:
-              items:
-                $ref: '#/components/schemas/Products.CreateProductModel'
+                $ref: '#/components/schemas/CreateProduct'
               type: array
         description: List of products to add
       responses:
@@ -1372,7 +1344,7 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/Products.ProductViewModel'
+                  $ref: '#/components/schemas/Product'
                 type: array
           description: Success
         "400":
@@ -1407,6 +1379,7 @@ paths:
       - Products
   /product/{productId}:
     get:
+      operationId: getProduct
       parameters:
       - description: Unique identifier of the product
         explode: false
@@ -1431,7 +1404,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Products.ProductViewModel'
+                $ref: '#/components/schemas/Product'
           description: Success
         "400":
           content:
@@ -1456,6 +1429,7 @@ paths:
       tags:
       - Products
     put:
+      operationId: updateProduct
       parameters:
       - description: Unique identifier of the product to modify
         explode: false
@@ -1477,18 +1451,9 @@ paths:
         style: simple
       requestBody:
         content:
-          application/*+json:
-            schema:
-              $ref: '#/components/schemas/Products.UpdateProductModel'
           application/json:
             schema:
-              $ref: '#/components/schemas/Products.UpdateProductModel'
-          application/json-patch+json:
-            schema:
-              $ref: '#/components/schemas/Products.UpdateProductModel'
-          text/json:
-            schema:
-              $ref: '#/components/schemas/Products.UpdateProductModel'
+              $ref: '#/components/schemas/UpdateProduct'
         description: Updated fields to the product
       responses:
         "200":
@@ -1496,7 +1461,7 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/Products.ProductViewModel'
+                  $ref: '#/components/schemas/Product'
                 type: array
           description: Success
         "400":
@@ -1533,6 +1498,7 @@ paths:
       - Products
   /product/{productId}/inventory:
     get:
+      operationId: getProductInventory
       parameters:
       - description: The product id to get inventory for
         explode: false
@@ -1559,7 +1525,7 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/Inventory.InventoryViewModel'
+                  $ref: '#/components/schemas/Inventory'
                 type: array
           description: Success
         "400":
@@ -1586,27 +1552,19 @@ paths:
       - Inventory
   /receiving:
     post:
+      operationId: createReceivingOrder
       requestBody:
         content:
-          application/*+json:
-            schema:
-              $ref: '#/components/schemas/Receiving.CreateReceivingOrderModel'
           application/json:
             schema:
-              $ref: '#/components/schemas/Receiving.CreateReceivingOrderModel'
-          application/json-patch+json:
-            schema:
-              $ref: '#/components/schemas/Receiving.CreateReceivingOrderModel'
-          text/json:
-            schema:
-              $ref: '#/components/schemas/Receiving.CreateReceivingOrderModel'
+              $ref: '#/components/schemas/CreateReceivingOrder'
         description: The receiving order to create
       responses:
         "201":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Receiving.ReceivingOrderViewModel'
+                $ref: '#/components/schemas/ReceivingOrder'
           description: Success
         "400":
           content:
@@ -1637,6 +1595,7 @@ paths:
       - Receiving
   /receiving/{id}:
     get:
+      operationId: getReceivingOrder
       parameters:
       - description: Id of the receiving order
         explode: false
@@ -1652,7 +1611,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Receiving.ReceivingOrderViewModel'
+                $ref: '#/components/schemas/ReceivingOrder'
           description: Success
         "401":
           description: Authorization missing or invalid
@@ -1673,6 +1632,7 @@ paths:
       - Receiving
   /receiving/{id}/cancel:
     post:
+      operationId: cancelReceivingOrder
       parameters:
       - description: Id of the receiving order to cancel
         explode: false
@@ -1715,6 +1675,7 @@ paths:
       - Receiving
   /receiving/{id}/labels:
     get:
+      operationId: getReceivingOrderLabels
       parameters:
       - description: Id of the receiving order
         explode: false
@@ -1732,17 +1693,10 @@ paths:
               schema:
                 format: byte
                 type: string
-            application/pdf:
-              schema:
-                format: byte
-                type: string
           description: Success
         "400":
           content:
             application/json:
-              schema:
-                $ref: '#/components/schemas/ValidationProblemDetails'
-            application/pdf:
               schema:
                 $ref: '#/components/schemas/ValidationProblemDetails'
           description: Bad Request
@@ -1756,9 +1710,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ValidationProblemDetails'
-            application/pdf:
-              schema:
-                $ref: '#/components/schemas/ValidationProblemDetails'
           description: Not Found
       security:
       - oauth2:
@@ -1768,6 +1719,7 @@ paths:
       - Receiving
   /return:
     get:
+      operationId: getReturns
       parameters:
       - description: Page of return orders to get
         explode: true
@@ -1793,7 +1745,10 @@ paths:
         name: SortOrder
         required: false
         schema:
-          $ref: '#/components/schemas/Returns.SortOrder'
+          enum:
+          - Newest
+          - Oldest
+          type: string
         style: form
       - description: Start date to filter orders inserted later than
         explode: true
@@ -1841,7 +1796,7 @@ paths:
         required: false
         schema:
           items:
-            $ref: '#/components/schemas/Returns.ReturnStatus'
+            $ref: '#/components/schemas/ReturnStatus'
           type: array
         style: form
       - description: Comma separated list of destination fulfillment center IDs to
@@ -1903,7 +1858,7 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/Returns.ReturnOrderViewModel'
+                  $ref: '#/components/schemas/ReturnOrder'
                 type: array
           description: Success
           headers:
@@ -1912,28 +1867,28 @@ paths:
               explode: false
               schema:
                 description: Number of the current page
-                type: int
+                type: integer
               style: simple
             Page-Size:
               description: Number of results per page
               explode: false
               schema:
                 description: Number of results per page
-                type: int
+                type: integer
               style: simple
             Total-Count:
               description: Total number of results
               explode: false
               schema:
                 description: Total number of results
-                type: int
+                type: integer
               style: simple
             Total-Pages:
               description: Total number of pages of results
               explode: false
               schema:
                 description: Total number of pages of results
-                type: int
+                type: integer
               style: simple
         "401":
           description: Authorization missing or invalid
@@ -1947,6 +1902,7 @@ paths:
       tags:
       - Returns
     post:
+      operationId: createReturn
       parameters:
       - description: Channel Id for Operation
         explode: false
@@ -1959,25 +1915,16 @@ paths:
         style: simple
       requestBody:
         content:
-          application/*+json:
-            schema:
-              $ref: '#/components/schemas/Returns.CreateReturnViewModel'
           application/json:
             schema:
-              $ref: '#/components/schemas/Returns.CreateReturnViewModel'
-          application/json-patch+json:
-            schema:
-              $ref: '#/components/schemas/Returns.CreateReturnViewModel'
-          text/json:
-            schema:
-              $ref: '#/components/schemas/Returns.CreateReturnViewModel'
+              $ref: '#/components/schemas/CreateReturn'
         description: Model defining the return
       responses:
         "201":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Returns.ReturnOrderViewModel'
+                $ref: '#/components/schemas/ReturnOrder'
           description: Success
         "400":
           content:
@@ -2004,6 +1951,7 @@ paths:
       - Returns
   /return/{id}:
     get:
+      operationId: getReturn
       parameters:
       - description: Id of the return order
         explode: false
@@ -2028,7 +1976,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Returns.ReturnOrderViewModel'
+                $ref: '#/components/schemas/ReturnOrder'
           description: Success
         "401":
           description: Authorization missing or invalid
@@ -2048,6 +1996,7 @@ paths:
       tags:
       - Returns
     put:
+      operationId: updateReturn
       parameters:
       - description: Channel Id for Operation
         explode: false
@@ -2069,25 +2018,16 @@ paths:
         style: simple
       requestBody:
         content:
-          application/*+json:
-            schema:
-              $ref: '#/components/schemas/Returns.CreateReturnViewModel'
           application/json:
             schema:
-              $ref: '#/components/schemas/Returns.CreateReturnViewModel'
-          application/json-patch+json:
-            schema:
-              $ref: '#/components/schemas/Returns.CreateReturnViewModel'
-          text/json:
-            schema:
-              $ref: '#/components/schemas/Returns.CreateReturnViewModel'
+              $ref: '#/components/schemas/CreateReturn'
         description: Model defining the return
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Returns.ReturnOrderViewModel'
+                $ref: '#/components/schemas/ReturnOrder'
           description: Success
         "400":
           content:
@@ -2114,6 +2054,7 @@ paths:
       - Returns
   /return/{id}/cancel:
     post:
+      operationId: cancelReturn
       parameters:
       - description: Id of the return order
         explode: false
@@ -2138,7 +2079,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Returns.ReturnOrderViewModel'
+                $ref: '#/components/schemas/ReturnOrder'
           description: Success
         "401":
           description: Authorization missing or invalid
@@ -2165,6 +2106,7 @@ paths:
       - Returns
   /return/{id}/statushistory:
     get:
+      operationId: getReturnStatusHistory
       parameters:
       - description: Id of the return order
         explode: false
@@ -2189,7 +2131,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Returns.ReturnOrderStatusHistoryViewModel'
+                $ref: '#/components/schemas/ReturnOrderStatusHistory'
           description: Success
         "401":
           description: Authorization missing or invalid
@@ -2210,6 +2152,7 @@ paths:
       - Returns
   /shipment/cancelbulk:
     post:
+      operationId: cancelShipmentBulk
       parameters:
       - description: Channel ID for Operation
         explode: false
@@ -2223,24 +2166,15 @@ paths:
         style: simple
       requestBody:
         content:
-          application/*+json:
-            schema:
-              $ref: '#/components/schemas/Orders.CancelShipmentsModel'
           application/json:
             schema:
-              $ref: '#/components/schemas/Orders.CancelShipmentsModel'
-          application/json-patch+json:
-            schema:
-              $ref: '#/components/schemas/Orders.CancelShipmentsModel'
-          text/json:
-            schema:
-              $ref: '#/components/schemas/Orders.CancelShipmentsModel'
+              $ref: '#/components/schemas/CancelShipment'
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Orders.CanceledShipmentsViewModel'
+                $ref: '#/components/schemas/inline_response_200'
           description: Success
         "401":
           description: No access right at this time
@@ -2274,6 +2208,7 @@ paths:
       - Orders
   /shipment/{shipmentId}:
     get:
+      operationId: getShipment
       parameters:
       - description: The shipment id to get
         explode: false
@@ -2299,7 +2234,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Orders.ShipmentViewModel'
+                $ref: '#/components/schemas/Shipment'
           description: Success
         "400":
           content:
@@ -2325,6 +2260,7 @@ paths:
       - Orders
   /shipment/{shipmentId}/cancel:
     post:
+      operationId: cancelShipment
       parameters:
       - description: The shipment id to get
         explode: false
@@ -2350,7 +2286,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Orders.ShipmentViewModel'
+                $ref: '#/components/schemas/Shipment'
           description: Success
         "400":
           content:
@@ -2396,6 +2332,7 @@ paths:
       - Orders
   /shipment/{shipmentId}/logs:
     get:
+      operationId: getShipmentLogs
       parameters:
       - description: The shipment id to get
         explode: false
@@ -2422,7 +2359,7 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/Orders.ShipmentLogViewModel'
+                  $ref: '#/components/schemas/ShipmentLog'
                 type: array
           description: Success
         "400":
@@ -2449,6 +2386,7 @@ paths:
       - Orders
   /shipment/{shipmentId}/timeline:
     get:
+      operationId: getShipmentTimeline
       parameters:
       - description: The shipment id to get
         explode: false
@@ -2475,7 +2413,7 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/Orders.ShipmentLogViewModel'
+                  $ref: '#/components/schemas/ShipmentLog'
                 type: array
           description: Success
         "400":
@@ -2503,6 +2441,7 @@ paths:
   /shippingmethod:
     get:
       description: Get all merchants shipping methods
+      operationId: getShippingMethodCollection
       parameters:
       - description: Page of orders to get
         explode: true
@@ -2528,7 +2467,7 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/Orders.ShipMethodDetailViewModel'
+                  $ref: '#/components/schemas/ShipMethodDetail'
                 type: array
           description: Success
         "400":
@@ -2564,6 +2503,7 @@ paths:
   /webhook:
     get:
       description: All parameters are AND filters
+      operationId: getWebhooks
       parameters:
       - description: Topic of the webhooks requested
         explode: true
@@ -2571,7 +2511,7 @@ paths:
         name: Topic
         required: false
         schema:
-          $ref: '#/components/schemas/Webhooks.Topics'
+          $ref: '#/components/schemas/Topics'
         style: form
       - description: Page of Webhooks to get
         explode: true
@@ -2603,7 +2543,7 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/Webhooks.WebhookViewModel'
+                  $ref: '#/components/schemas/Webhook'
                 type: array
           description: Success
           headers:
@@ -2621,28 +2561,28 @@ paths:
               explode: false
               schema:
                 description: Number of the current page
-                type: int
+                type: integer
               style: simple
             Page-Size:
               description: Number of results per page
               explode: false
               schema:
                 description: Number of results per page
-                type: int
+                type: integer
               style: simple
             Total-Count:
               description: Total number of results
               explode: false
               schema:
                 description: Total number of results
-                type: int
+                type: integer
               style: simple
             Total-Pages:
               description: Total number of pages of results
               explode: false
               schema:
                 description: Total number of pages of results
-                type: int
+                type: integer
               style: simple
         "400":
           content:
@@ -2664,6 +2604,7 @@ paths:
       tags:
       - Webhooks
     post:
+      operationId: createWebhook
       parameters:
       - explode: false
         in: header
@@ -2676,24 +2617,15 @@ paths:
         style: simple
       requestBody:
         content:
-          application/*+json:
-            schema:
-              $ref: '#/components/schemas/Webhooks.CreateWebhookSubscriptionModel'
           application/json:
             schema:
-              $ref: '#/components/schemas/Webhooks.CreateWebhookSubscriptionModel'
-          application/json-patch+json:
-            schema:
-              $ref: '#/components/schemas/Webhooks.CreateWebhookSubscriptionModel'
-          text/json:
-            schema:
-              $ref: '#/components/schemas/Webhooks.CreateWebhookSubscriptionModel'
+              $ref: '#/components/schemas/WebhookSubscription'
       responses:
         "201":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Webhooks.WebhookViewModel'
+                $ref: '#/components/schemas/Webhook'
           description: Success
         "400":
           content:
@@ -2726,6 +2658,7 @@ paths:
       - Webhooks
   /webhook/{id}:
     delete:
+      operationId: deleteWebhook
       parameters:
       - explode: false
         in: path
@@ -2755,7 +2688,7 @@ paths:
       - Webhooks
 components:
   schemas:
-    Location.AddressViewModel:
+    LocationAddress:
       additionalProperties: false
       description: The service-specific address of the location. Each object contains
         address type, address1, address2, city, state, country, zip code, phone number,
@@ -2808,7 +2741,7 @@ components:
           nullable: true
           type: string
       type: object
-    Location.LocationViewModel:
+    Location:
       additionalProperties: false
       example:
         is_receiving_enabled: true
@@ -2822,7 +2755,8 @@ components:
         - attributes
         id: 0
         services:
-        - address:
+        - service_type: Receiving
+          address:
             country: country
             address2: address2
             city: city
@@ -2833,7 +2767,8 @@ components:
             email: email
             zip_code: zip_code
           enabled: true
-        - address:
+        - service_type: Receiving
+          address:
             country: country
             address2: address2
             city: city
@@ -2883,11 +2818,11 @@ components:
           nullable: true
           type: string
         region:
-          $ref: '#/components/schemas/Location.RegionViewModel'
+          $ref: '#/components/schemas/LocationRegion'
         services:
           description: Services provided by the location
           items:
-            $ref: '#/components/schemas/Location.ServiceViewModel'
+            $ref: '#/components/schemas/LocationService'
           nullable: true
           type: array
         timezone:
@@ -2895,7 +2830,7 @@ components:
           nullable: true
           type: string
       type: object
-    Location.RegionViewModel:
+    LocationRegion:
       additionalProperties: false
       example:
         name: name
@@ -2910,9 +2845,10 @@ components:
           nullable: true
           type: string
       type: object
-    Location.ServiceViewModel:
+    LocationService:
       additionalProperties: false
       example:
+        service_type: Receiving
         address:
           country: country
           address2: address2
@@ -2926,19 +2862,17 @@ components:
         enabled: true
       properties:
         address:
-          $ref: '#/components/schemas/Location.AddressViewModel'
+          $ref: '#/components/schemas/LocationAddress'
         enabled:
           description: Indicates if the user is authorized to access this service
             at the location
           type: boolean
         service_type:
-          $ref: '#/components/schemas/Location.ServiceTypeEnum'
+          enum:
+          - Receiving
+          - Returns
+          type: string
       type: object
-    Location.ServiceTypeEnum:
-      enum:
-      - Receiving
-      - Returns
-      type: string
     ProblemDetails:
       additionalProperties: false
       discriminator:
@@ -3010,7 +2944,7 @@ components:
           nullable: true
           type: string
       type: object
-    Channels.ChannelViewModel:
+    Channel:
       additionalProperties: false
       example:
         application_name: Api
@@ -3040,47 +2974,13 @@ components:
           nullable: true
           type: array
       type: object
-    Orders.AddProductToOrderByProductIdModel:
-      additionalProperties: false
-      properties:
-        id:
-          description: Unique id of the product
-          format: int32
-          type: integer
-        quantity:
-          description: The quantity of this product ordered
-          format: int32
-          type: integer
-      required:
-      - id
-      - quantity
-      type: object
-    Orders.AddProductToOrderByReferenceIdModel:
-      additionalProperties: false
-      properties:
-        name:
-          description: Name of the product
-          example: TShirtBlueM
-          type: string
-        quantity:
-          description: The quantity of this product ordered
-          format: int32
-          type: integer
-        reference_id:
-          description: Unique reference id of the product
-          example: TShirtBlueM
-          type: string
-      required:
-      - quantity
-      - reference_id
-      type: object
-    Orders.AddProductToOrderModel:
-      oneOf:
-      - $ref: '#/components/schemas/Orders.AddProductToOrderByProductIdModel'
-      - $ref: '#/components/schemas/Orders.AddProductToOrderByReferenceIdModel'
-    Orders.CancelShipmentsModel:
+    CancelShipment:
       additionalProperties: false
       description: Model for cancel multiple shipments at once
+      example:
+        shipment_ids:
+        - 0
+        - 0
       properties:
         shipment_ids:
           description: Shipment IDs to cancel
@@ -3089,8 +2989,40 @@ components:
             type: integer
           type: array
       type: object
-    Orders.CreateOrderModel:
+    CreateOrder:
       additionalProperties: false
+      example:
+        reference_id: reference_id
+        shipping_method: shipping_method
+        order_number: order_number
+        recipient:
+          address:
+            country: US
+            address2: Suite 100
+            city: Gotham City
+            address1: 100 Nowhere Blvd
+            company_name: Wayne Enterprises
+            state: NJ
+            zip_code: "07093"
+          name: John Doe
+          phone_number: 555-555-5555
+          email: john@example.com
+        purchase_date: 2000-01-23T04:56:07.000+00:00
+        type: DTC
+        products:
+        - quantity: 6
+          reference_id: TShirtBlueM
+          name: TShirtBlueM
+          id: 0
+        - quantity: 6
+          reference_id: TShirtBlueM
+          name: TShirtBlueM
+          id: 0
+        tags:
+        - name: Handling instructions
+          value: Fragile
+        - name: Handling instructions
+          value: Fragile
       properties:
         order_number:
           description: User friendly orderId or store order number that will be shown
@@ -3099,7 +3031,7 @@ components:
           type: string
         products:
           items:
-            $ref: '#/components/schemas/Orders.AddProductToOrderModel'
+            $ref: '#/components/schemas/CreateOrder_products'
           minLength: 1
           type: array
         purchase_date:
@@ -3108,7 +3040,7 @@ components:
           nullable: true
           type: string
         recipient:
-          $ref: '#/components/schemas/Orders.RecipientInfoViewModel'
+          $ref: '#/components/schemas/RecipientInfo'
         reference_id:
           maxLength: 300
           type: string
@@ -3116,7 +3048,7 @@ components:
           type: string
         tags:
           items:
-            $ref: '#/components/schemas/Orders.TagViewModel'
+            $ref: '#/components/schemas/Tag'
           type: array
         type:
           description: 'Defaults to Direct to Consumer (DTC) if not provided. Note:
@@ -3132,21 +3064,40 @@ components:
       - reference_id
       - shipping_method
       type: object
-    Orders.EstimateFulfillmentRequestModel:
+    EstimateFulfillmentRequest:
       additionalProperties: false
+      example:
+        address:
+          country: US
+          address2: Suite 100
+          city: Gotham City
+          address1: 100 Nowhere Blvd
+          company_name: Wayne Enterprises
+          state: NJ
+          zip_code: "07093"
+        shipping_methods:
+        - shipping_methods
+        - shipping_methods
+        products:
+        - quantity: 120
+          reference_id: TShirtBlueM
+          id: 0
+        - quantity: 120
+          reference_id: TShirtBlueM
+          id: 0
       properties:
         address:
-          $ref: '#/components/schemas/Orders.EstimationAddressViewModel'
+          $ref: '#/components/schemas/EstimationAddress'
         products:
           description: Products to be included in the order. Each product must include
             one of reference_id or id
           items:
-            $ref: '#/components/schemas/Orders.EstimateProductInfoModel'
+            $ref: '#/components/schemas/EstimateFulfillmentRequest_products'
           type: array
         shipping_methods:
           description: Array of strings specifying shipping methods for which to fetch
-            estimates.\r\n\r\nIf this field is omitted we will return estimates for
-            all shipping methods defined in ShipBob
+            estimates.\r\nIf this field is omitted we will return estimates for all
+            shipping methods defined in ShipBob
           items:
             type: string
           type: array
@@ -3154,30 +3105,7 @@ components:
       - address
       - products
       type: object
-    Orders.EstimateProductInfoModel:
-      additionalProperties: false
-      properties:
-        id:
-          description: Unique id of the product (Must be provided if reference_id
-            is unknown)
-          format: int32
-          nullable: true
-          type: integer
-        quantity:
-          description: The quantity of this product ordered
-          format: int32
-          maximum: 199
-          minimum: 1
-          type: integer
-        reference_id:
-          description: Unique reference id of the product (Must be provided if ID
-            is unknown)
-          example: TShirtBlueM
-          type: string
-      required:
-      - quantity
-      type: object
-    Orders.AddressViewModel:
+    OrderAddress:
       additionalProperties: false
       example:
         country: US
@@ -3221,7 +3149,7 @@ components:
       - city
       - country
       type: object
-    Orders.CanceledOrderViewModel:
+    CanceledOrder:
       additionalProperties: false
       example:
         canceled_shipment_results:
@@ -3480,10 +3408,10 @@ components:
         canceled_shipment_results:
           description: Results of camceling the shipments associated with the order
           items:
-            $ref: '#/components/schemas/Orders.CanceledShipmentViewModel'
+            $ref: '#/components/schemas/CanceledShipment'
           type: array
         order:
-          $ref: '#/components/schemas/Orders.OrderViewModel'
+          $ref: '#/components/schemas/Order'
         order_id:
           description: The ID of the canceled order
           format: int32
@@ -3497,7 +3425,7 @@ components:
           - PartialSuccess
           type: string
       type: object
-    Orders.CanceledShipmentViewModel:
+    CanceledShipment:
       additionalProperties: false
       example:
         reason: reason
@@ -3520,26 +3448,7 @@ components:
           format: int64
           type: integer
       type: object
-    Orders.CanceledShipmentsViewModel:
-      additionalProperties: false
-      example:
-        results:
-        - reason: reason
-          action: Cancel
-          is_success: true
-          shipment_id: 0
-        - reason: reason
-          action: Cancel
-          is_success: true
-          shipment_id: 0
-      properties:
-        results:
-          description: The results of all cancellation actions
-          items:
-            $ref: '#/components/schemas/Orders.CanceledShipmentViewModel'
-          type: array
-      type: object
-    Orders.ChannelInfoViewModel:
+    ChannelInfo:
       additionalProperties: false
       description: Created by channel metadata
       example:
@@ -3555,26 +3464,7 @@ components:
           example: ShipBobs-Shopify-Store
           type: string
       type: object
-    Orders.EstimateDetailViewModel:
-      additionalProperties: false
-      example:
-        estimated_price: 0.8008281904610115
-        fulfillment_center:
-          name: Cicero (IL)
-          id: 9
-        shipping_method: shipping_method
-      properties:
-        estimated_price:
-          description: Estimated price in dollars for the provided shipping method
-          format: double
-          type: number
-        fulfillment_center:
-          $ref: '#/components/schemas/Orders.FulfillmentCenterViewModel'
-        shipping_method:
-          description: Provided shipping method. Maps to ship option in ShipBob.
-          type: string
-      type: object
-    Orders.EstimateViewModel:
+    OrderEstimate:
       additionalProperties: false
       example:
         estimates:
@@ -3592,11 +3482,19 @@ components:
         estimates:
           description: Array of estimates for each shipping method
           items:
-            $ref: '#/components/schemas/Orders.EstimateDetailViewModel'
+            $ref: '#/components/schemas/OrderEstimate_estimates'
           type: array
       type: object
-    Orders.EstimationAddressViewModel:
+    EstimationAddress:
       additionalProperties: false
+      example:
+        country: US
+        address2: Suite 100
+        city: Gotham City
+        address1: 100 Nowhere Blvd
+        company_name: Wayne Enterprises
+        state: NJ
+        zip_code: "07093"
       properties:
         address1:
           description: First line of the address
@@ -3629,7 +3527,7 @@ components:
       required:
       - country
       type: object
-    Orders.FulfillmentCenterViewModel:
+    FulfillmentCenter:
       additionalProperties: false
       description: Information about a fulfillment center that a shipment can belong
         to
@@ -3646,7 +3544,7 @@ components:
           example: Cicero (IL)
           type: string
       type: object
-    Orders.InventoryViewModel:
+    OrderInventory:
       additionalProperties: false
       description: Information about inventory belonging to a store product
       example:
@@ -3699,7 +3597,7 @@ components:
             type: string
           type: array
       type: object
-    Orders.MeasurementsViewModel:
+    OrderMeasurements:
       additionalProperties: false
       description: Measurements of a shipment
       example:
@@ -3725,7 +3623,7 @@ components:
           format: int32
           type: integer
       type: object
-    Orders.OrderViewModel:
+    Order:
       additionalProperties: false
       example:
         reference_id: reference_id
@@ -3970,7 +3868,7 @@ components:
         status: Processing
       properties:
         channel:
-          $ref: '#/components/schemas/Orders.ChannelInfoViewModel'
+          $ref: '#/components/schemas/ChannelInfo'
         created_date:
           description: Date this order was created
           format: date-time
@@ -3986,7 +3884,7 @@ components:
         products:
           description: List of products included in the order
           items:
-            $ref: '#/components/schemas/Orders.ProductInfoViewModel'
+            $ref: '#/components/schemas/ProductInfo'
           type: array
         purchase_date:
           description: Date this order was purchase by the end user
@@ -3994,14 +3892,14 @@ components:
           nullable: true
           type: string
         recipient:
-          $ref: '#/components/schemas/Orders.RecipientInfoViewModel'
+          $ref: '#/components/schemas/RecipientInfo'
         reference_id:
           description: Client-defined external unique id of the order
           type: string
         shipments:
           description: Shipments affiliated with the order
           items:
-            $ref: '#/components/schemas/Orders.ShipmentViewModel'
+            $ref: '#/components/schemas/Shipment'
           type: array
         shipping_method:
           description: Client-defined shipping method
@@ -4020,7 +3918,7 @@ components:
         tags:
           description: Client-defined order tags
           items:
-            $ref: '#/components/schemas/Orders.TagViewModel'
+            $ref: '#/components/schemas/Tag'
           type: array
         type:
           description: Shipment type of the order
@@ -4031,7 +3929,7 @@ components:
           example: DTC
           type: string
       type: object
-    Orders.ProductInfoViewModel:
+    ProductInfo:
       additionalProperties: false
       example:
         quantity: 5
@@ -4057,7 +3955,7 @@ components:
           example: TShirtBlueM
           type: string
       type: object
-    Orders.RecipientInfoViewModel:
+    RecipientInfo:
       additionalProperties: false
       description: Information about the recipient of an order
       example:
@@ -4074,7 +3972,7 @@ components:
         email: john@example.com
       properties:
         address:
-          $ref: '#/components/schemas/Orders.AddressViewModel'
+          $ref: '#/components/schemas/OrderAddress'
         email:
           description: Email address of the recipient
           example: john@example.com
@@ -4092,7 +3990,7 @@ components:
       - address
       - name
       type: object
-    Orders.RecipientViewModel:
+    Recipient:
       additionalProperties: false
       description: Information about the recipient of a shipment
       example:
@@ -4109,7 +4007,7 @@ components:
         email: john@example.com
       properties:
         address:
-          $ref: '#/components/schemas/Orders.AddressViewModel'
+          $ref: '#/components/schemas/OrderAddress'
         email:
           description: Email address of the recipient
           example: john@example.com
@@ -4123,7 +4021,7 @@ components:
           example: 555-555-5555
           type: string
       type: object
-    Orders.ServiceLevelDetailViewModel:
+    ServiceLevelDetail:
       additionalProperties: false
       example:
         name: name
@@ -4137,7 +4035,7 @@ components:
           description: The name or title of the service level
           type: string
       type: object
-    Orders.ShipMethodDetailViewModel:
+    ShipMethodDetail:
       additionalProperties: false
       example:
         default: true
@@ -4165,9 +4063,9 @@ components:
             \ to the shipping_method field in the Orders API."
           type: string
         service_level:
-          $ref: '#/components/schemas/Orders.ServiceLevelDetailViewModel'
+          $ref: '#/components/schemas/ServiceLevelDetail'
       type: object
-    Orders.ShipmentLogViewModel:
+    ShipmentLog:
       additionalProperties: false
       example:
         log_type_text: log_type_text
@@ -4197,7 +4095,7 @@ components:
           format: date-time
           type: string
       type: object
-    Orders.ShipmentProductViewModel:
+    ShipmentProduct:
       additionalProperties: false
       description: Information about a store product belonging to a shipment
       example:
@@ -4235,7 +4133,7 @@ components:
           description: Information about fulfillable inventory items belonging to
             this product
           items:
-            $ref: '#/components/schemas/Orders.InventoryViewModel'
+            $ref: '#/components/schemas/OrderInventory'
           type: array
         name:
           description: Name of the product
@@ -4250,7 +4148,7 @@ components:
           example: TShirtBlueM
           type: string
       type: object
-    Orders.ShipmentViewModel:
+    Shipment:
       additionalProperties: false
       description: Information about a shipment
       example:
@@ -4357,9 +4255,9 @@ components:
         status: None
       properties:
         actual_fulfillment_date:
-          description: "The datetime of ShipBobâ\x80\x99s completion of the fulfillment\
-            \ operation as promised. \\r\\nCurrently, this means the shipment has\
-            \ been picked, packed, and label has been printed."
+          description: The datetime of ShipBob's completion of the fulfillment operation
+            as promised. Currently, this means the shipment has been picked, packed,
+            and label has been printed.
           format: date-time
           nullable: true
           type: string
@@ -4368,14 +4266,13 @@ components:
           format: date-time
           type: string
         estimated_fulfillment_date:
-          description: "The datetime of ShipBobâ\x80\x99s commitment for completing\
-            \ \\r\\nthe shipment and handing to the carrier for delivery."
+          description: The datetime of ShipBob's commitment for completing the shipment
+            and handing to the carrier for delivery.
           format: date-time
           nullable: true
           type: string
         estimated_fulfillment_date_status:
-          description: "Status of ShipBobâ\x80\x99s completion of the fulfillment\
-            \ operation."
+          description: Status of ShipBob's completion of the fulfillment operation.
           enum:
           - AwaitingInventoryAllocation
           - AwaitingReset
@@ -4405,9 +4302,9 @@ components:
           nullable: true
           type: string
         location:
-          $ref: '#/components/schemas/Orders.FulfillmentCenterViewModel'
+          $ref: '#/components/schemas/FulfillmentCenter'
         measurements:
-          $ref: '#/components/schemas/Orders.MeasurementsViewModel'
+          $ref: '#/components/schemas/OrderMeasurements'
         order_id:
           description: Id of the order this shipment belongs to
           format: int32
@@ -4430,10 +4327,10 @@ components:
         products:
           description: Information about the products contained in this shipment
           items:
-            $ref: '#/components/schemas/Orders.ShipmentProductViewModel'
+            $ref: '#/components/schemas/ShipmentProduct'
           type: array
         recipient:
-          $ref: '#/components/schemas/Orders.RecipientViewModel'
+          $ref: '#/components/schemas/Recipient'
         reference_id:
           description: Client-defined external unique id of the order this shipment
             belongs to
@@ -4462,12 +4359,12 @@ components:
         status_details:
           description: Additional details about the shipment status
           items:
-            $ref: '#/components/schemas/Orders.StatusDetailViewModel'
+            $ref: '#/components/schemas/OrderStatusDetails'
           type: array
         tracking:
-          $ref: '#/components/schemas/Orders.TrackingViewModel'
+          $ref: '#/components/schemas/Tracking'
       type: object
-    Orders.StatusDetailViewModel:
+    OrderStatusDetails:
       additionalProperties: false
       example:
         inventory_id: 5
@@ -4496,7 +4393,7 @@ components:
           description: Short name of the status detail
           type: string
       type: object
-    Orders.TagViewModel:
+    Tag:
       additionalProperties: false
       example:
         name: Handling instructions
@@ -4516,7 +4413,7 @@ components:
       - name
       - value
       type: object
-    Orders.TrackingViewModel:
+    Tracking:
       additionalProperties: false
       description: Tracking information for a shipment
       example:
@@ -4542,8 +4439,10 @@ components:
           example: https://www.example.com/tracking?id=860C8CDC8F0B4FC7AB69AC86C20539EC
           type: string
       type: object
-    Webhooks.CreateWebhookSubscriptionModel:
+    WebhookSubscription:
       additionalProperties: false
+      example:
+        subscription_url: https://mywebsite.com/shipbob/handler
       properties:
         subscription_url:
           description: URL we will call when an event matching the subscription topic
@@ -4553,12 +4452,12 @@ components:
           format: uri
           type: string
         topic:
-          $ref: '#/components/schemas/Webhooks.Topics'
+          $ref: '#/components/schemas/Topics'
       required:
       - subscription_url
       - topic
       type: object
-    Webhooks.WebhookViewModel:
+    Webhook:
       additionalProperties: false
       example:
         created_at: 2000-01-23T04:56:07.000+00:00
@@ -4580,16 +4479,16 @@ components:
           nullable: true
           type: string
         topic:
-          $ref: '#/components/schemas/Webhooks.Topics'
+          $ref: '#/components/schemas/Topics'
       type: object
-    Webhooks.Topics:
+    Topics:
       enum:
       - order_shipped
       - shipment_delivered
       - shipment_exception
       - shipment_onhold
       type: string
-    Inventory.DimensionViewModel:
+    Dimension:
       additionalProperties: false
       description: Information about an inventory item's dimensions
       example:
@@ -4615,7 +4514,7 @@ components:
           format: double
           type: number
       type: object
-    Inventory.FulfillmentCenterQuantityViewModel:
+    InventoryFulfillmentCenterQuantity:
       additionalProperties: false
       description: Break down of fulfillable quantity by fulfillment center
       example:
@@ -4661,7 +4560,7 @@ components:
           format: int32
           type: integer
       type: object
-    Inventory.InventoryViewModel:
+    Inventory:
       additionalProperties: false
       description: Information about an inventory item
       example:
@@ -4746,18 +4645,18 @@ components:
           weight: 1.4658129805029452
       properties:
         dimensions:
-          $ref: '#/components/schemas/Inventory.DimensionViewModel'
+          $ref: '#/components/schemas/Dimension'
         fulfillable_quantity_by_fulfillment_center:
           description: Fulfillable quantity of this inventory item broken down by
             fulfillment center location
           items:
-            $ref: '#/components/schemas/Inventory.FulfillmentCenterQuantityViewModel'
+            $ref: '#/components/schemas/InventoryFulfillmentCenterQuantity'
           type: array
         fulfillable_quantity_by_lot:
           description: Fulfillable quantity of this inventory item broken down by
             lot
           items:
-            $ref: '#/components/schemas/Inventory.LotQuantityViewModel'
+            $ref: '#/components/schemas/InventoryLotQuantity'
           type: array
         id:
           description: Unique id of the inventory item
@@ -4833,7 +4732,7 @@ components:
           format: int32
           type: integer
       type: object
-    Inventory.LotQuantityViewModel:
+    InventoryLotQuantity:
       additionalProperties: false
       description: Break down of fulfillable quantity by lot
       example:
@@ -4882,7 +4781,7 @@ components:
           description: Fulfillable quantity of inventory items belonging to this lot
             broken down by fulfillment center location
           items:
-            $ref: '#/components/schemas/Inventory.FulfillmentCenterQuantityViewModel'
+            $ref: '#/components/schemas/InventoryFulfillmentCenterQuantity'
           type: array
         internal_transfer_quantity:
           description: The quantity of all items belonging to this lot that are in
@@ -4902,7 +4801,7 @@ components:
           format: int32
           type: integer
       type: object
-    Products.CreateProductModel:
+    CreateProduct:
       additionalProperties: false
       description: The product to create
       example:
@@ -4936,9 +4835,13 @@ components:
       - name
       - reference_id
       type: object
-    Products.UpdateProductModel:
+    UpdateProduct:
       additionalProperties: false
       description: Updates to an existing product product
+      example:
+        name: Medium Blue T-Shirt
+        sku: TShirtBlueM
+        barcode: "123456789012"
       properties:
         barcode:
           description: Barcode for the product
@@ -4958,22 +4861,7 @@ components:
       required:
       - name
       type: object
-    Products.BundleRootInformationViewModel:
-      additionalProperties: false
-      example:
-        name: name
-        id: 0
-      properties:
-        id:
-          description: Id of the bundle root product
-          format: int32
-          type: integer
-        name:
-          description: Name of the bundle root product
-          nullable: true
-          type: string
-      type: object
-    Products.ChannelViewModel:
+    ProductChannel:
       additionalProperties: false
       description: Information about a store channel
       example:
@@ -4990,7 +4878,7 @@ components:
           nullable: true
           type: string
       type: object
-    Products.FulfillmentCenterQuantityViewModel:
+    ProductFulfillmentCenterQuantity:
       additionalProperties: false
       description: Break down of quantities by fulfillment center
       example:
@@ -5022,7 +4910,7 @@ components:
           format: int32
           type: integer
       type: object
-    Products.InventoryItemViewModel:
+    ProductInventoryItem:
       additionalProperties: false
       description: The inventory that store products can resolve to when packing a
         shipment
@@ -5045,7 +4933,7 @@ components:
           format: int32
           type: integer
       type: object
-    Products.ProductViewModel:
+    Product:
       additionalProperties: false
       example:
         total_fulfillable_quantity: 4
@@ -5088,9 +4976,9 @@ components:
           nullable: true
           type: string
         bundle_root_information:
-          $ref: '#/components/schemas/Products.BundleRootInformationViewModel'
+          $ref: '#/components/schemas/Product_bundle_root_information'
         channel:
-          $ref: '#/components/schemas/Products.ChannelViewModel'
+          $ref: '#/components/schemas/ProductChannel'
         created_date:
           description: Date the product was created
           format: date-time
@@ -5099,14 +4987,14 @@ components:
           description: The inventory that this product will resolve to when packing
             a shipment
           items:
-            $ref: '#/components/schemas/Products.InventoryItemViewModel'
+            $ref: '#/components/schemas/ProductInventoryItem'
           nullable: true
           type: array
         fulfillable_quantity_by_fulfillment_center:
           description: Fulfillable quantity of this product broken down by fulfillment
             center location
           items:
-            $ref: '#/components/schemas/Products.FulfillmentCenterQuantityViewModel'
+            $ref: '#/components/schemas/ProductFulfillmentCenterQuantity'
           nullable: true
           type: array
         id:
@@ -5141,177 +5029,47 @@ components:
           format: int32
           type: integer
       type: object
-    Products.ProductActiveStatus:
-      enum:
-      - Any
-      - Active
-      - Inactive
-      type: string
-    Products.ProductBundleStatus:
+    ProductBundle:
       enum:
       - Any
       - Bundle
       - NotBundle
       type: string
-    Receiving.AddBoxItemToBoxModel:
-      additionalProperties: false
-      description: Information about an inventory item contained inside a receiving
-        order box
-      properties:
-        inventory_id:
-          description: Unique inventory id of the items in the box
-          format: int32
-          type: integer
-        lot_date:
-          description: Lot expiration date for the items in the box
-          format: date-time
-          nullable: true
-          type: string
-        lot_number:
-          description: Lot number of the items in the box
-          example: "2222"
-          nullable: true
-          type: string
-        quantity:
-          description: Quantity of the items in the box
-          format: int32
-          maximum: 2147483647
-          minimum: 1
-          type: integer
-      required:
-      - inventory_id
-      - quantity
-      type: object
-    Receiving.AddBoxToOrderModel:
-      additionalProperties: false
-      description: Information about a box shipment to be added to a receiving order
-      properties:
-        box_items:
-          description: Items contained in this box
-          items:
-            $ref: '#/components/schemas/Receiving.AddBoxItemToBoxModel'
-          nullable: true
-          type: array
-        tracking_number:
-          description: Tracking number for the box shipment
-          example: 860C8CDC8F0B4FC7AB69AC86C20539EC
-          nullable: true
-          type: string
-      required:
-      - box_items
-      - tracking_number
-      type: object
-    Receiving.AssignOrderToFulfillmentCenterModel:
-      additionalProperties: false
-      description: Model containing information that assigns a receiving order to
-        a fulfillment center
-      properties:
-        id:
-          description: ID of the fulfillment center to assign this receiving order
-            to
-          format: int32
-          type: integer
-      required:
-      - id
-      type: object
-    Receiving.BoxItemViewModel:
-      additionalProperties: false
-      description: Information about an item contained inside a box as part of a receiving
-        order
-      example:
-        lot_date: 2000-01-23T04:56:07.000+00:00
-        quantity: 6
-        inventory_id: 0
-        received_quantity: 1
-        lot_number: lot_number
-      properties:
-        inventory_id:
-          description: Unique identifier of the inventory item
-          format: int32
-          type: integer
-        lot_date:
-          description: Expiration date of the item's lot
-          format: date-time
-          nullable: true
-          type: string
-        lot_number:
-          description: Lot number the item belongs to
-          nullable: true
-          type: string
-        quantity:
-          description: Quantity of the item included
-          format: int32
-          type: integer
-        received_quantity:
-          description: Quantity of the item that was received after processing the
-            receiving order
-          format: int32
-          type: integer
-      type: object
-    Receiving.BoxViewModel:
-      additionalProperties: false
-      description: Information about a box shipment included in a receiving order
-      example:
-        counting_started_date: 2000-01-23T04:56:07.000+00:00
-        box_number: 5
-        received_date: 2000-01-23T04:56:07.000+00:00
-        box_items:
-        - lot_date: 2000-01-23T04:56:07.000+00:00
-          quantity: 6
-          inventory_id: 0
-          received_quantity: 1
-          lot_number: lot_number
-        - lot_date: 2000-01-23T04:56:07.000+00:00
-          quantity: 6
-          inventory_id: 0
-          received_quantity: 1
-          lot_number: lot_number
-        tracking_number: 860C8CDC8F0B4FC7AB69AC86C20539EC
-        arrived_date: 2000-01-23T04:56:07.000+00:00
-      properties:
-        arrived_date:
-          description: Date the box arrived
-          format: date-time
-          nullable: true
-          type: string
-        box_items:
-          description: Information about the items included in the box
-          items:
-            $ref: '#/components/schemas/Receiving.BoxItemViewModel'
-          nullable: true
-          type: array
-        box_number:
-          description: The number of the box in the receiving order
-          format: int32
-          type: integer
-        box_status:
-          $ref: '#/components/schemas/Receiving.BoxStatus'
-        counting_started_date:
-          description: Date counting of the box's inventory items started
-          format: date-time
-          nullable: true
-          type: string
-        received_date:
-          description: Date the box was received
-          format: date-time
-          nullable: true
-          type: string
-        tracking_number:
-          description: Tracking number of the box shipment
-          example: 860C8CDC8F0B4FC7AB69AC86C20539EC
-          nullable: true
-          type: string
-      type: object
-    Receiving.CreateReceivingOrderModel:
+    CreateReceivingOrder:
       additionalProperties: false
       description: Information to create a new receiving order
+      example:
+        boxes:
+        - box_items:
+          - lot_date: 2000-01-23T04:56:07.000+00:00
+            quantity: 1294386359
+            inventory_id: 0
+            lot_number: "2222"
+          - lot_date: 2000-01-23T04:56:07.000+00:00
+            quantity: 1294386359
+            inventory_id: 0
+            lot_number: "2222"
+          tracking_number: 860C8CDC8F0B4FC7AB69AC86C20539EC
+        - box_items:
+          - lot_date: 2000-01-23T04:56:07.000+00:00
+            quantity: 1294386359
+            inventory_id: 0
+            lot_number: "2222"
+          - lot_date: 2000-01-23T04:56:07.000+00:00
+            quantity: 1294386359
+            inventory_id: 0
+            lot_number: "2222"
+          tracking_number: 860C8CDC8F0B4FC7AB69AC86C20539EC
+        fulfillment_center:
+          id: 1
+        expected_arrival_date: 2000-01-23T04:56:07.000+00:00
       properties:
         box_packaging_type:
-          $ref: '#/components/schemas/Receiving.PackingType'
+          $ref: '#/components/schemas/PackingType'
         boxes:
           description: Box shipments to be added to this receiving order
           items:
-            $ref: '#/components/schemas/Receiving.AddBoxToOrderModel'
+            $ref: '#/components/schemas/CreateReceivingOrder_boxes'
           nullable: true
           type: array
         expected_arrival_date:
@@ -5320,9 +5078,9 @@ components:
           format: date-time
           type: string
         fulfillment_center:
-          $ref: '#/components/schemas/Receiving.AssignOrderToFulfillmentCenterModel'
+          $ref: '#/components/schemas/CreateReceivingOrder_fulfillment_center'
         package_type:
-          $ref: '#/components/schemas/Receiving.PackageType'
+          $ref: '#/components/schemas/PackageType'
       required:
       - box_packaging_type
       - boxes
@@ -5330,7 +5088,7 @@ components:
       - fulfillment_center
       - package_type
       type: object
-    Receiving.FulfillmentCenterViewModel:
+    ReceivingFulfillmentCenter:
       additionalProperties: false
       description: Information about a fulfillment center
       example:
@@ -5401,13 +5159,14 @@ components:
           nullable: true
           type: string
       type: object
-    Receiving.ReceivingOrderViewModel:
+    ReceivingOrder:
       additionalProperties: false
       description: Information about a receiving order
       example:
         boxes:
         - counting_started_date: 2000-01-23T04:56:07.000+00:00
           box_number: 5
+          box_status: Awaiting
           received_date: 2000-01-23T04:56:07.000+00:00
           box_items:
           - lot_date: 2000-01-23T04:56:07.000+00:00
@@ -5424,6 +5183,7 @@ components:
           arrived_date: 2000-01-23T04:56:07.000+00:00
         - counting_started_date: 2000-01-23T04:56:07.000+00:00
           box_number: 5
+          box_status: Awaiting
           received_date: 2000-01-23T04:56:07.000+00:00
           box_items:
           - lot_date: 2000-01-23T04:56:07.000+00:00
@@ -5455,6 +5215,7 @@ components:
         id: 5
         last_updated_date: 2000-01-23T04:56:07.000+00:00
         expected_arrival_date: 2000-01-23T04:56:07.000+00:00
+        status: Awaiting
       properties:
         box_labels_uri:
           description: URL to the packing slip to be included in each box shipment
@@ -5463,12 +5224,12 @@ components:
           nullable: true
           type: string
         box_packaging_type:
-          $ref: '#/components/schemas/Receiving.PackingType'
+          $ref: '#/components/schemas/PackingType'
         boxes:
           description: Information about the boxes being shipped in this receiving
             order
           items:
-            $ref: '#/components/schemas/Receiving.BoxViewModel'
+            $ref: '#/components/schemas/ReceivingOrder_boxes'
           nullable: true
           type: array
         expected_arrival_date:
@@ -5476,7 +5237,7 @@ components:
           format: date-time
           type: string
         fulfillment_center:
-          $ref: '#/components/schemas/Receiving.FulfillmentCenterViewModel'
+          $ref: '#/components/schemas/ReceivingFulfillmentCenter'
         id:
           description: Unique id of the warehouse receiving order
           format: int32
@@ -5490,42 +5251,31 @@ components:
           format: date-time
           type: string
         package_type:
-          $ref: '#/components/schemas/Receiving.PackageType'
+          $ref: '#/components/schemas/PackageType'
         status:
-          $ref: '#/components/schemas/Receiving.ReceivingStatus'
+          enum:
+          - Awaiting
+          - Processing
+          - Completed
+          - Cancelled
+          - Incomplete
+          - Arrived
+          - PartiallyArrived
+          type: string
       type: object
-    Receiving.BoxStatus:
-      enum:
-      - Awaiting
-      - Arrived
-      - Completed
-      - Counting
-      - Stowing
-      - Cancelled
-      type: string
-    Receiving.PackageType:
+    PackageType:
       enum:
       - Package
       - Pallet
       - FloorLoadedContainer
       type: string
-    Receiving.PackingType:
+    PackingType:
       enum:
       - EverythingInOneBox
       - OneSkuPerBox
       - MultipleSkuPerBox
       type: string
-    Receiving.ReceivingStatus:
-      enum:
-      - Awaiting
-      - Processing
-      - Completed
-      - Cancelled
-      - Incomplete
-      - Arrived
-      - PartiallyArrived
-      type: string
-    Returns.ChannelInfoViewModel:
+    ReturnChannelInfo:
       additionalProperties: false
       description: Created by channel metadata
       example:
@@ -5542,15 +5292,27 @@ components:
           nullable: true
           type: string
       type: object
-    Returns.CreateReturnViewModel:
+    CreateReturn:
       additionalProperties: false
+      example:
+        fulfillment_center:
+          name: Cicero (IL)
+          id: 6
+        reference_id: ShipBob_Return_123
+        tracking_number: 1Z9999999999999999
+        inventory:
+        - quantity: 1
+          id: 111222
+        - quantity: 1
+          id: 111222
+        original_shipment_id: 123456
       properties:
         fulfillment_center:
-          $ref: '#/components/schemas/Returns.FulfillmentCenterViewModel'
+          $ref: '#/components/schemas/ReturnFulfillmentCenter'
         inventory:
           description: Array of inventory items being returned
           items:
-            $ref: '#/components/schemas/Returns.ReturnInventoryViewModel'
+            $ref: '#/components/schemas/ReturnInventory'
           minLength: 1
           nullable: true
           type: array
@@ -5577,7 +5339,7 @@ components:
       - inventory
       - reference_id
       type: object
-    Returns.FulfillmentCenterViewModel:
+    ReturnFulfillmentCenter:
       additionalProperties: false
       description: Information about a fulfillment center
       example:
@@ -5596,11 +5358,12 @@ components:
       required:
       - id
       type: object
-    Returns.InventoryItemViewModel:
+    ReturnInventoryItem:
       additionalProperties: false
       example:
         action_requested:
           instructions: instructions
+          action_type: InventoryDefault
         quantity: 2
         action_taken:
         - quantity_processed: 1280358509
@@ -5611,11 +5374,11 @@ components:
         id: 5
       properties:
         action_requested:
-          $ref: '#/components/schemas/Returns.ReturnActionRequestedViewModel'
+          $ref: '#/components/schemas/ReturnActionRequested'
         action_taken:
           description: Action(s) taken when processing the return
           items:
-            $ref: '#/components/schemas/Returns.ReturnActionTakenViewModel'
+            $ref: '#/components/schemas/ReturnActionTaken'
           nullable: true
           type: array
         id:
@@ -5631,29 +5394,33 @@ components:
           format: int32
           type: integer
       type: object
-    Returns.ReturnActionRequestedViewModel:
+    ReturnActionRequested:
       additionalProperties: false
       example:
         instructions: instructions
+        action_type: InventoryDefault
       properties:
         action:
-          $ref: '#/components/schemas/Returns.ReturnAction'
+          $ref: '#/components/schemas/ReturnAction'
         action_type:
-          $ref: '#/components/schemas/Returns.ReturnActionSource'
+          enum:
+          - InventoryDefault
+          - Override
+          type: string
         instructions:
           description: Specific instructions to be taken for the inventory when processing
             the return
           nullable: true
           type: string
       type: object
-    Returns.ReturnActionTakenViewModel:
+    ReturnActionTaken:
       additionalProperties: false
       example:
         quantity_processed: 1280358509
         action_reason: action_reason
       properties:
         action:
-          $ref: '#/components/schemas/Returns.ReturnAction'
+          $ref: '#/components/schemas/ReturnAction'
         action_reason:
           description: Reason the given action was taken
           nullable: true
@@ -5665,8 +5432,11 @@ components:
           minimum: 1
           type: integer
       type: object
-    Returns.ReturnInventoryViewModel:
+    ReturnInventory:
       additionalProperties: false
+      example:
+        quantity: 1
+        id: 111222
       properties:
         id:
           description: ID of the inventory item to return
@@ -5681,26 +5451,27 @@ components:
           minimum: 1
           type: integer
         requested_action:
-          $ref: '#/components/schemas/Returns.ReturnAction'
+          $ref: '#/components/schemas/ReturnAction'
       required:
       - id
       - quantity
       type: object
-    Returns.ReturnOrderStatusHistoryViewModel:
+    ReturnOrderStatusHistory:
       additionalProperties: false
       example:
         time_stamp: 2000-01-23T04:56:07.000+00:00
       properties:
         status:
-          $ref: '#/components/schemas/Returns.ReturnStatus'
+          $ref: '#/components/schemas/ReturnStatus'
         time_stamp:
           description: Date this corresponding return order status was created
           format: date-time
           type: string
       type: object
-    Returns.ReturnOrderViewModel:
+    ReturnOrder:
       additionalProperties: false
       example:
+        return_type: Regular
         fulfillment_center:
           name: Cicero (IL)
           id: 6
@@ -5714,6 +5485,7 @@ components:
         inventory:
         - action_requested:
             instructions: instructions
+            action_type: InventoryDefault
           quantity: 2
           action_taken:
           - quantity_processed: 1280358509
@@ -5724,6 +5496,7 @@ components:
           id: 5
         - action_requested:
             instructions: instructions
+            action_type: InventoryDefault
           quantity: 2
           action_taken:
           - quantity_processed: 1280358509
@@ -5735,13 +5508,15 @@ components:
         original_shipment_id: 9
         transactions:
         - amount: 2.5
+          transaction_type: ReturnLabelInvoice
         - amount: 2.5
+          transaction_type: ReturnLabelInvoice
         invoice_amount: 7.061401241503109
       properties:
         channel:
-          $ref: '#/components/schemas/Returns.ChannelInfoViewModel'
+          $ref: '#/components/schemas/ReturnChannelInfo'
         fulfillment_center:
-          $ref: '#/components/schemas/Returns.FulfillmentCenterViewModel'
+          $ref: '#/components/schemas/ReturnFulfillmentCenter'
         id:
           description: Unique id of the Return Order
           format: int32
@@ -5753,7 +5528,7 @@ components:
         inventory:
           description: List of inventory included in the return order
           items:
-            $ref: '#/components/schemas/Returns.InventoryItemViewModel'
+            $ref: '#/components/schemas/ReturnInventoryItem'
           nullable: true
           type: array
         invoice_amount:
@@ -5771,9 +5546,12 @@ components:
           nullable: true
           type: string
         return_type:
-          $ref: '#/components/schemas/Returns.ReturnType'
+          enum:
+          - Regular
+          - ReturnToSender
+          type: string
         status:
-          $ref: '#/components/schemas/Returns.ReturnStatus'
+          $ref: '#/components/schemas/ReturnStatus'
         tracking_number:
           description: Tracking number of the return shipment
           example: 860C8CDC8F0B4FC7AB69AC86C20539EC
@@ -5782,14 +5560,15 @@ components:
         transactions:
           description: Array of transactions affiliated with the return order
           items:
-            $ref: '#/components/schemas/Returns.TransactionViewModel'
+            $ref: '#/components/schemas/ReturnTransaction'
           nullable: true
           type: array
       type: object
-    Returns.TransactionViewModel:
+    ReturnTransaction:
       additionalProperties: false
       example:
         amount: 2.5
+        transaction_type: ReturnLabelInvoice
       properties:
         amount:
           description: Transaction amount in dollars
@@ -5797,21 +5576,20 @@ components:
           format: double
           type: number
         transaction_type:
-          $ref: '#/components/schemas/Returns.TransactionLogSource'
+          enum:
+          - ReturnLabelInvoice
+          - ReturnProcessingFee
+          - ReturnToSenderFee
+          type: string
       type: object
-    Returns.ReturnAction:
+    ReturnAction:
       enum:
       - Default
       - Restock
       - Quarantine
       - Dispose
       type: string
-    Returns.ReturnActionSource:
-      enum:
-      - InventoryDefault
-      - Override
-      type: string
-    Returns.ReturnStatus:
+    ReturnStatus:
       enum:
       - AwaitingArrival
       - Arrived
@@ -5819,22 +5597,24 @@ components:
       - Completed
       - Cancelled
       type: string
-    Returns.ReturnType:
-      enum:
-      - Regular
-      - ReturnToSender
-      type: string
-    Returns.SortOrder:
-      enum:
-      - Newest
-      - Oldest
-      type: string
-    Returns.TransactionLogSource:
-      enum:
-      - ReturnLabelInvoice
-      - ReturnProcessingFee
-      - ReturnToSenderFee
-      type: string
+    inline_response_200:
+      example:
+        results:
+        - reason: reason
+          action: Cancel
+          is_success: true
+          shipment_id: 0
+        - reason: reason
+          action: Cancel
+          is_success: true
+          shipment_id: 0
+      properties:
+        results:
+          description: The results of all cancellation actions
+          items:
+            $ref: '#/components/schemas/CanceledShipment'
+          type: array
+      type: object
     ValidationProblemDetails_allOf:
       properties:
         errors:
@@ -5844,6 +5624,260 @@ components:
             type: array
           nullable: true
           type: object
+      type: object
+    CreateOrder_products:
+      example:
+        quantity: 6
+        reference_id: TShirtBlueM
+        name: TShirtBlueM
+        id: 0
+      properties:
+        id:
+          description: Unique id of the product
+          format: int32
+          type: integer
+        quantity:
+          description: The quantity of this product ordered
+          format: int32
+          type: integer
+        name:
+          description: Name of the product
+          example: TShirtBlueM
+          type: string
+        reference_id:
+          description: Unique reference id of the product
+          example: TShirtBlueM
+          type: string
+      required:
+      - quantity
+      type: object
+    EstimateFulfillmentRequest_products:
+      example:
+        quantity: 120
+        reference_id: TShirtBlueM
+        id: 0
+      properties:
+        id:
+          description: Unique id of the product (Must be provided if reference_id
+            is unknown)
+          format: int32
+          nullable: true
+          type: integer
+        quantity:
+          description: The quantity of this product ordered
+          format: int32
+          maximum: 199
+          minimum: 1
+          type: integer
+        reference_id:
+          description: Unique reference id of the product (Must be provided if ID
+            is unknown)
+          example: TShirtBlueM
+          type: string
+      required:
+      - quantity
+      type: object
+    OrderEstimate_estimates:
+      example:
+        estimated_price: 0.8008281904610115
+        fulfillment_center:
+          name: Cicero (IL)
+          id: 9
+        shipping_method: shipping_method
+      properties:
+        estimated_price:
+          description: Estimated price in dollars for the provided shipping method
+          format: double
+          type: number
+        fulfillment_center:
+          $ref: '#/components/schemas/FulfillmentCenter'
+        shipping_method:
+          description: Provided shipping method. Maps to ship option in ShipBob.
+          type: string
+      type: object
+    Product_bundle_root_information:
+      example:
+        name: name
+        id: 0
+      properties:
+        id:
+          description: Id of the bundle root product
+          format: int32
+          type: integer
+        name:
+          description: Name of the bundle root product
+          nullable: true
+          type: string
+      type: object
+    CreateReceivingOrder_box_items:
+      description: Information about an inventory item contained inside a receiving
+        order box
+      example:
+        lot_date: 2000-01-23T04:56:07.000+00:00
+        quantity: 1294386359
+        inventory_id: 0
+        lot_number: "2222"
+      properties:
+        inventory_id:
+          description: Unique inventory id of the items in the box
+          format: int32
+          type: integer
+        lot_date:
+          description: Lot expiration date for the items in the box
+          format: date-time
+          nullable: true
+          type: string
+        lot_number:
+          description: Lot number of the items in the box
+          example: "2222"
+          nullable: true
+          type: string
+        quantity:
+          description: Quantity of the items in the box
+          format: int32
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+      required:
+      - inventory_id
+      - quantity
+      type: object
+    CreateReceivingOrder_boxes:
+      description: Information about a box shipment to be added to a receiving order
+      example:
+        box_items:
+        - lot_date: 2000-01-23T04:56:07.000+00:00
+          quantity: 1294386359
+          inventory_id: 0
+          lot_number: "2222"
+        - lot_date: 2000-01-23T04:56:07.000+00:00
+          quantity: 1294386359
+          inventory_id: 0
+          lot_number: "2222"
+        tracking_number: 860C8CDC8F0B4FC7AB69AC86C20539EC
+      properties:
+        box_items:
+          description: Items contained in this box
+          items:
+            $ref: '#/components/schemas/CreateReceivingOrder_box_items'
+          nullable: true
+          type: array
+        tracking_number:
+          description: Tracking number for the box shipment
+          example: 860C8CDC8F0B4FC7AB69AC86C20539EC
+          nullable: true
+          type: string
+      required:
+      - box_items
+      - tracking_number
+      type: object
+    CreateReceivingOrder_fulfillment_center:
+      description: Model containing information that assigns a receiving order to
+        a fulfillment center
+      example:
+        id: 1
+      properties:
+        id:
+          description: ID of the fulfillment center to assign this receiving order
+            to
+          format: int32
+          type: integer
+      required:
+      - id
+      type: object
+    ReceivingOrder_box_items:
+      description: Information about an item contained inside a box as part of a receiving
+        order
+      example:
+        lot_date: 2000-01-23T04:56:07.000+00:00
+        quantity: 6
+        inventory_id: 0
+        received_quantity: 1
+        lot_number: lot_number
+      properties:
+        inventory_id:
+          description: Unique identifier of the inventory item
+          format: int32
+          type: integer
+        lot_date:
+          description: Expiration date of the item's lot
+          format: date-time
+          nullable: true
+          type: string
+        lot_number:
+          description: Lot number the item belongs to
+          nullable: true
+          type: string
+        quantity:
+          description: Quantity of the item included
+          format: int32
+          type: integer
+        received_quantity:
+          description: Quantity of the item that was received after processing the
+            receiving order
+          format: int32
+          type: integer
+      type: object
+    ReceivingOrder_boxes:
+      description: Information about a box shipment included in a receiving order
+      example:
+        counting_started_date: 2000-01-23T04:56:07.000+00:00
+        box_number: 5
+        box_status: Awaiting
+        received_date: 2000-01-23T04:56:07.000+00:00
+        box_items:
+        - lot_date: 2000-01-23T04:56:07.000+00:00
+          quantity: 6
+          inventory_id: 0
+          received_quantity: 1
+          lot_number: lot_number
+        - lot_date: 2000-01-23T04:56:07.000+00:00
+          quantity: 6
+          inventory_id: 0
+          received_quantity: 1
+          lot_number: lot_number
+        tracking_number: 860C8CDC8F0B4FC7AB69AC86C20539EC
+        arrived_date: 2000-01-23T04:56:07.000+00:00
+      properties:
+        arrived_date:
+          description: Date the box arrived
+          format: date-time
+          nullable: true
+          type: string
+        box_items:
+          description: Information about the items included in the box
+          items:
+            $ref: '#/components/schemas/ReceivingOrder_box_items'
+          nullable: true
+          type: array
+        box_number:
+          description: The number of the box in the receiving order
+          format: int32
+          type: integer
+        box_status:
+          enum:
+          - Awaiting
+          - Arrived
+          - Completed
+          - Counting
+          - Stowing
+          - Cancelled
+          type: string
+        counting_started_date:
+          description: Date counting of the box's inventory items started
+          format: date-time
+          nullable: true
+          type: string
+        received_date:
+          description: Date the box was received
+          format: date-time
+          nullable: true
+          type: string
+        tracking_number:
+          description: Tracking number of the box shipment
+          example: 860C8CDC8F0B4FC7AB69AC86C20539EC
+          nullable: true
+          type: string
       type: object
   securitySchemes:
     oauth2:

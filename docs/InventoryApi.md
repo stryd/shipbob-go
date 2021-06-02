@@ -4,15 +4,15 @@ All URIs are relative to *https://api.shipbob.com/1.0*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**InventoryGet**](InventoryApi.md#InventoryGet) | **Get** /inventory | List inventory items
-[**InventoryInventoryIdGet**](InventoryApi.md#InventoryInventoryIdGet) | **Get** /inventory/{inventoryId} | Get an inventory item
-[**ProductProductIdInventoryGet**](InventoryApi.md#ProductProductIdInventoryGet) | **Get** /product/{productId}/inventory | Get a list of inventory items by product id
+[**GetInventories**](InventoryApi.md#GetInventories) | **Get** /inventory | List inventory items
+[**GetInventory**](InventoryApi.md#GetInventory) | **Get** /inventory/{inventoryId} | Get an inventory item
+[**GetProductInventory**](InventoryApi.md#GetProductInventory) | **Get** /product/{productId}/inventory | Get a list of inventory items by product id
 
 
 
-## InventoryGet
+## GetInventories
 
-> []InventoryInventoryViewModel InventoryGet(ctx).Page(page).Limit(limit).IsActive(isActive).IsDigital(isDigital).IDs(iDs).Sort(sort).Search(search).ShipbobChannelId(shipbobChannelId).Execute()
+> []Inventory GetInventories(ctx).Page(page).Limit(limit).IsActive(isActive).IsDigital(isDigital).IDs(iDs).Sort(sort).Search(search).ShipbobChannelId(shipbobChannelId).Execute()
 
 List inventory items
 
@@ -40,13 +40,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.InventoryApi.InventoryGet(context.Background()).Page(page).Limit(limit).IsActive(isActive).IsDigital(isDigital).IDs(iDs).Sort(sort).Search(search).ShipbobChannelId(shipbobChannelId).Execute()
+    resp, r, err := api_client.InventoryApi.GetInventories(context.Background()).Page(page).Limit(limit).IsActive(isActive).IsDigital(isDigital).IDs(iDs).Sort(sort).Search(search).ShipbobChannelId(shipbobChannelId).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `InventoryApi.InventoryGet``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `InventoryApi.GetInventories``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `InventoryGet`: []InventoryInventoryViewModel
-    fmt.Fprintf(os.Stdout, "Response from `InventoryApi.InventoryGet`: %v\n", resp)
+    // response from `GetInventories`: []Inventory
+    fmt.Fprintf(os.Stdout, "Response from `InventoryApi.GetInventories`: %v\n", resp)
 }
 ```
 
@@ -56,7 +56,7 @@ func main() {
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiInventoryGetRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiGetInventoriesRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -72,7 +72,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]InventoryInventoryViewModel**](Inventory.InventoryViewModel.md)
+[**[]Inventory**](Inventory.md)
 
 ### Authorization
 
@@ -88,9 +88,9 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## InventoryInventoryIdGet
+## GetInventory
 
-> InventoryInventoryViewModel InventoryInventoryIdGet(ctx, inventoryId).Execute()
+> Inventory GetInventory(ctx, inventoryId).Execute()
 
 Get an inventory item
 
@@ -111,13 +111,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.InventoryApi.InventoryInventoryIdGet(context.Background(), inventoryId).Execute()
+    resp, r, err := api_client.InventoryApi.GetInventory(context.Background(), inventoryId).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `InventoryApi.InventoryInventoryIdGet``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `InventoryApi.GetInventory``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `InventoryInventoryIdGet`: InventoryInventoryViewModel
-    fmt.Fprintf(os.Stdout, "Response from `InventoryApi.InventoryInventoryIdGet`: %v\n", resp)
+    // response from `GetInventory`: Inventory
+    fmt.Fprintf(os.Stdout, "Response from `InventoryApi.GetInventory`: %v\n", resp)
 }
 ```
 
@@ -131,7 +131,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiInventoryInventoryIdGetRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiGetInventoryRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -140,7 +140,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InventoryInventoryViewModel**](Inventory.InventoryViewModel.md)
+[**Inventory**](Inventory.md)
 
 ### Authorization
 
@@ -156,9 +156,9 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## ProductProductIdInventoryGet
+## GetProductInventory
 
-> []InventoryInventoryViewModel ProductProductIdInventoryGet(ctx, productId).ShipbobChannelId(shipbobChannelId).Execute()
+> []Inventory GetProductInventory(ctx, productId).ShipbobChannelId(shipbobChannelId).Execute()
 
 Get a list of inventory items by product id
 
@@ -180,13 +180,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.InventoryApi.ProductProductIdInventoryGet(context.Background(), productId).ShipbobChannelId(shipbobChannelId).Execute()
+    resp, r, err := api_client.InventoryApi.GetProductInventory(context.Background(), productId).ShipbobChannelId(shipbobChannelId).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `InventoryApi.ProductProductIdInventoryGet``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `InventoryApi.GetProductInventory``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `ProductProductIdInventoryGet`: []InventoryInventoryViewModel
-    fmt.Fprintf(os.Stdout, "Response from `InventoryApi.ProductProductIdInventoryGet`: %v\n", resp)
+    // response from `GetProductInventory`: []Inventory
+    fmt.Fprintf(os.Stdout, "Response from `InventoryApi.GetProductInventory`: %v\n", resp)
 }
 ```
 
@@ -200,7 +200,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiProductProductIdInventoryGetRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiGetProductInventoryRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -210,7 +210,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]InventoryInventoryViewModel**](Inventory.InventoryViewModel.md)
+[**[]Inventory**](Inventory.md)
 
 ### Authorization
 

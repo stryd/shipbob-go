@@ -4,76 +4,17 @@ All URIs are relative to *https://api.shipbob.com/1.0*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**FulfillmentCenterGet**](ReceivingApi.md#FulfillmentCenterGet) | **Get** /fulfillmentCenter | Get Fulfillment Centers
-[**ReceivingIdCancelPost**](ReceivingApi.md#ReceivingIdCancelPost) | **Post** /receiving/{id}/cancel | Cancel Warehouse Receiving Order
-[**ReceivingIdGet**](ReceivingApi.md#ReceivingIdGet) | **Get** /receiving/{id} | Get Warehouse Receiving Order
-[**ReceivingIdLabelsGet**](ReceivingApi.md#ReceivingIdLabelsGet) | **Get** /receiving/{id}/labels | Get Warehouse Receiving Order Box Labels
-[**ReceivingPost**](ReceivingApi.md#ReceivingPost) | **Post** /receiving | Create Warehouse Receiving Order
+[**CancelReceivingOrder**](ReceivingApi.md#CancelReceivingOrder) | **Post** /receiving/{id}/cancel | Cancel Warehouse Receiving Order
+[**CreateReceivingOrder**](ReceivingApi.md#CreateReceivingOrder) | **Post** /receiving | Create Warehouse Receiving Order
+[**GetFulfillmentCenters**](ReceivingApi.md#GetFulfillmentCenters) | **Get** /fulfillmentCenter | Get Fulfillment Centers
+[**GetReceivingOrder**](ReceivingApi.md#GetReceivingOrder) | **Get** /receiving/{id} | Get Warehouse Receiving Order
+[**GetReceivingOrderLabels**](ReceivingApi.md#GetReceivingOrderLabels) | **Get** /receiving/{id}/labels | Get Warehouse Receiving Order Box Labels
 
 
 
-## FulfillmentCenterGet
+## CancelReceivingOrder
 
-> []ReceivingFulfillmentCenterViewModel FulfillmentCenterGet(ctx).Execute()
-
-Get Fulfillment Centers
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-
-    configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ReceivingApi.FulfillmentCenterGet(context.Background()).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReceivingApi.FulfillmentCenterGet``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `FulfillmentCenterGet`: []ReceivingFulfillmentCenterViewModel
-    fmt.Fprintf(os.Stdout, "Response from `ReceivingApi.FulfillmentCenterGet`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-This endpoint does not need any parameter.
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiFulfillmentCenterGetRequest struct via the builder pattern
-
-
-### Return type
-
-[**[]ReceivingFulfillmentCenterViewModel**](Receiving.FulfillmentCenterViewModel.md)
-
-### Authorization
-
-[oauth2](../README.md#oauth2)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## ReceivingIdCancelPost
-
-> ReceivingIdCancelPost(ctx, id).Execute()
+> CancelReceivingOrder(ctx, id).Execute()
 
 Cancel Warehouse Receiving Order
 
@@ -94,9 +35,9 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ReceivingApi.ReceivingIdCancelPost(context.Background(), id).Execute()
+    resp, r, err := api_client.ReceivingApi.CancelReceivingOrder(context.Background(), id).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReceivingApi.ReceivingIdCancelPost``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `ReceivingApi.CancelReceivingOrder``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
 }
@@ -112,7 +53,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiReceivingIdCancelPostRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiCancelReceivingOrderRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -137,9 +78,133 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## ReceivingIdGet
+## CreateReceivingOrder
 
-> ReceivingReceivingOrderViewModel ReceivingIdGet(ctx, id).Execute()
+> ReceivingOrder CreateReceivingOrder(ctx).CreateReceivingOrder(createReceivingOrder).Execute()
+
+Create Warehouse Receiving Order
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    "time"
+    openapiclient "./openapi"
+)
+
+func main() {
+    createReceivingOrder := *openapiclient.NewCreateReceivingOrder(openapiclient.PackingType("EverythingInOneBox"), []openapiclient.CreateReceivingOrderBoxes{*openapiclient.NewCreateReceivingOrderBoxes([]openapiclient.CreateReceivingOrderBoxItems{*openapiclient.NewCreateReceivingOrderBoxItems(int32(123), int32(123))}, "860C8CDC8F0B4FC7AB69AC86C20539EC")}, time.Now(), *openapiclient.NewCreateReceivingOrderFulfillmentCenter(int32(123)), openapiclient.PackageType("Package")) // CreateReceivingOrder | The receiving order to create (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.ReceivingApi.CreateReceivingOrder(context.Background()).CreateReceivingOrder(createReceivingOrder).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `ReceivingApi.CreateReceivingOrder``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `CreateReceivingOrder`: ReceivingOrder
+    fmt.Fprintf(os.Stdout, "Response from `ReceivingApi.CreateReceivingOrder`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCreateReceivingOrderRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **createReceivingOrder** | [**CreateReceivingOrder**](CreateReceivingOrder.md) | The receiving order to create | 
+
+### Return type
+
+[**ReceivingOrder**](ReceivingOrder.md)
+
+### Authorization
+
+[oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetFulfillmentCenters
+
+> []ReceivingFulfillmentCenter GetFulfillmentCenters(ctx).Execute()
+
+Get Fulfillment Centers
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.ReceivingApi.GetFulfillmentCenters(context.Background()).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `ReceivingApi.GetFulfillmentCenters``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetFulfillmentCenters`: []ReceivingFulfillmentCenter
+    fmt.Fprintf(os.Stdout, "Response from `ReceivingApi.GetFulfillmentCenters`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+This endpoint does not need any parameter.
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetFulfillmentCentersRequest struct via the builder pattern
+
+
+### Return type
+
+[**[]ReceivingFulfillmentCenter**](ReceivingFulfillmentCenter.md)
+
+### Authorization
+
+[oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetReceivingOrder
+
+> ReceivingOrder GetReceivingOrder(ctx, id).Execute()
 
 Get Warehouse Receiving Order
 
@@ -160,13 +225,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ReceivingApi.ReceivingIdGet(context.Background(), id).Execute()
+    resp, r, err := api_client.ReceivingApi.GetReceivingOrder(context.Background(), id).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReceivingApi.ReceivingIdGet``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `ReceivingApi.GetReceivingOrder``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `ReceivingIdGet`: ReceivingReceivingOrderViewModel
-    fmt.Fprintf(os.Stdout, "Response from `ReceivingApi.ReceivingIdGet`: %v\n", resp)
+    // response from `GetReceivingOrder`: ReceivingOrder
+    fmt.Fprintf(os.Stdout, "Response from `ReceivingApi.GetReceivingOrder`: %v\n", resp)
 }
 ```
 
@@ -180,7 +245,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiReceivingIdGetRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiGetReceivingOrderRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -189,7 +254,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ReceivingReceivingOrderViewModel**](Receiving.ReceivingOrderViewModel.md)
+[**ReceivingOrder**](ReceivingOrder.md)
 
 ### Authorization
 
@@ -205,9 +270,9 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## ReceivingIdLabelsGet
+## GetReceivingOrderLabels
 
-> string ReceivingIdLabelsGet(ctx, id).Execute()
+> string GetReceivingOrderLabels(ctx, id).Execute()
 
 Get Warehouse Receiving Order Box Labels
 
@@ -228,13 +293,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ReceivingApi.ReceivingIdLabelsGet(context.Background(), id).Execute()
+    resp, r, err := api_client.ReceivingApi.GetReceivingOrderLabels(context.Background(), id).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReceivingApi.ReceivingIdLabelsGet``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `ReceivingApi.GetReceivingOrderLabels``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `ReceivingIdLabelsGet`: string
-    fmt.Fprintf(os.Stdout, "Response from `ReceivingApi.ReceivingIdLabelsGet`: %v\n", resp)
+    // response from `GetReceivingOrderLabels`: string
+    fmt.Fprintf(os.Stdout, "Response from `ReceivingApi.GetReceivingOrderLabels`: %v\n", resp)
 }
 ```
 
@@ -248,7 +313,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiReceivingIdLabelsGetRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiGetReceivingOrderLabelsRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -266,71 +331,6 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json, application/pdf
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## ReceivingPost
-
-> ReceivingReceivingOrderViewModel ReceivingPost(ctx).ReceivingCreateReceivingOrderModel(receivingCreateReceivingOrderModel).Execute()
-
-Create Warehouse Receiving Order
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    "time"
-    openapiclient "./openapi"
-)
-
-func main() {
-    receivingCreateReceivingOrderModel := *openapiclient.NewReceivingCreateReceivingOrderModel(openapiclient.Receiving.PackingType("EverythingInOneBox"), []openapiclient.ReceivingAddBoxToOrderModel{*openapiclient.NewReceivingAddBoxToOrderModel([]openapiclient.ReceivingAddBoxItemToBoxModel{*openapiclient.NewReceivingAddBoxItemToBoxModel(int32(123), int32(123))}, "860C8CDC8F0B4FC7AB69AC86C20539EC")}, time.Now(), *openapiclient.NewReceivingAssignOrderToFulfillmentCenterModel(int32(123)), openapiclient.Receiving.PackageType("Package")) // ReceivingCreateReceivingOrderModel | The receiving order to create (optional)
-
-    configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ReceivingApi.ReceivingPost(context.Background()).ReceivingCreateReceivingOrderModel(receivingCreateReceivingOrderModel).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReceivingApi.ReceivingPost``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ReceivingPost`: ReceivingReceivingOrderViewModel
-    fmt.Fprintf(os.Stdout, "Response from `ReceivingApi.ReceivingPost`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiReceivingPostRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **receivingCreateReceivingOrderModel** | [**ReceivingCreateReceivingOrderModel**](ReceivingCreateReceivingOrderModel.md) | The receiving order to create | 
-
-### Return type
-
-[**ReceivingReceivingOrderViewModel**](Receiving.ReceivingOrderViewModel.md)
-
-### Authorization
-
-[oauth2](../README.md#oauth2)
-
-### HTTP request headers
-
-- **Content-Type**: application/_*+json, application/json, application/json-patch+json, text/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

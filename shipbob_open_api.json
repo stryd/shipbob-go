@@ -141,17 +141,14 @@
             "type": "boolean"
           },
           "service_type": {
-            "$ref": "#/components/schemas/ServiceType"
+            "enum": [
+              "Receiving",
+              "Returns"
+            ],
+            "type": "string"
           }
         },
         "type": "object"
-      },
-      "LocationServiceType": {
-        "enum": [
-          "Receiving",
-          "Returns"
-        ],
-        "type": "string"
       },
       "ProblemDetails": {
         "additionalProperties": false,
@@ -430,7 +427,7 @@
             "type": "array"
           },
           "shipping_methods": {
-            "description": "Array of strings specifying shipping methods for which to fetch estimates.\\r\\n\\r\\nIf this field is omitted we will return estimates for all shipping methods defined in ShipBob",
+            "description": "Array of strings specifying shipping methods for which to fetch estimates.\\r\\nIf this field is omitted we will return estimates for all shipping methods defined in ShipBob",
             "items": {
               "type": "string"
             },
@@ -1218,7 +1215,7 @@
         },
         "type": "object"
       },
-      "Webhooks.CreateWebhookSubscriptionModel": {
+      "WebhookSubscription": {
         "additionalProperties": false,
         "properties": {
           "subscription_url": {
@@ -1228,7 +1225,7 @@
             "type": "string"
           },
           "topic": {
-            "$ref": "#/components/schemas/Webhooks.Topics"
+            "$ref": "#/components/schemas/Topics"
           }
         },
         "required": [
@@ -1237,7 +1234,7 @@
         ],
         "type": "object"
       },
-      "Webhooks.WebhookViewModel": {
+      "Webhook": {
         "additionalProperties": false,
         "properties": {
           "created_at": {
@@ -1258,12 +1255,12 @@
             "type": "string"
           },
           "topic": {
-            "$ref": "#/components/schemas/Webhooks.Topics"
+            "$ref": "#/components/schemas/Topics"
           }
         },
         "type": "object"
       },
-      "Webhooks.Topics": {
+      "Topics": {
         "enum": [
           "order_shipped",
           "shipment_delivered",
@@ -2339,7 +2336,12 @@
             "type": "number"
           },
           "transaction_type": {
-            "$ref": "#/components/schemas/TransactionLogSource"
+            "enum": [
+              "ReturnLabelInvoice",
+              "ReturnProcessingFee",
+              "ReturnToSenderFee"
+            ],
+            "type": "string"
           }
         },
         "type": "object"
@@ -2360,14 +2362,6 @@
           "Processing",
           "Completed",
           "Cancelled"
-        ],
-        "type": "string"
-      },
-      "TransactionLogSource": {
-        "enum": [
-          "ReturnLabelInvoice",
-          "ReturnProcessingFee",
-          "ReturnToSenderFee"
         ],
         "type": "string"
       }
@@ -2409,6 +2403,7 @@
   "paths": {
     "/channel": {
       "get": {
+        "operationId": "getChannels",
         "responses": {
           "200": {
             "content": {
@@ -2461,6 +2456,7 @@
     },
     "/fulfillmentCenter": {
       "get": {
+        "operationId": "getFulfillmentCenters",
         "responses": {
           "200": {
             "content": {
@@ -2497,6 +2493,7 @@
     },
     "/inventory": {
       "get": {
+        "operationId": "getInventories",
         "parameters": [
           {
             "description": "Page of inventory items to get",
@@ -2628,6 +2625,7 @@
     },
     "/inventory/{inventoryId}": {
       "get": {
+        "operationId": "getInventory",
         "parameters": [
           {
             "description": "The inventory id to get",
@@ -2692,6 +2690,7 @@
     },
     "/location": {
       "get": {
+        "operationId": "getLocations",
         "parameters": [
           {
             "description": "Whether the inactive locations should be included or not",
@@ -2760,6 +2759,7 @@
     },
     "/order": {
       "get": {
+        "operationId": "getOrders",
         "description": "All parameters are AND filters",
         "parameters": [
           {
@@ -2925,6 +2925,7 @@
         ]
       },
       "post": {
+        "operationId": "createOrder",
         "parameters": [
           {
             "description": "Channel Id for Operation",
@@ -2939,22 +2940,7 @@
         ],
         "requestBody": {
           "content": {
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateOrder"
-              }
-            },
             "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateOrder"
-              }
-            },
-            "application/json-patch+json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateOrder"
-              }
-            },
-            "text/json": {
               "schema": {
                 "$ref": "#/components/schemas/CreateOrder"
               }
@@ -3026,6 +3012,7 @@
     },
     "/order/estimate": {
       "post": {
+        "operationId": "createOrderEstimate",
         "description": "This endpoint will provide, where possible, an estimate of pricing and fulfillment center assignment of a potential standard (direct to consumer) order. \\r\\nKeep in mind that there are ways for the merchant to change FC assignment or product configuration after order creation that could invalidate this estimate. \\r\\nEstimates cannot be returned for items that are unknown, out of stock, or too large for fulfillment using standard box sizes. \\r\\nAdditional services such as high-pick fees, shipping insurance, auto-splitting or auto-adding items to orders, and signature required are not included in this estimate.",
         "parameters": [
           {
@@ -3041,22 +3028,7 @@
         ],
         "requestBody": {
           "content": {
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/EstimateFulfillmentRequest"
-              }
-            },
             "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/EstimateFulfillmentRequest"
-              }
-            },
-            "application/json-patch+json": {
-              "schema": {
-                "$ref": "#/components/schemas/EstimateFulfillmentRequest"
-              }
-            },
-            "text/json": {
               "schema": {
                 "$ref": "#/components/schemas/EstimateFulfillmentRequest"
               }
@@ -3128,6 +3100,7 @@
     },
     "/order/{orderId}": {
       "get": {
+        "operationId": "getOrder",
         "parameters": [
           {
             "description": "",
@@ -3202,6 +3175,7 @@
     },
     "/order/{orderId}/cancel": {
       "post": {
+        "operationId": "cancelOrder",
         "parameters": [
           {
             "description": "The order ID to cancel",
@@ -3308,6 +3282,7 @@
     },
     "/order/{orderId}/shipment": {
       "get": {
+        "operationId": "getOrderShipments",
         "parameters": [
           {
             "description": "The order id to get shipments for",
@@ -3385,6 +3360,7 @@
     },
     "/order/{orderId}/shipment/{shipmentId}": {
       "get": {
+        "operationId": "getOrderShipment",
         "parameters": [
           {
             "description": "The order id to get the shipment for",
@@ -3469,6 +3445,7 @@
     },
     "/order/{orderId}/shipment/{shipmentId}/cancel": {
       "post": {
+        "operationId": "cancelOrderShipment",
         "parameters": [
           {
             "description": "The shipment id to get",
@@ -3583,6 +3560,7 @@
     },
     "/order/{orderId}/shipment/{shipmentId}/logs": {
       "get": {
+        "operationId": "getOrderShipmentLogs",
         "parameters": [
           {
             "description": "The order id to get the shipment for",
@@ -3670,6 +3648,7 @@
     },
     "/order/{orderId}/shipment/{shipmentId}/timeline": {
       "get": {
+        "operationId": "getOrderShipmentTimeline",
         "parameters": [
           {
             "description": "The order id to get the shipment for",
@@ -3757,6 +3736,7 @@
     },
     "/product": {
       "get": {
+        "operationId": "getProducts",
         "parameters": [
           {
             "description": "Page of products to get",
@@ -3808,7 +3788,7 @@
             }
           },
           {
-            "description": "Status filter for products:\\r\\n- Any: Include both active and inactive\\r\\n- Active: Filter products that are Active\\r\\n- Inactive: Filter products that are Inactive",
+            "description": "Status filter for products:- Any: Include both active and inactive- Active: Filter products that are Active- Inactive: Filter products that are Inactive",
             "in": "query",
             "name": "ActiveStatus",
             "schema": {
@@ -3821,7 +3801,7 @@
             }
           },
           {
-            "description": "Bundle filter for products:\\r\\n- Any: Don't filter and consider products that are bundles or not bundles\\r\\n- Bundle: Filter by products that are bundles\\r\\n- NotBundle: Filter by products that are not bundles",
+            "description": "Bundle filter for products:- Any: Don't filter and consider products that are bundles or not bundles- Bundle: Filter by products that are bundles- NotBundle: Filter by products that are not bundles",
             "in": "query",
             "name": "BundleStatus",
             "schema": {
@@ -3865,7 +3845,7 @@
                 "schema": {
                   "description": "Number of the current page",
                   "format": "",
-                  "type": "int"
+                  "type": "integer"
                 }
               },
               "Page-Size": {
@@ -3873,7 +3853,7 @@
                 "schema": {
                   "description": "Number of results per page",
                   "format": "",
-                  "type": "int"
+                  "type": "integer"
                 }
               },
               "Total-Count": {
@@ -3881,7 +3861,7 @@
                 "schema": {
                   "description": "Total number of results",
                   "format": "",
-                  "type": "int"
+                  "type": "integer"
                 }
               },
               "Total-Pages": {
@@ -3889,7 +3869,7 @@
                 "schema": {
                   "description": "Total number of pages of results",
                   "format": "",
-                  "type": "int"
+                  "type": "integer"
                 }
               }
             }
@@ -3930,6 +3910,7 @@
         ]
       },
       "post": {
+        "operationId": "createProduct",
         "parameters": [
           {
             "description": "Channel Id for Operation",
@@ -3944,22 +3925,7 @@
         ],
         "requestBody": {
           "content": {
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateProduct"
-              }
-            },
             "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateProduct"
-              }
-            },
-            "application/json-patch+json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateProduct"
-              }
-            },
-            "text/json": {
               "schema": {
                 "$ref": "#/components/schemas/CreateProduct"
               }
@@ -4035,6 +4001,7 @@
     },
     "/product/batch": {
       "post": {
+        "operationId": "createProductBatch",
         "parameters": [
           {
             "description": "Channel Id for Operation",
@@ -4049,31 +4016,7 @@
         ],
         "requestBody": {
           "content": {
-            "application/*+json": {
-              "schema": {
-                "items": {
-                  "$ref": "#/components/schemas/CreateProduct"
-                },
-                "type": "array"
-              }
-            },
             "application/json": {
-              "schema": {
-                "items": {
-                  "$ref": "#/components/schemas/CreateProduct"
-                },
-                "type": "array"
-              }
-            },
-            "application/json-patch+json": {
-              "schema": {
-                "items": {
-                  "$ref": "#/components/schemas/CreateProduct"
-                },
-                "type": "array"
-              }
-            },
-            "text/json": {
               "schema": {
                 "items": {
                   "$ref": "#/components/schemas/CreateProduct"
@@ -4152,6 +4095,7 @@
     },
     "/product/{productId}": {
       "get": {
+        "operationId": "getProduct",
         "parameters": [
           {
             "description": "Unique identifier of the product",
@@ -4223,6 +4167,7 @@
         ]
       },
       "put": {
+        "operationId": "updateProduct",
         "parameters": [
           {
             "description": "Unique identifier of the product to modify",
@@ -4247,22 +4192,7 @@
         ],
         "requestBody": {
           "content": {
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/UpdateProduct"
-              }
-            },
             "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UpdateProduct"
-              }
-            },
-            "application/json-patch+json": {
-              "schema": {
-                "$ref": "#/components/schemas/UpdateProduct"
-              }
-            },
-            "text/json": {
               "schema": {
                 "$ref": "#/components/schemas/UpdateProduct"
               }
@@ -4341,6 +4271,7 @@
     },
     "/product/{productId}/inventory": {
       "get": {
+        "operationId": "getProductInventory",
         "parameters": [
           {
             "description": "The product id to get inventory for",
@@ -4418,24 +4349,10 @@
     },
     "/receiving": {
       "post": {
+        "operationId": "createReceivingOrder",
         "requestBody": {
           "content": {
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateReceivingOrder"
-              }
-            },
             "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateReceivingOrder"
-              }
-            },
-            "application/json-patch+json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateReceivingOrder"
-              }
-            },
-            "text/json": {
               "schema": {
                 "$ref": "#/components/schemas/CreateReceivingOrder"
               }
@@ -4502,6 +4419,7 @@
     },
     "/receiving/{id}": {
       "get": {
+        "operationId": "getReceivingOrder",
         "parameters": [
           {
             "description": "Id of the receiving order",
@@ -4557,6 +4475,7 @@
     },
     "/receiving/{id}/cancel": {
       "post": {
+        "operationId": "cancelReceivingOrder",
         "parameters": [
           {
             "description": "Id of the receiving order to cancel",
@@ -4621,6 +4540,7 @@
     },
     "/receiving/{id}/labels": {
       "get": {
+        "operationId": "getReceivingOrderLabels",
         "parameters": [
           {
             "description": "Id of the receiving order",
@@ -4641,12 +4561,6 @@
                   "format": "byte",
                   "type": "string"
                 }
-              },
-              "application/pdf": {
-                "schema": {
-                  "format": "byte",
-                  "type": "string"
-                }
               }
             },
             "description": "Success"
@@ -4654,11 +4568,6 @@
           "400": {
             "content": {
               "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ValidationProblemDetails"
-                }
-              },
-              "application/pdf": {
                 "schema": {
                   "$ref": "#/components/schemas/ValidationProblemDetails"
                 }
@@ -4675,11 +4584,6 @@
           "404": {
             "content": {
               "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ValidationProblemDetails"
-                }
-              },
-              "application/pdf": {
                 "schema": {
                   "$ref": "#/components/schemas/ValidationProblemDetails"
                 }
@@ -4703,6 +4607,7 @@
     },
     "/return": {
       "get": {
+        "operationId": "getReturns",
         "parameters": [
           {
             "description": "Page of return orders to get",
@@ -4861,7 +4766,7 @@
                 "schema": {
                   "description": "Number of the current page",
                   "format": "",
-                  "type": "int"
+                  "type": "integer"
                 }
               },
               "Page-Size": {
@@ -4869,7 +4774,7 @@
                 "schema": {
                   "description": "Number of results per page",
                   "format": "",
-                  "type": "int"
+                  "type": "integer"
                 }
               },
               "Total-Count": {
@@ -4877,7 +4782,7 @@
                 "schema": {
                   "description": "Total number of results",
                   "format": "",
-                  "type": "int"
+                  "type": "integer"
                 }
               },
               "Total-Pages": {
@@ -4885,7 +4790,7 @@
                 "schema": {
                   "description": "Total number of pages of results",
                   "format": "",
-                  "type": "int"
+                  "type": "integer"
                 }
               }
             }
@@ -4910,6 +4815,7 @@
         ]
       },
       "post": {
+        "operationId": "createReturn",
         "parameters": [
           {
             "description": "Channel Id for Operation",
@@ -4924,22 +4830,7 @@
         ],
         "requestBody": {
           "content": {
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateReturn"
-              }
-            },
             "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateReturn"
-              }
-            },
-            "application/json-patch+json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateReturn"
-              }
-            },
-            "text/json": {
               "schema": {
                 "$ref": "#/components/schemas/CreateReturn"
               }
@@ -5000,6 +4891,7 @@
     },
     "/return/{id}": {
       "get": {
+        "operationId": "getReturn",
         "parameters": [
           {
             "description": "Id of the return order",
@@ -5062,6 +4954,7 @@
         ]
       },
       "put": {
+        "operationId": "updateReturn",
         "parameters": [
           {
             "description": "Channel Id for Operation",
@@ -5086,22 +4979,7 @@
         ],
         "requestBody": {
           "content": {
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateReturn"
-              }
-            },
             "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateReturn"
-              }
-            },
-            "application/json-patch+json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateReturn"
-              }
-            },
-            "text/json": {
               "schema": {
                 "$ref": "#/components/schemas/CreateReturn"
               }
@@ -5162,6 +5040,7 @@
     },
     "/return/{id}/cancel": {
       "post": {
+        "operationId": "cancelReturn",
         "parameters": [
           {
             "description": "Id of the return order",
@@ -5237,6 +5116,7 @@
     },
     "/return/{id}/statushistory": {
       "get": {
+        "operationId": "getReturnStatusHistory",
         "parameters": [
           {
             "description": "Id of the return order",
@@ -5301,6 +5181,7 @@
     },
     "/shipment/cancelbulk": {
       "post": {
+        "operationId": "cancelShipmentBulk",
         "parameters": [
           {
             "description": "Channel ID for Operation",
@@ -5316,22 +5197,7 @@
         ],
         "requestBody": {
           "content": {
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/CancelShipment"
-              }
-            },
             "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CancelShipment"
-              }
-            },
-            "application/json-patch+json": {
-              "schema": {
-                "$ref": "#/components/schemas/CancelShipment"
-              }
-            },
-            "text/json": {
               "schema": {
                 "$ref": "#/components/schemas/CancelShipment"
               }
@@ -5414,6 +5280,7 @@
     },
     "/shipment/{shipmentId}": {
       "get": {
+        "operationId": "getShipment",
         "parameters": [
           {
             "description": "The shipment id to get",
@@ -5488,6 +5355,7 @@
     },
     "/shipment/{shipmentId}/cancel": {
       "post": {
+        "operationId": "cancelShipment",
         "parameters": [
           {
             "description": "The shipment id to get",
@@ -5594,6 +5462,7 @@
     },
     "/shipment/{shipmentId}/logs": {
       "get": {
+        "operationId": "getShipmentLogs",
         "parameters": [
           {
             "description": "The shipment id to get",
@@ -5671,6 +5540,7 @@
     },
     "/shipment/{shipmentId}/timeline": {
       "get": {
+        "operationId": "getShipmentTimeline",
         "parameters": [
           {
             "description": "The shipment id to get",
@@ -5748,6 +5618,7 @@
     },
     "/shippingmethod": {
       "get": {
+        "operationId": "getShippingMethodCollection",
         "description": "Get all merchants shipping methods",
         "parameters": [
           {
@@ -5837,6 +5708,7 @@
     },
     "/webhook": {
       "get": {
+        "operationId": "getWebhooks",
         "description": "All parameters are AND filters",
         "parameters": [
           {
@@ -5844,7 +5716,7 @@
             "in": "query",
             "name": "Topic",
             "schema": {
-              "$ref": "#/components/schemas/Webhooks.Topics"
+              "$ref": "#/components/schemas/Topics"
             }
           },
           {
@@ -5878,7 +5750,7 @@
               "application/json": {
                 "schema": {
                   "items": {
-                    "$ref": "#/components/schemas/Webhooks.WebhookViewModel"
+                    "$ref": "#/components/schemas/Webhook"
                   },
                   "type": "array"
                 }
@@ -5899,7 +5771,7 @@
                 "schema": {
                   "description": "Number of the current page",
                   "format": "",
-                  "type": "int"
+                  "type": "integer"
                 }
               },
               "Page-Size": {
@@ -5907,7 +5779,7 @@
                 "schema": {
                   "description": "Number of results per page",
                   "format": "",
-                  "type": "int"
+                  "type": "integer"
                 }
               },
               "Total-Count": {
@@ -5915,7 +5787,7 @@
                 "schema": {
                   "description": "Total number of results",
                   "format": "",
-                  "type": "int"
+                  "type": "integer"
                 }
               },
               "Total-Pages": {
@@ -5923,7 +5795,7 @@
                 "schema": {
                   "description": "Total number of pages of results",
                   "format": "",
-                  "type": "int"
+                  "type": "integer"
                 }
               }
             }
@@ -5962,6 +5834,7 @@
         ]
       },
       "post": {
+        "operationId": "createWebhook",
         "parameters": [
           {
             "description": "",
@@ -5977,24 +5850,9 @@
         ],
         "requestBody": {
           "content": {
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/Webhooks.CreateWebhookSubscriptionModel"
-              }
-            },
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Webhooks.CreateWebhookSubscriptionModel"
-              }
-            },
-            "application/json-patch+json": {
-              "schema": {
-                "$ref": "#/components/schemas/Webhooks.CreateWebhookSubscriptionModel"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Webhooks.CreateWebhookSubscriptionModel"
+                "$ref": "#/components/schemas/WebhookSubscription"
               }
             }
           },
@@ -6005,7 +5863,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Webhooks.WebhookViewModel"
+                  "$ref": "#/components/schemas/Webhook"
                 }
               }
             },
@@ -6063,6 +5921,7 @@
     },
     "/webhook/{id}": {
       "delete": {
+        "operationId": "deleteWebhook",
         "parameters": [
           {
             "description": "",

@@ -4,28 +4,373 @@ All URIs are relative to *https://api.shipbob.com/1.0*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**OrderEstimatePost**](OrdersApi.md#OrderEstimatePost) | **Post** /order/estimate | Estimate Fulfillment Cost For Order
-[**OrderGet**](OrdersApi.md#OrderGet) | **Get** /order | Get Orders
-[**OrderOrderIdCancelPost**](OrdersApi.md#OrderOrderIdCancelPost) | **Post** /order/{orderId}/cancel | Cancel single Order by Order ID
-[**OrderOrderIdGet**](OrdersApi.md#OrderOrderIdGet) | **Get** /order/{orderId} | Get Order
-[**OrderOrderIdShipmentGet**](OrdersApi.md#OrderOrderIdShipmentGet) | **Get** /order/{orderId}/shipment | Get all Shipments for Order
-[**OrderOrderIdShipmentShipmentIdCancelPost**](OrdersApi.md#OrderOrderIdShipmentShipmentIdCancelPost) | **Post** /order/{orderId}/shipment/{shipmentId}/cancel | Cancel one Shipment by Order Id and Shipment Id
-[**OrderOrderIdShipmentShipmentIdGet**](OrdersApi.md#OrderOrderIdShipmentShipmentIdGet) | **Get** /order/{orderId}/shipment/{shipmentId} | Get one Shipment by Order Id and Shipment Id
-[**OrderOrderIdShipmentShipmentIdLogsGet**](OrdersApi.md#OrderOrderIdShipmentShipmentIdLogsGet) | **Get** /order/{orderId}/shipment/{shipmentId}/logs | Get logs for one Shipment by Order Id and Shipment Id
-[**OrderOrderIdShipmentShipmentIdTimelineGet**](OrdersApi.md#OrderOrderIdShipmentShipmentIdTimelineGet) | **Get** /order/{orderId}/shipment/{shipmentId}/timeline | Get one Shipment&#39;s status timeline by Order Id and Shipment Id
-[**OrderPost**](OrdersApi.md#OrderPost) | **Post** /order | Create Order
-[**ShipmentCancelbulkPost**](OrdersApi.md#ShipmentCancelbulkPost) | **Post** /shipment/cancelbulk | Cancel multiple Shipments by Shipment Id
-[**ShipmentShipmentIdCancelPost**](OrdersApi.md#ShipmentShipmentIdCancelPost) | **Post** /shipment/{shipmentId}/cancel | Cancel one Shipment by Shipment Id
-[**ShipmentShipmentIdGet**](OrdersApi.md#ShipmentShipmentIdGet) | **Get** /shipment/{shipmentId} | Get one Shipment by Shipment Id
-[**ShipmentShipmentIdLogsGet**](OrdersApi.md#ShipmentShipmentIdLogsGet) | **Get** /shipment/{shipmentId}/logs | Get logs for one Shipment by Shipment Id
-[**ShipmentShipmentIdTimelineGet**](OrdersApi.md#ShipmentShipmentIdTimelineGet) | **Get** /shipment/{shipmentId}/timeline | Get one Shipment&#39;s status timeline by Shipment Id
-[**ShippingmethodGet**](OrdersApi.md#ShippingmethodGet) | **Get** /shippingmethod | Get shipping methods
+[**CancelOrder**](OrdersApi.md#CancelOrder) | **Post** /order/{orderId}/cancel | Cancel single Order by Order ID
+[**CancelOrderShipment**](OrdersApi.md#CancelOrderShipment) | **Post** /order/{orderId}/shipment/{shipmentId}/cancel | Cancel one Shipment by Order Id and Shipment Id
+[**CancelShipment**](OrdersApi.md#CancelShipment) | **Post** /shipment/{shipmentId}/cancel | Cancel one Shipment by Shipment Id
+[**CancelShipmentBulk**](OrdersApi.md#CancelShipmentBulk) | **Post** /shipment/cancelbulk | Cancel multiple Shipments by Shipment Id
+[**CreateOrder**](OrdersApi.md#CreateOrder) | **Post** /order | Create Order
+[**CreateOrderEstimate**](OrdersApi.md#CreateOrderEstimate) | **Post** /order/estimate | Estimate Fulfillment Cost For Order
+[**GetOrder**](OrdersApi.md#GetOrder) | **Get** /order/{orderId} | Get Order
+[**GetOrderShipment**](OrdersApi.md#GetOrderShipment) | **Get** /order/{orderId}/shipment/{shipmentId} | Get one Shipment by Order Id and Shipment Id
+[**GetOrderShipmentLogs**](OrdersApi.md#GetOrderShipmentLogs) | **Get** /order/{orderId}/shipment/{shipmentId}/logs | Get logs for one Shipment by Order Id and Shipment Id
+[**GetOrderShipmentTimeline**](OrdersApi.md#GetOrderShipmentTimeline) | **Get** /order/{orderId}/shipment/{shipmentId}/timeline | Get one Shipment&#39;s status timeline by Order Id and Shipment Id
+[**GetOrderShipments**](OrdersApi.md#GetOrderShipments) | **Get** /order/{orderId}/shipment | Get all Shipments for Order
+[**GetOrders**](OrdersApi.md#GetOrders) | **Get** /order | Get Orders
+[**GetShipment**](OrdersApi.md#GetShipment) | **Get** /shipment/{shipmentId} | Get one Shipment by Shipment Id
+[**GetShipmentLogs**](OrdersApi.md#GetShipmentLogs) | **Get** /shipment/{shipmentId}/logs | Get logs for one Shipment by Shipment Id
+[**GetShipmentTimeline**](OrdersApi.md#GetShipmentTimeline) | **Get** /shipment/{shipmentId}/timeline | Get one Shipment&#39;s status timeline by Shipment Id
+[**GetShippingMethodCollection**](OrdersApi.md#GetShippingMethodCollection) | **Get** /shippingmethod | Get shipping methods
 
 
 
-## OrderEstimatePost
+## CancelOrder
 
-> OrdersEstimateViewModel OrderEstimatePost(ctx).ShipbobChannelId(shipbobChannelId).OrdersEstimateFulfillmentRequestModel(ordersEstimateFulfillmentRequestModel).Execute()
+> CanceledOrder CancelOrder(ctx, orderId).ShipbobChannelId(shipbobChannelId).Execute()
+
+Cancel single Order by Order ID
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    orderId := int32(56) // int32 | The order ID to cancel
+    shipbobChannelId := int32(56) // int32 | Channel ID for Operation
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.OrdersApi.CancelOrder(context.Background(), orderId).ShipbobChannelId(shipbobChannelId).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `OrdersApi.CancelOrder``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `CancelOrder`: CanceledOrder
+    fmt.Fprintf(os.Stdout, "Response from `OrdersApi.CancelOrder`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**orderId** | **int32** | The order ID to cancel | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCancelOrderRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **shipbobChannelId** | **int32** | Channel ID for Operation | 
+
+### Return type
+
+[**CanceledOrder**](CanceledOrder.md)
+
+### Authorization
+
+[oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## CancelOrderShipment
+
+> Shipment CancelOrderShipment(ctx, shipmentId, orderId).ShipbobChannelId(shipbobChannelId).Execute()
+
+Cancel one Shipment by Order Id and Shipment Id
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    shipmentId := int32(56) // int32 | The shipment id to get
+    orderId := "orderId_example" // string | 
+    shipbobChannelId := int32(56) // int32 | Channel Id for Operation (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.OrdersApi.CancelOrderShipment(context.Background(), shipmentId, orderId).ShipbobChannelId(shipbobChannelId).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `OrdersApi.CancelOrderShipment``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `CancelOrderShipment`: Shipment
+    fmt.Fprintf(os.Stdout, "Response from `OrdersApi.CancelOrderShipment`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**shipmentId** | **int32** | The shipment id to get | 
+**orderId** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCancelOrderShipmentRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **shipbobChannelId** | **int32** | Channel Id for Operation | 
+
+### Return type
+
+[**Shipment**](Shipment.md)
+
+### Authorization
+
+[oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## CancelShipment
+
+> Shipment CancelShipment(ctx, shipmentId).ShipbobChannelId(shipbobChannelId).Execute()
+
+Cancel one Shipment by Shipment Id
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    shipmentId := int32(56) // int32 | The shipment id to get
+    shipbobChannelId := int32(56) // int32 | Channel Id for Operation (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.OrdersApi.CancelShipment(context.Background(), shipmentId).ShipbobChannelId(shipbobChannelId).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `OrdersApi.CancelShipment``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `CancelShipment`: Shipment
+    fmt.Fprintf(os.Stdout, "Response from `OrdersApi.CancelShipment`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**shipmentId** | **int32** | The shipment id to get | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCancelShipmentRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **shipbobChannelId** | **int32** | Channel Id for Operation | 
+
+### Return type
+
+[**Shipment**](Shipment.md)
+
+### Authorization
+
+[oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## CancelShipmentBulk
+
+> InlineResponse200 CancelShipmentBulk(ctx).ShipbobChannelId(shipbobChannelId).CancelShipment(cancelShipment).Execute()
+
+Cancel multiple Shipments by Shipment Id
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    shipbobChannelId := int32(56) // int32 | Channel ID for Operation
+    cancelShipment := *openapiclient.NewCancelShipment() // CancelShipment |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.OrdersApi.CancelShipmentBulk(context.Background()).ShipbobChannelId(shipbobChannelId).CancelShipment(cancelShipment).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `OrdersApi.CancelShipmentBulk``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `CancelShipmentBulk`: InlineResponse200
+    fmt.Fprintf(os.Stdout, "Response from `OrdersApi.CancelShipmentBulk`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCancelShipmentBulkRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **shipbobChannelId** | **int32** | Channel ID for Operation | 
+ **cancelShipment** | [**CancelShipment**](CancelShipment.md) |  | 
+
+### Return type
+
+[**InlineResponse200**](inline_response_200.md)
+
+### Authorization
+
+[oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## CreateOrder
+
+> Order CreateOrder(ctx).ShipbobChannelId(shipbobChannelId).CreateOrder(createOrder).Execute()
+
+Create Order
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    shipbobChannelId := int32(56) // int32 | Channel Id for Operation
+    createOrder := *openapiclient.NewCreateOrder([]openapiclient.CreateOrderProducts{*openapiclient.NewCreateOrderProducts(int32(123))}, *openapiclient.NewRecipientInfo(*openapiclient.NewOrderAddress("100 Nowhere Blvd", "Gotham City", "US"), "John Doe"), "ReferenceId_example", "ShippingMethod_example") // CreateOrder |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.OrdersApi.CreateOrder(context.Background()).ShipbobChannelId(shipbobChannelId).CreateOrder(createOrder).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `OrdersApi.CreateOrder``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `CreateOrder`: Order
+    fmt.Fprintf(os.Stdout, "Response from `OrdersApi.CreateOrder`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCreateOrderRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **shipbobChannelId** | **int32** | Channel Id for Operation | 
+ **createOrder** | [**CreateOrder**](CreateOrder.md) |  | 
+
+### Return type
+
+[**Order**](Order.md)
+
+### Authorization
+
+[oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## CreateOrderEstimate
+
+> OrderEstimate CreateOrderEstimate(ctx).ShipbobChannelId(shipbobChannelId).EstimateFulfillmentRequest(estimateFulfillmentRequest).Execute()
 
 Estimate Fulfillment Cost For Order
 
@@ -45,17 +390,17 @@ import (
 
 func main() {
     shipbobChannelId := int32(56) // int32 | Channel Id for Operation
-    ordersEstimateFulfillmentRequestModel := *openapiclient.NewOrdersEstimateFulfillmentRequestModel(*openapiclient.NewOrdersEstimationAddressViewModel("US"), []openapiclient.OrdersEstimateProductInfoModel{*openapiclient.NewOrdersEstimateProductInfoModel(int32(123))}) // OrdersEstimateFulfillmentRequestModel |  (optional)
+    estimateFulfillmentRequest := *openapiclient.NewEstimateFulfillmentRequest(*openapiclient.NewEstimationAddress("US"), []openapiclient.EstimateFulfillmentRequestProducts{*openapiclient.NewEstimateFulfillmentRequestProducts(int32(123))}) // EstimateFulfillmentRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.OrdersApi.OrderEstimatePost(context.Background()).ShipbobChannelId(shipbobChannelId).OrdersEstimateFulfillmentRequestModel(ordersEstimateFulfillmentRequestModel).Execute()
+    resp, r, err := api_client.OrdersApi.CreateOrderEstimate(context.Background()).ShipbobChannelId(shipbobChannelId).EstimateFulfillmentRequest(estimateFulfillmentRequest).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `OrdersApi.OrderEstimatePost``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `OrdersApi.CreateOrderEstimate``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `OrderEstimatePost`: OrdersEstimateViewModel
-    fmt.Fprintf(os.Stdout, "Response from `OrdersApi.OrderEstimatePost`: %v\n", resp)
+    // response from `CreateOrderEstimate`: OrderEstimate
+    fmt.Fprintf(os.Stdout, "Response from `OrdersApi.CreateOrderEstimate`: %v\n", resp)
 }
 ```
 
@@ -65,17 +410,17 @@ func main() {
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiOrderEstimatePostRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiCreateOrderEstimateRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **shipbobChannelId** | **int32** | Channel Id for Operation | 
- **ordersEstimateFulfillmentRequestModel** | [**OrdersEstimateFulfillmentRequestModel**](OrdersEstimateFulfillmentRequestModel.md) |  | 
+ **estimateFulfillmentRequest** | [**EstimateFulfillmentRequest**](EstimateFulfillmentRequest.md) |  | 
 
 ### Return type
 
-[**OrdersEstimateViewModel**](Orders.EstimateViewModel.md)
+[**OrderEstimate**](OrderEstimate.md)
 
 ### Authorization
 
@@ -83,7 +428,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
-- **Content-Type**: application/_*+json, application/json, application/json-patch+json, text/json
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
@@ -91,9 +436,368 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## OrderGet
+## GetOrder
 
-> []OrdersOrderViewModel OrderGet(ctx).Page(page).Limit(limit).IDs(iDs).ReferenceIds(referenceIds).StartDate(startDate).EndDate(endDate).SortOrder(sortOrder).HasTracking(hasTracking).LastUpdateStartDate(lastUpdateStartDate).LastUpdateEndDate(lastUpdateEndDate).ShipbobChannelId(shipbobChannelId).Execute()
+> Order GetOrder(ctx, orderId).ShipbobChannelId(shipbobChannelId).Execute()
+
+Get Order
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    orderId := int32(56) // int32 | 
+    shipbobChannelId := int32(56) // int32 | Channel Id for Operation (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.OrdersApi.GetOrder(context.Background(), orderId).ShipbobChannelId(shipbobChannelId).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `OrdersApi.GetOrder``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetOrder`: Order
+    fmt.Fprintf(os.Stdout, "Response from `OrdersApi.GetOrder`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**orderId** | **int32** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetOrderRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **shipbobChannelId** | **int32** | Channel Id for Operation | 
+
+### Return type
+
+[**Order**](Order.md)
+
+### Authorization
+
+[oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetOrderShipment
+
+> Shipment GetOrderShipment(ctx, orderId, shipmentId).ShipbobChannelId(shipbobChannelId).Execute()
+
+Get one Shipment by Order Id and Shipment Id
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    orderId := int32(56) // int32 | The order id to get the shipment for
+    shipmentId := int32(56) // int32 | The shipment id to get
+    shipbobChannelId := int32(56) // int32 | Channel Id for Operation (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.OrdersApi.GetOrderShipment(context.Background(), orderId, shipmentId).ShipbobChannelId(shipbobChannelId).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `OrdersApi.GetOrderShipment``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetOrderShipment`: Shipment
+    fmt.Fprintf(os.Stdout, "Response from `OrdersApi.GetOrderShipment`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**orderId** | **int32** | The order id to get the shipment for | 
+**shipmentId** | **int32** | The shipment id to get | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetOrderShipmentRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **shipbobChannelId** | **int32** | Channel Id for Operation | 
+
+### Return type
+
+[**Shipment**](Shipment.md)
+
+### Authorization
+
+[oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetOrderShipmentLogs
+
+> []ShipmentLog GetOrderShipmentLogs(ctx, orderId, shipmentId).ShipbobChannelId(shipbobChannelId).Execute()
+
+Get logs for one Shipment by Order Id and Shipment Id
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    orderId := int32(56) // int32 | The order id to get the shipment for
+    shipmentId := int32(56) // int32 | The shipment id to get
+    shipbobChannelId := int32(56) // int32 | Channel Id for Operation (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.OrdersApi.GetOrderShipmentLogs(context.Background(), orderId, shipmentId).ShipbobChannelId(shipbobChannelId).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `OrdersApi.GetOrderShipmentLogs``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetOrderShipmentLogs`: []ShipmentLog
+    fmt.Fprintf(os.Stdout, "Response from `OrdersApi.GetOrderShipmentLogs`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**orderId** | **int32** | The order id to get the shipment for | 
+**shipmentId** | **int32** | The shipment id to get | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetOrderShipmentLogsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **shipbobChannelId** | **int32** | Channel Id for Operation | 
+
+### Return type
+
+[**[]ShipmentLog**](ShipmentLog.md)
+
+### Authorization
+
+[oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetOrderShipmentTimeline
+
+> []ShipmentLog GetOrderShipmentTimeline(ctx, orderId, shipmentId).ShipbobChannelId(shipbobChannelId).Execute()
+
+Get one Shipment's status timeline by Order Id and Shipment Id
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    orderId := int32(56) // int32 | The order id to get the shipment for
+    shipmentId := int32(56) // int32 | The shipment id to get
+    shipbobChannelId := int32(56) // int32 | Channel Id for Operation (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.OrdersApi.GetOrderShipmentTimeline(context.Background(), orderId, shipmentId).ShipbobChannelId(shipbobChannelId).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `OrdersApi.GetOrderShipmentTimeline``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetOrderShipmentTimeline`: []ShipmentLog
+    fmt.Fprintf(os.Stdout, "Response from `OrdersApi.GetOrderShipmentTimeline`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**orderId** | **int32** | The order id to get the shipment for | 
+**shipmentId** | **int32** | The shipment id to get | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetOrderShipmentTimelineRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **shipbobChannelId** | **int32** | Channel Id for Operation | 
+
+### Return type
+
+[**[]ShipmentLog**](ShipmentLog.md)
+
+### Authorization
+
+[oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetOrderShipments
+
+> []Shipment GetOrderShipments(ctx, orderId).ShipbobChannelId(shipbobChannelId).Execute()
+
+Get all Shipments for Order
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    orderId := int32(56) // int32 | The order id to get shipments for
+    shipbobChannelId := int32(56) // int32 | Channel Id for Operation (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.OrdersApi.GetOrderShipments(context.Background(), orderId).ShipbobChannelId(shipbobChannelId).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `OrdersApi.GetOrderShipments``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetOrderShipments`: []Shipment
+    fmt.Fprintf(os.Stdout, "Response from `OrdersApi.GetOrderShipments`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**orderId** | **int32** | The order id to get shipments for | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetOrderShipmentsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **shipbobChannelId** | **int32** | Channel Id for Operation | 
+
+### Return type
+
+[**[]Shipment**](Shipment.md)
+
+### Authorization
+
+[oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetOrders
+
+> []Order GetOrders(ctx).Page(page).Limit(limit).IDs(iDs).ReferenceIds(referenceIds).StartDate(startDate).EndDate(endDate).SortOrder(sortOrder).HasTracking(hasTracking).LastUpdateStartDate(lastUpdateStartDate).LastUpdateEndDate(lastUpdateEndDate).ShipbobChannelId(shipbobChannelId).Execute()
 
 Get Orders
 
@@ -127,13 +831,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.OrdersApi.OrderGet(context.Background()).Page(page).Limit(limit).IDs(iDs).ReferenceIds(referenceIds).StartDate(startDate).EndDate(endDate).SortOrder(sortOrder).HasTracking(hasTracking).LastUpdateStartDate(lastUpdateStartDate).LastUpdateEndDate(lastUpdateEndDate).ShipbobChannelId(shipbobChannelId).Execute()
+    resp, r, err := api_client.OrdersApi.GetOrders(context.Background()).Page(page).Limit(limit).IDs(iDs).ReferenceIds(referenceIds).StartDate(startDate).EndDate(endDate).SortOrder(sortOrder).HasTracking(hasTracking).LastUpdateStartDate(lastUpdateStartDate).LastUpdateEndDate(lastUpdateEndDate).ShipbobChannelId(shipbobChannelId).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `OrdersApi.OrderGet``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `OrdersApi.GetOrders``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `OrderGet`: []OrdersOrderViewModel
-    fmt.Fprintf(os.Stdout, "Response from `OrdersApi.OrderGet`: %v\n", resp)
+    // response from `GetOrders`: []Order
+    fmt.Fprintf(os.Stdout, "Response from `OrdersApi.GetOrders`: %v\n", resp)
 }
 ```
 
@@ -143,7 +847,7 @@ func main() {
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiOrderGetRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiGetOrdersRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -162,7 +866,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]OrdersOrderViewModel**](Orders.OrderViewModel.md)
+[**[]Order**](Order.md)
 
 ### Authorization
 
@@ -178,713 +882,9 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## OrderOrderIdCancelPost
+## GetShipment
 
-> OrdersCanceledOrderViewModel OrderOrderIdCancelPost(ctx, orderId).ShipbobChannelId(shipbobChannelId).Execute()
-
-Cancel single Order by Order ID
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    orderId := int32(56) // int32 | The order ID to cancel
-    shipbobChannelId := int32(56) // int32 | Channel ID for Operation
-
-    configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.OrdersApi.OrderOrderIdCancelPost(context.Background(), orderId).ShipbobChannelId(shipbobChannelId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `OrdersApi.OrderOrderIdCancelPost``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `OrderOrderIdCancelPost`: OrdersCanceledOrderViewModel
-    fmt.Fprintf(os.Stdout, "Response from `OrdersApi.OrderOrderIdCancelPost`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**orderId** | **int32** | The order ID to cancel | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiOrderOrderIdCancelPostRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **shipbobChannelId** | **int32** | Channel ID for Operation | 
-
-### Return type
-
-[**OrdersCanceledOrderViewModel**](Orders.CanceledOrderViewModel.md)
-
-### Authorization
-
-[oauth2](../README.md#oauth2)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## OrderOrderIdGet
-
-> OrdersOrderViewModel OrderOrderIdGet(ctx, orderId).ShipbobChannelId(shipbobChannelId).Execute()
-
-Get Order
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    orderId := int32(56) // int32 | 
-    shipbobChannelId := int32(56) // int32 | Channel Id for Operation (optional)
-
-    configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.OrdersApi.OrderOrderIdGet(context.Background(), orderId).ShipbobChannelId(shipbobChannelId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `OrdersApi.OrderOrderIdGet``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `OrderOrderIdGet`: OrdersOrderViewModel
-    fmt.Fprintf(os.Stdout, "Response from `OrdersApi.OrderOrderIdGet`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**orderId** | **int32** |  | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiOrderOrderIdGetRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **shipbobChannelId** | **int32** | Channel Id for Operation | 
-
-### Return type
-
-[**OrdersOrderViewModel**](Orders.OrderViewModel.md)
-
-### Authorization
-
-[oauth2](../README.md#oauth2)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## OrderOrderIdShipmentGet
-
-> []OrdersShipmentViewModel OrderOrderIdShipmentGet(ctx, orderId).ShipbobChannelId(shipbobChannelId).Execute()
-
-Get all Shipments for Order
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    orderId := int32(56) // int32 | The order id to get shipments for
-    shipbobChannelId := int32(56) // int32 | Channel Id for Operation (optional)
-
-    configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.OrdersApi.OrderOrderIdShipmentGet(context.Background(), orderId).ShipbobChannelId(shipbobChannelId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `OrdersApi.OrderOrderIdShipmentGet``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `OrderOrderIdShipmentGet`: []OrdersShipmentViewModel
-    fmt.Fprintf(os.Stdout, "Response from `OrdersApi.OrderOrderIdShipmentGet`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**orderId** | **int32** | The order id to get shipments for | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiOrderOrderIdShipmentGetRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **shipbobChannelId** | **int32** | Channel Id for Operation | 
-
-### Return type
-
-[**[]OrdersShipmentViewModel**](Orders.ShipmentViewModel.md)
-
-### Authorization
-
-[oauth2](../README.md#oauth2)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## OrderOrderIdShipmentShipmentIdCancelPost
-
-> OrdersShipmentViewModel OrderOrderIdShipmentShipmentIdCancelPost(ctx, shipmentId, orderId).ShipbobChannelId(shipbobChannelId).Execute()
-
-Cancel one Shipment by Order Id and Shipment Id
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    shipmentId := int32(56) // int32 | The shipment id to get
-    orderId := "orderId_example" // string | 
-    shipbobChannelId := int32(56) // int32 | Channel Id for Operation (optional)
-
-    configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.OrdersApi.OrderOrderIdShipmentShipmentIdCancelPost(context.Background(), shipmentId, orderId).ShipbobChannelId(shipbobChannelId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `OrdersApi.OrderOrderIdShipmentShipmentIdCancelPost``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `OrderOrderIdShipmentShipmentIdCancelPost`: OrdersShipmentViewModel
-    fmt.Fprintf(os.Stdout, "Response from `OrdersApi.OrderOrderIdShipmentShipmentIdCancelPost`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**shipmentId** | **int32** | The shipment id to get | 
-**orderId** | **string** |  | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiOrderOrderIdShipmentShipmentIdCancelPostRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
- **shipbobChannelId** | **int32** | Channel Id for Operation | 
-
-### Return type
-
-[**OrdersShipmentViewModel**](Orders.ShipmentViewModel.md)
-
-### Authorization
-
-[oauth2](../README.md#oauth2)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## OrderOrderIdShipmentShipmentIdGet
-
-> OrdersShipmentViewModel OrderOrderIdShipmentShipmentIdGet(ctx, orderId, shipmentId).ShipbobChannelId(shipbobChannelId).Execute()
-
-Get one Shipment by Order Id and Shipment Id
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    orderId := int32(56) // int32 | The order id to get the shipment for
-    shipmentId := int32(56) // int32 | The shipment id to get
-    shipbobChannelId := int32(56) // int32 | Channel Id for Operation (optional)
-
-    configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.OrdersApi.OrderOrderIdShipmentShipmentIdGet(context.Background(), orderId, shipmentId).ShipbobChannelId(shipbobChannelId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `OrdersApi.OrderOrderIdShipmentShipmentIdGet``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `OrderOrderIdShipmentShipmentIdGet`: OrdersShipmentViewModel
-    fmt.Fprintf(os.Stdout, "Response from `OrdersApi.OrderOrderIdShipmentShipmentIdGet`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**orderId** | **int32** | The order id to get the shipment for | 
-**shipmentId** | **int32** | The shipment id to get | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiOrderOrderIdShipmentShipmentIdGetRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
- **shipbobChannelId** | **int32** | Channel Id for Operation | 
-
-### Return type
-
-[**OrdersShipmentViewModel**](Orders.ShipmentViewModel.md)
-
-### Authorization
-
-[oauth2](../README.md#oauth2)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## OrderOrderIdShipmentShipmentIdLogsGet
-
-> []OrdersShipmentLogViewModel OrderOrderIdShipmentShipmentIdLogsGet(ctx, orderId, shipmentId).ShipbobChannelId(shipbobChannelId).Execute()
-
-Get logs for one Shipment by Order Id and Shipment Id
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    orderId := int32(56) // int32 | The order id to get the shipment for
-    shipmentId := int32(56) // int32 | The shipment id to get
-    shipbobChannelId := int32(56) // int32 | Channel Id for Operation (optional)
-
-    configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.OrdersApi.OrderOrderIdShipmentShipmentIdLogsGet(context.Background(), orderId, shipmentId).ShipbobChannelId(shipbobChannelId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `OrdersApi.OrderOrderIdShipmentShipmentIdLogsGet``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `OrderOrderIdShipmentShipmentIdLogsGet`: []OrdersShipmentLogViewModel
-    fmt.Fprintf(os.Stdout, "Response from `OrdersApi.OrderOrderIdShipmentShipmentIdLogsGet`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**orderId** | **int32** | The order id to get the shipment for | 
-**shipmentId** | **int32** | The shipment id to get | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiOrderOrderIdShipmentShipmentIdLogsGetRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
- **shipbobChannelId** | **int32** | Channel Id for Operation | 
-
-### Return type
-
-[**[]OrdersShipmentLogViewModel**](Orders.ShipmentLogViewModel.md)
-
-### Authorization
-
-[oauth2](../README.md#oauth2)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## OrderOrderIdShipmentShipmentIdTimelineGet
-
-> []OrdersShipmentLogViewModel OrderOrderIdShipmentShipmentIdTimelineGet(ctx, orderId, shipmentId).ShipbobChannelId(shipbobChannelId).Execute()
-
-Get one Shipment's status timeline by Order Id and Shipment Id
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    orderId := int32(56) // int32 | The order id to get the shipment for
-    shipmentId := int32(56) // int32 | The shipment id to get
-    shipbobChannelId := int32(56) // int32 | Channel Id for Operation (optional)
-
-    configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.OrdersApi.OrderOrderIdShipmentShipmentIdTimelineGet(context.Background(), orderId, shipmentId).ShipbobChannelId(shipbobChannelId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `OrdersApi.OrderOrderIdShipmentShipmentIdTimelineGet``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `OrderOrderIdShipmentShipmentIdTimelineGet`: []OrdersShipmentLogViewModel
-    fmt.Fprintf(os.Stdout, "Response from `OrdersApi.OrderOrderIdShipmentShipmentIdTimelineGet`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**orderId** | **int32** | The order id to get the shipment for | 
-**shipmentId** | **int32** | The shipment id to get | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiOrderOrderIdShipmentShipmentIdTimelineGetRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
- **shipbobChannelId** | **int32** | Channel Id for Operation | 
-
-### Return type
-
-[**[]OrdersShipmentLogViewModel**](Orders.ShipmentLogViewModel.md)
-
-### Authorization
-
-[oauth2](../README.md#oauth2)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## OrderPost
-
-> OrdersOrderViewModel OrderPost(ctx).ShipbobChannelId(shipbobChannelId).OrdersCreateOrderModel(ordersCreateOrderModel).Execute()
-
-Create Order
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    shipbobChannelId := int32(56) // int32 | Channel Id for Operation
-    ordersCreateOrderModel := *openapiclient.NewOrdersCreateOrderModel([]openapiclient.OrdersAddProductToOrderModel{openapiclient.Orders.AddProductToOrderModel{OrdersAddProductToOrderByProductIdModel: openapiclient.NewOrdersAddProductToOrderByProductIdModel(int32(123), int32(123))}}, *openapiclient.NewOrdersRecipientInfoViewModel(*openapiclient.NewOrdersAddressViewModel("100 Nowhere Blvd", "Gotham City", "US"), "John Doe"), "ReferenceId_example", "ShippingMethod_example") // OrdersCreateOrderModel |  (optional)
-
-    configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.OrdersApi.OrderPost(context.Background()).ShipbobChannelId(shipbobChannelId).OrdersCreateOrderModel(ordersCreateOrderModel).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `OrdersApi.OrderPost``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `OrderPost`: OrdersOrderViewModel
-    fmt.Fprintf(os.Stdout, "Response from `OrdersApi.OrderPost`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiOrderPostRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **shipbobChannelId** | **int32** | Channel Id for Operation | 
- **ordersCreateOrderModel** | [**OrdersCreateOrderModel**](OrdersCreateOrderModel.md) |  | 
-
-### Return type
-
-[**OrdersOrderViewModel**](Orders.OrderViewModel.md)
-
-### Authorization
-
-[oauth2](../README.md#oauth2)
-
-### HTTP request headers
-
-- **Content-Type**: application/_*+json, application/json, application/json-patch+json, text/json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## ShipmentCancelbulkPost
-
-> OrdersCanceledShipmentsViewModel ShipmentCancelbulkPost(ctx).ShipbobChannelId(shipbobChannelId).OrdersCancelShipmentsModel(ordersCancelShipmentsModel).Execute()
-
-Cancel multiple Shipments by Shipment Id
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    shipbobChannelId := int32(56) // int32 | Channel ID for Operation
-    ordersCancelShipmentsModel := *openapiclient.NewOrdersCancelShipmentsModel() // OrdersCancelShipmentsModel |  (optional)
-
-    configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.OrdersApi.ShipmentCancelbulkPost(context.Background()).ShipbobChannelId(shipbobChannelId).OrdersCancelShipmentsModel(ordersCancelShipmentsModel).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `OrdersApi.ShipmentCancelbulkPost``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ShipmentCancelbulkPost`: OrdersCanceledShipmentsViewModel
-    fmt.Fprintf(os.Stdout, "Response from `OrdersApi.ShipmentCancelbulkPost`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiShipmentCancelbulkPostRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **shipbobChannelId** | **int32** | Channel ID for Operation | 
- **ordersCancelShipmentsModel** | [**OrdersCancelShipmentsModel**](OrdersCancelShipmentsModel.md) |  | 
-
-### Return type
-
-[**OrdersCanceledShipmentsViewModel**](Orders.CanceledShipmentsViewModel.md)
-
-### Authorization
-
-[oauth2](../README.md#oauth2)
-
-### HTTP request headers
-
-- **Content-Type**: application/_*+json, application/json, application/json-patch+json, text/json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## ShipmentShipmentIdCancelPost
-
-> OrdersShipmentViewModel ShipmentShipmentIdCancelPost(ctx, shipmentId).ShipbobChannelId(shipbobChannelId).Execute()
-
-Cancel one Shipment by Shipment Id
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    shipmentId := int32(56) // int32 | The shipment id to get
-    shipbobChannelId := int32(56) // int32 | Channel Id for Operation (optional)
-
-    configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.OrdersApi.ShipmentShipmentIdCancelPost(context.Background(), shipmentId).ShipbobChannelId(shipbobChannelId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `OrdersApi.ShipmentShipmentIdCancelPost``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ShipmentShipmentIdCancelPost`: OrdersShipmentViewModel
-    fmt.Fprintf(os.Stdout, "Response from `OrdersApi.ShipmentShipmentIdCancelPost`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**shipmentId** | **int32** | The shipment id to get | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiShipmentShipmentIdCancelPostRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **shipbobChannelId** | **int32** | Channel Id for Operation | 
-
-### Return type
-
-[**OrdersShipmentViewModel**](Orders.ShipmentViewModel.md)
-
-### Authorization
-
-[oauth2](../README.md#oauth2)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## ShipmentShipmentIdGet
-
-> OrdersShipmentViewModel ShipmentShipmentIdGet(ctx, shipmentId).ShipbobChannelId(shipbobChannelId).Execute()
+> Shipment GetShipment(ctx, shipmentId).ShipbobChannelId(shipbobChannelId).Execute()
 
 Get one Shipment by Shipment Id
 
@@ -906,13 +906,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.OrdersApi.ShipmentShipmentIdGet(context.Background(), shipmentId).ShipbobChannelId(shipbobChannelId).Execute()
+    resp, r, err := api_client.OrdersApi.GetShipment(context.Background(), shipmentId).ShipbobChannelId(shipbobChannelId).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `OrdersApi.ShipmentShipmentIdGet``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `OrdersApi.GetShipment``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `ShipmentShipmentIdGet`: OrdersShipmentViewModel
-    fmt.Fprintf(os.Stdout, "Response from `OrdersApi.ShipmentShipmentIdGet`: %v\n", resp)
+    // response from `GetShipment`: Shipment
+    fmt.Fprintf(os.Stdout, "Response from `OrdersApi.GetShipment`: %v\n", resp)
 }
 ```
 
@@ -926,7 +926,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiShipmentShipmentIdGetRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiGetShipmentRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -936,7 +936,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OrdersShipmentViewModel**](Orders.ShipmentViewModel.md)
+[**Shipment**](Shipment.md)
 
 ### Authorization
 
@@ -952,9 +952,9 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## ShipmentShipmentIdLogsGet
+## GetShipmentLogs
 
-> []OrdersShipmentLogViewModel ShipmentShipmentIdLogsGet(ctx, shipmentId).ShipbobChannelId(shipbobChannelId).Execute()
+> []ShipmentLog GetShipmentLogs(ctx, shipmentId).ShipbobChannelId(shipbobChannelId).Execute()
 
 Get logs for one Shipment by Shipment Id
 
@@ -976,13 +976,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.OrdersApi.ShipmentShipmentIdLogsGet(context.Background(), shipmentId).ShipbobChannelId(shipbobChannelId).Execute()
+    resp, r, err := api_client.OrdersApi.GetShipmentLogs(context.Background(), shipmentId).ShipbobChannelId(shipbobChannelId).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `OrdersApi.ShipmentShipmentIdLogsGet``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `OrdersApi.GetShipmentLogs``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `ShipmentShipmentIdLogsGet`: []OrdersShipmentLogViewModel
-    fmt.Fprintf(os.Stdout, "Response from `OrdersApi.ShipmentShipmentIdLogsGet`: %v\n", resp)
+    // response from `GetShipmentLogs`: []ShipmentLog
+    fmt.Fprintf(os.Stdout, "Response from `OrdersApi.GetShipmentLogs`: %v\n", resp)
 }
 ```
 
@@ -996,7 +996,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiShipmentShipmentIdLogsGetRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiGetShipmentLogsRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -1006,7 +1006,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]OrdersShipmentLogViewModel**](Orders.ShipmentLogViewModel.md)
+[**[]ShipmentLog**](ShipmentLog.md)
 
 ### Authorization
 
@@ -1022,9 +1022,9 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## ShipmentShipmentIdTimelineGet
+## GetShipmentTimeline
 
-> []OrdersShipmentLogViewModel ShipmentShipmentIdTimelineGet(ctx, shipmentId).ShipbobChannelId(shipbobChannelId).Execute()
+> []ShipmentLog GetShipmentTimeline(ctx, shipmentId).ShipbobChannelId(shipbobChannelId).Execute()
 
 Get one Shipment's status timeline by Shipment Id
 
@@ -1046,13 +1046,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.OrdersApi.ShipmentShipmentIdTimelineGet(context.Background(), shipmentId).ShipbobChannelId(shipbobChannelId).Execute()
+    resp, r, err := api_client.OrdersApi.GetShipmentTimeline(context.Background(), shipmentId).ShipbobChannelId(shipbobChannelId).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `OrdersApi.ShipmentShipmentIdTimelineGet``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `OrdersApi.GetShipmentTimeline``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `ShipmentShipmentIdTimelineGet`: []OrdersShipmentLogViewModel
-    fmt.Fprintf(os.Stdout, "Response from `OrdersApi.ShipmentShipmentIdTimelineGet`: %v\n", resp)
+    // response from `GetShipmentTimeline`: []ShipmentLog
+    fmt.Fprintf(os.Stdout, "Response from `OrdersApi.GetShipmentTimeline`: %v\n", resp)
 }
 ```
 
@@ -1066,7 +1066,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiShipmentShipmentIdTimelineGetRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiGetShipmentTimelineRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -1076,7 +1076,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]OrdersShipmentLogViewModel**](Orders.ShipmentLogViewModel.md)
+[**[]ShipmentLog**](ShipmentLog.md)
 
 ### Authorization
 
@@ -1092,9 +1092,9 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## ShippingmethodGet
+## GetShippingMethodCollection
 
-> []OrdersShipMethodDetailViewModel ShippingmethodGet(ctx).Page(page).Limit(limit).Execute()
+> []ShipMethodDetail GetShippingMethodCollection(ctx).Page(page).Limit(limit).Execute()
 
 Get shipping methods
 
@@ -1118,13 +1118,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.OrdersApi.ShippingmethodGet(context.Background()).Page(page).Limit(limit).Execute()
+    resp, r, err := api_client.OrdersApi.GetShippingMethodCollection(context.Background()).Page(page).Limit(limit).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `OrdersApi.ShippingmethodGet``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `OrdersApi.GetShippingMethodCollection``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `ShippingmethodGet`: []OrdersShipMethodDetailViewModel
-    fmt.Fprintf(os.Stdout, "Response from `OrdersApi.ShippingmethodGet`: %v\n", resp)
+    // response from `GetShippingMethodCollection`: []ShipMethodDetail
+    fmt.Fprintf(os.Stdout, "Response from `OrdersApi.GetShippingMethodCollection`: %v\n", resp)
 }
 ```
 
@@ -1134,7 +1134,7 @@ func main() {
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiShippingmethodGetRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiGetShippingMethodCollectionRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -1144,7 +1144,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]OrdersShipMethodDetailViewModel**](Orders.ShipMethodDetailViewModel.md)
+[**[]ShipMethodDetail**](ShipMethodDetail.md)
 
 ### Authorization
 

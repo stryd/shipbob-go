@@ -27,59 +27,296 @@ var (
 // WebhooksApiService WebhooksApi service
 type WebhooksApiService service
 
-type ApiWebhookGetRequest struct {
-	ctx _context.Context
-	ApiService *WebhooksApiService
-	topic *WebhooksTopics
-	page *int32
-	limit *int32
+type ApiCreateWebhookRequest struct {
+	ctx                 _context.Context
+	ApiService          *WebhooksApiService
+	shipbobChannelId    *int32
+	webhookSubscription *WebhookSubscription
 }
 
-func (r ApiWebhookGetRequest) Topic(topic WebhooksTopics) ApiWebhookGetRequest {
-	r.topic = &topic
+func (r ApiCreateWebhookRequest) ShipbobChannelId(shipbobChannelId int32) ApiCreateWebhookRequest {
+	r.shipbobChannelId = &shipbobChannelId
 	return r
 }
-func (r ApiWebhookGetRequest) Page(page int32) ApiWebhookGetRequest {
-	r.page = &page
-	return r
-}
-func (r ApiWebhookGetRequest) Limit(limit int32) ApiWebhookGetRequest {
-	r.limit = &limit
+func (r ApiCreateWebhookRequest) WebhookSubscription(webhookSubscription WebhookSubscription) ApiCreateWebhookRequest {
+	r.webhookSubscription = &webhookSubscription
 	return r
 }
 
-func (r ApiWebhookGetRequest) Execute() ([]WebhooksWebhookViewModel, *_nethttp.Response, error) {
-	return r.ApiService.WebhookGetExecute(r)
+func (r ApiCreateWebhookRequest) Execute() (Webhook, *_nethttp.Response, error) {
+	return r.ApiService.CreateWebhookExecute(r)
 }
 
 /*
- * WebhookGet Get Webhooks
- * All parameters are AND filters
+ * CreateWebhook Create a new webhook subscription
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @return ApiWebhookGetRequest
+ * @return ApiCreateWebhookRequest
  */
-func (a *WebhooksApiService) WebhookGet(ctx _context.Context) ApiWebhookGetRequest {
-	return ApiWebhookGetRequest{
+func (a *WebhooksApiService) CreateWebhook(ctx _context.Context) ApiCreateWebhookRequest {
+	return ApiCreateWebhookRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 /*
  * Execute executes the request
- * @return []WebhooksWebhookViewModel
+ * @return Webhook
  */
-func (a *WebhooksApiService) WebhookGetExecute(r ApiWebhookGetRequest) ([]WebhooksWebhookViewModel, *_nethttp.Response, error) {
+func (a *WebhooksApiService) CreateWebhookExecute(r ApiCreateWebhookRequest) (Webhook, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  Webhook
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WebhooksApiService.CreateWebhook")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/webhook"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.shipbobChannelId != nil {
+		localVarHeaderParams["shipbob_channel_id"] = parameterToString(*r.shipbobChannelId, "")
+	}
+	// body params
+	localVarPostBody = r.webhookSubscription
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v map[string][]string
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v map[string][]string
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiDeleteWebhookRequest struct {
+	ctx        _context.Context
+	ApiService *WebhooksApiService
+	id         int32
+}
+
+func (r ApiDeleteWebhookRequest) Execute() (*_nethttp.Response, error) {
+	return r.ApiService.DeleteWebhookExecute(r)
+}
+
+/*
+ * DeleteWebhook Delete an existing webhook subscription
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param id
+ * @return ApiDeleteWebhookRequest
+ */
+func (a *WebhooksApiService) DeleteWebhook(ctx _context.Context, id int32) ApiDeleteWebhookRequest {
+	return ApiDeleteWebhookRequest{
+		ApiService: a,
+		ctx:        ctx,
+		id:         id,
+	}
+}
+
+/*
+ * Execute executes the request
+ */
+func (a *WebhooksApiService) DeleteWebhookExecute(r ApiDeleteWebhookRequest) (*_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodDelete
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WebhooksApiService.DeleteWebhook")
+	if err != nil {
+		return nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/webhook/{id}"
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", _neturl.PathEscape(parameterToString(r.id, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v ValidationProblemDetails
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+		}
+		return localVarHTTPResponse, newErr
+	}
+
+	return localVarHTTPResponse, nil
+}
+
+type ApiGetWebhooksRequest struct {
+	ctx        _context.Context
+	ApiService *WebhooksApiService
+	topic      *Topics
+	page       *int32
+	limit      *int32
+}
+
+func (r ApiGetWebhooksRequest) Topic(topic Topics) ApiGetWebhooksRequest {
+	r.topic = &topic
+	return r
+}
+func (r ApiGetWebhooksRequest) Page(page int32) ApiGetWebhooksRequest {
+	r.page = &page
+	return r
+}
+func (r ApiGetWebhooksRequest) Limit(limit int32) ApiGetWebhooksRequest {
+	r.limit = &limit
+	return r
+}
+
+func (r ApiGetWebhooksRequest) Execute() ([]Webhook, *_nethttp.Response, error) {
+	return r.ApiService.GetWebhooksExecute(r)
+}
+
+/*
+ * GetWebhooks Get Webhooks
+ * All parameters are AND filters
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @return ApiGetWebhooksRequest
+ */
+func (a *WebhooksApiService) GetWebhooks(ctx _context.Context) ApiGetWebhooksRequest {
+	return ApiGetWebhooksRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return []Webhook
+ */
+func (a *WebhooksApiService) GetWebhooksExecute(r ApiGetWebhooksRequest) ([]Webhook, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  []WebhooksWebhookViewModel
+		localVarReturnValue  []Webhook
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WebhooksApiService.WebhookGet")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WebhooksApiService.GetWebhooks")
 	if err != nil {
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
@@ -147,244 +384,6 @@ func (a *WebhooksApiService) WebhookGetExecute(r ApiWebhookGetRequest) ([]Webhoo
 			}
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiWebhookIdDeleteRequest struct {
-	ctx _context.Context
-	ApiService *WebhooksApiService
-	id int32
-}
-
-
-func (r ApiWebhookIdDeleteRequest) Execute() (*_nethttp.Response, error) {
-	return r.ApiService.WebhookIdDeleteExecute(r)
-}
-
-/*
- * WebhookIdDelete Delete an existing webhook subscription
- * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param id
- * @return ApiWebhookIdDeleteRequest
- */
-func (a *WebhooksApiService) WebhookIdDelete(ctx _context.Context, id int32) ApiWebhookIdDeleteRequest {
-	return ApiWebhookIdDeleteRequest{
-		ApiService: a,
-		ctx: ctx,
-		id: id,
-	}
-}
-
-/*
- * Execute executes the request
- */
-func (a *WebhooksApiService) WebhookIdDeleteExecute(r ApiWebhookIdDeleteRequest) (*_nethttp.Response, error) {
-	var (
-		localVarHTTPMethod   = _nethttp.MethodDelete
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WebhooksApiService.WebhookIdDelete")
-	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/webhook/{id}"
-	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", _neturl.PathEscape(parameterToString(r.id, "")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
-	if err != nil {
-		return nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarHTTPResponse, err
-	}
-
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v ValidationProblemDetails
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-		}
-		return localVarHTTPResponse, newErr
-	}
-
-	return localVarHTTPResponse, nil
-}
-
-type ApiWebhookPostRequest struct {
-	ctx _context.Context
-	ApiService *WebhooksApiService
-	shipbobChannelId *int32
-	webhooksCreateWebhookSubscriptionModel *WebhooksCreateWebhookSubscriptionModel
-}
-
-func (r ApiWebhookPostRequest) ShipbobChannelId(shipbobChannelId int32) ApiWebhookPostRequest {
-	r.shipbobChannelId = &shipbobChannelId
-	return r
-}
-func (r ApiWebhookPostRequest) WebhooksCreateWebhookSubscriptionModel(webhooksCreateWebhookSubscriptionModel WebhooksCreateWebhookSubscriptionModel) ApiWebhookPostRequest {
-	r.webhooksCreateWebhookSubscriptionModel = &webhooksCreateWebhookSubscriptionModel
-	return r
-}
-
-func (r ApiWebhookPostRequest) Execute() (WebhooksWebhookViewModel, *_nethttp.Response, error) {
-	return r.ApiService.WebhookPostExecute(r)
-}
-
-/*
- * WebhookPost Create a new webhook subscription
- * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @return ApiWebhookPostRequest
- */
-func (a *WebhooksApiService) WebhookPost(ctx _context.Context) ApiWebhookPostRequest {
-	return ApiWebhookPostRequest{
-		ApiService: a,
-		ctx: ctx,
-	}
-}
-
-/*
- * Execute executes the request
- * @return WebhooksWebhookViewModel
- */
-func (a *WebhooksApiService) WebhookPostExecute(r ApiWebhookPostRequest) (WebhooksWebhookViewModel, *_nethttp.Response, error) {
-	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  WebhooksWebhookViewModel
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WebhooksApiService.WebhookPost")
-	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/webhook"
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/_*+json", "application/json", "application/json-patch+json", "text/json"}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.shipbobChannelId != nil {
-		localVarHeaderParams["shipbob_channel_id"] = parameterToString(*r.shipbobChannelId, "")
-	}
-	// body params
-	localVarPostBody = r.webhooksCreateWebhookSubscriptionModel
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v map[string][]string
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 422 {
-			var v map[string][]string
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}

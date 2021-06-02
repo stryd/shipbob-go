@@ -4,13 +4,13 @@ All URIs are relative to *https://api.shipbob.com/1.0*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**ChannelGet**](ChannelsApi.md#ChannelGet) | **Get** /channel | Get user-authorized channel info
+[**GetChannels**](ChannelsApi.md#GetChannels) | **Get** /channel | Get user-authorized channel info
 
 
 
-## ChannelGet
+## GetChannels
 
-> []ChannelsChannelViewModel ChannelGet(ctx).Execute()
+> []Channel GetChannels(ctx).Execute()
 
 Get user-authorized channel info
 
@@ -30,13 +30,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ChannelsApi.ChannelGet(context.Background()).Execute()
+    resp, r, err := api_client.ChannelsApi.GetChannels(context.Background()).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ChannelsApi.ChannelGet``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `ChannelsApi.GetChannels``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `ChannelGet`: []ChannelsChannelViewModel
-    fmt.Fprintf(os.Stdout, "Response from `ChannelsApi.ChannelGet`: %v\n", resp)
+    // response from `GetChannels`: []Channel
+    fmt.Fprintf(os.Stdout, "Response from `ChannelsApi.GetChannels`: %v\n", resp)
 }
 ```
 
@@ -46,12 +46,12 @@ This endpoint does not need any parameter.
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiChannelGetRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiGetChannelsRequest struct via the builder pattern
 
 
 ### Return type
 
-[**[]ChannelsChannelViewModel**](Channels.ChannelViewModel.md)
+[**[]Channel**](Channel.md)
 
 ### Authorization
 
