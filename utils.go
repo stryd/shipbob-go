@@ -325,11 +325,15 @@ func NewNullableTime(val *time.Time) *NullableTime {
 	return &NullableTime{value: val, isSet: true}
 }
 
+// MarshalJSON date-time strings from shipbob do not include zone information (Z07:00)
 func (v NullableTime) MarshalJSON() ([]byte, error) {
-	return v.value.MarshalJSON()
+	return []byte(v.value.UTC().Format("2006-01-02T15:04:05")), nil
 }
 
+// UnmarshalJSON date-time strings from shipbob do not include zone information (Z07:00)
 func (v *NullableTime) UnmarshalJSON(src []byte) error {
 	v.isSet = true
-	return json.Unmarshal(src, &v.value)
+	t, err := time.Parse("2006-01-02T15:04:05", string(src))
+	v.value = &t
+	return err
 }
