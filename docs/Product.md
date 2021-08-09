@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **Barcode** | Pointer to **NullableString** | Barcode for the product | [optional] 
 **BundleRootInformation** | Pointer to [**ProductBundleRootInformation**](Product_bundle_root_information.md) |  | [optional] 
 **Channel** | Pointer to [**ProductChannel**](ProductChannel.md) |  | [optional] 
-**CreatedDate** | Pointer to **time.Time** | Date the product was created | [optional] 
+**CreatedDate** | Pointer to **NullableTime** | Date the product was created | [optional] 
 **FulfillableInventoryItems** | Pointer to [**[]ProductInventoryItem**](ProductInventoryItem.md) | The inventory that this product will resolve to when packing a shipment | [optional] 
 **FulfillableQuantityByFulfillmentCenter** | Pointer to [**[]ProductFulfillmentCenterQuantity**](ProductFulfillmentCenterQuantity.md) | Fulfillable quantity of this product broken down by fulfillment center location | [optional] 
 **Id** | Pointer to **int32** | Unique identifier of the product | [optional] 
@@ -147,6 +147,16 @@ SetCreatedDate sets CreatedDate field to given value.
 
 HasCreatedDate returns a boolean if a field has been set.
 
+### SetCreatedDateNil
+
+`func (o *Product) SetCreatedDateNil(b bool)`
+
+ SetCreatedDateNil sets the value for CreatedDate to be an explicit nil
+
+### UnsetCreatedDate
+`func (o *Product) UnsetCreatedDate()`
+
+UnsetCreatedDate ensures that no value is present for CreatedDate, not even an explicit nil
 ### GetFulfillableInventoryItems
 
 `func (o *Product) GetFulfillableInventoryItems() []ProductInventoryItem`

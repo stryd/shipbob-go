@@ -23,14 +23,14 @@ type ReceivingOrder struct {
 	// Information about the boxes being shipped in this receiving order
 	Boxes []ReceivingOrderBoxes `json:"boxes,omitempty"`
 	// Expected date that all packages will have arrived
-	ExpectedArrivalDate *time.Time                  `json:"expected_arrival_date,omitempty"`
+	ExpectedArrivalDate NullableTime                `json:"expected_arrival_date,omitempty"`
 	FulfillmentCenter   *ReceivingFulfillmentCenter `json:"fulfillment_center,omitempty"`
 	// Unique id of the warehouse receiving order
 	Id *int32 `json:"id,omitempty"`
 	// Insert date of the receiving order
-	InsertDate *time.Time `json:"insert_date,omitempty"`
+	InsertDate NullableTime `json:"insert_date,omitempty"`
 	// Last date the receiving order was updated
-	LastUpdatedDate *time.Time   `json:"last_updated_date,omitempty"`
+	LastUpdatedDate NullableTime `json:"last_updated_date,omitempty"`
 	PackageType     *PackageType `json:"package_type,omitempty"`
 	Status          *string      `json:"status,omitempty"`
 }
@@ -160,36 +160,47 @@ func (o *ReceivingOrder) SetBoxes(v []ReceivingOrderBoxes) {
 	o.Boxes = v
 }
 
-// GetExpectedArrivalDate returns the ExpectedArrivalDate field value if set, zero value otherwise.
+// GetExpectedArrivalDate returns the ExpectedArrivalDate field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ReceivingOrder) GetExpectedArrivalDate() time.Time {
-	if o == nil || o.ExpectedArrivalDate == nil {
+	if o == nil || o.ExpectedArrivalDate.Get() == nil {
 		var ret time.Time
 		return ret
 	}
-	return *o.ExpectedArrivalDate
+	return *o.ExpectedArrivalDate.Get()
 }
 
 // GetExpectedArrivalDateOk returns a tuple with the ExpectedArrivalDate field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ReceivingOrder) GetExpectedArrivalDateOk() (*time.Time, bool) {
-	if o == nil || o.ExpectedArrivalDate == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.ExpectedArrivalDate, true
+	return o.ExpectedArrivalDate.Get(), o.ExpectedArrivalDate.IsSet()
 }
 
 // HasExpectedArrivalDate returns a boolean if a field has been set.
 func (o *ReceivingOrder) HasExpectedArrivalDate() bool {
-	if o != nil && o.ExpectedArrivalDate != nil {
+	if o != nil && o.ExpectedArrivalDate.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetExpectedArrivalDate gets a reference to the given time.Time and assigns it to the ExpectedArrivalDate field.
+// SetExpectedArrivalDate gets a reference to the given NullableTime and assigns it to the ExpectedArrivalDate field.
 func (o *ReceivingOrder) SetExpectedArrivalDate(v time.Time) {
-	o.ExpectedArrivalDate = &v
+	o.ExpectedArrivalDate.Set(&v)
+}
+
+// SetExpectedArrivalDateNil sets the value for ExpectedArrivalDate to be an explicit nil
+func (o *ReceivingOrder) SetExpectedArrivalDateNil() {
+	o.ExpectedArrivalDate.Set(nil)
+}
+
+// UnsetExpectedArrivalDate ensures that no value is present for ExpectedArrivalDate, not even an explicit nil
+func (o *ReceivingOrder) UnsetExpectedArrivalDate() {
+	o.ExpectedArrivalDate.Unset()
 }
 
 // GetFulfillmentCenter returns the FulfillmentCenter field value if set, zero value otherwise.
@@ -256,68 +267,90 @@ func (o *ReceivingOrder) SetId(v int32) {
 	o.Id = &v
 }
 
-// GetInsertDate returns the InsertDate field value if set, zero value otherwise.
+// GetInsertDate returns the InsertDate field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ReceivingOrder) GetInsertDate() time.Time {
-	if o == nil || o.InsertDate == nil {
+	if o == nil || o.InsertDate.Get() == nil {
 		var ret time.Time
 		return ret
 	}
-	return *o.InsertDate
+	return *o.InsertDate.Get()
 }
 
 // GetInsertDateOk returns a tuple with the InsertDate field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ReceivingOrder) GetInsertDateOk() (*time.Time, bool) {
-	if o == nil || o.InsertDate == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.InsertDate, true
+	return o.InsertDate.Get(), o.InsertDate.IsSet()
 }
 
 // HasInsertDate returns a boolean if a field has been set.
 func (o *ReceivingOrder) HasInsertDate() bool {
-	if o != nil && o.InsertDate != nil {
+	if o != nil && o.InsertDate.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetInsertDate gets a reference to the given time.Time and assigns it to the InsertDate field.
+// SetInsertDate gets a reference to the given NullableTime and assigns it to the InsertDate field.
 func (o *ReceivingOrder) SetInsertDate(v time.Time) {
-	o.InsertDate = &v
+	o.InsertDate.Set(&v)
 }
 
-// GetLastUpdatedDate returns the LastUpdatedDate field value if set, zero value otherwise.
+// SetInsertDateNil sets the value for InsertDate to be an explicit nil
+func (o *ReceivingOrder) SetInsertDateNil() {
+	o.InsertDate.Set(nil)
+}
+
+// UnsetInsertDate ensures that no value is present for InsertDate, not even an explicit nil
+func (o *ReceivingOrder) UnsetInsertDate() {
+	o.InsertDate.Unset()
+}
+
+// GetLastUpdatedDate returns the LastUpdatedDate field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ReceivingOrder) GetLastUpdatedDate() time.Time {
-	if o == nil || o.LastUpdatedDate == nil {
+	if o == nil || o.LastUpdatedDate.Get() == nil {
 		var ret time.Time
 		return ret
 	}
-	return *o.LastUpdatedDate
+	return *o.LastUpdatedDate.Get()
 }
 
 // GetLastUpdatedDateOk returns a tuple with the LastUpdatedDate field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ReceivingOrder) GetLastUpdatedDateOk() (*time.Time, bool) {
-	if o == nil || o.LastUpdatedDate == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.LastUpdatedDate, true
+	return o.LastUpdatedDate.Get(), o.LastUpdatedDate.IsSet()
 }
 
 // HasLastUpdatedDate returns a boolean if a field has been set.
 func (o *ReceivingOrder) HasLastUpdatedDate() bool {
-	if o != nil && o.LastUpdatedDate != nil {
+	if o != nil && o.LastUpdatedDate.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetLastUpdatedDate gets a reference to the given time.Time and assigns it to the LastUpdatedDate field.
+// SetLastUpdatedDate gets a reference to the given NullableTime and assigns it to the LastUpdatedDate field.
 func (o *ReceivingOrder) SetLastUpdatedDate(v time.Time) {
-	o.LastUpdatedDate = &v
+	o.LastUpdatedDate.Set(&v)
+}
+
+// SetLastUpdatedDateNil sets the value for LastUpdatedDate to be an explicit nil
+func (o *ReceivingOrder) SetLastUpdatedDateNil() {
+	o.LastUpdatedDate.Set(nil)
+}
+
+// UnsetLastUpdatedDate ensures that no value is present for LastUpdatedDate, not even an explicit nil
+func (o *ReceivingOrder) UnsetLastUpdatedDate() {
+	o.LastUpdatedDate.Unset()
 }
 
 // GetPackageType returns the PackageType field value if set, zero value otherwise.
@@ -395,8 +428,8 @@ func (o ReceivingOrder) MarshalJSON() ([]byte, error) {
 	if o.Boxes != nil {
 		toSerialize["boxes"] = o.Boxes
 	}
-	if o.ExpectedArrivalDate != nil {
-		toSerialize["expected_arrival_date"] = o.ExpectedArrivalDate
+	if o.ExpectedArrivalDate.IsSet() {
+		toSerialize["expected_arrival_date"] = o.ExpectedArrivalDate.Get()
 	}
 	if o.FulfillmentCenter != nil {
 		toSerialize["fulfillment_center"] = o.FulfillmentCenter
@@ -404,11 +437,11 @@ func (o ReceivingOrder) MarshalJSON() ([]byte, error) {
 	if o.Id != nil {
 		toSerialize["id"] = o.Id
 	}
-	if o.InsertDate != nil {
-		toSerialize["insert_date"] = o.InsertDate
+	if o.InsertDate.IsSet() {
+		toSerialize["insert_date"] = o.InsertDate.Get()
 	}
-	if o.LastUpdatedDate != nil {
-		toSerialize["last_updated_date"] = o.LastUpdatedDate
+	if o.LastUpdatedDate.IsSet() {
+		toSerialize["last_updated_date"] = o.LastUpdatedDate.Get()
 	}
 	if o.PackageType != nil {
 		toSerialize["package_type"] = o.PackageType

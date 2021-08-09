@@ -20,7 +20,7 @@ type Shipment struct {
 	// The datetime of ShipBob's completion of the fulfillment operation as promised. Currently, this means the shipment has been picked, packed, and label has been printed.
 	ActualFulfillmentDate NullableTime `json:"actual_fulfillment_date,omitempty"`
 	// Date this shipment was created
-	CreatedDate *time.Time `json:"created_date,omitempty"`
+	CreatedDate NullableTime `json:"created_date,omitempty"`
 	// The datetime of ShipBob's commitment for completing the shipment and handing to the carrier for delivery.
 	EstimatedFulfillmentDate NullableTime `json:"estimated_fulfillment_date,omitempty"`
 	// Status of ShipBob's completion of the fulfillment operation.
@@ -115,36 +115,47 @@ func (o *Shipment) UnsetActualFulfillmentDate() {
 	o.ActualFulfillmentDate.Unset()
 }
 
-// GetCreatedDate returns the CreatedDate field value if set, zero value otherwise.
+// GetCreatedDate returns the CreatedDate field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *Shipment) GetCreatedDate() time.Time {
-	if o == nil || o.CreatedDate == nil {
+	if o == nil || o.CreatedDate.Get() == nil {
 		var ret time.Time
 		return ret
 	}
-	return *o.CreatedDate
+	return *o.CreatedDate.Get()
 }
 
 // GetCreatedDateOk returns a tuple with the CreatedDate field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *Shipment) GetCreatedDateOk() (*time.Time, bool) {
-	if o == nil || o.CreatedDate == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.CreatedDate, true
+	return o.CreatedDate.Get(), o.CreatedDate.IsSet()
 }
 
 // HasCreatedDate returns a boolean if a field has been set.
 func (o *Shipment) HasCreatedDate() bool {
-	if o != nil && o.CreatedDate != nil {
+	if o != nil && o.CreatedDate.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetCreatedDate gets a reference to the given time.Time and assigns it to the CreatedDate field.
+// SetCreatedDate gets a reference to the given NullableTime and assigns it to the CreatedDate field.
 func (o *Shipment) SetCreatedDate(v time.Time) {
-	o.CreatedDate = &v
+	o.CreatedDate.Set(&v)
+}
+
+// SetCreatedDateNil sets the value for CreatedDate to be an explicit nil
+func (o *Shipment) SetCreatedDateNil() {
+	o.CreatedDate.Set(nil)
+}
+
+// UnsetCreatedDate ensures that no value is present for CreatedDate, not even an explicit nil
+func (o *Shipment) UnsetCreatedDate() {
+	o.CreatedDate.Unset()
 }
 
 // GetEstimatedFulfillmentDate returns the EstimatedFulfillmentDate field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -772,8 +783,8 @@ func (o Shipment) MarshalJSON() ([]byte, error) {
 	if o.ActualFulfillmentDate.IsSet() {
 		toSerialize["actual_fulfillment_date"] = o.ActualFulfillmentDate.Get()
 	}
-	if o.CreatedDate != nil {
-		toSerialize["created_date"] = o.CreatedDate
+	if o.CreatedDate.IsSet() {
+		toSerialize["created_date"] = o.CreatedDate.Get()
 	}
 	if o.EstimatedFulfillmentDate.IsSet() {
 		toSerialize["estimated_fulfillment_date"] = o.EstimatedFulfillmentDate.Get()

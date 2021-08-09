@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ActualFulfillmentDate** | Pointer to **NullableTime** | The datetime of ShipBob&#39;s completion of the fulfillment operation as promised. Currently, this means the shipment has been picked, packed, and label has been printed. | [optional] 
-**CreatedDate** | Pointer to **time.Time** | Date this shipment was created | [optional] 
+**CreatedDate** | Pointer to **NullableTime** | Date this shipment was created | [optional] 
 **EstimatedFulfillmentDate** | Pointer to **NullableTime** | The datetime of ShipBob&#39;s commitment for completing the shipment and handing to the carrier for delivery. | [optional] 
 **EstimatedFulfillmentDateStatus** | Pointer to **string** | Status of ShipBob&#39;s completion of the fulfillment operation. | [optional] 
 **Id** | Pointer to **int32** | Unique id of the shipment | [optional] 
@@ -104,6 +104,16 @@ SetCreatedDate sets CreatedDate field to given value.
 
 HasCreatedDate returns a boolean if a field has been set.
 
+### SetCreatedDateNil
+
+`func (o *Shipment) SetCreatedDateNil(b bool)`
+
+ SetCreatedDateNil sets the value for CreatedDate to be an explicit nil
+
+### UnsetCreatedDate
+`func (o *Shipment) UnsetCreatedDate()`
+
+UnsetCreatedDate ensures that no value is present for CreatedDate, not even an explicit nil
 ### GetEstimatedFulfillmentDate
 
 `func (o *Shipment) GetEstimatedFulfillmentDate() time.Time`

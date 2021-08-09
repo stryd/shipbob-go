@@ -12,6 +12,7 @@ package shipbob
 
 import (
 	"encoding/json"
+	"strings"
 	"time"
 )
 
@@ -75,7 +76,6 @@ func (v *NullableBool) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-
 type NullableInt struct {
 	value *int
 	isSet bool
@@ -111,7 +111,6 @@ func (v *NullableInt) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 
 type NullableInt32 struct {
 	value *int32
@@ -149,7 +148,6 @@ func (v *NullableInt32) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-
 type NullableInt64 struct {
 	value *int64
 	isSet bool
@@ -185,7 +183,6 @@ func (v *NullableInt64) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 
 type NullableFloat32 struct {
 	value *float32
@@ -223,7 +220,6 @@ func (v *NullableFloat32) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-
 type NullableFloat64 struct {
 	value *float64
 	isSet bool
@@ -259,7 +255,6 @@ func (v *NullableFloat64) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 
 type NullableString struct {
 	value *string
@@ -297,7 +292,6 @@ func (v *NullableString) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-
 type NullableTime struct {
 	value *time.Time
 	isSet bool
@@ -325,15 +319,31 @@ func NewNullableTime(val *time.Time) *NullableTime {
 	return &NullableTime{value: val, isSet: true}
 }
 
-// MarshalJSON date-time strings from shipbob do not include zone information (Z07:00)
 func (v NullableTime) MarshalJSON() ([]byte, error) {
-	return []byte(v.value.UTC().Format("2006-01-02T15:04:05")), nil
+	if v.isSet {
+		return []byte(v.value.UTC().Format("2006-01-02T15:04:05")), nil
+	}
+	return []byte{}, nil
 }
 
-// UnmarshalJSON date-time strings from shipbob do not include zone information (Z07:00)
 func (v *NullableTime) UnmarshalJSON(src []byte) error {
-	v.isSet = true
-	t, err := time.Parse("2006-01-02T15:04:05", string(src))
-	v.value = &t
-	return err
+	dateString := cleanTimeString(string(src))
+	if len(dateString) > 0 && dateString != "null" {
+		v.isSet = true
+		t, err := time.Parse("2006-01-02T15:04:05", dateString)
+		v.value = &t
+		return err
+	}
+	return nil
+}
+
+func cleanTimeString(str string) string {
+	if strings.HasPrefix(str, `"`) || strings.HasSuffix(str, `"`) {
+		str = strings.ReplaceAll(str, "\"", "")
+	}
+	i := strings.Index(str, "+")
+	if i > 0 {
+		str = str[:i]
+	}
+	return str
 }

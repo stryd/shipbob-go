@@ -736,6 +736,7 @@
           "created_date": {
             "description": "Date this order was created",
             "format": "date-time",
+            "nullable": true,
             "type": "string"
           },
           "id": {
@@ -960,6 +961,7 @@
           "timestamp": {
             "description": "Timestamp of event",
             "format": "date-time",
+            "nullable": true,
             "type": "string"
           }
         },
@@ -1012,6 +1014,7 @@
           "created_date": {
             "description": "Date this shipment was created",
             "format": "date-time",
+            "nullable": true,
             "type": "string"
           },
           "estimated_fulfillment_date": {
@@ -1240,6 +1243,7 @@
           "created_at": {
             "description": "Timestamp the webhook subscription was created",
             "format": "date-time",
+            "nullable": true,
             "type": "string"
           },
           "id": {
@@ -1656,6 +1660,7 @@
           "created_date": {
             "description": "Date the product was created",
             "format": "date-time",
+            "nullable": true,
             "type": "string"
           },
           "fulfillable_inventory_items": {
@@ -1795,6 +1800,7 @@
           "expected_arrival_date": {
             "description": "Expected arrival date of all the box shipments in this receiving order",
             "format": "date-time",
+            "nullable": true,
             "type": "string"
           },
           "fulfillment_center": {
@@ -2003,6 +2009,7 @@
           "expected_arrival_date": {
             "description": "Expected date that all packages will have arrived",
             "format": "date-time",
+            "nullable": true,
             "type": "string"
           },
           "fulfillment_center": {
@@ -2016,11 +2023,13 @@
           "insert_date": {
             "description": "Insert date of the receiving order",
             "format": "date-time",
+            "nullable": true,
             "type": "string"
           },
           "last_updated_date": {
             "description": "Last date the receiving order was updated",
             "format": "date-time",
+            "nullable": true,
             "type": "string"
           },
           "package_type": {
@@ -2250,6 +2259,7 @@
           "time_stamp": {
             "description": "Date this corresponding return order status was created",
             "format": "date-time",
+            "nullable": true,
             "type": "string"
           }
         },
@@ -2272,6 +2282,7 @@
           "insert_date": {
             "description": "Date this return order was created",
             "format": "date-time",
+            "nullable": true,
             "type": "string"
           },
           "inventory": {
@@ -4645,6 +4656,7 @@
             "name": "StartDate",
             "schema": {
               "format": "date-time",
+              "nullable": true,
               "type": "string"
             }
           },
@@ -4654,6 +4666,7 @@
             "name": "EndDate",
             "schema": {
               "format": "date-time",
+              "nullable": true,
               "type": "string"
             }
           },

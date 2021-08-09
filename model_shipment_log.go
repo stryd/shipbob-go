@@ -26,7 +26,7 @@ type ShipmentLog struct {
 	// Specifics data for the event
 	Metadata *map[string]string `json:"metadata,omitempty"`
 	// Timestamp of event
-	Timestamp *time.Time `json:"timestamp,omitempty"`
+	Timestamp NullableTime `json:"timestamp,omitempty"`
 }
 
 // NewShipmentLog instantiates a new ShipmentLog object
@@ -174,36 +174,47 @@ func (o *ShipmentLog) SetMetadata(v map[string]string) {
 	o.Metadata = &v
 }
 
-// GetTimestamp returns the Timestamp field value if set, zero value otherwise.
+// GetTimestamp returns the Timestamp field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ShipmentLog) GetTimestamp() time.Time {
-	if o == nil || o.Timestamp == nil {
+	if o == nil || o.Timestamp.Get() == nil {
 		var ret time.Time
 		return ret
 	}
-	return *o.Timestamp
+	return *o.Timestamp.Get()
 }
 
 // GetTimestampOk returns a tuple with the Timestamp field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ShipmentLog) GetTimestampOk() (*time.Time, bool) {
-	if o == nil || o.Timestamp == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Timestamp, true
+	return o.Timestamp.Get(), o.Timestamp.IsSet()
 }
 
 // HasTimestamp returns a boolean if a field has been set.
 func (o *ShipmentLog) HasTimestamp() bool {
-	if o != nil && o.Timestamp != nil {
+	if o != nil && o.Timestamp.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetTimestamp gets a reference to the given time.Time and assigns it to the Timestamp field.
+// SetTimestamp gets a reference to the given NullableTime and assigns it to the Timestamp field.
 func (o *ShipmentLog) SetTimestamp(v time.Time) {
-	o.Timestamp = &v
+	o.Timestamp.Set(&v)
+}
+
+// SetTimestampNil sets the value for Timestamp to be an explicit nil
+func (o *ShipmentLog) SetTimestampNil() {
+	o.Timestamp.Set(nil)
+}
+
+// UnsetTimestamp ensures that no value is present for Timestamp, not even an explicit nil
+func (o *ShipmentLog) UnsetTimestamp() {
+	o.Timestamp.Unset()
 }
 
 func (o ShipmentLog) MarshalJSON() ([]byte, error) {
@@ -220,8 +231,8 @@ func (o ShipmentLog) MarshalJSON() ([]byte, error) {
 	if o.Metadata != nil {
 		toSerialize["metadata"] = o.Metadata
 	}
-	if o.Timestamp != nil {
-		toSerialize["timestamp"] = o.Timestamp
+	if o.Timestamp.IsSet() {
+		toSerialize["timestamp"] = o.Timestamp.Get()
 	}
 	return json.Marshal(toSerialize)
 }

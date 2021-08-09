@@ -19,7 +19,7 @@ import (
 type ReturnOrderStatusHistory struct {
 	Status *ReturnStatus `json:"status,omitempty"`
 	// Date this corresponding return order status was created
-	TimeStamp *time.Time `json:"time_stamp,omitempty"`
+	TimeStamp NullableTime `json:"time_stamp,omitempty"`
 }
 
 // NewReturnOrderStatusHistory instantiates a new ReturnOrderStatusHistory object
@@ -71,36 +71,47 @@ func (o *ReturnOrderStatusHistory) SetStatus(v ReturnStatus) {
 	o.Status = &v
 }
 
-// GetTimeStamp returns the TimeStamp field value if set, zero value otherwise.
+// GetTimeStamp returns the TimeStamp field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ReturnOrderStatusHistory) GetTimeStamp() time.Time {
-	if o == nil || o.TimeStamp == nil {
+	if o == nil || o.TimeStamp.Get() == nil {
 		var ret time.Time
 		return ret
 	}
-	return *o.TimeStamp
+	return *o.TimeStamp.Get()
 }
 
 // GetTimeStampOk returns a tuple with the TimeStamp field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ReturnOrderStatusHistory) GetTimeStampOk() (*time.Time, bool) {
-	if o == nil || o.TimeStamp == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.TimeStamp, true
+	return o.TimeStamp.Get(), o.TimeStamp.IsSet()
 }
 
 // HasTimeStamp returns a boolean if a field has been set.
 func (o *ReturnOrderStatusHistory) HasTimeStamp() bool {
-	if o != nil && o.TimeStamp != nil {
+	if o != nil && o.TimeStamp.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetTimeStamp gets a reference to the given time.Time and assigns it to the TimeStamp field.
+// SetTimeStamp gets a reference to the given NullableTime and assigns it to the TimeStamp field.
 func (o *ReturnOrderStatusHistory) SetTimeStamp(v time.Time) {
-	o.TimeStamp = &v
+	o.TimeStamp.Set(&v)
+}
+
+// SetTimeStampNil sets the value for TimeStamp to be an explicit nil
+func (o *ReturnOrderStatusHistory) SetTimeStampNil() {
+	o.TimeStamp.Set(nil)
+}
+
+// UnsetTimeStamp ensures that no value is present for TimeStamp, not even an explicit nil
+func (o *ReturnOrderStatusHistory) UnsetTimeStamp() {
+	o.TimeStamp.Unset()
 }
 
 func (o ReturnOrderStatusHistory) MarshalJSON() ([]byte, error) {
@@ -108,8 +119,8 @@ func (o ReturnOrderStatusHistory) MarshalJSON() ([]byte, error) {
 	if o.Status != nil {
 		toSerialize["status"] = o.Status
 	}
-	if o.TimeStamp != nil {
-		toSerialize["time_stamp"] = o.TimeStamp
+	if o.TimeStamp.IsSet() {
+		toSerialize["time_stamp"] = o.TimeStamp.Get()
 	}
 	return json.Marshal(toSerialize)
 }

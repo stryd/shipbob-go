@@ -7,11 +7,11 @@ Name | Type | Description | Notes
 **BoxLabelsUri** | Pointer to **NullableString** | URL to the packing slip to be included in each box shipment for this receiving order | [optional] 
 **BoxPackagingType** | Pointer to [**PackingType**](PackingType.md) |  | [optional] 
 **Boxes** | Pointer to [**[]ReceivingOrderBoxes**](ReceivingOrderBoxes.md) | Information about the boxes being shipped in this receiving order | [optional] 
-**ExpectedArrivalDate** | Pointer to **time.Time** | Expected date that all packages will have arrived | [optional] 
+**ExpectedArrivalDate** | Pointer to **NullableTime** | Expected date that all packages will have arrived | [optional] 
 **FulfillmentCenter** | Pointer to [**ReceivingFulfillmentCenter**](ReceivingFulfillmentCenter.md) |  | [optional] 
 **Id** | Pointer to **int32** | Unique id of the warehouse receiving order | [optional] 
-**InsertDate** | Pointer to **time.Time** | Insert date of the receiving order | [optional] 
-**LastUpdatedDate** | Pointer to **time.Time** | Last date the receiving order was updated | [optional] 
+**InsertDate** | Pointer to **NullableTime** | Insert date of the receiving order | [optional] 
+**LastUpdatedDate** | Pointer to **NullableTime** | Last date the receiving order was updated | [optional] 
 **PackageType** | Pointer to [**PackageType**](PackageType.md) |  | [optional] 
 **Status** | Pointer to **string** |  | [optional] 
 
@@ -154,6 +154,16 @@ SetExpectedArrivalDate sets ExpectedArrivalDate field to given value.
 
 HasExpectedArrivalDate returns a boolean if a field has been set.
 
+### SetExpectedArrivalDateNil
+
+`func (o *ReceivingOrder) SetExpectedArrivalDateNil(b bool)`
+
+ SetExpectedArrivalDateNil sets the value for ExpectedArrivalDate to be an explicit nil
+
+### UnsetExpectedArrivalDate
+`func (o *ReceivingOrder) UnsetExpectedArrivalDate()`
+
+UnsetExpectedArrivalDate ensures that no value is present for ExpectedArrivalDate, not even an explicit nil
 ### GetFulfillmentCenter
 
 `func (o *ReceivingOrder) GetFulfillmentCenter() ReceivingFulfillmentCenter`
@@ -229,6 +239,16 @@ SetInsertDate sets InsertDate field to given value.
 
 HasInsertDate returns a boolean if a field has been set.
 
+### SetInsertDateNil
+
+`func (o *ReceivingOrder) SetInsertDateNil(b bool)`
+
+ SetInsertDateNil sets the value for InsertDate to be an explicit nil
+
+### UnsetInsertDate
+`func (o *ReceivingOrder) UnsetInsertDate()`
+
+UnsetInsertDate ensures that no value is present for InsertDate, not even an explicit nil
 ### GetLastUpdatedDate
 
 `func (o *ReceivingOrder) GetLastUpdatedDate() time.Time`
@@ -254,6 +274,16 @@ SetLastUpdatedDate sets LastUpdatedDate field to given value.
 
 HasLastUpdatedDate returns a boolean if a field has been set.
 
+### SetLastUpdatedDateNil
+
+`func (o *ReceivingOrder) SetLastUpdatedDateNil(b bool)`
+
+ SetLastUpdatedDateNil sets the value for LastUpdatedDate to be an explicit nil
+
+### UnsetLastUpdatedDate
+`func (o *ReceivingOrder) UnsetLastUpdatedDate()`
+
+UnsetLastUpdatedDate ensures that no value is present for LastUpdatedDate, not even an explicit nil
 ### GetPackageType
 
 `func (o *ReceivingOrder) GetPackageType() PackageType`

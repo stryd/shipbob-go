@@ -21,7 +21,7 @@ type CreateReceivingOrder struct {
 	// Box shipments to be added to this receiving order
 	Boxes []CreateReceivingOrderBoxes `json:"boxes"`
 	// Expected arrival date of all the box shipments in this receiving order
-	ExpectedArrivalDate time.Time                             `json:"expected_arrival_date"`
+	ExpectedArrivalDate NullableTime                          `json:"expected_arrival_date"`
 	FulfillmentCenter   CreateReceivingOrderFulfillmentCenter `json:"fulfillment_center"`
 	PackageType         PackageType                           `json:"package_type"`
 }
@@ -30,7 +30,7 @@ type CreateReceivingOrder struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateReceivingOrder(boxPackagingType PackingType, boxes []CreateReceivingOrderBoxes, expectedArrivalDate time.Time, fulfillmentCenter CreateReceivingOrderFulfillmentCenter, packageType PackageType) *CreateReceivingOrder {
+func NewCreateReceivingOrder(boxPackagingType PackingType, boxes []CreateReceivingOrderBoxes, expectedArrivalDate NullableTime, fulfillmentCenter CreateReceivingOrderFulfillmentCenter, packageType PackageType) *CreateReceivingOrder {
 	this := CreateReceivingOrder{}
 	this.BoxPackagingType = boxPackagingType
 	this.Boxes = boxes
@@ -99,27 +99,29 @@ func (o *CreateReceivingOrder) SetBoxes(v []CreateReceivingOrderBoxes) {
 }
 
 // GetExpectedArrivalDate returns the ExpectedArrivalDate field value
+// If the value is explicit nil, the zero value for time.Time will be returned
 func (o *CreateReceivingOrder) GetExpectedArrivalDate() time.Time {
-	if o == nil {
+	if o == nil || o.ExpectedArrivalDate.Get() == nil {
 		var ret time.Time
 		return ret
 	}
 
-	return o.ExpectedArrivalDate
+	return *o.ExpectedArrivalDate.Get()
 }
 
 // GetExpectedArrivalDateOk returns a tuple with the ExpectedArrivalDate field value
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateReceivingOrder) GetExpectedArrivalDateOk() (*time.Time, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.ExpectedArrivalDate, true
+	return o.ExpectedArrivalDate.Get(), o.ExpectedArrivalDate.IsSet()
 }
 
 // SetExpectedArrivalDate sets field value
 func (o *CreateReceivingOrder) SetExpectedArrivalDate(v time.Time) {
-	o.ExpectedArrivalDate = v
+	o.ExpectedArrivalDate.Set(&v)
 }
 
 // GetFulfillmentCenter returns the FulfillmentCenter field value
@@ -179,7 +181,7 @@ func (o CreateReceivingOrder) MarshalJSON() ([]byte, error) {
 		toSerialize["boxes"] = o.Boxes
 	}
 	if true {
-		toSerialize["expected_arrival_date"] = o.ExpectedArrivalDate
+		toSerialize["expected_arrival_date"] = o.ExpectedArrivalDate.Get()
 	}
 	if true {
 		toSerialize["fulfillment_center"] = o.FulfillmentCenter
