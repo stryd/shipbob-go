@@ -22,7 +22,7 @@ type ReturnOrder struct {
 	// Unique id of the Return Order
 	Id *int32 `json:"id,omitempty"`
 	// Date this return order was created
-	InsertDate *time.Time `json:"insert_date,omitempty"`
+	InsertDate NullableTime `json:"insert_date,omitempty"`
 	// List of inventory included in the return order
 	Inventory []ReturnInventoryItem `json:"inventory,omitempty"`
 	// Invoiced amount of return order (sum of transaction amounts)
@@ -152,36 +152,47 @@ func (o *ReturnOrder) SetId(v int32) {
 	o.Id = &v
 }
 
-// GetInsertDate returns the InsertDate field value if set, zero value otherwise.
+// GetInsertDate returns the InsertDate field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ReturnOrder) GetInsertDate() time.Time {
-	if o == nil || o.InsertDate == nil {
+	if o == nil || o.InsertDate.Get() == nil {
 		var ret time.Time
 		return ret
 	}
-	return *o.InsertDate
+	return *o.InsertDate.Get()
 }
 
 // GetInsertDateOk returns a tuple with the InsertDate field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ReturnOrder) GetInsertDateOk() (*time.Time, bool) {
-	if o == nil || o.InsertDate == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.InsertDate, true
+	return o.InsertDate.Get(), o.InsertDate.IsSet()
 }
 
 // HasInsertDate returns a boolean if a field has been set.
 func (o *ReturnOrder) HasInsertDate() bool {
-	if o != nil && o.InsertDate != nil {
+	if o != nil && o.InsertDate.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetInsertDate gets a reference to the given time.Time and assigns it to the InsertDate field.
+// SetInsertDate gets a reference to the given NullableTime and assigns it to the InsertDate field.
 func (o *ReturnOrder) SetInsertDate(v time.Time) {
-	o.InsertDate = &v
+	o.InsertDate.Set(&v)
+}
+
+// SetInsertDateNil sets the value for InsertDate to be an explicit nil
+func (o *ReturnOrder) SetInsertDateNil() {
+	o.InsertDate.Set(nil)
+}
+
+// UnsetInsertDate ensures that no value is present for InsertDate, not even an explicit nil
+func (o *ReturnOrder) UnsetInsertDate() {
+	o.InsertDate.Unset()
 }
 
 // GetInventory returns the Inventory field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -497,8 +508,8 @@ func (o ReturnOrder) MarshalJSON() ([]byte, error) {
 	if o.Id != nil {
 		toSerialize["id"] = o.Id
 	}
-	if o.InsertDate != nil {
-		toSerialize["insert_date"] = o.InsertDate
+	if o.InsertDate.IsSet() {
+		toSerialize["insert_date"] = o.InsertDate.Get()
 	}
 	if o.Inventory != nil {
 		toSerialize["inventory"] = o.Inventory

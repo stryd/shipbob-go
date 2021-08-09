@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **BoxPackagingType** | [**PackingType**](PackingType.md) |  | 
 **Boxes** | [**[]CreateReceivingOrderBoxes**](CreateReceivingOrderBoxes.md) | Box shipments to be added to this receiving order | 
-**ExpectedArrivalDate** | **time.Time** | Expected arrival date of all the box shipments in this receiving order | 
+**ExpectedArrivalDate** | **NullableTime** | Expected arrival date of all the box shipments in this receiving order | 
 **FulfillmentCenter** | [**CreateReceivingOrderFulfillmentCenter**](CreateReceivingOrder_fulfillment_center.md) |  | 
 **PackageType** | [**PackageType**](PackageType.md) |  | 
 
@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 
 ### NewCreateReceivingOrder
 
-`func NewCreateReceivingOrder(boxPackagingType PackingType, boxes []CreateReceivingOrderBoxes, expectedArrivalDate time.Time, fulfillmentCenter CreateReceivingOrderFulfillmentCenter, packageType PackageType, ) *CreateReceivingOrder`
+`func NewCreateReceivingOrder(boxPackagingType PackingType, boxes []CreateReceivingOrderBoxes, expectedArrivalDate NullableTime, fulfillmentCenter CreateReceivingOrderFulfillmentCenter, packageType PackageType, ) *CreateReceivingOrder`
 
 NewCreateReceivingOrder instantiates a new CreateReceivingOrder object
 This constructor will assign default values to properties that have it defined,
@@ -99,6 +99,16 @@ and a boolean to check if the value has been set.
 SetExpectedArrivalDate sets ExpectedArrivalDate field to given value.
 
 
+### SetExpectedArrivalDateNil
+
+`func (o *CreateReceivingOrder) SetExpectedArrivalDateNil(b bool)`
+
+ SetExpectedArrivalDateNil sets the value for ExpectedArrivalDate to be an explicit nil
+
+### UnsetExpectedArrivalDate
+`func (o *CreateReceivingOrder) UnsetExpectedArrivalDate()`
+
+UnsetExpectedArrivalDate ensures that no value is present for ExpectedArrivalDate, not even an explicit nil
 ### GetFulfillmentCenter
 
 `func (o *CreateReceivingOrder) GetFulfillmentCenter() CreateReceivingOrderFulfillmentCenter`

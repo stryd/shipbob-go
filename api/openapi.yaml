@@ -1757,6 +1757,7 @@ paths:
         required: false
         schema:
           format: date-time
+          nullable: true
           type: string
         style: form
       - description: End date to filter orders inserted earlier than
@@ -1766,6 +1767,7 @@ paths:
         required: false
         schema:
           format: date-time
+          nullable: true
           type: string
         style: form
       - description: Comma separated list of return orders ids to filter by
@@ -3872,6 +3874,7 @@ components:
         created_date:
           description: Date this order was created
           format: date-time
+          nullable: true
           type: string
         id:
           description: Unique id of the order
@@ -4093,6 +4096,7 @@ components:
         timestamp:
           description: Timestamp of event
           format: date-time
+          nullable: true
           type: string
       type: object
     ShipmentProduct:
@@ -4264,6 +4268,7 @@ components:
         created_date:
           description: Date this shipment was created
           format: date-time
+          nullable: true
           type: string
         estimated_fulfillment_date:
           description: The datetime of ShipBob's commitment for completing the shipment
@@ -4467,6 +4472,7 @@ components:
         created_at:
           description: Timestamp the webhook subscription was created
           format: date-time
+          nullable: true
           type: string
         id:
           description: ID of the webhook subscription
@@ -4982,6 +4988,7 @@ components:
         created_date:
           description: Date the product was created
           format: date-time
+          nullable: true
           type: string
         fulfillable_inventory_items:
           description: The inventory that this product will resolve to when packing
@@ -5076,6 +5083,7 @@ components:
           description: Expected arrival date of all the box shipments in this receiving
             order
           format: date-time
+          nullable: true
           type: string
         fulfillment_center:
           $ref: '#/components/schemas/CreateReceivingOrder_fulfillment_center'
@@ -5235,6 +5243,7 @@ components:
         expected_arrival_date:
           description: Expected date that all packages will have arrived
           format: date-time
+          nullable: true
           type: string
         fulfillment_center:
           $ref: '#/components/schemas/ReceivingFulfillmentCenter'
@@ -5245,10 +5254,12 @@ components:
         insert_date:
           description: Insert date of the receiving order
           format: date-time
+          nullable: true
           type: string
         last_updated_date:
           description: Last date the receiving order was updated
           format: date-time
+          nullable: true
           type: string
         package_type:
           $ref: '#/components/schemas/PackageType'
@@ -5466,6 +5477,7 @@ components:
         time_stamp:
           description: Date this corresponding return order status was created
           format: date-time
+          nullable: true
           type: string
       type: object
     ReturnOrder:
@@ -5524,6 +5536,7 @@ components:
         insert_date:
           description: Date this return order was created
           format: date-time
+          nullable: true
           type: string
         inventory:
           description: List of inventory included in the return order

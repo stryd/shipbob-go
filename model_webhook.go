@@ -18,7 +18,7 @@ import (
 // Webhook struct for Webhook
 type Webhook struct {
 	// Timestamp the webhook subscription was created
-	CreatedAt *time.Time `json:"created_at,omitempty"`
+	CreatedAt NullableTime `json:"created_at,omitempty"`
 	// ID of the webhook subscription
 	Id *int32 `json:"id,omitempty"`
 	// URL subscription events will be posted to
@@ -43,36 +43,47 @@ func NewWebhookWithDefaults() *Webhook {
 	return &this
 }
 
-// GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
+// GetCreatedAt returns the CreatedAt field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *Webhook) GetCreatedAt() time.Time {
-	if o == nil || o.CreatedAt == nil {
+	if o == nil || o.CreatedAt.Get() == nil {
 		var ret time.Time
 		return ret
 	}
-	return *o.CreatedAt
+	return *o.CreatedAt.Get()
 }
 
 // GetCreatedAtOk returns a tuple with the CreatedAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *Webhook) GetCreatedAtOk() (*time.Time, bool) {
-	if o == nil || o.CreatedAt == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.CreatedAt, true
+	return o.CreatedAt.Get(), o.CreatedAt.IsSet()
 }
 
 // HasCreatedAt returns a boolean if a field has been set.
 func (o *Webhook) HasCreatedAt() bool {
-	if o != nil && o.CreatedAt != nil {
+	if o != nil && o.CreatedAt.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetCreatedAt gets a reference to the given time.Time and assigns it to the CreatedAt field.
+// SetCreatedAt gets a reference to the given NullableTime and assigns it to the CreatedAt field.
 func (o *Webhook) SetCreatedAt(v time.Time) {
-	o.CreatedAt = &v
+	o.CreatedAt.Set(&v)
+}
+
+// SetCreatedAtNil sets the value for CreatedAt to be an explicit nil
+func (o *Webhook) SetCreatedAtNil() {
+	o.CreatedAt.Set(nil)
+}
+
+// UnsetCreatedAt ensures that no value is present for CreatedAt, not even an explicit nil
+func (o *Webhook) UnsetCreatedAt() {
+	o.CreatedAt.Unset()
 }
 
 // GetId returns the Id field value if set, zero value otherwise.
@@ -184,8 +195,8 @@ func (o *Webhook) SetTopic(v Topics) {
 
 func (o Webhook) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.CreatedAt != nil {
-		toSerialize["created_at"] = o.CreatedAt
+	if o.CreatedAt.IsSet() {
+		toSerialize["created_at"] = o.CreatedAt.Get()
 	}
 	if o.Id != nil {
 		toSerialize["id"] = o.Id

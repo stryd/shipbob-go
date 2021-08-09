@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**CreatedAt** | Pointer to **time.Time** | Timestamp the webhook subscription was created | [optional] 
+**CreatedAt** | Pointer to **NullableTime** | Timestamp the webhook subscription was created | [optional] 
 **Id** | Pointer to **int32** | ID of the webhook subscription | [optional] 
 **SubscriptionUrl** | Pointer to **NullableString** | URL subscription events will be posted to | [optional] 
 **Topic** | Pointer to [**Topics**](Topics.md) |  | [optional] 
@@ -53,6 +53,16 @@ SetCreatedAt sets CreatedAt field to given value.
 
 HasCreatedAt returns a boolean if a field has been set.
 
+### SetCreatedAtNil
+
+`func (o *Webhook) SetCreatedAtNil(b bool)`
+
+ SetCreatedAtNil sets the value for CreatedAt to be an explicit nil
+
+### UnsetCreatedAt
+`func (o *Webhook) UnsetCreatedAt()`
+
+UnsetCreatedAt ensures that no value is present for CreatedAt, not even an explicit nil
 ### GetId
 
 `func (o *Webhook) GetId() int32`

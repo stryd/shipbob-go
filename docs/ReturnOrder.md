@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **Channel** | Pointer to [**ReturnChannelInfo**](ReturnChannelInfo.md) |  | [optional] 
 **FulfillmentCenter** | Pointer to [**ReturnFulfillmentCenter**](ReturnFulfillmentCenter.md) |  | [optional] 
 **Id** | Pointer to **int32** | Unique id of the Return Order | [optional] 
-**InsertDate** | Pointer to **time.Time** | Date this return order was created | [optional] 
+**InsertDate** | Pointer to **NullableTime** | Date this return order was created | [optional] 
 **Inventory** | Pointer to [**[]ReturnInventoryItem**](ReturnInventoryItem.md) | List of inventory included in the return order | [optional] 
 **InvoiceAmount** | Pointer to **NullableFloat64** | Invoiced amount of return order (sum of transaction amounts) | [optional] 
 **OriginalShipmentId** | Pointer to **NullableInt32** | Id of the corresponding shipment that is the souce of the return | [optional] 
@@ -136,6 +136,16 @@ SetInsertDate sets InsertDate field to given value.
 
 HasInsertDate returns a boolean if a field has been set.
 
+### SetInsertDateNil
+
+`func (o *ReturnOrder) SetInsertDateNil(b bool)`
+
+ SetInsertDateNil sets the value for InsertDate to be an explicit nil
+
+### UnsetInsertDate
+`func (o *ReturnOrder) UnsetInsertDate()`
+
+UnsetInsertDate ensures that no value is present for InsertDate, not even an explicit nil
 ### GetInventory
 
 `func (o *ReturnOrder) GetInventory() []ReturnInventoryItem`

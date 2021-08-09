@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **LogTypeName** | Pointer to **string** | Name of the log type | [optional] 
 **LogTypeText** | Pointer to **string** | Summary of log type meaning | [optional] 
 **Metadata** | Pointer to **map[string]string** | Specifics data for the event | [optional] 
-**Timestamp** | Pointer to **time.Time** | Timestamp of event | [optional] 
+**Timestamp** | Pointer to **NullableTime** | Timestamp of event | [optional] 
 
 ## Methods
 
@@ -154,6 +154,16 @@ SetTimestamp sets Timestamp field to given value.
 
 HasTimestamp returns a boolean if a field has been set.
 
+### SetTimestampNil
+
+`func (o *ShipmentLog) SetTimestampNil(b bool)`
+
+ SetTimestampNil sets the value for Timestamp to be an explicit nil
+
+### UnsetTimestamp
+`func (o *ShipmentLog) UnsetTimestamp()`
+
+UnsetTimestamp ensures that no value is present for Timestamp, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

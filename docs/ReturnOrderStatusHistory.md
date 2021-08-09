@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Status** | Pointer to [**ReturnStatus**](ReturnStatus.md) |  | [optional] 
-**TimeStamp** | Pointer to **time.Time** | Date this corresponding return order status was created | [optional] 
+**TimeStamp** | Pointer to **NullableTime** | Date this corresponding return order status was created | [optional] 
 
 ## Methods
 
@@ -76,6 +76,16 @@ SetTimeStamp sets TimeStamp field to given value.
 
 HasTimeStamp returns a boolean if a field has been set.
 
+### SetTimeStampNil
+
+`func (o *ReturnOrderStatusHistory) SetTimeStampNil(b bool)`
+
+ SetTimeStampNil sets the value for TimeStamp to be an explicit nil
+
+### UnsetTimeStamp
+`func (o *ReturnOrderStatusHistory) UnsetTimeStamp()`
+
+UnsetTimeStamp ensures that no value is present for TimeStamp, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Channel** | Pointer to [**ChannelInfo**](ChannelInfo.md) |  | [optional] 
-**CreatedDate** | Pointer to **time.Time** | Date this order was created | [optional] 
+**CreatedDate** | Pointer to **NullableTime** | Date this order was created | [optional] 
 **Id** | Pointer to **int32** | Unique id of the order | [optional] 
 **OrderNumber** | Pointer to **string** | User friendly orderId or store order number that will be shown on the Orders Page. If not provided, referenceId will be used | [optional] 
 **Products** | Pointer to [**[]ProductInfo**](ProductInfo.md) | List of products included in the order | [optional] 
@@ -87,6 +87,16 @@ SetCreatedDate sets CreatedDate field to given value.
 
 HasCreatedDate returns a boolean if a field has been set.
 
+### SetCreatedDateNil
+
+`func (o *Order) SetCreatedDateNil(b bool)`
+
+ SetCreatedDateNil sets the value for CreatedDate to be an explicit nil
+
+### UnsetCreatedDate
+`func (o *Order) UnsetCreatedDate()`
+
+UnsetCreatedDate ensures that no value is present for CreatedDate, not even an explicit nil
 ### GetId
 
 `func (o *Order) GetId() int32`

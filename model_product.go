@@ -22,7 +22,7 @@ type Product struct {
 	BundleRootInformation *ProductBundleRootInformation `json:"bundle_root_information,omitempty"`
 	Channel               *ProductChannel               `json:"channel,omitempty"`
 	// Date the product was created
-	CreatedDate *time.Time `json:"created_date,omitempty"`
+	CreatedDate NullableTime `json:"created_date,omitempty"`
 	// The inventory that this product will resolve to when packing a shipment
 	FulfillableInventoryItems []ProductInventoryItem `json:"fulfillable_inventory_items,omitempty"`
 	// Fulfillable quantity of this product broken down by fulfillment center location
@@ -167,36 +167,47 @@ func (o *Product) SetChannel(v ProductChannel) {
 	o.Channel = &v
 }
 
-// GetCreatedDate returns the CreatedDate field value if set, zero value otherwise.
+// GetCreatedDate returns the CreatedDate field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *Product) GetCreatedDate() time.Time {
-	if o == nil || o.CreatedDate == nil {
+	if o == nil || o.CreatedDate.Get() == nil {
 		var ret time.Time
 		return ret
 	}
-	return *o.CreatedDate
+	return *o.CreatedDate.Get()
 }
 
 // GetCreatedDateOk returns a tuple with the CreatedDate field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *Product) GetCreatedDateOk() (*time.Time, bool) {
-	if o == nil || o.CreatedDate == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.CreatedDate, true
+	return o.CreatedDate.Get(), o.CreatedDate.IsSet()
 }
 
 // HasCreatedDate returns a boolean if a field has been set.
 func (o *Product) HasCreatedDate() bool {
-	if o != nil && o.CreatedDate != nil {
+	if o != nil && o.CreatedDate.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetCreatedDate gets a reference to the given time.Time and assigns it to the CreatedDate field.
+// SetCreatedDate gets a reference to the given NullableTime and assigns it to the CreatedDate field.
 func (o *Product) SetCreatedDate(v time.Time) {
-	o.CreatedDate = &v
+	o.CreatedDate.Set(&v)
+}
+
+// SetCreatedDateNil sets the value for CreatedDate to be an explicit nil
+func (o *Product) SetCreatedDateNil() {
+	o.CreatedDate.Set(nil)
+}
+
+// UnsetCreatedDate ensures that no value is present for CreatedDate, not even an explicit nil
+func (o *Product) UnsetCreatedDate() {
+	o.CreatedDate.Unset()
 }
 
 // GetFulfillableInventoryItems returns the FulfillableInventoryItems field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -533,8 +544,8 @@ func (o Product) MarshalJSON() ([]byte, error) {
 	if o.Channel != nil {
 		toSerialize["channel"] = o.Channel
 	}
-	if o.CreatedDate != nil {
-		toSerialize["created_date"] = o.CreatedDate
+	if o.CreatedDate.IsSet() {
+		toSerialize["created_date"] = o.CreatedDate.Get()
 	}
 	if o.FulfillableInventoryItems != nil {
 		toSerialize["fulfillable_inventory_items"] = o.FulfillableInventoryItems

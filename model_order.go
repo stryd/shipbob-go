@@ -19,7 +19,7 @@ import (
 type Order struct {
 	Channel *ChannelInfo `json:"channel,omitempty"`
 	// Date this order was created
-	CreatedDate *time.Time `json:"created_date,omitempty"`
+	CreatedDate NullableTime `json:"created_date,omitempty"`
 	// Unique id of the order
 	Id *int32 `json:"id,omitempty"`
 	// User friendly orderId or store order number that will be shown on the Orders Page. If not provided, referenceId will be used
@@ -92,36 +92,47 @@ func (o *Order) SetChannel(v ChannelInfo) {
 	o.Channel = &v
 }
 
-// GetCreatedDate returns the CreatedDate field value if set, zero value otherwise.
+// GetCreatedDate returns the CreatedDate field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *Order) GetCreatedDate() time.Time {
-	if o == nil || o.CreatedDate == nil {
+	if o == nil || o.CreatedDate.Get() == nil {
 		var ret time.Time
 		return ret
 	}
-	return *o.CreatedDate
+	return *o.CreatedDate.Get()
 }
 
 // GetCreatedDateOk returns a tuple with the CreatedDate field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *Order) GetCreatedDateOk() (*time.Time, bool) {
-	if o == nil || o.CreatedDate == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.CreatedDate, true
+	return o.CreatedDate.Get(), o.CreatedDate.IsSet()
 }
 
 // HasCreatedDate returns a boolean if a field has been set.
 func (o *Order) HasCreatedDate() bool {
-	if o != nil && o.CreatedDate != nil {
+	if o != nil && o.CreatedDate.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetCreatedDate gets a reference to the given time.Time and assigns it to the CreatedDate field.
+// SetCreatedDate gets a reference to the given NullableTime and assigns it to the CreatedDate field.
 func (o *Order) SetCreatedDate(v time.Time) {
-	o.CreatedDate = &v
+	o.CreatedDate.Set(&v)
+}
+
+// SetCreatedDateNil sets the value for CreatedDate to be an explicit nil
+func (o *Order) SetCreatedDateNil() {
+	o.CreatedDate.Set(nil)
+}
+
+// UnsetCreatedDate ensures that no value is present for CreatedDate, not even an explicit nil
+func (o *Order) UnsetCreatedDate() {
+	o.CreatedDate.Unset()
 }
 
 // GetId returns the Id field value if set, zero value otherwise.
@@ -492,8 +503,8 @@ func (o Order) MarshalJSON() ([]byte, error) {
 	if o.Channel != nil {
 		toSerialize["channel"] = o.Channel
 	}
-	if o.CreatedDate != nil {
-		toSerialize["created_date"] = o.CreatedDate
+	if o.CreatedDate.IsSet() {
+		toSerialize["created_date"] = o.CreatedDate.Get()
 	}
 	if o.Id != nil {
 		toSerialize["id"] = o.Id
