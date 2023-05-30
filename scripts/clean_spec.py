@@ -1,8 +1,17 @@
+import json
 
 
-def main():
+def order():
     with open('../shipbob_open_api.json', 'r') as f:
-        with open('../shipbob_open_api_fixed.json', 'w') as w:
+        spec = json.load(f)
+    ordered = json.dumps(spec, sort_keys=True, indent=4)
+    with open('../shipbob_open_api_ordered.json', 'w') as w:
+        w.write(ordered)
+
+
+def clean():
+    with open('../shipbob_open_api.json', 'r') as f:
+        with open('../shipbob_open_api_cleaned.json', 'w') as w:
             for line in f:
                 line = replace_if_present(line, '$type', 'ttype')
 
@@ -45,4 +54,4 @@ def replace_if_present(line, word, replace):
 
 
 if __name__ == "__main__":
-    main()
+    order()
