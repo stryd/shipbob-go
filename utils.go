@@ -13,6 +13,7 @@ package shipbob
 import (
 	"encoding/json"
 	"reflect"
+	"strings"
 	"time"
 )
 
@@ -320,12 +321,32 @@ func NewNullableTime(val *time.Time) *NullableTime {
 }
 
 func (v NullableTime) MarshalJSON() ([]byte, error) {
-	return v.value.MarshalJSON()
+	if v.isSet {
+		return []byte(v.value.UTC().Format("2006-01-02T15:04:05")), nil
+	}
+	return []byte{}, nil
 }
 
 func (v *NullableTime) UnmarshalJSON(src []byte) error {
-	v.isSet = true
-	return json.Unmarshal(src, &v.value)
+	dateString := cleanTimeString(string(src))
+	if len(dateString) > 0 && dateString != "null" {
+		v.isSet = true
+		t, err := time.Parse("2006-01-02T15:04:05", dateString)
+		v.value = &t
+		return err
+	}
+	return nil
+}
+
+func cleanTimeString(str string) string {
+	if strings.HasPrefix(str, `"`) || strings.HasSuffix(str, `"`) {
+		str = strings.ReplaceAll(str, "\"", "")
+	}
+	i := strings.Index(str, "+")
+	if i > 0 {
+		str = str[:i]
+	}
+	return str
 }
 
 // IsNil checks if an input is nil
