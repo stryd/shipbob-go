@@ -2,7 +2,7 @@
 
 def main():
     with open('../shipbob_open_api.json', 'r') as f:
-        with open('../shipbob_open_api_fixed.json', 'w') as w:
+        with open('../shipbob_open_api_cleaned.json', 'w') as w:
             for line in f:
                 line = replace_if_present(line, '$type', 'ttype')
 
