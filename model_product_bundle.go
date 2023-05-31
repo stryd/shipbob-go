@@ -20,8 +20,8 @@ type ProductBundle string
 
 // List of ProductBundle
 const (
-	ANY ProductBundle = "Any"
-	BUNDLE ProductBundle = "Bundle"
+	ANY        ProductBundle = "Any"
+	BUNDLE     ProductBundle = "Bundle"
 	NOT_BUNDLE ProductBundle = "NotBundle"
 )
 
@@ -110,4 +110,3 @@ func (v *NullableProductBundle) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

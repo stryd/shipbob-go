@@ -176,6 +176,7 @@ func (o *ProductFulfillmentCenterQuantity) HasName() bool {
 func (o *ProductFulfillmentCenterQuantity) SetName(v string) {
 	o.Name.Set(&v)
 }
+
 // SetNameNil sets the value for Name to be an explicit nil
 func (o *ProductFulfillmentCenterQuantity) SetNameNil() {
 	o.Name.Set(nil)
@@ -219,7 +220,7 @@ func (o *ProductFulfillmentCenterQuantity) SetOnhandQuantity(v int32) {
 }
 
 func (o ProductFulfillmentCenterQuantity) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -281,5 +282,3 @@ func (v *NullableProductFulfillmentCenterQuantity) UnmarshalJSON(src []byte) err
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

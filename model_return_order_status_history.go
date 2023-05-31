@@ -106,6 +106,7 @@ func (o *ReturnOrderStatusHistory) HasTimeStamp() bool {
 func (o *ReturnOrderStatusHistory) SetTimeStamp(v time.Time) {
 	o.TimeStamp.Set(&v)
 }
+
 // SetTimeStampNil sets the value for TimeStamp to be an explicit nil
 func (o *ReturnOrderStatusHistory) SetTimeStampNil() {
 	o.TimeStamp.Set(nil)
@@ -117,7 +118,7 @@ func (o *ReturnOrderStatusHistory) UnsetTimeStamp() {
 }
 
 func (o ReturnOrderStatusHistory) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -170,5 +171,3 @@ func (v *NullableReturnOrderStatusHistory) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

@@ -92,6 +92,7 @@ func (o *ReceivingFulfillmentCenter) HasAddress1() bool {
 func (o *ReceivingFulfillmentCenter) SetAddress1(v string) {
 	o.Address1.Set(&v)
 }
+
 // SetAddress1Nil sets the value for Address1 to be an explicit nil
 func (o *ReceivingFulfillmentCenter) SetAddress1Nil() {
 	o.Address1.Set(nil)
@@ -134,6 +135,7 @@ func (o *ReceivingFulfillmentCenter) HasAddress2() bool {
 func (o *ReceivingFulfillmentCenter) SetAddress2(v string) {
 	o.Address2.Set(&v)
 }
+
 // SetAddress2Nil sets the value for Address2 to be an explicit nil
 func (o *ReceivingFulfillmentCenter) SetAddress2Nil() {
 	o.Address2.Set(nil)
@@ -176,6 +178,7 @@ func (o *ReceivingFulfillmentCenter) HasCity() bool {
 func (o *ReceivingFulfillmentCenter) SetCity(v string) {
 	o.City.Set(&v)
 }
+
 // SetCityNil sets the value for City to be an explicit nil
 func (o *ReceivingFulfillmentCenter) SetCityNil() {
 	o.City.Set(nil)
@@ -218,6 +221,7 @@ func (o *ReceivingFulfillmentCenter) HasCountry() bool {
 func (o *ReceivingFulfillmentCenter) SetCountry(v string) {
 	o.Country.Set(&v)
 }
+
 // SetCountryNil sets the value for Country to be an explicit nil
 func (o *ReceivingFulfillmentCenter) SetCountryNil() {
 	o.Country.Set(nil)
@@ -260,6 +264,7 @@ func (o *ReceivingFulfillmentCenter) HasEmail() bool {
 func (o *ReceivingFulfillmentCenter) SetEmail(v string) {
 	o.Email.Set(&v)
 }
+
 // SetEmailNil sets the value for Email to be an explicit nil
 func (o *ReceivingFulfillmentCenter) SetEmailNil() {
 	o.Email.Set(nil)
@@ -334,6 +339,7 @@ func (o *ReceivingFulfillmentCenter) HasName() bool {
 func (o *ReceivingFulfillmentCenter) SetName(v string) {
 	o.Name.Set(&v)
 }
+
 // SetNameNil sets the value for Name to be an explicit nil
 func (o *ReceivingFulfillmentCenter) SetNameNil() {
 	o.Name.Set(nil)
@@ -376,6 +382,7 @@ func (o *ReceivingFulfillmentCenter) HasPhoneNumber() bool {
 func (o *ReceivingFulfillmentCenter) SetPhoneNumber(v string) {
 	o.PhoneNumber.Set(&v)
 }
+
 // SetPhoneNumberNil sets the value for PhoneNumber to be an explicit nil
 func (o *ReceivingFulfillmentCenter) SetPhoneNumberNil() {
 	o.PhoneNumber.Set(nil)
@@ -418,6 +425,7 @@ func (o *ReceivingFulfillmentCenter) HasState() bool {
 func (o *ReceivingFulfillmentCenter) SetState(v string) {
 	o.State.Set(&v)
 }
+
 // SetStateNil sets the value for State to be an explicit nil
 func (o *ReceivingFulfillmentCenter) SetStateNil() {
 	o.State.Set(nil)
@@ -460,6 +468,7 @@ func (o *ReceivingFulfillmentCenter) HasTimezone() bool {
 func (o *ReceivingFulfillmentCenter) SetTimezone(v string) {
 	o.Timezone.Set(&v)
 }
+
 // SetTimezoneNil sets the value for Timezone to be an explicit nil
 func (o *ReceivingFulfillmentCenter) SetTimezoneNil() {
 	o.Timezone.Set(nil)
@@ -502,6 +511,7 @@ func (o *ReceivingFulfillmentCenter) HasZipCode() bool {
 func (o *ReceivingFulfillmentCenter) SetZipCode(v string) {
 	o.ZipCode.Set(&v)
 }
+
 // SetZipCodeNil sets the value for ZipCode to be an explicit nil
 func (o *ReceivingFulfillmentCenter) SetZipCodeNil() {
 	o.ZipCode.Set(nil)
@@ -513,7 +523,7 @@ func (o *ReceivingFulfillmentCenter) UnsetZipCode() {
 }
 
 func (o ReceivingFulfillmentCenter) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -593,5 +603,3 @@ func (v *NullableReceivingFulfillmentCenter) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

@@ -88,6 +88,7 @@ func (o *LocationAddress) HasAddress1() bool {
 func (o *LocationAddress) SetAddress1(v string) {
 	o.Address1.Set(&v)
 }
+
 // SetAddress1Nil sets the value for Address1 to be an explicit nil
 func (o *LocationAddress) SetAddress1Nil() {
 	o.Address1.Set(nil)
@@ -130,6 +131,7 @@ func (o *LocationAddress) HasAddress2() bool {
 func (o *LocationAddress) SetAddress2(v string) {
 	o.Address2.Set(&v)
 }
+
 // SetAddress2Nil sets the value for Address2 to be an explicit nil
 func (o *LocationAddress) SetAddress2Nil() {
 	o.Address2.Set(nil)
@@ -172,6 +174,7 @@ func (o *LocationAddress) HasCity() bool {
 func (o *LocationAddress) SetCity(v string) {
 	o.City.Set(&v)
 }
+
 // SetCityNil sets the value for City to be an explicit nil
 func (o *LocationAddress) SetCityNil() {
 	o.City.Set(nil)
@@ -214,6 +217,7 @@ func (o *LocationAddress) HasCountry() bool {
 func (o *LocationAddress) SetCountry(v string) {
 	o.Country.Set(&v)
 }
+
 // SetCountryNil sets the value for Country to be an explicit nil
 func (o *LocationAddress) SetCountryNil() {
 	o.Country.Set(nil)
@@ -256,6 +260,7 @@ func (o *LocationAddress) HasEmail() bool {
 func (o *LocationAddress) SetEmail(v string) {
 	o.Email.Set(&v)
 }
+
 // SetEmailNil sets the value for Email to be an explicit nil
 func (o *LocationAddress) SetEmailNil() {
 	o.Email.Set(nil)
@@ -298,6 +303,7 @@ func (o *LocationAddress) HasName() bool {
 func (o *LocationAddress) SetName(v string) {
 	o.Name.Set(&v)
 }
+
 // SetNameNil sets the value for Name to be an explicit nil
 func (o *LocationAddress) SetNameNil() {
 	o.Name.Set(nil)
@@ -340,6 +346,7 @@ func (o *LocationAddress) HasPhoneNumber() bool {
 func (o *LocationAddress) SetPhoneNumber(v string) {
 	o.PhoneNumber.Set(&v)
 }
+
 // SetPhoneNumberNil sets the value for PhoneNumber to be an explicit nil
 func (o *LocationAddress) SetPhoneNumberNil() {
 	o.PhoneNumber.Set(nil)
@@ -382,6 +389,7 @@ func (o *LocationAddress) HasState() bool {
 func (o *LocationAddress) SetState(v string) {
 	o.State.Set(&v)
 }
+
 // SetStateNil sets the value for State to be an explicit nil
 func (o *LocationAddress) SetStateNil() {
 	o.State.Set(nil)
@@ -424,6 +432,7 @@ func (o *LocationAddress) HasZipCode() bool {
 func (o *LocationAddress) SetZipCode(v string) {
 	o.ZipCode.Set(&v)
 }
+
 // SetZipCodeNil sets the value for ZipCode to be an explicit nil
 func (o *LocationAddress) SetZipCodeNil() {
 	o.ZipCode.Set(nil)
@@ -435,7 +444,7 @@ func (o *LocationAddress) UnsetZipCode() {
 }
 
 func (o LocationAddress) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -509,5 +518,3 @@ func (v *NullableLocationAddress) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

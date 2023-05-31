@@ -21,8 +21,8 @@ type PackingType string
 // List of PackingType
 const (
 	EVERYTHING_IN_ONE_BOX PackingType = "EverythingInOneBox"
-	ONE_SKU_PER_BOX PackingType = "OneSkuPerBox"
-	MULTIPLE_SKU_PER_BOX PackingType = "MultipleSkuPerBox"
+	ONE_SKU_PER_BOX       PackingType = "OneSkuPerBox"
+	MULTIPLE_SKU_PER_BOX  PackingType = "MultipleSkuPerBox"
 )
 
 // All allowed values of PackingType enum
@@ -110,4 +110,3 @@ func (v *NullablePackingType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

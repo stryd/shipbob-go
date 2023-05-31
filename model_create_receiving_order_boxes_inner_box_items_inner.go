@@ -105,6 +105,7 @@ func (o *CreateReceivingOrderBoxesInnerBoxItemsInner) HasLotDate() bool {
 func (o *CreateReceivingOrderBoxesInnerBoxItemsInner) SetLotDate(v time.Time) {
 	o.LotDate.Set(&v)
 }
+
 // SetLotDateNil sets the value for LotDate to be an explicit nil
 func (o *CreateReceivingOrderBoxesInnerBoxItemsInner) SetLotDateNil() {
 	o.LotDate.Set(nil)
@@ -147,6 +148,7 @@ func (o *CreateReceivingOrderBoxesInnerBoxItemsInner) HasLotNumber() bool {
 func (o *CreateReceivingOrderBoxesInnerBoxItemsInner) SetLotNumber(v string) {
 	o.LotNumber.Set(&v)
 }
+
 // SetLotNumberNil sets the value for LotNumber to be an explicit nil
 func (o *CreateReceivingOrderBoxesInnerBoxItemsInner) SetLotNumberNil() {
 	o.LotNumber.Set(nil)
@@ -182,7 +184,7 @@ func (o *CreateReceivingOrderBoxesInnerBoxItemsInner) SetQuantity(v int32) {
 }
 
 func (o CreateReceivingOrderBoxesInnerBoxItemsInner) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -237,5 +239,3 @@ func (v *NullableCreateReceivingOrderBoxesInnerBoxItemsInner) UnmarshalJSON(src 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
