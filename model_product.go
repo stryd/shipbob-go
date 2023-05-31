@@ -21,9 +21,9 @@ var _ MappedNullable = &Product{}
 // Product struct for Product
 type Product struct {
 	// Barcode for the product
-	Barcode NullableString `json:"barcode,omitempty"`
+	Barcode               NullableString                `json:"barcode,omitempty"`
 	BundleRootInformation *ProductBundleRootInformation `json:"bundle_root_information,omitempty"`
-	Channel *ProductChannel `json:"channel,omitempty"`
+	Channel               *ProductChannel               `json:"channel,omitempty"`
 	// Date the product was created
 	CreatedDate NullableTime `json:"created_date,omitempty"`
 	// The inventory that this product will resolve to when packing a shipment
@@ -95,6 +95,7 @@ func (o *Product) HasBarcode() bool {
 func (o *Product) SetBarcode(v string) {
 	o.Barcode.Set(&v)
 }
+
 // SetBarcodeNil sets the value for Barcode to be an explicit nil
 func (o *Product) SetBarcodeNil() {
 	o.Barcode.Set(nil)
@@ -201,6 +202,7 @@ func (o *Product) HasCreatedDate() bool {
 func (o *Product) SetCreatedDate(v time.Time) {
 	o.CreatedDate.Set(&v)
 }
+
 // SetCreatedDateNil sets the value for CreatedDate to be an explicit nil
 func (o *Product) SetCreatedDateNil() {
 	o.CreatedDate.Set(nil)
@@ -341,6 +343,7 @@ func (o *Product) HasName() bool {
 func (o *Product) SetName(v string) {
 	o.Name.Set(&v)
 }
+
 // SetNameNil sets the value for Name to be an explicit nil
 func (o *Product) SetNameNil() {
 	o.Name.Set(nil)
@@ -383,6 +386,7 @@ func (o *Product) HasReferenceId() bool {
 func (o *Product) SetReferenceId(v string) {
 	o.ReferenceId.Set(&v)
 }
+
 // SetReferenceIdNil sets the value for ReferenceId to be an explicit nil
 func (o *Product) SetReferenceIdNil() {
 	o.ReferenceId.Set(nil)
@@ -425,6 +429,7 @@ func (o *Product) HasSku() bool {
 func (o *Product) SetSku(v string) {
 	o.Sku.Set(&v)
 }
+
 // SetSkuNil sets the value for Sku to be an explicit nil
 func (o *Product) SetSkuNil() {
 	o.Sku.Set(nil)
@@ -532,7 +537,7 @@ func (o *Product) SetTotalOnhandQuantity(v int32) {
 }
 
 func (o Product) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -618,5 +623,3 @@ func (v *NullableProduct) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

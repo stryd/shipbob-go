@@ -25,7 +25,7 @@ type ReceivingOrderBoxesInner struct {
 	// Information about the items included in the box
 	BoxItems []ReceivingOrderBoxesInnerBoxItemsInner `json:"box_items,omitempty"`
 	// The number of the box in the receiving order
-	BoxNumber *int32 `json:"box_number,omitempty"`
+	BoxNumber *int32  `json:"box_number,omitempty"`
 	BoxStatus *string `json:"box_status,omitempty"`
 	// Date counting of the box's inventory items started
 	CountingStartedDate NullableTime `json:"counting_started_date,omitempty"`
@@ -84,6 +84,7 @@ func (o *ReceivingOrderBoxesInner) HasArrivedDate() bool {
 func (o *ReceivingOrderBoxesInner) SetArrivedDate(v time.Time) {
 	o.ArrivedDate.Set(&v)
 }
+
 // SetArrivedDateNil sets the value for ArrivedDate to be an explicit nil
 func (o *ReceivingOrderBoxesInner) SetArrivedDateNil() {
 	o.ArrivedDate.Set(nil)
@@ -223,6 +224,7 @@ func (o *ReceivingOrderBoxesInner) HasCountingStartedDate() bool {
 func (o *ReceivingOrderBoxesInner) SetCountingStartedDate(v time.Time) {
 	o.CountingStartedDate.Set(&v)
 }
+
 // SetCountingStartedDateNil sets the value for CountingStartedDate to be an explicit nil
 func (o *ReceivingOrderBoxesInner) SetCountingStartedDateNil() {
 	o.CountingStartedDate.Set(nil)
@@ -265,6 +267,7 @@ func (o *ReceivingOrderBoxesInner) HasReceivedDate() bool {
 func (o *ReceivingOrderBoxesInner) SetReceivedDate(v time.Time) {
 	o.ReceivedDate.Set(&v)
 }
+
 // SetReceivedDateNil sets the value for ReceivedDate to be an explicit nil
 func (o *ReceivingOrderBoxesInner) SetReceivedDateNil() {
 	o.ReceivedDate.Set(nil)
@@ -307,6 +310,7 @@ func (o *ReceivingOrderBoxesInner) HasTrackingNumber() bool {
 func (o *ReceivingOrderBoxesInner) SetTrackingNumber(v string) {
 	o.TrackingNumber.Set(&v)
 }
+
 // SetTrackingNumberNil sets the value for TrackingNumber to be an explicit nil
 func (o *ReceivingOrderBoxesInner) SetTrackingNumberNil() {
 	o.TrackingNumber.Set(nil)
@@ -318,7 +322,7 @@ func (o *ReceivingOrderBoxesInner) UnsetTrackingNumber() {
 }
 
 func (o ReceivingOrderBoxesInner) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -386,5 +390,3 @@ func (v *NullableReceivingOrderBoxesInner) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

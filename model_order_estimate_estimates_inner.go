@@ -20,7 +20,7 @@ var _ MappedNullable = &OrderEstimateEstimatesInner{}
 // OrderEstimateEstimatesInner struct for OrderEstimateEstimatesInner
 type OrderEstimateEstimatesInner struct {
 	// Estimated price in dollars for the provided shipping method
-	EstimatedPrice *float64 `json:"estimated_price,omitempty"`
+	EstimatedPrice    *float64           `json:"estimated_price,omitempty"`
 	FulfillmentCenter *FulfillmentCenter `json:"fulfillment_center,omitempty"`
 	// Provided shipping method. Maps to ship option in ShipBob.
 	ShippingMethod *string `json:"shipping_method,omitempty"`
@@ -140,7 +140,7 @@ func (o *OrderEstimateEstimatesInner) SetShippingMethod(v string) {
 }
 
 func (o OrderEstimateEstimatesInner) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -196,5 +196,3 @@ func (v *NullableOrderEstimateEstimatesInner) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

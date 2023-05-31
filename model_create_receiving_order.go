@@ -24,9 +24,9 @@ type CreateReceivingOrder struct {
 	// Box shipments to be added to this receiving order
 	Boxes []CreateReceivingOrderBoxesInner `json:"boxes"`
 	// Expected arrival date of all the box shipments in this receiving order
-	ExpectedArrivalDate NullableTime `json:"expected_arrival_date"`
-	FulfillmentCenter CreateReceivingOrderFulfillmentCenter `json:"fulfillment_center"`
-	PackageType PackageType `json:"package_type"`
+	ExpectedArrivalDate NullableTime                          `json:"expected_arrival_date"`
+	FulfillmentCenter   CreateReceivingOrderFulfillmentCenter `json:"fulfillment_center"`
+	PackageType         PackageType                           `json:"package_type"`
 }
 
 // NewCreateReceivingOrder instantiates a new CreateReceivingOrder object
@@ -176,7 +176,7 @@ func (o *CreateReceivingOrder) SetPackageType(v PackageType) {
 }
 
 func (o CreateReceivingOrder) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -230,5 +230,3 @@ func (v *NullableCreateReceivingOrder) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

@@ -17,7 +17,7 @@ import (
 // checks if the CancelShipmentBulk200Response type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &CancelShipmentBulk200Response{}
 
-// CancelShipmentBulk200Response 
+// CancelShipmentBulk200Response
 type CancelShipmentBulk200Response struct {
 	// The results of all cancellation actions
 	Results []CanceledShipment `json:"results,omitempty"`
@@ -73,7 +73,7 @@ func (o *CancelShipmentBulk200Response) SetResults(v []CanceledShipment) {
 }
 
 func (o CancelShipmentBulk200Response) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -123,5 +123,3 @@ func (v *NullableCancelShipmentBulk200Response) UnmarshalJSON(src []byte) error 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
