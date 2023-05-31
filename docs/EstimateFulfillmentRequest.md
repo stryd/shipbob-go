@@ -5,14 +5,14 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Address** | [**EstimationAddress**](EstimationAddress.md) |  | 
-**Products** | [**[]EstimateFulfillmentRequestProducts**](EstimateFulfillmentRequestProducts.md) | Products to be included in the order. Each product must include one of reference_id or id | 
+**Products** | [**[]EstimateFulfillmentRequestProductsInner**](EstimateFulfillmentRequestProductsInner.md) | Products to be included in the order. Each product must include one of reference_id or id | 
 **ShippingMethods** | Pointer to **[]string** | Array of strings specifying shipping methods for which to fetch estimates.\\r\\nIf this field is omitted we will return estimates for all shipping methods defined in ShipBob | [optional] 
 
 ## Methods
 
 ### NewEstimateFulfillmentRequest
 
-`func NewEstimateFulfillmentRequest(address EstimationAddress, products []EstimateFulfillmentRequestProducts, ) *EstimateFulfillmentRequest`
+`func NewEstimateFulfillmentRequest(address EstimationAddress, products []EstimateFulfillmentRequestProductsInner, ) *EstimateFulfillmentRequest`
 
 NewEstimateFulfillmentRequest instantiates a new EstimateFulfillmentRequest object
 This constructor will assign default values to properties that have it defined,
@@ -49,20 +49,20 @@ SetAddress sets Address field to given value.
 
 ### GetProducts
 
-`func (o *EstimateFulfillmentRequest) GetProducts() []EstimateFulfillmentRequestProducts`
+`func (o *EstimateFulfillmentRequest) GetProducts() []EstimateFulfillmentRequestProductsInner`
 
 GetProducts returns the Products field if non-nil, zero value otherwise.
 
 ### GetProductsOk
 
-`func (o *EstimateFulfillmentRequest) GetProductsOk() (*[]EstimateFulfillmentRequestProducts, bool)`
+`func (o *EstimateFulfillmentRequest) GetProductsOk() (*[]EstimateFulfillmentRequestProductsInner, bool)`
 
 GetProductsOk returns a tuple with the Products field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetProducts
 
-`func (o *EstimateFulfillmentRequest) SetProducts(v []EstimateFulfillmentRequestProducts)`
+`func (o *EstimateFulfillmentRequest) SetProducts(v []EstimateFulfillmentRequestProductsInner)`
 
 SetProducts sets Products field to given value.
 

@@ -25,7 +25,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/stryd/shipbob-go"
 )
 
 func main() {
@@ -33,8 +33,8 @@ func main() {
     webhookSubscription := *openapiclient.NewWebhookSubscription("https://mywebsite.com/shipbob/handler", openapiclient.Topics("order_shipped")) // WebhookSubscription |  (optional)
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.WebhooksApi.CreateWebhook(context.Background()).ShipbobChannelId(shipbobChannelId).WebhookSubscription(webhookSubscription).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.WebhooksApi.CreateWebhook(context.Background()).ShipbobChannelId(shipbobChannelId).WebhookSubscription(webhookSubscription).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `WebhooksApi.CreateWebhook``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -91,15 +91,15 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/stryd/shipbob-go"
 )
 
 func main() {
     id := int32(56) // int32 | 
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.WebhooksApi.DeleteWebhook(context.Background(), id).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    r, err := apiClient.WebhooksApi.DeleteWebhook(context.Background(), id).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `WebhooksApi.DeleteWebhook``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -159,7 +159,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/stryd/shipbob-go"
 )
 
 func main() {
@@ -168,8 +168,8 @@ func main() {
     limit := int32(56) // int32 | Amount of Webhooks per page to request (optional)
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.WebhooksApi.GetWebhooks(context.Background()).Topic(topic).Page(page).Limit(limit).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.WebhooksApi.GetWebhooks(context.Background()).Topic(topic).Page(page).Limit(limit).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `WebhooksApi.GetWebhooks``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)

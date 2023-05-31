@@ -23,7 +23,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/stryd/shipbob-go"
 )
 
 func main() {
@@ -32,8 +32,8 @@ func main() {
     accessGranted := true // bool | Return all the access granted locations (optional)
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.LocationsApi.GetLocations(context.Background()).IncludeInactive(includeInactive).ReceivingEnabled(receivingEnabled).AccessGranted(accessGranted).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.LocationsApi.GetLocations(context.Background()).IncludeInactive(includeInactive).ReceivingEnabled(receivingEnabled).AccessGranted(accessGranted).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `LocationsApi.GetLocations``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)

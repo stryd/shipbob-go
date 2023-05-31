@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Barcode** | Pointer to **NullableString** | Barcode for the product | [optional] 
-**BundleRootInformation** | Pointer to [**ProductBundleRootInformation**](Product_bundle_root_information.md) |  | [optional] 
+**BundleRootInformation** | Pointer to [**ProductBundleRootInformation**](ProductBundleRootInformation.md) |  | [optional] 
 **Channel** | Pointer to [**ProductChannel**](ProductChannel.md) |  | [optional] 
 **CreatedDate** | Pointer to **NullableTime** | Date the product was created | [optional] 
 **FulfillableInventoryItems** | Pointer to [**[]ProductInventoryItem**](ProductInventoryItem.md) | The inventory that this product will resolve to when packing a shipment | [optional] 

@@ -5,16 +5,16 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **BoxPackagingType** | [**PackingType**](PackingType.md) |  | 
-**Boxes** | [**[]CreateReceivingOrderBoxes**](CreateReceivingOrderBoxes.md) | Box shipments to be added to this receiving order | 
+**Boxes** | [**[]CreateReceivingOrderBoxesInner**](CreateReceivingOrderBoxesInner.md) | Box shipments to be added to this receiving order | 
 **ExpectedArrivalDate** | **NullableTime** | Expected arrival date of all the box shipments in this receiving order | 
-**FulfillmentCenter** | [**CreateReceivingOrderFulfillmentCenter**](CreateReceivingOrder_fulfillment_center.md) |  | 
+**FulfillmentCenter** | [**CreateReceivingOrderFulfillmentCenter**](CreateReceivingOrderFulfillmentCenter.md) |  | 
 **PackageType** | [**PackageType**](PackageType.md) |  | 
 
 ## Methods
 
 ### NewCreateReceivingOrder
 
-`func NewCreateReceivingOrder(boxPackagingType PackingType, boxes []CreateReceivingOrderBoxes, expectedArrivalDate NullableTime, fulfillmentCenter CreateReceivingOrderFulfillmentCenter, packageType PackageType, ) *CreateReceivingOrder`
+`func NewCreateReceivingOrder(boxPackagingType PackingType, boxes []CreateReceivingOrderBoxesInner, expectedArrivalDate NullableTime, fulfillmentCenter CreateReceivingOrderFulfillmentCenter, packageType PackageType, ) *CreateReceivingOrder`
 
 NewCreateReceivingOrder instantiates a new CreateReceivingOrder object
 This constructor will assign default values to properties that have it defined,
@@ -51,20 +51,20 @@ SetBoxPackagingType sets BoxPackagingType field to given value.
 
 ### GetBoxes
 
-`func (o *CreateReceivingOrder) GetBoxes() []CreateReceivingOrderBoxes`
+`func (o *CreateReceivingOrder) GetBoxes() []CreateReceivingOrderBoxesInner`
 
 GetBoxes returns the Boxes field if non-nil, zero value otherwise.
 
 ### GetBoxesOk
 
-`func (o *CreateReceivingOrder) GetBoxesOk() (*[]CreateReceivingOrderBoxes, bool)`
+`func (o *CreateReceivingOrder) GetBoxesOk() (*[]CreateReceivingOrderBoxesInner, bool)`
 
 GetBoxesOk returns a tuple with the Boxes field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetBoxes
 
-`func (o *CreateReceivingOrder) SetBoxes(v []CreateReceivingOrderBoxes)`
+`func (o *CreateReceivingOrder) SetBoxes(v []CreateReceivingOrderBoxesInner)`
 
 SetBoxes sets Boxes field to given value.
 

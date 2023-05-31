@@ -27,15 +27,15 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/stryd/shipbob-go"
 )
 
 func main() {
     id := int32(56) // int32 | Id of the receiving order to cancel
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ReceivingApi.CancelReceivingOrder(context.Background(), id).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    r, err := apiClient.ReceivingApi.CancelReceivingOrder(context.Background(), id).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ReceivingApi.CancelReceivingOrder``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -94,15 +94,15 @@ import (
     "fmt"
     "os"
     "time"
-    openapiclient "./openapi"
+    openapiclient "github.com/stryd/shipbob-go"
 )
 
 func main() {
-    createReceivingOrder := *openapiclient.NewCreateReceivingOrder(openapiclient.PackingType("EverythingInOneBox"), []openapiclient.CreateReceivingOrderBoxes{*openapiclient.NewCreateReceivingOrderBoxes([]openapiclient.CreateReceivingOrderBoxItems{*openapiclient.NewCreateReceivingOrderBoxItems(int32(123), int32(123))}, "860C8CDC8F0B4FC7AB69AC86C20539EC")}, time.Now(), *openapiclient.NewCreateReceivingOrderFulfillmentCenter(int32(123)), openapiclient.PackageType("Package")) // CreateReceivingOrder | The receiving order to create (optional)
+    createReceivingOrder := *openapiclient.NewCreateReceivingOrder(openapiclient.PackingType("EverythingInOneBox"), []openapiclient.CreateReceivingOrderBoxesInner{*openapiclient.NewCreateReceivingOrderBoxesInner([]openapiclient.CreateReceivingOrderBoxesInnerBoxItemsInner{*openapiclient.NewCreateReceivingOrderBoxesInnerBoxItemsInner(int32(123), int32(123))}, "860C8CDC8F0B4FC7AB69AC86C20539EC")}, time.Now(), *openapiclient.NewCreateReceivingOrderFulfillmentCenter(int32(123)), openapiclient.PackageType("Package")) // CreateReceivingOrder | The receiving order to create (optional)
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ReceivingApi.CreateReceivingOrder(context.Background()).CreateReceivingOrder(createReceivingOrder).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.ReceivingApi.CreateReceivingOrder(context.Background()).CreateReceivingOrder(createReceivingOrder).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ReceivingApi.CreateReceivingOrder``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -158,14 +158,14 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/stryd/shipbob-go"
 )
 
 func main() {
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ReceivingApi.GetFulfillmentCenters(context.Background()).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.ReceivingApi.GetFulfillmentCenters(context.Background()).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ReceivingApi.GetFulfillmentCenters``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -217,15 +217,15 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/stryd/shipbob-go"
 )
 
 func main() {
     id := int32(56) // int32 | Id of the receiving order
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ReceivingApi.GetReceivingOrder(context.Background(), id).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.ReceivingApi.GetReceivingOrder(context.Background(), id).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ReceivingApi.GetReceivingOrder``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -285,15 +285,15 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/stryd/shipbob-go"
 )
 
 func main() {
     id := int32(56) // int32 | Id of the receiving order
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ReceivingApi.GetReceivingOrderLabels(context.Background(), id).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.ReceivingApi.GetReceivingOrderLabels(context.Background(), id).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ReceivingApi.GetReceivingOrderLabels``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)

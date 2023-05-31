@@ -27,7 +27,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/stryd/shipbob-go"
 )
 
 func main() {
@@ -35,8 +35,8 @@ func main() {
     createProduct := *openapiclient.NewCreateProduct("Medium Blue T-Shirt", "TShirtBlueM") // CreateProduct | The product to add (optional)
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ProductsApi.CreateProduct(context.Background()).ShipbobChannelId(shipbobChannelId).CreateProduct(createProduct).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.ProductsApi.CreateProduct(context.Background()).ShipbobChannelId(shipbobChannelId).CreateProduct(createProduct).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ProductsApi.CreateProduct``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -93,7 +93,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/stryd/shipbob-go"
 )
 
 func main() {
@@ -101,8 +101,8 @@ func main() {
     createProduct := []openapiclient.CreateProduct{*openapiclient.NewCreateProduct("Medium Blue T-Shirt", "TShirtBlueM")} // []CreateProduct | List of products to add (optional)
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ProductsApi.CreateProductBatch(context.Background()).ShipbobChannelId(shipbobChannelId).CreateProduct(createProduct).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.ProductsApi.CreateProductBatch(context.Background()).ShipbobChannelId(shipbobChannelId).CreateProduct(createProduct).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ProductsApi.CreateProductBatch``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -159,7 +159,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/stryd/shipbob-go"
 )
 
 func main() {
@@ -167,8 +167,8 @@ func main() {
     shipbobChannelId := int32(56) // int32 | Channel Id for Operation (optional)
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ProductsApi.GetProduct(context.Background(), productId).ShipbobChannelId(shipbobChannelId).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.ProductsApi.GetProduct(context.Background(), productId).ShipbobChannelId(shipbobChannelId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ProductsApi.GetProduct``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -229,7 +229,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/stryd/shipbob-go"
 )
 
 func main() {
@@ -243,8 +243,8 @@ func main() {
     shipbobChannelId := int32(56) // int32 | Channel Id for Operation (optional)
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ProductsApi.GetProducts(context.Background()).Page(page).Limit(limit).IDs(iDs).ReferenceIds(referenceIds).Search(search).ActiveStatus(activeStatus).BundleStatus(bundleStatus).ShipbobChannelId(shipbobChannelId).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.ProductsApi.GetProducts(context.Background()).Page(page).Limit(limit).IDs(iDs).ReferenceIds(referenceIds).Search(search).ActiveStatus(activeStatus).BundleStatus(bundleStatus).ShipbobChannelId(shipbobChannelId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ProductsApi.GetProducts``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -307,7 +307,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/stryd/shipbob-go"
 )
 
 func main() {
@@ -316,8 +316,8 @@ func main() {
     updateProduct := *openapiclient.NewUpdateProduct("Medium Blue T-Shirt") // UpdateProduct | Updated fields to the product (optional)
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ProductsApi.UpdateProduct(context.Background(), productId).ShipbobChannelId(shipbobChannelId).UpdateProduct(updateProduct).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.ProductsApi.UpdateProduct(context.Background(), productId).ShipbobChannelId(shipbobChannelId).UpdateProduct(updateProduct).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ProductsApi.UpdateProduct``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)

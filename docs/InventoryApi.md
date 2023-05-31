@@ -25,7 +25,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/stryd/shipbob-go"
 )
 
 func main() {
@@ -39,8 +39,8 @@ func main() {
     shipbobChannelId := int32(56) // int32 | Channel Id for Operation (optional)
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.InventoryApi.GetInventories(context.Background()).Page(page).Limit(limit).IsActive(isActive).IsDigital(isDigital).IDs(iDs).Sort(sort).Search(search).ShipbobChannelId(shipbobChannelId).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.InventoryApi.GetInventories(context.Background()).Page(page).Limit(limit).IsActive(isActive).IsDigital(isDigital).IDs(iDs).Sort(sort).Search(search).ShipbobChannelId(shipbobChannelId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `InventoryApi.GetInventories``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -103,15 +103,15 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/stryd/shipbob-go"
 )
 
 func main() {
     inventoryId := int32(56) // int32 | The inventory id to get
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.InventoryApi.GetInventory(context.Background(), inventoryId).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.InventoryApi.GetInventory(context.Background(), inventoryId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `InventoryApi.GetInventory``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -171,7 +171,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/stryd/shipbob-go"
 )
 
 func main() {
@@ -179,8 +179,8 @@ func main() {
     shipbobChannelId := int32(56) // int32 | Channel Id for Operation (optional)
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.InventoryApi.GetProductInventory(context.Background(), productId).ShipbobChannelId(shipbobChannelId).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.InventoryApi.GetProductInventory(context.Background(), productId).ShipbobChannelId(shipbobChannelId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `InventoryApi.GetProductInventory``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
