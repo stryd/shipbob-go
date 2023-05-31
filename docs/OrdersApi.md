@@ -38,7 +38,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/stryd/shipbob-go"
 )
 
 func main() {
@@ -46,8 +46,8 @@ func main() {
     shipbobChannelId := int32(56) // int32 | Channel ID for Operation
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.OrdersApi.CancelOrder(context.Background(), orderId).ShipbobChannelId(shipbobChannelId).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.OrdersApi.CancelOrder(context.Background(), orderId).ShipbobChannelId(shipbobChannelId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `OrdersApi.CancelOrder``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -108,7 +108,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/stryd/shipbob-go"
 )
 
 func main() {
@@ -117,8 +117,8 @@ func main() {
     shipbobChannelId := int32(56) // int32 | Channel Id for Operation (optional)
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.OrdersApi.CancelOrderShipment(context.Background(), shipmentId, orderId).ShipbobChannelId(shipbobChannelId).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.OrdersApi.CancelOrderShipment(context.Background(), shipmentId, orderId).ShipbobChannelId(shipbobChannelId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `OrdersApi.CancelOrderShipment``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -181,7 +181,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/stryd/shipbob-go"
 )
 
 func main() {
@@ -189,8 +189,8 @@ func main() {
     shipbobChannelId := int32(56) // int32 | Channel Id for Operation (optional)
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.OrdersApi.CancelShipment(context.Background(), shipmentId).ShipbobChannelId(shipbobChannelId).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.OrdersApi.CancelShipment(context.Background(), shipmentId).ShipbobChannelId(shipbobChannelId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `OrdersApi.CancelShipment``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -238,7 +238,7 @@ Name | Type | Description  | Notes
 
 ## CancelShipmentBulk
 
-> InlineResponse200 CancelShipmentBulk(ctx).ShipbobChannelId(shipbobChannelId).CancelShipment(cancelShipment).Execute()
+> CancelShipmentBulk200Response CancelShipmentBulk(ctx).ShipbobChannelId(shipbobChannelId).CancelShipment(cancelShipment).Execute()
 
 Cancel multiple Shipments by Shipment Id
 
@@ -251,7 +251,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/stryd/shipbob-go"
 )
 
 func main() {
@@ -259,13 +259,13 @@ func main() {
     cancelShipment := *openapiclient.NewCancelShipment() // CancelShipment |  (optional)
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.OrdersApi.CancelShipmentBulk(context.Background()).ShipbobChannelId(shipbobChannelId).CancelShipment(cancelShipment).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.OrdersApi.CancelShipmentBulk(context.Background()).ShipbobChannelId(shipbobChannelId).CancelShipment(cancelShipment).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `OrdersApi.CancelShipmentBulk``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `CancelShipmentBulk`: InlineResponse200
+    // response from `CancelShipmentBulk`: CancelShipmentBulk200Response
     fmt.Fprintf(os.Stdout, "Response from `OrdersApi.CancelShipmentBulk`: %v\n", resp)
 }
 ```
@@ -286,7 +286,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse200**](inline_response_200.md)
+[**CancelShipmentBulk200Response**](CancelShipmentBulk200Response.md)
 
 ### Authorization
 
@@ -317,16 +317,16 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/stryd/shipbob-go"
 )
 
 func main() {
     shipbobChannelId := int32(56) // int32 | Channel Id for Operation
-    createOrder := *openapiclient.NewCreateOrder([]openapiclient.CreateOrderProducts{*openapiclient.NewCreateOrderProducts(int32(123))}, *openapiclient.NewRecipientInfo(*openapiclient.NewOrderAddress("100 Nowhere Blvd", "Gotham City", "US"), "John Doe"), "ReferenceId_example", "ShippingMethod_example") // CreateOrder |  (optional)
+    createOrder := *openapiclient.NewCreateOrder([]openapiclient.CreateOrderProductsInner{*openapiclient.NewCreateOrderProductsInner(int32(123))}, *openapiclient.NewRecipientInfo(*openapiclient.NewOrderAddress("100 Nowhere Blvd", "Gotham City", "US"), "John Doe"), "ReferenceId_example", "ShippingMethod_example") // CreateOrder |  (optional)
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.OrdersApi.CreateOrder(context.Background()).ShipbobChannelId(shipbobChannelId).CreateOrder(createOrder).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.OrdersApi.CreateOrder(context.Background()).ShipbobChannelId(shipbobChannelId).CreateOrder(createOrder).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `OrdersApi.CreateOrder``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -385,16 +385,16 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/stryd/shipbob-go"
 )
 
 func main() {
     shipbobChannelId := int32(56) // int32 | Channel Id for Operation
-    estimateFulfillmentRequest := *openapiclient.NewEstimateFulfillmentRequest(*openapiclient.NewEstimationAddress("US"), []openapiclient.EstimateFulfillmentRequestProducts{*openapiclient.NewEstimateFulfillmentRequestProducts(int32(123))}) // EstimateFulfillmentRequest |  (optional)
+    estimateFulfillmentRequest := *openapiclient.NewEstimateFulfillmentRequest(*openapiclient.NewEstimationAddress("US"), []openapiclient.EstimateFulfillmentRequestProductsInner{*openapiclient.NewEstimateFulfillmentRequestProductsInner(int32(123))}) // EstimateFulfillmentRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.OrdersApi.CreateOrderEstimate(context.Background()).ShipbobChannelId(shipbobChannelId).EstimateFulfillmentRequest(estimateFulfillmentRequest).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.OrdersApi.CreateOrderEstimate(context.Background()).ShipbobChannelId(shipbobChannelId).EstimateFulfillmentRequest(estimateFulfillmentRequest).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `OrdersApi.CreateOrderEstimate``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -451,7 +451,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/stryd/shipbob-go"
 )
 
 func main() {
@@ -459,8 +459,8 @@ func main() {
     shipbobChannelId := int32(56) // int32 | Channel Id for Operation (optional)
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.OrdersApi.GetOrder(context.Background(), orderId).ShipbobChannelId(shipbobChannelId).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.OrdersApi.GetOrder(context.Background(), orderId).ShipbobChannelId(shipbobChannelId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `OrdersApi.GetOrder``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -521,7 +521,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/stryd/shipbob-go"
 )
 
 func main() {
@@ -530,8 +530,8 @@ func main() {
     shipbobChannelId := int32(56) // int32 | Channel Id for Operation (optional)
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.OrdersApi.GetOrderShipment(context.Background(), orderId, shipmentId).ShipbobChannelId(shipbobChannelId).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.OrdersApi.GetOrderShipment(context.Background(), orderId, shipmentId).ShipbobChannelId(shipbobChannelId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `OrdersApi.GetOrderShipment``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -594,7 +594,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/stryd/shipbob-go"
 )
 
 func main() {
@@ -603,8 +603,8 @@ func main() {
     shipbobChannelId := int32(56) // int32 | Channel Id for Operation (optional)
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.OrdersApi.GetOrderShipmentLogs(context.Background(), orderId, shipmentId).ShipbobChannelId(shipbobChannelId).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.OrdersApi.GetOrderShipmentLogs(context.Background(), orderId, shipmentId).ShipbobChannelId(shipbobChannelId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `OrdersApi.GetOrderShipmentLogs``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -667,7 +667,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/stryd/shipbob-go"
 )
 
 func main() {
@@ -676,8 +676,8 @@ func main() {
     shipbobChannelId := int32(56) // int32 | Channel Id for Operation (optional)
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.OrdersApi.GetOrderShipmentTimeline(context.Background(), orderId, shipmentId).ShipbobChannelId(shipbobChannelId).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.OrdersApi.GetOrderShipmentTimeline(context.Background(), orderId, shipmentId).ShipbobChannelId(shipbobChannelId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `OrdersApi.GetOrderShipmentTimeline``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -740,7 +740,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/stryd/shipbob-go"
 )
 
 func main() {
@@ -748,8 +748,8 @@ func main() {
     shipbobChannelId := int32(56) // int32 | Channel Id for Operation (optional)
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.OrdersApi.GetOrderShipments(context.Background(), orderId).ShipbobChannelId(shipbobChannelId).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.OrdersApi.GetOrderShipments(context.Background(), orderId).ShipbobChannelId(shipbobChannelId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `OrdersApi.GetOrderShipments``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -813,7 +813,7 @@ import (
     "fmt"
     "os"
     "time"
-    openapiclient "./openapi"
+    openapiclient "github.com/stryd/shipbob-go"
 )
 
 func main() {
@@ -830,8 +830,8 @@ func main() {
     shipbobChannelId := int32(56) // int32 | Channel Id for Operation (optional)
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.OrdersApi.GetOrders(context.Background()).Page(page).Limit(limit).IDs(iDs).ReferenceIds(referenceIds).StartDate(startDate).EndDate(endDate).SortOrder(sortOrder).HasTracking(hasTracking).LastUpdateStartDate(lastUpdateStartDate).LastUpdateEndDate(lastUpdateEndDate).ShipbobChannelId(shipbobChannelId).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.OrdersApi.GetOrders(context.Background()).Page(page).Limit(limit).IDs(iDs).ReferenceIds(referenceIds).StartDate(startDate).EndDate(endDate).SortOrder(sortOrder).HasTracking(hasTracking).LastUpdateStartDate(lastUpdateStartDate).LastUpdateEndDate(lastUpdateEndDate).ShipbobChannelId(shipbobChannelId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `OrdersApi.GetOrders``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -897,7 +897,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/stryd/shipbob-go"
 )
 
 func main() {
@@ -905,8 +905,8 @@ func main() {
     shipbobChannelId := int32(56) // int32 | Channel Id for Operation (optional)
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.OrdersApi.GetShipment(context.Background(), shipmentId).ShipbobChannelId(shipbobChannelId).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.OrdersApi.GetShipment(context.Background(), shipmentId).ShipbobChannelId(shipbobChannelId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `OrdersApi.GetShipment``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -967,7 +967,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/stryd/shipbob-go"
 )
 
 func main() {
@@ -975,8 +975,8 @@ func main() {
     shipbobChannelId := int32(56) // int32 | Channel Id for Operation (optional)
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.OrdersApi.GetShipmentLogs(context.Background(), shipmentId).ShipbobChannelId(shipbobChannelId).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.OrdersApi.GetShipmentLogs(context.Background(), shipmentId).ShipbobChannelId(shipbobChannelId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `OrdersApi.GetShipmentLogs``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1037,7 +1037,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/stryd/shipbob-go"
 )
 
 func main() {
@@ -1045,8 +1045,8 @@ func main() {
     shipbobChannelId := int32(56) // int32 | Channel Id for Operation (optional)
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.OrdersApi.GetShipmentTimeline(context.Background(), shipmentId).ShipbobChannelId(shipbobChannelId).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.OrdersApi.GetShipmentTimeline(context.Background(), shipmentId).ShipbobChannelId(shipbobChannelId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `OrdersApi.GetShipmentTimeline``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1109,7 +1109,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/stryd/shipbob-go"
 )
 
 func main() {
@@ -1117,8 +1117,8 @@ func main() {
     limit := int32(56) // int32 | Amount of records per page to request (optional)
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.OrdersApi.GetShippingMethodCollection(context.Background()).Page(page).Limit(limit).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.OrdersApi.GetShippingMethodCollection(context.Background()).Page(page).Limit(limit).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `OrdersApi.GetShippingMethodCollection``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)

@@ -28,7 +28,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/stryd/shipbob-go"
 )
 
 func main() {
@@ -36,8 +36,8 @@ func main() {
     shipbobChannelId := int32(56) // int32 | Channel Id for Operation
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ReturnsApi.CancelReturn(context.Background(), id).ShipbobChannelId(shipbobChannelId).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.ReturnsApi.CancelReturn(context.Background(), id).ShipbobChannelId(shipbobChannelId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ReturnsApi.CancelReturn``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -98,7 +98,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/stryd/shipbob-go"
 )
 
 func main() {
@@ -106,8 +106,8 @@ func main() {
     createReturn := *openapiclient.NewCreateReturn(*openapiclient.NewReturnFulfillmentCenter(int32(123)), []openapiclient.ReturnInventory{*openapiclient.NewReturnInventory(int32(111222), int32(1))}, "ShipBob_Return_123") // CreateReturn | Model defining the return (optional)
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ReturnsApi.CreateReturn(context.Background()).ShipbobChannelId(shipbobChannelId).CreateReturn(createReturn).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.ReturnsApi.CreateReturn(context.Background()).ShipbobChannelId(shipbobChannelId).CreateReturn(createReturn).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ReturnsApi.CreateReturn``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -164,7 +164,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/stryd/shipbob-go"
 )
 
 func main() {
@@ -172,8 +172,8 @@ func main() {
     shipbobChannelId := int32(56) // int32 | Channel Id for Operation (optional)
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ReturnsApi.GetReturn(context.Background(), id).ShipbobChannelId(shipbobChannelId).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.ReturnsApi.GetReturn(context.Background(), id).ShipbobChannelId(shipbobChannelId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ReturnsApi.GetReturn``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -234,7 +234,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/stryd/shipbob-go"
 )
 
 func main() {
@@ -242,8 +242,8 @@ func main() {
     shipbobChannelId := int32(56) // int32 | Channel Id for Operation (optional)
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ReturnsApi.GetReturnStatusHistory(context.Background(), id).ShipbobChannelId(shipbobChannelId).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.ReturnsApi.GetReturnStatusHistory(context.Background(), id).ShipbobChannelId(shipbobChannelId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ReturnsApi.GetReturnStatusHistory``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -305,7 +305,7 @@ import (
     "fmt"
     "os"
     "time"
-    openapiclient "./openapi"
+    openapiclient "github.com/stryd/shipbob-go"
 )
 
 func main() {
@@ -324,8 +324,8 @@ func main() {
     shipbobChannelId := int32(56) // int32 |  (optional)
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ReturnsApi.GetReturns(context.Background()).Page(page).Limit(limit).SortOrder(sortOrder).StartDate(startDate).EndDate(endDate).IDs(iDs).ReferenceIds(referenceIds).Status(status).FulfillmentCenterIds(fulfillmentCenterIds).TrackingNumbers(trackingNumbers).OriginalShipmentIds(originalShipmentIds).InventoryIds(inventoryIds).ShipbobChannelId(shipbobChannelId).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.ReturnsApi.GetReturns(context.Background()).Page(page).Limit(limit).SortOrder(sortOrder).StartDate(startDate).EndDate(endDate).IDs(iDs).ReferenceIds(referenceIds).Status(status).FulfillmentCenterIds(fulfillmentCenterIds).TrackingNumbers(trackingNumbers).OriginalShipmentIds(originalShipmentIds).InventoryIds(inventoryIds).ShipbobChannelId(shipbobChannelId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ReturnsApi.GetReturns``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -393,7 +393,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/stryd/shipbob-go"
 )
 
 func main() {
@@ -402,8 +402,8 @@ func main() {
     createReturn := *openapiclient.NewCreateReturn(*openapiclient.NewReturnFulfillmentCenter(int32(123)), []openapiclient.ReturnInventory{*openapiclient.NewReturnInventory(int32(111222), int32(1))}, "ShipBob_Return_123") // CreateReturn | Model defining the return (optional)
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ReturnsApi.UpdateReturn(context.Background(), id).ShipbobChannelId(shipbobChannelId).CreateReturn(createReturn).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.ReturnsApi.UpdateReturn(context.Background(), id).ShipbobChannelId(shipbobChannelId).CreateReturn(createReturn).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ReturnsApi.UpdateReturn``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
