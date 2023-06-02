@@ -1,300 +1,75 @@
 {
   "components": {
     "schemas": {
-      "LocationAddress": {
+      "AddBoxItemToBox": {
         "additionalProperties": false,
-        "description": "The service-specific address of the location. Each object contains address type, address1, address2, city, state, country, zip code, phone number, and email",
+        "description": "Information about an inventory item contained inside a receiving order box",
         "properties": {
-          "address1": {
-            "description": "First part of the address of the location for this service",
-            "nullable": true,
-            "type": "string"
-          },
-          "address2": {
-            "description": "Second part of the address of the location for this service",
-            "nullable": true,
-            "type": "string"
-          },
-          "city": {
-            "description": "City of the location",
-            "nullable": true,
-            "type": "string"
-          },
-          "country": {
-            "description": "Country of the location",
-            "nullable": true,
-            "type": "string"
-          },
-          "email": {
-            "description": "Email of the location for this service",
-            "nullable": true,
-            "type": "string"
-          },
-          "name": {
-            "description": "Name to use in the address of the location for this service",
-            "nullable": true,
-            "type": "string"
-          },
-          "phone_number": {
-            "description": "Phone Number of the location for this service",
-            "nullable": true,
-            "type": "string"
-          },
-          "state": {
-            "description": "State of the location",
-            "nullable": true,
-            "type": "string"
-          },
-          "zip_code": {
-            "description": "Zip code of the location",
-            "nullable": true,
-            "type": "string"
-          }
-        },
-        "type": "object"
-      },
-      "Location": {
-        "additionalProperties": false,
-        "properties": {
-          "abbreviation": {
-            "description": "Abbreviation of the location. Combination of nearest Airport Code and the sequence number.",
-            "nullable": true,
-            "type": "string"
-          },
-          "access_granted": {
-            "description": "Indicates whether or not the user is authorized to interact at all with the location",
-            "type": "boolean"
-          },
-          "attributes": {
-            "description": "Available attributes for the location",
-            "items": {
-              "type": "string"
-            },
-            "nullable": true,
-            "type": "array"
-          },
-          "id": {
-            "description": "Id of the location in ShipBob's database",
+          "inventory_id": {
+            "description": "Unique inventory id of the items in the box",
             "format": "int32",
             "type": "integer"
           },
-          "is_active": {
-            "description": "Indicates if the location is operationally active or inactive",
-            "type": "boolean"
-          },
-          "is_receiving_enabled": {
-            "description": "Indicates if the receiving is enabled for FC",
-            "type": "boolean"
-          },
-          "is_shipping_enabled": {
-            "description": "Indicates if the shipping is enabled for FC",
-            "type": "boolean"
-          },
-          "name": {
-            "description": "Name of the location. Follows the naming convention City (State Code) for domestic FCs and City (Country Code) for international FCs",
+          "lot_date": {
+            "description": "Lot expiration date for the items in the box",
+            "format": "date-time",
             "nullable": true,
             "type": "string"
           },
-          "region": {
-            "$ref": "#/components/schemas/LocationRegion"
-          },
-          "services": {
-            "description": "Services provided by the location",
-            "items": {
-              "$ref": "#/components/schemas/LocationService"
-            },
-            "nullable": true,
-            "type": "array"
-          },
-          "timezone": {
-            "description": "Time zone of the location",
+          "lot_number": {
+            "description": "Lot number of the items in the box",
+            "example": "2222",
             "nullable": true,
             "type": "string"
-          }
-        },
-        "type": "object"
-      },
-      "LocationRegion": {
-        "additionalProperties": false,
-        "properties": {
-          "id": {
-            "description": "Unique Id for the location region",
+          },
+          "quantity": {
+            "description": "Quantity of the items in the box",
             "format": "int32",
+            "maximum": 2147483647,
+            "minimum": 1,
             "type": "integer"
-          },
-          "name": {
-            "description": "Name of the region the location is in.",
-            "nullable": true,
-            "type": "string"
           }
         },
-        "type": "object"
-      },
-      "LocationService": {
-        "additionalProperties": false,
-        "properties": {
-          "address": {
-            "$ref": "#/components/schemas/LocationAddress"
-          },
-          "enabled": {
-            "description": "Indicates if the user is authorized to access this service at the location",
-            "type": "boolean"
-          },
-          "service_type": {
-            "$ref": "#/components/schemas/LocationServiceTypeEnum"
-          }
-        },
-        "type": "object"
-      },
-      "LocationServiceTypeEnum": {
-        "enum": [
-          "Receiving",
-          "Returns"
+        "required": [
+          "inventory_id",
+          "quantity"
         ],
-        "type": "string"
+        "type": "object"
       },
-      "ProblemDetails": {
+      "AddBoxToOrder": {
         "additionalProperties": false,
-        "discriminator": {
-          "propertyName": "ttype"
-        },
+        "description": "Information about a box shipment to be added to a receiving order",
         "properties": {
-          "detail": {
-            "nullable": true,
-            "type": "string"
-          },
-          "extensions": {
-            "additionalProperties": {
-              "additionalProperties": false,
-              "type": "object"
+          "box_items": {
+            "description": "Items contained in this box",
+            "items": {
+              "$ref": "#/components/schemas/AddBoxItemToBox"
             },
             "nullable": true,
-            "readOnly": true,
-            "type": "object"
+            "type": "array"
           },
-          "instance": {
+          "tracking_number": {
+            "description": "Tracking number for the box shipment",
+            "example": "860C8CDC8F0B4FC7AB69AC86C20539EC",
             "nullable": true,
-            "type": "string"
-          },
-          "status": {
-            "format": "int32",
-            "nullable": true,
-            "type": "integer"
-          },
-          "title": {
-            "nullable": true,
-            "type": "string"
-          },
-          "type": {
-            "nullable": true,
-            "type": "string"
-          },
-          "ttype": {
             "type": "string"
           }
         },
         "required": [
-          "ttype"
+          "box_items",
+          "tracking_number"
         ],
         "type": "object"
       },
-      "ValidationProblemDetails": {
-        "additionalProperties": false,
-        "allOf": [
+      "AddProductToOrder": {
+        "oneOf": [
           {
-            "$ref": "#/components/schemas/ProblemDetails"
+            "$ref": "#/components/schemas/AddProductToOrderByProductId"
           },
           {
-            "additionalProperties": false,
-            "properties": {
-              "errors": {
-                "additionalProperties": {
-                  "items": {
-                    "type": "string"
-                  },
-                  "type": "array"
-                },
-                "nullable": true,
-                "type": "object"
-              }
-            },
-            "type": "object"
+            "$ref": "#/components/schemas/AddProductToOrderByReferenceId"
           }
-        ],
-        "properties": {
-          "detail": {
-            "nullable": true,
-            "type": "string"
-          },
-          "errors": {
-            "additionalProperties": {
-              "items": {
-                "type": "string"
-              },
-              "type": "array"
-            },
-            "nullable": true,
-            "readOnly": true,
-            "type": "object"
-          },
-          "extensions": {
-            "additionalProperties": {
-              "additionalProperties": false,
-              "type": "object"
-            },
-            "nullable": true,
-            "readOnly": true,
-            "type": "object"
-          },
-          "instance": {
-            "nullable": true,
-            "type": "string"
-          },
-          "status": {
-            "format": "int32",
-            "nullable": true,
-            "type": "integer"
-          },
-          "title": {
-            "nullable": true,
-            "type": "string"
-          },
-          "type": {
-            "nullable": true,
-            "type": "string"
-          }
-        },
-        "type": "object"
-      },
-      "Channel": {
-        "additionalProperties": false,
-        "properties": {
-          "application_name": {
-            "description": "Name of the application that owns the channel",
-            "example": "Api",
-            "nullable": true,
-            "type": "string"
-          },
-          "id": {
-            "description": "Unique id of the channel",
-            "format": "int32",
-            "type": "integer"
-          },
-          "name": {
-            "description": "Name of the channel",
-            "nullable": true,
-            "type": "string"
-          },
-          "scopes": {
-            "description": "Array of permissions granted for the channel",
-            "items": {
-              "type": "string"
-            },
-            "nullable": true,
-            "type": "array"
-          }
-        },
-        "type": "object"
+        ]
       },
       "AddProductToOrderByProductId": {
         "additionalProperties": false,
@@ -341,15 +116,127 @@
         ],
         "type": "object"
       },
-      "AddProductToOrder": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/AddProductToOrderByProductId"
-          },
-          {
-            "$ref": "#/components/schemas/AddProductToOrderByReferenceId"
+      "AssignOrderToFulfillmentCenter": {
+        "additionalProperties": false,
+        "description": "Model containing information that assigns a receiving order to a fulfillment center",
+        "properties": {
+          "id": {
+            "description": "ID of the fulfillment center to assign this receiving order to",
+            "format": "int32",
+            "type": "integer"
           }
-        ]
+        },
+        "required": [
+          "id"
+        ],
+        "type": "object"
+      },
+      "Box": {
+        "additionalProperties": false,
+        "description": "Information about a box shipment included in a receiving order",
+        "properties": {
+          "arrived_date": {
+            "description": "Date the box arrived",
+            "format": "date-time",
+            "nullable": true,
+            "type": "string"
+          },
+          "box_items": {
+            "description": "Information about the items included in the box",
+            "items": {
+              "$ref": "#/components/schemas/BoxItem"
+            },
+            "nullable": true,
+            "type": "array"
+          },
+          "box_number": {
+            "description": "The number of the box in the receiving order",
+            "format": "int32",
+            "type": "integer"
+          },
+          "box_status": {
+            "$ref": "#/components/schemas/BoxStatus"
+          },
+          "counting_started_date": {
+            "description": "Date counting of the box's inventory items started",
+            "format": "date-time",
+            "nullable": true,
+            "type": "string"
+          },
+          "received_date": {
+            "description": "Date the box was received",
+            "format": "date-time",
+            "nullable": true,
+            "type": "string"
+          },
+          "tracking_number": {
+            "description": "Tracking number of the box shipment",
+            "example": "860C8CDC8F0B4FC7AB69AC86C20539EC",
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "BoxItem": {
+        "additionalProperties": false,
+        "description": "Information about an item contained inside a box as part of a receiving order",
+        "properties": {
+          "inventory_id": {
+            "description": "Unique identifier of the inventory item",
+            "format": "int32",
+            "type": "integer"
+          },
+          "lot_date": {
+            "description": "Expiration date of the item's lot",
+            "format": "date-time",
+            "nullable": true,
+            "type": "string"
+          },
+          "lot_number": {
+            "description": "Lot number the item belongs to",
+            "nullable": true,
+            "type": "string"
+          },
+          "quantity": {
+            "description": "Quantity of the item included",
+            "format": "int32",
+            "type": "integer"
+          },
+          "received_quantity": {
+            "description": "Quantity of the item that was received after processing the receiving order",
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
+      "BoxStatus": {
+        "enum": [
+          "Awaiting",
+          "Arrived",
+          "Completed",
+          "Counting",
+          "Stowing",
+          "Cancelled"
+        ],
+        "type": "string"
+      },
+      "BundleRootInformation": {
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "description": "Id of the bundle root product",
+            "format": "int32",
+            "type": "integer"
+          },
+          "name": {
+            "description": "Name of the bundle root product",
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "type": "object"
       },
       "CancelShipments": {
         "additionalProperties": false,
@@ -364,161 +251,6 @@
             "type": "array"
           }
         },
-        "type": "object"
-      },
-      "CreateOrder": {
-        "additionalProperties": false,
-        "properties": {
-          "order_number": {
-            "description": "User friendly orderId or store order number that will be shown on the Orders Page. If not provided, referenceId will be used",
-            "maxLength": 400,
-            "type": "string"
-          },
-          "products": {
-            "items": {
-              "$ref": "#/components/schemas/AddProductToOrder"
-            },
-            "minLength": 1,
-            "type": "array"
-          },
-          "purchase_date": {
-            "description": "Date this order was purchase by the end user",
-            "format": "date-time",
-            "nullable": true,
-            "type": "string"
-          },
-          "recipient": {
-            "$ref": "#/components/schemas/RecipientInfo"
-          },
-          "reference_id": {
-            "maxLength": 300,
-            "type": "string"
-          },
-          "shipping_method": {
-            "type": "string"
-          },
-          "tags": {
-            "items": {
-              "$ref": "#/components/schemas/Tag"
-            },
-            "type": "array"
-          },
-          "type": {
-            "description": "Defaults to Direct to Consumer (DTC) if not provided. Note: B2B is not supported at this time",
-            "enum": [
-              "DTC",
-              "DropShip",
-              "B2B"
-            ],
-            "type": "string"
-          }
-        },
-        "required": [
-          "products",
-          "recipient",
-          "reference_id",
-          "shipping_method"
-        ],
-        "type": "object"
-      },
-      "OrderEstimateFulfillmentRequest": {
-        "additionalProperties": false,
-        "properties": {
-          "address": {
-            "$ref": "#/components/schemas/EstimationAddress"
-          },
-          "products": {
-            "description": "Products to be included in the order. Each product must include one of reference_id or id",
-            "items": {
-              "$ref": "#/components/schemas/OrderEstimateProductInfo"
-            },
-            "type": "array"
-          },
-          "shipping_methods": {
-            "description": "Array of strings specifying shipping methods for which to fetch estimates.  If this field is omitted we will return estimates for all shipping methods defined in ShipBob",
-            "items": {
-              "type": "string"
-            },
-            "type": "array"
-          }
-        },
-        "required": [
-          "address",
-          "products"
-        ],
-        "type": "object"
-      },
-      "OrderEstimateProductInfo": {
-        "additionalProperties": false,
-        "properties": {
-          "id": {
-            "description": "Unique id of the product (Must be provided if reference_id is unknown)",
-            "format": "int32",
-            "nullable": true,
-            "type": "integer"
-          },
-          "quantity": {
-            "description": "The quantity of this product ordered",
-            "format": "int32",
-            "maximum": 199,
-            "minimum": 1,
-            "type": "integer"
-          },
-          "reference_id": {
-            "description": "Unique reference id of the product (Must be provided if ID is unknown)",
-            "example": "TShirtBlueM",
-            "type": "string"
-          }
-        },
-        "required": [
-          "quantity"
-        ],
-        "type": "object"
-      },
-      "OrderAddress": {
-        "additionalProperties": false,
-        "properties": {
-          "address1": {
-            "description": "First line of the address",
-            "example": "100 Nowhere Blvd",
-            "type": "string"
-          },
-          "address2": {
-            "description": "Second line of the address",
-            "example": "Suite 100",
-            "type": "string"
-          },
-          "city": {
-            "description": "The city",
-            "example": "Gotham City",
-            "type": "string"
-          },
-          "company_name": {
-            "description": "Name of the company receiving the shipment",
-            "example": "Wayne Enterprises",
-            "type": "string"
-          },
-          "country": {
-            "description": "The country (Must be ISO Alpha-2 for estimates)",
-            "example": "US",
-            "type": "string"
-          },
-          "state": {
-            "description": "The state or province",
-            "example": "NJ",
-            "type": "string"
-          },
-          "zip_code": {
-            "description": "The zip code or postal code",
-            "example": "07093",
-            "type": "string"
-          }
-        },
-        "required": [
-          "address1",
-          "city",
-          "country"
-        ],
         "type": "object"
       },
       "CanceledOrder": {
@@ -593,6 +325,36 @@
         },
         "type": "object"
       },
+      "Channel": {
+        "additionalProperties": false,
+        "properties": {
+          "application_name": {
+            "description": "Name of the application that owns the channel",
+            "example": "Api",
+            "nullable": true,
+            "type": "string"
+          },
+          "id": {
+            "description": "Unique id of the channel",
+            "format": "int32",
+            "type": "integer"
+          },
+          "name": {
+            "description": "Name of the channel",
+            "nullable": true,
+            "type": "string"
+          },
+          "scopes": {
+            "description": "Array of permissions granted for the channel",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true,
+            "type": "array"
+          }
+        },
+        "type": "object"
+      },
       "ChannelInfo": {
         "additionalProperties": false,
         "description": "Created by channel metadata",
@@ -610,33 +372,200 @@
         },
         "type": "object"
       },
-      "OrderEstimateDetail": {
+      "CreateOrder": {
         "additionalProperties": false,
         "properties": {
-          "estimated_price": {
-            "description": "Estimated price in dollars for the provided shipping method",
-            "format": "double",
-            "type": "number"
+          "order_number": {
+            "description": "User friendly orderId or store order number that will be shown on the Orders Page. If not provided, referenceId will be used",
+            "maxLength": 400,
+            "type": "string"
           },
-          "fulfillment_center": {
-            "$ref": "#/components/schemas/FulfillmentCenter"
+          "products": {
+            "items": {
+              "$ref": "#/components/schemas/AddProductToOrder"
+            },
+            "minLength": 1,
+            "type": "array"
+          },
+          "purchase_date": {
+            "description": "Date this order was purchase by the end user",
+            "format": "date-time",
+            "nullable": true,
+            "type": "string"
+          },
+          "recipient": {
+            "$ref": "#/components/schemas/RecipientInfo"
+          },
+          "reference_id": {
+            "maxLength": 300,
+            "type": "string"
           },
           "shipping_method": {
-            "description": "Provided shipping method. Maps to ship option in ShipBob.",
+            "type": "string"
+          },
+          "tags": {
+            "items": {
+              "$ref": "#/components/schemas/Tag"
+            },
+            "type": "array"
+          },
+          "type": {
+            "description": "Defaults to Direct to Consumer (DTC) if not provided. Note: B2B is not supported at this time",
+            "enum": [
+              "DTC",
+              "DropShip",
+              "B2B"
+            ],
             "type": "string"
           }
         },
+        "required": [
+          "products",
+          "recipient",
+          "reference_id",
+          "shipping_method"
+        ],
         "type": "object"
       },
-      "OrderEstimate": {
+      "CreateProduct": {
+        "additionalProperties": false,
+        "description": "The product to create",
+        "properties": {
+          "barcode": {
+            "description": "Barcode for the product",
+            "example": "123456789012",
+            "nullable": true,
+            "type": "string"
+          },
+          "name": {
+            "description": "The name of the product",
+            "example": "Medium Blue T-Shirt",
+            "nullable": true,
+            "type": "string"
+          },
+          "reference_id": {
+            "description": "Unique reference identifier for the product. Any linked or generated inventory will also be uniquely identified by this value",
+            "example": "TShirtBlueM",
+            "nullable": true,
+            "type": "string"
+          },
+          "sku": {
+            "description": "Stock keeping unit for the product",
+            "example": "TShirtBlueM",
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "reference_id"
+        ],
+        "type": "object"
+      },
+      "CreateReceivingOrder": {
+        "additionalProperties": false,
+        "description": "Information to create a new receiving order",
+        "properties": {
+          "box_packaging_type": {
+            "$ref": "#/components/schemas/PackingType"
+          },
+          "boxes": {
+            "description": "Box shipments to be added to this receiving order",
+            "items": {
+              "$ref": "#/components/schemas/AddBoxToOrder"
+            },
+            "nullable": true,
+            "type": "array"
+          },
+          "expected_arrival_date": {
+            "description": "Expected arrival date of all the box shipments in this receiving order",
+            "format": "date-time",
+            "nullable": true,
+            "type": "string"
+          },
+          "fulfillment_center": {
+            "$ref": "#/components/schemas/AssignOrderToFulfillmentCenter"
+          },
+          "package_type": {
+            "$ref": "#/components/schemas/PackageType"
+          }
+        },
+        "required": [
+          "box_packaging_type",
+          "boxes",
+          "expected_arrival_date",
+          "fulfillment_center",
+          "package_type"
+        ],
+        "type": "object"
+      },
+      "CreateReturn": {
         "additionalProperties": false,
         "properties": {
-          "estimates": {
-            "description": "Array of estimates for each shipping method",
+          "fulfillment_center": {
+            "$ref": "#/components/schemas/ReturnFulfillmentCenter"
+          },
+          "inventory": {
+            "description": "Array of inventory items being returned",
             "items": {
-              "$ref": "#/components/schemas/OrderEstimateDetail"
+              "$ref": "#/components/schemas/ReturnInventory"
             },
+            "minLength": 1,
+            "nullable": true,
             "type": "array"
+          },
+          "original_shipment_id": {
+            "description": "Shipment from which the items in the return originated",
+            "example": 123456,
+            "format": "int32",
+            "nullable": true,
+            "type": "integer"
+          },
+          "reference_id": {
+            "description": "Client-defined external unique identifier for the return order",
+            "example": "ShipBob_Return_123",
+            "maxLength": 50,
+            "nullable": true,
+            "type": "string"
+          },
+          "tracking_number": {
+            "description": "Tracking number for the return shipment",
+            "example": "1Z9999999999999999",
+            "maxLength": 500,
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "required": [
+          "fulfillment_center",
+          "inventory",
+          "reference_id"
+        ],
+        "type": "object"
+      },
+      "Dimension": {
+        "additionalProperties": false,
+        "description": "Information about an inventory item's dimensions",
+        "properties": {
+          "depth": {
+            "description": "Depth in inches of this inventory item",
+            "format": "double",
+            "type": "number"
+          },
+          "length": {
+            "description": "Length in inches of this inventory item",
+            "format": "double",
+            "type": "number"
+          },
+          "weight": {
+            "description": "Weight in ounces of this inventory item",
+            "format": "double",
+            "type": "number"
+          },
+          "width": {
+            "description": "Width in inches of this inventory item",
+            "format": "double",
+            "type": "number"
           }
         },
         "type": "object"
@@ -700,6 +629,566 @@
             "type": "string"
           }
         },
+        "type": "object"
+      },
+      "Inventory": {
+        "additionalProperties": false,
+        "description": "Information about an inventory item",
+        "properties": {
+          "dimensions": {
+            "$ref": "#/components/schemas/Dimension"
+          },
+          "fulfillable_quantity_by_fulfillment_center": {
+            "description": "Fulfillable quantity of this inventory item broken down by fulfillment center location",
+            "items": {
+              "$ref": "#/components/schemas/InventoryFulfillmentCenterQuantity"
+            },
+            "type": "array"
+          },
+          "fulfillable_quantity_by_lot": {
+            "description": "Fulfillable quantity of this inventory item broken down by lot",
+            "items": {
+              "$ref": "#/components/schemas/InventoryLotQuantity"
+            },
+            "type": "array"
+          },
+          "id": {
+            "description": "Unique id of the inventory item",
+            "format": "int32",
+            "type": "integer"
+          },
+          "is_active": {
+            "description": "Whether the inventory is active or not",
+            "type": "boolean"
+          },
+          "is_case_pick": {
+            "description": "True if the inventory item is marked as case pick",
+            "type": "boolean"
+          },
+          "is_digital": {
+            "description": "True if the inventory item is marked as a digital item",
+            "type": "boolean"
+          },
+          "is_lot": {
+            "description": "True if this inventory item is organized into lots",
+            "type": "boolean"
+          },
+          "name": {
+            "description": "Name of the inventory item",
+            "example": "Medium Blue T-Shirt",
+            "type": "string"
+          },
+          "packaging_attribute": {
+            "description": "Attribute influencing the packaging requirements of this inventory item",
+            "enum": [
+              "None",
+              "Fragile",
+              "Foldable",
+              "Stackable",
+              "Book",
+              "CustomPackaging",
+              "CustomDunnage",
+              "MarketingInsert",
+              "Poster"
+            ],
+            "type": "string"
+          },
+          "total_awaiting_quantity": {
+            "description": "Total quantity in unreceived receiving orders for this inventory item",
+            "format": "int32",
+            "type": "integer"
+          },
+          "total_backordered_quantity": {
+            "description": "The amount of the item you need to send to ShipBob to fulfill all exception orders containing  the item. This is the exception_quantity less the fulfillable_quantity of the item.",
+            "format": "int32",
+            "type": "integer"
+          },
+          "total_committed_quantity": {
+            "description": "Total committed quantity of this inventory item",
+            "format": "int32",
+            "type": "integer"
+          },
+          "total_exception_quantity": {
+            "description": "The total quantity of all items that are contained within orders that are in exception/out of stock status. Out of stock orders have not been processed and therefore do not have lot or fulfillment centers assigned.",
+            "format": "int32",
+            "type": "integer"
+          },
+          "total_fulfillable_quantity": {
+            "description": "Total fulfillable quantity of this inventory item",
+            "format": "int32",
+            "type": "integer"
+          },
+          "total_internal_transfer_quantity": {
+            "description": "The total quantity of all items that are in the process of internal transit  between ShipBob fulfillment centers. These items are not pickable or fulfillable until they have been received and moved to the \"On Hand\" quantity of the destination FC. Internal transit quantities for each FC represent the incoming transfer stock for that specific location.",
+            "format": "int32",
+            "type": "integer"
+          },
+          "total_onhand_quantity": {
+            "description": "Total onhand quantity of this inventory item",
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
+      "InventoryFulfillmentCenterQuantity": {
+        "additionalProperties": false,
+        "description": "Break down of fulfillable quantity by fulfillment center",
+        "properties": {
+          "awaiting_quantity": {
+            "description": "Amount of quantity awaiting arrival of a receiving order at this fulfillment center",
+            "format": "int32",
+            "type": "integer"
+          },
+          "committed_quantity": {
+            "description": "Amount of committed quantity at this fulfillment center",
+            "format": "int32",
+            "type": "integer"
+          },
+          "fulfillable_quantity": {
+            "description": "Amount of fulfillable quantity at this fulfillment center",
+            "format": "int32",
+            "type": "integer"
+          },
+          "id": {
+            "description": "Unique id of the fulfillment center",
+            "format": "int32",
+            "type": "integer"
+          },
+          "internal_transfer_quantity": {
+            "description": "The quantity of items that are in the process of internal transit  between ShipBob fulfillment centers, with a destination of this fulfillment center. These items are not pickable or fulfillable until they have been received and moved  to the \"On Hand\" quantity of the destination FC.",
+            "format": "int32",
+            "type": "integer"
+          },
+          "name": {
+            "description": "Name of the fulfillment center",
+            "example": "Cicero",
+            "type": "string"
+          },
+          "onhand_quantity": {
+            "description": "Amount of onhand quantity at this fulfillment center",
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
+      "InventoryLotQuantity": {
+        "additionalProperties": false,
+        "description": "Break down of fulfillable quantity by lot",
+        "properties": {
+          "awaiting_quantity": {
+            "description": "Quantity of inventory items belonging to this lot awaiting arrival of a receiving order",
+            "format": "int32",
+            "type": "integer"
+          },
+          "committed_quantity": {
+            "description": "Committed quantity of inventory items belonging to this lot",
+            "format": "int32",
+            "type": "integer"
+          },
+          "expiration_date": {
+            "description": "Expiration date for this lot",
+            "format": "date-time",
+            "nullable": true,
+            "type": "string"
+          },
+          "fulfillable_quantity": {
+            "description": "Fulfillable quantity of inventory items belonging to this lot",
+            "format": "int32",
+            "type": "integer"
+          },
+          "fulfillable_quantity_by_fulfillment_center": {
+            "description": "Fulfillable quantity of inventory items belonging to this lot broken down by fulfillment center location",
+            "items": {
+              "$ref": "#/components/schemas/InventoryFulfillmentCenterQuantity"
+            },
+            "type": "array"
+          },
+          "internal_transfer_quantity": {
+            "description": "The quantity of all items belonging to this lot that are in the process of internal transit  between ShipBob fulfillment centers. These items are not pickable or fulfillable until they have been received and moved to the \"On Hand\" quantity of the destination FC. Internal transit quantities for each FC represent the incoming transfer stock for that specific location.",
+            "format": "int32",
+            "type": "integer"
+          },
+          "lot_number": {
+            "description": "Identification number of this lot",
+            "example": "1234",
+            "type": "string"
+          },
+          "onhand_quantity": {
+            "description": "OnHand quantity of inventory items belonging to this lot",
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
+      "Location": {
+        "additionalProperties": false,
+        "properties": {
+          "abbreviation": {
+            "description": "Abbreviation of the location. Combination of nearest Airport Code and the sequence number.",
+            "nullable": true,
+            "type": "string"
+          },
+          "access_granted": {
+            "description": "Indicates whether or not the user is authorized to interact at all with the location",
+            "type": "boolean"
+          },
+          "attributes": {
+            "description": "Available attributes for the location",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true,
+            "type": "array"
+          },
+          "id": {
+            "description": "Id of the location in ShipBob's database",
+            "format": "int32",
+            "type": "integer"
+          },
+          "is_active": {
+            "description": "Indicates if the location is operationally active or inactive",
+            "type": "boolean"
+          },
+          "is_receiving_enabled": {
+            "description": "Indicates if the receiving is enabled for FC",
+            "type": "boolean"
+          },
+          "is_shipping_enabled": {
+            "description": "Indicates if the shipping is enabled for FC",
+            "type": "boolean"
+          },
+          "name": {
+            "description": "Name of the location. Follows the naming convention City (State Code) for domestic FCs and City (Country Code) for international FCs",
+            "nullable": true,
+            "type": "string"
+          },
+          "region": {
+            "$ref": "#/components/schemas/LocationRegion"
+          },
+          "services": {
+            "description": "Services provided by the location",
+            "items": {
+              "$ref": "#/components/schemas/LocationService"
+            },
+            "nullable": true,
+            "type": "array"
+          },
+          "timezone": {
+            "description": "Time zone of the location",
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "LocationAddress": {
+        "additionalProperties": false,
+        "description": "The service-specific address of the location. Each object contains address type, address1, address2, city, state, country, zip code, phone number, and email",
+        "properties": {
+          "address1": {
+            "description": "First part of the address of the location for this service",
+            "nullable": true,
+            "type": "string"
+          },
+          "address2": {
+            "description": "Second part of the address of the location for this service",
+            "nullable": true,
+            "type": "string"
+          },
+          "city": {
+            "description": "City of the location",
+            "nullable": true,
+            "type": "string"
+          },
+          "country": {
+            "description": "Country of the location",
+            "nullable": true,
+            "type": "string"
+          },
+          "email": {
+            "description": "Email of the location for this service",
+            "nullable": true,
+            "type": "string"
+          },
+          "name": {
+            "description": "Name to use in the address of the location for this service",
+            "nullable": true,
+            "type": "string"
+          },
+          "phone_number": {
+            "description": "Phone Number of the location for this service",
+            "nullable": true,
+            "type": "string"
+          },
+          "state": {
+            "description": "State of the location",
+            "nullable": true,
+            "type": "string"
+          },
+          "zip_code": {
+            "description": "Zip code of the location",
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "LocationRegion": {
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "description": "Unique Id for the location region",
+            "format": "int32",
+            "type": "integer"
+          },
+          "name": {
+            "description": "Name of the region the location is in.",
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "LocationService": {
+        "additionalProperties": false,
+        "properties": {
+          "address": {
+            "$ref": "#/components/schemas/LocationAddress"
+          },
+          "enabled": {
+            "description": "Indicates if the user is authorized to access this service at the location",
+            "type": "boolean"
+          },
+          "service_type": {
+            "$ref": "#/components/schemas/LocationServiceTypeEnum"
+          }
+        },
+        "type": "object"
+      },
+      "LocationServiceTypeEnum": {
+        "enum": [
+          "Receiving",
+          "Returns"
+        ],
+        "type": "string"
+      },
+      "Order": {
+        "additionalProperties": false,
+        "properties": {
+          "channel": {
+            "$ref": "#/components/schemas/ChannelInfo"
+          },
+          "created_date": {
+            "description": "Date this order was created",
+            "format": "date-time",
+            "nullable": true,
+            "type": "string"
+          },
+          "id": {
+            "description": "Unique id of the order",
+            "format": "int32",
+            "type": "integer"
+          },
+          "order_number": {
+            "description": "User friendly orderId or store order number that will be shown on the Orders Page. If not provided, referenceId will be used",
+            "type": "string"
+          },
+          "products": {
+            "description": "List of products included in the order",
+            "items": {
+              "$ref": "#/components/schemas/ProductInfo"
+            },
+            "type": "array"
+          },
+          "purchase_date": {
+            "description": "Date this order was purchase by the end user",
+            "format": "date-time",
+            "nullable": true,
+            "type": "string"
+          },
+          "recipient": {
+            "$ref": "#/components/schemas/RecipientInfo"
+          },
+          "reference_id": {
+            "description": "Client-defined external unique id of the order",
+            "type": "string"
+          },
+          "shipments": {
+            "description": "Shipments affiliated with the order",
+            "items": {
+              "$ref": "#/components/schemas/Shipment"
+            },
+            "type": "array"
+          },
+          "shipping_method": {
+            "description": "Client-defined shipping method",
+            "example": "Free 2-day Shipping",
+            "type": "string"
+          },
+          "status": {
+            "description": "The order status",
+            "enum": [
+              "Processing",
+              "Exception",
+              "PartiallyFulfilled",
+              "Fulfilled",
+              "Cancelled",
+              "ImportReview"
+            ],
+            "type": "string"
+          },
+          "tags": {
+            "description": "Client-defined order tags",
+            "items": {
+              "$ref": "#/components/schemas/Tag"
+            },
+            "type": "array"
+          },
+          "type": {
+            "description": "Shipment type of the order",
+            "enum": [
+              "DTC",
+              "DropShip",
+              "B2B"
+            ],
+            "example": "DTC",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "OrderAddress": {
+        "additionalProperties": false,
+        "properties": {
+          "address1": {
+            "description": "First line of the address",
+            "example": "100 Nowhere Blvd",
+            "type": "string"
+          },
+          "address2": {
+            "description": "Second line of the address",
+            "example": "Suite 100",
+            "type": "string"
+          },
+          "city": {
+            "description": "The city",
+            "example": "Gotham City",
+            "type": "string"
+          },
+          "company_name": {
+            "description": "Name of the company receiving the shipment",
+            "example": "Wayne Enterprises",
+            "type": "string"
+          },
+          "country": {
+            "description": "The country (Must be ISO Alpha-2 for estimates)",
+            "example": "US",
+            "type": "string"
+          },
+          "state": {
+            "description": "The state or province",
+            "example": "NJ",
+            "type": "string"
+          },
+          "zip_code": {
+            "description": "The zip code or postal code",
+            "example": "07093",
+            "type": "string"
+          }
+        },
+        "required": [
+          "address1",
+          "city",
+          "country"
+        ],
+        "type": "object"
+      },
+      "OrderEstimate": {
+        "additionalProperties": false,
+        "properties": {
+          "estimates": {
+            "description": "Array of estimates for each shipping method",
+            "items": {
+              "$ref": "#/components/schemas/OrderEstimateDetail"
+            },
+            "type": "array"
+          }
+        },
+        "type": "object"
+      },
+      "OrderEstimateDetail": {
+        "additionalProperties": false,
+        "properties": {
+          "estimated_price": {
+            "description": "Estimated price in dollars for the provided shipping method",
+            "format": "double",
+            "type": "number"
+          },
+          "fulfillment_center": {
+            "$ref": "#/components/schemas/FulfillmentCenter"
+          },
+          "shipping_method": {
+            "description": "Provided shipping method. Maps to ship option in ShipBob.",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "OrderEstimateFulfillmentRequest": {
+        "additionalProperties": false,
+        "properties": {
+          "address": {
+            "$ref": "#/components/schemas/EstimationAddress"
+          },
+          "products": {
+            "description": "Products to be included in the order. Each product must include one of reference_id or id",
+            "items": {
+              "$ref": "#/components/schemas/OrderEstimateProductInfo"
+            },
+            "type": "array"
+          },
+          "shipping_methods": {
+            "description": "Array of strings specifying shipping methods for which to fetch estimates.  If this field is omitted we will return estimates for all shipping methods defined in ShipBob",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "address",
+          "products"
+        ],
+        "type": "object"
+      },
+      "OrderEstimateProductInfo": {
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "description": "Unique id of the product (Must be provided if reference_id is unknown)",
+            "format": "int32",
+            "nullable": true,
+            "type": "integer"
+          },
+          "quantity": {
+            "description": "The quantity of this product ordered",
+            "format": "int32",
+            "maximum": 199,
+            "minimum": 1,
+            "type": "integer"
+          },
+          "reference_id": {
+            "description": "Unique reference id of the product (Must be provided if ID is unknown)",
+            "example": "TShirtBlueM",
+            "type": "string"
+          }
+        },
+        "required": [
+          "quantity"
+        ],
         "type": "object"
       },
       "OrderInventory": {
@@ -779,87 +1268,238 @@
         },
         "type": "object"
       },
-      "Order": {
+      "OrderStatusDetail": {
         "additionalProperties": false,
         "properties": {
-          "channel": {
-            "$ref": "#/components/schemas/ChannelInfo"
+          "description": {
+            "description": "Describes what the status detail means",
+            "type": "string"
           },
-          "created_date": {
-            "description": "Date this order was created",
-            "format": "date-time",
-            "type": "string",
-            "nullable": true
+          "exception_fulfillment_center_id": {
+            "format": "int32",
+            "nullable": true,
+            "type": "integer"
           },
           "id": {
-            "description": "Unique id of the order",
+            "description": "The id of the status detail",
             "format": "int32",
             "type": "integer"
           },
-          "order_number": {
-            "description": "User friendly orderId or store order number that will be shown on the Orders Page. If not provided, referenceId will be used",
+          "inventory_id": {
+            "description": "Inventory Id the detail applies to (if applicable)",
+            "format": "int32",
+            "nullable": true,
+            "type": "integer"
+          },
+          "name": {
+            "description": "Short name of the status detail",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "PackageType": {
+        "enum": [
+          "Package",
+          "Pallet",
+          "FloorLoadedContainer"
+        ],
+        "type": "string"
+      },
+      "PackingType": {
+        "enum": [
+          "EverythingInOneBox",
+          "OneSkuPerBox",
+          "MultipleSkuPerBox"
+        ],
+        "type": "string"
+      },
+      "ProblemDetails": {
+        "additionalProperties": false,
+        "discriminator": {
+          "propertyName": "ttype"
+        },
+        "properties": {
+          "detail": {
+            "nullable": true,
             "type": "string"
           },
-          "products": {
-            "description": "List of products included in the order",
-            "items": {
-              "$ref": "#/components/schemas/ProductInfo"
+          "extensions": {
+            "additionalProperties": {
+              "additionalProperties": false,
+              "type": "object"
             },
-            "type": "array"
+            "nullable": true,
+            "readOnly": true,
+            "type": "object"
           },
-          "purchase_date": {
-            "description": "Date this order was purchase by the end user",
+          "instance": {
+            "nullable": true,
+            "type": "string"
+          },
+          "status": {
+            "format": "int32",
+            "nullable": true,
+            "type": "integer"
+          },
+          "title": {
+            "nullable": true,
+            "type": "string"
+          },
+          "ttype": {
+            "type": "string"
+          },
+          "type": {
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "required": [
+          "ttype"
+        ],
+        "type": "object"
+      },
+      "Product": {
+        "additionalProperties": false,
+        "properties": {
+          "barcode": {
+            "description": "Barcode for the product",
+            "example": "123456789012",
+            "nullable": true,
+            "type": "string"
+          },
+          "bundle_root_information": {
+            "$ref": "#/components/schemas/BundleRootInformation"
+          },
+          "channel": {
+            "$ref": "#/components/schemas/ProductChannel"
+          },
+          "created_date": {
+            "description": "Date the product was created",
             "format": "date-time",
             "nullable": true,
             "type": "string"
           },
-          "recipient": {
-            "$ref": "#/components/schemas/RecipientInfo"
+          "fulfillable_inventory_items": {
+            "description": "The inventory that this product will resolve to when packing a shipment",
+            "items": {
+              "$ref": "#/components/schemas/ProductInventoryItem"
+            },
+            "nullable": true,
+            "type": "array"
+          },
+          "fulfillable_quantity_by_fulfillment_center": {
+            "description": "Fulfillable quantity of this product broken down by fulfillment center location",
+            "items": {
+              "$ref": "#/components/schemas/ProductFulfillmentCenterQuantity"
+            },
+            "nullable": true,
+            "type": "array"
+          },
+          "id": {
+            "description": "Unique identifier of the product",
+            "format": "int32",
+            "type": "integer"
+          },
+          "name": {
+            "description": "The name of the product",
+            "example": "Medium Blue T-Shirt",
+            "nullable": true,
+            "type": "string"
           },
           "reference_id": {
-            "description": "Client-defined external unique id of the order",
+            "description": "Unique reference identifier of the product",
+            "example": "TShirtBlueM",
+            "nullable": true,
             "type": "string"
           },
-          "shipments": {
-            "description": "Shipments affiliated with the order",
-            "items": {
-              "$ref": "#/components/schemas/Shipment"
-            },
-            "type": "array"
-          },
-          "shipping_method": {
-            "description": "Client-defined shipping method",
-            "example": "Free 2-day Shipping",
+          "sku": {
+            "description": "Stock keeping unit for the product",
+            "example": "TShirtBlueM",
+            "nullable": true,
             "type": "string"
           },
-          "status": {
-            "description": "The order status",
-            "enum": [
-              "Processing",
-              "Exception",
-              "PartiallyFulfilled",
-              "Fulfilled",
-              "Cancelled",
-              "ImportReview"
-            ],
+          "total_committed_quantity": {
+            "description": "Total committed quantity of this product",
+            "format": "int32",
+            "type": "integer"
+          },
+          "total_fulfillable_quantity": {
+            "description": "Total fulfillable quantity of this product",
+            "format": "int32",
+            "type": "integer"
+          },
+          "total_onhand_quantity": {
+            "description": "Total on hand quantity of this product",
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
+      "ProductActiveStatus": {
+        "enum": [
+          "Any",
+          "Active",
+          "Inactive"
+        ],
+        "type": "string"
+      },
+      "ProductBundleStatus": {
+        "enum": [
+          "Any",
+          "Bundle",
+          "NotBundle"
+        ],
+        "type": "string"
+      },
+      "ProductChannel": {
+        "additionalProperties": false,
+        "description": "Information about a store channel",
+        "properties": {
+          "id": {
+            "description": "Unique id of the store channel",
+            "format": "int32",
+            "type": "integer"
+          },
+          "name": {
+            "description": "Name of the store channel",
+            "example": "House of Slippers",
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "ProductFulfillmentCenterQuantity": {
+        "additionalProperties": false,
+        "description": "Break down of quantities by fulfillment center",
+        "properties": {
+          "committed_quantity": {
+            "description": "Amount of committed quantity at this fulfillment center",
+            "format": "int32",
+            "type": "integer"
+          },
+          "fulfillable_quantity": {
+            "description": "Amount of fulfillable quantity at this fulfillment center",
+            "format": "int32",
+            "type": "integer"
+          },
+          "id": {
+            "description": "Unique id of the fulfillment center",
+            "format": "int32",
+            "type": "integer"
+          },
+          "name": {
+            "description": "Name of the fulfillment center",
+            "example": "Cicero",
+            "nullable": true,
             "type": "string"
           },
-          "tags": {
-            "description": "Client-defined order tags",
-            "items": {
-              "$ref": "#/components/schemas/Tag"
-            },
-            "type": "array"
-          },
-          "type": {
-            "description": "Shipment type of the order",
-            "enum": [
-              "DTC",
-              "DropShip",
-              "B2B"
-            ],
-            "example": "DTC",
-            "type": "string"
+          "onhand_quantity": {
+            "description": "Amount of onhand quantity at this fulfillment center",
+            "format": "int32",
+            "type": "integer"
           }
         },
         "type": "object"
@@ -886,6 +1526,194 @@
           "sku": {
             "description": "Stock keeping unit for the product",
             "example": "TShirtBlueM",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "ProductInventoryItem": {
+        "additionalProperties": false,
+        "description": "The inventory that store products can resolve to when packing a shipment",
+        "properties": {
+          "id": {
+            "description": "Unique id of the inventory item",
+            "format": "int32",
+            "type": "integer"
+          },
+          "name": {
+            "description": "Name of the inventory item",
+            "example": "Medium Blue T-Shirt",
+            "nullable": true,
+            "type": "string"
+          },
+          "quantity": {
+            "description": "Quantity of the inventory item included in a store product",
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
+      "ReceivingFulfillmentCenter": {
+        "additionalProperties": false,
+        "description": "Information about a fulfillment center",
+        "properties": {
+          "address1": {
+            "description": "Address line one of the fulfillment center",
+            "example": "5900 W Ogden Ave",
+            "nullable": true,
+            "type": "string"
+          },
+          "address2": {
+            "description": "Address line two of the fulfillment center",
+            "example": "Suite 100",
+            "nullable": true,
+            "type": "string"
+          },
+          "city": {
+            "description": "City the fulfillment center is located in",
+            "example": "Cicero",
+            "nullable": true,
+            "type": "string"
+          },
+          "country": {
+            "description": "Country the fulfillment center is located in",
+            "example": "USA",
+            "nullable": true,
+            "type": "string"
+          },
+          "email": {
+            "description": "Email contact for the fulfillment center",
+            "example": "example@example.com",
+            "nullable": true,
+            "type": "string"
+          },
+          "id": {
+            "description": "Unique identifier of the fulfillment center",
+            "format": "int32",
+            "type": "integer"
+          },
+          "name": {
+            "description": "Name of the fulfillment center",
+            "example": "Cicero (IL)",
+            "nullable": true,
+            "type": "string"
+          },
+          "phone_number": {
+            "description": "Phone number contact for the fulfillment center",
+            "example": "555-555-5555",
+            "nullable": true,
+            "type": "string"
+          },
+          "state": {
+            "description": "State the fulfillment center is located in",
+            "example": "IL",
+            "nullable": true,
+            "type": "string"
+          },
+          "timezone": {
+            "description": "Timezone the fulfillment center is located in",
+            "example": "Central Standard Time",
+            "nullable": true,
+            "type": "string"
+          },
+          "zip_code": {
+            "description": "Postal code of the fulfillment center",
+            "example": "60804",
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "ReceivingOrder": {
+        "additionalProperties": false,
+        "description": "Information about a receiving order",
+        "properties": {
+          "box_labels_uri": {
+            "description": "URL to the packing slip to be included in each box shipment for this receiving order",
+            "example": "https://api.shipbob.com/1.0/receiving/1/labels",
+            "nullable": true,
+            "type": "string"
+          },
+          "box_packaging_type": {
+            "$ref": "#/components/schemas/PackingType"
+          },
+          "boxes": {
+            "description": "Information about the boxes being shipped in this receiving order",
+            "items": {
+              "$ref": "#/components/schemas/Box"
+            },
+            "nullable": true,
+            "type": "array"
+          },
+          "expected_arrival_date": {
+            "description": "Expected date that all packages will have arrived",
+            "format": "date-time",
+            "nullable": true,
+            "type": "string"
+          },
+          "fulfillment_center": {
+            "$ref": "#/components/schemas/ReceivingFulfillmentCenter"
+          },
+          "id": {
+            "description": "Unique id of the warehouse receiving order",
+            "format": "int32",
+            "type": "integer"
+          },
+          "insert_date": {
+            "description": "Insert date of the receiving order",
+            "format": "date-time",
+            "nullable": true,
+            "type": "string"
+          },
+          "last_updated_date": {
+            "description": "Last date the receiving order was updated",
+            "format": "date-time",
+            "nullable": true,
+            "type": "string"
+          },
+          "package_type": {
+            "$ref": "#/components/schemas/PackageType"
+          },
+          "status": {
+            "$ref": "#/components/schemas/ReceivingStatus"
+          }
+        },
+        "type": "object"
+      },
+      "ReceivingStatus": {
+        "enum": [
+          "Awaiting",
+          "Processing",
+          "Completed",
+          "Cancelled",
+          "Incomplete",
+          "Arrived",
+          "PartiallyArrived"
+        ],
+        "type": "string"
+      },
+      "Recipient": {
+        "additionalProperties": false,
+        "description": "Information about the recipient of a shipment",
+        "properties": {
+          "address": {
+            "$ref": "#/components/schemas/OrderAddress"
+          },
+          "email": {
+            "description": "Email address of the recipient",
+            "example": "john@example.com",
+            "type": "string"
+          },
+          "name": {
+            "description": "Name of the recipient",
+            "example": "John Doe",
+            "type": "string"
+          },
+          "phone_number": {
+            "description": "Phone number of the recipient",
+            "example": "555-555-5555",
             "type": "string"
           }
         },
@@ -921,30 +1749,280 @@
         ],
         "type": "object"
       },
-      "Recipient": {
+      "ReturnAction": {
+        "enum": [
+          "Default",
+          "Restock",
+          "Quarantine",
+          "Dispose"
+        ],
+        "type": "string"
+      },
+      "ReturnActionRequested": {
         "additionalProperties": false,
-        "description": "Information about the recipient of a shipment",
         "properties": {
-          "address": {
-            "$ref": "#/components/schemas/OrderAddress"
+          "action": {
+            "$ref": "#/components/schemas/ReturnAction"
           },
-          "email": {
-            "description": "Email address of the recipient",
-            "example": "john@example.com",
-            "type": "string"
+          "action_type": {
+            "$ref": "#/components/schemas/ReturnActionSource"
           },
-          "name": {
-            "description": "Name of the recipient",
-            "example": "John Doe",
-            "type": "string"
-          },
-          "phone_number": {
-            "description": "Phone number of the recipient",
-            "example": "555-555-5555",
+          "instructions": {
+            "description": "Specific instructions to be taken for the inventory when processing the return",
+            "nullable": true,
             "type": "string"
           }
         },
         "type": "object"
+      },
+      "ReturnActionSource": {
+        "enum": [
+          "InventoryDefault",
+          "Override"
+        ],
+        "type": "string"
+      },
+      "ReturnActionTaken": {
+        "additionalProperties": false,
+        "properties": {
+          "action": {
+            "$ref": "#/components/schemas/ReturnAction"
+          },
+          "action_reason": {
+            "description": "Reason the given action was taken",
+            "nullable": true,
+            "type": "string"
+          },
+          "quantity_processed": {
+            "description": "Quantity of inventory processed with the taken action",
+            "format": "int32",
+            "maximum": 2147483647,
+            "minimum": 1,
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
+      "ReturnChannelInfo": {
+        "additionalProperties": false,
+        "description": "Created by channel metadata",
+        "properties": {
+          "id": {
+            "description": "Unique id of the channel",
+            "format": "int32",
+            "type": "integer"
+          },
+          "name": {
+            "description": "Name of the channel",
+            "example": "ShipBobs-Shopify-Store",
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "ReturnFulfillmentCenter": {
+        "additionalProperties": false,
+        "description": "Information about a fulfillment center",
+        "properties": {
+          "id": {
+            "description": "Unique identifier of the fulfillment center",
+            "format": "int32",
+            "type": "integer"
+          },
+          "name": {
+            "description": "Name of the fulfillment center",
+            "example": "Cicero (IL)",
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "required": [
+          "id"
+        ],
+        "type": "object"
+      },
+      "ReturnInventory": {
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "description": "ID of the inventory item to return",
+            "example": 111222,
+            "format": "int32",
+            "type": "integer"
+          },
+          "quantity": {
+            "description": "Quantity of the returned inventory item in the return",
+            "example": 1,
+            "format": "int32",
+            "maximum": 2147483647,
+            "minimum": 1,
+            "type": "integer"
+          },
+          "requested_action": {
+            "$ref": "#/components/schemas/ReturnAction"
+          }
+        },
+        "required": [
+          "id",
+          "quantity"
+        ],
+        "type": "object"
+      },
+      "ReturnInventoryItem": {
+        "additionalProperties": false,
+        "properties": {
+          "action_requested": {
+            "$ref": "#/components/schemas/ReturnActionRequested"
+          },
+          "action_taken": {
+            "description": "Action(s) taken when processing the return",
+            "items": {
+              "$ref": "#/components/schemas/ReturnActionTaken"
+            },
+            "nullable": true,
+            "type": "array"
+          },
+          "id": {
+            "description": "Unique id of the inventory item",
+            "format": "int32",
+            "type": "integer"
+          },
+          "name": {
+            "description": "Name of the inventory item",
+            "nullable": true,
+            "type": "string"
+          },
+          "quantity": {
+            "description": "Quantity expected to be processed with the return",
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
+      "ReturnOrder": {
+        "additionalProperties": false,
+        "properties": {
+          "channel": {
+            "$ref": "#/components/schemas/ReturnChannelInfo"
+          },
+          "fulfillment_center": {
+            "$ref": "#/components/schemas/ReturnFulfillmentCenter"
+          },
+          "id": {
+            "description": "Unique id of the Return Order",
+            "format": "int32",
+            "type": "integer"
+          },
+          "insert_date": {
+            "description": "Date this return order was created",
+            "format": "date-time",
+            "nullable": true,
+            "type": "string"
+          },
+          "inventory": {
+            "description": "List of inventory included in the return order",
+            "items": {
+              "$ref": "#/components/schemas/ReturnInventoryItem"
+            },
+            "nullable": true,
+            "type": "array"
+          },
+          "invoice_amount": {
+            "description": "Invoiced amount of return order (sum of transaction amounts)",
+            "format": "double",
+            "nullable": true,
+            "type": "number"
+          },
+          "original_shipment_id": {
+            "description": "Id of the corresponding shipment that is the souce of the return",
+            "format": "int32",
+            "nullable": true,
+            "type": "integer"
+          },
+          "reference_id": {
+            "description": "Client-defined external unique id of the return order",
+            "nullable": true,
+            "type": "string"
+          },
+          "return_type": {
+            "$ref": "#/components/schemas/ReturnType"
+          },
+          "status": {
+            "$ref": "#/components/schemas/ReturnStatus"
+          },
+          "tracking_number": {
+            "description": "Tracking number of the return shipment",
+            "example": "860C8CDC8F0B4FC7AB69AC86C20539EC",
+            "nullable": true,
+            "type": "string"
+          },
+          "transactions": {
+            "description": "Array of transactions affiliated with the return order",
+            "items": {
+              "$ref": "#/components/schemas/ReturnTransaction"
+            },
+            "nullable": true,
+            "type": "array"
+          }
+        },
+        "type": "object"
+      },
+      "ReturnOrderStatusHistory": {
+        "additionalProperties": false,
+        "properties": {
+          "status": {
+            "$ref": "#/components/schemas/ReturnStatus"
+          },
+          "time_stamp": {
+            "description": "Date this corresponding return order status was created",
+            "format": "date-time",
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "ReturnStatus": {
+        "enum": [
+          "AwaitingArrival",
+          "Arrived",
+          "Processing",
+          "Completed",
+          "Cancelled"
+        ],
+        "type": "string"
+      },
+      "ReturnTransaction": {
+        "additionalProperties": false,
+        "properties": {
+          "amount": {
+            "description": "Transaction amount in dollars",
+            "example": 2.5,
+            "format": "double",
+            "type": "number"
+          },
+          "transaction_type": {
+            "$ref": "#/components/schemas/ReturnTransactionLogSource"
+          }
+        },
+        "type": "object"
+      },
+      "ReturnTransactionLogSource": {
+        "enum": [
+          "ReturnLabelInvoice",
+          "ReturnProcessingFee",
+          "ReturnToSenderFee"
+        ],
+        "type": "string"
+      },
+      "ReturnType": {
+        "enum": [
+          "Regular",
+          "ReturnToSender"
+        ],
+        "type": "string"
       },
       "ServiceLevelDetail": {
         "additionalProperties": false,
@@ -987,72 +2065,6 @@
         },
         "type": "object"
       },
-      "ShipmentLog": {
-        "additionalProperties": false,
-        "properties": {
-          "log_type_id": {
-            "description": "Log type id of the shipment",
-            "format": "int32",
-            "type": "integer"
-          },
-          "log_type_name": {
-            "description": "Name of the log type",
-            "type": "string"
-          },
-          "log_type_text": {
-            "description": "Summary of log type meaning",
-            "type": "string"
-          },
-          "metadata": {
-            "additionalProperties": {
-              "type": "string"
-            },
-            "description": "Specifics data for the event",
-            "type": "object"
-          },
-          "timestamp": {
-            "description": "Timestamp of event",
-            "format": "date-time",
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "type": "object"
-      },
-      "ShipmentProduct": {
-        "additionalProperties": false,
-        "description": "Information about a store product belonging to a shipment",
-        "properties": {
-          "id": {
-            "description": "Unique id of the product",
-            "format": "int32",
-            "type": "integer"
-          },
-          "inventory_items": {
-            "description": "Information about fulfillable inventory items belonging to this product",
-            "items": {
-              "$ref": "#/components/schemas/OrderInventory"
-            },
-            "type": "array"
-          },
-          "name": {
-            "description": "Name of the product",
-            "example": "Medium Blue T-Shirt",
-            "type": "string"
-          },
-          "reference_id": {
-            "description": "Unique reference id of the product",
-            "example": "TShirtBlueM",
-            "type": "string"
-          },
-          "sku": {
-            "description": "Stock keeping unit for the product",
-            "example": "TShirtBlueM",
-            "type": "string"
-          }
-        },
-        "type": "object"
-      },
       "Shipment": {
         "additionalProperties": false,
         "description": "Information about a shipment",
@@ -1066,8 +2078,8 @@
           "created_date": {
             "description": "Date this shipment was created",
             "format": "date-time",
-            "type": "string",
-            "nullable": true
+            "nullable": true,
+            "type": "string"
           },
           "estimated_fulfillment_date": {
             "description": "The datetime of ShipBob's commitment for completing  the shipment and handing to the carrier for delivery.",
@@ -1191,35 +2203,78 @@
         },
         "type": "object"
       },
-      "OrderStatusDetail": {
+      "ShipmentLog": {
         "additionalProperties": false,
         "properties": {
-          "description": {
-            "description": "Describes what the status detail means",
+          "log_type_id": {
+            "description": "Log type id of the shipment",
+            "format": "int32",
+            "type": "integer"
+          },
+          "log_type_name": {
+            "description": "Name of the log type",
             "type": "string"
           },
-          "exception_fulfillment_center_id": {
-            "format": "int32",
+          "log_type_text": {
+            "description": "Summary of log type meaning",
+            "type": "string"
+          },
+          "metadata": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Specifics data for the event",
+            "type": "object"
+          },
+          "timestamp": {
+            "description": "Timestamp of event",
+            "format": "date-time",
             "nullable": true,
-            "type": "integer"
-          },
-          "id": {
-            "description": "The id of the status detail",
-            "format": "int32",
-            "type": "integer"
-          },
-          "inventory_id": {
-            "description": "Inventory Id the detail applies to (if applicable)",
-            "format": "int32",
-            "nullable": true,
-            "type": "integer"
-          },
-          "name": {
-            "description": "Short name of the status detail",
             "type": "string"
           }
         },
         "type": "object"
+      },
+      "ShipmentProduct": {
+        "additionalProperties": false,
+        "description": "Information about a store product belonging to a shipment",
+        "properties": {
+          "id": {
+            "description": "Unique id of the product",
+            "format": "int32",
+            "type": "integer"
+          },
+          "inventory_items": {
+            "description": "Information about fulfillable inventory items belonging to this product",
+            "items": {
+              "$ref": "#/components/schemas/OrderInventory"
+            },
+            "type": "array"
+          },
+          "name": {
+            "description": "Name of the product",
+            "example": "Medium Blue T-Shirt",
+            "type": "string"
+          },
+          "reference_id": {
+            "description": "Unique reference id of the product",
+            "example": "TShirtBlueM",
+            "type": "string"
+          },
+          "sku": {
+            "description": "Stock keeping unit for the product",
+            "example": "TShirtBlueM",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "SortOrder": {
+        "enum": [
+          "Newest",
+          "Oldest"
+        ],
+        "type": "string"
       },
       "Tag": {
         "additionalProperties": false,
@@ -1242,6 +2297,15 @@
           "value"
         ],
         "type": "object"
+      },
+      "Topics": {
+        "enum": [
+          "order_shipped",
+          "shipment_delivered",
+          "shipment_exception",
+          "shipment_onhold"
+        ],
+        "type": "string"
       },
       "Tracking": {
         "additionalProperties": false,
@@ -1268,315 +2332,6 @@
             "type": "string"
           }
         },
-        "type": "object"
-      },
-      "WebhookSubscription": {
-        "additionalProperties": false,
-        "properties": {
-          "subscription_url": {
-            "description": "URL we will call when an event matching the subscription topic is raised. Must have ssl enabled (https) and accept POST requests with content type of application/json",
-            "example": "https://mywebsite.com/shipbob/handler",
-            "format": "uri",
-            "type": "string"
-          },
-          "topic": {
-            "$ref": "#/components/schemas/Topics"
-          }
-        },
-        "required": [
-          "subscription_url",
-          "topic"
-        ],
-        "type": "object"
-      },
-      "Webhook": {
-        "additionalProperties": false,
-        "properties": {
-          "created_at": {
-            "description": "Timestamp the webhook subscription was created",
-            "format": "date-time",
-            "type": "string",
-            "nullable": true
-          },
-          "id": {
-            "description": "ID of the webhook subscription",
-            "example": 12345,
-            "format": "int32",
-            "type": "integer"
-          },
-          "subscription_url": {
-            "description": "URL subscription events will be posted to",
-            "format": "uri",
-            "nullable": true,
-            "type": "string"
-          },
-          "topic": {
-            "$ref": "#/components/schemas/Topics"
-          }
-        },
-        "type": "object"
-      },
-      "Topics": {
-        "enum": [
-          "order_shipped",
-          "shipment_delivered",
-          "shipment_exception",
-          "shipment_onhold"
-        ],
-        "type": "string"
-      },
-      "Dimension": {
-        "additionalProperties": false,
-        "description": "Information about an inventory item's dimensions",
-        "properties": {
-          "depth": {
-            "description": "Depth in inches of this inventory item",
-            "format": "double",
-            "type": "number"
-          },
-          "length": {
-            "description": "Length in inches of this inventory item",
-            "format": "double",
-            "type": "number"
-          },
-          "weight": {
-            "description": "Weight in ounces of this inventory item",
-            "format": "double",
-            "type": "number"
-          },
-          "width": {
-            "description": "Width in inches of this inventory item",
-            "format": "double",
-            "type": "number"
-          }
-        },
-        "type": "object"
-      },
-      "InventoryFulfillmentCenterQuantity": {
-        "additionalProperties": false,
-        "description": "Break down of fulfillable quantity by fulfillment center",
-        "properties": {
-          "awaiting_quantity": {
-            "description": "Amount of quantity awaiting arrival of a receiving order at this fulfillment center",
-            "format": "int32",
-            "type": "integer"
-          },
-          "committed_quantity": {
-            "description": "Amount of committed quantity at this fulfillment center",
-            "format": "int32",
-            "type": "integer"
-          },
-          "fulfillable_quantity": {
-            "description": "Amount of fulfillable quantity at this fulfillment center",
-            "format": "int32",
-            "type": "integer"
-          },
-          "id": {
-            "description": "Unique id of the fulfillment center",
-            "format": "int32",
-            "type": "integer"
-          },
-          "internal_transfer_quantity": {
-            "description": "The quantity of items that are in the process of internal transit  between ShipBob fulfillment centers, with a destination of this fulfillment center. These items are not pickable or fulfillable until they have been received and moved  to the \"On Hand\" quantity of the destination FC.",
-            "format": "int32",
-            "type": "integer"
-          },
-          "name": {
-            "description": "Name of the fulfillment center",
-            "example": "Cicero",
-            "type": "string"
-          },
-          "onhand_quantity": {
-            "description": "Amount of onhand quantity at this fulfillment center",
-            "format": "int32",
-            "type": "integer"
-          }
-        },
-        "type": "object"
-      },
-      "Inventory": {
-        "additionalProperties": false,
-        "description": "Information about an inventory item",
-        "properties": {
-          "dimensions": {
-            "$ref": "#/components/schemas/Dimension"
-          },
-          "fulfillable_quantity_by_fulfillment_center": {
-            "description": "Fulfillable quantity of this inventory item broken down by fulfillment center location",
-            "items": {
-              "$ref": "#/components/schemas/InventoryFulfillmentCenterQuantity"
-            },
-            "type": "array"
-          },
-          "fulfillable_quantity_by_lot": {
-            "description": "Fulfillable quantity of this inventory item broken down by lot",
-            "items": {
-              "$ref": "#/components/schemas/InventoryLotQuantity"
-            },
-            "type": "array"
-          },
-          "id": {
-            "description": "Unique id of the inventory item",
-            "format": "int32",
-            "type": "integer"
-          },
-          "is_active": {
-            "description": "Whether the inventory is active or not",
-            "type": "boolean"
-          },
-          "is_case_pick": {
-            "description": "True if the inventory item is marked as case pick",
-            "type": "boolean"
-          },
-          "is_digital": {
-            "description": "True if the inventory item is marked as a digital item",
-            "type": "boolean"
-          },
-          "is_lot": {
-            "description": "True if this inventory item is organized into lots",
-            "type": "boolean"
-          },
-          "name": {
-            "description": "Name of the inventory item",
-            "example": "Medium Blue T-Shirt",
-            "type": "string"
-          },
-          "packaging_attribute": {
-            "description": "Attribute influencing the packaging requirements of this inventory item",
-            "enum": [
-              "None",
-              "Fragile",
-              "Foldable",
-              "Stackable",
-              "Book",
-              "CustomPackaging",
-              "CustomDunnage",
-              "MarketingInsert",
-              "Poster"
-            ],
-            "type": "string"
-          },
-          "total_awaiting_quantity": {
-            "description": "Total quantity in unreceived receiving orders for this inventory item",
-            "format": "int32",
-            "type": "integer"
-          },
-          "total_backordered_quantity": {
-            "description": "The amount of the item you need to send to ShipBob to fulfill all exception orders containing  the item. This is the exception_quantity less the fulfillable_quantity of the item.",
-            "format": "int32",
-            "type": "integer"
-          },
-          "total_committed_quantity": {
-            "description": "Total committed quantity of this inventory item",
-            "format": "int32",
-            "type": "integer"
-          },
-          "total_exception_quantity": {
-            "description": "The total quantity of all items that are contained within orders that are in exception/out of stock status. Out of stock orders have not been processed and therefore do not have lot or fulfillment centers assigned.",
-            "format": "int32",
-            "type": "integer"
-          },
-          "total_fulfillable_quantity": {
-            "description": "Total fulfillable quantity of this inventory item",
-            "format": "int32",
-            "type": "integer"
-          },
-          "total_internal_transfer_quantity": {
-            "description": "The total quantity of all items that are in the process of internal transit  between ShipBob fulfillment centers. These items are not pickable or fulfillable until they have been received and moved to the \"On Hand\" quantity of the destination FC. Internal transit quantities for each FC represent the incoming transfer stock for that specific location.",
-            "format": "int32",
-            "type": "integer"
-          },
-          "total_onhand_quantity": {
-            "description": "Total onhand quantity of this inventory item",
-            "format": "int32",
-            "type": "integer"
-          }
-        },
-        "type": "object"
-      },
-      "InventoryLotQuantity": {
-        "additionalProperties": false,
-        "description": "Break down of fulfillable quantity by lot",
-        "properties": {
-          "awaiting_quantity": {
-            "description": "Quantity of inventory items belonging to this lot awaiting arrival of a receiving order",
-            "format": "int32",
-            "type": "integer"
-          },
-          "committed_quantity": {
-            "description": "Committed quantity of inventory items belonging to this lot",
-            "format": "int32",
-            "type": "integer"
-          },
-          "expiration_date": {
-            "description": "Expiration date for this lot",
-            "format": "date-time",
-            "nullable": true,
-            "type": "string"
-          },
-          "fulfillable_quantity": {
-            "description": "Fulfillable quantity of inventory items belonging to this lot",
-            "format": "int32",
-            "type": "integer"
-          },
-          "fulfillable_quantity_by_fulfillment_center": {
-            "description": "Fulfillable quantity of inventory items belonging to this lot broken down by fulfillment center location",
-            "items": {
-              "$ref": "#/components/schemas/InventoryFulfillmentCenterQuantity"
-            },
-            "type": "array"
-          },
-          "internal_transfer_quantity": {
-            "description": "The quantity of all items belonging to this lot that are in the process of internal transit  between ShipBob fulfillment centers. These items are not pickable or fulfillable until they have been received and moved to the \"On Hand\" quantity of the destination FC. Internal transit quantities for each FC represent the incoming transfer stock for that specific location.",
-            "format": "int32",
-            "type": "integer"
-          },
-          "lot_number": {
-            "description": "Identification number of this lot",
-            "example": "1234",
-            "type": "string"
-          },
-          "onhand_quantity": {
-            "description": "OnHand quantity of inventory items belonging to this lot",
-            "format": "int32",
-            "type": "integer"
-          }
-        },
-        "type": "object"
-      },
-      "CreateProduct": {
-        "additionalProperties": false,
-        "description": "The product to create",
-        "properties": {
-          "barcode": {
-            "description": "Barcode for the product",
-            "example": "123456789012",
-            "nullable": true,
-            "type": "string"
-          },
-          "name": {
-            "description": "The name of the product",
-            "example": "Medium Blue T-Shirt",
-            "nullable": true,
-            "type": "string"
-          },
-          "reference_id": {
-            "description": "Unique reference identifier for the product. Any linked or generated inventory will also be uniquely identified by this value",
-            "example": "TShirtBlueM",
-            "nullable": true,
-            "type": "string"
-          },
-          "sku": {
-            "description": "Stock keeping unit for the product",
-            "example": "TShirtBlueM",
-            "nullable": true,
-            "type": "string"
-          }
-        },
-        "required": [
-          "name",
-          "reference_id"
-        ],
         "type": "object"
       },
       "UpdateProduct": {
@@ -1607,874 +2362,119 @@
         ],
         "type": "object"
       },
-      "BundleRootInformation": {
+      "ValidationProblemDetails": {
         "additionalProperties": false,
-        "properties": {
-          "id": {
-            "description": "Id of the bundle root product",
-            "format": "int32",
-            "type": "integer"
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ProblemDetails"
           },
-          "name": {
-            "description": "Name of the bundle root product",
-            "nullable": true,
-            "type": "string"
+          {
+            "additionalProperties": false,
+            "properties": {
+              "errors": {
+                "additionalProperties": {
+                  "items": {
+                    "type": "string"
+                  },
+                  "type": "array"
+                },
+                "nullable": true,
+                "type": "object"
+              }
+            },
+            "type": "object"
           }
-        },
-        "type": "object"
-      },
-      "ProductChannel": {
-        "additionalProperties": false,
-        "description": "Information about a store channel",
+        ],
         "properties": {
-          "id": {
-            "description": "Unique id of the store channel",
-            "format": "int32",
-            "type": "integer"
-          },
-          "name": {
-            "description": "Name of the store channel",
-            "example": "House of Slippers",
-            "nullable": true,
-            "type": "string"
-          }
-        },
-        "type": "object"
-      },
-      "ProductFulfillmentCenterQuantity": {
-        "additionalProperties": false,
-        "description": "Break down of quantities by fulfillment center",
-        "properties": {
-          "committed_quantity": {
-            "description": "Amount of committed quantity at this fulfillment center",
-            "format": "int32",
-            "type": "integer"
-          },
-          "fulfillable_quantity": {
-            "description": "Amount of fulfillable quantity at this fulfillment center",
-            "format": "int32",
-            "type": "integer"
-          },
-          "id": {
-            "description": "Unique id of the fulfillment center",
-            "format": "int32",
-            "type": "integer"
-          },
-          "name": {
-            "description": "Name of the fulfillment center",
-            "example": "Cicero",
+          "detail": {
             "nullable": true,
             "type": "string"
           },
-          "onhand_quantity": {
-            "description": "Amount of onhand quantity at this fulfillment center",
-            "format": "int32",
-            "type": "integer"
-          }
-        },
-        "type": "object"
-      },
-      "ProductInventoryItem": {
-        "additionalProperties": false,
-        "description": "The inventory that store products can resolve to when packing a shipment",
-        "properties": {
-          "id": {
-            "description": "Unique id of the inventory item",
-            "format": "int32",
-            "type": "integer"
-          },
-          "name": {
-            "description": "Name of the inventory item",
-            "example": "Medium Blue T-Shirt",
-            "nullable": true,
-            "type": "string"
-          },
-          "quantity": {
-            "description": "Quantity of the inventory item included in a store product",
-            "format": "int32",
-            "type": "integer"
-          }
-        },
-        "type": "object"
-      },
-      "Product": {
-        "additionalProperties": false,
-        "properties": {
-          "barcode": {
-            "description": "Barcode for the product",
-            "example": "123456789012",
-            "nullable": true,
-            "type": "string"
-          },
-          "bundle_root_information": {
-            "$ref": "#/components/schemas/BundleRootInformation"
-          },
-          "channel": {
-            "$ref": "#/components/schemas/ProductChannel"
-          },
-          "created_date": {
-            "description": "Date the product was created",
-            "format": "date-time",
-            "type": "string",
-            "nullable": true
-          },
-          "fulfillable_inventory_items": {
-            "description": "The inventory that this product will resolve to when packing a shipment",
-            "items": {
-              "$ref": "#/components/schemas/ProductInventoryItem"
+          "errors": {
+            "additionalProperties": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
             },
             "nullable": true,
-            "type": "array"
+            "readOnly": true,
+            "type": "object"
           },
-          "fulfillable_quantity_by_fulfillment_center": {
-            "description": "Fulfillable quantity of this product broken down by fulfillment center location",
-            "items": {
-              "$ref": "#/components/schemas/ProductFulfillmentCenterQuantity"
+          "extensions": {
+            "additionalProperties": {
+              "additionalProperties": false,
+              "type": "object"
             },
             "nullable": true,
-            "type": "array"
+            "readOnly": true,
+            "type": "object"
           },
-          "id": {
-            "description": "Unique identifier of the product",
-            "format": "int32",
-            "type": "integer"
-          },
-          "name": {
-            "description": "The name of the product",
-            "example": "Medium Blue T-Shirt",
+          "instance": {
             "nullable": true,
             "type": "string"
-          },
-          "reference_id": {
-            "description": "Unique reference identifier of the product",
-            "example": "TShirtBlueM",
-            "nullable": true,
-            "type": "string"
-          },
-          "sku": {
-            "description": "Stock keeping unit for the product",
-            "example": "TShirtBlueM",
-            "nullable": true,
-            "type": "string"
-          },
-          "total_committed_quantity": {
-            "description": "Total committed quantity of this product",
-            "format": "int32",
-            "type": "integer"
-          },
-          "total_fulfillable_quantity": {
-            "description": "Total fulfillable quantity of this product",
-            "format": "int32",
-            "type": "integer"
-          },
-          "total_onhand_quantity": {
-            "description": "Total on hand quantity of this product",
-            "format": "int32",
-            "type": "integer"
-          }
-        },
-        "type": "object"
-      },
-      "ProductActiveStatus": {
-        "enum": [
-          "Any",
-          "Active",
-          "Inactive"
-        ],
-        "type": "string"
-      },
-      "ProductBundleStatus": {
-        "enum": [
-          "Any",
-          "Bundle",
-          "NotBundle"
-        ],
-        "type": "string"
-      },
-      "AddBoxItemToBox": {
-        "additionalProperties": false,
-        "description": "Information about an inventory item contained inside a receiving order box",
-        "properties": {
-          "inventory_id": {
-            "description": "Unique inventory id of the items in the box",
-            "format": "int32",
-            "type": "integer"
-          },
-          "lot_date": {
-            "description": "Lot expiration date for the items in the box",
-            "format": "date-time",
-            "nullable": true,
-            "type": "string"
-          },
-          "lot_number": {
-            "description": "Lot number of the items in the box",
-            "example": "2222",
-            "nullable": true,
-            "type": "string"
-          },
-          "quantity": {
-            "description": "Quantity of the items in the box",
-            "format": "int32",
-            "maximum": 2147483647,
-            "minimum": 1,
-            "type": "integer"
-          }
-        },
-        "required": [
-          "inventory_id",
-          "quantity"
-        ],
-        "type": "object"
-      },
-      "AddBoxToOrder": {
-        "additionalProperties": false,
-        "description": "Information about a box shipment to be added to a receiving order",
-        "properties": {
-          "box_items": {
-            "description": "Items contained in this box",
-            "items": {
-              "$ref": "#/components/schemas/AddBoxItemToBox"
-            },
-            "nullable": true,
-            "type": "array"
-          },
-          "tracking_number": {
-            "description": "Tracking number for the box shipment",
-            "example": "860C8CDC8F0B4FC7AB69AC86C20539EC",
-            "nullable": true,
-            "type": "string"
-          }
-        },
-        "required": [
-          "box_items",
-          "tracking_number"
-        ],
-        "type": "object"
-      },
-      "AssignOrderToFulfillmentCenter": {
-        "additionalProperties": false,
-        "description": "Model containing information that assigns a receiving order to a fulfillment center",
-        "properties": {
-          "id": {
-            "description": "ID of the fulfillment center to assign this receiving order to",
-            "format": "int32",
-            "type": "integer"
-          }
-        },
-        "required": [
-          "id"
-        ],
-        "type": "object"
-      },
-      "BoxItem": {
-        "additionalProperties": false,
-        "description": "Information about an item contained inside a box as part of a receiving order",
-        "properties": {
-          "inventory_id": {
-            "description": "Unique identifier of the inventory item",
-            "format": "int32",
-            "type": "integer"
-          },
-          "lot_date": {
-            "description": "Expiration date of the item's lot",
-            "format": "date-time",
-            "nullable": true,
-            "type": "string"
-          },
-          "lot_number": {
-            "description": "Lot number the item belongs to",
-            "nullable": true,
-            "type": "string"
-          },
-          "quantity": {
-            "description": "Quantity of the item included",
-            "format": "int32",
-            "type": "integer"
-          },
-          "received_quantity": {
-            "description": "Quantity of the item that was received after processing the receiving order",
-            "format": "int32",
-            "type": "integer"
-          }
-        },
-        "type": "object"
-      },
-      "Box": {
-        "additionalProperties": false,
-        "description": "Information about a box shipment included in a receiving order",
-        "properties": {
-          "arrived_date": {
-            "description": "Date the box arrived",
-            "format": "date-time",
-            "nullable": true,
-            "type": "string"
-          },
-          "box_items": {
-            "description": "Information about the items included in the box",
-            "items": {
-              "$ref": "#/components/schemas/BoxItem"
-            },
-            "nullable": true,
-            "type": "array"
-          },
-          "box_number": {
-            "description": "The number of the box in the receiving order",
-            "format": "int32",
-            "type": "integer"
-          },
-          "box_status": {
-            "$ref": "#/components/schemas/BoxStatus"
-          },
-          "counting_started_date": {
-            "description": "Date counting of the box's inventory items started",
-            "format": "date-time",
-            "nullable": true,
-            "type": "string"
-          },
-          "received_date": {
-            "description": "Date the box was received",
-            "format": "date-time",
-            "nullable": true,
-            "type": "string"
-          },
-          "tracking_number": {
-            "description": "Tracking number of the box shipment",
-            "example": "860C8CDC8F0B4FC7AB69AC86C20539EC",
-            "nullable": true,
-            "type": "string"
-          }
-        },
-        "type": "object"
-      },
-      "CreateReceivingOrder": {
-        "additionalProperties": false,
-        "description": "Information to create a new receiving order",
-        "properties": {
-          "box_packaging_type": {
-            "$ref": "#/components/schemas/PackingType"
-          },
-          "boxes": {
-            "description": "Box shipments to be added to this receiving order",
-            "items": {
-              "$ref": "#/components/schemas/AddBoxToOrder"
-            },
-            "nullable": true,
-            "type": "array"
-          },
-          "expected_arrival_date": {
-            "description": "Expected arrival date of all the box shipments in this receiving order",
-            "format": "date-time",
-            "type": "string",
-            "nullable": true
-          },
-          "fulfillment_center": {
-            "$ref": "#/components/schemas/AssignOrderToFulfillmentCenter"
-          },
-          "package_type": {
-            "$ref": "#/components/schemas/PackageType"
-          }
-        },
-        "required": [
-          "box_packaging_type",
-          "boxes",
-          "expected_arrival_date",
-          "fulfillment_center",
-          "package_type"
-        ],
-        "type": "object"
-      },
-      "ReceivingFulfillmentCenter": {
-        "additionalProperties": false,
-        "description": "Information about a fulfillment center",
-        "properties": {
-          "address1": {
-            "description": "Address line one of the fulfillment center",
-            "example": "5900 W Ogden Ave",
-            "nullable": true,
-            "type": "string"
-          },
-          "address2": {
-            "description": "Address line two of the fulfillment center",
-            "example": "Suite 100",
-            "nullable": true,
-            "type": "string"
-          },
-          "city": {
-            "description": "City the fulfillment center is located in",
-            "example": "Cicero",
-            "nullable": true,
-            "type": "string"
-          },
-          "country": {
-            "description": "Country the fulfillment center is located in",
-            "example": "USA",
-            "nullable": true,
-            "type": "string"
-          },
-          "email": {
-            "description": "Email contact for the fulfillment center",
-            "example": "example@example.com",
-            "nullable": true,
-            "type": "string"
-          },
-          "id": {
-            "description": "Unique identifier of the fulfillment center",
-            "format": "int32",
-            "type": "integer"
-          },
-          "name": {
-            "description": "Name of the fulfillment center",
-            "example": "Cicero (IL)",
-            "nullable": true,
-            "type": "string"
-          },
-          "phone_number": {
-            "description": "Phone number contact for the fulfillment center",
-            "example": "555-555-5555",
-            "nullable": true,
-            "type": "string"
-          },
-          "state": {
-            "description": "State the fulfillment center is located in",
-            "example": "IL",
-            "nullable": true,
-            "type": "string"
-          },
-          "timezone": {
-            "description": "Timezone the fulfillment center is located in",
-            "example": "Central Standard Time",
-            "nullable": true,
-            "type": "string"
-          },
-          "zip_code": {
-            "description": "Postal code of the fulfillment center",
-            "example": "60804",
-            "nullable": true,
-            "type": "string"
-          }
-        },
-        "type": "object"
-      },
-      "ReceivingOrder": {
-        "additionalProperties": false,
-        "description": "Information about a receiving order",
-        "properties": {
-          "box_labels_uri": {
-            "description": "URL to the packing slip to be included in each box shipment for this receiving order",
-            "example": "https://api.shipbob.com/1.0/receiving/1/labels",
-            "nullable": true,
-            "type": "string"
-          },
-          "box_packaging_type": {
-            "$ref": "#/components/schemas/PackingType"
-          },
-          "boxes": {
-            "description": "Information about the boxes being shipped in this receiving order",
-            "items": {
-              "$ref": "#/components/schemas/Box"
-            },
-            "nullable": true,
-            "type": "array"
-          },
-          "expected_arrival_date": {
-            "description": "Expected date that all packages will have arrived",
-            "format": "date-time",
-            "type": "string",
-            "nullable": true
-          },
-          "fulfillment_center": {
-            "$ref": "#/components/schemas/ReceivingFulfillmentCenter"
-          },
-          "id": {
-            "description": "Unique id of the warehouse receiving order",
-            "format": "int32",
-            "type": "integer"
-          },
-          "insert_date": {
-            "description": "Insert date of the receiving order",
-            "format": "date-time",
-            "type": "string",
-            "nullable": true
-          },
-          "last_updated_date": {
-            "description": "Last date the receiving order was updated",
-            "format": "date-time",
-            "type": "string",
-            "nullable": true
-          },
-          "package_type": {
-            "$ref": "#/components/schemas/PackageType"
           },
           "status": {
-            "$ref": "#/components/schemas/ReceivingStatus"
-          }
-        },
-        "type": "object"
-      },
-      "BoxStatus": {
-        "enum": [
-          "Awaiting",
-          "Arrived",
-          "Completed",
-          "Counting",
-          "Stowing",
-          "Cancelled"
-        ],
-        "type": "string"
-      },
-      "PackageType": {
-        "enum": [
-          "Package",
-          "Pallet",
-          "FloorLoadedContainer"
-        ],
-        "type": "string"
-      },
-      "PackingType": {
-        "enum": [
-          "EverythingInOneBox",
-          "OneSkuPerBox",
-          "MultipleSkuPerBox"
-        ],
-        "type": "string"
-      },
-      "ReceivingStatus": {
-        "enum": [
-          "Awaiting",
-          "Processing",
-          "Completed",
-          "Cancelled",
-          "Incomplete",
-          "Arrived",
-          "PartiallyArrived"
-        ],
-        "type": "string"
-      },
-      "ReturnChannelInfo": {
-        "additionalProperties": false,
-        "description": "Created by channel metadata",
-        "properties": {
-          "id": {
-            "description": "Unique id of the channel",
             "format": "int32",
+            "nullable": true,
             "type": "integer"
           },
-          "name": {
-            "description": "Name of the channel",
-            "example": "ShipBobs-Shopify-Store",
+          "title": {
+            "nullable": true,
+            "type": "string"
+          },
+          "type": {
             "nullable": true,
             "type": "string"
           }
         },
         "type": "object"
       },
-      "CreateReturn": {
+      "Webhook": {
         "additionalProperties": false,
         "properties": {
-          "fulfillment_center": {
-            "$ref": "#/components/schemas/ReturnFulfillmentCenter"
-          },
-          "inventory": {
-            "description": "Array of inventory items being returned",
-            "items": {
-              "$ref": "#/components/schemas/ReturnInventory"
-            },
-            "minLength": 1,
-            "nullable": true,
-            "type": "array"
-          },
-          "original_shipment_id": {
-            "description": "Shipment from which the items in the return originated",
-            "example": 123456,
-            "format": "int32",
-            "nullable": true,
-            "type": "integer"
-          },
-          "reference_id": {
-            "description": "Client-defined external unique identifier for the return order",
-            "example": "ShipBob_Return_123",
-            "maxLength": 50,
-            "nullable": true,
-            "type": "string"
-          },
-          "tracking_number": {
-            "description": "Tracking number for the return shipment",
-            "example": "1Z9999999999999999",
-            "maxLength": 500,
-            "nullable": true,
-            "type": "string"
-          }
-        },
-        "required": [
-          "fulfillment_center",
-          "inventory",
-          "reference_id"
-        ],
-        "type": "object"
-      },
-      "ReturnFulfillmentCenter": {
-        "additionalProperties": false,
-        "description": "Information about a fulfillment center",
-        "properties": {
-          "id": {
-            "description": "Unique identifier of the fulfillment center",
-            "format": "int32",
-            "type": "integer"
-          },
-          "name": {
-            "description": "Name of the fulfillment center",
-            "example": "Cicero (IL)",
-            "nullable": true,
-            "type": "string"
-          }
-        },
-        "required": [
-          "id"
-        ],
-        "type": "object"
-      },
-      "ReturnInventoryItem": {
-        "additionalProperties": false,
-        "properties": {
-          "action_requested": {
-            "$ref": "#/components/schemas/ReturnActionRequested"
-          },
-          "action_taken": {
-            "description": "Action(s) taken when processing the return",
-            "items": {
-              "$ref": "#/components/schemas/ReturnActionTaken"
-            },
-            "nullable": true,
-            "type": "array"
-          },
-          "id": {
-            "description": "Unique id of the inventory item",
-            "format": "int32",
-            "type": "integer"
-          },
-          "name": {
-            "description": "Name of the inventory item",
-            "nullable": true,
-            "type": "string"
-          },
-          "quantity": {
-            "description": "Quantity expected to be processed with the return",
-            "format": "int32",
-            "type": "integer"
-          }
-        },
-        "type": "object"
-      },
-      "ReturnActionRequested": {
-        "additionalProperties": false,
-        "properties": {
-          "action": {
-            "$ref": "#/components/schemas/ReturnAction"
-          },
-          "action_type": {
-            "$ref": "#/components/schemas/ReturnActionSource"
-          },
-          "instructions": {
-            "description": "Specific instructions to be taken for the inventory when processing the return",
-            "nullable": true,
-            "type": "string"
-          }
-        },
-        "type": "object"
-      },
-      "ReturnActionTaken": {
-        "additionalProperties": false,
-        "properties": {
-          "action": {
-            "$ref": "#/components/schemas/ReturnAction"
-          },
-          "action_reason": {
-            "description": "Reason the given action was taken",
-            "nullable": true,
-            "type": "string"
-          },
-          "quantity_processed": {
-            "description": "Quantity of inventory processed with the taken action",
-            "format": "int32",
-            "maximum": 2147483647,
-            "minimum": 1,
-            "type": "integer"
-          }
-        },
-        "type": "object"
-      },
-      "ReturnInventory": {
-        "additionalProperties": false,
-        "properties": {
-          "id": {
-            "description": "ID of the inventory item to return",
-            "example": 111222,
-            "format": "int32",
-            "type": "integer"
-          },
-          "quantity": {
-            "description": "Quantity of the returned inventory item in the return",
-            "example": 1,
-            "format": "int32",
-            "maximum": 2147483647,
-            "minimum": 1,
-            "type": "integer"
-          },
-          "requested_action": {
-            "$ref": "#/components/schemas/ReturnAction"
-          }
-        },
-        "required": [
-          "id",
-          "quantity"
-        ],
-        "type": "object"
-      },
-      "ReturnOrderStatusHistory": {
-        "additionalProperties": false,
-        "properties": {
-          "status": {
-            "$ref": "#/components/schemas/ReturnStatus"
-          },
-          "time_stamp": {
-            "description": "Date this corresponding return order status was created",
+          "created_at": {
+            "description": "Timestamp the webhook subscription was created",
             "format": "date-time",
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "type": "object"
-      },
-      "ReturnOrder": {
-        "additionalProperties": false,
-        "properties": {
-          "channel": {
-            "$ref": "#/components/schemas/ReturnChannelInfo"
-          },
-          "fulfillment_center": {
-            "$ref": "#/components/schemas/ReturnFulfillmentCenter"
+            "nullable": true,
+            "type": "string"
           },
           "id": {
-            "description": "Unique id of the Return Order",
+            "description": "ID of the webhook subscription",
+            "example": 12345,
             "format": "int32",
             "type": "integer"
           },
-          "insert_date": {
-            "description": "Date this return order was created",
-            "format": "date-time",
-            "type": "string",
-            "nullable": true
-          },
-          "inventory": {
-            "description": "List of inventory included in the return order",
-            "items": {
-              "$ref": "#/components/schemas/ReturnInventoryItem"
-            },
-            "nullable": true,
-            "type": "array"
-          },
-          "invoice_amount": {
-            "description": "Invoiced amount of return order (sum of transaction amounts)",
-            "format": "double",
-            "nullable": true,
-            "type": "number"
-          },
-          "original_shipment_id": {
-            "description": "Id of the corresponding shipment that is the souce of the return",
-            "format": "int32",
-            "nullable": true,
-            "type": "integer"
-          },
-          "reference_id": {
-            "description": "Client-defined external unique id of the return order",
+          "subscription_url": {
+            "description": "URL subscription events will be posted to",
+            "format": "uri",
             "nullable": true,
             "type": "string"
           },
-          "return_type": {
-            "$ref": "#/components/schemas/ReturnType"
-          },
-          "status": {
-            "$ref": "#/components/schemas/ReturnStatus"
-          },
-          "tracking_number": {
-            "description": "Tracking number of the return shipment",
-            "example": "860C8CDC8F0B4FC7AB69AC86C20539EC",
-            "nullable": true,
-            "type": "string"
-          },
-          "transactions": {
-            "description": "Array of transactions affiliated with the return order",
-            "items": {
-              "$ref": "#/components/schemas/ReturnTransaction"
-            },
-            "nullable": true,
-            "type": "array"
+          "topic": {
+            "$ref": "#/components/schemas/Topics"
           }
         },
         "type": "object"
       },
-      "ReturnTransaction": {
+      "WebhookSubscription": {
         "additionalProperties": false,
         "properties": {
-          "amount": {
-            "description": "Transaction amount in dollars",
-            "example": 2.5,
-            "format": "double",
-            "type": "number"
+          "subscription_url": {
+            "description": "URL we will call when an event matching the subscription topic is raised. Must have ssl enabled (https) and accept POST requests with content type of application/json",
+            "example": "https://mywebsite.com/shipbob/handler",
+            "format": "uri",
+            "type": "string"
           },
-          "transaction_type": {
-            "$ref": "#/components/schemas/ReturnTransactionLogSource"
+          "topic": {
+            "$ref": "#/components/schemas/Topics"
           }
         },
+        "required": [
+          "subscription_url",
+          "topic"
+        ],
         "type": "object"
-      },
-      "ReturnAction": {
-        "enum": [
-          "Default",
-          "Restock",
-          "Quarantine",
-          "Dispose"
-        ],
-        "type": "string"
-      },
-      "ReturnActionSource": {
-        "enum": [
-          "InventoryDefault",
-          "Override"
-        ],
-        "type": "string"
-      },
-      "ReturnStatus": {
-        "enum": [
-          "AwaitingArrival",
-          "Arrived",
-          "Processing",
-          "Completed",
-          "Cancelled"
-        ],
-        "type": "string"
-      },
-      "ReturnType": {
-        "enum": [
-          "Regular",
-          "ReturnToSender"
-        ],
-        "type": "string"
-      },
-      "SortOrder": {
-        "enum": [
-          "Newest",
-          "Oldest"
-        ],
-        "type": "string"
-      },
-      "ReturnTransactionLogSource": {
-        "enum": [
-          "ReturnLabelInvoice",
-          "ReturnProcessingFee",
-          "ReturnToSenderFee"
-        ],
-        "type": "string"
       }
     },
     "securitySchemes": {
@@ -2514,6 +2514,7 @@
   "paths": {
     "/channel": {
       "get": {
+        "operationId": "getChannels",
         "responses": {
           "200": {
             "content": {
@@ -2561,12 +2562,12 @@
         "summary": "Get user-authorized channel info",
         "tags": [
           "Channels"
-        ],
-        "operationId": "getChannels"
+        ]
       }
     },
     "/fulfillmentCenter": {
       "get": {
+        "operationId": "getFulfillmentCenters",
         "responses": {
           "200": {
             "content": {
@@ -2598,12 +2599,12 @@
         "summary": "Get Fulfillment Centers",
         "tags": [
           "Receiving"
-        ],
-        "operationId": "getFulfillmentCenters"
+        ]
       }
     },
     "/inventory": {
       "get": {
+        "operationId": "getInventories",
         "parameters": [
           {
             "description": "Page of inventory items to get",
@@ -2730,12 +2731,12 @@
         "summary": "List inventory items",
         "tags": [
           "Inventory"
-        ],
-        "operationId": "getInventories"
+        ]
       }
     },
     "/inventory/{inventoryId}": {
       "get": {
+        "operationId": "getInventory",
         "parameters": [
           {
             "description": "The inventory id to get",
@@ -2795,12 +2796,12 @@
         "summary": "Get an inventory item",
         "tags": [
           "Inventory"
-        ],
-        "operationId": "getInventory"
+        ]
       }
     },
     "/location": {
       "get": {
+        "operationId": "getLocations",
         "parameters": [
           {
             "description": "Whether the inactive locations should be included or not",
@@ -2864,13 +2865,13 @@
         "summary": "Get locations",
         "tags": [
           "Locations"
-        ],
-        "operationId": "getLocations"
+        ]
       }
     },
     "/order": {
       "get": {
         "description": "All parameters are AND filters",
+        "operationId": "getOrders",
         "parameters": [
           {
             "description": "Page of orders to get",
@@ -3032,10 +3033,10 @@
         "summary": "Get Orders",
         "tags": [
           "Orders"
-        ],
-        "operationId": "getOrders"
+        ]
       },
       "post": {
+        "operationId": "createOrder",
         "parameters": [
           {
             "description": "Channel Id for Operation",
@@ -3117,13 +3118,13 @@
         "summary": "Create Order",
         "tags": [
           "Orders"
-        ],
-        "operationId": "createOrder"
+        ]
       }
     },
     "/order/estimate": {
       "post": {
         "description": "This endpoint will provide, where possible, an estimate of pricing and fulfillment center assignment of a potential standard (direct to consumer) order.  Keep in mind that there are ways for the merchant to change FC assignment or product configuration after order creation that could invalidate this estimate.  Estimates cannot be returned for items that are unknown, out of stock, or too large for fulfillment using standard box sizes.  Additional services such as high-pick fees, shipping insurance, auto-splitting or auto-adding items to orders, and signature required are not included in this estimate.",
+        "operationId": "createOrderEstimate",
         "parameters": [
           {
             "description": "Channel Id for Operation",
@@ -3205,12 +3206,12 @@
         "summary": "Estimate Fulfillment Cost For Order",
         "tags": [
           "Orders"
-        ],
-        "operationId": "createOrderEstimate"
+        ]
       }
     },
     "/order/{orderId}": {
       "get": {
+        "operationId": "getOrder",
         "parameters": [
           {
             "description": "",
@@ -3280,12 +3281,12 @@
         "summary": "Get Order",
         "tags": [
           "Orders"
-        ],
-        "operationId": "getOrder"
+        ]
       }
     },
     "/order/{orderId}/cancel": {
       "post": {
+        "operationId": "cancelOrder",
         "parameters": [
           {
             "description": "The order ID to cancel",
@@ -3387,12 +3388,12 @@
         "summary": "Cancel single Order by Order ID",
         "tags": [
           "Orders"
-        ],
-        "operationId": "cancelOrder"
+        ]
       }
     },
     "/order/{orderId}/shipment": {
       "get": {
+        "operationId": "getOrderShipments",
         "parameters": [
           {
             "description": "The order id to get shipments for",
@@ -3465,12 +3466,12 @@
         "summary": "Get all Shipments for Order",
         "tags": [
           "Orders"
-        ],
-        "operationId": "getOrderShipments"
+        ]
       }
     },
     "/order/{orderId}/shipment/{shipmentId}": {
       "get": {
+        "operationId": "getOrderShipment",
         "parameters": [
           {
             "description": "The order id to get the shipment for",
@@ -3550,12 +3551,12 @@
         "summary": "Get one Shipment by Order Id and Shipment Id",
         "tags": [
           "Orders"
-        ],
-        "operationId": "getOrderShipment"
+        ]
       }
     },
     "/order/{orderId}/shipment/{shipmentId}/cancel": {
       "post": {
+        "operationId": "cancelOrderShipment",
         "parameters": [
           {
             "description": "The shipment id to get",
@@ -3665,12 +3666,12 @@
         "summary": "Cancel one Shipment by Order Id and Shipment Id",
         "tags": [
           "Orders"
-        ],
-        "operationId": "cancelOrderShipment"
+        ]
       }
     },
     "/order/{orderId}/shipment/{shipmentId}/logs": {
       "get": {
+        "operationId": "getOrderShipmentLogs",
         "parameters": [
           {
             "description": "The order id to get the shipment for",
@@ -3753,12 +3754,12 @@
         "summary": "Get logs for one Shipment by Order Id and Shipment Id",
         "tags": [
           "Orders"
-        ],
-        "operationId": "getOrderShipmentLogs"
+        ]
       }
     },
     "/order/{orderId}/shipment/{shipmentId}/timeline": {
       "get": {
+        "operationId": "getOrderShipmentTimelines",
         "parameters": [
           {
             "description": "The order id to get the shipment for",
@@ -3841,12 +3842,12 @@
         "summary": "Get one Shipment's status timeline by Order Id and Shipment Id",
         "tags": [
           "Orders"
-        ],
-        "operationId": "getOrderShipmentTimelines"
+        ]
       }
     },
     "/product": {
       "get": {
+        "operationId": "getProducts",
         "parameters": [
           {
             "description": "Page of products to get",
@@ -4012,10 +4013,10 @@
         "summary": "Get multiple products",
         "tags": [
           "Products"
-        ],
-        "operationId": "getProducts"
+        ]
       },
       "post": {
+        "operationId": "createProduct",
         "parameters": [
           {
             "description": "Channel Id for Operation",
@@ -4101,12 +4102,12 @@
         "summary": "Add a single product to the store",
         "tags": [
           "Products"
-        ],
-        "operationId": "createProduct"
+        ]
       }
     },
     "/product/batch": {
       "post": {
+        "operationId": "createProductBatch",
         "parameters": [
           {
             "description": "Channel Id for Operation",
@@ -4195,12 +4196,12 @@
         "summary": "Add multiple products to the store",
         "tags": [
           "Products"
-        ],
-        "operationId": "createProductBatch"
+        ]
       }
     },
     "/product/{productId}": {
       "get": {
+        "operationId": "getProduct",
         "parameters": [
           {
             "description": "Unique identifier of the product",
@@ -4269,10 +4270,10 @@
         "summary": "Get a single product",
         "tags": [
           "Products"
-        ],
-        "operationId": "getProduct"
+        ]
       },
       "put": {
+        "operationId": "updateProduct",
         "parameters": [
           {
             "description": "Unique identifier of the product to modify",
@@ -4371,12 +4372,12 @@
         "summary": "Modify a single product",
         "tags": [
           "Products"
-        ],
-        "operationId": "updateProduct"
+        ]
       }
     },
     "/product/{productId}/inventory": {
       "get": {
+        "operationId": "getProductInventories",
         "parameters": [
           {
             "description": "The product id to get inventory for",
@@ -4449,12 +4450,12 @@
         "summary": "Get a list of inventory items by product id",
         "tags": [
           "Inventory"
-        ],
-        "operationId": "getProductInventories"
+        ]
       }
     },
     "/receiving": {
       "post": {
+        "operationId": "createReceiving",
         "requestBody": {
           "content": {
             "application/json": {
@@ -4519,12 +4520,12 @@
         "summary": "Create Warehouse Receiving Order",
         "tags": [
           "Receiving"
-        ],
-        "operationId": "createReceiving"
+        ]
       }
     },
     "/receiving/{id}": {
       "get": {
+        "operationId": "getReceiving",
         "parameters": [
           {
             "description": "Id of the receiving order",
@@ -4575,12 +4576,12 @@
         "summary": "Get Warehouse Receiving Order",
         "tags": [
           "Receiving"
-        ],
-        "operationId": "getReceiving"
+        ]
       }
     },
     "/receiving/{id}/cancel": {
       "post": {
+        "operationId": "cancelReceiving",
         "parameters": [
           {
             "description": "Id of the receiving order to cancel",
@@ -4640,12 +4641,12 @@
         "summary": "Cancel Warehouse Receiving Order",
         "tags": [
           "Receiving"
-        ],
-        "operationId": "cancelReceiving"
+        ]
       }
     },
     "/receiving/{id}/labels": {
       "get": {
+        "operationId": "getReceivingLabels",
         "parameters": [
           {
             "description": "Id of the receiving order",
@@ -4707,12 +4708,12 @@
         "summary": "Get Warehouse Receiving Order Box Labels",
         "tags": [
           "Receiving"
-        ],
-        "operationId": "getReceivingLabels"
+        ]
       }
     },
     "/return": {
       "get": {
+        "operationId": "getReturns",
         "parameters": [
           {
             "description": "Page of return orders to get",
@@ -4746,8 +4747,8 @@
             "name": "StartDate",
             "schema": {
               "format": "date-time",
-              "type": "string",
-              "nullable": true
+              "nullable": true,
+              "type": "string"
             }
           },
           {
@@ -4756,8 +4757,8 @@
             "name": "EndDate",
             "schema": {
               "format": "date-time",
-              "type": "string",
-              "nullable": true
+              "nullable": true,
+              "type": "string"
             }
           },
           {
@@ -4915,10 +4916,10 @@
         "summary": "Get Return Orders",
         "tags": [
           "Returns"
-        ],
-        "operationId": "getReturns"
+        ]
       },
       "post": {
+        "operationId": "createReturn",
         "parameters": [
           {
             "description": "Channel Id for Operation",
@@ -4989,12 +4990,12 @@
         "summary": "Create Return Order",
         "tags": [
           "Returns"
-        ],
-        "operationId": "createReturn"
+        ]
       }
     },
     "/return/{id}": {
       "get": {
+        "operationId": "getReturn",
         "parameters": [
           {
             "description": "Id of the return order",
@@ -5054,10 +5055,10 @@
         "summary": "Get Return Order",
         "tags": [
           "Returns"
-        ],
-        "operationId": "getReturn"
+        ]
       },
       "put": {
+        "operationId": "updateReturn",
         "parameters": [
           {
             "description": "Channel Id for Operation",
@@ -5138,12 +5139,12 @@
         "summary": "Modify Return Order",
         "tags": [
           "Returns"
-        ],
-        "operationId": "updateReturn"
+        ]
       }
     },
     "/return/{id}/cancel": {
       "post": {
+        "operationId": "cancelReturn",
         "parameters": [
           {
             "description": "Id of the return order",
@@ -5214,12 +5215,12 @@
         "summary": "Cancel Return Order",
         "tags": [
           "Returns"
-        ],
-        "operationId": "cancelReturn"
+        ]
       }
     },
     "/return/{id}/statushistory": {
       "get": {
+        "operationId": "getReturnStatushistory",
         "parameters": [
           {
             "description": "Id of the return order",
@@ -5279,12 +5280,12 @@
         "summary": "Get One Return's status history",
         "tags": [
           "Returns"
-        ],
-        "operationId": "getReturnStatushistory"
+        ]
       }
     },
     "/shipment/cancelbulk": {
       "post": {
+        "operationId": "createShipmentCancelbulk",
         "parameters": [
           {
             "description": "Channel ID for Operation",
@@ -5367,12 +5368,12 @@
         "summary": "Cancel multiple Shipments by Shipment Id",
         "tags": [
           "Orders"
-        ],
-        "operationId": "createShipmentCancelbulk"
+        ]
       }
     },
     "/shipment/{shipmentId}": {
       "get": {
+        "operationId": "getShipment",
         "parameters": [
           {
             "description": "The shipment id to get",
@@ -5442,12 +5443,12 @@
         "summary": "Get one Shipment by Shipment Id",
         "tags": [
           "Orders"
-        ],
-        "operationId": "getShipment"
+        ]
       }
     },
     "/shipment/{shipmentId}/cancel": {
       "post": {
+        "operationId": "cancelShipment",
         "parameters": [
           {
             "description": "The shipment id to get",
@@ -5549,12 +5550,12 @@
         "summary": "Cancel one Shipment by Shipment Id",
         "tags": [
           "Orders"
-        ],
-        "operationId": "cancelShipment"
+        ]
       }
     },
     "/shipment/{shipmentId}/logs": {
       "get": {
+        "operationId": "getShipmentLogs",
         "parameters": [
           {
             "description": "The shipment id to get",
@@ -5627,12 +5628,12 @@
         "summary": "Get logs for one Shipment by Shipment Id",
         "tags": [
           "Orders"
-        ],
-        "operationId": "getShipmentLogs"
+        ]
       }
     },
     "/shipment/{shipmentId}/timeline": {
       "get": {
+        "operationId": "getShipmentTimelines",
         "parameters": [
           {
             "description": "The shipment id to get",
@@ -5705,13 +5706,13 @@
         "summary": "Get one Shipment's status timeline by Shipment Id",
         "tags": [
           "Orders"
-        ],
-        "operationId": "getShipmentTimelines"
+        ]
       }
     },
     "/shippingmethod": {
       "get": {
         "description": "Get all merchants shipping methods",
+        "operationId": "getShippingmethods",
         "parameters": [
           {
             "description": "Page of orders to get",
@@ -5795,13 +5796,13 @@
         "summary": "Get shipping methods",
         "tags": [
           "Orders"
-        ],
-        "operationId": "getShippingmethods"
+        ]
       }
     },
     "/webhook": {
       "get": {
         "description": "All parameters are AND filters",
+        "operationId": "getWebhooks",
         "parameters": [
           {
             "description": "Topic of the webhooks requested",
@@ -5923,10 +5924,10 @@
         "summary": "Get Webhooks",
         "tags": [
           "Webhooks"
-        ],
-        "operationId": "getWebhooks"
+        ]
       },
       "post": {
+        "operationId": "createWebhook",
         "parameters": [
           {
             "description": "",
@@ -6008,12 +6009,12 @@
         "summary": "Create a new webhook subscription",
         "tags": [
           "Webhooks"
-        ],
-        "operationId": "createWebhook"
+        ]
       }
     },
     "/webhook/{id}": {
       "delete": {
+        "operationId": "deleteWebhook",
         "parameters": [
           {
             "description": "",
@@ -6056,8 +6057,7 @@
         "summary": "Delete an existing webhook subscription",
         "tags": [
           "Webhooks"
-        ],
-        "operationId": "deleteWebhook"
+        ]
       }
     }
   },

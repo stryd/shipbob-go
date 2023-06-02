@@ -211,7 +211,7 @@ def process_openapi_schema(file_path):
 
 def save_processed_schema(schema, output_file):
     with open(output_file, "w") as file:
-        json.dump(schema, file, indent=2)
+        json.dump(schema, file, indent=2, sort_keys=True)
     print("Schema processed successfully and saved to", output_file)
 
 
