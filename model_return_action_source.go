@@ -21,7 +21,7 @@ type ReturnActionSource string
 // List of ReturnActionSource
 const (
 	INVENTORY_DEFAULT ReturnActionSource = "InventoryDefault"
-	OVERRIDE ReturnActionSource = "Override"
+	OVERRIDE          ReturnActionSource = "Override"
 )
 
 // All allowed values of ReturnActionSource enum
@@ -108,4 +108,3 @@ func (v *NullableReturnActionSource) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

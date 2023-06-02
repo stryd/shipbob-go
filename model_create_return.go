@@ -132,6 +132,7 @@ func (o *CreateReturn) HasOriginalShipmentId() bool {
 func (o *CreateReturn) SetOriginalShipmentId(v int32) {
 	o.OriginalShipmentId.Set(&v)
 }
+
 // SetOriginalShipmentIdNil sets the value for OriginalShipmentId to be an explicit nil
 func (o *CreateReturn) SetOriginalShipmentIdNil() {
 	o.OriginalShipmentId.Set(nil)
@@ -200,6 +201,7 @@ func (o *CreateReturn) HasTrackingNumber() bool {
 func (o *CreateReturn) SetTrackingNumber(v string) {
 	o.TrackingNumber.Set(&v)
 }
+
 // SetTrackingNumberNil sets the value for TrackingNumber to be an explicit nil
 func (o *CreateReturn) SetTrackingNumberNil() {
 	o.TrackingNumber.Set(nil)
@@ -211,7 +213,7 @@ func (o *CreateReturn) UnsetTrackingNumber() {
 }
 
 func (o CreateReturn) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -269,5 +271,3 @@ func (v *NullableCreateReturn) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

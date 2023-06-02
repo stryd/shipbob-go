@@ -19,14 +19,13 @@ import (
 	"strings"
 )
 
-
 // ReceivingApiService ReceivingApi service
 type ReceivingApiService service
 
 type ApiCancelReceivingRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *ReceivingApiService
-	id int32
+	id         int32
 }
 
 func (r ApiCancelReceivingRequest) Execute() (*http.Response, error) {
@@ -36,24 +35,24 @@ func (r ApiCancelReceivingRequest) Execute() (*http.Response, error) {
 /*
 CancelReceiving Cancel Warehouse Receiving Order
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id Id of the receiving order to cancel
- @return ApiCancelReceivingRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id Id of the receiving order to cancel
+	@return ApiCancelReceivingRequest
 */
 func (a *ReceivingApiService) CancelReceiving(ctx context.Context, id int32) ApiCancelReceivingRequest {
 	return ApiCancelReceivingRequest{
 		ApiService: a,
-		ctx: ctx,
-		id: id,
+		ctx:        ctx,
+		id:         id,
 	}
 }
 
 // Execute executes the request
 func (a *ReceivingApiService) CancelReceivingExecute(r ApiCancelReceivingRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
+		localVarHTTPMethod = http.MethodPost
+		localVarPostBody   interface{}
+		formFiles          []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ReceivingApiService.CancelReceiving")
@@ -114,8 +113,8 @@ func (a *ReceivingApiService) CancelReceivingExecute(r ApiCancelReceivingRequest
 				newErr.error = err.Error()
 				return localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 422 {
@@ -125,8 +124,8 @@ func (a *ReceivingApiService) CancelReceivingExecute(r ApiCancelReceivingRequest
 				newErr.error = err.Error()
 				return localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarHTTPResponse, newErr
 	}
@@ -135,8 +134,8 @@ func (a *ReceivingApiService) CancelReceivingExecute(r ApiCancelReceivingRequest
 }
 
 type ApiCreateReceivingRequest struct {
-	ctx context.Context
-	ApiService *ReceivingApiService
+	ctx                  context.Context
+	ApiService           *ReceivingApiService
 	createReceivingOrder *CreateReceivingOrder
 }
 
@@ -153,24 +152,25 @@ func (r ApiCreateReceivingRequest) Execute() (*ReceivingOrder, *http.Response, e
 /*
 CreateReceiving Create Warehouse Receiving Order
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateReceivingRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateReceivingRequest
 */
 func (a *ReceivingApiService) CreateReceiving(ctx context.Context) ApiCreateReceivingRequest {
 	return ApiCreateReceivingRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return ReceivingOrder
+//
+//	@return ReceivingOrder
 func (a *ReceivingApiService) CreateReceivingExecute(r ApiCreateReceivingRequest) (*ReceivingOrder, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *ReceivingOrder
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ReceivingOrder
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ReceivingApiService.CreateReceiving")
@@ -232,8 +232,8 @@ func (a *ReceivingApiService) CreateReceivingExecute(r ApiCreateReceivingRequest
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -243,8 +243,8 @@ func (a *ReceivingApiService) CreateReceivingExecute(r ApiCreateReceivingRequest
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -262,7 +262,7 @@ func (a *ReceivingApiService) CreateReceivingExecute(r ApiCreateReceivingRequest
 }
 
 type ApiGetFulfillmentCentersRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *ReceivingApiService
 }
 
@@ -273,24 +273,25 @@ func (r ApiGetFulfillmentCentersRequest) Execute() ([]ReceivingFulfillmentCenter
 /*
 GetFulfillmentCenters Get Fulfillment Centers
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetFulfillmentCentersRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetFulfillmentCentersRequest
 */
 func (a *ReceivingApiService) GetFulfillmentCenters(ctx context.Context) ApiGetFulfillmentCentersRequest {
 	return ApiGetFulfillmentCentersRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return []ReceivingFulfillmentCenter
+//
+//	@return []ReceivingFulfillmentCenter
 func (a *ReceivingApiService) GetFulfillmentCentersExecute(r ApiGetFulfillmentCentersRequest) ([]ReceivingFulfillmentCenter, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  []ReceivingFulfillmentCenter
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue []ReceivingFulfillmentCenter
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ReceivingApiService.GetFulfillmentCenters")
@@ -359,9 +360,9 @@ func (a *ReceivingApiService) GetFulfillmentCentersExecute(r ApiGetFulfillmentCe
 }
 
 type ApiGetReceivingRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *ReceivingApiService
-	id int32
+	id         int32
 }
 
 func (r ApiGetReceivingRequest) Execute() (*ReceivingOrder, *http.Response, error) {
@@ -371,26 +372,27 @@ func (r ApiGetReceivingRequest) Execute() (*ReceivingOrder, *http.Response, erro
 /*
 GetReceiving Get Warehouse Receiving Order
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id Id of the receiving order
- @return ApiGetReceivingRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id Id of the receiving order
+	@return ApiGetReceivingRequest
 */
 func (a *ReceivingApiService) GetReceiving(ctx context.Context, id int32) ApiGetReceivingRequest {
 	return ApiGetReceivingRequest{
 		ApiService: a,
-		ctx: ctx,
-		id: id,
+		ctx:        ctx,
+		id:         id,
 	}
 }
 
 // Execute executes the request
-//  @return ReceivingOrder
+//
+//	@return ReceivingOrder
 func (a *ReceivingApiService) GetReceivingExecute(r ApiGetReceivingRequest) (*ReceivingOrder, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *ReceivingOrder
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ReceivingOrder
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ReceivingApiService.GetReceiving")
@@ -451,8 +453,8 @@ func (a *ReceivingApiService) GetReceivingExecute(r ApiGetReceivingRequest) (*Re
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -470,9 +472,9 @@ func (a *ReceivingApiService) GetReceivingExecute(r ApiGetReceivingRequest) (*Re
 }
 
 type ApiGetReceivingLabelsRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *ReceivingApiService
-	id int32
+	id         int32
 }
 
 func (r ApiGetReceivingLabelsRequest) Execute() (string, *http.Response, error) {
@@ -482,26 +484,27 @@ func (r ApiGetReceivingLabelsRequest) Execute() (string, *http.Response, error) 
 /*
 GetReceivingLabels Get Warehouse Receiving Order Box Labels
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id Id of the receiving order
- @return ApiGetReceivingLabelsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id Id of the receiving order
+	@return ApiGetReceivingLabelsRequest
 */
 func (a *ReceivingApiService) GetReceivingLabels(ctx context.Context, id int32) ApiGetReceivingLabelsRequest {
 	return ApiGetReceivingLabelsRequest{
 		ApiService: a,
-		ctx: ctx,
-		id: id,
+		ctx:        ctx,
+		id:         id,
 	}
 }
 
 // Execute executes the request
-//  @return string
+//
+//	@return string
 func (a *ReceivingApiService) GetReceivingLabelsExecute(r ApiGetReceivingLabelsRequest) (string, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  string
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue string
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ReceivingApiService.GetReceivingLabels")
@@ -562,8 +565,8 @@ func (a *ReceivingApiService) GetReceivingLabelsExecute(r ApiGetReceivingLabelsR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -573,8 +576,8 @@ func (a *ReceivingApiService) GetReceivingLabelsExecute(r ApiGetReceivingLabelsR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}

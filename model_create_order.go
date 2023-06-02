@@ -21,14 +21,14 @@ var _ MappedNullable = &CreateOrder{}
 // CreateOrder struct for CreateOrder
 type CreateOrder struct {
 	// User friendly orderId or store order number that will be shown on the Orders Page. If not provided, referenceId will be used
-	OrderNumber *string `json:"order_number,omitempty"`
-	Products []AddProductToOrder `json:"products"`
+	OrderNumber *string             `json:"order_number,omitempty"`
+	Products    []AddProductToOrder `json:"products"`
 	// Date this order was purchase by the end user
-	PurchaseDate NullableTime `json:"purchase_date,omitempty"`
-	Recipient RecipientInfo `json:"recipient"`
-	ReferenceId string `json:"reference_id"`
-	ShippingMethod string `json:"shipping_method"`
-	Tags []Tag `json:"tags,omitempty"`
+	PurchaseDate   NullableTime  `json:"purchase_date,omitempty"`
+	Recipient      RecipientInfo `json:"recipient"`
+	ReferenceId    string        `json:"reference_id"`
+	ShippingMethod string        `json:"shipping_method"`
+	Tags           []Tag         `json:"tags,omitempty"`
 	// Defaults to Direct to Consumer (DTC) if not provided. Note: B2B is not supported at this time
 	Type *string `json:"type,omitempty"`
 }
@@ -142,6 +142,7 @@ func (o *CreateOrder) HasPurchaseDate() bool {
 func (o *CreateOrder) SetPurchaseDate(v time.Time) {
 	o.PurchaseDate.Set(&v)
 }
+
 // SetPurchaseDateNil sets the value for PurchaseDate to be an explicit nil
 func (o *CreateOrder) SetPurchaseDateNil() {
 	o.PurchaseDate.Set(nil)
@@ -289,7 +290,7 @@ func (o *CreateOrder) SetType(v string) {
 }
 
 func (o CreateOrder) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -352,5 +353,3 @@ func (v *NullableCreateOrder) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

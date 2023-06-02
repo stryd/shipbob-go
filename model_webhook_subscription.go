@@ -21,7 +21,7 @@ var _ MappedNullable = &WebhookSubscription{}
 type WebhookSubscription struct {
 	// URL we will call when an event matching the subscription topic is raised. Must have ssl enabled (https) and accept POST requests with content type of application/json
 	SubscriptionUrl string `json:"subscription_url"`
-	Topic Topics `json:"topic"`
+	Topic           Topics `json:"topic"`
 }
 
 // NewWebhookSubscription instantiates a new WebhookSubscription object
@@ -92,7 +92,7 @@ func (o *WebhookSubscription) SetTopic(v Topics) {
 }
 
 func (o WebhookSubscription) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -141,5 +141,3 @@ func (v *NullableWebhookSubscription) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

@@ -19,7 +19,7 @@ var _ MappedNullable = &ReturnActionRequested{}
 
 // ReturnActionRequested struct for ReturnActionRequested
 type ReturnActionRequested struct {
-	Action *ReturnAction `json:"action,omitempty"`
+	Action     *ReturnAction       `json:"action,omitempty"`
 	ActionType *ReturnActionSource `json:"action_type,omitempty"`
 	// Specific instructions to be taken for the inventory when processing the return
 	Instructions NullableString `json:"instructions,omitempty"`
@@ -138,6 +138,7 @@ func (o *ReturnActionRequested) HasInstructions() bool {
 func (o *ReturnActionRequested) SetInstructions(v string) {
 	o.Instructions.Set(&v)
 }
+
 // SetInstructionsNil sets the value for Instructions to be an explicit nil
 func (o *ReturnActionRequested) SetInstructionsNil() {
 	o.Instructions.Set(nil)
@@ -149,7 +150,7 @@ func (o *ReturnActionRequested) UnsetInstructions() {
 }
 
 func (o ReturnActionRequested) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -205,5 +206,3 @@ func (v *NullableReturnActionRequested) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

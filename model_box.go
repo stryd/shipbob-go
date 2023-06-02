@@ -25,7 +25,7 @@ type Box struct {
 	// Information about the items included in the box
 	BoxItems []BoxItem `json:"box_items,omitempty"`
 	// The number of the box in the receiving order
-	BoxNumber *int32 `json:"box_number,omitempty"`
+	BoxNumber *int32     `json:"box_number,omitempty"`
 	BoxStatus *BoxStatus `json:"box_status,omitempty"`
 	// Date counting of the box's inventory items started
 	CountingStartedDate NullableTime `json:"counting_started_date,omitempty"`
@@ -84,6 +84,7 @@ func (o *Box) HasArrivedDate() bool {
 func (o *Box) SetArrivedDate(v time.Time) {
 	o.ArrivedDate.Set(&v)
 }
+
 // SetArrivedDateNil sets the value for ArrivedDate to be an explicit nil
 func (o *Box) SetArrivedDateNil() {
 	o.ArrivedDate.Set(nil)
@@ -223,6 +224,7 @@ func (o *Box) HasCountingStartedDate() bool {
 func (o *Box) SetCountingStartedDate(v time.Time) {
 	o.CountingStartedDate.Set(&v)
 }
+
 // SetCountingStartedDateNil sets the value for CountingStartedDate to be an explicit nil
 func (o *Box) SetCountingStartedDateNil() {
 	o.CountingStartedDate.Set(nil)
@@ -265,6 +267,7 @@ func (o *Box) HasReceivedDate() bool {
 func (o *Box) SetReceivedDate(v time.Time) {
 	o.ReceivedDate.Set(&v)
 }
+
 // SetReceivedDateNil sets the value for ReceivedDate to be an explicit nil
 func (o *Box) SetReceivedDateNil() {
 	o.ReceivedDate.Set(nil)
@@ -307,6 +310,7 @@ func (o *Box) HasTrackingNumber() bool {
 func (o *Box) SetTrackingNumber(v string) {
 	o.TrackingNumber.Set(&v)
 }
+
 // SetTrackingNumberNil sets the value for TrackingNumber to be an explicit nil
 func (o *Box) SetTrackingNumberNil() {
 	o.TrackingNumber.Set(nil)
@@ -318,7 +322,7 @@ func (o *Box) UnsetTrackingNumber() {
 }
 
 func (o Box) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -386,5 +390,3 @@ func (v *NullableBox) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

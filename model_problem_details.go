@@ -19,13 +19,13 @@ var _ MappedNullable = &ProblemDetails{}
 
 // ProblemDetails struct for ProblemDetails
 type ProblemDetails struct {
-	Detail NullableString `json:"detail,omitempty"`
+	Detail     NullableString                    `json:"detail,omitempty"`
 	Extensions map[string]map[string]interface{} `json:"extensions,omitempty"`
-	Instance NullableString `json:"instance,omitempty"`
-	Status NullableInt32 `json:"status,omitempty"`
-	Title NullableString `json:"title,omitempty"`
-	Type NullableString `json:"type,omitempty"`
-	Ttype string `json:"ttype"`
+	Instance   NullableString                    `json:"instance,omitempty"`
+	Status     NullableInt32                     `json:"status,omitempty"`
+	Title      NullableString                    `json:"title,omitempty"`
+	Type       NullableString                    `json:"type,omitempty"`
+	Ttype      string                            `json:"ttype"`
 }
 
 // NewProblemDetails instantiates a new ProblemDetails object
@@ -78,6 +78,7 @@ func (o *ProblemDetails) HasDetail() bool {
 func (o *ProblemDetails) SetDetail(v string) {
 	o.Detail.Set(&v)
 }
+
 // SetDetailNil sets the value for Detail to be an explicit nil
 func (o *ProblemDetails) SetDetailNil() {
 	o.Detail.Set(nil)
@@ -153,6 +154,7 @@ func (o *ProblemDetails) HasInstance() bool {
 func (o *ProblemDetails) SetInstance(v string) {
 	o.Instance.Set(&v)
 }
+
 // SetInstanceNil sets the value for Instance to be an explicit nil
 func (o *ProblemDetails) SetInstanceNil() {
 	o.Instance.Set(nil)
@@ -195,6 +197,7 @@ func (o *ProblemDetails) HasStatus() bool {
 func (o *ProblemDetails) SetStatus(v int32) {
 	o.Status.Set(&v)
 }
+
 // SetStatusNil sets the value for Status to be an explicit nil
 func (o *ProblemDetails) SetStatusNil() {
 	o.Status.Set(nil)
@@ -237,6 +240,7 @@ func (o *ProblemDetails) HasTitle() bool {
 func (o *ProblemDetails) SetTitle(v string) {
 	o.Title.Set(&v)
 }
+
 // SetTitleNil sets the value for Title to be an explicit nil
 func (o *ProblemDetails) SetTitleNil() {
 	o.Title.Set(nil)
@@ -279,6 +283,7 @@ func (o *ProblemDetails) HasType() bool {
 func (o *ProblemDetails) SetType(v string) {
 	o.Type.Set(&v)
 }
+
 // SetTypeNil sets the value for Type to be an explicit nil
 func (o *ProblemDetails) SetTypeNil() {
 	o.Type.Set(nil)
@@ -314,7 +319,7 @@ func (o *ProblemDetails) SetTtype(v string) {
 }
 
 func (o ProblemDetails) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -380,5 +385,3 @@ func (v *NullableProblemDetails) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

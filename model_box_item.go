@@ -113,6 +113,7 @@ func (o *BoxItem) HasLotDate() bool {
 func (o *BoxItem) SetLotDate(v time.Time) {
 	o.LotDate.Set(&v)
 }
+
 // SetLotDateNil sets the value for LotDate to be an explicit nil
 func (o *BoxItem) SetLotDateNil() {
 	o.LotDate.Set(nil)
@@ -155,6 +156,7 @@ func (o *BoxItem) HasLotNumber() bool {
 func (o *BoxItem) SetLotNumber(v string) {
 	o.LotNumber.Set(&v)
 }
+
 // SetLotNumberNil sets the value for LotNumber to be an explicit nil
 func (o *BoxItem) SetLotNumberNil() {
 	o.LotNumber.Set(nil)
@@ -230,7 +232,7 @@ func (o *BoxItem) SetReceivedQuantity(v int32) {
 }
 
 func (o BoxItem) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -292,5 +294,3 @@ func (v *NullableBoxItem) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

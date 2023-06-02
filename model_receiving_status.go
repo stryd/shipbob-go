@@ -20,12 +20,12 @@ type ReceivingStatus string
 
 // List of ReceivingStatus
 const (
-	AWAITING ReceivingStatus = "Awaiting"
-	PROCESSING ReceivingStatus = "Processing"
-	COMPLETED ReceivingStatus = "Completed"
-	CANCELLED ReceivingStatus = "Cancelled"
-	INCOMPLETE ReceivingStatus = "Incomplete"
-	ARRIVED ReceivingStatus = "Arrived"
+	AWAITING          ReceivingStatus = "Awaiting"
+	PROCESSING        ReceivingStatus = "Processing"
+	COMPLETED         ReceivingStatus = "Completed"
+	CANCELLED         ReceivingStatus = "Cancelled"
+	INCOMPLETE        ReceivingStatus = "Incomplete"
+	ARRIVED           ReceivingStatus = "Arrived"
 	PARTIALLY_ARRIVED ReceivingStatus = "PartiallyArrived"
 )
 
@@ -118,4 +118,3 @@ func (v *NullableReceivingStatus) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

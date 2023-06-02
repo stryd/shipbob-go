@@ -20,7 +20,7 @@ var _ MappedNullable = &ReturnOrder{}
 
 // ReturnOrder struct for ReturnOrder
 type ReturnOrder struct {
-	Channel *ReturnChannelInfo `json:"channel,omitempty"`
+	Channel           *ReturnChannelInfo       `json:"channel,omitempty"`
 	FulfillmentCenter *ReturnFulfillmentCenter `json:"fulfillment_center,omitempty"`
 	// Unique id of the Return Order
 	Id *int32 `json:"id,omitempty"`
@@ -34,8 +34,8 @@ type ReturnOrder struct {
 	OriginalShipmentId NullableInt32 `json:"original_shipment_id,omitempty"`
 	// Client-defined external unique id of the return order
 	ReferenceId NullableString `json:"reference_id,omitempty"`
-	ReturnType *ReturnType `json:"return_type,omitempty"`
-	Status *ReturnStatus `json:"status,omitempty"`
+	ReturnType  *ReturnType    `json:"return_type,omitempty"`
+	Status      *ReturnStatus  `json:"status,omitempty"`
 	// Tracking number of the return shipment
 	TrackingNumber NullableString `json:"tracking_number,omitempty"`
 	// Array of transactions affiliated with the return order
@@ -187,6 +187,7 @@ func (o *ReturnOrder) HasInsertDate() bool {
 func (o *ReturnOrder) SetInsertDate(v time.Time) {
 	o.InsertDate.Set(&v)
 }
+
 // SetInsertDateNil sets the value for InsertDate to be an explicit nil
 func (o *ReturnOrder) SetInsertDateNil() {
 	o.InsertDate.Set(nil)
@@ -262,6 +263,7 @@ func (o *ReturnOrder) HasInvoiceAmount() bool {
 func (o *ReturnOrder) SetInvoiceAmount(v float64) {
 	o.InvoiceAmount.Set(&v)
 }
+
 // SetInvoiceAmountNil sets the value for InvoiceAmount to be an explicit nil
 func (o *ReturnOrder) SetInvoiceAmountNil() {
 	o.InvoiceAmount.Set(nil)
@@ -304,6 +306,7 @@ func (o *ReturnOrder) HasOriginalShipmentId() bool {
 func (o *ReturnOrder) SetOriginalShipmentId(v int32) {
 	o.OriginalShipmentId.Set(&v)
 }
+
 // SetOriginalShipmentIdNil sets the value for OriginalShipmentId to be an explicit nil
 func (o *ReturnOrder) SetOriginalShipmentIdNil() {
 	o.OriginalShipmentId.Set(nil)
@@ -346,6 +349,7 @@ func (o *ReturnOrder) HasReferenceId() bool {
 func (o *ReturnOrder) SetReferenceId(v string) {
 	o.ReferenceId.Set(&v)
 }
+
 // SetReferenceIdNil sets the value for ReferenceId to be an explicit nil
 func (o *ReturnOrder) SetReferenceIdNil() {
 	o.ReferenceId.Set(nil)
@@ -452,6 +456,7 @@ func (o *ReturnOrder) HasTrackingNumber() bool {
 func (o *ReturnOrder) SetTrackingNumber(v string) {
 	o.TrackingNumber.Set(&v)
 }
+
 // SetTrackingNumberNil sets the value for TrackingNumber to be an explicit nil
 func (o *ReturnOrder) SetTrackingNumberNil() {
 	o.TrackingNumber.Set(nil)
@@ -496,7 +501,7 @@ func (o *ReturnOrder) SetTransactions(v []ReturnTransaction) {
 }
 
 func (o ReturnOrder) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -579,5 +584,3 @@ func (v *NullableReturnOrder) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

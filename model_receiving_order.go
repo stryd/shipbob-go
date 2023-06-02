@@ -21,21 +21,21 @@ var _ MappedNullable = &ReceivingOrder{}
 // ReceivingOrder Information about a receiving order
 type ReceivingOrder struct {
 	// URL to the packing slip to be included in each box shipment for this receiving order
-	BoxLabelsUri NullableString `json:"box_labels_uri,omitempty"`
-	BoxPackagingType *PackingType `json:"box_packaging_type,omitempty"`
+	BoxLabelsUri     NullableString `json:"box_labels_uri,omitempty"`
+	BoxPackagingType *PackingType   `json:"box_packaging_type,omitempty"`
 	// Information about the boxes being shipped in this receiving order
 	Boxes []Box `json:"boxes,omitempty"`
 	// Expected date that all packages will have arrived
-	ExpectedArrivalDate NullableTime `json:"expected_arrival_date,omitempty"`
-	FulfillmentCenter *ReceivingFulfillmentCenter `json:"fulfillment_center,omitempty"`
+	ExpectedArrivalDate NullableTime                `json:"expected_arrival_date,omitempty"`
+	FulfillmentCenter   *ReceivingFulfillmentCenter `json:"fulfillment_center,omitempty"`
 	// Unique id of the warehouse receiving order
 	Id *int32 `json:"id,omitempty"`
 	// Insert date of the receiving order
 	InsertDate NullableTime `json:"insert_date,omitempty"`
 	// Last date the receiving order was updated
-	LastUpdatedDate NullableTime `json:"last_updated_date,omitempty"`
-	PackageType *PackageType `json:"package_type,omitempty"`
-	Status *ReceivingStatus `json:"status,omitempty"`
+	LastUpdatedDate NullableTime     `json:"last_updated_date,omitempty"`
+	PackageType     *PackageType     `json:"package_type,omitempty"`
+	Status          *ReceivingStatus `json:"status,omitempty"`
 }
 
 // NewReceivingOrder instantiates a new ReceivingOrder object
@@ -87,6 +87,7 @@ func (o *ReceivingOrder) HasBoxLabelsUri() bool {
 func (o *ReceivingOrder) SetBoxLabelsUri(v string) {
 	o.BoxLabelsUri.Set(&v)
 }
+
 // SetBoxLabelsUriNil sets the value for BoxLabelsUri to be an explicit nil
 func (o *ReceivingOrder) SetBoxLabelsUriNil() {
 	o.BoxLabelsUri.Set(nil)
@@ -194,6 +195,7 @@ func (o *ReceivingOrder) HasExpectedArrivalDate() bool {
 func (o *ReceivingOrder) SetExpectedArrivalDate(v time.Time) {
 	o.ExpectedArrivalDate.Set(&v)
 }
+
 // SetExpectedArrivalDateNil sets the value for ExpectedArrivalDate to be an explicit nil
 func (o *ReceivingOrder) SetExpectedArrivalDateNil() {
 	o.ExpectedArrivalDate.Set(nil)
@@ -300,6 +302,7 @@ func (o *ReceivingOrder) HasInsertDate() bool {
 func (o *ReceivingOrder) SetInsertDate(v time.Time) {
 	o.InsertDate.Set(&v)
 }
+
 // SetInsertDateNil sets the value for InsertDate to be an explicit nil
 func (o *ReceivingOrder) SetInsertDateNil() {
 	o.InsertDate.Set(nil)
@@ -342,6 +345,7 @@ func (o *ReceivingOrder) HasLastUpdatedDate() bool {
 func (o *ReceivingOrder) SetLastUpdatedDate(v time.Time) {
 	o.LastUpdatedDate.Set(&v)
 }
+
 // SetLastUpdatedDateNil sets the value for LastUpdatedDate to be an explicit nil
 func (o *ReceivingOrder) SetLastUpdatedDateNil() {
 	o.LastUpdatedDate.Set(nil)
@@ -417,7 +421,7 @@ func (o *ReceivingOrder) SetStatus(v ReceivingStatus) {
 }
 
 func (o ReceivingOrder) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -494,5 +498,3 @@ func (v *NullableReceivingOrder) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
