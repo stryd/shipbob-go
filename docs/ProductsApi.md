@@ -237,9 +237,9 @@ func main() {
     limit := int32(56) // int32 | Amount of products per page to request (optional)
     iDs := []int32{int32(123)} // []int32 | Comma separated list of product ids to filter by (optional)
     referenceIds := []string{"Inner_example"} // []string | Comma separated list of reference ids to filter by (optional)
-    search := "search_example" // string | Search is available for 2 fields of the inventory record related to the product: Inventory ID and Name -\\r\\n1. Expected behavior for search by Inventory ID is exact match\\r\\n2. Expected behavior for search by Inventory Name is partial match, i.e. does not have to be start of word, \\r\\nbut must be consecutive characters. This is not case sensitive. (optional)
-    activeStatus := "activeStatus_example" // string | Status filter for products:- Any: Include both active and inactive- Active: Filter products that are Active- Inactive: Filter products that are Inactive (optional)
-    bundleStatus := openapiclient.ProductBundle("Any") // ProductBundle | Bundle filter for products:- Any: Don't filter and consider products that are bundles or not bundles- Bundle: Filter by products that are bundles- NotBundle: Filter by products that are not bundles (optional)
+    search := "search_example" // string | Search is available for 2 fields of the inventory record related to the product: Inventory ID and Name - 1. Expected behavior for search by Inventory ID is exact match 2. Expected behavior for search by Inventory Name is partial match, i.e. does not have to be start of word,  but must be consecutive characters. This is not case sensitive. (optional)
+    activeStatus := openapiclient.ProductActiveStatus("Any") // ProductActiveStatus | Status filter for products: - Any: Include both active and inactive - Active: Filter products that are Active - Inactive: Filter products that are Inactive (optional)
+    bundleStatus := openapiclient.ProductBundleStatus("Any") // ProductBundleStatus | Bundle filter for products: - Any: Don't filter and consider products that are bundles or not bundles - Bundle: Filter by products that are bundles - NotBundle: Filter by products that are not bundles (optional)
     shipbobChannelId := int32(56) // int32 | Channel Id for Operation (optional)
 
     configuration := openapiclient.NewConfiguration()
@@ -269,9 +269,9 @@ Name | Type | Description  | Notes
  **limit** | **int32** | Amount of products per page to request | 
  **iDs** | **[]int32** | Comma separated list of product ids to filter by | 
  **referenceIds** | **[]string** | Comma separated list of reference ids to filter by | 
- **search** | **string** | Search is available for 2 fields of the inventory record related to the product: Inventory ID and Name -\\r\\n1. Expected behavior for search by Inventory ID is exact match\\r\\n2. Expected behavior for search by Inventory Name is partial match, i.e. does not have to be start of word, \\r\\nbut must be consecutive characters. This is not case sensitive. | 
- **activeStatus** | **string** | Status filter for products:- Any: Include both active and inactive- Active: Filter products that are Active- Inactive: Filter products that are Inactive | 
- **bundleStatus** | [**ProductBundle**](ProductBundle.md) | Bundle filter for products:- Any: Don&#39;t filter and consider products that are bundles or not bundles- Bundle: Filter by products that are bundles- NotBundle: Filter by products that are not bundles | 
+ **search** | **string** | Search is available for 2 fields of the inventory record related to the product: Inventory ID and Name - 1. Expected behavior for search by Inventory ID is exact match 2. Expected behavior for search by Inventory Name is partial match, i.e. does not have to be start of word,  but must be consecutive characters. This is not case sensitive. | 
+ **activeStatus** | [**ProductActiveStatus**](ProductActiveStatus.md) | Status filter for products: - Any: Include both active and inactive - Active: Filter products that are Active - Inactive: Filter products that are Inactive | 
+ **bundleStatus** | [**ProductBundleStatus**](ProductBundleStatus.md) | Bundle filter for products: - Any: Don&#39;t filter and consider products that are bundles or not bundles - Bundle: Filter by products that are bundles - NotBundle: Filter by products that are not bundles | 
  **shipbobChannelId** | **int32** | Channel Id for Operation | 
 
 ### Return type

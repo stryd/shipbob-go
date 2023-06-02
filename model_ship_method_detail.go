@@ -25,7 +25,7 @@ type ShipMethodDetail struct {
 	Default *bool `json:"default,omitempty"`
 	// Unique id for shipping method.
 	Id *int32 `json:"id,omitempty"`
-	// Name of the ship method as selected by the merchant and saved in ShipBobâs database (i.e. âgroundâ). Corresponds to the shipping_method field in the Orders API.
+	// Name of the ship method as selected by the merchant and saved in ShipBob's database (i.e. \"ground\"). Corresponds to the shipping_method field in the Orders API.
 	Name         *string             `json:"name,omitempty"`
 	ServiceLevel *ServiceLevelDetail `json:"service_level,omitempty"`
 }

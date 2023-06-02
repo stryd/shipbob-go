@@ -21,8 +21,8 @@ var _ MappedNullable = &CreateOrder{}
 // CreateOrder struct for CreateOrder
 type CreateOrder struct {
 	// User friendly orderId or store order number that will be shown on the Orders Page. If not provided, referenceId will be used
-	OrderNumber *string                    `json:"order_number,omitempty"`
-	Products    []CreateOrderProductsInner `json:"products"`
+	OrderNumber *string             `json:"order_number,omitempty"`
+	Products    []AddProductToOrder `json:"products"`
 	// Date this order was purchase by the end user
 	PurchaseDate   NullableTime  `json:"purchase_date,omitempty"`
 	Recipient      RecipientInfo `json:"recipient"`
@@ -37,7 +37,7 @@ type CreateOrder struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateOrder(products []CreateOrderProductsInner, recipient RecipientInfo, referenceId string, shippingMethod string) *CreateOrder {
+func NewCreateOrder(products []AddProductToOrder, recipient RecipientInfo, referenceId string, shippingMethod string) *CreateOrder {
 	this := CreateOrder{}
 	this.Products = products
 	this.Recipient = recipient
@@ -87,9 +87,9 @@ func (o *CreateOrder) SetOrderNumber(v string) {
 }
 
 // GetProducts returns the Products field value
-func (o *CreateOrder) GetProducts() []CreateOrderProductsInner {
+func (o *CreateOrder) GetProducts() []AddProductToOrder {
 	if o == nil {
-		var ret []CreateOrderProductsInner
+		var ret []AddProductToOrder
 		return ret
 	}
 
@@ -98,7 +98,7 @@ func (o *CreateOrder) GetProducts() []CreateOrderProductsInner {
 
 // GetProductsOk returns a tuple with the Products field value
 // and a boolean to check if the value has been set.
-func (o *CreateOrder) GetProductsOk() ([]CreateOrderProductsInner, bool) {
+func (o *CreateOrder) GetProductsOk() ([]AddProductToOrder, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -106,7 +106,7 @@ func (o *CreateOrder) GetProductsOk() ([]CreateOrderProductsInner, bool) {
 }
 
 // SetProducts sets field value
-func (o *CreateOrder) SetProducts(v []CreateOrderProductsInner) {
+func (o *CreateOrder) SetProducts(v []AddProductToOrder) {
 	o.Products = v
 }
 

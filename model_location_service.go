@@ -21,8 +21,8 @@ var _ MappedNullable = &LocationService{}
 type LocationService struct {
 	Address *LocationAddress `json:"address,omitempty"`
 	// Indicates if the user is authorized to access this service at the location
-	Enabled     *bool   `json:"enabled,omitempty"`
-	ServiceType *string `json:"service_type,omitempty"`
+	Enabled     *bool                    `json:"enabled,omitempty"`
+	ServiceType *LocationServiceTypeEnum `json:"service_type,omitempty"`
 }
 
 // NewLocationService instantiates a new LocationService object
@@ -107,9 +107,9 @@ func (o *LocationService) SetEnabled(v bool) {
 }
 
 // GetServiceType returns the ServiceType field value if set, zero value otherwise.
-func (o *LocationService) GetServiceType() string {
+func (o *LocationService) GetServiceType() LocationServiceTypeEnum {
 	if o == nil || IsNil(o.ServiceType) {
-		var ret string
+		var ret LocationServiceTypeEnum
 		return ret
 	}
 	return *o.ServiceType
@@ -117,7 +117,7 @@ func (o *LocationService) GetServiceType() string {
 
 // GetServiceTypeOk returns a tuple with the ServiceType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *LocationService) GetServiceTypeOk() (*string, bool) {
+func (o *LocationService) GetServiceTypeOk() (*LocationServiceTypeEnum, bool) {
 	if o == nil || IsNil(o.ServiceType) {
 		return nil, false
 	}
@@ -133,8 +133,8 @@ func (o *LocationService) HasServiceType() bool {
 	return false
 }
 
-// SetServiceType gets a reference to the given string and assigns it to the ServiceType field.
-func (o *LocationService) SetServiceType(v string) {
+// SetServiceType gets a reference to the given LocationServiceTypeEnum and assigns it to the ServiceType field.
+func (o *LocationService) SetServiceType(v LocationServiceTypeEnum) {
 	o.ServiceType = &v
 }
 

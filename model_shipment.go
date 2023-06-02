@@ -20,11 +20,11 @@ var _ MappedNullable = &Shipment{}
 
 // Shipment Information about a shipment
 type Shipment struct {
-	// The datetime of ShipBob's completion of the fulfillment operation as promised. Currently, this means the shipment has been picked, packed, and label has been printed.
+	// The datetime of ShipBob's completion of the fulfillment operation as promised.  Currently, this means the shipment has been picked, packed, and label has been printed.
 	ActualFulfillmentDate NullableTime `json:"actual_fulfillment_date,omitempty"`
 	// Date this shipment was created
 	CreatedDate NullableTime `json:"created_date,omitempty"`
-	// The datetime of ShipBob's commitment for completing the shipment and handing to the carrier for delivery.
+	// The datetime of ShipBob's commitment for completing  the shipment and handing to the carrier for delivery.
 	EstimatedFulfillmentDate NullableTime `json:"estimated_fulfillment_date,omitempty"`
 	// Status of ShipBob's completion of the fulfillment operation.
 	EstimatedFulfillmentDateStatus *string `json:"estimated_fulfillment_date_status,omitempty"`
@@ -54,8 +54,8 @@ type Shipment struct {
 	// The shipment status
 	Status *string `json:"status,omitempty"`
 	// Additional details about the shipment status
-	StatusDetails []OrderStatusDetails `json:"status_details,omitempty"`
-	Tracking      *Tracking            `json:"tracking,omitempty"`
+	StatusDetails []OrderStatusDetail `json:"status_details,omitempty"`
+	Tracking      *Tracking           `json:"tracking,omitempty"`
 }
 
 // NewShipment instantiates a new Shipment object
@@ -718,9 +718,9 @@ func (o *Shipment) SetStatus(v string) {
 }
 
 // GetStatusDetails returns the StatusDetails field value if set, zero value otherwise.
-func (o *Shipment) GetStatusDetails() []OrderStatusDetails {
+func (o *Shipment) GetStatusDetails() []OrderStatusDetail {
 	if o == nil || IsNil(o.StatusDetails) {
-		var ret []OrderStatusDetails
+		var ret []OrderStatusDetail
 		return ret
 	}
 	return o.StatusDetails
@@ -728,7 +728,7 @@ func (o *Shipment) GetStatusDetails() []OrderStatusDetails {
 
 // GetStatusDetailsOk returns a tuple with the StatusDetails field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Shipment) GetStatusDetailsOk() ([]OrderStatusDetails, bool) {
+func (o *Shipment) GetStatusDetailsOk() ([]OrderStatusDetail, bool) {
 	if o == nil || IsNil(o.StatusDetails) {
 		return nil, false
 	}
@@ -744,8 +744,8 @@ func (o *Shipment) HasStatusDetails() bool {
 	return false
 }
 
-// SetStatusDetails gets a reference to the given []OrderStatusDetails and assigns it to the StatusDetails field.
-func (o *Shipment) SetStatusDetails(v []OrderStatusDetails) {
+// SetStatusDetails gets a reference to the given []OrderStatusDetail and assigns it to the StatusDetails field.
+func (o *Shipment) SetStatusDetails(v []OrderStatusDetail) {
 	o.StatusDetails = v
 }
 

@@ -34,7 +34,7 @@ type ReturnOrder struct {
 	OriginalShipmentId NullableInt32 `json:"original_shipment_id,omitempty"`
 	// Client-defined external unique id of the return order
 	ReferenceId NullableString `json:"reference_id,omitempty"`
-	ReturnType  *string        `json:"return_type,omitempty"`
+	ReturnType  *ReturnType    `json:"return_type,omitempty"`
 	Status      *ReturnStatus  `json:"status,omitempty"`
 	// Tracking number of the return shipment
 	TrackingNumber NullableString `json:"tracking_number,omitempty"`
@@ -361,9 +361,9 @@ func (o *ReturnOrder) UnsetReferenceId() {
 }
 
 // GetReturnType returns the ReturnType field value if set, zero value otherwise.
-func (o *ReturnOrder) GetReturnType() string {
+func (o *ReturnOrder) GetReturnType() ReturnType {
 	if o == nil || IsNil(o.ReturnType) {
-		var ret string
+		var ret ReturnType
 		return ret
 	}
 	return *o.ReturnType
@@ -371,7 +371,7 @@ func (o *ReturnOrder) GetReturnType() string {
 
 // GetReturnTypeOk returns a tuple with the ReturnType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ReturnOrder) GetReturnTypeOk() (*string, bool) {
+func (o *ReturnOrder) GetReturnTypeOk() (*ReturnType, bool) {
 	if o == nil || IsNil(o.ReturnType) {
 		return nil, false
 	}
@@ -387,8 +387,8 @@ func (o *ReturnOrder) HasReturnType() bool {
 	return false
 }
 
-// SetReturnType gets a reference to the given string and assigns it to the ReturnType field.
-func (o *ReturnOrder) SetReturnType(v string) {
+// SetReturnType gets a reference to the given ReturnType and assigns it to the ReturnType field.
+func (o *ReturnOrder) SetReturnType(v ReturnType) {
 	o.ReturnType = &v
 }
 

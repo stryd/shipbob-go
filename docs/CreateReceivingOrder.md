@@ -5,16 +5,16 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **BoxPackagingType** | [**PackingType**](PackingType.md) |  | 
-**Boxes** | [**[]CreateReceivingOrderBoxesInner**](CreateReceivingOrderBoxesInner.md) | Box shipments to be added to this receiving order | 
+**Boxes** | [**[]AddBoxToOrder**](AddBoxToOrder.md) | Box shipments to be added to this receiving order | 
 **ExpectedArrivalDate** | **NullableTime** | Expected arrival date of all the box shipments in this receiving order | 
-**FulfillmentCenter** | [**CreateReceivingOrderFulfillmentCenter**](CreateReceivingOrderFulfillmentCenter.md) |  | 
+**FulfillmentCenter** | [**AssignOrderToFulfillmentCenter**](AssignOrderToFulfillmentCenter.md) |  | 
 **PackageType** | [**PackageType**](PackageType.md) |  | 
 
 ## Methods
 
 ### NewCreateReceivingOrder
 
-`func NewCreateReceivingOrder(boxPackagingType PackingType, boxes []CreateReceivingOrderBoxesInner, expectedArrivalDate NullableTime, fulfillmentCenter CreateReceivingOrderFulfillmentCenter, packageType PackageType, ) *CreateReceivingOrder`
+`func NewCreateReceivingOrder(boxPackagingType PackingType, boxes []AddBoxToOrder, expectedArrivalDate NullableTime, fulfillmentCenter AssignOrderToFulfillmentCenter, packageType PackageType, ) *CreateReceivingOrder`
 
 NewCreateReceivingOrder instantiates a new CreateReceivingOrder object
 This constructor will assign default values to properties that have it defined,
@@ -51,20 +51,20 @@ SetBoxPackagingType sets BoxPackagingType field to given value.
 
 ### GetBoxes
 
-`func (o *CreateReceivingOrder) GetBoxes() []CreateReceivingOrderBoxesInner`
+`func (o *CreateReceivingOrder) GetBoxes() []AddBoxToOrder`
 
 GetBoxes returns the Boxes field if non-nil, zero value otherwise.
 
 ### GetBoxesOk
 
-`func (o *CreateReceivingOrder) GetBoxesOk() (*[]CreateReceivingOrderBoxesInner, bool)`
+`func (o *CreateReceivingOrder) GetBoxesOk() (*[]AddBoxToOrder, bool)`
 
 GetBoxesOk returns a tuple with the Boxes field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetBoxes
 
-`func (o *CreateReceivingOrder) SetBoxes(v []CreateReceivingOrderBoxesInner)`
+`func (o *CreateReceivingOrder) SetBoxes(v []AddBoxToOrder)`
 
 SetBoxes sets Boxes field to given value.
 
@@ -111,20 +111,20 @@ SetExpectedArrivalDate sets ExpectedArrivalDate field to given value.
 UnsetExpectedArrivalDate ensures that no value is present for ExpectedArrivalDate, not even an explicit nil
 ### GetFulfillmentCenter
 
-`func (o *CreateReceivingOrder) GetFulfillmentCenter() CreateReceivingOrderFulfillmentCenter`
+`func (o *CreateReceivingOrder) GetFulfillmentCenter() AssignOrderToFulfillmentCenter`
 
 GetFulfillmentCenter returns the FulfillmentCenter field if non-nil, zero value otherwise.
 
 ### GetFulfillmentCenterOk
 
-`func (o *CreateReceivingOrder) GetFulfillmentCenterOk() (*CreateReceivingOrderFulfillmentCenter, bool)`
+`func (o *CreateReceivingOrder) GetFulfillmentCenterOk() (*AssignOrderToFulfillmentCenter, bool)`
 
 GetFulfillmentCenterOk returns a tuple with the FulfillmentCenter field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetFulfillmentCenter
 
-`func (o *CreateReceivingOrder) SetFulfillmentCenter(v CreateReceivingOrderFulfillmentCenter)`
+`func (o *CreateReceivingOrder) SetFulfillmentCenter(v AssignOrderToFulfillmentCenter)`
 
 SetFulfillmentCenter sets FulfillmentCenter field to given value.
 

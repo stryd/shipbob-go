@@ -2731,7 +2731,7 @@
         "tags": [
           "Inventory"
         ],
-        "operationId": "getInventory"
+        "operationId": "getInventories"
       }
     },
     "/inventory/{inventoryId}": {
@@ -4450,7 +4450,7 @@
         "tags": [
           "Inventory"
         ],
-        "operationId": "getProductInventory"
+        "operationId": "getProductInventories"
       }
     },
     "/receiving": {

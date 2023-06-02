@@ -27,7 +27,7 @@ type InventoryFulfillmentCenterQuantity struct {
 	FulfillableQuantity *int32 `json:"fulfillable_quantity,omitempty"`
 	// Unique id of the fulfillment center
 	Id *int32 `json:"id,omitempty"`
-	// The quantity of items that are in the process of internal transit \\r\\nbetween ShipBob fulfillment centers, with a destination of this fulfillment center.\\r\\nThese items are not pickable or fulfillable until they have been received and moved \\r\\nto the \"On Hand\" quantity of the destination FC.
+	// The quantity of items that are in the process of internal transit  between ShipBob fulfillment centers, with a destination of this fulfillment center. These items are not pickable or fulfillable until they have been received and moved  to the \"On Hand\" quantity of the destination FC.
 	InternalTransferQuantity *int32 `json:"internal_transfer_quantity,omitempty"`
 	// Name of the fulfillment center
 	Name *string `json:"name,omitempty"`

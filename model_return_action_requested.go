@@ -19,8 +19,8 @@ var _ MappedNullable = &ReturnActionRequested{}
 
 // ReturnActionRequested struct for ReturnActionRequested
 type ReturnActionRequested struct {
-	Action     *ReturnAction `json:"action,omitempty"`
-	ActionType *string       `json:"action_type,omitempty"`
+	Action     *ReturnAction       `json:"action,omitempty"`
+	ActionType *ReturnActionSource `json:"action_type,omitempty"`
 	// Specific instructions to be taken for the inventory when processing the return
 	Instructions NullableString `json:"instructions,omitempty"`
 }
@@ -75,9 +75,9 @@ func (o *ReturnActionRequested) SetAction(v ReturnAction) {
 }
 
 // GetActionType returns the ActionType field value if set, zero value otherwise.
-func (o *ReturnActionRequested) GetActionType() string {
+func (o *ReturnActionRequested) GetActionType() ReturnActionSource {
 	if o == nil || IsNil(o.ActionType) {
-		var ret string
+		var ret ReturnActionSource
 		return ret
 	}
 	return *o.ActionType
@@ -85,7 +85,7 @@ func (o *ReturnActionRequested) GetActionType() string {
 
 // GetActionTypeOk returns a tuple with the ActionType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ReturnActionRequested) GetActionTypeOk() (*string, bool) {
+func (o *ReturnActionRequested) GetActionTypeOk() (*ReturnActionSource, bool) {
 	if o == nil || IsNil(o.ActionType) {
 		return nil, false
 	}
@@ -101,8 +101,8 @@ func (o *ReturnActionRequested) HasActionType() bool {
 	return false
 }
 
-// SetActionType gets a reference to the given string and assigns it to the ActionType field.
-func (o *ReturnActionRequested) SetActionType(v string) {
+// SetActionType gets a reference to the given ReturnActionSource and assigns it to the ActionType field.
+func (o *ReturnActionRequested) SetActionType(v ReturnActionSource) {
 	o.ActionType = &v
 }
 

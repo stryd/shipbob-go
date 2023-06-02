@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **InvoiceAmount** | Pointer to **NullableFloat64** | Invoiced amount of return order (sum of transaction amounts) | [optional] 
 **OriginalShipmentId** | Pointer to **NullableInt32** | Id of the corresponding shipment that is the souce of the return | [optional] 
 **ReferenceId** | Pointer to **NullableString** | Client-defined external unique id of the return order | [optional] 
-**ReturnType** | Pointer to **string** |  | [optional] 
+**ReturnType** | Pointer to [**ReturnType**](ReturnType.md) |  | [optional] 
 **Status** | Pointer to [**ReturnStatus**](ReturnStatus.md) |  | [optional] 
 **TrackingNumber** | Pointer to **NullableString** | Tracking number of the return shipment | [optional] 
 **Transactions** | Pointer to [**[]ReturnTransaction**](ReturnTransaction.md) | Array of transactions affiliated with the return order | [optional] 
@@ -288,20 +288,20 @@ HasReferenceId returns a boolean if a field has been set.
 UnsetReferenceId ensures that no value is present for ReferenceId, not even an explicit nil
 ### GetReturnType
 
-`func (o *ReturnOrder) GetReturnType() string`
+`func (o *ReturnOrder) GetReturnType() ReturnType`
 
 GetReturnType returns the ReturnType field if non-nil, zero value otherwise.
 
 ### GetReturnTypeOk
 
-`func (o *ReturnOrder) GetReturnTypeOk() (*string, bool)`
+`func (o *ReturnOrder) GetReturnTypeOk() (*ReturnType, bool)`
 
 GetReturnTypeOk returns a tuple with the ReturnType field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetReturnType
 
-`func (o *ReturnOrder) SetReturnType(v string)`
+`func (o *ReturnOrder) SetReturnType(v ReturnType)`
 
 SetReturnType sets ReturnType field to given value.
 

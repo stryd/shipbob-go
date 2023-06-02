@@ -25,7 +25,7 @@ type Location struct {
 	AccessGranted *bool `json:"access_granted,omitempty"`
 	// Available attributes for the location
 	Attributes []string `json:"attributes,omitempty"`
-	// Id of the location in ShipBobâs database
+	// Id of the location in ShipBob's database
 	Id *int32 `json:"id,omitempty"`
 	// Indicates if the location is operationally active or inactive
 	IsActive *bool `json:"is_active,omitempty"`
@@ -33,7 +33,7 @@ type Location struct {
 	IsReceivingEnabled *bool `json:"is_receiving_enabled,omitempty"`
 	// Indicates if the shipping is enabled for FC
 	IsShippingEnabled *bool `json:"is_shipping_enabled,omitempty"`
-	// Name of the location. Follows the naming convention City (State Code)\\r\\nfor domestic FCs and City (Country Code) for international FCs
+	// Name of the location. Follows the naming convention City (State Code) for domestic FCs and City (Country Code) for international FCs
 	Name   NullableString  `json:"name,omitempty"`
 	Region *LocationRegion `json:"region,omitempty"`
 	// Services provided by the location

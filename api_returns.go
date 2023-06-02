@@ -419,7 +419,7 @@ func (a *ReturnsApiService) GetReturnExecute(r ApiGetReturnRequest) (*ReturnOrde
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetReturnStatusHistoryRequest struct {
+type ApiGetReturnStatushistoryRequest struct {
 	ctx              context.Context
 	ApiService       *ReturnsApiService
 	id               int32
@@ -427,24 +427,24 @@ type ApiGetReturnStatusHistoryRequest struct {
 }
 
 // Channel Id for Operation
-func (r ApiGetReturnStatusHistoryRequest) ShipbobChannelId(shipbobChannelId int32) ApiGetReturnStatusHistoryRequest {
+func (r ApiGetReturnStatushistoryRequest) ShipbobChannelId(shipbobChannelId int32) ApiGetReturnStatushistoryRequest {
 	r.shipbobChannelId = &shipbobChannelId
 	return r
 }
 
-func (r ApiGetReturnStatusHistoryRequest) Execute() (*ReturnOrderStatusHistory, *http.Response, error) {
-	return r.ApiService.GetReturnStatusHistoryExecute(r)
+func (r ApiGetReturnStatushistoryRequest) Execute() (*ReturnOrderStatusHistory, *http.Response, error) {
+	return r.ApiService.GetReturnStatushistoryExecute(r)
 }
 
 /*
-GetReturnStatusHistory Get One Return's status history
+GetReturnStatushistory Get One Return's status history
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param id Id of the return order
-	@return ApiGetReturnStatusHistoryRequest
+	@return ApiGetReturnStatushistoryRequest
 */
-func (a *ReturnsApiService) GetReturnStatusHistory(ctx context.Context, id int32) ApiGetReturnStatusHistoryRequest {
-	return ApiGetReturnStatusHistoryRequest{
+func (a *ReturnsApiService) GetReturnStatushistory(ctx context.Context, id int32) ApiGetReturnStatushistoryRequest {
+	return ApiGetReturnStatushistoryRequest{
 		ApiService: a,
 		ctx:        ctx,
 		id:         id,
@@ -454,7 +454,7 @@ func (a *ReturnsApiService) GetReturnStatusHistory(ctx context.Context, id int32
 // Execute executes the request
 //
 //	@return ReturnOrderStatusHistory
-func (a *ReturnsApiService) GetReturnStatusHistoryExecute(r ApiGetReturnStatusHistoryRequest) (*ReturnOrderStatusHistory, *http.Response, error) {
+func (a *ReturnsApiService) GetReturnStatushistoryExecute(r ApiGetReturnStatushistoryRequest) (*ReturnOrderStatusHistory, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
@@ -462,7 +462,7 @@ func (a *ReturnsApiService) GetReturnStatusHistoryExecute(r ApiGetReturnStatusHi
 		localVarReturnValue *ReturnOrderStatusHistory
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ReturnsApiService.GetReturnStatusHistory")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ReturnsApiService.GetReturnStatushistory")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -546,7 +546,7 @@ type ApiGetReturnsRequest struct {
 	ApiService           *ReturnsApiService
 	page                 *int32
 	limit                *int32
-	sortOrder            *string
+	sortOrder            *SortOrder
 	startDate            *time.Time
 	endDate              *time.Time
 	iDs                  *[]int32
@@ -572,7 +572,7 @@ func (r ApiGetReturnsRequest) Limit(limit int32) ApiGetReturnsRequest {
 }
 
 // Order to sort results by
-func (r ApiGetReturnsRequest) SortOrder(sortOrder string) ApiGetReturnsRequest {
+func (r ApiGetReturnsRequest) SortOrder(sortOrder SortOrder) ApiGetReturnsRequest {
 	r.sortOrder = &sortOrder
 	return r
 }

@@ -66,13 +66,13 @@ func (r ApiGetInventoriesRequest) IDs(iDs []int32) ApiGetInventoriesRequest {
 	return r
 }
 
-// Sort will default to ascending order for each field. \\r\\nTo sort in descending order please pass a \&quot;-\&quot; in front of the field name. \\r\\nFor example, Sort&#x3D;-onHand,name will sort by onHand descending
+// Sort will default to ascending order for each field.  To sort in descending order please pass a \&quot;-\&quot; in front of the field name.  For example, Sort&#x3D;-onHand,name will sort by onHand descending
 func (r ApiGetInventoriesRequest) Sort(sort string) ApiGetInventoriesRequest {
 	r.sort = &sort
 	return r
 }
 
-// Search is available for 2 fields, Inventory ID and Name -\\r\\n1. Expected behavior for search by Inventory ID is exact match\\r\\n2. Expected behavior for search by Inventory Name is partial match, i.e. does not have to be start of word, \\r\\nbut must be consecutive characters. This is not case sensitive.
+// Search is available for 2 fields, Inventory ID and Name - 1. Expected behavior for search by Inventory ID is exact match 2. Expected behavior for search by Inventory Name is partial match, i.e. does not have to be start of word,  but must be consecutive characters. This is not case sensitive.
 func (r ApiGetInventoriesRequest) Search(search string) ApiGetInventoriesRequest {
 	r.search = &search
 	return r
@@ -333,7 +333,7 @@ func (a *InventoryApiService) GetInventoryExecute(r ApiGetInventoryRequest) (*In
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetProductInventoryRequest struct {
+type ApiGetProductInventoriesRequest struct {
 	ctx              context.Context
 	ApiService       *InventoryApiService
 	productId        int32
@@ -341,24 +341,24 @@ type ApiGetProductInventoryRequest struct {
 }
 
 // Channel Id for Operation
-func (r ApiGetProductInventoryRequest) ShipbobChannelId(shipbobChannelId int32) ApiGetProductInventoryRequest {
+func (r ApiGetProductInventoriesRequest) ShipbobChannelId(shipbobChannelId int32) ApiGetProductInventoriesRequest {
 	r.shipbobChannelId = &shipbobChannelId
 	return r
 }
 
-func (r ApiGetProductInventoryRequest) Execute() ([]Inventory, *http.Response, error) {
-	return r.ApiService.GetProductInventoryExecute(r)
+func (r ApiGetProductInventoriesRequest) Execute() ([]Inventory, *http.Response, error) {
+	return r.ApiService.GetProductInventoriesExecute(r)
 }
 
 /*
-GetProductInventory Get a list of inventory items by product id
+GetProductInventories Get a list of inventory items by product id
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param productId The product id to get inventory for
-	@return ApiGetProductInventoryRequest
+	@return ApiGetProductInventoriesRequest
 */
-func (a *InventoryApiService) GetProductInventory(ctx context.Context, productId int32) ApiGetProductInventoryRequest {
-	return ApiGetProductInventoryRequest{
+func (a *InventoryApiService) GetProductInventories(ctx context.Context, productId int32) ApiGetProductInventoriesRequest {
+	return ApiGetProductInventoriesRequest{
 		ApiService: a,
 		ctx:        ctx,
 		productId:  productId,
@@ -368,7 +368,7 @@ func (a *InventoryApiService) GetProductInventory(ctx context.Context, productId
 // Execute executes the request
 //
 //	@return []Inventory
-func (a *InventoryApiService) GetProductInventoryExecute(r ApiGetProductInventoryRequest) ([]Inventory, *http.Response, error) {
+func (a *InventoryApiService) GetProductInventoriesExecute(r ApiGetProductInventoriesRequest) ([]Inventory, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
@@ -376,7 +376,7 @@ func (a *InventoryApiService) GetProductInventoryExecute(r ApiGetProductInventor
 		localVarReturnValue []Inventory
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "InventoryApiService.GetProductInventory")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "InventoryApiService.GetProductInventories")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}

@@ -7,7 +7,7 @@ Method | HTTP request | Description
 [**CancelReturn**](ReturnsApi.md#CancelReturn) | **Post** /return/{id}/cancel | Cancel Return Order
 [**CreateReturn**](ReturnsApi.md#CreateReturn) | **Post** /return | Create Return Order
 [**GetReturn**](ReturnsApi.md#GetReturn) | **Get** /return/{id} | Get Return Order
-[**GetReturnStatusHistory**](ReturnsApi.md#GetReturnStatusHistory) | **Get** /return/{id}/statushistory | Get One Return&#39;s status history
+[**GetReturnStatushistory**](ReturnsApi.md#GetReturnStatushistory) | **Get** /return/{id}/statushistory | Get One Return&#39;s status history
 [**GetReturns**](ReturnsApi.md#GetReturns) | **Get** /return | Get Return Orders
 [**UpdateReturn**](ReturnsApi.md#UpdateReturn) | **Put** /return/{id} | Modify Return Order
 
@@ -219,9 +219,9 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## GetReturnStatusHistory
+## GetReturnStatushistory
 
-> ReturnOrderStatusHistory GetReturnStatusHistory(ctx, id).ShipbobChannelId(shipbobChannelId).Execute()
+> ReturnOrderStatusHistory GetReturnStatushistory(ctx, id).ShipbobChannelId(shipbobChannelId).Execute()
 
 Get One Return's status history
 
@@ -243,13 +243,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ReturnsApi.GetReturnStatusHistory(context.Background(), id).ShipbobChannelId(shipbobChannelId).Execute()
+    resp, r, err := apiClient.ReturnsApi.GetReturnStatushistory(context.Background(), id).ShipbobChannelId(shipbobChannelId).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReturnsApi.GetReturnStatusHistory``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `ReturnsApi.GetReturnStatushistory``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `GetReturnStatusHistory`: ReturnOrderStatusHistory
-    fmt.Fprintf(os.Stdout, "Response from `ReturnsApi.GetReturnStatusHistory`: %v\n", resp)
+    // response from `GetReturnStatushistory`: ReturnOrderStatusHistory
+    fmt.Fprintf(os.Stdout, "Response from `ReturnsApi.GetReturnStatushistory`: %v\n", resp)
 }
 ```
 
@@ -263,7 +263,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiGetReturnStatusHistoryRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiGetReturnStatushistoryRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -311,7 +311,7 @@ import (
 func main() {
     page := int32(56) // int32 | Page of return orders to get (optional)
     limit := int32(56) // int32 | Amount of return orders per page to request (optional)
-    sortOrder := "sortOrder_example" // string | Order to sort results by (optional)
+    sortOrder := openapiclient.SortOrder("Newest") // SortOrder | Order to sort results by (optional)
     startDate := time.Now() // time.Time | Start date to filter orders inserted later than (optional)
     endDate := time.Now() // time.Time | End date to filter orders inserted earlier than (optional)
     iDs := []int32{int32(123)} // []int32 | Comma separated list of return orders ids to filter by (optional)
@@ -348,7 +348,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **page** | **int32** | Page of return orders to get | 
  **limit** | **int32** | Amount of return orders per page to request | 
- **sortOrder** | **string** | Order to sort results by | 
+ **sortOrder** | [**SortOrder**](SortOrder.md) | Order to sort results by | 
  **startDate** | **time.Time** | Start date to filter orders inserted later than | 
  **endDate** | **time.Time** | End date to filter orders inserted earlier than | 
  **iDs** | **[]int32** | Comma separated list of return orders ids to filter by | 

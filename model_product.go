@@ -21,9 +21,9 @@ var _ MappedNullable = &Product{}
 // Product struct for Product
 type Product struct {
 	// Barcode for the product
-	Barcode               NullableString                `json:"barcode,omitempty"`
-	BundleRootInformation *ProductBundleRootInformation `json:"bundle_root_information,omitempty"`
-	Channel               *ProductChannel               `json:"channel,omitempty"`
+	Barcode               NullableString         `json:"barcode,omitempty"`
+	BundleRootInformation *BundleRootInformation `json:"bundle_root_information,omitempty"`
+	Channel               *ProductChannel        `json:"channel,omitempty"`
 	// Date the product was created
 	CreatedDate NullableTime `json:"created_date,omitempty"`
 	// The inventory that this product will resolve to when packing a shipment
@@ -107,9 +107,9 @@ func (o *Product) UnsetBarcode() {
 }
 
 // GetBundleRootInformation returns the BundleRootInformation field value if set, zero value otherwise.
-func (o *Product) GetBundleRootInformation() ProductBundleRootInformation {
+func (o *Product) GetBundleRootInformation() BundleRootInformation {
 	if o == nil || IsNil(o.BundleRootInformation) {
-		var ret ProductBundleRootInformation
+		var ret BundleRootInformation
 		return ret
 	}
 	return *o.BundleRootInformation
@@ -117,7 +117,7 @@ func (o *Product) GetBundleRootInformation() ProductBundleRootInformation {
 
 // GetBundleRootInformationOk returns a tuple with the BundleRootInformation field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Product) GetBundleRootInformationOk() (*ProductBundleRootInformation, bool) {
+func (o *Product) GetBundleRootInformationOk() (*BundleRootInformation, bool) {
 	if o == nil || IsNil(o.BundleRootInformation) {
 		return nil, false
 	}
@@ -133,8 +133,8 @@ func (o *Product) HasBundleRootInformation() bool {
 	return false
 }
 
-// SetBundleRootInformation gets a reference to the given ProductBundleRootInformation and assigns it to the BundleRootInformation field.
-func (o *Product) SetBundleRootInformation(v ProductBundleRootInformation) {
+// SetBundleRootInformation gets a reference to the given BundleRootInformation and assigns it to the BundleRootInformation field.
+func (o *Product) SetBundleRootInformation(v BundleRootInformation) {
 	o.BundleRootInformation = &v
 }
 

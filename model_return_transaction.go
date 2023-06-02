@@ -20,8 +20,8 @@ var _ MappedNullable = &ReturnTransaction{}
 // ReturnTransaction struct for ReturnTransaction
 type ReturnTransaction struct {
 	// Transaction amount in dollars
-	Amount          *float64 `json:"amount,omitempty"`
-	TransactionType *string  `json:"transaction_type,omitempty"`
+	Amount          *float64                    `json:"amount,omitempty"`
+	TransactionType *ReturnTransactionLogSource `json:"transaction_type,omitempty"`
 }
 
 // NewReturnTransaction instantiates a new ReturnTransaction object
@@ -74,9 +74,9 @@ func (o *ReturnTransaction) SetAmount(v float64) {
 }
 
 // GetTransactionType returns the TransactionType field value if set, zero value otherwise.
-func (o *ReturnTransaction) GetTransactionType() string {
+func (o *ReturnTransaction) GetTransactionType() ReturnTransactionLogSource {
 	if o == nil || IsNil(o.TransactionType) {
-		var ret string
+		var ret ReturnTransactionLogSource
 		return ret
 	}
 	return *o.TransactionType
@@ -84,7 +84,7 @@ func (o *ReturnTransaction) GetTransactionType() string {
 
 // GetTransactionTypeOk returns a tuple with the TransactionType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ReturnTransaction) GetTransactionTypeOk() (*string, bool) {
+func (o *ReturnTransaction) GetTransactionTypeOk() (*ReturnTransactionLogSource, bool) {
 	if o == nil || IsNil(o.TransactionType) {
 		return nil, false
 	}
@@ -100,8 +100,8 @@ func (o *ReturnTransaction) HasTransactionType() bool {
 	return false
 }
 
-// SetTransactionType gets a reference to the given string and assigns it to the TransactionType field.
-func (o *ReturnTransaction) SetTransactionType(v string) {
+// SetTransactionType gets a reference to the given ReturnTransactionLogSource and assigns it to the TransactionType field.
+func (o *ReturnTransaction) SetTransactionType(v ReturnTransactionLogSource) {
 	o.TransactionType = &v
 }
 

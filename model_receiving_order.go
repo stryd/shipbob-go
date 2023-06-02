@@ -24,7 +24,7 @@ type ReceivingOrder struct {
 	BoxLabelsUri     NullableString `json:"box_labels_uri,omitempty"`
 	BoxPackagingType *PackingType   `json:"box_packaging_type,omitempty"`
 	// Information about the boxes being shipped in this receiving order
-	Boxes []ReceivingOrderBoxesInner `json:"boxes,omitempty"`
+	Boxes []Box `json:"boxes,omitempty"`
 	// Expected date that all packages will have arrived
 	ExpectedArrivalDate NullableTime                `json:"expected_arrival_date,omitempty"`
 	FulfillmentCenter   *ReceivingFulfillmentCenter `json:"fulfillment_center,omitempty"`
@@ -33,9 +33,9 @@ type ReceivingOrder struct {
 	// Insert date of the receiving order
 	InsertDate NullableTime `json:"insert_date,omitempty"`
 	// Last date the receiving order was updated
-	LastUpdatedDate NullableTime `json:"last_updated_date,omitempty"`
-	PackageType     *PackageType `json:"package_type,omitempty"`
-	Status          *string      `json:"status,omitempty"`
+	LastUpdatedDate NullableTime     `json:"last_updated_date,omitempty"`
+	PackageType     *PackageType     `json:"package_type,omitempty"`
+	Status          *ReceivingStatus `json:"status,omitempty"`
 }
 
 // NewReceivingOrder instantiates a new ReceivingOrder object
@@ -131,9 +131,9 @@ func (o *ReceivingOrder) SetBoxPackagingType(v PackingType) {
 }
 
 // GetBoxes returns the Boxes field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *ReceivingOrder) GetBoxes() []ReceivingOrderBoxesInner {
+func (o *ReceivingOrder) GetBoxes() []Box {
 	if o == nil {
-		var ret []ReceivingOrderBoxesInner
+		var ret []Box
 		return ret
 	}
 	return o.Boxes
@@ -142,7 +142,7 @@ func (o *ReceivingOrder) GetBoxes() []ReceivingOrderBoxesInner {
 // GetBoxesOk returns a tuple with the Boxes field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *ReceivingOrder) GetBoxesOk() ([]ReceivingOrderBoxesInner, bool) {
+func (o *ReceivingOrder) GetBoxesOk() ([]Box, bool) {
 	if o == nil || IsNil(o.Boxes) {
 		return nil, false
 	}
@@ -158,8 +158,8 @@ func (o *ReceivingOrder) HasBoxes() bool {
 	return false
 }
 
-// SetBoxes gets a reference to the given []ReceivingOrderBoxesInner and assigns it to the Boxes field.
-func (o *ReceivingOrder) SetBoxes(v []ReceivingOrderBoxesInner) {
+// SetBoxes gets a reference to the given []Box and assigns it to the Boxes field.
+func (o *ReceivingOrder) SetBoxes(v []Box) {
 	o.Boxes = v
 }
 
@@ -389,9 +389,9 @@ func (o *ReceivingOrder) SetPackageType(v PackageType) {
 }
 
 // GetStatus returns the Status field value if set, zero value otherwise.
-func (o *ReceivingOrder) GetStatus() string {
+func (o *ReceivingOrder) GetStatus() ReceivingStatus {
 	if o == nil || IsNil(o.Status) {
-		var ret string
+		var ret ReceivingStatus
 		return ret
 	}
 	return *o.Status
@@ -399,7 +399,7 @@ func (o *ReceivingOrder) GetStatus() string {
 
 // GetStatusOk returns a tuple with the Status field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ReceivingOrder) GetStatusOk() (*string, bool) {
+func (o *ReceivingOrder) GetStatusOk() (*ReceivingStatus, bool) {
 	if o == nil || IsNil(o.Status) {
 		return nil, false
 	}
@@ -415,8 +415,8 @@ func (o *ReceivingOrder) HasStatus() bool {
 	return false
 }
 
-// SetStatus gets a reference to the given string and assigns it to the Status field.
-func (o *ReceivingOrder) SetStatus(v string) {
+// SetStatus gets a reference to the given ReceivingStatus and assigns it to the Status field.
+func (o *ReceivingOrder) SetStatus(v ReceivingStatus) {
 	o.Status = &v
 }
 

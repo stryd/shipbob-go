@@ -4,9 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ActualFulfillmentDate** | Pointer to **NullableTime** | The datetime of ShipBob&#39;s completion of the fulfillment operation as promised. Currently, this means the shipment has been picked, packed, and label has been printed. | [optional] 
+**ActualFulfillmentDate** | Pointer to **NullableTime** | The datetime of ShipBob&#39;s completion of the fulfillment operation as promised.  Currently, this means the shipment has been picked, packed, and label has been printed. | [optional] 
 **CreatedDate** | Pointer to **NullableTime** | Date this shipment was created | [optional] 
-**EstimatedFulfillmentDate** | Pointer to **NullableTime** | The datetime of ShipBob&#39;s commitment for completing the shipment and handing to the carrier for delivery. | [optional] 
+**EstimatedFulfillmentDate** | Pointer to **NullableTime** | The datetime of ShipBob&#39;s commitment for completing  the shipment and handing to the carrier for delivery. | [optional] 
 **EstimatedFulfillmentDateStatus** | Pointer to **string** | Status of ShipBob&#39;s completion of the fulfillment operation. | [optional] 
 **Id** | Pointer to **int32** | Unique id of the shipment | [optional] 
 **InsuranceValue** | Pointer to **NullableFloat64** | Monetary amount that this shipment was insured for | [optional] 
@@ -22,7 +22,7 @@ Name | Type | Description | Notes
 **RequireSignature** | Pointer to **bool** | If a shipment requires signature | [optional] 
 **ShipOption** | Pointer to **string** | Name of the shipping option used for this shipment | [optional] 
 **Status** | Pointer to **string** | The shipment status | [optional] 
-**StatusDetails** | Pointer to [**[]OrderStatusDetails**](OrderStatusDetails.md) | Additional details about the shipment status | [optional] 
+**StatusDetails** | Pointer to [**[]OrderStatusDetail**](OrderStatusDetail.md) | Additional details about the shipment status | [optional] 
 **Tracking** | Pointer to [**Tracking**](Tracking.md) |  | [optional] 
 
 ## Methods
@@ -556,20 +556,20 @@ HasStatus returns a boolean if a field has been set.
 
 ### GetStatusDetails
 
-`func (o *Shipment) GetStatusDetails() []OrderStatusDetails`
+`func (o *Shipment) GetStatusDetails() []OrderStatusDetail`
 
 GetStatusDetails returns the StatusDetails field if non-nil, zero value otherwise.
 
 ### GetStatusDetailsOk
 
-`func (o *Shipment) GetStatusDetailsOk() (*[]OrderStatusDetails, bool)`
+`func (o *Shipment) GetStatusDetailsOk() (*[]OrderStatusDetail, bool)`
 
 GetStatusDetailsOk returns a tuple with the StatusDetails field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetStatusDetails
 
-`func (o *Shipment) SetStatusDetails(v []OrderStatusDetails)`
+`func (o *Shipment) SetStatusDetails(v []OrderStatusDetail)`
 
 SetStatusDetails sets StatusDetails field to given value.
 

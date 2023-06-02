@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Address** | Pointer to [**LocationAddress**](LocationAddress.md) |  | [optional] 
 **Enabled** | Pointer to **bool** | Indicates if the user is authorized to access this service at the location | [optional] 
-**ServiceType** | Pointer to **string** |  | [optional] 
+**ServiceType** | Pointer to [**LocationServiceTypeEnum**](LocationServiceTypeEnum.md) |  | [optional] 
 
 ## Methods
 
@@ -79,20 +79,20 @@ HasEnabled returns a boolean if a field has been set.
 
 ### GetServiceType
 
-`func (o *LocationService) GetServiceType() string`
+`func (o *LocationService) GetServiceType() LocationServiceTypeEnum`
 
 GetServiceType returns the ServiceType field if non-nil, zero value otherwise.
 
 ### GetServiceTypeOk
 
-`func (o *LocationService) GetServiceTypeOk() (*string, bool)`
+`func (o *LocationService) GetServiceTypeOk() (*LocationServiceTypeEnum, bool)`
 
 GetServiceTypeOk returns a tuple with the ServiceType field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetServiceType
 
-`func (o *LocationService) SetServiceType(v string)`
+`func (o *LocationService) SetServiceType(v LocationServiceTypeEnum)`
 
 SetServiceType sets ServiceType field to given value.
 

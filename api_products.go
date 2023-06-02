@@ -432,8 +432,8 @@ type ApiGetProductsRequest struct {
 	iDs              *[]int32
 	referenceIds     *[]string
 	search           *string
-	activeStatus     *string
-	bundleStatus     *ProductBundle
+	activeStatus     *ProductActiveStatus
+	bundleStatus     *ProductBundleStatus
 	shipbobChannelId *int32
 }
 
@@ -461,20 +461,20 @@ func (r ApiGetProductsRequest) ReferenceIds(referenceIds []string) ApiGetProduct
 	return r
 }
 
-// Search is available for 2 fields of the inventory record related to the product: Inventory ID and Name -\\r\\n1. Expected behavior for search by Inventory ID is exact match\\r\\n2. Expected behavior for search by Inventory Name is partial match, i.e. does not have to be start of word, \\r\\nbut must be consecutive characters. This is not case sensitive.
+// Search is available for 2 fields of the inventory record related to the product: Inventory ID and Name - 1. Expected behavior for search by Inventory ID is exact match 2. Expected behavior for search by Inventory Name is partial match, i.e. does not have to be start of word,  but must be consecutive characters. This is not case sensitive.
 func (r ApiGetProductsRequest) Search(search string) ApiGetProductsRequest {
 	r.search = &search
 	return r
 }
 
-// Status filter for products:- Any: Include both active and inactive- Active: Filter products that are Active- Inactive: Filter products that are Inactive
-func (r ApiGetProductsRequest) ActiveStatus(activeStatus string) ApiGetProductsRequest {
+// Status filter for products: - Any: Include both active and inactive - Active: Filter products that are Active - Inactive: Filter products that are Inactive
+func (r ApiGetProductsRequest) ActiveStatus(activeStatus ProductActiveStatus) ApiGetProductsRequest {
 	r.activeStatus = &activeStatus
 	return r
 }
 
-// Bundle filter for products:- Any: Don&#39;t filter and consider products that are bundles or not bundles- Bundle: Filter by products that are bundles- NotBundle: Filter by products that are not bundles
-func (r ApiGetProductsRequest) BundleStatus(bundleStatus ProductBundle) ApiGetProductsRequest {
+// Bundle filter for products: - Any: Don&#39;t filter and consider products that are bundles or not bundles - Bundle: Filter by products that are bundles - NotBundle: Filter by products that are not bundles
+func (r ApiGetProductsRequest) BundleStatus(bundleStatus ProductBundleStatus) ApiGetProductsRequest {
 	r.bundleStatus = &bundleStatus
 	return r
 }

@@ -6,14 +6,14 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **BoxLabelsUri** | Pointer to **NullableString** | URL to the packing slip to be included in each box shipment for this receiving order | [optional] 
 **BoxPackagingType** | Pointer to [**PackingType**](PackingType.md) |  | [optional] 
-**Boxes** | Pointer to [**[]ReceivingOrderBoxesInner**](ReceivingOrderBoxesInner.md) | Information about the boxes being shipped in this receiving order | [optional] 
+**Boxes** | Pointer to [**[]Box**](Box.md) | Information about the boxes being shipped in this receiving order | [optional] 
 **ExpectedArrivalDate** | Pointer to **NullableTime** | Expected date that all packages will have arrived | [optional] 
 **FulfillmentCenter** | Pointer to [**ReceivingFulfillmentCenter**](ReceivingFulfillmentCenter.md) |  | [optional] 
 **Id** | Pointer to **int32** | Unique id of the warehouse receiving order | [optional] 
 **InsertDate** | Pointer to **NullableTime** | Insert date of the receiving order | [optional] 
 **LastUpdatedDate** | Pointer to **NullableTime** | Last date the receiving order was updated | [optional] 
 **PackageType** | Pointer to [**PackageType**](PackageType.md) |  | [optional] 
-**Status** | Pointer to **string** |  | [optional] 
+**Status** | Pointer to [**ReceivingStatus**](ReceivingStatus.md) |  | [optional] 
 
 ## Methods
 
@@ -96,20 +96,20 @@ HasBoxPackagingType returns a boolean if a field has been set.
 
 ### GetBoxes
 
-`func (o *ReceivingOrder) GetBoxes() []ReceivingOrderBoxesInner`
+`func (o *ReceivingOrder) GetBoxes() []Box`
 
 GetBoxes returns the Boxes field if non-nil, zero value otherwise.
 
 ### GetBoxesOk
 
-`func (o *ReceivingOrder) GetBoxesOk() (*[]ReceivingOrderBoxesInner, bool)`
+`func (o *ReceivingOrder) GetBoxesOk() (*[]Box, bool)`
 
 GetBoxesOk returns a tuple with the Boxes field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetBoxes
 
-`func (o *ReceivingOrder) SetBoxes(v []ReceivingOrderBoxesInner)`
+`func (o *ReceivingOrder) SetBoxes(v []Box)`
 
 SetBoxes sets Boxes field to given value.
 
@@ -311,20 +311,20 @@ HasPackageType returns a boolean if a field has been set.
 
 ### GetStatus
 
-`func (o *ReceivingOrder) GetStatus() string`
+`func (o *ReceivingOrder) GetStatus() ReceivingStatus`
 
 GetStatus returns the Status field if non-nil, zero value otherwise.
 
 ### GetStatusOk
 
-`func (o *ReceivingOrder) GetStatusOk() (*string, bool)`
+`func (o *ReceivingOrder) GetStatusOk() (*ReceivingStatus, bool)`
 
 GetStatusOk returns a tuple with the Status field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetStatus
 
-`func (o *ReceivingOrder) SetStatus(v string)`
+`func (o *ReceivingOrder) SetStatus(v ReceivingStatus)`
 
 SetStatus sets Status field to given value.
 

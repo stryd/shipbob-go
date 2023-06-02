@@ -40,15 +40,15 @@ type Inventory struct {
 	PackagingAttribute *string `json:"packaging_attribute,omitempty"`
 	// Total quantity in unreceived receiving orders for this inventory item
 	TotalAwaitingQuantity *int32 `json:"total_awaiting_quantity,omitempty"`
-	// The amount of the item you need to send to ShipBob to fulfill all exception orders containing \\r\\nthe item. This is the exception_quantity less the fulfillable_quantity of the item.
+	// The amount of the item you need to send to ShipBob to fulfill all exception orders containing  the item. This is the exception_quantity less the fulfillable_quantity of the item.
 	TotalBackorderedQuantity *int32 `json:"total_backordered_quantity,omitempty"`
 	// Total committed quantity of this inventory item
 	TotalCommittedQuantity *int32 `json:"total_committed_quantity,omitempty"`
-	// The total quantity of all items that are contained within orders that\\r\\nare in exception/out of stock status. Out of stock orders have not been\\r\\nprocessed and therefore do not have lot or fulfillment centers assigned.
+	// The total quantity of all items that are contained within orders that are in exception/out of stock status. Out of stock orders have not been processed and therefore do not have lot or fulfillment centers assigned.
 	TotalExceptionQuantity *int32 `json:"total_exception_quantity,omitempty"`
 	// Total fulfillable quantity of this inventory item
 	TotalFulfillableQuantity *int32 `json:"total_fulfillable_quantity,omitempty"`
-	// The total quantity of all items that are in the process of internal transit \\r\\nbetween ShipBob fulfillment centers. These items are not pickable or fulfillable\\r\\nuntil they have been received and moved to the \"On Hand\" quantity of the destination FC.\\r\\nInternal transit quantities for each FC represent the incoming transfer stock\\r\\nfor that specific location.
+	// The total quantity of all items that are in the process of internal transit  between ShipBob fulfillment centers. These items are not pickable or fulfillable until they have been received and moved to the \"On Hand\" quantity of the destination FC. Internal transit quantities for each FC represent the incoming transfer stock for that specific location.
 	TotalInternalTransferQuantity *int32 `json:"total_internal_transfer_quantity,omitempty"`
 	// Total onhand quantity of this inventory item
 	TotalOnhandQuantity *int32 `json:"total_onhand_quantity,omitempty"`
