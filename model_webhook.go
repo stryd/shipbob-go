@@ -26,7 +26,7 @@ type Webhook struct {
 	Id *int32 `json:"id,omitempty"`
 	// URL subscription events will be posted to
 	SubscriptionUrl NullableString `json:"subscription_url,omitempty"`
-	Topic           *Topics        `json:"topic,omitempty"`
+	Topic *Topics `json:"topic,omitempty"`
 }
 
 // NewWebhook instantiates a new Webhook object
@@ -78,7 +78,6 @@ func (o *Webhook) HasCreatedAt() bool {
 func (o *Webhook) SetCreatedAt(v time.Time) {
 	o.CreatedAt.Set(&v)
 }
-
 // SetCreatedAtNil sets the value for CreatedAt to be an explicit nil
 func (o *Webhook) SetCreatedAtNil() {
 	o.CreatedAt.Set(nil)
@@ -153,7 +152,6 @@ func (o *Webhook) HasSubscriptionUrl() bool {
 func (o *Webhook) SetSubscriptionUrl(v string) {
 	o.SubscriptionUrl.Set(&v)
 }
-
 // SetSubscriptionUrlNil sets the value for SubscriptionUrl to be an explicit nil
 func (o *Webhook) SetSubscriptionUrlNil() {
 	o.SubscriptionUrl.Set(nil)
@@ -197,7 +195,7 @@ func (o *Webhook) SetTopic(v Topics) {
 }
 
 func (o Webhook) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -256,3 +254,5 @@ func (v *NullableWebhook) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

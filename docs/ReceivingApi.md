@@ -4,17 +4,17 @@ All URIs are relative to *https://api.shipbob.com/1.0*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CancelReceivingOrder**](ReceivingApi.md#CancelReceivingOrder) | **Post** /receiving/{id}/cancel | Cancel Warehouse Receiving Order
-[**CreateReceivingOrder**](ReceivingApi.md#CreateReceivingOrder) | **Post** /receiving | Create Warehouse Receiving Order
+[**CancelReceiving**](ReceivingApi.md#CancelReceiving) | **Post** /receiving/{id}/cancel | Cancel Warehouse Receiving Order
+[**CreateReceiving**](ReceivingApi.md#CreateReceiving) | **Post** /receiving | Create Warehouse Receiving Order
 [**GetFulfillmentCenters**](ReceivingApi.md#GetFulfillmentCenters) | **Get** /fulfillmentCenter | Get Fulfillment Centers
-[**GetReceivingOrder**](ReceivingApi.md#GetReceivingOrder) | **Get** /receiving/{id} | Get Warehouse Receiving Order
-[**GetReceivingOrderLabels**](ReceivingApi.md#GetReceivingOrderLabels) | **Get** /receiving/{id}/labels | Get Warehouse Receiving Order Box Labels
+[**GetReceiving**](ReceivingApi.md#GetReceiving) | **Get** /receiving/{id} | Get Warehouse Receiving Order
+[**GetReceivingLabels**](ReceivingApi.md#GetReceivingLabels) | **Get** /receiving/{id}/labels | Get Warehouse Receiving Order Box Labels
 
 
 
-## CancelReceivingOrder
+## CancelReceiving
 
-> CancelReceivingOrder(ctx, id).Execute()
+> CancelReceiving(ctx, id).Execute()
 
 Cancel Warehouse Receiving Order
 
@@ -35,9 +35,9 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    r, err := apiClient.ReceivingApi.CancelReceivingOrder(context.Background(), id).Execute()
+    r, err := apiClient.ReceivingApi.CancelReceiving(context.Background(), id).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReceivingApi.CancelReceivingOrder``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `ReceivingApi.CancelReceiving``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
 }
@@ -53,7 +53,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiCancelReceivingOrderRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiCancelReceivingRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -78,9 +78,9 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## CreateReceivingOrder
+## CreateReceiving
 
-> ReceivingOrder CreateReceivingOrder(ctx).CreateReceivingOrder(createReceivingOrder).Execute()
+> ReceivingOrder CreateReceiving(ctx).CreateReceivingOrder(createReceivingOrder).Execute()
 
 Create Warehouse Receiving Order
 
@@ -98,17 +98,17 @@ import (
 )
 
 func main() {
-    createReceivingOrder := *openapiclient.NewCreateReceivingOrder(openapiclient.PackingType("EverythingInOneBox"), []openapiclient.CreateReceivingOrderBoxesInner{*openapiclient.NewCreateReceivingOrderBoxesInner([]openapiclient.CreateReceivingOrderBoxesInnerBoxItemsInner{*openapiclient.NewCreateReceivingOrderBoxesInnerBoxItemsInner(int32(123), int32(123))}, "860C8CDC8F0B4FC7AB69AC86C20539EC")}, time.Now(), *openapiclient.NewCreateReceivingOrderFulfillmentCenter(int32(123)), openapiclient.PackageType("Package")) // CreateReceivingOrder | The receiving order to create (optional)
+    createReceivingOrder := *openapiclient.NewCreateReceivingOrder(openapiclient.PackingType("EverythingInOneBox"), []openapiclient.AddBoxToOrder{*openapiclient.NewAddBoxToOrder([]openapiclient.AddBoxItemToBox{*openapiclient.NewAddBoxItemToBox(int32(123), int32(123))}, "860C8CDC8F0B4FC7AB69AC86C20539EC")}, time.Now(), *openapiclient.NewAssignOrderToFulfillmentCenter(int32(123)), openapiclient.PackageType("Package")) // CreateReceivingOrder | The receiving order to create (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ReceivingApi.CreateReceivingOrder(context.Background()).CreateReceivingOrder(createReceivingOrder).Execute()
+    resp, r, err := apiClient.ReceivingApi.CreateReceiving(context.Background()).CreateReceivingOrder(createReceivingOrder).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReceivingApi.CreateReceivingOrder``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `ReceivingApi.CreateReceiving``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `CreateReceivingOrder`: ReceivingOrder
-    fmt.Fprintf(os.Stdout, "Response from `ReceivingApi.CreateReceivingOrder`: %v\n", resp)
+    // response from `CreateReceiving`: ReceivingOrder
+    fmt.Fprintf(os.Stdout, "Response from `ReceivingApi.CreateReceiving`: %v\n", resp)
 }
 ```
 
@@ -118,7 +118,7 @@ func main() {
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiCreateReceivingOrderRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiCreateReceivingRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -202,9 +202,9 @@ Other parameters are passed through a pointer to a apiGetFulfillmentCentersReque
 [[Back to README]](../README.md)
 
 
-## GetReceivingOrder
+## GetReceiving
 
-> ReceivingOrder GetReceivingOrder(ctx, id).Execute()
+> ReceivingOrder GetReceiving(ctx, id).Execute()
 
 Get Warehouse Receiving Order
 
@@ -225,13 +225,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ReceivingApi.GetReceivingOrder(context.Background(), id).Execute()
+    resp, r, err := apiClient.ReceivingApi.GetReceiving(context.Background(), id).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReceivingApi.GetReceivingOrder``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `ReceivingApi.GetReceiving``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `GetReceivingOrder`: ReceivingOrder
-    fmt.Fprintf(os.Stdout, "Response from `ReceivingApi.GetReceivingOrder`: %v\n", resp)
+    // response from `GetReceiving`: ReceivingOrder
+    fmt.Fprintf(os.Stdout, "Response from `ReceivingApi.GetReceiving`: %v\n", resp)
 }
 ```
 
@@ -245,7 +245,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiGetReceivingOrderRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiGetReceivingRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -270,9 +270,9 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## GetReceivingOrderLabels
+## GetReceivingLabels
 
-> string GetReceivingOrderLabels(ctx, id).Execute()
+> string GetReceivingLabels(ctx, id).Execute()
 
 Get Warehouse Receiving Order Box Labels
 
@@ -293,13 +293,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ReceivingApi.GetReceivingOrderLabels(context.Background(), id).Execute()
+    resp, r, err := apiClient.ReceivingApi.GetReceivingLabels(context.Background(), id).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReceivingApi.GetReceivingOrderLabels``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `ReceivingApi.GetReceivingLabels``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `GetReceivingOrderLabels`: string
-    fmt.Fprintf(os.Stdout, "Response from `ReceivingApi.GetReceivingOrderLabels`: %v\n", resp)
+    // response from `GetReceivingLabels`: string
+    fmt.Fprintf(os.Stdout, "Response from `ReceivingApi.GetReceivingLabels`: %v\n", resp)
 }
 ```
 
@@ -313,7 +313,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiGetReceivingOrderLabelsRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiGetReceivingLabelsRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes

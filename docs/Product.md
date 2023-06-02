@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Barcode** | Pointer to **NullableString** | Barcode for the product | [optional] 
-**BundleRootInformation** | Pointer to [**ProductBundleRootInformation**](ProductBundleRootInformation.md) |  | [optional] 
+**BundleRootInformation** | Pointer to [**BundleRootInformation**](BundleRootInformation.md) |  | [optional] 
 **Channel** | Pointer to [**ProductChannel**](ProductChannel.md) |  | [optional] 
 **CreatedDate** | Pointer to **NullableTime** | Date the product was created | [optional] 
 **FulfillableInventoryItems** | Pointer to [**[]ProductInventoryItem**](ProductInventoryItem.md) | The inventory that this product will resolve to when packing a shipment | [optional] 
@@ -74,20 +74,20 @@ HasBarcode returns a boolean if a field has been set.
 UnsetBarcode ensures that no value is present for Barcode, not even an explicit nil
 ### GetBundleRootInformation
 
-`func (o *Product) GetBundleRootInformation() ProductBundleRootInformation`
+`func (o *Product) GetBundleRootInformation() BundleRootInformation`
 
 GetBundleRootInformation returns the BundleRootInformation field if non-nil, zero value otherwise.
 
 ### GetBundleRootInformationOk
 
-`func (o *Product) GetBundleRootInformationOk() (*ProductBundleRootInformation, bool)`
+`func (o *Product) GetBundleRootInformationOk() (*BundleRootInformation, bool)`
 
 GetBundleRootInformationOk returns a tuple with the BundleRootInformation field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetBundleRootInformation
 
-`func (o *Product) SetBundleRootInformation(v ProductBundleRootInformation)`
+`func (o *Product) SetBundleRootInformation(v BundleRootInformation)`
 
 SetBundleRootInformation sets BundleRootInformation field to given value.
 

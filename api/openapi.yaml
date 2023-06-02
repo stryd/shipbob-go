@@ -10,135 +10,138 @@ tags:
     \ in the ShipBob Merchant Portal when you navigate to the Orders page. ShipBob\
     \ is currently undergoing a schema migration and the Id displayed in the ShipBob\
     \ Merchant Portal is the shipmentId not the orderId. In the future, the portal\
-    \ will display both orderId(s) and shipmentId(s).  Use the Orders Resource to\
-    \ create and retrieve orders in ShipBob.  An order a digital record of a complete\
-    \ purchase that comes from an upstream source (i.e. Shopify) and is intended for\
-    \ ShipBob to fulfill. The order object includes products purchased, shipping address\
-    \ details, shipping method selected etc. Orders are created in ShipBob via a channel.\
-    \  When ShipBob fulfills the order, one or more shipments are created for that\
-    \ order. A shipment is a record of the physical package(s) sent out via a carrier.\
-    \ If an order is shipped in multiple packages then 2 or more shipments can be\
-    \ created for that order.  ### Tips for creating orders in ShipBob via the POST\
-    \ Order endpoint:  * Populate the referenceId with a unique and immutable order\
-    \ identifier from your upstream system. This field was created to allow you to\
-    \ tieback records in ShipBob with your upstream system.  * Ensure that the <em>\
-    \ shipping method </em> passed in the API request matches exactly what the user\
-    \ has listed as the <em> shipping method </em> on the <em>  Ship Option Mapping\
-    \ </em> setup page in the ShipBob Merchant Portal. If they don't match, ShipBob\
-    \ will assume that the user wants to leverage ShipBob's default shipping method.\
-    \  * You can leverage either productId (the ShipBob productId) or the product\
-    \ referenceId (your system's  unique Identifier for products) when creating an\
-    \ order.  Use the Shipments endpoints to retrieve fulfillment information for\
-    \ shipments or orders.  A shipment is an object that is the result of a fulfillment\
-    \ of an order. An order can have one or more shipments. Say Shopify order #122323\
-    \ contains 3 different products, shipped in two separate packages, there would\
-    \ be 2 shipments for that order.   Serial numbers are unique identifiers for an\
-    \ individual item (e.g. your specific iPhone X that you bought at the Apple Store).\
-    \ No inventory item can possess duplicate serial numbers. Merchants can request\
-    \ serial scan, which means ShipBob will capture the serial number(s) upon sending\
-    \ a shipment so the merchant knows which customer received which individual item(s)."
+    \ will display both orderId(s) and shipmentId(s). \\n\\n Use the Orders Resource\
+    \ to create and retrieve orders in ShipBob. \\n\\n An order a digital record of\
+    \ a complete purchase that comes from an upstream source (i.e. Shopify) and is\
+    \ intended for ShipBob to fulfill. The order object includes products purchased,\
+    \ shipping address details, shipping method selected etc. Orders are created in\
+    \ ShipBob via a channel. \\n\\n When ShipBob fulfills the order, one or more shipments\
+    \ are created for that order. A shipment is a record of the physical package(s)\
+    \ sent out via a carrier. If an order is shipped in multiple packages then 2 or\
+    \ more shipments can be created for that order. \\n\\n ### Tips for creating orders\
+    \ in ShipBob via the POST Order endpoint: \\n\\n * Populate the referenceId with\
+    \ a unique and immutable order identifier from your upstream system. This field\
+    \ was created to allow you to tieback records in ShipBob with your upstream system.\
+    \ \\n\\n * Ensure that the <em> shipping method </em> passed in the API request\
+    \ matches exactly what the user has listed as the <em> shipping method </em> on\
+    \ the <em>  Ship Option Mapping </em> setup page in the ShipBob Merchant Portal.\
+    \ If they don't match, ShipBob will assume that the user wants to leverage ShipBob's\
+    \ default shipping method. \\n\\n * You can leverage either productId (the ShipBob\
+    \ productId) or the product referenceId (your system's  unique Identifier for\
+    \ products) when creating an order. \\n\\n Use the Shipments endpoints to retrieve\
+    \ fulfillment information for shipments or orders. \\n\\n A shipment is an object\
+    \ that is the result of a fulfillment of an order. An order can have one or more\
+    \ shipments. Say Shopify order #122323 contains 3 different products, shipped\
+    \ in two separate packages, there would be 2 shipments for that order. \\n\\n\
+    \  Serial numbers are unique identifiers for an individual item (e.g. your specific\
+    \ iPhone X that you bought at the Apple Store). No inventory item can possess\
+    \ duplicate serial numbers. Merchants can request \"serial scan\", which means\
+    \ ShipBob will capture the serial number(s) upon sending a shipment so the merchant\
+    \ knows which customer received which individual item(s)."
   name: Orders
 - description: "Use the Products Resource to retrieve and create product records in\
-    \ ShipBob.  A product is a virtual record created in ShipBob's system via a channel.\
-    \ Say a merchant has two Shopify stores (each store would have its own channel),\
-    \ Kevin's Shopify Store #133 and Kevin's Shopify store #134. If the same SKU was\
-    \ sold on both stores, two products would be created for that SKU, one product\
-    \ would be created to represent the SKU sold on Store #133 and one to represent\
-    \ it on Store on #134, with productIds 3884009 and 3884008 respectively.  While\
-    \ a product is a virtual record, the inventory item is a representation of a physical\
-    \ good. So in the above example, as product 3884009 and product 3884008 represent\
-    \ the same SKU sold on different channels, the same inventory item will be mapped\
-    \ to both products. Every product will have one or more inventory items mapped\
-    \ to it. Bundle products, a set of products that are sold to consumers as one\
-    \ combined package, think gift or multi packs, may have 2 or more inventory items\
-    \ mapped to them.  ### Tips for creating products in ShipBob via the POST Product\
-    \ endpoints:  * ShipBob needs products to be created at the lowest level. So if\
-    \ a product has 3 variants, small, medium and large, a separate product needs\
-    \ to be created in ShipBob for all three. * Populate the referenceId with a unique\
-    \ and immutable product identifier from your upstream system. This field was created\
-    \ to allow you to tie back records in ShipBob with your upstream system.  * Use\
-    \ specific and/or unique names to describe each product so they can be easily\
-    \ identified by users in the ShipBob Merchant Portal. In particular, when creating\
-    \ variants, please give them distinguishable names i.e. for a Blue shirt that\
-    \ comes in two sizes, small and medium, strong product names would be Blue shirt\
-    \ size:small and Blue shirt size:medium.  > **NOTE:** The productId returned in\
-    \ the API response will not match the id displayed in the ShipBob Merchant Portal\
-    \ when you navigate to Inventory > Products. ShipBob is currently undergoing a\
-    \ schema migration and the Id displayed in the ShipBob Merchant Portal is the\
-    \ inventoryId not the productId. In the future, the portal will display both productId(s)\
-    \ and inventoryId(s)"
+    \ ShipBob. \\n\\n A product is a virtual record created in ShipBob's system via\
+    \ a channel. Say a merchant has two Shopify stores (each store would have its\
+    \ own channel), Kevin's Shopify Store #133 and Kevin's Shopify store #134. If\
+    \ the same SKU was sold on both stores, two products would be created for that\
+    \ SKU, one product would be created to represent the SKU sold on Store #133 and\
+    \ one to represent it on Store on #134, with productIds 3884009 and 3884008 respectively.\
+    \ \\n\\n While a product is a virtual record, the inventory item is a representation\
+    \ of a physical good. So in the above example, as product 3884009 and product\
+    \ 3884008 represent the same SKU sold on different channels, the same inventory\
+    \ item will be mapped to both products. Every product will have one or more inventory\
+    \ items mapped to it. Bundle products, a set of products that are sold to consumers\
+    \ as one combined package, think gift or multi packs, may have 2 or more inventory\
+    \ items mapped to them. \\n\\n ### Tips for creating products in ShipBob via the\
+    \ POST Product endpoints: \\n\\n * ShipBob needs products to be created at the\
+    \ lowest level. So if a product has 3 variants, small, medium and large, a separate\
+    \ product needs to be created in ShipBob for all three.\\n\\n * Populate the referenceId\
+    \ with a unique and immutable product identifier from your upstream system. This\
+    \ field was created to allow you to tie back records in ShipBob with your upstream\
+    \ system. \\n\\n * Use specific and/or unique names to describe each product so\
+    \ they can be easily identified by users in the ShipBob Merchant Portal. In particular,\
+    \ when creating variants, please give them distinguishable names i.e. for a Blue\
+    \ shirt that comes in two sizes, small and medium, strong product names would\
+    \ be Blue shirt size:small and Blue shirt size:medium. \\n\\n > **NOTE:** The\
+    \ productId returned in the API response will not match the id displayed in the\
+    \ ShipBob Merchant Portal when you navigate to Inventory > Products. ShipBob is\
+    \ currently undergoing a schema migration and the Id displayed in the ShipBob\
+    \ Merchant Portal is the inventoryId not the productId. In the future, the portal\
+    \ will display both productId(s) and inventoryId(s)"
   name: Products
 - description: " Use the Inventory Resource to retrieve ShipBob  inventory items and\
-    \ quantities.  An inventory item is a representation of a physical good, that\
-    \ may or may not have physical stock in ShipBob's fulfillment centers. Every product\
-    \ will have one or more inventory items mapped to it. A bundle product (a set\
-    \ of products that are sold as one combined package - e.g.  gift or multi packs)\
-    \ is an example of a product that has  2 or more inventory items mapped to it.\
-    \  Lot items are physical items that have expiration dates or batch numbers that\
-    \ should be fulfilled in a FIFO (first in, first out) manner. Most food items\
-    \ are lot items. Quantities by lot # and/or expiration date are also listed in\
-    \ the Inventory object."
+    \ quantities. \\n\\n An inventory item is a representation of a physical good,\
+    \ that may or may not have physical stock in ShipBob's fulfillment centers. Every\
+    \ product will have one or more inventory items mapped to it. A bundle product\
+    \ (a set of products that are sold as one combined package - e.g.  gift or multi\
+    \ packs) is an example of a product that has  2 or more inventory items mapped\
+    \ to it. \\n\\n Lot items are physical items that have expiration dates or batch\
+    \ numbers that should be fulfilled in a FIFO (first in, first out) manner. Most\
+    \ food items are lot items. Quantities by lot # and/or expiration date are also\
+    \ listed in the Inventory object."
   name: Inventory
-- description: "Use the Channel Resource to list channels which you have access to.\
-    \ You will use this channelId for subsequent API calls made to ShipBob endpoints.\
-    \  A channel is a specific installation of an application built by a vendor on\
-    \ top of our API e.g. Kevin's Shopify Store #133432.  All write and most read\
-    \ endpoints require a channel to be passed in the header to complete the request.\
-    \ The channel is used to Identify where the data originally came from.   Applications\
-    \ that are granted multi-channel permissions will be able to read data from all\
-    \ channels that belong to a user. However, multi-channel applications will only\
-    \ be able to write on behalf of their own channel."
+- description: "Use the Channel Resource to list \"channels\" which you have access\
+    \ to. You will use this channelId for subsequent API calls made to ShipBob endpoints.\
+    \ \\n\\n A channel is a specific installation of an application built by a vendor\
+    \ on top of our API - e.g. Kevin's Shopify Store #133432.  All write and most\
+    \ read endpoints require a channel to be passed in the header to complete the\
+    \ request. The channel is used to Identify where the data originally came from.\
+    \  \\n\\n Applications that are granted multi-channel permissions will be able\
+    \ to read data from all channels that belong to a user. However, multi-channel\
+    \ applications will only be able to write on behalf of their own channel."
   name: Channels
 - description: "**While the Returns API is live, ShipBob's end to end Returns process\
     \ will not go live until the beginning of March. As a result, any returns arriving\
     \ at ShipBob's fulfillment centers prior to March 12st, 2020 will NOT be processed**.\
-    \  Use the Returns resource to retrieve, create, edit and cancel return records\
-    \ in ShipBob.  A return is a request for ShipBob to perform an action on inventory\
-    \ that is coming back into our fulfillment centers. Typically, the return is a\
-    \ result of an order being requested to be refunded or exchanged. ShipBob does\
-    \ not handle refunds or exchanges - we simply process the inventory according\
-    \ to the merchant specifications.  Returns can only be **modified** or **cancelled**\
-    \ when they are in the Awaiting Arrival status. Returns that are being Processed\
-    \ or have been Completed cannot be modified or cancelled.  ### Tips for creating\
-    \ return orders:  * Populate the referenceId with a unique and immutable return\
-    \ identifier from your upstream system. This field was created to allow you to\
-    \ tie back records in ShipBob with your upstream system.  *Include each inventoryId\
-    \ exactly once in the inventory object. If an inventoryId is included more than\
-    \ once, the call will return an error code  * Provide a tracking # when submitting\
-    \ a return, while it is not a required field, it is the the most surefire way\
-    \ for ShipBob staff to properly and quickly identify the return package when it\
-    \ reaches our fulfillment center.  * Only include inventory items to the return\
-    \ record that will be returned in the same box i.e. if InventoryId 12232 and InventoryId\
-    \ 12039 will be returned in two seperate boxes, two return orders should be created.\
-    \  * ShipBob does not process returns for digital items or bundle inventory items.\
-    \ Return calls that include digital inventory  items (e.g. ebooks) or bundle inventory\
+    \ \\n\\n Use the Returns resource to retrieve, create, edit and cancel return\
+    \ records in ShipBob. \\n\\n A return is a request for ShipBob to perform an action\
+    \ on inventory that is coming back into our fulfillment centers. Typically, the\
+    \ return is a result of an order being requested to be refunded or exchanged.\
+    \ ShipBob does not handle refunds or exchanges - we simply process the inventory\
+    \ according to the merchant specifications. \\n\\n Returns can only be **modified**\
+    \ or **cancelled** when they are in the Awaiting Arrival status. Returns that\
+    \ are being Processed or have been Completed cannot be modified or cancelled.\
+    \ \\n\\n ### Tips for creating return orders: \\n\\n * Populate the referenceId\
+    \ with a unique and immutable return identifier from your upstream system. This\
+    \ field was created to allow you to tie back records in ShipBob with your upstream\
+    \ system. \\n\\n *Include each inventoryId exactly once in the inventory object.\
+    \ If an inventoryId is included more than once, the call will return an error\
+    \ code \\n\\n * Provide a tracking # when submitting a return, while it is not\
+    \ a required field, it is the the most surefire way for ShipBob staff to properly\
+    \ and quickly identify the return package when it reaches our fulfillment center.\
+    \ \\n\\n * Only include inventory items to the return record that will be returned\
+    \ in the same box i.e. if InventoryId 12232 and InventoryId 12039 will be returned\
+    \ in two seperate boxes, two return orders should be created. \\n\\n * ShipBob\
+    \ does not process returns for digital items or bundle inventory items. Return\
+    \ calls that include digital inventory  items (e.g. ebooks) or bundle inventory\
     \ items (i.e. multipacks, combination of multiple inventory items)  will return\
-    \ an error code.  * If you choose to provide a requested action (it is an optional\
-    \ field), only provide one requested action per inventory item. So if  you have\
-    \ more than 1 quantity of a given item being returned within the same box, all\
-    \ quantities of the item have to have the same action associated with them. If\
-    \ you don't provide a requested action, it will default to the action the User\
-    \ set for that inventory item in the ShipBob Merchant portal."
+    \ an error code. \\n\\n * If you choose to provide a requested action (it is an\
+    \ optional field), only provide one requested action per inventory item. So if\
+    \  you have more than 1 quantity of a given item being returned within the same\
+    \ box, all quantities of the item have to have the same action associated with\
+    \ them. If you don't provide a requested action, it will default to the action\
+    \ the User set for that inventory item in the ShipBob Merchant portal."
   name: Returns
 - description: "Use the Receiving Resource to retrieve, create and cancel Warehouse\
-    \ Receiving Orders (WROs).  A WRO is a request form that tells ShipBob's fulfillment\
-    \ centers what inventory should be received and stocked. Some other solutions\
-    \ call this an ASN or Advanced Ship Notice. WROs may include multiple inventory\
-    \ items with specific quantities. More details on creating a WRO can be found\
-    \ [here](https://support.shipbob.com/s/article/New-Send-Inventory-to-ShipBob-WRO).\
-    \  A WRO can only be **canceled** if it is in the Awaiting status. WROs in Awaiting\
-    \ status are considered to still be in transit to ShipBob FCs. WROs that have\
-    \ Partially Arrived, have been Processed or are Completed, cannot be canceled."
+    \ Receiving Orders (WROs). \\n\\n A WRO is a request form that tells ShipBob's\
+    \ fulfillment centers what inventory should be received and stocked. Some other\
+    \ solutions call this an \"ASN\" or Advanced Ship Notice. WROs may include multiple\
+    \ inventory items with specific quantities. More details on creating a WRO can\
+    \ be found [here](https://support.shipbob.com/s/article/New-Send-Inventory-to-ShipBob-WRO).\
+    \ \\n\\n A WRO can only be **canceled** if it is in the Awaiting status. WROs\
+    \ in Awaiting status are considered to still be in transit to ShipBob FCs. WROs\
+    \ that have Partially Arrived, have been Processed or are Completed, cannot be\
+    \ canceled."
   name: Receiving
 - description: "Use the Webhooks Resource to create, view or delete subscriptions\
     \ for a user."
   name: Webhooks
 - description: "Use this API to interact with the physical locations across ShipBob's\
-    \ fulfillment network.  An active ShipBob location is operational for fulfillment\
+    \ fulfillment network. \\n\\n An active ShipBob location is operational for fulfillment\
     \ processes, including receiving inventory and processing returns. It's important\
     \ to note that some locations, access is granted to all merchants by default,\
     \ while some locations require special request for merchants to be granted access.\
-    \  For each location, determine if it can be leveraged for the user by viewing\
+    \ \\n\\n For each location, determine if it can be leveraged for the user by viewing\
     \ the access_granted & receiving_enabled fields."
   name: Locations
 paths:
@@ -248,9 +251,9 @@ paths:
             type: integer
           type: array
         style: form
-      - description: "Sort will default to ascending order for each field. \\r\\nTo\
-          \ sort in descending order please pass a \"-\" in front of the field name.\
-          \ \\r\\nFor example, Sort=-onHand,name will sort by onHand descending"
+      - description: "Sort will default to ascending order for each field.  To sort\
+          \ in descending order please pass a \"-\" in front of the field name.  For\
+          \ example, Sort=-onHand,name will sort by onHand descending"
         explode: true
         in: query
         name: Sort
@@ -258,11 +261,11 @@ paths:
         schema:
           type: string
         style: form
-      - description: "Search is available for 2 fields, Inventory ID and Name -\\\
-          r\\n1. Expected behavior for search by Inventory ID is exact match\\r\\\
-          n2. Expected behavior for search by Inventory Name is partial match, i.e.\
-          \ does not have to be start of word, \\r\\nbut must be consecutive characters.\
-          \ This is not case sensitive."
+      - description: "Search is available for 2 fields, Inventory ID and Name - 1.\
+          \ Expected behavior for search by Inventory ID is exact match 2. Expected\
+          \ behavior for search by Inventory Name is partial match, i.e. does not\
+          \ have to be start of word,  but must be consecutive characters. This is\
+          \ not case sensitive."
         explode: true
         in: query
         name: Search
@@ -608,13 +611,12 @@ paths:
     post:
       description: "This endpoint will provide, where possible, an estimate of pricing\
         \ and fulfillment center assignment of a potential standard (direct to consumer)\
-        \ order. \\r\\nKeep in mind that there are ways for the merchant to change\
-        \ FC assignment or product configuration after order creation that could invalidate\
-        \ this estimate. \\r\\nEstimates cannot be returned for items that are unknown,\
-        \ out of stock, or too large for fulfillment using standard box sizes. \\\
-        r\\nAdditional services such as high-pick fees, shipping insurance, auto-splitting\
-        \ or auto-adding items to orders, and signature required are not included\
-        \ in this estimate."
+        \ order.  Keep in mind that there are ways for the merchant to change FC assignment\
+        \ or product configuration after order creation that could invalidate this\
+        \ estimate.  Estimates cannot be returned for items that are unknown, out\
+        \ of stock, or too large for fulfillment using standard box sizes.  Additional\
+        \ services such as high-pick fees, shipping insurance, auto-splitting or auto-adding\
+        \ items to orders, and signature required are not included in this estimate."
       operationId: createOrderEstimate
       parameters:
       - description: Channel Id for Operation
@@ -630,7 +632,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/EstimateFulfillmentRequest'
+              $ref: '#/components/schemas/OrderEstimateFulfillmentRequest'
       responses:
         "200":
           content:
@@ -1050,7 +1052,7 @@ paths:
       - Orders
   /order/{orderId}/shipment/{shipmentId}/timeline:
     get:
-      operationId: getOrderShipmentTimeline
+      operationId: getOrderShipmentTimelines
       parameters:
       - description: The order id to get the shipment for
         explode: false
@@ -1155,10 +1157,10 @@ paths:
           type: array
         style: form
       - description: "Search is available for 2 fields of the inventory record related\
-          \ to the product: Inventory ID and Name -\\r\\n1. Expected behavior for\
-          \ search by Inventory ID is exact match\\r\\n2. Expected behavior for search\
-          \ by Inventory Name is partial match, i.e. does not have to be start of\
-          \ word, \\r\\nbut must be consecutive characters. This is not case sensitive."
+          \ to the product: Inventory ID and Name - 1. Expected behavior for search\
+          \ by Inventory ID is exact match 2. Expected behavior for search by Inventory\
+          \ Name is partial match, i.e. does not have to be start of word,  but must\
+          \ be consecutive characters. This is not case sensitive."
         explode: true
         in: query
         name: Search
@@ -1166,29 +1168,25 @@ paths:
         schema:
           type: string
         style: form
-      - description: "Status filter for products:- Any: Include both active and inactive-\
-          \ Active: Filter products that are Active- Inactive: Filter products that\
-          \ are Inactive"
+      - description: "Status filter for products: - Any: Include both active and inactive\
+          \ - Active: Filter products that are Active - Inactive: Filter products\
+          \ that are Inactive"
         explode: true
         in: query
         name: ActiveStatus
         required: false
         schema:
-          enum:
-          - Any
-          - Active
-          - Inactive
-          type: string
+          $ref: '#/components/schemas/ProductActiveStatus'
         style: form
-      - description: "Bundle filter for products:- Any: Don't filter and consider\
-          \ products that are bundles or not bundles- Bundle: Filter by products that\
-          \ are bundles- NotBundle: Filter by products that are not bundles"
+      - description: "Bundle filter for products: - Any: Don't filter and consider\
+          \ products that are bundles or not bundles - Bundle: Filter by products\
+          \ that are bundles - NotBundle: Filter by products that are not bundles"
         explode: true
         in: query
         name: BundleStatus
         required: false
         schema:
-          $ref: '#/components/schemas/ProductBundle'
+          $ref: '#/components/schemas/ProductBundleStatus'
         style: form
       - description: Channel Id for Operation
         explode: false
@@ -1509,7 +1507,7 @@ paths:
       - Products
   /product/{productId}/inventory:
     get:
-      operationId: getProductInventory
+      operationId: getProductInventories
       parameters:
       - description: The product id to get inventory for
         explode: false
@@ -1563,7 +1561,7 @@ paths:
       - Inventory
   /receiving:
     post:
-      operationId: createReceivingOrder
+      operationId: createReceiving
       requestBody:
         content:
           application/json:
@@ -1606,7 +1604,7 @@ paths:
       - Receiving
   /receiving/{id}:
     get:
-      operationId: getReceivingOrder
+      operationId: getReceiving
       parameters:
       - description: Id of the receiving order
         explode: false
@@ -1643,7 +1641,7 @@ paths:
       - Receiving
   /receiving/{id}/cancel:
     post:
-      operationId: cancelReceivingOrder
+      operationId: cancelReceiving
       parameters:
       - description: Id of the receiving order to cancel
         explode: false
@@ -1686,7 +1684,7 @@ paths:
       - Receiving
   /receiving/{id}/labels:
     get:
-      operationId: getReceivingOrderLabels
+      operationId: getReceivingLabels
       parameters:
       - description: Id of the receiving order
         explode: false
@@ -1756,10 +1754,7 @@ paths:
         name: SortOrder
         required: false
         schema:
-          enum:
-          - Newest
-          - Oldest
-          type: string
+          $ref: '#/components/schemas/SortOrder'
         style: form
       - description: Start date to filter orders inserted later than
         explode: true
@@ -2123,7 +2118,7 @@ paths:
       - Returns
   /return/{id}/statushistory:
     get:
-      operationId: getReturnStatusHistory
+      operationId: getReturnStatushistory
       parameters:
       - description: Id of the return order
         explode: false
@@ -2169,7 +2164,7 @@ paths:
       - Returns
   /shipment/cancelbulk:
     post:
-      operationId: cancelShipmentBulk
+      operationId: createShipmentCancelbulk
       parameters:
       - description: Channel ID for Operation
         explode: false
@@ -2185,13 +2180,13 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CancelShipment'
+              $ref: '#/components/schemas/CancelShipments'
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/cancelShipmentBulk_200_response'
+                $ref: '#/components/schemas/CanceledShipments'
           description: Success
         "401":
           description: No access right at this time
@@ -2403,7 +2398,7 @@ paths:
       - Orders
   /shipment/{shipmentId}/timeline:
     get:
-      operationId: getShipmentTimeline
+      operationId: getShipmentTimelines
       parameters:
       - description: The shipment id to get
         explode: false
@@ -2458,7 +2453,7 @@ paths:
   /shippingmethod:
     get:
       description: Get all merchants shipping methods
-      operationId: getShippingMethodCollection
+      operationId: getShippingmethods
       parameters:
       - description: Page of orders to get
         explode: true
@@ -2782,7 +2777,7 @@ components:
         - attributes
         id: 0
         services:
-        - service_type: Receiving
+        - service_type: null
           address:
             country: country
             address2: address2
@@ -2794,7 +2789,7 @@ components:
             email: email
             zip_code: zip_code
           enabled: true
-        - service_type: Receiving
+        - service_type: null
           address:
             country: country
             address2: address2
@@ -2827,7 +2822,7 @@ components:
           nullable: true
           type: array
         id:
-          description: "Id of the location in ShipBobâ\x80\x99s database"
+          description: Id of the location in ShipBob's database
           format: int32
           type: integer
         is_active:
@@ -2841,7 +2836,7 @@ components:
           type: boolean
         name:
           description: Name of the location. Follows the naming convention City (State
-            Code)\r\nfor domestic FCs and City (Country Code) for international FCs
+            Code) for domestic FCs and City (Country Code) for international FCs
           nullable: true
           type: string
         region:
@@ -2875,7 +2870,7 @@ components:
     LocationService:
       additionalProperties: false
       example:
-        service_type: Receiving
+        service_type: null
         address:
           country: country
           address2: address2
@@ -2895,18 +2890,18 @@ components:
             at the location
           type: boolean
         service_type:
-          enum:
-          - Receiving
-          - Returns
-          type: string
+          $ref: '#/components/schemas/LocationServiceTypeEnum'
       type: object
+    LocationServiceTypeEnum:
+      enum:
+      - Receiving
+      - Returns
+      type: string
     ProblemDetails:
       additionalProperties: false
       discriminator:
-        propertyName: $type
+        propertyName: ttype
       properties:
-        ttype:
-          type: string
         detail:
           nullable: true
           type: string
@@ -2930,8 +2925,10 @@ components:
         type:
           nullable: true
           type: string
+        ttype:
+          type: string
       required:
-      - $type
+      - ttype
       type: object
     ValidationProblemDetails:
       additionalProperties: false
@@ -3001,7 +2998,45 @@ components:
           nullable: true
           type: array
       type: object
-    CancelShipment:
+    AddProductToOrderByProductId:
+      additionalProperties: false
+      properties:
+        id:
+          description: Unique id of the product
+          format: int32
+          type: integer
+        quantity:
+          description: The quantity of this product ordered
+          format: int32
+          type: integer
+      required:
+      - id
+      - quantity
+      type: object
+    AddProductToOrderByReferenceId:
+      additionalProperties: false
+      properties:
+        name:
+          description: Name of the product
+          example: TShirtBlueM
+          type: string
+        quantity:
+          description: The quantity of this product ordered
+          format: int32
+          type: integer
+        reference_id:
+          description: Unique reference id of the product
+          example: TShirtBlueM
+          type: string
+      required:
+      - quantity
+      - reference_id
+      type: object
+    AddProductToOrder:
+      oneOf:
+      - $ref: '#/components/schemas/AddProductToOrderByProductId'
+      - $ref: '#/components/schemas/AddProductToOrderByReferenceId'
+    CancelShipments:
       additionalProperties: false
       description: Model for cancel multiple shipments at once
       example:
@@ -3037,14 +3072,8 @@ components:
         purchase_date: 2000-01-23T04:56:07.000+00:00
         type: DTC
         products:
-        - quantity: 6
-          reference_id: TShirtBlueM
-          name: TShirtBlueM
-          id: 0
-        - quantity: 6
-          reference_id: TShirtBlueM
-          name: TShirtBlueM
-          id: 0
+        - null
+        - null
         tags:
         - name: Handling instructions
           value: Fragile
@@ -3058,7 +3087,7 @@ components:
           type: string
         products:
           items:
-            $ref: '#/components/schemas/CreateOrder_products_inner'
+            $ref: '#/components/schemas/AddProductToOrder'
           minLength: 1
           type: array
         purchase_date:
@@ -3091,7 +3120,7 @@ components:
       - reference_id
       - shipping_method
       type: object
-    EstimateFulfillmentRequest:
+    OrderEstimateFulfillmentRequest:
       additionalProperties: false
       example:
         address:
@@ -3119,11 +3148,11 @@ components:
           description: Products to be included in the order. Each product must include
             one of reference_id or id
           items:
-            $ref: '#/components/schemas/EstimateFulfillmentRequest_products_inner'
+            $ref: '#/components/schemas/OrderEstimateProductInfo'
           type: array
         shipping_methods:
           description: Array of strings specifying shipping methods for which to fetch
-            estimates.\r\nIf this field is omitted we will return estimates for all
+            estimates.  If this field is omitted we will return estimates for all
             shipping methods defined in ShipBob
           items:
             type: string
@@ -3131,6 +3160,33 @@ components:
       required:
       - address
       - products
+      type: object
+    OrderEstimateProductInfo:
+      additionalProperties: false
+      example:
+        quantity: 120
+        reference_id: TShirtBlueM
+        id: 0
+      properties:
+        id:
+          description: Unique id of the product (Must be provided if reference_id
+            is unknown)
+          format: int32
+          nullable: true
+          type: integer
+        quantity:
+          description: The quantity of this product ordered
+          format: int32
+          maximum: 199
+          minimum: 1
+          type: integer
+        reference_id:
+          description: Unique reference id of the product (Must be provided if ID
+            is unknown)
+          example: TShirtBlueM
+          type: string
+      required:
+      - quantity
       type: object
     OrderAddress:
       additionalProperties: false
@@ -3478,6 +3534,26 @@ components:
           format: int64
           type: integer
       type: object
+    CanceledShipments:
+      additionalProperties: false
+      description: ""
+      example:
+        results:
+        - reason: reason
+          action: Cancel
+          is_success: true
+          shipment_id: 0
+        - reason: reason
+          action: Cancel
+          is_success: true
+          shipment_id: 0
+      properties:
+        results:
+          description: The results of all cancellation actions
+          items:
+            $ref: '#/components/schemas/CanceledShipment'
+          type: array
+      type: object
     ChannelInfo:
       additionalProperties: false
       description: Created by channel metadata
@@ -3492,6 +3568,25 @@ components:
         name:
           description: Name of the channel
           example: ShipBobs-Shopify-Store
+          type: string
+      type: object
+    OrderEstimateDetail:
+      additionalProperties: false
+      example:
+        estimated_price: 0.8008281904610115
+        fulfillment_center:
+          name: Cicero (IL)
+          id: 9
+        shipping_method: shipping_method
+      properties:
+        estimated_price:
+          description: Estimated price in dollars for the provided shipping method
+          format: double
+          type: number
+        fulfillment_center:
+          $ref: '#/components/schemas/FulfillmentCenter'
+        shipping_method:
+          description: Provided shipping method. Maps to ship option in ShipBob.
           type: string
       type: object
     OrderEstimate:
@@ -3512,7 +3607,7 @@ components:
         estimates:
           description: Array of estimates for each shipping method
           items:
-            $ref: '#/components/schemas/OrderEstimate_estimates_inner'
+            $ref: '#/components/schemas/OrderEstimateDetail'
           type: array
       type: object
     EstimationAddress:
@@ -4089,9 +4184,9 @@ components:
           format: int32
           type: integer
         name:
-          description: "Name of the ship method as selected by the merchant and saved\
-            \ in ShipBobâ\x80\x99s database (i.e. â\x80\x9cgroundâ\x80\x9d). Corresponds\
-            \ to the shipping_method field in the Orders API."
+          description: Name of the ship method as selected by the merchant and saved
+            in ShipBob's database (i.e. "ground"). Corresponds to the shipping_method
+            field in the Orders API.
           type: string
         service_level:
           $ref: '#/components/schemas/ServiceLevelDetail'
@@ -4288,7 +4383,7 @@ components:
       properties:
         actual_fulfillment_date:
           description: "The datetime of ShipBob's completion of the fulfillment operation\
-            \ as promised. Currently, this means the shipment has been picked, packed,\
+            \ as promised.  Currently, this means the shipment has been picked, packed,\
             \ and label has been printed."
           format: date-time
           nullable: true
@@ -4299,7 +4394,7 @@ components:
           nullable: true
           type: string
         estimated_fulfillment_date:
-          description: The datetime of ShipBob's commitment for completing the shipment
+          description: The datetime of ShipBob's commitment for completing  the shipment
             and handing to the carrier for delivery.
           format: date-time
           nullable: true
@@ -4392,12 +4487,12 @@ components:
         status_details:
           description: Additional details about the shipment status
           items:
-            $ref: '#/components/schemas/OrderStatusDetails'
+            $ref: '#/components/schemas/OrderStatusDetail'
           type: array
         tracking:
           $ref: '#/components/schemas/Tracking'
       type: object
-    OrderStatusDetails:
+    OrderStatusDetail:
       additionalProperties: false
       example:
         inventory_id: 5
@@ -4581,9 +4676,9 @@ components:
           type: integer
         internal_transfer_quantity:
           description: "The quantity of items that are in the process of internal\
-            \ transit \\r\\nbetween ShipBob fulfillment centers, with a destination\
-            \ of this fulfillment center.\\r\\nThese items are not pickable or fulfillable\
-            \ until they have been received and moved \\r\\nto the \"On Hand\" quantity\
+            \ transit  between ShipBob fulfillment centers, with a destination of\
+            \ this fulfillment center. These items are not pickable or fulfillable\
+            \ until they have been received and moved  to the \"On Hand\" quantity\
             \ of the destination FC."
           format: int32
           type: integer
@@ -4735,7 +4830,7 @@ components:
           type: integer
         total_backordered_quantity:
           description: The amount of the item you need to send to ShipBob to fulfill
-            all exception orders containing \r\nthe item. This is the exception_quantity
+            all exception orders containing  the item. This is the exception_quantity
             less the fulfillable_quantity of the item.
           format: int32
           type: integer
@@ -4745,9 +4840,8 @@ components:
           type: integer
         total_exception_quantity:
           description: The total quantity of all items that are contained within orders
-            that\r\nare in exception/out of stock status. Out of stock orders have
-            not been\r\nprocessed and therefore do not have lot or fulfillment centers
-            assigned.
+            that are in exception/out of stock status. Out of stock orders have not
+            been processed and therefore do not have lot or fulfillment centers assigned.
           format: int32
           type: integer
         total_fulfillable_quantity:
@@ -4756,11 +4850,10 @@ components:
           type: integer
         total_internal_transfer_quantity:
           description: The total quantity of all items that are in the process of
-            internal transit \r\nbetween ShipBob fulfillment centers. These items
-            are not pickable or fulfillable\r\nuntil they have been received and moved
-            to the "On Hand" quantity of the destination FC.\r\nInternal transit quantities
-            for each FC represent the incoming transfer stock\r\nfor that specific
-            location.
+            internal transit  between ShipBob fulfillment centers. These items are
+            not pickable or fulfillable until they have been received and moved to
+            the "On Hand" quantity of the destination FC. Internal transit quantities
+            for each FC represent the incoming transfer stock for that specific location.
           format: int32
           type: integer
         total_onhand_quantity:
@@ -4821,11 +4914,11 @@ components:
           type: array
         internal_transfer_quantity:
           description: The quantity of all items belonging to this lot that are in
-            the process of internal transit \r\nbetween ShipBob fulfillment centers.
-            These items are not pickable or fulfillable\r\nuntil they have been received
-            and moved to the "On Hand" quantity of the destination FC.\r\nInternal
-            transit quantities for each FC represent the incoming transfer stock\r\nfor
-            that specific location.
+            the process of internal transit  between ShipBob fulfillment centers.
+            These items are not pickable or fulfillable until they have been received
+            and moved to the "On Hand" quantity of the destination FC. Internal transit
+            quantities for each FC represent the incoming transfer stock for that
+            specific location.
           format: int32
           type: integer
         lot_number:
@@ -4896,6 +4989,21 @@ components:
           type: string
       required:
       - name
+      type: object
+    BundleRootInformation:
+      additionalProperties: false
+      example:
+        name: name
+        id: 0
+      properties:
+        id:
+          description: Id of the bundle root product
+          format: int32
+          type: integer
+        name:
+          description: Name of the bundle root product
+          nullable: true
+          type: string
       type: object
     ProductChannel:
       additionalProperties: false
@@ -5012,7 +5120,7 @@ components:
           nullable: true
           type: string
         bundle_root_information:
-          $ref: '#/components/schemas/Product_bundle_root_information'
+          $ref: '#/components/schemas/BundleRootInformation'
         channel:
           $ref: '#/components/schemas/ProductChannel'
         created_date:
@@ -5066,12 +5174,186 @@ components:
           format: int32
           type: integer
       type: object
-    ProductBundle:
+    ProductActiveStatus:
+      enum:
+      - Any
+      - Active
+      - Inactive
+      type: string
+    ProductBundleStatus:
       enum:
       - Any
       - Bundle
       - NotBundle
       type: string
+    AddBoxItemToBox:
+      additionalProperties: false
+      description: Information about an inventory item contained inside a receiving
+        order box
+      example:
+        lot_date: 2000-01-23T04:56:07.000+00:00
+        quantity: 1294386359
+        inventory_id: 0
+        lot_number: "2222"
+      properties:
+        inventory_id:
+          description: Unique inventory id of the items in the box
+          format: int32
+          type: integer
+        lot_date:
+          description: Lot expiration date for the items in the box
+          format: date-time
+          nullable: true
+          type: string
+        lot_number:
+          description: Lot number of the items in the box
+          example: "2222"
+          nullable: true
+          type: string
+        quantity:
+          description: Quantity of the items in the box
+          format: int32
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+      required:
+      - inventory_id
+      - quantity
+      type: object
+    AddBoxToOrder:
+      additionalProperties: false
+      description: Information about a box shipment to be added to a receiving order
+      example:
+        box_items:
+        - lot_date: 2000-01-23T04:56:07.000+00:00
+          quantity: 1294386359
+          inventory_id: 0
+          lot_number: "2222"
+        - lot_date: 2000-01-23T04:56:07.000+00:00
+          quantity: 1294386359
+          inventory_id: 0
+          lot_number: "2222"
+        tracking_number: 860C8CDC8F0B4FC7AB69AC86C20539EC
+      properties:
+        box_items:
+          description: Items contained in this box
+          items:
+            $ref: '#/components/schemas/AddBoxItemToBox'
+          nullable: true
+          type: array
+        tracking_number:
+          description: Tracking number for the box shipment
+          example: 860C8CDC8F0B4FC7AB69AC86C20539EC
+          nullable: true
+          type: string
+      required:
+      - box_items
+      - tracking_number
+      type: object
+    AssignOrderToFulfillmentCenter:
+      additionalProperties: false
+      description: Model containing information that assigns a receiving order to
+        a fulfillment center
+      example:
+        id: 1
+      properties:
+        id:
+          description: ID of the fulfillment center to assign this receiving order
+            to
+          format: int32
+          type: integer
+      required:
+      - id
+      type: object
+    BoxItem:
+      additionalProperties: false
+      description: Information about an item contained inside a box as part of a receiving
+        order
+      example:
+        lot_date: 2000-01-23T04:56:07.000+00:00
+        quantity: 6
+        inventory_id: 0
+        received_quantity: 1
+        lot_number: lot_number
+      properties:
+        inventory_id:
+          description: Unique identifier of the inventory item
+          format: int32
+          type: integer
+        lot_date:
+          description: Expiration date of the item's lot
+          format: date-time
+          nullable: true
+          type: string
+        lot_number:
+          description: Lot number the item belongs to
+          nullable: true
+          type: string
+        quantity:
+          description: Quantity of the item included
+          format: int32
+          type: integer
+        received_quantity:
+          description: Quantity of the item that was received after processing the
+            receiving order
+          format: int32
+          type: integer
+      type: object
+    Box:
+      additionalProperties: false
+      description: Information about a box shipment included in a receiving order
+      example:
+        counting_started_date: 2000-01-23T04:56:07.000+00:00
+        box_number: 5
+        box_status: null
+        received_date: 2000-01-23T04:56:07.000+00:00
+        box_items:
+        - lot_date: 2000-01-23T04:56:07.000+00:00
+          quantity: 6
+          inventory_id: 0
+          received_quantity: 1
+          lot_number: lot_number
+        - lot_date: 2000-01-23T04:56:07.000+00:00
+          quantity: 6
+          inventory_id: 0
+          received_quantity: 1
+          lot_number: lot_number
+        tracking_number: 860C8CDC8F0B4FC7AB69AC86C20539EC
+        arrived_date: 2000-01-23T04:56:07.000+00:00
+      properties:
+        arrived_date:
+          description: Date the box arrived
+          format: date-time
+          nullable: true
+          type: string
+        box_items:
+          description: Information about the items included in the box
+          items:
+            $ref: '#/components/schemas/BoxItem'
+          nullable: true
+          type: array
+        box_number:
+          description: The number of the box in the receiving order
+          format: int32
+          type: integer
+        box_status:
+          $ref: '#/components/schemas/BoxStatus'
+        counting_started_date:
+          description: Date counting of the box's inventory items started
+          format: date-time
+          nullable: true
+          type: string
+        received_date:
+          description: Date the box was received
+          format: date-time
+          nullable: true
+          type: string
+        tracking_number:
+          description: Tracking number of the box shipment
+          example: 860C8CDC8F0B4FC7AB69AC86C20539EC
+          nullable: true
+          type: string
+      type: object
     CreateReceivingOrder:
       additionalProperties: false
       description: Information to create a new receiving order
@@ -5108,7 +5390,7 @@ components:
         boxes:
           description: Box shipments to be added to this receiving order
           items:
-            $ref: '#/components/schemas/CreateReceivingOrder_boxes_inner'
+            $ref: '#/components/schemas/AddBoxToOrder'
           nullable: true
           type: array
         expected_arrival_date:
@@ -5118,7 +5400,7 @@ components:
           nullable: true
           type: string
         fulfillment_center:
-          $ref: '#/components/schemas/CreateReceivingOrder_fulfillment_center'
+          $ref: '#/components/schemas/AssignOrderToFulfillmentCenter'
         package_type:
           $ref: '#/components/schemas/PackageType'
       required:
@@ -5206,7 +5488,7 @@ components:
         boxes:
         - counting_started_date: 2000-01-23T04:56:07.000+00:00
           box_number: 5
-          box_status: Awaiting
+          box_status: null
           received_date: 2000-01-23T04:56:07.000+00:00
           box_items:
           - lot_date: 2000-01-23T04:56:07.000+00:00
@@ -5223,7 +5505,7 @@ components:
           arrived_date: 2000-01-23T04:56:07.000+00:00
         - counting_started_date: 2000-01-23T04:56:07.000+00:00
           box_number: 5
-          box_status: Awaiting
+          box_status: null
           received_date: 2000-01-23T04:56:07.000+00:00
           box_items:
           - lot_date: 2000-01-23T04:56:07.000+00:00
@@ -5257,7 +5539,7 @@ components:
         last_updated_date: 2000-01-23T04:56:07.000+00:00
         package_type: null
         expected_arrival_date: 2000-01-23T04:56:07.000+00:00
-        status: Awaiting
+        status: null
       properties:
         box_labels_uri:
           description: URL to the packing slip to be included in each box shipment
@@ -5271,7 +5553,7 @@ components:
           description: Information about the boxes being shipped in this receiving
             order
           items:
-            $ref: '#/components/schemas/ReceivingOrder_boxes_inner'
+            $ref: '#/components/schemas/Box'
           nullable: true
           type: array
         expected_arrival_date:
@@ -5298,16 +5580,17 @@ components:
         package_type:
           $ref: '#/components/schemas/PackageType'
         status:
-          enum:
-          - Awaiting
-          - Processing
-          - Completed
-          - Cancelled
-          - Incomplete
-          - Arrived
-          - PartiallyArrived
-          type: string
+          $ref: '#/components/schemas/ReceivingStatus'
       type: object
+    BoxStatus:
+      enum:
+      - Awaiting
+      - Arrived
+      - Completed
+      - Counting
+      - Stowing
+      - Cancelled
+      type: string
     PackageType:
       enum:
       - Package
@@ -5319,6 +5602,16 @@ components:
       - EverythingInOneBox
       - OneSkuPerBox
       - MultipleSkuPerBox
+      type: string
+    ReceivingStatus:
+      enum:
+      - Awaiting
+      - Processing
+      - Completed
+      - Cancelled
+      - Incomplete
+      - Arrived
+      - PartiallyArrived
       type: string
     ReturnChannelInfo:
       additionalProperties: false
@@ -5410,7 +5703,7 @@ components:
       example:
         action_requested:
           instructions: instructions
-          action_type: InventoryDefault
+          action_type: null
           action: null
         quantity: 2
         action_taken:
@@ -5448,16 +5741,13 @@ components:
       additionalProperties: false
       example:
         instructions: instructions
-        action_type: InventoryDefault
+        action_type: null
         action: null
       properties:
         action:
           $ref: '#/components/schemas/ReturnAction'
         action_type:
-          enum:
-          - InventoryDefault
-          - Override
-          type: string
+          $ref: '#/components/schemas/ReturnActionSource'
         instructions:
           description: Specific instructions to be taken for the inventory when processing
             the return
@@ -5526,7 +5816,7 @@ components:
     ReturnOrder:
       additionalProperties: false
       example:
-        return_type: Regular
+        return_type: null
         fulfillment_center:
           name: Cicero (IL)
           id: 6
@@ -5540,7 +5830,7 @@ components:
         inventory:
         - action_requested:
             instructions: instructions
-            action_type: InventoryDefault
+            action_type: null
             action: null
           quantity: 2
           action_taken:
@@ -5554,7 +5844,7 @@ components:
           id: 5
         - action_requested:
             instructions: instructions
-            action_type: InventoryDefault
+            action_type: null
             action: null
           quantity: 2
           action_taken:
@@ -5569,9 +5859,9 @@ components:
         original_shipment_id: 9
         transactions:
         - amount: 2.5
-          transaction_type: ReturnLabelInvoice
+          transaction_type: null
         - amount: 2.5
-          transaction_type: ReturnLabelInvoice
+          transaction_type: null
         invoice_amount: 7.061401241503109
         status: null
       properties:
@@ -5609,10 +5899,7 @@ components:
           nullable: true
           type: string
         return_type:
-          enum:
-          - Regular
-          - ReturnToSender
-          type: string
+          $ref: '#/components/schemas/ReturnType'
         status:
           $ref: '#/components/schemas/ReturnStatus'
         tracking_number:
@@ -5631,7 +5918,7 @@ components:
       additionalProperties: false
       example:
         amount: 2.5
-        transaction_type: ReturnLabelInvoice
+        transaction_type: null
       properties:
         amount:
           description: Transaction amount in dollars
@@ -5639,11 +5926,7 @@ components:
           format: double
           type: number
         transaction_type:
-          enum:
-          - ReturnLabelInvoice
-          - ReturnProcessingFee
-          - ReturnToSenderFee
-          type: string
+          $ref: '#/components/schemas/ReturnTransactionLogSource'
       type: object
     ReturnAction:
       enum:
@@ -5651,6 +5934,11 @@ components:
       - Restock
       - Quarantine
       - Dispose
+      type: string
+    ReturnActionSource:
+      enum:
+      - InventoryDefault
+      - Override
       type: string
     ReturnStatus:
       enum:
@@ -5660,26 +5948,22 @@ components:
       - Completed
       - Cancelled
       type: string
-    cancelShipmentBulk_200_response:
-      additionalProperties: false
-      description: ""
-      example:
-        results:
-        - reason: reason
-          action: Cancel
-          is_success: true
-          shipment_id: 0
-        - reason: reason
-          action: Cancel
-          is_success: true
-          shipment_id: 0
-      properties:
-        results:
-          description: The results of all cancellation actions
-          items:
-            $ref: '#/components/schemas/CanceledShipment'
-          type: array
-      type: object
+    ReturnType:
+      enum:
+      - Regular
+      - ReturnToSender
+      type: string
+    SortOrder:
+      enum:
+      - Newest
+      - Oldest
+      type: string
+    ReturnTransactionLogSource:
+      enum:
+      - ReturnLabelInvoice
+      - ReturnProcessingFee
+      - ReturnToSenderFee
+      type: string
     ValidationProblemDetails_allOf:
       properties:
         errors:
@@ -5691,269 +5975,6 @@ components:
           type: object
       type: object
       example: null
-    CreateOrder_products_inner:
-      additionalProperties: false
-      example:
-        quantity: 6
-        reference_id: TShirtBlueM
-        name: TShirtBlueM
-        id: 0
-      properties:
-        id:
-          description: Unique id of the product
-          format: int32
-          type: integer
-        quantity:
-          description: The quantity of this product ordered
-          format: int32
-          type: integer
-        name:
-          description: Name of the product
-          example: TShirtBlueM
-          type: string
-        reference_id:
-          description: Unique reference id of the product
-          example: TShirtBlueM
-          type: string
-      required:
-      - quantity
-      type: object
-    EstimateFulfillmentRequest_products_inner:
-      additionalProperties: false
-      example:
-        quantity: 120
-        reference_id: TShirtBlueM
-        id: 0
-      properties:
-        id:
-          description: Unique id of the product (Must be provided if reference_id
-            is unknown)
-          format: int32
-          nullable: true
-          type: integer
-        quantity:
-          description: The quantity of this product ordered
-          format: int32
-          maximum: 199
-          minimum: 1
-          type: integer
-        reference_id:
-          description: Unique reference id of the product (Must be provided if ID
-            is unknown)
-          example: TShirtBlueM
-          type: string
-      required:
-      - quantity
-      type: object
-    OrderEstimate_estimates_inner:
-      additionalProperties: false
-      example:
-        estimated_price: 0.8008281904610115
-        fulfillment_center:
-          name: Cicero (IL)
-          id: 9
-        shipping_method: shipping_method
-      properties:
-        estimated_price:
-          description: Estimated price in dollars for the provided shipping method
-          format: double
-          type: number
-        fulfillment_center:
-          $ref: '#/components/schemas/FulfillmentCenter'
-        shipping_method:
-          description: Provided shipping method. Maps to ship option in ShipBob.
-          type: string
-      type: object
-    Product_bundle_root_information:
-      additionalProperties: false
-      example:
-        name: name
-        id: 0
-      properties:
-        id:
-          description: Id of the bundle root product
-          format: int32
-          type: integer
-        name:
-          description: Name of the bundle root product
-          nullable: true
-          type: string
-      type: object
-    CreateReceivingOrder_boxes_inner_box_items_inner:
-      additionalProperties: false
-      description: Information about an inventory item contained inside a receiving
-        order box
-      example:
-        lot_date: 2000-01-23T04:56:07.000+00:00
-        quantity: 1294386359
-        inventory_id: 0
-        lot_number: "2222"
-      properties:
-        inventory_id:
-          description: Unique inventory id of the items in the box
-          format: int32
-          type: integer
-        lot_date:
-          description: Lot expiration date for the items in the box
-          format: date-time
-          nullable: true
-          type: string
-        lot_number:
-          description: Lot number of the items in the box
-          example: "2222"
-          nullable: true
-          type: string
-        quantity:
-          description: Quantity of the items in the box
-          format: int32
-          maximum: 2147483647
-          minimum: 1
-          type: integer
-      required:
-      - inventory_id
-      - quantity
-      type: object
-    CreateReceivingOrder_boxes_inner:
-      additionalProperties: false
-      description: Information about a box shipment to be added to a receiving order
-      example:
-        box_items:
-        - lot_date: 2000-01-23T04:56:07.000+00:00
-          quantity: 1294386359
-          inventory_id: 0
-          lot_number: "2222"
-        - lot_date: 2000-01-23T04:56:07.000+00:00
-          quantity: 1294386359
-          inventory_id: 0
-          lot_number: "2222"
-        tracking_number: 860C8CDC8F0B4FC7AB69AC86C20539EC
-      properties:
-        box_items:
-          description: Items contained in this box
-          items:
-            $ref: '#/components/schemas/CreateReceivingOrder_boxes_inner_box_items_inner'
-          nullable: true
-          type: array
-        tracking_number:
-          description: Tracking number for the box shipment
-          example: 860C8CDC8F0B4FC7AB69AC86C20539EC
-          nullable: true
-          type: string
-      required:
-      - box_items
-      - tracking_number
-      type: object
-    CreateReceivingOrder_fulfillment_center:
-      additionalProperties: false
-      description: Model containing information that assigns a receiving order to
-        a fulfillment center
-      example:
-        id: 1
-      properties:
-        id:
-          description: ID of the fulfillment center to assign this receiving order
-            to
-          format: int32
-          type: integer
-      required:
-      - id
-      type: object
-    ReceivingOrder_boxes_inner_box_items_inner:
-      additionalProperties: false
-      description: Information about an item contained inside a box as part of a receiving
-        order
-      example:
-        lot_date: 2000-01-23T04:56:07.000+00:00
-        quantity: 6
-        inventory_id: 0
-        received_quantity: 1
-        lot_number: lot_number
-      properties:
-        inventory_id:
-          description: Unique identifier of the inventory item
-          format: int32
-          type: integer
-        lot_date:
-          description: Expiration date of the item's lot
-          format: date-time
-          nullable: true
-          type: string
-        lot_number:
-          description: Lot number the item belongs to
-          nullable: true
-          type: string
-        quantity:
-          description: Quantity of the item included
-          format: int32
-          type: integer
-        received_quantity:
-          description: Quantity of the item that was received after processing the
-            receiving order
-          format: int32
-          type: integer
-      type: object
-    ReceivingOrder_boxes_inner:
-      additionalProperties: false
-      description: Information about a box shipment included in a receiving order
-      example:
-        counting_started_date: 2000-01-23T04:56:07.000+00:00
-        box_number: 5
-        box_status: Awaiting
-        received_date: 2000-01-23T04:56:07.000+00:00
-        box_items:
-        - lot_date: 2000-01-23T04:56:07.000+00:00
-          quantity: 6
-          inventory_id: 0
-          received_quantity: 1
-          lot_number: lot_number
-        - lot_date: 2000-01-23T04:56:07.000+00:00
-          quantity: 6
-          inventory_id: 0
-          received_quantity: 1
-          lot_number: lot_number
-        tracking_number: 860C8CDC8F0B4FC7AB69AC86C20539EC
-        arrived_date: 2000-01-23T04:56:07.000+00:00
-      properties:
-        arrived_date:
-          description: Date the box arrived
-          format: date-time
-          nullable: true
-          type: string
-        box_items:
-          description: Information about the items included in the box
-          items:
-            $ref: '#/components/schemas/ReceivingOrder_boxes_inner_box_items_inner'
-          nullable: true
-          type: array
-        box_number:
-          description: The number of the box in the receiving order
-          format: int32
-          type: integer
-        box_status:
-          enum:
-          - Awaiting
-          - Arrived
-          - Completed
-          - Counting
-          - Stowing
-          - Cancelled
-          type: string
-        counting_started_date:
-          description: Date counting of the box's inventory items started
-          format: date-time
-          nullable: true
-          type: string
-        received_date:
-          description: Date the box was received
-          format: date-time
-          nullable: true
-          type: string
-        tracking_number:
-          description: Tracking number of the box shipment
-          example: 860C8CDC8F0B4FC7AB69AC86C20539EC
-          nullable: true
-          type: string
-      type: object
   securitySchemes:
     oauth2:
       flows:

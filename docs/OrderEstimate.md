@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Estimates** | Pointer to [**[]OrderEstimateEstimatesInner**](OrderEstimateEstimatesInner.md) | Array of estimates for each shipping method | [optional] 
+**Estimates** | Pointer to [**[]OrderEstimateDetail**](OrderEstimateDetail.md) | Array of estimates for each shipping method | [optional] 
 
 ## Methods
 
@@ -27,20 +27,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetEstimates
 
-`func (o *OrderEstimate) GetEstimates() []OrderEstimateEstimatesInner`
+`func (o *OrderEstimate) GetEstimates() []OrderEstimateDetail`
 
 GetEstimates returns the Estimates field if non-nil, zero value otherwise.
 
 ### GetEstimatesOk
 
-`func (o *OrderEstimate) GetEstimatesOk() (*[]OrderEstimateEstimatesInner, bool)`
+`func (o *OrderEstimate) GetEstimatesOk() (*[]OrderEstimateDetail, bool)`
 
 GetEstimatesOk returns a tuple with the Estimates field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetEstimates
 
-`func (o *OrderEstimate) SetEstimates(v []OrderEstimateEstimatesInner)`
+`func (o *OrderEstimate) SetEstimates(v []OrderEstimateDetail)`
 
 SetEstimates sets Estimates field to given value.
 

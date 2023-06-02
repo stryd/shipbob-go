@@ -4,19 +4,19 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Ttype** | Pointer to **string** |  | [optional] 
 **Detail** | Pointer to **NullableString** |  | [optional] 
 **Extensions** | Pointer to **map[string]map[string]interface{}** |  | [optional] [readonly] 
 **Instance** | Pointer to **NullableString** |  | [optional] 
 **Status** | Pointer to **NullableInt32** |  | [optional] 
 **Title** | Pointer to **NullableString** |  | [optional] 
 **Type** | Pointer to **NullableString** |  | [optional] 
+**Ttype** | **string** |  | 
 
 ## Methods
 
 ### NewProblemDetails
 
-`func NewProblemDetails() *ProblemDetails`
+`func NewProblemDetails(ttype string, ) *ProblemDetails`
 
 NewProblemDetails instantiates a new ProblemDetails object
 This constructor will assign default values to properties that have it defined,
@@ -30,31 +30,6 @@ will change when the set of required properties is changed
 NewProblemDetailsWithDefaults instantiates a new ProblemDetails object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetTtype
-
-`func (o *ProblemDetails) GetTtype() string`
-
-GetTtype returns the Ttype field if non-nil, zero value otherwise.
-
-### GetTtypeOk
-
-`func (o *ProblemDetails) GetTtypeOk() (*string, bool)`
-
-GetTtypeOk returns a tuple with the Ttype field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetTtype
-
-`func (o *ProblemDetails) SetTtype(v string)`
-
-SetTtype sets Ttype field to given value.
-
-### HasTtype
-
-`func (o *ProblemDetails) HasTtype() bool`
-
-HasTtype returns a boolean if a field has been set.
 
 ### GetDetail
 
@@ -266,6 +241,26 @@ HasType returns a boolean if a field has been set.
 `func (o *ProblemDetails) UnsetType()`
 
 UnsetType ensures that no value is present for Type, not even an explicit nil
+### GetTtype
+
+`func (o *ProblemDetails) GetTtype() string`
+
+GetTtype returns the Ttype field if non-nil, zero value otherwise.
+
+### GetTtypeOk
+
+`func (o *ProblemDetails) GetTtypeOk() (*string, bool)`
+
+GetTtypeOk returns a tuple with the Ttype field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTtype
+
+`func (o *ProblemDetails) SetTtype(v string)`
+
+SetTtype sets Ttype field to given value.
+
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

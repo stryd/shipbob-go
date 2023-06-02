@@ -80,7 +80,6 @@ func (o *CreateProduct) HasBarcode() bool {
 func (o *CreateProduct) SetBarcode(v string) {
 	o.Barcode.Set(&v)
 }
-
 // SetBarcodeNil sets the value for Barcode to be an explicit nil
 func (o *CreateProduct) SetBarcodeNil() {
 	o.Barcode.Set(nil)
@@ -175,7 +174,6 @@ func (o *CreateProduct) HasSku() bool {
 func (o *CreateProduct) SetSku(v string) {
 	o.Sku.Set(&v)
 }
-
 // SetSkuNil sets the value for Sku to be an explicit nil
 func (o *CreateProduct) SetSkuNil() {
 	o.Sku.Set(nil)
@@ -187,7 +185,7 @@ func (o *CreateProduct) UnsetSku() {
 }
 
 func (o CreateProduct) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -242,3 +240,5 @@ func (v *NullableCreateProduct) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

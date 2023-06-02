@@ -20,11 +20,11 @@ var _ MappedNullable = &Shipment{}
 
 // Shipment Information about a shipment
 type Shipment struct {
-	// The datetime of ShipBob's completion of the fulfillment operation as promised. Currently, this means the shipment has been picked, packed, and label has been printed.
+	// The datetime of ShipBob's completion of the fulfillment operation as promised.  Currently, this means the shipment has been picked, packed, and label has been printed.
 	ActualFulfillmentDate NullableTime `json:"actual_fulfillment_date,omitempty"`
 	// Date this shipment was created
 	CreatedDate NullableTime `json:"created_date,omitempty"`
-	// The datetime of ShipBob's commitment for completing the shipment and handing to the carrier for delivery.
+	// The datetime of ShipBob's commitment for completing  the shipment and handing to the carrier for delivery.
 	EstimatedFulfillmentDate NullableTime `json:"estimated_fulfillment_date,omitempty"`
 	// Status of ShipBob's completion of the fulfillment operation.
 	EstimatedFulfillmentDateStatus *string `json:"estimated_fulfillment_date_status,omitempty"`
@@ -35,16 +35,16 @@ type Shipment struct {
 	// Monetary amount that was invoiced for this shipment
 	InvoiceAmount NullableFloat64 `json:"invoice_amount,omitempty"`
 	// Date this shipment was last updated
-	LastUpdateAt NullableTime       `json:"last_update_at,omitempty"`
-	Location     *FulfillmentCenter `json:"location,omitempty"`
+	LastUpdateAt NullableTime `json:"last_update_at,omitempty"`
+	Location *FulfillmentCenter `json:"location,omitempty"`
 	Measurements *OrderMeasurements `json:"measurements,omitempty"`
 	// Id of the order this shipment belongs to
 	OrderId *int32 `json:"order_id,omitempty"`
 	// Container type for the shipment
 	PackageMaterialType *string `json:"package_material_type,omitempty"`
 	// Information about the products contained in this shipment
-	Products  []ShipmentProduct `json:"products,omitempty"`
-	Recipient *Recipient        `json:"recipient,omitempty"`
+	Products []ShipmentProduct `json:"products,omitempty"`
+	Recipient *Recipient `json:"recipient,omitempty"`
 	// Client-defined external unique id of the order this shipment belongs to
 	ReferenceId *string `json:"reference_id,omitempty"`
 	// If a shipment requires signature
@@ -54,8 +54,8 @@ type Shipment struct {
 	// The shipment status
 	Status *string `json:"status,omitempty"`
 	// Additional details about the shipment status
-	StatusDetails []OrderStatusDetails `json:"status_details,omitempty"`
-	Tracking      *Tracking            `json:"tracking,omitempty"`
+	StatusDetails []OrderStatusDetail `json:"status_details,omitempty"`
+	Tracking *Tracking `json:"tracking,omitempty"`
 }
 
 // NewShipment instantiates a new Shipment object
@@ -107,7 +107,6 @@ func (o *Shipment) HasActualFulfillmentDate() bool {
 func (o *Shipment) SetActualFulfillmentDate(v time.Time) {
 	o.ActualFulfillmentDate.Set(&v)
 }
-
 // SetActualFulfillmentDateNil sets the value for ActualFulfillmentDate to be an explicit nil
 func (o *Shipment) SetActualFulfillmentDateNil() {
 	o.ActualFulfillmentDate.Set(nil)
@@ -150,7 +149,6 @@ func (o *Shipment) HasCreatedDate() bool {
 func (o *Shipment) SetCreatedDate(v time.Time) {
 	o.CreatedDate.Set(&v)
 }
-
 // SetCreatedDateNil sets the value for CreatedDate to be an explicit nil
 func (o *Shipment) SetCreatedDateNil() {
 	o.CreatedDate.Set(nil)
@@ -193,7 +191,6 @@ func (o *Shipment) HasEstimatedFulfillmentDate() bool {
 func (o *Shipment) SetEstimatedFulfillmentDate(v time.Time) {
 	o.EstimatedFulfillmentDate.Set(&v)
 }
-
 // SetEstimatedFulfillmentDateNil sets the value for EstimatedFulfillmentDate to be an explicit nil
 func (o *Shipment) SetEstimatedFulfillmentDateNil() {
 	o.EstimatedFulfillmentDate.Set(nil)
@@ -300,7 +297,6 @@ func (o *Shipment) HasInsuranceValue() bool {
 func (o *Shipment) SetInsuranceValue(v float64) {
 	o.InsuranceValue.Set(&v)
 }
-
 // SetInsuranceValueNil sets the value for InsuranceValue to be an explicit nil
 func (o *Shipment) SetInsuranceValueNil() {
 	o.InsuranceValue.Set(nil)
@@ -343,7 +339,6 @@ func (o *Shipment) HasInvoiceAmount() bool {
 func (o *Shipment) SetInvoiceAmount(v float64) {
 	o.InvoiceAmount.Set(&v)
 }
-
 // SetInvoiceAmountNil sets the value for InvoiceAmount to be an explicit nil
 func (o *Shipment) SetInvoiceAmountNil() {
 	o.InvoiceAmount.Set(nil)
@@ -386,7 +381,6 @@ func (o *Shipment) HasLastUpdateAt() bool {
 func (o *Shipment) SetLastUpdateAt(v time.Time) {
 	o.LastUpdateAt.Set(&v)
 }
-
 // SetLastUpdateAtNil sets the value for LastUpdateAt to be an explicit nil
 func (o *Shipment) SetLastUpdateAtNil() {
 	o.LastUpdateAt.Set(nil)
@@ -718,9 +712,9 @@ func (o *Shipment) SetStatus(v string) {
 }
 
 // GetStatusDetails returns the StatusDetails field value if set, zero value otherwise.
-func (o *Shipment) GetStatusDetails() []OrderStatusDetails {
+func (o *Shipment) GetStatusDetails() []OrderStatusDetail {
 	if o == nil || IsNil(o.StatusDetails) {
-		var ret []OrderStatusDetails
+		var ret []OrderStatusDetail
 		return ret
 	}
 	return o.StatusDetails
@@ -728,7 +722,7 @@ func (o *Shipment) GetStatusDetails() []OrderStatusDetails {
 
 // GetStatusDetailsOk returns a tuple with the StatusDetails field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Shipment) GetStatusDetailsOk() ([]OrderStatusDetails, bool) {
+func (o *Shipment) GetStatusDetailsOk() ([]OrderStatusDetail, bool) {
 	if o == nil || IsNil(o.StatusDetails) {
 		return nil, false
 	}
@@ -744,8 +738,8 @@ func (o *Shipment) HasStatusDetails() bool {
 	return false
 }
 
-// SetStatusDetails gets a reference to the given []OrderStatusDetails and assigns it to the StatusDetails field.
-func (o *Shipment) SetStatusDetails(v []OrderStatusDetails) {
+// SetStatusDetails gets a reference to the given []OrderStatusDetail and assigns it to the StatusDetails field.
+func (o *Shipment) SetStatusDetails(v []OrderStatusDetail) {
 	o.StatusDetails = v
 }
 
@@ -782,7 +776,7 @@ func (o *Shipment) SetTracking(v Tracking) {
 }
 
 func (o Shipment) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -889,3 +883,5 @@ func (v *NullableShipment) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

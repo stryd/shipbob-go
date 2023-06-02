@@ -99,7 +99,6 @@ func (o *ReturnFulfillmentCenter) HasName() bool {
 func (o *ReturnFulfillmentCenter) SetName(v string) {
 	o.Name.Set(&v)
 }
-
 // SetNameNil sets the value for Name to be an explicit nil
 func (o *ReturnFulfillmentCenter) SetNameNil() {
 	o.Name.Set(nil)
@@ -111,7 +110,7 @@ func (o *ReturnFulfillmentCenter) UnsetName() {
 }
 
 func (o ReturnFulfillmentCenter) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -162,3 +161,5 @@ func (v *NullableReturnFulfillmentCenter) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

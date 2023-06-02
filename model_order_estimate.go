@@ -20,7 +20,7 @@ var _ MappedNullable = &OrderEstimate{}
 // OrderEstimate struct for OrderEstimate
 type OrderEstimate struct {
 	// Array of estimates for each shipping method
-	Estimates []OrderEstimateEstimatesInner `json:"estimates,omitempty"`
+	Estimates []OrderEstimateDetail `json:"estimates,omitempty"`
 }
 
 // NewOrderEstimate instantiates a new OrderEstimate object
@@ -41,9 +41,9 @@ func NewOrderEstimateWithDefaults() *OrderEstimate {
 }
 
 // GetEstimates returns the Estimates field value if set, zero value otherwise.
-func (o *OrderEstimate) GetEstimates() []OrderEstimateEstimatesInner {
+func (o *OrderEstimate) GetEstimates() []OrderEstimateDetail {
 	if o == nil || IsNil(o.Estimates) {
-		var ret []OrderEstimateEstimatesInner
+		var ret []OrderEstimateDetail
 		return ret
 	}
 	return o.Estimates
@@ -51,7 +51,7 @@ func (o *OrderEstimate) GetEstimates() []OrderEstimateEstimatesInner {
 
 // GetEstimatesOk returns a tuple with the Estimates field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *OrderEstimate) GetEstimatesOk() ([]OrderEstimateEstimatesInner, bool) {
+func (o *OrderEstimate) GetEstimatesOk() ([]OrderEstimateDetail, bool) {
 	if o == nil || IsNil(o.Estimates) {
 		return nil, false
 	}
@@ -67,13 +67,13 @@ func (o *OrderEstimate) HasEstimates() bool {
 	return false
 }
 
-// SetEstimates gets a reference to the given []OrderEstimateEstimatesInner and assigns it to the Estimates field.
-func (o *OrderEstimate) SetEstimates(v []OrderEstimateEstimatesInner) {
+// SetEstimates gets a reference to the given []OrderEstimateDetail and assigns it to the Estimates field.
+func (o *OrderEstimate) SetEstimates(v []OrderEstimateDetail) {
 	o.Estimates = v
 }
 
 func (o OrderEstimate) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -123,3 +123,5 @@ func (v *NullableOrderEstimate) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

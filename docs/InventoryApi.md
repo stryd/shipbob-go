@@ -6,7 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**GetInventories**](InventoryApi.md#GetInventories) | **Get** /inventory | List inventory items
 [**GetInventory**](InventoryApi.md#GetInventory) | **Get** /inventory/{inventoryId} | Get an inventory item
-[**GetProductInventory**](InventoryApi.md#GetProductInventory) | **Get** /product/{productId}/inventory | Get a list of inventory items by product id
+[**GetProductInventories**](InventoryApi.md#GetProductInventories) | **Get** /product/{productId}/inventory | Get a list of inventory items by product id
 
 
 
@@ -34,8 +34,8 @@ func main() {
     isActive := true // bool | Whether the inventory should be active or not (optional)
     isDigital := true // bool | Whether the inventory is digital or not (optional)
     iDs := []int32{int32(123)} // []int32 | Comma separated inventory ids to filter by (optional)
-    sort := "sort_example" // string | Sort will default to ascending order for each field. \\r\\nTo sort in descending order please pass a \"-\" in front of the field name. \\r\\nFor example, Sort=-onHand,name will sort by onHand descending (optional)
-    search := "search_example" // string | Search is available for 2 fields, Inventory ID and Name -\\r\\n1. Expected behavior for search by Inventory ID is exact match\\r\\n2. Expected behavior for search by Inventory Name is partial match, i.e. does not have to be start of word, \\r\\nbut must be consecutive characters. This is not case sensitive. (optional)
+    sort := "sort_example" // string | Sort will default to ascending order for each field.  To sort in descending order please pass a \"-\" in front of the field name.  For example, Sort=-onHand,name will sort by onHand descending (optional)
+    search := "search_example" // string | Search is available for 2 fields, Inventory ID and Name - 1. Expected behavior for search by Inventory ID is exact match 2. Expected behavior for search by Inventory Name is partial match, i.e. does not have to be start of word,  but must be consecutive characters. This is not case sensitive. (optional)
     shipbobChannelId := int32(56) // int32 | Channel Id for Operation (optional)
 
     configuration := openapiclient.NewConfiguration()
@@ -66,8 +66,8 @@ Name | Type | Description  | Notes
  **isActive** | **bool** | Whether the inventory should be active or not | 
  **isDigital** | **bool** | Whether the inventory is digital or not | 
  **iDs** | **[]int32** | Comma separated inventory ids to filter by | 
- **sort** | **string** | Sort will default to ascending order for each field. \\r\\nTo sort in descending order please pass a \&quot;-\&quot; in front of the field name. \\r\\nFor example, Sort&#x3D;-onHand,name will sort by onHand descending | 
- **search** | **string** | Search is available for 2 fields, Inventory ID and Name -\\r\\n1. Expected behavior for search by Inventory ID is exact match\\r\\n2. Expected behavior for search by Inventory Name is partial match, i.e. does not have to be start of word, \\r\\nbut must be consecutive characters. This is not case sensitive. | 
+ **sort** | **string** | Sort will default to ascending order for each field.  To sort in descending order please pass a \&quot;-\&quot; in front of the field name.  For example, Sort&#x3D;-onHand,name will sort by onHand descending | 
+ **search** | **string** | Search is available for 2 fields, Inventory ID and Name - 1. Expected behavior for search by Inventory ID is exact match 2. Expected behavior for search by Inventory Name is partial match, i.e. does not have to be start of word,  but must be consecutive characters. This is not case sensitive. | 
  **shipbobChannelId** | **int32** | Channel Id for Operation | 
 
 ### Return type
@@ -156,9 +156,9 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## GetProductInventory
+## GetProductInventories
 
-> []Inventory GetProductInventory(ctx, productId).ShipbobChannelId(shipbobChannelId).Execute()
+> []Inventory GetProductInventories(ctx, productId).ShipbobChannelId(shipbobChannelId).Execute()
 
 Get a list of inventory items by product id
 
@@ -180,13 +180,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.InventoryApi.GetProductInventory(context.Background(), productId).ShipbobChannelId(shipbobChannelId).Execute()
+    resp, r, err := apiClient.InventoryApi.GetProductInventories(context.Background(), productId).ShipbobChannelId(shipbobChannelId).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `InventoryApi.GetProductInventory``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `InventoryApi.GetProductInventories``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `GetProductInventory`: []Inventory
-    fmt.Fprintf(os.Stdout, "Response from `InventoryApi.GetProductInventory`: %v\n", resp)
+    // response from `GetProductInventories`: []Inventory
+    fmt.Fprintf(os.Stdout, "Response from `InventoryApi.GetProductInventories`: %v\n", resp)
 }
 ```
 
@@ -200,7 +200,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiGetProductInventoryRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiGetProductInventoriesRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes

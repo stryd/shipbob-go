@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **Active** | Pointer to **bool** | Indicates if the shipping method is active | [optional] 
 **Default** | Pointer to **bool** | Indicates the shipping method is a ShipBob default shipping method. | [optional] 
 **Id** | Pointer to **int32** | Unique id for shipping method. | [optional] 
-**Name** | Pointer to **string** | Name of the ship method as selected by the merchant and saved in ShipBobâs database (i.e. âgroundâ). Corresponds to the shipping_method field in the Orders API. | [optional] 
+**Name** | Pointer to **string** | Name of the ship method as selected by the merchant and saved in ShipBob&#39;s database (i.e. \&quot;ground\&quot;). Corresponds to the shipping_method field in the Orders API. | [optional] 
 **ServiceLevel** | Pointer to [**ServiceLevelDetail**](ServiceLevelDetail.md) |  | [optional] 
 
 ## Methods

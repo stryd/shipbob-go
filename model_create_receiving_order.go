@@ -22,18 +22,18 @@ var _ MappedNullable = &CreateReceivingOrder{}
 type CreateReceivingOrder struct {
 	BoxPackagingType PackingType `json:"box_packaging_type"`
 	// Box shipments to be added to this receiving order
-	Boxes []CreateReceivingOrderBoxesInner `json:"boxes"`
+	Boxes []AddBoxToOrder `json:"boxes"`
 	// Expected arrival date of all the box shipments in this receiving order
-	ExpectedArrivalDate NullableTime                          `json:"expected_arrival_date"`
-	FulfillmentCenter   CreateReceivingOrderFulfillmentCenter `json:"fulfillment_center"`
-	PackageType         PackageType                           `json:"package_type"`
+	ExpectedArrivalDate NullableTime `json:"expected_arrival_date"`
+	FulfillmentCenter AssignOrderToFulfillmentCenter `json:"fulfillment_center"`
+	PackageType PackageType `json:"package_type"`
 }
 
 // NewCreateReceivingOrder instantiates a new CreateReceivingOrder object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateReceivingOrder(boxPackagingType PackingType, boxes []CreateReceivingOrderBoxesInner, expectedArrivalDate NullableTime, fulfillmentCenter CreateReceivingOrderFulfillmentCenter, packageType PackageType) *CreateReceivingOrder {
+func NewCreateReceivingOrder(boxPackagingType PackingType, boxes []AddBoxToOrder, expectedArrivalDate NullableTime, fulfillmentCenter AssignOrderToFulfillmentCenter, packageType PackageType) *CreateReceivingOrder {
 	this := CreateReceivingOrder{}
 	this.BoxPackagingType = boxPackagingType
 	this.Boxes = boxes
@@ -76,10 +76,10 @@ func (o *CreateReceivingOrder) SetBoxPackagingType(v PackingType) {
 }
 
 // GetBoxes returns the Boxes field value
-// If the value is explicit nil, the zero value for []CreateReceivingOrderBoxesInner will be returned
-func (o *CreateReceivingOrder) GetBoxes() []CreateReceivingOrderBoxesInner {
+// If the value is explicit nil, the zero value for []AddBoxToOrder will be returned
+func (o *CreateReceivingOrder) GetBoxes() []AddBoxToOrder {
 	if o == nil {
-		var ret []CreateReceivingOrderBoxesInner
+		var ret []AddBoxToOrder
 		return ret
 	}
 
@@ -89,7 +89,7 @@ func (o *CreateReceivingOrder) GetBoxes() []CreateReceivingOrderBoxesInner {
 // GetBoxesOk returns a tuple with the Boxes field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *CreateReceivingOrder) GetBoxesOk() ([]CreateReceivingOrderBoxesInner, bool) {
+func (o *CreateReceivingOrder) GetBoxesOk() ([]AddBoxToOrder, bool) {
 	if o == nil || IsNil(o.Boxes) {
 		return nil, false
 	}
@@ -97,7 +97,7 @@ func (o *CreateReceivingOrder) GetBoxesOk() ([]CreateReceivingOrderBoxesInner, b
 }
 
 // SetBoxes sets field value
-func (o *CreateReceivingOrder) SetBoxes(v []CreateReceivingOrderBoxesInner) {
+func (o *CreateReceivingOrder) SetBoxes(v []AddBoxToOrder) {
 	o.Boxes = v
 }
 
@@ -128,9 +128,9 @@ func (o *CreateReceivingOrder) SetExpectedArrivalDate(v time.Time) {
 }
 
 // GetFulfillmentCenter returns the FulfillmentCenter field value
-func (o *CreateReceivingOrder) GetFulfillmentCenter() CreateReceivingOrderFulfillmentCenter {
+func (o *CreateReceivingOrder) GetFulfillmentCenter() AssignOrderToFulfillmentCenter {
 	if o == nil {
-		var ret CreateReceivingOrderFulfillmentCenter
+		var ret AssignOrderToFulfillmentCenter
 		return ret
 	}
 
@@ -139,7 +139,7 @@ func (o *CreateReceivingOrder) GetFulfillmentCenter() CreateReceivingOrderFulfil
 
 // GetFulfillmentCenterOk returns a tuple with the FulfillmentCenter field value
 // and a boolean to check if the value has been set.
-func (o *CreateReceivingOrder) GetFulfillmentCenterOk() (*CreateReceivingOrderFulfillmentCenter, bool) {
+func (o *CreateReceivingOrder) GetFulfillmentCenterOk() (*AssignOrderToFulfillmentCenter, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -147,7 +147,7 @@ func (o *CreateReceivingOrder) GetFulfillmentCenterOk() (*CreateReceivingOrderFu
 }
 
 // SetFulfillmentCenter sets field value
-func (o *CreateReceivingOrder) SetFulfillmentCenter(v CreateReceivingOrderFulfillmentCenter) {
+func (o *CreateReceivingOrder) SetFulfillmentCenter(v AssignOrderToFulfillmentCenter) {
 	o.FulfillmentCenter = v
 }
 
@@ -176,7 +176,7 @@ func (o *CreateReceivingOrder) SetPackageType(v PackageType) {
 }
 
 func (o CreateReceivingOrder) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -230,3 +230,5 @@ func (v *NullableCreateReceivingOrder) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

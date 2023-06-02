@@ -178,7 +178,11 @@ def add_operation_ids(path: str, path_schema: dict):
             operation_id = operation_id[:-len("Cancel")]
         method_schema[op_id_key] = op + operation_id
         if method == "get" and not path.endswith("}"):
-            if not operation_id.endswith("y") and not operation_id.endswith("s"):
+            if operation_id.endswith("Statushistory"):
+                continue
+            if operation_id.endswith("y"):
+                method_schema[op_id_key] = method_schema[op_id_key][:-1] + "ies"
+            elif not operation_id.endswith("s"):
                 method_schema[op_id_key] += "s"
 
 

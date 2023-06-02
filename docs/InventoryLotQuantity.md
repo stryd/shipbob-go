@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **ExpirationDate** | Pointer to **NullableTime** | Expiration date for this lot | [optional] 
 **FulfillableQuantity** | Pointer to **int32** | Fulfillable quantity of inventory items belonging to this lot | [optional] 
 **FulfillableQuantityByFulfillmentCenter** | Pointer to [**[]InventoryFulfillmentCenterQuantity**](InventoryFulfillmentCenterQuantity.md) | Fulfillable quantity of inventory items belonging to this lot broken down by fulfillment center location | [optional] 
-**InternalTransferQuantity** | Pointer to **int32** | The quantity of all items belonging to this lot that are in the process of internal transit \\r\\nbetween ShipBob fulfillment centers. These items are not pickable or fulfillable\\r\\nuntil they have been received and moved to the \&quot;On Hand\&quot; quantity of the destination FC.\\r\\nInternal transit quantities for each FC represent the incoming transfer stock\\r\\nfor that specific location. | [optional] 
+**InternalTransferQuantity** | Pointer to **int32** | The quantity of all items belonging to this lot that are in the process of internal transit  between ShipBob fulfillment centers. These items are not pickable or fulfillable until they have been received and moved to the \&quot;On Hand\&quot; quantity of the destination FC. Internal transit quantities for each FC represent the incoming transfer stock for that specific location. | [optional] 
 **LotNumber** | Pointer to **string** | Identification number of this lot | [optional] 
 **OnhandQuantity** | Pointer to **int32** | OnHand quantity of inventory items belonging to this lot | [optional] 
 

@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **OrderNumber** | Pointer to **string** | User friendly orderId or store order number that will be shown on the Orders Page. If not provided, referenceId will be used | [optional] 
-**Products** | [**[]CreateOrderProductsInner**](CreateOrderProductsInner.md) |  | 
+**Products** | [**[]AddProductToOrder**](AddProductToOrder.md) |  | 
 **PurchaseDate** | Pointer to **NullableTime** | Date this order was purchase by the end user | [optional] 
 **Recipient** | [**RecipientInfo**](RecipientInfo.md) |  | 
 **ReferenceId** | **string** |  | 
@@ -17,7 +17,7 @@ Name | Type | Description | Notes
 
 ### NewCreateOrder
 
-`func NewCreateOrder(products []CreateOrderProductsInner, recipient RecipientInfo, referenceId string, shippingMethod string, ) *CreateOrder`
+`func NewCreateOrder(products []AddProductToOrder, recipient RecipientInfo, referenceId string, shippingMethod string, ) *CreateOrder`
 
 NewCreateOrder instantiates a new CreateOrder object
 This constructor will assign default values to properties that have it defined,
@@ -59,20 +59,20 @@ HasOrderNumber returns a boolean if a field has been set.
 
 ### GetProducts
 
-`func (o *CreateOrder) GetProducts() []CreateOrderProductsInner`
+`func (o *CreateOrder) GetProducts() []AddProductToOrder`
 
 GetProducts returns the Products field if non-nil, zero value otherwise.
 
 ### GetProductsOk
 
-`func (o *CreateOrder) GetProductsOk() (*[]CreateOrderProductsInner, bool)`
+`func (o *CreateOrder) GetProductsOk() (*[]AddProductToOrder, bool)`
 
 GetProductsOk returns a tuple with the Products field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetProducts
 
-`func (o *CreateOrder) SetProducts(v []CreateOrderProductsInner)`
+`func (o *CreateOrder) SetProducts(v []AddProductToOrder)`
 
 SetProducts sets Products field to given value.
 

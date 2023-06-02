@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **CommittedQuantity** | Pointer to **int32** | Amount of committed quantity at this fulfillment center | [optional] 
 **FulfillableQuantity** | Pointer to **int32** | Amount of fulfillable quantity at this fulfillment center | [optional] 
 **Id** | Pointer to **int32** | Unique id of the fulfillment center | [optional] 
-**InternalTransferQuantity** | Pointer to **int32** | The quantity of items that are in the process of internal transit \\r\\nbetween ShipBob fulfillment centers, with a destination of this fulfillment center.\\r\\nThese items are not pickable or fulfillable until they have been received and moved \\r\\nto the \&quot;On Hand\&quot; quantity of the destination FC. | [optional] 
+**InternalTransferQuantity** | Pointer to **int32** | The quantity of items that are in the process of internal transit  between ShipBob fulfillment centers, with a destination of this fulfillment center. These items are not pickable or fulfillable until they have been received and moved  to the \&quot;On Hand\&quot; quantity of the destination FC. | [optional] 
 **Name** | Pointer to **string** | Name of the fulfillment center | [optional] 
 **OnhandQuantity** | Pointer to **int32** | Amount of onhand quantity at this fulfillment center | [optional] 
 

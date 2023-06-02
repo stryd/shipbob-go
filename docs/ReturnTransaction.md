@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Amount** | Pointer to **float64** | Transaction amount in dollars | [optional] 
-**TransactionType** | Pointer to **string** |  | [optional] 
+**TransactionType** | Pointer to [**ReturnTransactionLogSource**](ReturnTransactionLogSource.md) |  | [optional] 
 
 ## Methods
 
@@ -53,20 +53,20 @@ HasAmount returns a boolean if a field has been set.
 
 ### GetTransactionType
 
-`func (o *ReturnTransaction) GetTransactionType() string`
+`func (o *ReturnTransaction) GetTransactionType() ReturnTransactionLogSource`
 
 GetTransactionType returns the TransactionType field if non-nil, zero value otherwise.
 
 ### GetTransactionTypeOk
 
-`func (o *ReturnTransaction) GetTransactionTypeOk() (*string, bool)`
+`func (o *ReturnTransaction) GetTransactionTypeOk() (*ReturnTransactionLogSource, bool)`
 
 GetTransactionTypeOk returns a tuple with the TransactionType field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetTransactionType
 
-`func (o *ReturnTransaction) SetTransactionType(v string)`
+`func (o *ReturnTransaction) SetTransactionType(v ReturnTransactionLogSource)`
 
 SetTransactionType sets TransactionType field to given value.
 

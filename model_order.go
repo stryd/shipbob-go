@@ -30,8 +30,8 @@ type Order struct {
 	// List of products included in the order
 	Products []ProductInfo `json:"products,omitempty"`
 	// Date this order was purchase by the end user
-	PurchaseDate NullableTime   `json:"purchase_date,omitempty"`
-	Recipient    *RecipientInfo `json:"recipient,omitempty"`
+	PurchaseDate NullableTime `json:"purchase_date,omitempty"`
+	Recipient *RecipientInfo `json:"recipient,omitempty"`
 	// Client-defined external unique id of the order
 	ReferenceId *string `json:"reference_id,omitempty"`
 	// Shipments affiliated with the order
@@ -127,7 +127,6 @@ func (o *Order) HasCreatedDate() bool {
 func (o *Order) SetCreatedDate(v time.Time) {
 	o.CreatedDate.Set(&v)
 }
-
 // SetCreatedDateNil sets the value for CreatedDate to be an explicit nil
 func (o *Order) SetCreatedDateNil() {
 	o.CreatedDate.Set(nil)
@@ -266,7 +265,6 @@ func (o *Order) HasPurchaseDate() bool {
 func (o *Order) SetPurchaseDate(v time.Time) {
 	o.PurchaseDate.Set(&v)
 }
-
 // SetPurchaseDateNil sets the value for PurchaseDate to be an explicit nil
 func (o *Order) SetPurchaseDateNil() {
 	o.PurchaseDate.Set(nil)
@@ -502,7 +500,7 @@ func (o *Order) SetType(v string) {
 }
 
 func (o Order) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -588,3 +586,5 @@ func (v *NullableOrder) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

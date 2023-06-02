@@ -15,11 +15,11 @@ Name | Type | Description | Notes
 **Name** | Pointer to **string** | Name of the inventory item | [optional] 
 **PackagingAttribute** | Pointer to **string** | Attribute influencing the packaging requirements of this inventory item | [optional] 
 **TotalAwaitingQuantity** | Pointer to **int32** | Total quantity in unreceived receiving orders for this inventory item | [optional] 
-**TotalBackorderedQuantity** | Pointer to **int32** | The amount of the item you need to send to ShipBob to fulfill all exception orders containing \\r\\nthe item. This is the exception_quantity less the fulfillable_quantity of the item. | [optional] 
+**TotalBackorderedQuantity** | Pointer to **int32** | The amount of the item you need to send to ShipBob to fulfill all exception orders containing  the item. This is the exception_quantity less the fulfillable_quantity of the item. | [optional] 
 **TotalCommittedQuantity** | Pointer to **int32** | Total committed quantity of this inventory item | [optional] 
-**TotalExceptionQuantity** | Pointer to **int32** | The total quantity of all items that are contained within orders that\\r\\nare in exception/out of stock status. Out of stock orders have not been\\r\\nprocessed and therefore do not have lot or fulfillment centers assigned. | [optional] 
+**TotalExceptionQuantity** | Pointer to **int32** | The total quantity of all items that are contained within orders that are in exception/out of stock status. Out of stock orders have not been processed and therefore do not have lot or fulfillment centers assigned. | [optional] 
 **TotalFulfillableQuantity** | Pointer to **int32** | Total fulfillable quantity of this inventory item | [optional] 
-**TotalInternalTransferQuantity** | Pointer to **int32** | The total quantity of all items that are in the process of internal transit \\r\\nbetween ShipBob fulfillment centers. These items are not pickable or fulfillable\\r\\nuntil they have been received and moved to the \&quot;On Hand\&quot; quantity of the destination FC.\\r\\nInternal transit quantities for each FC represent the incoming transfer stock\\r\\nfor that specific location. | [optional] 
+**TotalInternalTransferQuantity** | Pointer to **int32** | The total quantity of all items that are in the process of internal transit  between ShipBob fulfillment centers. These items are not pickable or fulfillable until they have been received and moved to the \&quot;On Hand\&quot; quantity of the destination FC. Internal transit quantities for each FC represent the incoming transfer stock for that specific location. | [optional] 
 **TotalOnhandQuantity** | Pointer to **int32** | Total onhand quantity of this inventory item | [optional] 
 
 ## Methods

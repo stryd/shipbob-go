@@ -19,7 +19,7 @@ var _ MappedNullable = &ValidationProblemDetailsAllOf{}
 
 // ValidationProblemDetailsAllOf struct for ValidationProblemDetailsAllOf
 type ValidationProblemDetailsAllOf struct {
-	Errors               map[string][]string `json:"errors,omitempty"`
+	Errors map[string][]string `json:"errors,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -76,7 +76,7 @@ func (o *ValidationProblemDetailsAllOf) SetErrors(v map[string][]string) {
 }
 
 func (o ValidationProblemDetailsAllOf) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -148,3 +148,5 @@ func (v *NullableValidationProblemDetailsAllOf) UnmarshalJSON(src []byte) error 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

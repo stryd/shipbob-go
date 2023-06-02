@@ -21,10 +21,10 @@ type ReturnStatus string
 // List of ReturnStatus
 const (
 	AWAITING_ARRIVAL ReturnStatus = "AwaitingArrival"
-	ARRIVED          ReturnStatus = "Arrived"
-	PROCESSING       ReturnStatus = "Processing"
-	COMPLETED        ReturnStatus = "Completed"
-	CANCELLED        ReturnStatus = "Cancelled"
+	ARRIVED ReturnStatus = "Arrived"
+	PROCESSING ReturnStatus = "Processing"
+	COMPLETED ReturnStatus = "Completed"
+	CANCELLED ReturnStatus = "Cancelled"
 )
 
 // All allowed values of ReturnStatus enum
@@ -114,3 +114,4 @@ func (v *NullableReturnStatus) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

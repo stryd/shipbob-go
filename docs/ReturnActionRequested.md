@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Action** | Pointer to [**ReturnAction**](ReturnAction.md) |  | [optional] 
-**ActionType** | Pointer to **string** |  | [optional] 
+**ActionType** | Pointer to [**ReturnActionSource**](ReturnActionSource.md) |  | [optional] 
 **Instructions** | Pointer to **NullableString** | Specific instructions to be taken for the inventory when processing the return | [optional] 
 
 ## Methods
@@ -54,20 +54,20 @@ HasAction returns a boolean if a field has been set.
 
 ### GetActionType
 
-`func (o *ReturnActionRequested) GetActionType() string`
+`func (o *ReturnActionRequested) GetActionType() ReturnActionSource`
 
 GetActionType returns the ActionType field if non-nil, zero value otherwise.
 
 ### GetActionTypeOk
 
-`func (o *ReturnActionRequested) GetActionTypeOk() (*string, bool)`
+`func (o *ReturnActionRequested) GetActionTypeOk() (*ReturnActionSource, bool)`
 
 GetActionTypeOk returns a tuple with the ActionType field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetActionType
 
-`func (o *ReturnActionRequested) SetActionType(v string)`
+`func (o *ReturnActionRequested) SetActionType(v ReturnActionSource)`
 
 SetActionType sets ActionType field to given value.
 

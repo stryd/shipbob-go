@@ -30,7 +30,7 @@ type InventoryLotQuantity struct {
 	FulfillableQuantity *int32 `json:"fulfillable_quantity,omitempty"`
 	// Fulfillable quantity of inventory items belonging to this lot broken down by fulfillment center location
 	FulfillableQuantityByFulfillmentCenter []InventoryFulfillmentCenterQuantity `json:"fulfillable_quantity_by_fulfillment_center,omitempty"`
-	// The quantity of all items belonging to this lot that are in the process of internal transit \\r\\nbetween ShipBob fulfillment centers. These items are not pickable or fulfillable\\r\\nuntil they have been received and moved to the \"On Hand\" quantity of the destination FC.\\r\\nInternal transit quantities for each FC represent the incoming transfer stock\\r\\nfor that specific location.
+	// The quantity of all items belonging to this lot that are in the process of internal transit  between ShipBob fulfillment centers. These items are not pickable or fulfillable until they have been received and moved to the \"On Hand\" quantity of the destination FC. Internal transit quantities for each FC represent the incoming transfer stock for that specific location.
 	InternalTransferQuantity *int32 `json:"internal_transfer_quantity,omitempty"`
 	// Identification number of this lot
 	LotNumber *string `json:"lot_number,omitempty"`
@@ -151,7 +151,6 @@ func (o *InventoryLotQuantity) HasExpirationDate() bool {
 func (o *InventoryLotQuantity) SetExpirationDate(v time.Time) {
 	o.ExpirationDate.Set(&v)
 }
-
 // SetExpirationDateNil sets the value for ExpirationDate to be an explicit nil
 func (o *InventoryLotQuantity) SetExpirationDateNil() {
 	o.ExpirationDate.Set(nil)
@@ -323,7 +322,7 @@ func (o *InventoryLotQuantity) SetOnhandQuantity(v int32) {
 }
 
 func (o InventoryLotQuantity) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -394,3 +393,5 @@ func (v *NullableInventoryLotQuantity) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
