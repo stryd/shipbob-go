@@ -49,7 +49,7 @@ def rename_verbose_names(name: str) -> str:
 
     # remove common schema suffixes
     name = remove_if_present(name, 'ViewModel')
-    name = replace_if_present(name, 'Model"', '"')
+    name = remove_if_present(name, 'Model')
 
     # remove "easy" specific schema prefixes
     name = replace_if_present(name, 'Orders.Address', 'OrderAddress')
@@ -212,7 +212,7 @@ def save_processed_schema(schema, output_file):
 
 
 def main():
-    processed_schema = process_openapi_schema("../shipbob_open_api.json")
+    processed_schema = process_openapi_schema("../shipbob_open_api_original.json")
     save_processed_schema(processed_schema, "../shipbob_open_api.json")
 
 

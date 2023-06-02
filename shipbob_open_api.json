@@ -141,14 +141,17 @@
             "type": "boolean"
           },
           "service_type": {
-            "enum": [
-              "Receiving",
-              "Returns"
-            ],
-            "type": "string"
+            "$ref": "#/components/schemas/LocationServiceTypeEnum"
           }
         },
         "type": "object"
+      },
+      "LocationServiceTypeEnum": {
+        "enum": [
+          "Receiving",
+          "Returns"
+        ],
+        "type": "string"
       },
       "ProblemDetails": {
         "additionalProperties": false,
@@ -156,9 +159,6 @@
           "propertyName": "ttype"
         },
         "properties": {
-          "ttype": {
-            "type": "string"
-          },
           "detail": {
             "nullable": true,
             "type": "string"
@@ -187,6 +187,9 @@
           },
           "type": {
             "nullable": true,
+            "type": "string"
+          },
+          "ttype": {
             "type": "string"
           }
         },
@@ -293,7 +296,62 @@
         },
         "type": "object"
       },
-      "CancelShipment": {
+      "AddProductToOrderByProductId": {
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "description": "Unique id of the product",
+            "format": "int32",
+            "type": "integer"
+          },
+          "quantity": {
+            "description": "The quantity of this product ordered",
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "id",
+          "quantity"
+        ],
+        "type": "object"
+      },
+      "AddProductToOrderByReferenceId": {
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "description": "Name of the product",
+            "example": "TShirtBlueM",
+            "type": "string"
+          },
+          "quantity": {
+            "description": "The quantity of this product ordered",
+            "format": "int32",
+            "type": "integer"
+          },
+          "reference_id": {
+            "description": "Unique reference id of the product",
+            "example": "TShirtBlueM",
+            "type": "string"
+          }
+        },
+        "required": [
+          "quantity",
+          "reference_id"
+        ],
+        "type": "object"
+      },
+      "AddProductToOrder": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/AddProductToOrderByProductId"
+          },
+          {
+            "$ref": "#/components/schemas/AddProductToOrderByReferenceId"
+          }
+        ]
+      },
+      "CancelShipments": {
         "additionalProperties": false,
         "description": "Model for cancel multiple shipments at once",
         "properties": {
@@ -318,33 +376,7 @@
           },
           "products": {
             "items": {
-              "additionalProperties": false,
-              "properties": {
-                "id": {
-                  "description": "Unique id of the product",
-                  "format": "int32",
-                  "type": "integer"
-                },
-                "quantity": {
-                  "description": "The quantity of this product ordered",
-                  "format": "int32",
-                  "type": "integer"
-                },
-                "name": {
-                  "description": "Name of the product",
-                  "example": "TShirtBlueM",
-                  "type": "string"
-                },
-                "reference_id": {
-                  "description": "Unique reference id of the product",
-                  "example": "TShirtBlueM",
-                  "type": "string"
-                }
-              },
-              "required": [
-                "quantity"
-              ],
-              "type": "object"
+              "$ref": "#/components/schemas/AddProductToOrder"
             },
             "minLength": 1,
             "type": "array"
@@ -389,7 +421,7 @@
         ],
         "type": "object"
       },
-      "EstimateFulfillmentRequest": {
+      "OrderEstimateFulfillmentRequest": {
         "additionalProperties": false,
         "properties": {
           "address": {
@@ -398,36 +430,12 @@
           "products": {
             "description": "Products to be included in the order. Each product must include one of reference_id or id",
             "items": {
-              "additionalProperties": false,
-              "properties": {
-                "id": {
-                  "description": "Unique id of the product (Must be provided if reference_id is unknown)",
-                  "format": "int32",
-                  "nullable": true,
-                  "type": "integer"
-                },
-                "quantity": {
-                  "description": "The quantity of this product ordered",
-                  "format": "int32",
-                  "maximum": 199,
-                  "minimum": 1,
-                  "type": "integer"
-                },
-                "reference_id": {
-                  "description": "Unique reference id of the product (Must be provided if ID is unknown)",
-                  "example": "TShirtBlueM",
-                  "type": "string"
-                }
-              },
-              "required": [
-                "quantity"
-              ],
-              "type": "object"
+              "$ref": "#/components/schemas/OrderEstimateProductInfo"
             },
             "type": "array"
           },
           "shipping_methods": {
-            "description": "Array of strings specifying shipping methods for which to fetch estimates. If this field is omitted we will return estimates for all shipping methods defined in ShipBob",
+            "description": "Array of strings specifying shipping methods for which to fetch estimates.  If this field is omitted we will return estimates for all shipping methods defined in ShipBob",
             "items": {
               "type": "string"
             },
@@ -437,6 +445,33 @@
         "required": [
           "address",
           "products"
+        ],
+        "type": "object"
+      },
+      "OrderEstimateProductInfo": {
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "description": "Unique id of the product (Must be provided if reference_id is unknown)",
+            "format": "int32",
+            "nullable": true,
+            "type": "integer"
+          },
+          "quantity": {
+            "description": "The quantity of this product ordered",
+            "format": "int32",
+            "maximum": 199,
+            "minimum": 1,
+            "type": "integer"
+          },
+          "reference_id": {
+            "description": "Unique reference id of the product (Must be provided if ID is unknown)",
+            "example": "TShirtBlueM",
+            "type": "string"
+          }
+        },
+        "required": [
+          "quantity"
         ],
         "type": "object"
       },
@@ -544,6 +579,20 @@
         },
         "type": "object"
       },
+      "CanceledShipments": {
+        "additionalProperties": false,
+        "description": "",
+        "properties": {
+          "results": {
+            "description": "The results of all cancellation actions",
+            "items": {
+              "$ref": "#/components/schemas/CanceledShipment"
+            },
+            "type": "array"
+          }
+        },
+        "type": "object"
+      },
       "ChannelInfo": {
         "additionalProperties": false,
         "description": "Created by channel metadata",
@@ -561,28 +610,31 @@
         },
         "type": "object"
       },
+      "OrderEstimateDetail": {
+        "additionalProperties": false,
+        "properties": {
+          "estimated_price": {
+            "description": "Estimated price in dollars for the provided shipping method",
+            "format": "double",
+            "type": "number"
+          },
+          "fulfillment_center": {
+            "$ref": "#/components/schemas/FulfillmentCenter"
+          },
+          "shipping_method": {
+            "description": "Provided shipping method. Maps to ship option in ShipBob.",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
       "OrderEstimate": {
         "additionalProperties": false,
         "properties": {
           "estimates": {
             "description": "Array of estimates for each shipping method",
             "items": {
-              "additionalProperties": false,
-              "properties": {
-                "estimated_price": {
-                  "description": "Estimated price in dollars for the provided shipping method",
-                  "format": "double",
-                  "type": "number"
-                },
-                "fulfillment_center": {
-                  "$ref": "#/components/schemas/FulfillmentCenter"
-                },
-                "shipping_method": {
-                  "description": "Provided shipping method. Maps to ship option in ShipBob.",
-                  "type": "string"
-                }
-              },
-              "type": "object"
+              "$ref": "#/components/schemas/OrderEstimateDetail"
             },
             "type": "array"
           }
@@ -736,8 +788,8 @@
           "created_date": {
             "description": "Date this order was created",
             "format": "date-time",
-            "nullable": true,
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "id": {
             "description": "Unique id of the order",
@@ -961,8 +1013,8 @@
           "timestamp": {
             "description": "Timestamp of event",
             "format": "date-time",
-            "nullable": true,
-            "type": "string"
+            "type": "string",
+            "nullable": true
           }
         },
         "type": "object"
@@ -1006,7 +1058,7 @@
         "description": "Information about a shipment",
         "properties": {
           "actual_fulfillment_date": {
-            "description": "The datetime of ShipBob's completion of the fulfillment operation as promised. Currently, this means the shipment has been picked, packed, and label has been printed.",
+            "description": "The datetime of ShipBob's completion of the fulfillment operation as promised.  Currently, this means the shipment has been picked, packed, and label has been printed.",
             "format": "date-time",
             "nullable": true,
             "type": "string"
@@ -1014,11 +1066,11 @@
           "created_date": {
             "description": "Date this shipment was created",
             "format": "date-time",
-            "nullable": true,
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "estimated_fulfillment_date": {
-            "description": "The datetime of ShipBob's commitment for completing the shipment and handing to the carrier for delivery.",
+            "description": "The datetime of ShipBob's commitment for completing  the shipment and handing to the carrier for delivery.",
             "format": "date-time",
             "nullable": true,
             "type": "string"
@@ -1129,7 +1181,7 @@
           "status_details": {
             "description": "Additional details about the shipment status",
             "items": {
-              "$ref": "#/components/schemas/OrderStatusDetails"
+              "$ref": "#/components/schemas/OrderStatusDetail"
             },
             "type": "array"
           },
@@ -1139,7 +1191,7 @@
         },
         "type": "object"
       },
-      "OrderStatusDetails": {
+      "OrderStatusDetail": {
         "additionalProperties": false,
         "properties": {
           "description": {
@@ -1243,8 +1295,8 @@
           "created_at": {
             "description": "Timestamp the webhook subscription was created",
             "format": "date-time",
-            "nullable": true,
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "id": {
             "description": "ID of the webhook subscription",
@@ -1555,6 +1607,22 @@
         ],
         "type": "object"
       },
+      "BundleRootInformation": {
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "description": "Id of the bundle root product",
+            "format": "int32",
+            "type": "integer"
+          },
+          "name": {
+            "description": "Name of the bundle root product",
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
       "ProductChannel": {
         "additionalProperties": false,
         "description": "Information about a store channel",
@@ -1639,20 +1707,7 @@
             "type": "string"
           },
           "bundle_root_information": {
-            "additionalProperties": false,
-            "properties": {
-              "id": {
-                "description": "Id of the bundle root product",
-                "format": "int32",
-                "type": "integer"
-              },
-              "name": {
-                "description": "Name of the bundle root product",
-                "nullable": true,
-                "type": "string"
-              }
-            },
-            "type": "object"
+            "$ref": "#/components/schemas/BundleRootInformation"
           },
           "channel": {
             "$ref": "#/components/schemas/ProductChannel"
@@ -1660,8 +1715,8 @@
           "created_date": {
             "description": "Date the product was created",
             "format": "date-time",
-            "nullable": true,
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "fulfillable_inventory_items": {
             "description": "The inventory that this product will resolve to when packing a shipment",
@@ -1720,13 +1775,176 @@
         },
         "type": "object"
       },
-      "ProductBundle": {
+      "ProductActiveStatus": {
+        "enum": [
+          "Any",
+          "Active",
+          "Inactive"
+        ],
+        "type": "string"
+      },
+      "ProductBundleStatus": {
         "enum": [
           "Any",
           "Bundle",
           "NotBundle"
         ],
         "type": "string"
+      },
+      "AddBoxItemToBox": {
+        "additionalProperties": false,
+        "description": "Information about an inventory item contained inside a receiving order box",
+        "properties": {
+          "inventory_id": {
+            "description": "Unique inventory id of the items in the box",
+            "format": "int32",
+            "type": "integer"
+          },
+          "lot_date": {
+            "description": "Lot expiration date for the items in the box",
+            "format": "date-time",
+            "nullable": true,
+            "type": "string"
+          },
+          "lot_number": {
+            "description": "Lot number of the items in the box",
+            "example": "2222",
+            "nullable": true,
+            "type": "string"
+          },
+          "quantity": {
+            "description": "Quantity of the items in the box",
+            "format": "int32",
+            "maximum": 2147483647,
+            "minimum": 1,
+            "type": "integer"
+          }
+        },
+        "required": [
+          "inventory_id",
+          "quantity"
+        ],
+        "type": "object"
+      },
+      "AddBoxToOrder": {
+        "additionalProperties": false,
+        "description": "Information about a box shipment to be added to a receiving order",
+        "properties": {
+          "box_items": {
+            "description": "Items contained in this box",
+            "items": {
+              "$ref": "#/components/schemas/AddBoxItemToBox"
+            },
+            "nullable": true,
+            "type": "array"
+          },
+          "tracking_number": {
+            "description": "Tracking number for the box shipment",
+            "example": "860C8CDC8F0B4FC7AB69AC86C20539EC",
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "required": [
+          "box_items",
+          "tracking_number"
+        ],
+        "type": "object"
+      },
+      "AssignOrderToFulfillmentCenter": {
+        "additionalProperties": false,
+        "description": "Model containing information that assigns a receiving order to a fulfillment center",
+        "properties": {
+          "id": {
+            "description": "ID of the fulfillment center to assign this receiving order to",
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "id"
+        ],
+        "type": "object"
+      },
+      "BoxItem": {
+        "additionalProperties": false,
+        "description": "Information about an item contained inside a box as part of a receiving order",
+        "properties": {
+          "inventory_id": {
+            "description": "Unique identifier of the inventory item",
+            "format": "int32",
+            "type": "integer"
+          },
+          "lot_date": {
+            "description": "Expiration date of the item's lot",
+            "format": "date-time",
+            "nullable": true,
+            "type": "string"
+          },
+          "lot_number": {
+            "description": "Lot number the item belongs to",
+            "nullable": true,
+            "type": "string"
+          },
+          "quantity": {
+            "description": "Quantity of the item included",
+            "format": "int32",
+            "type": "integer"
+          },
+          "received_quantity": {
+            "description": "Quantity of the item that was received after processing the receiving order",
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
+      "Box": {
+        "additionalProperties": false,
+        "description": "Information about a box shipment included in a receiving order",
+        "properties": {
+          "arrived_date": {
+            "description": "Date the box arrived",
+            "format": "date-time",
+            "nullable": true,
+            "type": "string"
+          },
+          "box_items": {
+            "description": "Information about the items included in the box",
+            "items": {
+              "$ref": "#/components/schemas/BoxItem"
+            },
+            "nullable": true,
+            "type": "array"
+          },
+          "box_number": {
+            "description": "The number of the box in the receiving order",
+            "format": "int32",
+            "type": "integer"
+          },
+          "box_status": {
+            "$ref": "#/components/schemas/BoxStatus"
+          },
+          "counting_started_date": {
+            "description": "Date counting of the box's inventory items started",
+            "format": "date-time",
+            "nullable": true,
+            "type": "string"
+          },
+          "received_date": {
+            "description": "Date the box was received",
+            "format": "date-time",
+            "nullable": true,
+            "type": "string"
+          },
+          "tracking_number": {
+            "description": "Tracking number of the box shipment",
+            "example": "860C8CDC8F0B4FC7AB69AC86C20539EC",
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "type": "object"
       },
       "CreateReceivingOrder": {
         "additionalProperties": false,
@@ -1738,61 +1956,7 @@
           "boxes": {
             "description": "Box shipments to be added to this receiving order",
             "items": {
-              "additionalProperties": false,
-              "description": "Information about a box shipment to be added to a receiving order",
-              "properties": {
-                "box_items": {
-                  "description": "Items contained in this box",
-                  "items": {
-                    "additionalProperties": false,
-                    "description": "Information about an inventory item contained inside a receiving order box",
-                    "properties": {
-                      "inventory_id": {
-                        "description": "Unique inventory id of the items in the box",
-                        "format": "int32",
-                        "type": "integer"
-                      },
-                      "lot_date": {
-                        "description": "Lot expiration date for the items in the box",
-                        "format": "date-time",
-                        "nullable": true,
-                        "type": "string"
-                      },
-                      "lot_number": {
-                        "description": "Lot number of the items in the box",
-                        "example": "2222",
-                        "nullable": true,
-                        "type": "string"
-                      },
-                      "quantity": {
-                        "description": "Quantity of the items in the box",
-                        "format": "int32",
-                        "maximum": 2147483647,
-                        "minimum": 1,
-                        "type": "integer"
-                      }
-                    },
-                    "required": [
-                      "inventory_id",
-                      "quantity"
-                    ],
-                    "type": "object"
-                  },
-                  "nullable": true,
-                  "type": "array"
-                },
-                "tracking_number": {
-                  "description": "Tracking number for the box shipment",
-                  "example": "860C8CDC8F0B4FC7AB69AC86C20539EC",
-                  "nullable": true,
-                  "type": "string"
-                }
-              },
-              "required": [
-                "box_items",
-                "tracking_number"
-              ],
-              "type": "object"
+              "$ref": "#/components/schemas/AddBoxToOrder"
             },
             "nullable": true,
             "type": "array"
@@ -1800,23 +1964,11 @@
           "expected_arrival_date": {
             "description": "Expected arrival date of all the box shipments in this receiving order",
             "format": "date-time",
-            "nullable": true,
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "fulfillment_center": {
-            "additionalProperties": false,
-            "description": "Model containing information that assigns a receiving order to a fulfillment center",
-            "properties": {
-              "id": {
-                "description": "ID of the fulfillment center to assign this receiving order to",
-                "format": "int32",
-                "type": "integer"
-              }
-            },
-            "required": [
-              "id"
-            ],
-            "type": "object"
+            "$ref": "#/components/schemas/AssignOrderToFulfillmentCenter"
           },
           "package_type": {
             "$ref": "#/components/schemas/PackageType"
@@ -1919,89 +2071,7 @@
           "boxes": {
             "description": "Information about the boxes being shipped in this receiving order",
             "items": {
-              "additionalProperties": false,
-              "description": "Information about a box shipment included in a receiving order",
-              "properties": {
-                "arrived_date": {
-                  "description": "Date the box arrived",
-                  "format": "date-time",
-                  "nullable": true,
-                  "type": "string"
-                },
-                "box_items": {
-                  "description": "Information about the items included in the box",
-                  "items": {
-                    "additionalProperties": false,
-                    "description": "Information about an item contained inside a box as part of a receiving order",
-                    "properties": {
-                      "inventory_id": {
-                        "description": "Unique identifier of the inventory item",
-                        "format": "int32",
-                        "type": "integer"
-                      },
-                      "lot_date": {
-                        "description": "Expiration date of the item's lot",
-                        "format": "date-time",
-                        "nullable": true,
-                        "type": "string"
-                      },
-                      "lot_number": {
-                        "description": "Lot number the item belongs to",
-                        "nullable": true,
-                        "type": "string"
-                      },
-                      "quantity": {
-                        "description": "Quantity of the item included",
-                        "format": "int32",
-                        "type": "integer"
-                      },
-                      "received_quantity": {
-                        "description": "Quantity of the item that was received after processing the receiving order",
-                        "format": "int32",
-                        "type": "integer"
-                      }
-                    },
-                    "type": "object"
-                  },
-                  "nullable": true,
-                  "type": "array"
-                },
-                "box_number": {
-                  "description": "The number of the box in the receiving order",
-                  "format": "int32",
-                  "type": "integer"
-                },
-                "box_status": {
-                  "enum": [
-                    "Awaiting",
-                    "Arrived",
-                    "Completed",
-                    "Counting",
-                    "Stowing",
-                    "Cancelled"
-                  ],
-                  "type": "string"
-                },
-                "counting_started_date": {
-                  "description": "Date counting of the box's inventory items started",
-                  "format": "date-time",
-                  "nullable": true,
-                  "type": "string"
-                },
-                "received_date": {
-                  "description": "Date the box was received",
-                  "format": "date-time",
-                  "nullable": true,
-                  "type": "string"
-                },
-                "tracking_number": {
-                  "description": "Tracking number of the box shipment",
-                  "example": "860C8CDC8F0B4FC7AB69AC86C20539EC",
-                  "nullable": true,
-                  "type": "string"
-                }
-              },
-              "type": "object"
+              "$ref": "#/components/schemas/Box"
             },
             "nullable": true,
             "type": "array"
@@ -2009,8 +2079,8 @@
           "expected_arrival_date": {
             "description": "Expected date that all packages will have arrived",
             "format": "date-time",
-            "nullable": true,
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "fulfillment_center": {
             "$ref": "#/components/schemas/ReceivingFulfillmentCenter"
@@ -2023,32 +2093,34 @@
           "insert_date": {
             "description": "Insert date of the receiving order",
             "format": "date-time",
-            "nullable": true,
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "last_updated_date": {
             "description": "Last date the receiving order was updated",
             "format": "date-time",
-            "nullable": true,
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "package_type": {
             "$ref": "#/components/schemas/PackageType"
           },
           "status": {
-            "enum": [
-              "Awaiting",
-              "Processing",
-              "Completed",
-              "Cancelled",
-              "Incomplete",
-              "Arrived",
-              "PartiallyArrived"
-            ],
-            "type": "string"
+            "$ref": "#/components/schemas/ReceivingStatus"
           }
         },
         "type": "object"
+      },
+      "BoxStatus": {
+        "enum": [
+          "Awaiting",
+          "Arrived",
+          "Completed",
+          "Counting",
+          "Stowing",
+          "Cancelled"
+        ],
+        "type": "string"
       },
       "PackageType": {
         "enum": [
@@ -2063,6 +2135,18 @@
           "EverythingInOneBox",
           "OneSkuPerBox",
           "MultipleSkuPerBox"
+        ],
+        "type": "string"
+      },
+      "ReceivingStatus": {
+        "enum": [
+          "Awaiting",
+          "Processing",
+          "Completed",
+          "Cancelled",
+          "Incomplete",
+          "Arrived",
+          "PartiallyArrived"
         ],
         "type": "string"
       },
@@ -2188,11 +2272,7 @@
             "$ref": "#/components/schemas/ReturnAction"
           },
           "action_type": {
-            "enum": [
-              "InventoryDefault",
-              "Override"
-            ],
-            "type": "string"
+            "$ref": "#/components/schemas/ReturnActionSource"
           },
           "instructions": {
             "description": "Specific instructions to be taken for the inventory when processing the return",
@@ -2259,8 +2339,8 @@
           "time_stamp": {
             "description": "Date this corresponding return order status was created",
             "format": "date-time",
-            "nullable": true,
-            "type": "string"
+            "type": "string",
+            "nullable": true
           }
         },
         "type": "object"
@@ -2282,8 +2362,8 @@
           "insert_date": {
             "description": "Date this return order was created",
             "format": "date-time",
-            "nullable": true,
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "inventory": {
             "description": "List of inventory included in the return order",
@@ -2311,11 +2391,7 @@
             "type": "string"
           },
           "return_type": {
-            "enum": [
-              "Regular",
-              "ReturnToSender"
-            ],
-            "type": "string"
+            "$ref": "#/components/schemas/ReturnType"
           },
           "status": {
             "$ref": "#/components/schemas/ReturnStatus"
@@ -2347,12 +2423,7 @@
             "type": "number"
           },
           "transaction_type": {
-            "enum": [
-              "ReturnLabelInvoice",
-              "ReturnProcessingFee",
-              "ReturnToSenderFee"
-            ],
-            "type": "string"
+            "$ref": "#/components/schemas/ReturnTransactionLogSource"
           }
         },
         "type": "object"
@@ -2366,6 +2437,13 @@
         ],
         "type": "string"
       },
+      "ReturnActionSource": {
+        "enum": [
+          "InventoryDefault",
+          "Override"
+        ],
+        "type": "string"
+      },
       "ReturnStatus": {
         "enum": [
           "AwaitingArrival",
@@ -2373,6 +2451,28 @@
           "Processing",
           "Completed",
           "Cancelled"
+        ],
+        "type": "string"
+      },
+      "ReturnType": {
+        "enum": [
+          "Regular",
+          "ReturnToSender"
+        ],
+        "type": "string"
+      },
+      "SortOrder": {
+        "enum": [
+          "Newest",
+          "Oldest"
+        ],
+        "type": "string"
+      },
+      "ReturnTransactionLogSource": {
+        "enum": [
+          "ReturnLabelInvoice",
+          "ReturnProcessingFee",
+          "ReturnToSenderFee"
         ],
         "type": "string"
       }
@@ -2414,7 +2514,6 @@
   "paths": {
     "/channel": {
       "get": {
-        "operationId": "getChannels",
         "responses": {
           "200": {
             "content": {
@@ -2462,12 +2561,12 @@
         "summary": "Get user-authorized channel info",
         "tags": [
           "Channels"
-        ]
+        ],
+        "operationId": "getChannels"
       }
     },
     "/fulfillmentCenter": {
       "get": {
-        "operationId": "getFulfillmentCenters",
         "responses": {
           "200": {
             "content": {
@@ -2499,12 +2598,12 @@
         "summary": "Get Fulfillment Centers",
         "tags": [
           "Receiving"
-        ]
+        ],
+        "operationId": "getFulfillmentCenters"
       }
     },
     "/inventory": {
       "get": {
-        "operationId": "getInventory",
         "parameters": [
           {
             "description": "Page of inventory items to get",
@@ -2631,12 +2730,12 @@
         "summary": "List inventory items",
         "tags": [
           "Inventory"
-        ]
+        ],
+        "operationId": "getInventory"
       }
     },
     "/inventory/{inventoryId}": {
       "get": {
-        "operationId": "getInventory",
         "parameters": [
           {
             "description": "The inventory id to get",
@@ -2696,12 +2795,12 @@
         "summary": "Get an inventory item",
         "tags": [
           "Inventory"
-        ]
+        ],
+        "operationId": "getInventory"
       }
     },
     "/location": {
       "get": {
-        "operationId": "getLocations",
         "parameters": [
           {
             "description": "Whether the inactive locations should be included or not",
@@ -2765,12 +2864,12 @@
         "summary": "Get locations",
         "tags": [
           "Locations"
-        ]
+        ],
+        "operationId": "getLocations"
       }
     },
     "/order": {
       "get": {
-        "operationId": "getOrders",
         "description": "All parameters are AND filters",
         "parameters": [
           {
@@ -2933,10 +3032,10 @@
         "summary": "Get Orders",
         "tags": [
           "Orders"
-        ]
+        ],
+        "operationId": "getOrders"
       },
       "post": {
-        "operationId": "createOrder",
         "parameters": [
           {
             "description": "Channel Id for Operation",
@@ -3018,12 +3117,12 @@
         "summary": "Create Order",
         "tags": [
           "Orders"
-        ]
+        ],
+        "operationId": "createOrder"
       }
     },
     "/order/estimate": {
       "post": {
-        "operationId": "createOrderEstimate",
         "description": "This endpoint will provide, where possible, an estimate of pricing and fulfillment center assignment of a potential standard (direct to consumer) order.  Keep in mind that there are ways for the merchant to change FC assignment or product configuration after order creation that could invalidate this estimate.  Estimates cannot be returned for items that are unknown, out of stock, or too large for fulfillment using standard box sizes.  Additional services such as high-pick fees, shipping insurance, auto-splitting or auto-adding items to orders, and signature required are not included in this estimate.",
         "parameters": [
           {
@@ -3041,7 +3140,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/EstimateFulfillmentRequest"
+                "$ref": "#/components/schemas/OrderEstimateFulfillmentRequest"
               }
             }
           }
@@ -3106,12 +3205,12 @@
         "summary": "Estimate Fulfillment Cost For Order",
         "tags": [
           "Orders"
-        ]
+        ],
+        "operationId": "createOrderEstimate"
       }
     },
     "/order/{orderId}": {
       "get": {
-        "operationId": "getOrder",
         "parameters": [
           {
             "description": "",
@@ -3181,12 +3280,12 @@
         "summary": "Get Order",
         "tags": [
           "Orders"
-        ]
+        ],
+        "operationId": "getOrder"
       }
     },
     "/order/{orderId}/cancel": {
       "post": {
-        "operationId": "cancelOrder",
         "parameters": [
           {
             "description": "The order ID to cancel",
@@ -3288,12 +3387,12 @@
         "summary": "Cancel single Order by Order ID",
         "tags": [
           "Orders"
-        ]
+        ],
+        "operationId": "cancelOrder"
       }
     },
     "/order/{orderId}/shipment": {
       "get": {
-        "operationId": "getOrderShipments",
         "parameters": [
           {
             "description": "The order id to get shipments for",
@@ -3366,12 +3465,12 @@
         "summary": "Get all Shipments for Order",
         "tags": [
           "Orders"
-        ]
+        ],
+        "operationId": "getOrderShipments"
       }
     },
     "/order/{orderId}/shipment/{shipmentId}": {
       "get": {
-        "operationId": "getOrderShipment",
         "parameters": [
           {
             "description": "The order id to get the shipment for",
@@ -3451,12 +3550,12 @@
         "summary": "Get one Shipment by Order Id and Shipment Id",
         "tags": [
           "Orders"
-        ]
+        ],
+        "operationId": "getOrderShipment"
       }
     },
     "/order/{orderId}/shipment/{shipmentId}/cancel": {
       "post": {
-        "operationId": "cancelOrderShipment",
         "parameters": [
           {
             "description": "The shipment id to get",
@@ -3566,12 +3665,12 @@
         "summary": "Cancel one Shipment by Order Id and Shipment Id",
         "tags": [
           "Orders"
-        ]
+        ],
+        "operationId": "cancelOrderShipment"
       }
     },
     "/order/{orderId}/shipment/{shipmentId}/logs": {
       "get": {
-        "operationId": "getOrderShipmentLogs",
         "parameters": [
           {
             "description": "The order id to get the shipment for",
@@ -3654,12 +3753,12 @@
         "summary": "Get logs for one Shipment by Order Id and Shipment Id",
         "tags": [
           "Orders"
-        ]
+        ],
+        "operationId": "getOrderShipmentLogs"
       }
     },
     "/order/{orderId}/shipment/{shipmentId}/timeline": {
       "get": {
-        "operationId": "getOrderShipmentTimelines",
         "parameters": [
           {
             "description": "The order id to get the shipment for",
@@ -3742,12 +3841,12 @@
         "summary": "Get one Shipment's status timeline by Order Id and Shipment Id",
         "tags": [
           "Orders"
-        ]
+        ],
+        "operationId": "getOrderShipmentTimelines"
       }
     },
     "/product": {
       "get": {
-        "operationId": "getProducts",
         "parameters": [
           {
             "description": "Page of products to get",
@@ -3799,24 +3898,19 @@
             }
           },
           {
-            "description": "Status filter for products:- Any: Include both active and inactive- Active: Filter products that are Active- Inactive: Filter products that are Inactive",
+            "description": "Status filter for products: - Any: Include both active and inactive - Active: Filter products that are Active - Inactive: Filter products that are Inactive",
             "in": "query",
             "name": "ActiveStatus",
             "schema": {
-              "enum": [
-                "Any",
-                "Active",
-                "Inactive"
-              ],
-              "type": "string"
+              "$ref": "#/components/schemas/ProductActiveStatus"
             }
           },
           {
-            "description": "Bundle filter for products:- Any: Don't filter and consider products that are bundles or not bundles- Bundle: Filter by products that are bundles- NotBundle: Filter by products that are not bundles",
+            "description": "Bundle filter for products: - Any: Don't filter and consider products that are bundles or not bundles - Bundle: Filter by products that are bundles - NotBundle: Filter by products that are not bundles",
             "in": "query",
             "name": "BundleStatus",
             "schema": {
-              "$ref": "#/components/schemas/ProductBundle"
+              "$ref": "#/components/schemas/ProductBundleStatus"
             }
           },
           {
@@ -3918,10 +4012,10 @@
         "summary": "Get multiple products",
         "tags": [
           "Products"
-        ]
+        ],
+        "operationId": "getProducts"
       },
       "post": {
-        "operationId": "createProduct",
         "parameters": [
           {
             "description": "Channel Id for Operation",
@@ -4007,12 +4101,12 @@
         "summary": "Add a single product to the store",
         "tags": [
           "Products"
-        ]
+        ],
+        "operationId": "createProduct"
       }
     },
     "/product/batch": {
       "post": {
-        "operationId": "createProductBatch",
         "parameters": [
           {
             "description": "Channel Id for Operation",
@@ -4101,12 +4195,12 @@
         "summary": "Add multiple products to the store",
         "tags": [
           "Products"
-        ]
+        ],
+        "operationId": "createProductBatch"
       }
     },
     "/product/{productId}": {
       "get": {
-        "operationId": "getProduct",
         "parameters": [
           {
             "description": "Unique identifier of the product",
@@ -4175,10 +4269,10 @@
         "summary": "Get a single product",
         "tags": [
           "Products"
-        ]
+        ],
+        "operationId": "getProduct"
       },
       "put": {
-        "operationId": "updateProduct",
         "parameters": [
           {
             "description": "Unique identifier of the product to modify",
@@ -4277,12 +4371,12 @@
         "summary": "Modify a single product",
         "tags": [
           "Products"
-        ]
+        ],
+        "operationId": "updateProduct"
       }
     },
     "/product/{productId}/inventory": {
       "get": {
-        "operationId": "getProductInventory",
         "parameters": [
           {
             "description": "The product id to get inventory for",
@@ -4355,12 +4449,12 @@
         "summary": "Get a list of inventory items by product id",
         "tags": [
           "Inventory"
-        ]
+        ],
+        "operationId": "getProductInventory"
       }
     },
     "/receiving": {
       "post": {
-        "operationId": "createReceiving",
         "requestBody": {
           "content": {
             "application/json": {
@@ -4425,12 +4519,12 @@
         "summary": "Create Warehouse Receiving Order",
         "tags": [
           "Receiving"
-        ]
+        ],
+        "operationId": "createReceiving"
       }
     },
     "/receiving/{id}": {
       "get": {
-        "operationId": "getReceiving",
         "parameters": [
           {
             "description": "Id of the receiving order",
@@ -4481,12 +4575,12 @@
         "summary": "Get Warehouse Receiving Order",
         "tags": [
           "Receiving"
-        ]
+        ],
+        "operationId": "getReceiving"
       }
     },
     "/receiving/{id}/cancel": {
       "post": {
-        "operationId": "cancelReceiving",
         "parameters": [
           {
             "description": "Id of the receiving order to cancel",
@@ -4546,12 +4640,12 @@
         "summary": "Cancel Warehouse Receiving Order",
         "tags": [
           "Receiving"
-        ]
+        ],
+        "operationId": "cancelReceiving"
       }
     },
     "/receiving/{id}/labels": {
       "get": {
-        "operationId": "getReceivingLabels",
         "parameters": [
           {
             "description": "Id of the receiving order",
@@ -4613,12 +4707,12 @@
         "summary": "Get Warehouse Receiving Order Box Labels",
         "tags": [
           "Receiving"
-        ]
+        ],
+        "operationId": "getReceivingLabels"
       }
     },
     "/return": {
       "get": {
-        "operationId": "getReturns",
         "parameters": [
           {
             "description": "Page of return orders to get",
@@ -4643,11 +4737,7 @@
             "in": "query",
             "name": "SortOrder",
             "schema": {
-              "enum": [
-                "Newest",
-                "Oldest"
-              ],
-              "type": "string"
+              "$ref": "#/components/schemas/SortOrder"
             }
           },
           {
@@ -4656,8 +4746,8 @@
             "name": "StartDate",
             "schema": {
               "format": "date-time",
-              "nullable": true,
-              "type": "string"
+              "type": "string",
+              "nullable": true
             }
           },
           {
@@ -4666,8 +4756,8 @@
             "name": "EndDate",
             "schema": {
               "format": "date-time",
-              "nullable": true,
-              "type": "string"
+              "type": "string",
+              "nullable": true
             }
           },
           {
@@ -4825,10 +4915,10 @@
         "summary": "Get Return Orders",
         "tags": [
           "Returns"
-        ]
+        ],
+        "operationId": "getReturns"
       },
       "post": {
-        "operationId": "createReturn",
         "parameters": [
           {
             "description": "Channel Id for Operation",
@@ -4899,12 +4989,12 @@
         "summary": "Create Return Order",
         "tags": [
           "Returns"
-        ]
+        ],
+        "operationId": "createReturn"
       }
     },
     "/return/{id}": {
       "get": {
-        "operationId": "getReturn",
         "parameters": [
           {
             "description": "Id of the return order",
@@ -4964,10 +5054,10 @@
         "summary": "Get Return Order",
         "tags": [
           "Returns"
-        ]
+        ],
+        "operationId": "getReturn"
       },
       "put": {
-        "operationId": "updateReturn",
         "parameters": [
           {
             "description": "Channel Id for Operation",
@@ -5048,12 +5138,12 @@
         "summary": "Modify Return Order",
         "tags": [
           "Returns"
-        ]
+        ],
+        "operationId": "updateReturn"
       }
     },
     "/return/{id}/cancel": {
       "post": {
-        "operationId": "cancelReturn",
         "parameters": [
           {
             "description": "Id of the return order",
@@ -5124,12 +5214,12 @@
         "summary": "Cancel Return Order",
         "tags": [
           "Returns"
-        ]
+        ],
+        "operationId": "cancelReturn"
       }
     },
     "/return/{id}/statushistory": {
       "get": {
-        "operationId": "getReturnStatushistory",
         "parameters": [
           {
             "description": "Id of the return order",
@@ -5189,12 +5279,12 @@
         "summary": "Get One Return's status history",
         "tags": [
           "Returns"
-        ]
+        ],
+        "operationId": "getReturnStatushistory"
       }
     },
     "/shipment/cancelbulk": {
       "post": {
-        "operationId": "createShipmentCancelbulk",
         "parameters": [
           {
             "description": "Channel ID for Operation",
@@ -5212,7 +5302,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/CancelShipment"
+                "$ref": "#/components/schemas/CancelShipments"
               }
             }
           }
@@ -5222,18 +5312,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "additionalProperties": false,
-                  "description": "",
-                  "properties": {
-                    "results": {
-                      "description": "The results of all cancellation actions",
-                      "items": {
-                        "$ref": "#/components/schemas/CanceledShipment"
-                      },
-                      "type": "array"
-                    }
-                  },
-                  "type": "object"
+                  "$ref": "#/components/schemas/CanceledShipments"
                 }
               }
             },
@@ -5288,12 +5367,12 @@
         "summary": "Cancel multiple Shipments by Shipment Id",
         "tags": [
           "Orders"
-        ]
+        ],
+        "operationId": "createShipmentCancelbulk"
       }
     },
     "/shipment/{shipmentId}": {
       "get": {
-        "operationId": "getShipment",
         "parameters": [
           {
             "description": "The shipment id to get",
@@ -5363,12 +5442,12 @@
         "summary": "Get one Shipment by Shipment Id",
         "tags": [
           "Orders"
-        ]
+        ],
+        "operationId": "getShipment"
       }
     },
     "/shipment/{shipmentId}/cancel": {
       "post": {
-        "operationId": "cancelShipment",
         "parameters": [
           {
             "description": "The shipment id to get",
@@ -5470,12 +5549,12 @@
         "summary": "Cancel one Shipment by Shipment Id",
         "tags": [
           "Orders"
-        ]
+        ],
+        "operationId": "cancelShipment"
       }
     },
     "/shipment/{shipmentId}/logs": {
       "get": {
-        "operationId": "getShipmentLogs",
         "parameters": [
           {
             "description": "The shipment id to get",
@@ -5548,12 +5627,12 @@
         "summary": "Get logs for one Shipment by Shipment Id",
         "tags": [
           "Orders"
-        ]
+        ],
+        "operationId": "getShipmentLogs"
       }
     },
     "/shipment/{shipmentId}/timeline": {
       "get": {
-        "operationId": "getShipmentTimelines",
         "parameters": [
           {
             "description": "The shipment id to get",
@@ -5626,12 +5705,12 @@
         "summary": "Get one Shipment's status timeline by Shipment Id",
         "tags": [
           "Orders"
-        ]
+        ],
+        "operationId": "getShipmentTimelines"
       }
     },
     "/shippingmethod": {
       "get": {
-        "operationId": "getShippingmethods",
         "description": "Get all merchants shipping methods",
         "parameters": [
           {
@@ -5716,12 +5795,12 @@
         "summary": "Get shipping methods",
         "tags": [
           "Orders"
-        ]
+        ],
+        "operationId": "getShippingmethods"
       }
     },
     "/webhook": {
       "get": {
-        "operationId": "getWebhooks",
         "description": "All parameters are AND filters",
         "parameters": [
           {
@@ -5844,10 +5923,10 @@
         "summary": "Get Webhooks",
         "tags": [
           "Webhooks"
-        ]
+        ],
+        "operationId": "getWebhooks"
       },
       "post": {
-        "operationId": "createWebhook",
         "parameters": [
           {
             "description": "",
@@ -5929,12 +6008,12 @@
         "summary": "Create a new webhook subscription",
         "tags": [
           "Webhooks"
-        ]
+        ],
+        "operationId": "createWebhook"
       }
     },
     "/webhook/{id}": {
       "delete": {
-        "operationId": "deleteWebhook",
         "parameters": [
           {
             "description": "",
@@ -5977,7 +6056,8 @@
         "summary": "Delete an existing webhook subscription",
         "tags": [
           "Webhooks"
-        ]
+        ],
+        "operationId": "deleteWebhook"
       }
     }
   },
@@ -5988,27 +6068,27 @@
   ],
   "tags": [
     {
-      "description": " >  Note: The orderId in the API response will not match the Id displayed in the ShipBob Merchant Portal when you navigate to the Orders page. ShipBob is currently undergoing a schema migration and the Id displayed in the ShipBob Merchant Portal is the shipmentId not the orderId. In the future, the portal will display both orderId(s) and shipmentId(s).  Use the Orders Resource to create and retrieve orders in ShipBob.  An order a digital record of a complete purchase that comes from an upstream source (i.e. Shopify) and is intended for ShipBob to fulfill. The order object includes products purchased, shipping address details, shipping method selected etc. Orders are created in ShipBob via a channel.  When ShipBob fulfills the order, one or more shipments are created for that order. A shipment is a record of the physical package(s) sent out via a carrier. If an order is shipped in multiple packages then 2 or more shipments can be created for that order.  ### Tips for creating orders in ShipBob via the POST Order endpoint:  * Populate the referenceId with a unique and immutable order identifier from your upstream system. This field was created to allow you to tieback records in ShipBob with your upstream system.  * Ensure that the <em> shipping method </em> passed in the API request matches exactly what the user has listed as the <em> shipping method </em> on the <em>  Ship Option Mapping </em> setup page in the ShipBob Merchant Portal. If they don't match, ShipBob will assume that the user wants to leverage ShipBob's default shipping method.  * You can leverage either productId (the ShipBob productId) or the product referenceId (your system's  unique Identifier for products) when creating an order.  Use the Shipments endpoints to retrieve fulfillment information for shipments or orders.  A shipment is an object that is the result of a fulfillment of an order. An order can have one or more shipments. Say Shopify order #122323 contains 3 different products, shipped in two separate packages, there would be 2 shipments for that order.   Serial numbers are unique identifiers for an individual item (e.g. your specific iPhone X that you bought at the Apple Store). No inventory item can possess duplicate serial numbers. Merchants can request serial scan, which means ShipBob will capture the serial number(s) upon sending a shipment so the merchant knows which customer received which individual item(s).",
+      "description": " >  Note: The orderId in the API response will not match the Id displayed in the ShipBob Merchant Portal when you navigate to the Orders page. ShipBob is currently undergoing a schema migration and the Id displayed in the ShipBob Merchant Portal is the shipmentId not the orderId. In the future, the portal will display both orderId(s) and shipmentId(s). \\n\\n Use the Orders Resource to create and retrieve orders in ShipBob. \\n\\n An order a digital record of a complete purchase that comes from an upstream source (i.e. Shopify) and is intended for ShipBob to fulfill. The order object includes products purchased, shipping address details, shipping method selected etc. Orders are created in ShipBob via a channel. \\n\\n When ShipBob fulfills the order, one or more shipments are created for that order. A shipment is a record of the physical package(s) sent out via a carrier. If an order is shipped in multiple packages then 2 or more shipments can be created for that order. \\n\\n ### Tips for creating orders in ShipBob via the POST Order endpoint: \\n\\n * Populate the referenceId with a unique and immutable order identifier from your upstream system. This field was created to allow you to tieback records in ShipBob with your upstream system. \\n\\n * Ensure that the <em> shipping method </em> passed in the API request matches exactly what the user has listed as the <em> shipping method </em> on the <em>  Ship Option Mapping </em> setup page in the ShipBob Merchant Portal. If they don't match, ShipBob will assume that the user wants to leverage ShipBob's default shipping method. \\n\\n * You can leverage either productId (the ShipBob productId) or the product referenceId (your system's  unique Identifier for products) when creating an order. \\n\\n Use the Shipments endpoints to retrieve fulfillment information for shipments or orders. \\n\\n A shipment is an object that is the result of a fulfillment of an order. An order can have one or more shipments. Say Shopify order #122323 contains 3 different products, shipped in two separate packages, there would be 2 shipments for that order. \\n\\n  Serial numbers are unique identifiers for an individual item (e.g. your specific iPhone X that you bought at the Apple Store). No inventory item can possess duplicate serial numbers. Merchants can request \"serial scan\", which means ShipBob will capture the serial number(s) upon sending a shipment so the merchant knows which customer received which individual item(s).",
       "name": "Orders"
     },
     {
-      "description": "Use the Products Resource to retrieve and create product records in ShipBob.  A product is a virtual record created in ShipBob's system via a channel. Say a merchant has two Shopify stores (each store would have its own channel), Kevin's Shopify Store #133 and Kevin's Shopify store #134. If the same SKU was sold on both stores, two products would be created for that SKU, one product would be created to represent the SKU sold on Store #133 and one to represent it on Store on #134, with productIds 3884009 and 3884008 respectively.  While a product is a virtual record, the inventory item is a representation of a physical good. So in the above example, as product 3884009 and product 3884008 represent the same SKU sold on different channels, the same inventory item will be mapped to both products. Every product will have one or more inventory items mapped to it. Bundle products, a set of products that are sold to consumers as one combined package, think gift or multi packs, may have 2 or more inventory items mapped to them.  ### Tips for creating products in ShipBob via the POST Product endpoints:  * ShipBob needs products to be created at the lowest level. So if a product has 3 variants, small, medium and large, a separate product needs to be created in ShipBob for all three. * Populate the referenceId with a unique and immutable product identifier from your upstream system. This field was created to allow you to tie back records in ShipBob with your upstream system.  * Use specific and/or unique names to describe each product so they can be easily identified by users in the ShipBob Merchant Portal. In particular, when creating variants, please give them distinguishable names i.e. for a Blue shirt that comes in two sizes, small and medium, strong product names would be Blue shirt size:small and Blue shirt size:medium.  > **NOTE:** The productId returned in the API response will not match the id displayed in the ShipBob Merchant Portal when you navigate to Inventory > Products. ShipBob is currently undergoing a schema migration and the Id displayed in the ShipBob Merchant Portal is the inventoryId not the productId. In the future, the portal will display both productId(s) and inventoryId(s)",
+      "description": "Use the Products Resource to retrieve and create product records in ShipBob. \\n\\n A product is a virtual record created in ShipBob's system via a channel. Say a merchant has two Shopify stores (each store would have its own channel), Kevin's Shopify Store #133 and Kevin's Shopify store #134. If the same SKU was sold on both stores, two products would be created for that SKU, one product would be created to represent the SKU sold on Store #133 and one to represent it on Store on #134, with productIds 3884009 and 3884008 respectively. \\n\\n While a product is a virtual record, the inventory item is a representation of a physical good. So in the above example, as product 3884009 and product 3884008 represent the same SKU sold on different channels, the same inventory item will be mapped to both products. Every product will have one or more inventory items mapped to it. Bundle products, a set of products that are sold to consumers as one combined package, think gift or multi packs, may have 2 or more inventory items mapped to them. \\n\\n ### Tips for creating products in ShipBob via the POST Product endpoints: \\n\\n * ShipBob needs products to be created at the lowest level. So if a product has 3 variants, small, medium and large, a separate product needs to be created in ShipBob for all three.\\n\\n * Populate the referenceId with a unique and immutable product identifier from your upstream system. This field was created to allow you to tie back records in ShipBob with your upstream system. \\n\\n * Use specific and/or unique names to describe each product so they can be easily identified by users in the ShipBob Merchant Portal. In particular, when creating variants, please give them distinguishable names i.e. for a Blue shirt that comes in two sizes, small and medium, strong product names would be Blue shirt size:small and Blue shirt size:medium. \\n\\n > **NOTE:** The productId returned in the API response will not match the id displayed in the ShipBob Merchant Portal when you navigate to Inventory > Products. ShipBob is currently undergoing a schema migration and the Id displayed in the ShipBob Merchant Portal is the inventoryId not the productId. In the future, the portal will display both productId(s) and inventoryId(s)",
       "name": "Products"
     },
     {
-      "description": " Use the Inventory Resource to retrieve ShipBob  inventory items and quantities.  An inventory item is a representation of a physical good, that may or may not have physical stock in ShipBob's fulfillment centers. Every product will have one or more inventory items mapped to it. A bundle product (a set of products that are sold as one combined package - e.g.  gift or multi packs) is an example of a product that has  2 or more inventory items mapped to it.  Lot items are physical items that have expiration dates or batch numbers that should be fulfilled in a FIFO (first in, first out) manner. Most food items are lot items. Quantities by lot # and/or expiration date are also listed in the Inventory object.",
+      "description": " Use the Inventory Resource to retrieve ShipBob  inventory items and quantities. \\n\\n An inventory item is a representation of a physical good, that may or may not have physical stock in ShipBob's fulfillment centers. Every product will have one or more inventory items mapped to it. A bundle product (a set of products that are sold as one combined package - e.g.  gift or multi packs) is an example of a product that has  2 or more inventory items mapped to it. \\n\\n Lot items are physical items that have expiration dates or batch numbers that should be fulfilled in a FIFO (first in, first out) manner. Most food items are lot items. Quantities by lot # and/or expiration date are also listed in the Inventory object.",
       "name": "Inventory"
     },
     {
-      "description": "Use the Channel Resource to list channels which you have access to. You will use this channelId for subsequent API calls made to ShipBob endpoints.  A channel is a specific installation of an application built by a vendor on top of our API e.g. Kevin's Shopify Store #133432.  All write and most read endpoints require a channel to be passed in the header to complete the request. The channel is used to Identify where the data originally came from.   Applications that are granted multi-channel permissions will be able to read data from all channels that belong to a user. However, multi-channel applications will only be able to write on behalf of their own channel.",
+      "description": "Use the Channel Resource to list \"channels\" which you have access to. You will use this channelId for subsequent API calls made to ShipBob endpoints. \\n\\n A channel is a specific installation of an application built by a vendor on top of our API - e.g. Kevin's Shopify Store #133432.  All write and most read endpoints require a channel to be passed in the header to complete the request. The channel is used to Identify where the data originally came from.  \\n\\n Applications that are granted multi-channel permissions will be able to read data from all channels that belong to a user. However, multi-channel applications will only be able to write on behalf of their own channel.",
       "name": "Channels"
     },
     {
-      "description": "**While the Returns API is live, ShipBob's end to end Returns process will not go live until the beginning of March. As a result, any returns arriving at ShipBob's fulfillment centers prior to March 12st, 2020 will NOT be processed**.  Use the Returns resource to retrieve, create, edit and cancel return records in ShipBob.  A return is a request for ShipBob to perform an action on inventory that is coming back into our fulfillment centers. Typically, the return is a result of an order being requested to be refunded or exchanged. ShipBob does not handle refunds or exchanges - we simply process the inventory according to the merchant specifications.  Returns can only be **modified** or **cancelled** when they are in the Awaiting Arrival status. Returns that are being Processed or have been Completed cannot be modified or cancelled.  ### Tips for creating return orders:  * Populate the referenceId with a unique and immutable return identifier from your upstream system. This field was created to allow you to tie back records in ShipBob with your upstream system.  *Include each inventoryId exactly once in the inventory object. If an inventoryId is included more than once, the call will return an error code  * Provide a tracking # when submitting a return, while it is not a required field, it is the the most surefire way for ShipBob staff to properly and quickly identify the return package when it reaches our fulfillment center.  * Only include inventory items to the return record that will be returned in the same box i.e. if InventoryId 12232 and InventoryId 12039 will be returned in two seperate boxes, two return orders should be created.  * ShipBob does not process returns for digital items or bundle inventory items. Return calls that include digital inventory  items (e.g. ebooks) or bundle inventory items (i.e. multipacks, combination of multiple inventory items)  will return an error code.  * If you choose to provide a requested action (it is an optional field), only provide one requested action per inventory item. So if  you have more than 1 quantity of a given item being returned within the same box, all quantities of the item have to have the same action associated with them. If you don't provide a requested action, it will default to the action the User set for that inventory item in the ShipBob Merchant portal.",
+      "description": "**While the Returns API is live, ShipBob's end to end Returns process will not go live until the beginning of March. As a result, any returns arriving at ShipBob's fulfillment centers prior to March 12st, 2020 will NOT be processed**. \\n\\n Use the Returns resource to retrieve, create, edit and cancel return records in ShipBob. \\n\\n A return is a request for ShipBob to perform an action on inventory that is coming back into our fulfillment centers. Typically, the return is a result of an order being requested to be refunded or exchanged. ShipBob does not handle refunds or exchanges - we simply process the inventory according to the merchant specifications. \\n\\n Returns can only be **modified** or **cancelled** when they are in the Awaiting Arrival status. Returns that are being Processed or have been Completed cannot be modified or cancelled. \\n\\n ### Tips for creating return orders: \\n\\n * Populate the referenceId with a unique and immutable return identifier from your upstream system. This field was created to allow you to tie back records in ShipBob with your upstream system. \\n\\n *Include each inventoryId exactly once in the inventory object. If an inventoryId is included more than once, the call will return an error code \\n\\n * Provide a tracking # when submitting a return, while it is not a required field, it is the the most surefire way for ShipBob staff to properly and quickly identify the return package when it reaches our fulfillment center. \\n\\n * Only include inventory items to the return record that will be returned in the same box i.e. if InventoryId 12232 and InventoryId 12039 will be returned in two seperate boxes, two return orders should be created. \\n\\n * ShipBob does not process returns for digital items or bundle inventory items. Return calls that include digital inventory  items (e.g. ebooks) or bundle inventory items (i.e. multipacks, combination of multiple inventory items)  will return an error code. \\n\\n * If you choose to provide a requested action (it is an optional field), only provide one requested action per inventory item. So if  you have more than 1 quantity of a given item being returned within the same box, all quantities of the item have to have the same action associated with them. If you don't provide a requested action, it will default to the action the User set for that inventory item in the ShipBob Merchant portal.",
       "name": "Returns"
     },
     {
-      "description": "Use the Receiving Resource to retrieve, create and cancel Warehouse Receiving Orders (WROs).  A WRO is a request form that tells ShipBob's fulfillment centers what inventory should be received and stocked. Some other solutions call this an ASN or Advanced Ship Notice. WROs may include multiple inventory items with specific quantities. More details on creating a WRO can be found [here](https://support.shipbob.com/s/article/New-Send-Inventory-to-ShipBob-WRO).  A WRO can only be **canceled** if it is in the Awaiting status. WROs in Awaiting status are considered to still be in transit to ShipBob FCs. WROs that have Partially Arrived, have been Processed or are Completed, cannot be canceled.",
+      "description": "Use the Receiving Resource to retrieve, create and cancel Warehouse Receiving Orders (WROs). \\n\\n A WRO is a request form that tells ShipBob's fulfillment centers what inventory should be received and stocked. Some other solutions call this an \"ASN\" or Advanced Ship Notice. WROs may include multiple inventory items with specific quantities. More details on creating a WRO can be found [here](https://support.shipbob.com/s/article/New-Send-Inventory-to-ShipBob-WRO). \\n\\n A WRO can only be **canceled** if it is in the Awaiting status. WROs in Awaiting status are considered to still be in transit to ShipBob FCs. WROs that have Partially Arrived, have been Processed or are Completed, cannot be canceled.",
       "name": "Receiving"
     },
     {
@@ -6016,7 +6096,7 @@
       "name": "Webhooks"
     },
     {
-      "description": "Use this API to interact with the physical locations across ShipBob's fulfillment network.  An active ShipBob location is operational for fulfillment processes, including receiving inventory and processing returns. It's important to note that some locations, access is granted to all merchants by default, while some locations require special request for merchants to be granted access.  For each location, determine if it can be leveraged for the user by viewing the access_granted & receiving_enabled fields.",
+      "description": "Use this API to interact with the physical locations across ShipBob's fulfillment network. \\n\\n An active ShipBob location is operational for fulfillment processes, including receiving inventory and processing returns. It's important to note that some locations, access is granted to all merchants by default, while some locations require special request for merchants to be granted access. \\n\\n For each location, determine if it can be leveraged for the user by viewing the access_granted & receiving_enabled fields.",
       "name": "Locations"
     }
   ]
