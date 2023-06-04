@@ -1,20 +1,20 @@
 # \ProductsApi
 
-All URIs are relative to *https://api.shipbob.com/1.0*
+All URIs are relative to *https://api.shipbob.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CreateProduct**](ProductsApi.md#CreateProduct) | **Post** /product | Add a single product to the store
-[**CreateProductBatch**](ProductsApi.md#CreateProductBatch) | **Post** /product/batch | Add multiple products to the store
-[**GetProduct**](ProductsApi.md#GetProduct) | **Get** /product/{productId} | Get a single product
-[**GetProducts**](ProductsApi.md#GetProducts) | **Get** /product | Get multiple products
-[**UpdateProduct**](ProductsApi.md#UpdateProduct) | **Put** /product/{productId} | Modify a single product
+[**CreateProduct**](ProductsApi.md#CreateProduct) | **Post** /1.0/product | Add a single product to the store
+[**CreateProductBatch**](ProductsApi.md#CreateProductBatch) | **Post** /1.0/product/batch | Add multiple products to the store
+[**GetProduct**](ProductsApi.md#GetProduct) | **Get** /1.0/product/{productId} | Get a single product
+[**GetProducts**](ProductsApi.md#GetProducts) | **Get** /1.0/product | Get multiple products
+[**UpdateProduct**](ProductsApi.md#UpdateProduct) | **Put** /1.0/product/{productId} | Modify a single product
 
 
 
 ## CreateProduct
 
-> []Product CreateProduct(ctx).ShipbobChannelId(shipbobChannelId).CreateProduct(createProduct).Execute()
+> Product CreateProduct(ctx).ShipbobChannelId(shipbobChannelId).CreateProduct(createProduct).Execute()
 
 Add a single product to the store
 
@@ -41,7 +41,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `ProductsApi.CreateProduct``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `CreateProduct`: []Product
+    // response from `CreateProduct`: Product
     fmt.Fprintf(os.Stdout, "Response from `ProductsApi.CreateProduct`: %v\n", resp)
 }
 ```
@@ -62,7 +62,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]Product**](Product.md)
+[**Product**](Product.md)
 
 ### Authorization
 
@@ -98,7 +98,7 @@ import (
 
 func main() {
     shipbobChannelId := int32(56) // int32 | Channel Id for Operation
-    createProduct := []openapiclient.CreateProduct{*openapiclient.NewCreateProduct("Medium Blue T-Shirt", "TShirtBlueM")} // []CreateProduct | List of products to add (optional)
+    createProduct := []openapiclient.CreateProduct{*openapiclient.NewCreateProduct("Medium Blue T-Shirt", "TShirtBlueM")} // []CreateProduct | List of up to 50 products to add (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -124,7 +124,7 @@ Other parameters are passed through a pointer to a apiCreateProductBatchRequest 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **shipbobChannelId** | **int32** | Channel Id for Operation | 
- **createProduct** | [**[]CreateProduct**](CreateProduct.md) | List of products to add | 
+ **createProduct** | [**[]CreateProduct**](CreateProduct.md) | List of up to 50 products to add | 
 
 ### Return type
 
@@ -233,8 +233,8 @@ import (
 )
 
 func main() {
-    page := int32(56) // int32 | Page of products to get (optional)
-    limit := int32(56) // int32 | Amount of products per page to request (optional)
+    page := int32(56) // int32 | Page of products to get - Valid Range is 0 to integer max with a default of 1 (optional)
+    limit := int32(56) // int32 | Amount of products per page to request - Valid Range is 1 to 250 with a default of 50 (optional)
     iDs := []int32{int32(123)} // []int32 | Comma separated list of product ids to filter by (optional)
     referenceIds := []string{"Inner_example"} // []string | Comma separated list of reference ids to filter by (optional)
     search := "search_example" // string | Search is available for 2 fields of the inventory record related to the product: Inventory ID and Name - 1. Expected behavior for search by Inventory ID is exact match 2. Expected behavior for search by Inventory Name is partial match, i.e. does not have to be start of word,  but must be consecutive characters. This is not case sensitive. (optional)
@@ -265,8 +265,8 @@ Other parameters are passed through a pointer to a apiGetProductsRequest struct 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **page** | **int32** | Page of products to get | 
- **limit** | **int32** | Amount of products per page to request | 
+ **page** | **int32** | Page of products to get - Valid Range is 0 to integer max with a default of 1 | 
+ **limit** | **int32** | Amount of products per page to request - Valid Range is 1 to 250 with a default of 50 | 
  **iDs** | **[]int32** | Comma separated list of product ids to filter by | 
  **referenceIds** | **[]string** | Comma separated list of reference ids to filter by | 
  **search** | **string** | Search is available for 2 fields of the inventory record related to the product: Inventory ID and Name - 1. Expected behavior for search by Inventory ID is exact match 2. Expected behavior for search by Inventory Name is partial match, i.e. does not have to be start of word,  but must be consecutive characters. This is not case sensitive. | 
@@ -294,7 +294,7 @@ Name | Type | Description  | Notes
 
 ## UpdateProduct
 
-> []Product UpdateProduct(ctx, productId).ShipbobChannelId(shipbobChannelId).UpdateProduct(updateProduct).Execute()
+> Product UpdateProduct(ctx, productId).ShipbobChannelId(shipbobChannelId).UpdateProduct(updateProduct).Execute()
 
 Modify a single product
 
@@ -322,7 +322,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `ProductsApi.UpdateProduct``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `UpdateProduct`: []Product
+    // response from `UpdateProduct`: Product
     fmt.Fprintf(os.Stdout, "Response from `ProductsApi.UpdateProduct`: %v\n", resp)
 }
 ```
@@ -348,7 +348,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]Product**](Product.md)
+[**Product**](Product.md)
 
 ### Authorization
 

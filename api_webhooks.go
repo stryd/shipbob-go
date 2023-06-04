@@ -72,7 +72,7 @@ func (a *WebhooksApiService) CreateWebhookExecute(r ApiCreateWebhookRequest) (*W
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/webhook"
+	localVarPath := localBasePath + "/1.0/webhook"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -196,7 +196,7 @@ func (a *WebhooksApiService) DeleteWebhookExecute(r ApiDeleteWebhookRequest) (*h
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/webhook/{id}"
+	localVarPath := localBasePath + "/1.0/webhook/{id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -319,7 +319,7 @@ func (a *WebhooksApiService) GetWebhooksExecute(r ApiGetWebhooksRequest) ([]Webh
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/webhook"
+	localVarPath := localBasePath + "/1.0/webhook"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}

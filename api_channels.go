@@ -59,7 +59,7 @@ func (a *ChannelsApiService) GetChannelsExecute(r ApiGetChannelsRequest) ([]Chan
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/channel"
+	localVarPath := localBasePath + "/1.0/channel"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}

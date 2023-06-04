@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Address** | [**OrderAddress**](OrderAddress.md) |  | 
+**Address** | [**RetailerProgramDataAddress**](RetailerProgramDataAddress.md) |  | 
 **Email** | Pointer to **string** | Email address of the recipient | [optional] 
 **Name** | **string** | Name of the recipient | 
 **PhoneNumber** | Pointer to **string** | Phone number of the recipient | [optional] 
@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 
 ### NewRecipientInfo
 
-`func NewRecipientInfo(address OrderAddress, name string, ) *RecipientInfo`
+`func NewRecipientInfo(address RetailerProgramDataAddress, name string, ) *RecipientInfo`
 
 NewRecipientInfo instantiates a new RecipientInfo object
 This constructor will assign default values to properties that have it defined,
@@ -30,20 +30,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetAddress
 
-`func (o *RecipientInfo) GetAddress() OrderAddress`
+`func (o *RecipientInfo) GetAddress() RetailerProgramDataAddress`
 
 GetAddress returns the Address field if non-nil, zero value otherwise.
 
 ### GetAddressOk
 
-`func (o *RecipientInfo) GetAddressOk() (*OrderAddress, bool)`
+`func (o *RecipientInfo) GetAddressOk() (*RetailerProgramDataAddress, bool)`
 
 GetAddressOk returns a tuple with the Address field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetAddress
 
-`func (o *RecipientInfo) SetAddress(v OrderAddress)`
+`func (o *RecipientInfo) SetAddress(v RetailerProgramDataAddress)`
 
 SetAddress sets Address field to given value.
 

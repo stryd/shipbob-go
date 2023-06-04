@@ -19,7 +19,7 @@ var _ MappedNullable = &Recipient{}
 
 // Recipient Information about the recipient of a shipment
 type Recipient struct {
-	Address *OrderAddress `json:"address,omitempty"`
+	Address *RetailerProgramDataAddress `json:"address,omitempty"`
 	// Email address of the recipient
 	Email *string `json:"email,omitempty"`
 	// Name of the recipient
@@ -46,9 +46,9 @@ func NewRecipientWithDefaults() *Recipient {
 }
 
 // GetAddress returns the Address field value if set, zero value otherwise.
-func (o *Recipient) GetAddress() OrderAddress {
+func (o *Recipient) GetAddress() RetailerProgramDataAddress {
 	if o == nil || IsNil(o.Address) {
-		var ret OrderAddress
+		var ret RetailerProgramDataAddress
 		return ret
 	}
 	return *o.Address
@@ -56,7 +56,7 @@ func (o *Recipient) GetAddress() OrderAddress {
 
 // GetAddressOk returns a tuple with the Address field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Recipient) GetAddressOk() (*OrderAddress, bool) {
+func (o *Recipient) GetAddressOk() (*RetailerProgramDataAddress, bool) {
 	if o == nil || IsNil(o.Address) {
 		return nil, false
 	}
@@ -72,8 +72,8 @@ func (o *Recipient) HasAddress() bool {
 	return false
 }
 
-// SetAddress gets a reference to the given OrderAddress and assigns it to the Address field.
-func (o *Recipient) SetAddress(v OrderAddress) {
+// SetAddress gets a reference to the given RetailerProgramDataAddress and assigns it to the Address field.
+func (o *Recipient) SetAddress(v RetailerProgramDataAddress) {
 	o.Address = &v
 }
 

@@ -27,6 +27,8 @@ type CreateReceivingOrder struct {
 	ExpectedArrivalDate NullableTime                   `json:"expected_arrival_date"`
 	FulfillmentCenter   AssignOrderToFulfillmentCenter `json:"fulfillment_center"`
 	PackageType         PackageType                    `json:"package_type"`
+	// Purchase order number for this receiving order
+	PurchaseOrderNumber NullableString `json:"purchase_order_number,omitempty"`
 }
 
 // NewCreateReceivingOrder instantiates a new CreateReceivingOrder object
@@ -175,6 +177,49 @@ func (o *CreateReceivingOrder) SetPackageType(v PackageType) {
 	o.PackageType = v
 }
 
+// GetPurchaseOrderNumber returns the PurchaseOrderNumber field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *CreateReceivingOrder) GetPurchaseOrderNumber() string {
+	if o == nil || IsNil(o.PurchaseOrderNumber.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.PurchaseOrderNumber.Get()
+}
+
+// GetPurchaseOrderNumberOk returns a tuple with the PurchaseOrderNumber field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *CreateReceivingOrder) GetPurchaseOrderNumberOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.PurchaseOrderNumber.Get(), o.PurchaseOrderNumber.IsSet()
+}
+
+// HasPurchaseOrderNumber returns a boolean if a field has been set.
+func (o *CreateReceivingOrder) HasPurchaseOrderNumber() bool {
+	if o != nil && o.PurchaseOrderNumber.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetPurchaseOrderNumber gets a reference to the given NullableString and assigns it to the PurchaseOrderNumber field.
+func (o *CreateReceivingOrder) SetPurchaseOrderNumber(v string) {
+	o.PurchaseOrderNumber.Set(&v)
+}
+
+// SetPurchaseOrderNumberNil sets the value for PurchaseOrderNumber to be an explicit nil
+func (o *CreateReceivingOrder) SetPurchaseOrderNumberNil() {
+	o.PurchaseOrderNumber.Set(nil)
+}
+
+// UnsetPurchaseOrderNumber ensures that no value is present for PurchaseOrderNumber, not even an explicit nil
+func (o *CreateReceivingOrder) UnsetPurchaseOrderNumber() {
+	o.PurchaseOrderNumber.Unset()
+}
+
 func (o CreateReceivingOrder) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -192,6 +237,9 @@ func (o CreateReceivingOrder) ToMap() (map[string]interface{}, error) {
 	toSerialize["expected_arrival_date"] = o.ExpectedArrivalDate.Get()
 	toSerialize["fulfillment_center"] = o.FulfillmentCenter
 	toSerialize["package_type"] = o.PackageType
+	if o.PurchaseOrderNumber.IsSet() {
+		toSerialize["purchase_order_number"] = o.PurchaseOrderNumber.Get()
+	}
 	return toSerialize, nil
 }
 

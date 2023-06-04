@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **InsertDate** | Pointer to **NullableTime** | Insert date of the receiving order | [optional] 
 **LastUpdatedDate** | Pointer to **NullableTime** | Last date the receiving order was updated | [optional] 
 **PackageType** | Pointer to [**PackageType**](PackageType.md) |  | [optional] 
+**PurchaseOrderNumber** | Pointer to **NullableString** | Purchase order number for a receiving order | [optional] 
 **Status** | Pointer to [**ReceivingStatus**](ReceivingStatus.md) |  | [optional] 
 
 ## Methods
@@ -309,6 +310,41 @@ SetPackageType sets PackageType field to given value.
 
 HasPackageType returns a boolean if a field has been set.
 
+### GetPurchaseOrderNumber
+
+`func (o *ReceivingOrder) GetPurchaseOrderNumber() string`
+
+GetPurchaseOrderNumber returns the PurchaseOrderNumber field if non-nil, zero value otherwise.
+
+### GetPurchaseOrderNumberOk
+
+`func (o *ReceivingOrder) GetPurchaseOrderNumberOk() (*string, bool)`
+
+GetPurchaseOrderNumberOk returns a tuple with the PurchaseOrderNumber field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPurchaseOrderNumber
+
+`func (o *ReceivingOrder) SetPurchaseOrderNumber(v string)`
+
+SetPurchaseOrderNumber sets PurchaseOrderNumber field to given value.
+
+### HasPurchaseOrderNumber
+
+`func (o *ReceivingOrder) HasPurchaseOrderNumber() bool`
+
+HasPurchaseOrderNumber returns a boolean if a field has been set.
+
+### SetPurchaseOrderNumberNil
+
+`func (o *ReceivingOrder) SetPurchaseOrderNumberNil(b bool)`
+
+ SetPurchaseOrderNumberNil sets the value for PurchaseOrderNumber to be an explicit nil
+
+### UnsetPurchaseOrderNumber
+`func (o *ReceivingOrder) UnsetPurchaseOrderNumber()`
+
+UnsetPurchaseOrderNumber ensures that no value is present for PurchaseOrderNumber, not even an explicit nil
 ### GetStatus
 
 `func (o *ReceivingOrder) GetStatus() ReceivingStatus`

@@ -21,7 +21,7 @@ var _ MappedNullable = &CanceledShipment{}
 type CanceledShipment struct {
 	//
 	Action *string `json:"action,omitempty"`
-	// If the cancel action was successfull
+	// If the cancel action was successful
 	IsSuccess *bool `json:"is_success,omitempty"`
 	// The reason the cancellation result
 	Reason *string `json:"reason,omitempty"`

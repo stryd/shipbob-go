@@ -21,21 +21,21 @@ var _ MappedNullable = &InventoryLotQuantity{}
 // InventoryLotQuantity Break down of fulfillable quantity by lot
 type InventoryLotQuantity struct {
 	// Quantity of inventory items belonging to this lot awaiting arrival of a receiving order
-	AwaitingQuantity *int32 `json:"awaiting_quantity,omitempty"`
+	AwaitingQuantity *int32 `json:"awaitingQuantity,omitempty"`
 	// Committed quantity of inventory items belonging to this lot
-	CommittedQuantity *int32 `json:"committed_quantity,omitempty"`
+	CommittedQuantity *int32 `json:"committedQuantity,omitempty"`
 	// Expiration date for this lot
-	ExpirationDate NullableTime `json:"expiration_date,omitempty"`
+	ExpirationDate NullableTime `json:"expirationDate,omitempty"`
 	// Fulfillable quantity of inventory items belonging to this lot
-	FulfillableQuantity *int32 `json:"fulfillable_quantity,omitempty"`
+	FulfillableQuantity *int32 `json:"fulfillableQuantity,omitempty"`
 	// Fulfillable quantity of inventory items belonging to this lot broken down by fulfillment center location
-	FulfillableQuantityByFulfillmentCenter []InventoryFulfillmentCenterQuantity `json:"fulfillable_quantity_by_fulfillment_center,omitempty"`
+	FulfillableQuantityByFulfillmentCenter []InventoryFulfillmentCenterQuantity `json:"fulfillableQuantityByFulfillmentCenter,omitempty"`
 	// The quantity of all items belonging to this lot that are in the process of internal transit  between ShipBob fulfillment centers. These items are not pickable or fulfillable until they have been received and moved to the \"On Hand\" quantity of the destination FC. Internal transit quantities for each FC represent the incoming transfer stock for that specific location.
-	InternalTransferQuantity *int32 `json:"internal_transfer_quantity,omitempty"`
+	InternalTransferQuantity *int32 `json:"internalTransferQuantity,omitempty"`
 	// Identification number of this lot
-	LotNumber *string `json:"lot_number,omitempty"`
+	LotNumber NullableString `json:"lotNumber,omitempty"`
 	// OnHand quantity of inventory items belonging to this lot
-	OnhandQuantity *int32 `json:"onhand_quantity,omitempty"`
+	OnHandQuantity *int32 `json:"onHandQuantity,omitempty"`
 }
 
 // NewInventoryLotQuantity instantiates a new InventoryLotQuantity object
@@ -194,9 +194,9 @@ func (o *InventoryLotQuantity) SetFulfillableQuantity(v int32) {
 	o.FulfillableQuantity = &v
 }
 
-// GetFulfillableQuantityByFulfillmentCenter returns the FulfillableQuantityByFulfillmentCenter field value if set, zero value otherwise.
+// GetFulfillableQuantityByFulfillmentCenter returns the FulfillableQuantityByFulfillmentCenter field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *InventoryLotQuantity) GetFulfillableQuantityByFulfillmentCenter() []InventoryFulfillmentCenterQuantity {
-	if o == nil || IsNil(o.FulfillableQuantityByFulfillmentCenter) {
+	if o == nil {
 		var ret []InventoryFulfillmentCenterQuantity
 		return ret
 	}
@@ -205,6 +205,7 @@ func (o *InventoryLotQuantity) GetFulfillableQuantityByFulfillmentCenter() []Inv
 
 // GetFulfillableQuantityByFulfillmentCenterOk returns a tuple with the FulfillableQuantityByFulfillmentCenter field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *InventoryLotQuantity) GetFulfillableQuantityByFulfillmentCenterOk() ([]InventoryFulfillmentCenterQuantity, bool) {
 	if o == nil || IsNil(o.FulfillableQuantityByFulfillmentCenter) {
 		return nil, false
@@ -214,7 +215,7 @@ func (o *InventoryLotQuantity) GetFulfillableQuantityByFulfillmentCenterOk() ([]
 
 // HasFulfillableQuantityByFulfillmentCenter returns a boolean if a field has been set.
 func (o *InventoryLotQuantity) HasFulfillableQuantityByFulfillmentCenter() bool {
-	if o != nil && !IsNil(o.FulfillableQuantityByFulfillmentCenter) {
+	if o != nil && IsNil(o.FulfillableQuantityByFulfillmentCenter) {
 		return true
 	}
 
@@ -258,68 +259,79 @@ func (o *InventoryLotQuantity) SetInternalTransferQuantity(v int32) {
 	o.InternalTransferQuantity = &v
 }
 
-// GetLotNumber returns the LotNumber field value if set, zero value otherwise.
+// GetLotNumber returns the LotNumber field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *InventoryLotQuantity) GetLotNumber() string {
-	if o == nil || IsNil(o.LotNumber) {
+	if o == nil || IsNil(o.LotNumber.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.LotNumber
+	return *o.LotNumber.Get()
 }
 
 // GetLotNumberOk returns a tuple with the LotNumber field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *InventoryLotQuantity) GetLotNumberOk() (*string, bool) {
-	if o == nil || IsNil(o.LotNumber) {
+	if o == nil {
 		return nil, false
 	}
-	return o.LotNumber, true
+	return o.LotNumber.Get(), o.LotNumber.IsSet()
 }
 
 // HasLotNumber returns a boolean if a field has been set.
 func (o *InventoryLotQuantity) HasLotNumber() bool {
-	if o != nil && !IsNil(o.LotNumber) {
+	if o != nil && o.LotNumber.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetLotNumber gets a reference to the given string and assigns it to the LotNumber field.
+// SetLotNumber gets a reference to the given NullableString and assigns it to the LotNumber field.
 func (o *InventoryLotQuantity) SetLotNumber(v string) {
-	o.LotNumber = &v
+	o.LotNumber.Set(&v)
 }
 
-// GetOnhandQuantity returns the OnhandQuantity field value if set, zero value otherwise.
-func (o *InventoryLotQuantity) GetOnhandQuantity() int32 {
-	if o == nil || IsNil(o.OnhandQuantity) {
+// SetLotNumberNil sets the value for LotNumber to be an explicit nil
+func (o *InventoryLotQuantity) SetLotNumberNil() {
+	o.LotNumber.Set(nil)
+}
+
+// UnsetLotNumber ensures that no value is present for LotNumber, not even an explicit nil
+func (o *InventoryLotQuantity) UnsetLotNumber() {
+	o.LotNumber.Unset()
+}
+
+// GetOnHandQuantity returns the OnHandQuantity field value if set, zero value otherwise.
+func (o *InventoryLotQuantity) GetOnHandQuantity() int32 {
+	if o == nil || IsNil(o.OnHandQuantity) {
 		var ret int32
 		return ret
 	}
-	return *o.OnhandQuantity
+	return *o.OnHandQuantity
 }
 
-// GetOnhandQuantityOk returns a tuple with the OnhandQuantity field value if set, nil otherwise
+// GetOnHandQuantityOk returns a tuple with the OnHandQuantity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *InventoryLotQuantity) GetOnhandQuantityOk() (*int32, bool) {
-	if o == nil || IsNil(o.OnhandQuantity) {
+func (o *InventoryLotQuantity) GetOnHandQuantityOk() (*int32, bool) {
+	if o == nil || IsNil(o.OnHandQuantity) {
 		return nil, false
 	}
-	return o.OnhandQuantity, true
+	return o.OnHandQuantity, true
 }
 
-// HasOnhandQuantity returns a boolean if a field has been set.
-func (o *InventoryLotQuantity) HasOnhandQuantity() bool {
-	if o != nil && !IsNil(o.OnhandQuantity) {
+// HasOnHandQuantity returns a boolean if a field has been set.
+func (o *InventoryLotQuantity) HasOnHandQuantity() bool {
+	if o != nil && !IsNil(o.OnHandQuantity) {
 		return true
 	}
 
 	return false
 }
 
-// SetOnhandQuantity gets a reference to the given int32 and assigns it to the OnhandQuantity field.
-func (o *InventoryLotQuantity) SetOnhandQuantity(v int32) {
-	o.OnhandQuantity = &v
+// SetOnHandQuantity gets a reference to the given int32 and assigns it to the OnHandQuantity field.
+func (o *InventoryLotQuantity) SetOnHandQuantity(v int32) {
+	o.OnHandQuantity = &v
 }
 
 func (o InventoryLotQuantity) MarshalJSON() ([]byte, error) {
@@ -333,28 +345,28 @@ func (o InventoryLotQuantity) MarshalJSON() ([]byte, error) {
 func (o InventoryLotQuantity) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.AwaitingQuantity) {
-		toSerialize["awaiting_quantity"] = o.AwaitingQuantity
+		toSerialize["awaitingQuantity"] = o.AwaitingQuantity
 	}
 	if !IsNil(o.CommittedQuantity) {
-		toSerialize["committed_quantity"] = o.CommittedQuantity
+		toSerialize["committedQuantity"] = o.CommittedQuantity
 	}
 	if o.ExpirationDate.IsSet() {
-		toSerialize["expiration_date"] = o.ExpirationDate.Get()
+		toSerialize["expirationDate"] = o.ExpirationDate.Get()
 	}
 	if !IsNil(o.FulfillableQuantity) {
-		toSerialize["fulfillable_quantity"] = o.FulfillableQuantity
+		toSerialize["fulfillableQuantity"] = o.FulfillableQuantity
 	}
-	if !IsNil(o.FulfillableQuantityByFulfillmentCenter) {
-		toSerialize["fulfillable_quantity_by_fulfillment_center"] = o.FulfillableQuantityByFulfillmentCenter
+	if o.FulfillableQuantityByFulfillmentCenter != nil {
+		toSerialize["fulfillableQuantityByFulfillmentCenter"] = o.FulfillableQuantityByFulfillmentCenter
 	}
 	if !IsNil(o.InternalTransferQuantity) {
-		toSerialize["internal_transfer_quantity"] = o.InternalTransferQuantity
+		toSerialize["internalTransferQuantity"] = o.InternalTransferQuantity
 	}
-	if !IsNil(o.LotNumber) {
-		toSerialize["lot_number"] = o.LotNumber
+	if o.LotNumber.IsSet() {
+		toSerialize["lotNumber"] = o.LotNumber.Get()
 	}
-	if !IsNil(o.OnhandQuantity) {
-		toSerialize["onhand_quantity"] = o.OnhandQuantity
+	if !IsNil(o.OnHandQuantity) {
+		toSerialize["onHandQuantity"] = o.OnHandQuantity
 	}
 	return toSerialize, nil
 }

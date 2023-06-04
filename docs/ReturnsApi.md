@@ -1,15 +1,15 @@
 # \ReturnsApi
 
-All URIs are relative to *https://api.shipbob.com/1.0*
+All URIs are relative to *https://api.shipbob.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CancelReturn**](ReturnsApi.md#CancelReturn) | **Post** /return/{id}/cancel | Cancel Return Order
-[**CreateReturn**](ReturnsApi.md#CreateReturn) | **Post** /return | Create Return Order
-[**GetReturn**](ReturnsApi.md#GetReturn) | **Get** /return/{id} | Get Return Order
-[**GetReturnStatushistory**](ReturnsApi.md#GetReturnStatushistory) | **Get** /return/{id}/statushistory | Get One Return&#39;s status history
-[**GetReturns**](ReturnsApi.md#GetReturns) | **Get** /return | Get Return Orders
-[**UpdateReturn**](ReturnsApi.md#UpdateReturn) | **Put** /return/{id} | Modify Return Order
+[**CancelReturn**](ReturnsApi.md#CancelReturn) | **Post** /1.0/return/{id}/cancel | Cancel Return Order
+[**CreateReturn**](ReturnsApi.md#CreateReturn) | **Post** /1.0/return | Create Return Order
+[**GetReturn**](ReturnsApi.md#GetReturn) | **Get** /1.0/return/{id} | Get Return Order
+[**GetReturnStatushistory**](ReturnsApi.md#GetReturnStatushistory) | **Get** /1.0/return/{id}/statushistory | Get One Return&#39;s status history
+[**GetReturns**](ReturnsApi.md#GetReturns) | **Get** /1.0/return | Get Return Orders
+[**UpdateReturn**](ReturnsApi.md#UpdateReturn) | **Put** /1.0/return/{id} | Modify Return Order
 
 
 
@@ -221,7 +221,7 @@ Name | Type | Description  | Notes
 
 ## GetReturnStatushistory
 
-> ReturnOrderStatusHistory GetReturnStatushistory(ctx, id).ShipbobChannelId(shipbobChannelId).Execute()
+> []ReturnOrderStatusHistory GetReturnStatushistory(ctx, id).ShipbobChannelId(shipbobChannelId).Execute()
 
 Get One Return's status history
 
@@ -248,7 +248,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `ReturnsApi.GetReturnStatushistory``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `GetReturnStatushistory`: ReturnOrderStatusHistory
+    // response from `GetReturnStatushistory`: []ReturnOrderStatusHistory
     fmt.Fprintf(os.Stdout, "Response from `ReturnsApi.GetReturnStatushistory`: %v\n", resp)
 }
 ```
@@ -273,7 +273,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ReturnOrderStatusHistory**](ReturnOrderStatusHistory.md)
+[**[]ReturnOrderStatusHistory**](ReturnOrderStatusHistory.md)
 
 ### Authorization
 

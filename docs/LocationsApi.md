@@ -1,16 +1,16 @@
 # \LocationsApi
 
-All URIs are relative to *https://api.shipbob.com/1.0*
+All URIs are relative to *https://api.shipbob.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**GetLocations**](LocationsApi.md#GetLocations) | **Get** /location | Get locations
+[**GetLocations**](LocationsApi.md#GetLocations) | **Get** /1.0/location | Get locations
 
 
 
 ## GetLocations
 
-> []Location GetLocations(ctx).IncludeInactive(includeInactive).ReceivingEnabled(receivingEnabled).AccessGranted(accessGranted).Execute()
+> []GetLocations200ResponseInner GetLocations(ctx).IncludeInactive(includeInactive).ReceivingEnabled(receivingEnabled).AccessGranted(accessGranted).Execute()
 
 Get locations
 
@@ -38,7 +38,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `LocationsApi.GetLocations``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `GetLocations`: []Location
+    // response from `GetLocations`: []GetLocations200ResponseInner
     fmt.Fprintf(os.Stdout, "Response from `LocationsApi.GetLocations`: %v\n", resp)
 }
 ```
@@ -60,7 +60,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]Location**](Location.md)
+[**[]GetLocations200ResponseInner**](GetLocations200ResponseInner.md)
 
 ### Authorization
 

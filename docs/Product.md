@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **CreatedDate** | Pointer to **NullableTime** | Date the product was created | [optional] 
 **FulfillableInventoryItems** | Pointer to [**[]ProductInventoryItem**](ProductInventoryItem.md) | The inventory that this product will resolve to when packing a shipment | [optional] 
 **FulfillableQuantityByFulfillmentCenter** | Pointer to [**[]ProductFulfillmentCenterQuantity**](ProductFulfillmentCenterQuantity.md) | Fulfillable quantity of this product broken down by fulfillment center location | [optional] 
+**Gtin** | Pointer to **NullableString** | Global Trade Item Number - unique and internationally recognized identifier assigned to item by company GS1. | [optional] 
 **Id** | Pointer to **int32** | Unique identifier of the product | [optional] 
 **Name** | Pointer to **NullableString** | The name of the product | [optional] 
 **ReferenceId** | Pointer to **NullableString** | Unique reference identifier of the product | [optional] 
@@ -17,6 +18,8 @@ Name | Type | Description | Notes
 **TotalCommittedQuantity** | Pointer to **int32** | Total committed quantity of this product | [optional] 
 **TotalFulfillableQuantity** | Pointer to **int32** | Total fulfillable quantity of this product | [optional] 
 **TotalOnhandQuantity** | Pointer to **int32** | Total on hand quantity of this product | [optional] 
+**UnitPrice** | Pointer to **NullableFloat64** | The price of one unit | [optional] 
+**Upc** | Pointer to **NullableString** | Universal Product Code - Unique external identifier | [optional] 
 
 ## Methods
 
@@ -227,6 +230,41 @@ HasFulfillableQuantityByFulfillmentCenter returns a boolean if a field has been 
 `func (o *Product) UnsetFulfillableQuantityByFulfillmentCenter()`
 
 UnsetFulfillableQuantityByFulfillmentCenter ensures that no value is present for FulfillableQuantityByFulfillmentCenter, not even an explicit nil
+### GetGtin
+
+`func (o *Product) GetGtin() string`
+
+GetGtin returns the Gtin field if non-nil, zero value otherwise.
+
+### GetGtinOk
+
+`func (o *Product) GetGtinOk() (*string, bool)`
+
+GetGtinOk returns a tuple with the Gtin field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetGtin
+
+`func (o *Product) SetGtin(v string)`
+
+SetGtin sets Gtin field to given value.
+
+### HasGtin
+
+`func (o *Product) HasGtin() bool`
+
+HasGtin returns a boolean if a field has been set.
+
+### SetGtinNil
+
+`func (o *Product) SetGtinNil(b bool)`
+
+ SetGtinNil sets the value for Gtin to be an explicit nil
+
+### UnsetGtin
+`func (o *Product) UnsetGtin()`
+
+UnsetGtin ensures that no value is present for Gtin, not even an explicit nil
 ### GetId
 
 `func (o *Product) GetId() int32`
@@ -432,6 +470,76 @@ SetTotalOnhandQuantity sets TotalOnhandQuantity field to given value.
 
 HasTotalOnhandQuantity returns a boolean if a field has been set.
 
+### GetUnitPrice
+
+`func (o *Product) GetUnitPrice() float64`
+
+GetUnitPrice returns the UnitPrice field if non-nil, zero value otherwise.
+
+### GetUnitPriceOk
+
+`func (o *Product) GetUnitPriceOk() (*float64, bool)`
+
+GetUnitPriceOk returns a tuple with the UnitPrice field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUnitPrice
+
+`func (o *Product) SetUnitPrice(v float64)`
+
+SetUnitPrice sets UnitPrice field to given value.
+
+### HasUnitPrice
+
+`func (o *Product) HasUnitPrice() bool`
+
+HasUnitPrice returns a boolean if a field has been set.
+
+### SetUnitPriceNil
+
+`func (o *Product) SetUnitPriceNil(b bool)`
+
+ SetUnitPriceNil sets the value for UnitPrice to be an explicit nil
+
+### UnsetUnitPrice
+`func (o *Product) UnsetUnitPrice()`
+
+UnsetUnitPrice ensures that no value is present for UnitPrice, not even an explicit nil
+### GetUpc
+
+`func (o *Product) GetUpc() string`
+
+GetUpc returns the Upc field if non-nil, zero value otherwise.
+
+### GetUpcOk
+
+`func (o *Product) GetUpcOk() (*string, bool)`
+
+GetUpcOk returns a tuple with the Upc field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUpc
+
+`func (o *Product) SetUpc(v string)`
+
+SetUpc sets Upc field to given value.
+
+### HasUpc
+
+`func (o *Product) HasUpc() bool`
+
+HasUpc returns a boolean if a field has been set.
+
+### SetUpcNil
+
+`func (o *Product) SetUpcNil(b bool)`
+
+ SetUpcNil sets the value for Upc to be an explicit nil
+
+### UnsetUpc
+`func (o *Product) UnsetUpc()`
+
+UnsetUpc ensures that no value is present for Upc, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

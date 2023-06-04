@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**CanceledShipmentResults** | Pointer to [**[]CanceledShipment**](CanceledShipment.md) | Results of camceling the shipments associated with the order | [optional] 
+**CanceledShipmentResults** | Pointer to [**[]CanceledShipment**](CanceledShipment.md) | Results of canceling the shipments associated with the order | [optional] 
 **Order** | Pointer to [**Order**](Order.md) |  | [optional] 
 **OrderId** | Pointer to **int32** | The ID of the canceled order | [optional] 
 **Status** | Pointer to **string** | The overall result of canceling the shipments associated with the order | [optional] 

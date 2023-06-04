@@ -12,15 +12,16 @@ Name | Type | Description | Notes
 **IsReceivingEnabled** | Pointer to **bool** | Indicates if the receiving is enabled for FC | [optional] 
 **IsShippingEnabled** | Pointer to **bool** | Indicates if the shipping is enabled for FC | [optional] 
 **Name** | Pointer to **NullableString** | Name of the location. Follows the naming convention City (State Code) for domestic FCs and City (Country Code) for international FCs | [optional] 
-**Region** | Pointer to [**LocationRegion**](LocationRegion.md) |  | [optional] 
+**Region** | Pointer to [**FulfillmentCenterRegion**](FulfillmentCenterRegion.md) |  | [optional] 
 **Services** | Pointer to [**[]LocationService**](LocationService.md) | Services provided by the location | [optional] 
 **Timezone** | Pointer to **NullableString** | Time zone of the location | [optional] 
+**Ttype** | **string** |  | 
 
 ## Methods
 
 ### NewLocation
 
-`func NewLocation() *Location`
+`func NewLocation(ttype string, ) *Location`
 
 NewLocation instantiates a new Location object
 This constructor will assign default values to properties that have it defined,
@@ -267,20 +268,20 @@ HasName returns a boolean if a field has been set.
 UnsetName ensures that no value is present for Name, not even an explicit nil
 ### GetRegion
 
-`func (o *Location) GetRegion() LocationRegion`
+`func (o *Location) GetRegion() FulfillmentCenterRegion`
 
 GetRegion returns the Region field if non-nil, zero value otherwise.
 
 ### GetRegionOk
 
-`func (o *Location) GetRegionOk() (*LocationRegion, bool)`
+`func (o *Location) GetRegionOk() (*FulfillmentCenterRegion, bool)`
 
 GetRegionOk returns a tuple with the Region field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetRegion
 
-`func (o *Location) SetRegion(v LocationRegion)`
+`func (o *Location) SetRegion(v FulfillmentCenterRegion)`
 
 SetRegion sets Region field to given value.
 
@@ -360,6 +361,26 @@ HasTimezone returns a boolean if a field has been set.
 `func (o *Location) UnsetTimezone()`
 
 UnsetTimezone ensures that no value is present for Timezone, not even an explicit nil
+### GetTtype
+
+`func (o *Location) GetTtype() string`
+
+GetTtype returns the Ttype field if non-nil, zero value otherwise.
+
+### GetTtypeOk
+
+`func (o *Location) GetTtypeOk() (*string, bool)`
+
+GetTtypeOk returns a tuple with the Ttype field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTtype
+
+`func (o *Location) SetTtype(v string)`
+
+SetTtype sets Ttype field to given value.
+
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

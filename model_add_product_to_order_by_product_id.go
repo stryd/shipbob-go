@@ -19,10 +19,14 @@ var _ MappedNullable = &AddProductToOrderByProductId{}
 
 // AddProductToOrderByProductId struct for AddProductToOrderByProductId
 type AddProductToOrderByProductId struct {
+	// Numeric assignment per item. Used as a reference number for multiple purposes such as split orders, split containers, etc.
+	ExternalLineId NullableInt32 `json:"external_line_id,omitempty"`
 	// Unique id of the product
 	Id int32 `json:"id"`
 	// The quantity of this product ordered
 	Quantity int32 `json:"quantity"`
+	// Defined standard for measure for an item (each, inner pack, case, pallet).  Values: EA, INP, CS and PL
+	QuantityUnitOfMeasureCode *string `json:"quantity_unit_of_measure_code,omitempty"`
 }
 
 // NewAddProductToOrderByProductId instantiates a new AddProductToOrderByProductId object
@@ -42,6 +46,49 @@ func NewAddProductToOrderByProductId(id int32, quantity int32) *AddProductToOrde
 func NewAddProductToOrderByProductIdWithDefaults() *AddProductToOrderByProductId {
 	this := AddProductToOrderByProductId{}
 	return &this
+}
+
+// GetExternalLineId returns the ExternalLineId field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *AddProductToOrderByProductId) GetExternalLineId() int32 {
+	if o == nil || IsNil(o.ExternalLineId.Get()) {
+		var ret int32
+		return ret
+	}
+	return *o.ExternalLineId.Get()
+}
+
+// GetExternalLineIdOk returns a tuple with the ExternalLineId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *AddProductToOrderByProductId) GetExternalLineIdOk() (*int32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.ExternalLineId.Get(), o.ExternalLineId.IsSet()
+}
+
+// HasExternalLineId returns a boolean if a field has been set.
+func (o *AddProductToOrderByProductId) HasExternalLineId() bool {
+	if o != nil && o.ExternalLineId.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetExternalLineId gets a reference to the given NullableInt32 and assigns it to the ExternalLineId field.
+func (o *AddProductToOrderByProductId) SetExternalLineId(v int32) {
+	o.ExternalLineId.Set(&v)
+}
+
+// SetExternalLineIdNil sets the value for ExternalLineId to be an explicit nil
+func (o *AddProductToOrderByProductId) SetExternalLineIdNil() {
+	o.ExternalLineId.Set(nil)
+}
+
+// UnsetExternalLineId ensures that no value is present for ExternalLineId, not even an explicit nil
+func (o *AddProductToOrderByProductId) UnsetExternalLineId() {
+	o.ExternalLineId.Unset()
 }
 
 // GetId returns the Id field value
@@ -92,6 +139,38 @@ func (o *AddProductToOrderByProductId) SetQuantity(v int32) {
 	o.Quantity = v
 }
 
+// GetQuantityUnitOfMeasureCode returns the QuantityUnitOfMeasureCode field value if set, zero value otherwise.
+func (o *AddProductToOrderByProductId) GetQuantityUnitOfMeasureCode() string {
+	if o == nil || IsNil(o.QuantityUnitOfMeasureCode) {
+		var ret string
+		return ret
+	}
+	return *o.QuantityUnitOfMeasureCode
+}
+
+// GetQuantityUnitOfMeasureCodeOk returns a tuple with the QuantityUnitOfMeasureCode field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AddProductToOrderByProductId) GetQuantityUnitOfMeasureCodeOk() (*string, bool) {
+	if o == nil || IsNil(o.QuantityUnitOfMeasureCode) {
+		return nil, false
+	}
+	return o.QuantityUnitOfMeasureCode, true
+}
+
+// HasQuantityUnitOfMeasureCode returns a boolean if a field has been set.
+func (o *AddProductToOrderByProductId) HasQuantityUnitOfMeasureCode() bool {
+	if o != nil && !IsNil(o.QuantityUnitOfMeasureCode) {
+		return true
+	}
+
+	return false
+}
+
+// SetQuantityUnitOfMeasureCode gets a reference to the given string and assigns it to the QuantityUnitOfMeasureCode field.
+func (o *AddProductToOrderByProductId) SetQuantityUnitOfMeasureCode(v string) {
+	o.QuantityUnitOfMeasureCode = &v
+}
+
 func (o AddProductToOrderByProductId) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -102,8 +181,14 @@ func (o AddProductToOrderByProductId) MarshalJSON() ([]byte, error) {
 
 func (o AddProductToOrderByProductId) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if o.ExternalLineId.IsSet() {
+		toSerialize["external_line_id"] = o.ExternalLineId.Get()
+	}
 	toSerialize["id"] = o.Id
 	toSerialize["quantity"] = o.Quantity
+	if !IsNil(o.QuantityUnitOfMeasureCode) {
+		toSerialize["quantity_unit_of_measure_code"] = o.QuantityUnitOfMeasureCode
+	}
 	return toSerialize, nil
 }
 

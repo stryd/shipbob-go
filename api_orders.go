@@ -72,7 +72,7 @@ func (a *OrdersApiService) CancelOrderExecute(r ApiCancelOrderRequest) (*Cancele
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/order/{orderId}/cancel"
+	localVarPath := localBasePath + "/1.0/order/{orderId}/cancel"
 	localVarPath = strings.Replace(localVarPath, "{"+"orderId"+"}", url.PathEscape(parameterValueToString(r.orderId, "orderId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -220,7 +220,7 @@ func (a *OrdersApiService) CancelOrderShipmentExecute(r ApiCancelOrderShipmentRe
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/order/{orderId}/shipment/{shipmentId}/cancel"
+	localVarPath := localBasePath + "/1.0/order/{orderId}/shipment/{shipmentId}/cancel"
 	localVarPath = strings.Replace(localVarPath, "{"+"shipmentId"+"}", url.PathEscape(parameterValueToString(r.shipmentId, "shipmentId")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"orderId"+"}", url.PathEscape(parameterValueToString(r.orderId, "orderId")), -1)
 
@@ -365,7 +365,7 @@ func (a *OrdersApiService) CancelShipmentExecute(r ApiCancelShipmentRequest) (*S
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/shipment/{shipmentId}/cancel"
+	localVarPath := localBasePath + "/1.0/shipment/{shipmentId}/cancel"
 	localVarPath = strings.Replace(localVarPath, "{"+"shipmentId"+"}", url.PathEscape(parameterValueToString(r.shipmentId, "shipmentId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -512,7 +512,7 @@ func (a *OrdersApiService) CreateOrderExecute(r ApiCreateOrderRequest) (*Order, 
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/order"
+	localVarPath := localBasePath + "/1.0/order"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -652,7 +652,7 @@ func (a *OrdersApiService) CreateOrderEstimateExecute(r ApiCreateOrderEstimateRe
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/order/estimate"
+	localVarPath := localBasePath + "/1.0/order/estimate"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -681,6 +681,137 @@ func (a *OrdersApiService) CreateOrderEstimateExecute(r ApiCreateOrderEstimateRe
 	parameterAddToHeaderOrQuery(localVarHeaderParams, "shipbob_channel_id", r.shipbobChannelId, "")
 	// body params
 	localVarPostBody = r.orderEstimateFulfillmentRequest
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v map[string][]string
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v map[string][]string
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiCreateOrderStoreOrderJsonRequest struct {
+	ctx               context.Context
+	ApiService        *OrdersApiService
+	orderId           int32
+	addStoreOrderJson *AddStoreOrderJson
+}
+
+func (r ApiCreateOrderStoreOrderJsonRequest) AddStoreOrderJson(addStoreOrderJson AddStoreOrderJson) ApiCreateOrderStoreOrderJsonRequest {
+	r.addStoreOrderJson = &addStoreOrderJson
+	return r
+}
+
+func (r ApiCreateOrderStoreOrderJsonRequest) Execute() (string, *http.Response, error) {
+	return r.ApiService.CreateOrderStoreOrderJsonExecute(r)
+}
+
+/*
+CreateOrderStoreOrderJson Save the Store Order Json
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param orderId The order ID to Store
+	@return ApiCreateOrderStoreOrderJsonRequest
+*/
+func (a *OrdersApiService) CreateOrderStoreOrderJson(ctx context.Context, orderId int32) ApiCreateOrderStoreOrderJsonRequest {
+	return ApiCreateOrderStoreOrderJsonRequest{
+		ApiService: a,
+		ctx:        ctx,
+		orderId:    orderId,
+	}
+}
+
+// Execute executes the request
+//
+//	@return string
+func (a *OrdersApiService) CreateOrderStoreOrderJsonExecute(r ApiCreateOrderStoreOrderJsonRequest) (string, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue string
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrdersApiService.CreateOrderStoreOrderJson")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/1.0/order/{orderId}/storeOrderJson"
+	localVarPath = strings.Replace(localVarPath, "{"+"orderId"+"}", url.PathEscape(parameterValueToString(r.orderId, "orderId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.addStoreOrderJson
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -790,7 +921,7 @@ func (a *OrdersApiService) CreateShipmentCancelbulkExecute(r ApiCreateShipmentCa
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/shipment/cancelbulk"
+	localVarPath := localBasePath + "/1.0/shipment/cancelbulk"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -925,7 +1056,7 @@ func (a *OrdersApiService) GetOrderExecute(r ApiGetOrderRequest) (*Order, *http.
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/order/{orderId}"
+	localVarPath := localBasePath + "/1.0/order/{orderId}"
 	localVarPath = strings.Replace(localVarPath, "{"+"orderId"+"}", url.PathEscape(parameterValueToString(r.orderId, "orderId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -1051,7 +1182,7 @@ func (a *OrdersApiService) GetOrderShipmentExecute(r ApiGetOrderShipmentRequest)
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/order/{orderId}/shipment/{shipmentId}"
+	localVarPath := localBasePath + "/1.0/order/{orderId}/shipment/{shipmentId}"
 	localVarPath = strings.Replace(localVarPath, "{"+"orderId"+"}", url.PathEscape(parameterValueToString(r.orderId, "orderId")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"shipmentId"+"}", url.PathEscape(parameterValueToString(r.shipmentId, "shipmentId")), -1)
 
@@ -1178,7 +1309,7 @@ func (a *OrdersApiService) GetOrderShipmentLogsExecute(r ApiGetOrderShipmentLogs
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/order/{orderId}/shipment/{shipmentId}/logs"
+	localVarPath := localBasePath + "/1.0/order/{orderId}/shipment/{shipmentId}/logs"
 	localVarPath = strings.Replace(localVarPath, "{"+"orderId"+"}", url.PathEscape(parameterValueToString(r.orderId, "orderId")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"shipmentId"+"}", url.PathEscape(parameterValueToString(r.shipmentId, "shipmentId")), -1)
 
@@ -1305,7 +1436,7 @@ func (a *OrdersApiService) GetOrderShipmentTimelinesExecute(r ApiGetOrderShipmen
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/order/{orderId}/shipment/{shipmentId}/timeline"
+	localVarPath := localBasePath + "/1.0/order/{orderId}/shipment/{shipmentId}/timeline"
 	localVarPath = strings.Replace(localVarPath, "{"+"orderId"+"}", url.PathEscape(parameterValueToString(r.orderId, "orderId")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"shipmentId"+"}", url.PathEscape(parameterValueToString(r.shipmentId, "shipmentId")), -1)
 
@@ -1429,7 +1560,7 @@ func (a *OrdersApiService) GetOrderShipmentsExecute(r ApiGetOrderShipmentsReques
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/order/{orderId}/shipment"
+	localVarPath := localBasePath + "/1.0/order/{orderId}/shipment"
 	localVarPath = strings.Replace(localVarPath, "{"+"orderId"+"}", url.PathEscape(parameterValueToString(r.orderId, "orderId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -1504,20 +1635,150 @@ func (a *OrdersApiService) GetOrderShipmentsExecute(r ApiGetOrderShipmentsReques
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiGetOrderStoreOrderJsonsRequest struct {
+	ctx        context.Context
+	ApiService *OrdersApiService
+	orderId    int32
+}
+
+func (r ApiGetOrderStoreOrderJsonsRequest) Execute() (string, *http.Response, error) {
+	return r.ApiService.GetOrderStoreOrderJsonsExecute(r)
+}
+
+/*
+GetOrderStoreOrderJsons Get Order Store Json
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param orderId The order ID to Get the JSON Stored
+	@return ApiGetOrderStoreOrderJsonsRequest
+*/
+func (a *OrdersApiService) GetOrderStoreOrderJsons(ctx context.Context, orderId int32) ApiGetOrderStoreOrderJsonsRequest {
+	return ApiGetOrderStoreOrderJsonsRequest{
+		ApiService: a,
+		ctx:        ctx,
+		orderId:    orderId,
+	}
+}
+
+// Execute executes the request
+//
+//	@return string
+func (a *OrdersApiService) GetOrderStoreOrderJsonsExecute(r ApiGetOrderStoreOrderJsonsRequest) (string, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue string
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrdersApiService.GetOrderStoreOrderJsons")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/1.0/order/{orderId}/storeOrderJson"
+	localVarPath = strings.Replace(localVarPath, "{"+"orderId"+"}", url.PathEscape(parameterValueToString(r.orderId, "orderId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v map[string][]string
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v map[string][]string
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiGetOrdersRequest struct {
-	ctx                 context.Context
-	ApiService          *OrdersApiService
-	page                *int32
-	limit               *int32
-	iDs                 *[]int32
-	referenceIds        *[]string
-	startDate           *time.Time
-	endDate             *time.Time
-	sortOrder           *string
-	hasTracking         *bool
-	lastUpdateStartDate *time.Time
-	lastUpdateEndDate   *time.Time
-	shipbobChannelId    *int32
+	ctx                         context.Context
+	ApiService                  *OrdersApiService
+	page                        *int32
+	limit                       *int32
+	iDs                         *[]int32
+	referenceIds                *[]string
+	startDate                   *time.Time
+	endDate                     *time.Time
+	sortOrder                   *string
+	hasTracking                 *bool
+	lastUpdateStartDate         *time.Time
+	lastUpdateEndDate           *time.Time
+	isTrackingUploaded          *bool
+	lastTrackingUpdateStartDate *time.Time
+	lastTrackingUpdateEndDate   *time.Time
+	deliveryStartDate           *time.Time
+	deliveryEndDate             *time.Time
+	fulfillmentStartDate        *time.Time
+	fulfillmentEndDate          *time.Time
+	shipbobChannelId            *int32
 }
 
 // Page of orders to get
@@ -1532,13 +1793,13 @@ func (r ApiGetOrdersRequest) Limit(limit int32) ApiGetOrdersRequest {
 	return r
 }
 
-// order ids to filter by
+// order ids to filter by, comma separated
 func (r ApiGetOrdersRequest) IDs(iDs []int32) ApiGetOrdersRequest {
 	r.iDs = &iDs
 	return r
 }
 
-// Reference ids to filter by
+// Reference ids to filter by, comma separated
 func (r ApiGetOrdersRequest) ReferenceIds(referenceIds []string) ApiGetOrdersRequest {
 	r.referenceIds = &referenceIds
 	return r
@@ -1577,6 +1838,48 @@ func (r ApiGetOrdersRequest) LastUpdateStartDate(lastUpdateStartDate time.Time) 
 // End date to filter orders updated later than
 func (r ApiGetOrdersRequest) LastUpdateEndDate(lastUpdateEndDate time.Time) ApiGetOrdersRequest {
 	r.lastUpdateEndDate = &lastUpdateEndDate
+	return r
+}
+
+// Filter orders that their tracking information was fully uploaded
+func (r ApiGetOrdersRequest) IsTrackingUploaded(isTrackingUploaded bool) ApiGetOrdersRequest {
+	r.isTrackingUploaded = &isTrackingUploaded
+	return r
+}
+
+// Start date to filter orders with tracking updates later than the supplied date. Will only return orders that have tracking information
+func (r ApiGetOrdersRequest) LastTrackingUpdateStartDate(lastTrackingUpdateStartDate time.Time) ApiGetOrdersRequest {
+	r.lastTrackingUpdateStartDate = &lastTrackingUpdateStartDate
+	return r
+}
+
+// End date to filter orders updated later than the supplied date. Will only return orders that have tracking information
+func (r ApiGetOrdersRequest) LastTrackingUpdateEndDate(lastTrackingUpdateEndDate time.Time) ApiGetOrdersRequest {
+	r.lastTrackingUpdateEndDate = &lastTrackingUpdateEndDate
+	return r
+}
+
+// Start date to filter orders with delivery date later than the supplied date. Will only return orders that have tracking information
+func (r ApiGetOrdersRequest) DeliveryStartDate(deliveryStartDate time.Time) ApiGetOrdersRequest {
+	r.deliveryStartDate = &deliveryStartDate
+	return r
+}
+
+// End date to filter orders delivery date later than the supplied date. Will only return orders that have tracking information
+func (r ApiGetOrdersRequest) DeliveryEndDate(deliveryEndDate time.Time) ApiGetOrdersRequest {
+	r.deliveryEndDate = &deliveryEndDate
+	return r
+}
+
+// Start date to filter orders with fulfillment date later than the supplied date. Will only return orders that have tracking information
+func (r ApiGetOrdersRequest) FulfillmentStartDate(fulfillmentStartDate time.Time) ApiGetOrdersRequest {
+	r.fulfillmentStartDate = &fulfillmentStartDate
+	return r
+}
+
+// End date to filter orders fulfillment date  later than the supplied date. Will only return orders that have tracking information
+func (r ApiGetOrdersRequest) FulfillmentEndDate(fulfillmentEndDate time.Time) ApiGetOrdersRequest {
+	r.fulfillmentEndDate = &fulfillmentEndDate
 	return r
 }
 
@@ -1621,7 +1924,7 @@ func (a *OrdersApiService) GetOrdersExecute(r ApiGetOrdersRequest) ([]Order, *ht
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/order"
+	localVarPath := localBasePath + "/1.0/order"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -1672,6 +1975,27 @@ func (a *OrdersApiService) GetOrdersExecute(r ApiGetOrdersRequest) ([]Order, *ht
 	}
 	if r.lastUpdateEndDate != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "LastUpdateEndDate", r.lastUpdateEndDate, "")
+	}
+	if r.isTrackingUploaded != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "IsTrackingUploaded", r.isTrackingUploaded, "")
+	}
+	if r.lastTrackingUpdateStartDate != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "LastTrackingUpdateStartDate", r.lastTrackingUpdateStartDate, "")
+	}
+	if r.lastTrackingUpdateEndDate != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "LastTrackingUpdateEndDate", r.lastTrackingUpdateEndDate, "")
+	}
+	if r.deliveryStartDate != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "DeliveryStartDate", r.deliveryStartDate, "")
+	}
+	if r.deliveryEndDate != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "DeliveryEndDate", r.deliveryEndDate, "")
+	}
+	if r.fulfillmentStartDate != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "FulfillmentStartDate", r.fulfillmentStartDate, "")
+	}
+	if r.fulfillmentEndDate != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "FulfillmentEndDate", r.fulfillmentEndDate, "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1789,7 +2113,7 @@ func (a *OrdersApiService) GetShipmentExecute(r ApiGetShipmentRequest) (*Shipmen
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/shipment/{shipmentId}"
+	localVarPath := localBasePath + "/1.0/shipment/{shipmentId}"
 	localVarPath = strings.Replace(localVarPath, "{"+"shipmentId"+"}", url.PathEscape(parameterValueToString(r.shipmentId, "shipmentId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -1912,7 +2236,7 @@ func (a *OrdersApiService) GetShipmentLogsExecute(r ApiGetShipmentLogsRequest) (
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/shipment/{shipmentId}/logs"
+	localVarPath := localBasePath + "/1.0/shipment/{shipmentId}/logs"
 	localVarPath = strings.Replace(localVarPath, "{"+"shipmentId"+"}", url.PathEscape(parameterValueToString(r.shipmentId, "shipmentId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -2035,7 +2359,7 @@ func (a *OrdersApiService) GetShipmentTimelinesExecute(r ApiGetShipmentTimelines
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/shipment/{shipmentId}/timeline"
+	localVarPath := localBasePath + "/1.0/shipment/{shipmentId}/timeline"
 	localVarPath = strings.Replace(localVarPath, "{"+"shipmentId"+"}", url.PathEscape(parameterValueToString(r.shipmentId, "shipmentId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -2164,7 +2488,7 @@ func (a *OrdersApiService) GetShippingmethodsExecute(r ApiGetShippingmethodsRequ
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/shippingmethod"
+	localVarPath := localBasePath + "/1.0/shippingmethod"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
