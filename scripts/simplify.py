@@ -92,6 +92,9 @@ def rename_verbose_names(name: str) -> str:
 
     name = replace_if_present(name, 'Microsoft_AspNetCore_Mvc_ValidationProblemDetails_allOf',
                               'ValidationProblemDetails_allOf')
+
+    if 'V2.' in name:
+        name = remove_if_present(name, 'V2.') + 'V2'
     return name
 
 
@@ -154,10 +157,10 @@ def fix_technical_properties(schema):
         schema = replace_if_present(schema, 'â', '"')
         schema = replace_if_present(schema, 'â', '-')
         schema = replace_if_present(schema, 'â', '\'')
-        schema = replace_if_present(schema, '\\r\\n', ' ')
-        schema = replace_if_present(schema, '\r\n', ' ')
-        schema = replace_if_present(schema, '\n\n', ' ')
-        schema = replace_if_present(schema, '\\n\\n', ' ')
+        schema = remove_if_present(schema, '\\r\\n')
+        schema = remove_if_present(schema, '\r\n')
+        schema = remove_if_present(schema, '\n\n')
+        schema = remove_if_present(schema, '\\n\\n')
         return schema
     return schema
 
