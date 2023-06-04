@@ -202,6 +202,20 @@ def add_operation_ids(path: str, path_schema: dict):
             method_schema[op_id_key] += suffix
 
 
+def add_missing_security_schema(schema):
+    """
+    Shipbob does not include both of their supported security schemas in the open api.
+    They support both oath2 and a PAT token but only include the oauth2 schema.
+    Old version of the generator generated all possible security mechanisms but has since been
+    updated to only generate what was specified in the spec.
+    """
+    if "bearer" not in schema:
+        schema["pat"] = {
+            "type": "http",
+            "scheme": "bearer",
+        }
+
+
 def process_openapi_schema(file_path):
     with open(file_path, "r") as file:
         schema = json.load(file)
@@ -209,6 +223,8 @@ def process_openapi_schema(file_path):
         clean_up_schema_names(schema)
         schema = clean_up_schema_name_references(schema)
         schema = fix_technical_properties(schema)
+
+        add_missing_security_schema(schema["components"]["securitySchemes"])
 
         for n, comp in schema["components"]["schemas"].items():
             remove_single_oneof_properties(comp)
