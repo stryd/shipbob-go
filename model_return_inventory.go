@@ -22,7 +22,7 @@ type ReturnInventory struct {
 	// ID of the inventory item to return
 	Id int32 `json:"id"`
 	// Quantity of the returned inventory item in the return
-	Quantity int32 `json:"quantity"`
+	Quantity        int32         `json:"quantity"`
 	RequestedAction *ReturnAction `json:"requested_action,omitempty"`
 }
 
@@ -126,7 +126,7 @@ func (o *ReturnInventory) SetRequestedAction(v ReturnAction) {
 }
 
 func (o ReturnInventory) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -178,5 +178,3 @@ func (v *NullableReturnInventory) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

@@ -18,12 +18,11 @@ import (
 	"net/url"
 )
 
-
 // ChannelsApiService ChannelsApi service
 type ChannelsApiService service
 
 type ApiGetChannelsRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *ChannelsApiService
 }
 
@@ -34,24 +33,25 @@ func (r ApiGetChannelsRequest) Execute() ([]Channel, *http.Response, error) {
 /*
 GetChannels Get user-authorized channel info
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetChannelsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetChannelsRequest
 */
 func (a *ChannelsApiService) GetChannels(ctx context.Context) ApiGetChannelsRequest {
 	return ApiGetChannelsRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return []Channel
+//
+//	@return []Channel
 func (a *ChannelsApiService) GetChannelsExecute(r ApiGetChannelsRequest) ([]Channel, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  []Channel
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue []Channel
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ChannelsApiService.GetChannels")
@@ -111,8 +111,8 @@ func (a *ChannelsApiService) GetChannelsExecute(r ApiGetChannelsRequest) ([]Chan
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr

@@ -18,16 +18,15 @@ import (
 	"net/url"
 )
 
-
 // LocationsApiService LocationsApi service
 type LocationsApiService service
 
 type ApiGetLocationsRequest struct {
-	ctx context.Context
-	ApiService *LocationsApiService
-	includeInactive *bool
+	ctx              context.Context
+	ApiService       *LocationsApiService
+	includeInactive  *bool
 	receivingEnabled *bool
-	accessGranted *bool
+	accessGranted    *bool
 }
 
 // Whether the inactive locations should be included or not
@@ -55,24 +54,25 @@ func (r ApiGetLocationsRequest) Execute() ([]GetLocations200ResponseInner, *http
 /*
 GetLocations Get locations
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetLocationsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetLocationsRequest
 */
 func (a *LocationsApiService) GetLocations(ctx context.Context) ApiGetLocationsRequest {
 	return ApiGetLocationsRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return []GetLocations200ResponseInner
+//
+//	@return []GetLocations200ResponseInner
 func (a *LocationsApiService) GetLocationsExecute(r ApiGetLocationsRequest) ([]GetLocations200ResponseInner, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  []GetLocations200ResponseInner
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue []GetLocations200ResponseInner
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "LocationsApiService.GetLocations")

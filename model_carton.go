@@ -24,7 +24,7 @@ type Carton struct {
 	// Details about the contents of this carton
 	CartonDetails []CartonDetails `json:"carton_details,omitempty"`
 	// ID assigned to this carton
-	Id *int32 `json:"id,omitempty"`
+	Id           *int32              `json:"id,omitempty"`
 	Measurements *CartonMeasurements `json:"measurements,omitempty"`
 	// Type of this carton container
 	Type *string `json:"type,omitempty"`
@@ -208,7 +208,7 @@ func (o *Carton) SetType(v string) {
 }
 
 func (o Carton) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -270,5 +270,3 @@ func (v *NullableCarton) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

@@ -88,6 +88,7 @@ func (o *ProductInfo) HasExternalLineId() bool {
 func (o *ProductInfo) SetExternalLineId(v int32) {
 	o.ExternalLineId.Set(&v)
 }
+
 // SetExternalLineIdNil sets the value for ExternalLineId to be an explicit nil
 func (o *ProductInfo) SetExternalLineIdNil() {
 	o.ExternalLineId.Set(nil)
@@ -162,6 +163,7 @@ func (o *ProductInfo) HasId() bool {
 func (o *ProductInfo) SetId(v int32) {
 	o.Id.Set(&v)
 }
+
 // SetIdNil sets the value for Id to be an explicit nil
 func (o *ProductInfo) SetIdNil() {
 	o.Id.Set(nil)
@@ -332,6 +334,7 @@ func (o *ProductInfo) HasUnitPrice() bool {
 func (o *ProductInfo) SetUnitPrice(v float64) {
 	o.UnitPrice.Set(&v)
 }
+
 // SetUnitPriceNil sets the value for UnitPrice to be an explicit nil
 func (o *ProductInfo) SetUnitPriceNil() {
 	o.UnitPrice.Set(nil)
@@ -375,7 +378,7 @@ func (o *ProductInfo) SetUpc(v string) {
 }
 
 func (o ProductInfo) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -449,5 +452,3 @@ func (v *NullableProductInfo) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

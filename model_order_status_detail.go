@@ -20,7 +20,7 @@ var _ MappedNullable = &OrderStatusDetail{}
 // OrderStatusDetail struct for OrderStatusDetail
 type OrderStatusDetail struct {
 	// Describes what the status detail means
-	Description *string `json:"description,omitempty"`
+	Description                  *string       `json:"description,omitempty"`
 	ExceptionFulfillmentCenterId NullableInt32 `json:"exception_fulfillment_center_id,omitempty"`
 	// The id of the status detail
 	Id *int32 `json:"id,omitempty"`
@@ -111,6 +111,7 @@ func (o *OrderStatusDetail) HasExceptionFulfillmentCenterId() bool {
 func (o *OrderStatusDetail) SetExceptionFulfillmentCenterId(v int32) {
 	o.ExceptionFulfillmentCenterId.Set(&v)
 }
+
 // SetExceptionFulfillmentCenterIdNil sets the value for ExceptionFulfillmentCenterId to be an explicit nil
 func (o *OrderStatusDetail) SetExceptionFulfillmentCenterIdNil() {
 	o.ExceptionFulfillmentCenterId.Set(nil)
@@ -185,6 +186,7 @@ func (o *OrderStatusDetail) HasInventoryId() bool {
 func (o *OrderStatusDetail) SetInventoryId(v int32) {
 	o.InventoryId.Set(&v)
 }
+
 // SetInventoryIdNil sets the value for InventoryId to be an explicit nil
 func (o *OrderStatusDetail) SetInventoryIdNil() {
 	o.InventoryId.Set(nil)
@@ -228,7 +230,7 @@ func (o *OrderStatusDetail) SetName(v string) {
 }
 
 func (o OrderStatusDetail) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -290,5 +292,3 @@ func (v *NullableOrderStatusDetail) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

@@ -19,9 +19,9 @@ var _ MappedNullable = &LocationV2AllOf{}
 
 // LocationV2AllOf struct for LocationV2AllOf
 type LocationV2AllOf struct {
-	OrganizationId *string `json:"organization_id,omitempty"`
-	OwnerId NullableString `json:"owner_id,omitempty"`
-	ParentId NullableString `json:"parent_id,omitempty"`
+	OrganizationId       *string        `json:"organization_id,omitempty"`
+	OwnerId              NullableString `json:"owner_id,omitempty"`
+	ParentId             NullableString `json:"parent_id,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -108,6 +108,7 @@ func (o *LocationV2AllOf) HasOwnerId() bool {
 func (o *LocationV2AllOf) SetOwnerId(v string) {
 	o.OwnerId.Set(&v)
 }
+
 // SetOwnerIdNil sets the value for OwnerId to be an explicit nil
 func (o *LocationV2AllOf) SetOwnerIdNil() {
 	o.OwnerId.Set(nil)
@@ -150,6 +151,7 @@ func (o *LocationV2AllOf) HasParentId() bool {
 func (o *LocationV2AllOf) SetParentId(v string) {
 	o.ParentId.Set(&v)
 }
+
 // SetParentIdNil sets the value for ParentId to be an explicit nil
 func (o *LocationV2AllOf) SetParentIdNil() {
 	o.ParentId.Set(nil)
@@ -161,7 +163,7 @@ func (o *LocationV2AllOf) UnsetParentId() {
 }
 
 func (o LocationV2AllOf) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -241,5 +243,3 @@ func (v *NullableLocationV2AllOf) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

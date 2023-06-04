@@ -27,28 +27,28 @@ type InternalLocationV2 struct {
 	// Indicates whether or not the user is authorized to interact at all with the location
 	AccessGranted *bool `json:"access_granted,omitempty"`
 	// Available attributes for the location
-	Attributes []string `json:"attributes,omitempty"`
-	FulfillmentCenterAttributes []FcAttribute `json:"fulfillment_center_attributes,omitempty"`
-	FulfillmentCenterType NullableInternalLocationAllOfFulfillmentCenterType `json:"fulfillment_center_type,omitempty"`
+	Attributes                  []string                                           `json:"attributes,omitempty"`
+	FulfillmentCenterAttributes []FcAttribute                                      `json:"fulfillment_center_attributes,omitempty"`
+	FulfillmentCenterType       NullableInternalLocationAllOfFulfillmentCenterType `json:"fulfillment_center_type,omitempty"`
 	// Id of the location in ShipBob's database
 	Id *int32 `json:"id,omitempty"`
 	// Indicates if the location is operationally active or inactive
-	IsActive *bool `json:"is_active,omitempty"`
+	IsActive            *bool `json:"is_active,omitempty"`
 	IsEnabledForNewUser *bool `json:"is_enabled_for_new_user,omitempty"`
 	// Indicates if the receiving is enabled for FC
 	IsReceivingEnabled *bool `json:"is_receiving_enabled,omitempty"`
 	// Indicates if the shipping is enabled for FC
 	IsShippingEnabled *bool `json:"is_shipping_enabled,omitempty"`
 	// Name of the location. Follows the naming convention City (State Code) for domestic FCs and City (Country Code) for international FCs
-	Name NullableString `json:"name,omitempty"`
-	OrganizationId *string `json:"organization_id,omitempty"`
-	OwnerId NullableString `json:"owner_id,omitempty"`
-	ParentId NullableString `json:"parent_id,omitempty"`
-	Region *FulfillmentCenterRegion `json:"region,omitempty"`
+	Name           NullableString           `json:"name,omitempty"`
+	OrganizationId *string                  `json:"organization_id,omitempty"`
+	OwnerId        NullableString           `json:"owner_id,omitempty"`
+	ParentId       NullableString           `json:"parent_id,omitempty"`
+	Region         *FulfillmentCenterRegion `json:"region,omitempty"`
 	// Services provided by the location
 	Services []LocationService `json:"services,omitempty"`
 	// Time zone of the location
-	Timezone NullableString `json:"timezone,omitempty"`
+	Timezone             NullableString `json:"timezone,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -104,6 +104,7 @@ func (o *InternalLocationV2) HasAbbreviation() bool {
 func (o *InternalLocationV2) SetAbbreviation(v string) {
 	o.Abbreviation.Set(&v)
 }
+
 // SetAbbreviationNil sets the value for Abbreviation to be an explicit nil
 func (o *InternalLocationV2) SetAbbreviationNil() {
 	o.Abbreviation.Set(nil)
@@ -244,6 +245,7 @@ func (o *InternalLocationV2) HasFulfillmentCenterType() bool {
 func (o *InternalLocationV2) SetFulfillmentCenterType(v InternalLocationAllOfFulfillmentCenterType) {
 	o.FulfillmentCenterType.Set(&v)
 }
+
 // SetFulfillmentCenterTypeNil sets the value for FulfillmentCenterType to be an explicit nil
 func (o *InternalLocationV2) SetFulfillmentCenterTypeNil() {
 	o.FulfillmentCenterType.Set(nil)
@@ -446,6 +448,7 @@ func (o *InternalLocationV2) HasName() bool {
 func (o *InternalLocationV2) SetName(v string) {
 	o.Name.Set(&v)
 }
+
 // SetNameNil sets the value for Name to be an explicit nil
 func (o *InternalLocationV2) SetNameNil() {
 	o.Name.Set(nil)
@@ -520,6 +523,7 @@ func (o *InternalLocationV2) HasOwnerId() bool {
 func (o *InternalLocationV2) SetOwnerId(v string) {
 	o.OwnerId.Set(&v)
 }
+
 // SetOwnerIdNil sets the value for OwnerId to be an explicit nil
 func (o *InternalLocationV2) SetOwnerIdNil() {
 	o.OwnerId.Set(nil)
@@ -562,6 +566,7 @@ func (o *InternalLocationV2) HasParentId() bool {
 func (o *InternalLocationV2) SetParentId(v string) {
 	o.ParentId.Set(&v)
 }
+
 // SetParentIdNil sets the value for ParentId to be an explicit nil
 func (o *InternalLocationV2) SetParentIdNil() {
 	o.ParentId.Set(nil)
@@ -669,6 +674,7 @@ func (o *InternalLocationV2) HasTimezone() bool {
 func (o *InternalLocationV2) SetTimezone(v string) {
 	o.Timezone.Set(&v)
 }
+
 // SetTimezoneNil sets the value for Timezone to be an explicit nil
 func (o *InternalLocationV2) SetTimezoneNil() {
 	o.Timezone.Set(nil)
@@ -680,7 +686,7 @@ func (o *InternalLocationV2) UnsetTimezone() {
 }
 
 func (o InternalLocationV2) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -763,24 +769,24 @@ func (o *InternalLocationV2) UnmarshalJSON(bytes []byte) (err error) {
 		// Indicates whether or not the user is authorized to interact at all with the location
 		AccessGranted *bool `json:"access_granted,omitempty"`
 		// Available attributes for the location
-		Attributes []string `json:"attributes,omitempty"`
-		FulfillmentCenterAttributes []FcAttribute `json:"fulfillment_center_attributes,omitempty"`
-		FulfillmentCenterType NullableInternalLocationAllOfFulfillmentCenterType `json:"fulfillment_center_type,omitempty"`
+		Attributes                  []string                                           `json:"attributes,omitempty"`
+		FulfillmentCenterAttributes []FcAttribute                                      `json:"fulfillment_center_attributes,omitempty"`
+		FulfillmentCenterType       NullableInternalLocationAllOfFulfillmentCenterType `json:"fulfillment_center_type,omitempty"`
 		// Id of the location in ShipBob's database
 		Id *int32 `json:"id,omitempty"`
 		// Indicates if the location is operationally active or inactive
-		IsActive *bool `json:"is_active,omitempty"`
+		IsActive            *bool `json:"is_active,omitempty"`
 		IsEnabledForNewUser *bool `json:"is_enabled_for_new_user,omitempty"`
 		// Indicates if the receiving is enabled for FC
 		IsReceivingEnabled *bool `json:"is_receiving_enabled,omitempty"`
 		// Indicates if the shipping is enabled for FC
 		IsShippingEnabled *bool `json:"is_shipping_enabled,omitempty"`
 		// Name of the location. Follows the naming convention City (State Code) for domestic FCs and City (Country Code) for international FCs
-		Name NullableString `json:"name,omitempty"`
-		OrganizationId *string `json:"organization_id,omitempty"`
-		OwnerId NullableString `json:"owner_id,omitempty"`
-		ParentId NullableString `json:"parent_id,omitempty"`
-		Region *FulfillmentCenterRegion `json:"region,omitempty"`
+		Name           NullableString           `json:"name,omitempty"`
+		OrganizationId *string                  `json:"organization_id,omitempty"`
+		OwnerId        NullableString           `json:"owner_id,omitempty"`
+		ParentId       NullableString           `json:"parent_id,omitempty"`
+		Region         *FulfillmentCenterRegion `json:"region,omitempty"`
 		// Services provided by the location
 		Services []LocationService `json:"services,omitempty"`
 		// Time zone of the location
@@ -903,5 +909,3 @@ func (v *NullableInternalLocationV2) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

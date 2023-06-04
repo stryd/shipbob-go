@@ -20,7 +20,7 @@ type ReturnType string
 
 // List of ReturnType
 const (
-	REGULAR ReturnType = "Regular"
+	REGULAR          ReturnType = "Regular"
 	RETURN_TO_SENDER ReturnType = "ReturnToSender"
 )
 
@@ -108,4 +108,3 @@ func (v *NullableReturnType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

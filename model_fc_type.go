@@ -22,8 +22,8 @@ type FcType struct {
 	// Unique Id for the fulfillment center type
 	Id *int32 `json:"id,omitempty"`
 	// Name of the fc type
-	Name NullableString `json:"name,omitempty"`
-	Ttype string `json:"ttype"`
+	Name  NullableString `json:"name,omitempty"`
+	Ttype string         `json:"ttype"`
 }
 
 // NewFcType instantiates a new FcType object
@@ -108,6 +108,7 @@ func (o *FcType) HasName() bool {
 func (o *FcType) SetName(v string) {
 	o.Name.Set(&v)
 }
+
 // SetNameNil sets the value for Name to be an explicit nil
 func (o *FcType) SetNameNil() {
 	o.Name.Set(nil)
@@ -143,7 +144,7 @@ func (o *FcType) SetTtype(v string) {
 }
 
 func (o FcType) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -197,5 +198,3 @@ func (v *NullableFcType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

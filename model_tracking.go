@@ -247,6 +247,7 @@ func (o *Tracking) HasShippingDate() bool {
 func (o *Tracking) SetShippingDate(v time.Time) {
 	o.ShippingDate.Set(&v)
 }
+
 // SetShippingDateNil sets the value for ShippingDate to be an explicit nil
 func (o *Tracking) SetShippingDateNil() {
 	o.ShippingDate.Set(nil)
@@ -322,7 +323,7 @@ func (o *Tracking) SetTrackingUrl(v string) {
 }
 
 func (o Tracking) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -393,5 +394,3 @@ func (v *NullableTracking) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

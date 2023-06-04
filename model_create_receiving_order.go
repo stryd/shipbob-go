@@ -24,9 +24,9 @@ type CreateReceivingOrder struct {
 	// Box shipments to be added to this receiving order
 	Boxes []AddBoxToOrder `json:"boxes"`
 	// Expected arrival date of all the box shipments in this receiving order
-	ExpectedArrivalDate NullableTime `json:"expected_arrival_date"`
-	FulfillmentCenter AssignOrderToFulfillmentCenter `json:"fulfillment_center"`
-	PackageType PackageType `json:"package_type"`
+	ExpectedArrivalDate NullableTime                   `json:"expected_arrival_date"`
+	FulfillmentCenter   AssignOrderToFulfillmentCenter `json:"fulfillment_center"`
+	PackageType         PackageType                    `json:"package_type"`
 	// Purchase order number for this receiving order
 	PurchaseOrderNumber NullableString `json:"purchase_order_number,omitempty"`
 }
@@ -209,6 +209,7 @@ func (o *CreateReceivingOrder) HasPurchaseOrderNumber() bool {
 func (o *CreateReceivingOrder) SetPurchaseOrderNumber(v string) {
 	o.PurchaseOrderNumber.Set(&v)
 }
+
 // SetPurchaseOrderNumberNil sets the value for PurchaseOrderNumber to be an explicit nil
 func (o *CreateReceivingOrder) SetPurchaseOrderNumberNil() {
 	o.PurchaseOrderNumber.Set(nil)
@@ -220,7 +221,7 @@ func (o *CreateReceivingOrder) UnsetPurchaseOrderNumber() {
 }
 
 func (o CreateReceivingOrder) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -277,5 +278,3 @@ func (v *NullableCreateReceivingOrder) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

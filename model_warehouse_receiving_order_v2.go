@@ -21,11 +21,11 @@ var _ MappedNullable = &WarehouseReceivingOrderV2{}
 // WarehouseReceivingOrderV2 struct for WarehouseReceivingOrderV2
 type WarehouseReceivingOrderV2 struct {
 	// URL to the packing slip to be included in each box shipment for this receiving order
-	BoxLabelsUri NullableString `json:"box_labels_uri,omitempty"`
-	BoxPackagingType *PackingType `json:"box_packaging_type,omitempty"`
+	BoxLabelsUri     NullableString `json:"box_labels_uri,omitempty"`
+	BoxPackagingType *PackingType   `json:"box_packaging_type,omitempty"`
 	// Expected date that all packages will have arrived
-	ExpectedArrivalDate NullableTime `json:"expected_arrival_date,omitempty"`
-	FulfillmentCenter *ReceivingFulfillmentCenter `json:"fulfillment_center,omitempty"`
+	ExpectedArrivalDate NullableTime                `json:"expected_arrival_date,omitempty"`
+	FulfillmentCenter   *ReceivingFulfillmentCenter `json:"fulfillment_center,omitempty"`
 	// Unique id of the warehouse receiving order
 	Id *int32 `json:"id,omitempty"`
 	// Insert date of the receiving order
@@ -34,10 +34,10 @@ type WarehouseReceivingOrderV2 struct {
 	InventoryQuantities []InventoryQuantityV2 `json:"inventory_quantities,omitempty"`
 	// Last date the receiving order was updated
 	LastUpdatedDate NullableTime `json:"last_updated_date,omitempty"`
-	PackageType *PackageType `json:"package_type,omitempty"`
+	PackageType     *PackageType `json:"package_type,omitempty"`
 	// Purchase order number for a receiving order
-	PurchaseOrderNumber NullableString `json:"purchase_order_number,omitempty"`
-	Status *ReceivingStatus `json:"status,omitempty"`
+	PurchaseOrderNumber NullableString   `json:"purchase_order_number,omitempty"`
+	Status              *ReceivingStatus `json:"status,omitempty"`
 }
 
 // NewWarehouseReceivingOrderV2 instantiates a new WarehouseReceivingOrderV2 object
@@ -89,6 +89,7 @@ func (o *WarehouseReceivingOrderV2) HasBoxLabelsUri() bool {
 func (o *WarehouseReceivingOrderV2) SetBoxLabelsUri(v string) {
 	o.BoxLabelsUri.Set(&v)
 }
+
 // SetBoxLabelsUriNil sets the value for BoxLabelsUri to be an explicit nil
 func (o *WarehouseReceivingOrderV2) SetBoxLabelsUriNil() {
 	o.BoxLabelsUri.Set(nil)
@@ -163,6 +164,7 @@ func (o *WarehouseReceivingOrderV2) HasExpectedArrivalDate() bool {
 func (o *WarehouseReceivingOrderV2) SetExpectedArrivalDate(v time.Time) {
 	o.ExpectedArrivalDate.Set(&v)
 }
+
 // SetExpectedArrivalDateNil sets the value for ExpectedArrivalDate to be an explicit nil
 func (o *WarehouseReceivingOrderV2) SetExpectedArrivalDateNil() {
 	o.ExpectedArrivalDate.Set(nil)
@@ -269,6 +271,7 @@ func (o *WarehouseReceivingOrderV2) HasInsertDate() bool {
 func (o *WarehouseReceivingOrderV2) SetInsertDate(v time.Time) {
 	o.InsertDate.Set(&v)
 }
+
 // SetInsertDateNil sets the value for InsertDate to be an explicit nil
 func (o *WarehouseReceivingOrderV2) SetInsertDateNil() {
 	o.InsertDate.Set(nil)
@@ -344,6 +347,7 @@ func (o *WarehouseReceivingOrderV2) HasLastUpdatedDate() bool {
 func (o *WarehouseReceivingOrderV2) SetLastUpdatedDate(v time.Time) {
 	o.LastUpdatedDate.Set(&v)
 }
+
 // SetLastUpdatedDateNil sets the value for LastUpdatedDate to be an explicit nil
 func (o *WarehouseReceivingOrderV2) SetLastUpdatedDateNil() {
 	o.LastUpdatedDate.Set(nil)
@@ -418,6 +422,7 @@ func (o *WarehouseReceivingOrderV2) HasPurchaseOrderNumber() bool {
 func (o *WarehouseReceivingOrderV2) SetPurchaseOrderNumber(v string) {
 	o.PurchaseOrderNumber.Set(&v)
 }
+
 // SetPurchaseOrderNumberNil sets the value for PurchaseOrderNumber to be an explicit nil
 func (o *WarehouseReceivingOrderV2) SetPurchaseOrderNumberNil() {
 	o.PurchaseOrderNumber.Set(nil)
@@ -461,7 +466,7 @@ func (o *WarehouseReceivingOrderV2) SetStatus(v ReceivingStatus) {
 }
 
 func (o WarehouseReceivingOrderV2) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -541,5 +546,3 @@ func (v *NullableWarehouseReceivingOrderV2) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

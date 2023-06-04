@@ -74,6 +74,7 @@ func (o *ShippingTerms) HasCarrierType() bool {
 func (o *ShippingTerms) SetCarrierType(v string) {
 	o.CarrierType.Set(&v)
 }
+
 // SetCarrierTypeNil sets the value for CarrierType to be an explicit nil
 func (o *ShippingTerms) SetCarrierTypeNil() {
 	o.CarrierType.Set(nil)
@@ -116,6 +117,7 @@ func (o *ShippingTerms) HasPaymentTerm() bool {
 func (o *ShippingTerms) SetPaymentTerm(v string) {
 	o.PaymentTerm.Set(&v)
 }
+
 // SetPaymentTermNil sets the value for PaymentTerm to be an explicit nil
 func (o *ShippingTerms) SetPaymentTermNil() {
 	o.PaymentTerm.Set(nil)
@@ -127,7 +129,7 @@ func (o *ShippingTerms) UnsetPaymentTerm() {
 }
 
 func (o ShippingTerms) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -180,5 +182,3 @@ func (v *NullableShippingTerms) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

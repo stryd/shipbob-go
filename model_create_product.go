@@ -86,6 +86,7 @@ func (o *CreateProduct) HasBarcode() bool {
 func (o *CreateProduct) SetBarcode(v string) {
 	o.Barcode.Set(&v)
 }
+
 // SetBarcodeNil sets the value for Barcode to be an explicit nil
 func (o *CreateProduct) SetBarcodeNil() {
 	o.Barcode.Set(nil)
@@ -128,6 +129,7 @@ func (o *CreateProduct) HasGtin() bool {
 func (o *CreateProduct) SetGtin(v string) {
 	o.Gtin.Set(&v)
 }
+
 // SetGtinNil sets the value for Gtin to be an explicit nil
 func (o *CreateProduct) SetGtinNil() {
 	o.Gtin.Set(nil)
@@ -218,6 +220,7 @@ func (o *CreateProduct) HasSku() bool {
 func (o *CreateProduct) SetSku(v string) {
 	o.Sku.Set(&v)
 }
+
 // SetSkuNil sets the value for Sku to be an explicit nil
 func (o *CreateProduct) SetSkuNil() {
 	o.Sku.Set(nil)
@@ -260,6 +263,7 @@ func (o *CreateProduct) HasUnitPrice() bool {
 func (o *CreateProduct) SetUnitPrice(v float64) {
 	o.UnitPrice.Set(&v)
 }
+
 // SetUnitPriceNil sets the value for UnitPrice to be an explicit nil
 func (o *CreateProduct) SetUnitPriceNil() {
 	o.UnitPrice.Set(nil)
@@ -302,6 +306,7 @@ func (o *CreateProduct) HasUpc() bool {
 func (o *CreateProduct) SetUpc(v string) {
 	o.Upc.Set(&v)
 }
+
 // SetUpcNil sets the value for Upc to be an explicit nil
 func (o *CreateProduct) SetUpcNil() {
 	o.Upc.Set(nil)
@@ -313,7 +318,7 @@ func (o *CreateProduct) UnsetUpc() {
 }
 
 func (o CreateProduct) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -377,5 +382,3 @@ func (v *NullableCreateProduct) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

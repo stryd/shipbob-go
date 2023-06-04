@@ -22,10 +22,10 @@ var _ MappedNullable = &FcTypeV2{}
 // FcTypeV2 struct for FcTypeV2
 type FcTypeV2 struct {
 	FcType
-	IsChild *bool `json:"is_child,omitempty"`
-	OrganizationRoles []OrganizationRole `json:"organization_roles,omitempty"`
-	OrganizationTypeId *string `json:"organization_type_id,omitempty"`
-	OrganizationTypeName NullableString `json:"organization_type_name,omitempty"`
+	IsChild              *bool              `json:"is_child,omitempty"`
+	OrganizationRoles    []OrganizationRole `json:"organization_roles,omitempty"`
+	OrganizationTypeId   *string            `json:"organization_type_id,omitempty"`
+	OrganizationTypeName NullableString     `json:"organization_type_name,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -178,6 +178,7 @@ func (o *FcTypeV2) HasOrganizationTypeName() bool {
 func (o *FcTypeV2) SetOrganizationTypeName(v string) {
 	o.OrganizationTypeName.Set(&v)
 }
+
 // SetOrganizationTypeNameNil sets the value for OrganizationTypeName to be an explicit nil
 func (o *FcTypeV2) SetOrganizationTypeNameNil() {
 	o.OrganizationTypeName.Set(nil)
@@ -189,7 +190,7 @@ func (o *FcTypeV2) UnsetOrganizationTypeName() {
 }
 
 func (o FcTypeV2) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -228,10 +229,10 @@ func (o FcTypeV2) ToMap() (map[string]interface{}, error) {
 
 func (o *FcTypeV2) UnmarshalJSON(bytes []byte) (err error) {
 	type FcTypeV2WithoutEmbeddedStruct struct {
-		IsChild *bool `json:"is_child,omitempty"`
-		OrganizationRoles []OrganizationRole `json:"organization_roles,omitempty"`
-		OrganizationTypeId *string `json:"organization_type_id,omitempty"`
-		OrganizationTypeName NullableString `json:"organization_type_name,omitempty"`
+		IsChild              *bool              `json:"is_child,omitempty"`
+		OrganizationRoles    []OrganizationRole `json:"organization_roles,omitempty"`
+		OrganizationTypeId   *string            `json:"organization_type_id,omitempty"`
+		OrganizationTypeName NullableString     `json:"organization_type_name,omitempty"`
 	}
 
 	varFcTypeV2WithoutEmbeddedStruct := FcTypeV2WithoutEmbeddedStruct{}
@@ -324,5 +325,3 @@ func (v *NullableFcTypeV2) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

@@ -27,7 +27,6 @@ func InternalShipmentAsShipment(v *InternalShipment) Shipment {
 	}
 }
 
-
 // Unmarshal JSON data into one of the pointers in the struct
 func (dst *Shipment) UnmarshalJSON(data []byte) error {
 	var err error
@@ -67,7 +66,7 @@ func (src Shipment) MarshalJSON() ([]byte, error) {
 }
 
 // Get the actual instance
-func (obj *Shipment) GetActualInstance() (interface{}) {
+func (obj *Shipment) GetActualInstance() interface{} {
 	if obj == nil {
 		return nil
 	}
@@ -114,5 +113,3 @@ func (v *NullableShipment) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

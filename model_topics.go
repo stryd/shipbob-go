@@ -20,10 +20,10 @@ type Topics string
 
 // List of Topics
 const (
-	ORDER_SHIPPED Topics = "order_shipped"
+	ORDER_SHIPPED      Topics = "order_shipped"
 	SHIPMENT_DELIVERED Topics = "shipment_delivered"
 	SHIPMENT_EXCEPTION Topics = "shipment_exception"
-	SHIPMENT_ONHOLD Topics = "shipment_onhold"
+	SHIPMENT_ONHOLD    Topics = "shipment_onhold"
 	SHIPMENT_CANCELLED Topics = "shipment_cancelled"
 )
 
@@ -114,4 +114,3 @@ func (v *NullableTopics) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

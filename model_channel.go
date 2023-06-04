@@ -78,6 +78,7 @@ func (o *Channel) HasApplicationName() bool {
 func (o *Channel) SetApplicationName(v string) {
 	o.ApplicationName.Set(&v)
 }
+
 // SetApplicationNameNil sets the value for ApplicationName to be an explicit nil
 func (o *Channel) SetApplicationNameNil() {
 	o.ApplicationName.Set(nil)
@@ -152,6 +153,7 @@ func (o *Channel) HasName() bool {
 func (o *Channel) SetName(v string) {
 	o.Name.Set(&v)
 }
+
 // SetNameNil sets the value for Name to be an explicit nil
 func (o *Channel) SetNameNil() {
 	o.Name.Set(nil)
@@ -196,7 +198,7 @@ func (o *Channel) SetScopes(v []string) {
 }
 
 func (o Channel) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -255,5 +257,3 @@ func (v *NullableChannel) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

@@ -87,6 +87,7 @@ func (o *OrderInventory) HasExpirationDate() bool {
 func (o *OrderInventory) SetExpirationDate(v time.Time) {
 	o.ExpirationDate.Set(&v)
 }
+
 // SetExpirationDateNil sets the value for ExpirationDate to be an explicit nil
 func (o *OrderInventory) SetExpirationDateNil() {
 	o.ExpirationDate.Set(nil)
@@ -322,7 +323,7 @@ func (o *OrderInventory) SetSerialNumbers(v []string) {
 }
 
 func (o OrderInventory) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -393,5 +394,3 @@ func (v *NullableOrderInventory) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

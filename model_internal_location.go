@@ -22,11 +22,11 @@ var _ MappedNullable = &InternalLocation{}
 // InternalLocation struct for InternalLocation
 type InternalLocation struct {
 	Location
-	FulfillmentCenterAttributes []FcAttribute `json:"fulfillment_center_attributes,omitempty"`
-	FulfillmentCenterType NullableInternalLocationAllOfFulfillmentCenterType `json:"fulfillment_center_type,omitempty"`
-	IsEnabledForNewUser *bool `json:"is_enabled_for_new_user,omitempty"`
-	IsExternal *bool `json:"is_external,omitempty"`
-	AdditionalProperties map[string]interface{}
+	FulfillmentCenterAttributes []FcAttribute                                      `json:"fulfillment_center_attributes,omitempty"`
+	FulfillmentCenterType       NullableInternalLocationAllOfFulfillmentCenterType `json:"fulfillment_center_type,omitempty"`
+	IsEnabledForNewUser         *bool                                              `json:"is_enabled_for_new_user,omitempty"`
+	IsExternal                  *bool                                              `json:"is_external,omitempty"`
+	AdditionalProperties        map[string]interface{}
 }
 
 type _InternalLocation InternalLocation
@@ -114,6 +114,7 @@ func (o *InternalLocation) HasFulfillmentCenterType() bool {
 func (o *InternalLocation) SetFulfillmentCenterType(v InternalLocationAllOfFulfillmentCenterType) {
 	o.FulfillmentCenterType.Set(&v)
 }
+
 // SetFulfillmentCenterTypeNil sets the value for FulfillmentCenterType to be an explicit nil
 func (o *InternalLocation) SetFulfillmentCenterTypeNil() {
 	o.FulfillmentCenterType.Set(nil)
@@ -189,7 +190,7 @@ func (o *InternalLocation) SetIsExternal(v bool) {
 }
 
 func (o InternalLocation) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -228,10 +229,10 @@ func (o InternalLocation) ToMap() (map[string]interface{}, error) {
 
 func (o *InternalLocation) UnmarshalJSON(bytes []byte) (err error) {
 	type InternalLocationWithoutEmbeddedStruct struct {
-		FulfillmentCenterAttributes []FcAttribute `json:"fulfillment_center_attributes,omitempty"`
-		FulfillmentCenterType NullableInternalLocationAllOfFulfillmentCenterType `json:"fulfillment_center_type,omitempty"`
-		IsEnabledForNewUser *bool `json:"is_enabled_for_new_user,omitempty"`
-		IsExternal *bool `json:"is_external,omitempty"`
+		FulfillmentCenterAttributes []FcAttribute                                      `json:"fulfillment_center_attributes,omitempty"`
+		FulfillmentCenterType       NullableInternalLocationAllOfFulfillmentCenterType `json:"fulfillment_center_type,omitempty"`
+		IsEnabledForNewUser         *bool                                              `json:"is_enabled_for_new_user,omitempty"`
+		IsExternal                  *bool                                              `json:"is_external,omitempty"`
 	}
 
 	varInternalLocationWithoutEmbeddedStruct := InternalLocationWithoutEmbeddedStruct{}
@@ -324,5 +325,3 @@ func (v *NullableInternalLocation) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

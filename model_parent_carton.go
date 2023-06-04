@@ -22,7 +22,7 @@ type ParentCarton struct {
 	// Barcode assigned to this carton
 	Barcode *string `json:"barcode,omitempty"`
 	// Cartons packed inside this parent container
-	Cartons []Carton `json:"cartons,omitempty"`
+	Cartons      []Carton            `json:"cartons,omitempty"`
 	Measurements *CartonMeasurements `json:"measurements,omitempty"`
 	// Type of this carton container
 	Type *string `json:"type,omitempty"`
@@ -174,7 +174,7 @@ func (o *ParentCarton) SetType(v string) {
 }
 
 func (o ParentCarton) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -233,5 +233,3 @@ func (v *NullableParentCarton) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

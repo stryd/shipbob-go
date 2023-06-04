@@ -16,25 +16,24 @@ import (
 	"io"
 	"net/http"
 	"net/url"
-	"strings"
 	"reflect"
+	"strings"
 )
-
 
 // InventoryApiService InventoryApi service
 type InventoryApiService service
 
 type ApiGetInventoriesRequest struct {
-	ctx context.Context
-	ApiService *InventoryApiService
-	page *int32
-	limit *int32
-	isActive *bool
-	isDigital *bool
-	iDs *[]int32
-	sort *string
-	search *string
-	locationType *string
+	ctx              context.Context
+	ApiService       *InventoryApiService
+	page             *int32
+	limit            *int32
+	isActive         *bool
+	isDigital        *bool
+	iDs              *[]int32
+	sort             *string
+	search           *string
+	locationType     *string
 	shipbobChannelId *int32
 }
 
@@ -99,24 +98,25 @@ func (r ApiGetInventoriesRequest) Execute() ([]Inventory, *http.Response, error)
 /*
 GetInventories List inventory items
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetInventoriesRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetInventoriesRequest
 */
 func (a *InventoryApiService) GetInventories(ctx context.Context) ApiGetInventoriesRequest {
 	return ApiGetInventoriesRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return []Inventory
+//
+//	@return []Inventory
 func (a *InventoryApiService) GetInventoriesExecute(r ApiGetInventoriesRequest) ([]Inventory, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  []Inventory
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue []Inventory
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "InventoryApiService.GetInventories")
@@ -211,8 +211,8 @@ func (a *InventoryApiService) GetInventoriesExecute(r ApiGetInventoriesRequest) 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -222,8 +222,8 @@ func (a *InventoryApiService) GetInventoriesExecute(r ApiGetInventoriesRequest) 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -241,8 +241,8 @@ func (a *InventoryApiService) GetInventoriesExecute(r ApiGetInventoriesRequest) 
 }
 
 type ApiGetInventoryRequest struct {
-	ctx context.Context
-	ApiService *InventoryApiService
+	ctx         context.Context
+	ApiService  *InventoryApiService
 	inventoryId int32
 }
 
@@ -253,26 +253,27 @@ func (r ApiGetInventoryRequest) Execute() (*Inventory, *http.Response, error) {
 /*
 GetInventory Get an inventory item
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param inventoryId The inventory id to get
- @return ApiGetInventoryRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param inventoryId The inventory id to get
+	@return ApiGetInventoryRequest
 */
 func (a *InventoryApiService) GetInventory(ctx context.Context, inventoryId int32) ApiGetInventoryRequest {
 	return ApiGetInventoryRequest{
-		ApiService: a,
-		ctx: ctx,
+		ApiService:  a,
+		ctx:         ctx,
 		inventoryId: inventoryId,
 	}
 }
 
 // Execute executes the request
-//  @return Inventory
+//
+//	@return Inventory
 func (a *InventoryApiService) GetInventoryExecute(r ApiGetInventoryRequest) (*Inventory, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *Inventory
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *Inventory
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "InventoryApiService.GetInventory")
@@ -333,8 +334,8 @@ func (a *InventoryApiService) GetInventoryExecute(r ApiGetInventoryRequest) (*In
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -344,8 +345,8 @@ func (a *InventoryApiService) GetInventoryExecute(r ApiGetInventoryRequest) (*In
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -363,9 +364,9 @@ func (a *InventoryApiService) GetInventoryExecute(r ApiGetInventoryRequest) (*In
 }
 
 type ApiGetProductInventoriesRequest struct {
-	ctx context.Context
-	ApiService *InventoryApiService
-	productId int32
+	ctx              context.Context
+	ApiService       *InventoryApiService
+	productId        int32
 	shipbobChannelId *int32
 }
 
@@ -382,26 +383,27 @@ func (r ApiGetProductInventoriesRequest) Execute() ([]Inventory, *http.Response,
 /*
 GetProductInventories Get a list of inventory items by product id
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param productId The product id to get inventory for
- @return ApiGetProductInventoriesRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param productId The product id to get inventory for
+	@return ApiGetProductInventoriesRequest
 */
 func (a *InventoryApiService) GetProductInventories(ctx context.Context, productId int32) ApiGetProductInventoriesRequest {
 	return ApiGetProductInventoriesRequest{
 		ApiService: a,
-		ctx: ctx,
-		productId: productId,
+		ctx:        ctx,
+		productId:  productId,
 	}
 }
 
 // Execute executes the request
-//  @return []Inventory
+//
+//	@return []Inventory
 func (a *InventoryApiService) GetProductInventoriesExecute(r ApiGetProductInventoriesRequest) ([]Inventory, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  []Inventory
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue []Inventory
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "InventoryApiService.GetProductInventories")
@@ -465,8 +467,8 @@ func (a *InventoryApiService) GetProductInventoriesExecute(r ApiGetProductInvent
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -476,8 +478,8 @@ func (a *InventoryApiService) GetProductInventoriesExecute(r ApiGetProductInvent
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}

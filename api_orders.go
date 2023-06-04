@@ -16,19 +16,18 @@ import (
 	"io"
 	"net/http"
 	"net/url"
-	"strings"
 	"reflect"
+	"strings"
 	"time"
 )
-
 
 // OrdersApiService OrdersApi service
 type OrdersApiService service
 
 type ApiCancelOrderRequest struct {
-	ctx context.Context
-	ApiService *OrdersApiService
-	orderId int32
+	ctx              context.Context
+	ApiService       *OrdersApiService
+	orderId          int32
 	shipbobChannelId *int32
 }
 
@@ -45,26 +44,27 @@ func (r ApiCancelOrderRequest) Execute() (*CanceledOrder, *http.Response, error)
 /*
 CancelOrder Cancel single Order by Order ID
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param orderId The order ID to cancel
- @return ApiCancelOrderRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param orderId The order ID to cancel
+	@return ApiCancelOrderRequest
 */
 func (a *OrdersApiService) CancelOrder(ctx context.Context, orderId int32) ApiCancelOrderRequest {
 	return ApiCancelOrderRequest{
 		ApiService: a,
-		ctx: ctx,
-		orderId: orderId,
+		ctx:        ctx,
+		orderId:    orderId,
 	}
 }
 
 // Execute executes the request
-//  @return CanceledOrder
+//
+//	@return CanceledOrder
 func (a *OrdersApiService) CancelOrderExecute(r ApiCancelOrderRequest) (*CanceledOrder, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *CanceledOrder
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CanceledOrder
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrdersApiService.CancelOrder")
@@ -129,8 +129,8 @@ func (a *OrdersApiService) CancelOrderExecute(r ApiCancelOrderRequest) (*Cancele
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 422 {
@@ -140,8 +140,8 @@ func (a *OrdersApiService) CancelOrderExecute(r ApiCancelOrderRequest) (*Cancele
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -151,8 +151,8 @@ func (a *OrdersApiService) CancelOrderExecute(r ApiCancelOrderRequest) (*Cancele
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -170,10 +170,10 @@ func (a *OrdersApiService) CancelOrderExecute(r ApiCancelOrderRequest) (*Cancele
 }
 
 type ApiCancelOrderShipmentRequest struct {
-	ctx context.Context
-	ApiService *OrdersApiService
-	shipmentId int32
-	orderId string
+	ctx              context.Context
+	ApiService       *OrdersApiService
+	shipmentId       int32
+	orderId          string
 	shipbobChannelId *int32
 }
 
@@ -190,28 +190,29 @@ func (r ApiCancelOrderShipmentRequest) Execute() (*Shipment, *http.Response, err
 /*
 CancelOrderShipment Cancel one Shipment by Order Id and Shipment Id
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param shipmentId The shipment id to get
- @param orderId
- @return ApiCancelOrderShipmentRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param shipmentId The shipment id to get
+	@param orderId
+	@return ApiCancelOrderShipmentRequest
 */
 func (a *OrdersApiService) CancelOrderShipment(ctx context.Context, shipmentId int32, orderId string) ApiCancelOrderShipmentRequest {
 	return ApiCancelOrderShipmentRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 		shipmentId: shipmentId,
-		orderId: orderId,
+		orderId:    orderId,
 	}
 }
 
 // Execute executes the request
-//  @return Shipment
+//
+//	@return Shipment
 func (a *OrdersApiService) CancelOrderShipmentExecute(r ApiCancelOrderShipmentRequest) (*Shipment, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *Shipment
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *Shipment
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrdersApiService.CancelOrderShipment")
@@ -276,8 +277,8 @@ func (a *OrdersApiService) CancelOrderShipmentExecute(r ApiCancelOrderShipmentRe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 422 {
@@ -287,8 +288,8 @@ func (a *OrdersApiService) CancelOrderShipmentExecute(r ApiCancelOrderShipmentRe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -298,8 +299,8 @@ func (a *OrdersApiService) CancelOrderShipmentExecute(r ApiCancelOrderShipmentRe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -317,9 +318,9 @@ func (a *OrdersApiService) CancelOrderShipmentExecute(r ApiCancelOrderShipmentRe
 }
 
 type ApiCancelShipmentRequest struct {
-	ctx context.Context
-	ApiService *OrdersApiService
-	shipmentId int32
+	ctx              context.Context
+	ApiService       *OrdersApiService
+	shipmentId       int32
 	shipbobChannelId *int32
 }
 
@@ -336,26 +337,27 @@ func (r ApiCancelShipmentRequest) Execute() (*Shipment, *http.Response, error) {
 /*
 CancelShipment Cancel one Shipment by Shipment Id
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param shipmentId The shipment id to get
- @return ApiCancelShipmentRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param shipmentId The shipment id to get
+	@return ApiCancelShipmentRequest
 */
 func (a *OrdersApiService) CancelShipment(ctx context.Context, shipmentId int32) ApiCancelShipmentRequest {
 	return ApiCancelShipmentRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 		shipmentId: shipmentId,
 	}
 }
 
 // Execute executes the request
-//  @return Shipment
+//
+//	@return Shipment
 func (a *OrdersApiService) CancelShipmentExecute(r ApiCancelShipmentRequest) (*Shipment, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *Shipment
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *Shipment
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrdersApiService.CancelShipment")
@@ -419,8 +421,8 @@ func (a *OrdersApiService) CancelShipmentExecute(r ApiCancelShipmentRequest) (*S
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 422 {
@@ -430,8 +432,8 @@ func (a *OrdersApiService) CancelShipmentExecute(r ApiCancelShipmentRequest) (*S
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -441,8 +443,8 @@ func (a *OrdersApiService) CancelShipmentExecute(r ApiCancelShipmentRequest) (*S
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -460,10 +462,10 @@ func (a *OrdersApiService) CancelShipmentExecute(r ApiCancelShipmentRequest) (*S
 }
 
 type ApiCreateOrderRequest struct {
-	ctx context.Context
-	ApiService *OrdersApiService
+	ctx              context.Context
+	ApiService       *OrdersApiService
 	shipbobChannelId *int32
-	createOrder *CreateOrder
+	createOrder      *CreateOrder
 }
 
 // Channel Id for Operation
@@ -484,24 +486,25 @@ func (r ApiCreateOrderRequest) Execute() (*Order, *http.Response, error) {
 /*
 CreateOrder Create Order
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateOrderRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateOrderRequest
 */
 func (a *OrdersApiService) CreateOrder(ctx context.Context) ApiCreateOrderRequest {
 	return ApiCreateOrderRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return Order
+//
+//	@return Order
 func (a *OrdersApiService) CreateOrderExecute(r ApiCreateOrderRequest) (*Order, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *Order
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *Order
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrdersApiService.CreateOrder")
@@ -567,8 +570,8 @@ func (a *OrdersApiService) CreateOrderExecute(r ApiCreateOrderRequest) (*Order, 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 422 {
@@ -578,8 +581,8 @@ func (a *OrdersApiService) CreateOrderExecute(r ApiCreateOrderRequest) (*Order, 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -597,9 +600,9 @@ func (a *OrdersApiService) CreateOrderExecute(r ApiCreateOrderRequest) (*Order, 
 }
 
 type ApiCreateOrderEstimateRequest struct {
-	ctx context.Context
-	ApiService *OrdersApiService
-	shipbobChannelId *int32
+	ctx                             context.Context
+	ApiService                      *OrdersApiService
+	shipbobChannelId                *int32
 	orderEstimateFulfillmentRequest *OrderEstimateFulfillmentRequest
 }
 
@@ -623,24 +626,25 @@ CreateOrderEstimate Estimate Fulfillment Cost For Order
 
 This endpoint will provide, where possible, an estimate of pricing and fulfillment center assignment of a potential standard (direct to consumer) order.  Keep in mind that there are ways for the merchant to change FC assignment or product configuration after order creation that could invalidate this estimate.  Estimates cannot be returned for items that are unknown, out of stock, or too large for fulfillment using standard box sizes.  Additional services such as high-pick fees, shipping insurance, auto-splitting or auto-adding items to orders, and signature required are not included in this estimate.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateOrderEstimateRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateOrderEstimateRequest
 */
 func (a *OrdersApiService) CreateOrderEstimate(ctx context.Context) ApiCreateOrderEstimateRequest {
 	return ApiCreateOrderEstimateRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return OrderEstimate
+//
+//	@return OrderEstimate
 func (a *OrdersApiService) CreateOrderEstimateExecute(r ApiCreateOrderEstimateRequest) (*OrderEstimate, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *OrderEstimate
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *OrderEstimate
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrdersApiService.CreateOrderEstimate")
@@ -706,8 +710,8 @@ func (a *OrdersApiService) CreateOrderEstimateExecute(r ApiCreateOrderEstimateRe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 422 {
@@ -717,8 +721,8 @@ func (a *OrdersApiService) CreateOrderEstimateExecute(r ApiCreateOrderEstimateRe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -736,9 +740,9 @@ func (a *OrdersApiService) CreateOrderEstimateExecute(r ApiCreateOrderEstimateRe
 }
 
 type ApiCreateOrderStoreOrderJsonRequest struct {
-	ctx context.Context
-	ApiService *OrdersApiService
-	orderId int32
+	ctx               context.Context
+	ApiService        *OrdersApiService
+	orderId           int32
 	addStoreOrderJson *AddStoreOrderJson
 }
 
@@ -754,26 +758,27 @@ func (r ApiCreateOrderStoreOrderJsonRequest) Execute() (string, *http.Response, 
 /*
 CreateOrderStoreOrderJson Save the Store Order Json
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param orderId The order ID to Store
- @return ApiCreateOrderStoreOrderJsonRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param orderId The order ID to Store
+	@return ApiCreateOrderStoreOrderJsonRequest
 */
 func (a *OrdersApiService) CreateOrderStoreOrderJson(ctx context.Context, orderId int32) ApiCreateOrderStoreOrderJsonRequest {
 	return ApiCreateOrderStoreOrderJsonRequest{
 		ApiService: a,
-		ctx: ctx,
-		orderId: orderId,
+		ctx:        ctx,
+		orderId:    orderId,
 	}
 }
 
 // Execute executes the request
-//  @return string
+//
+//	@return string
 func (a *OrdersApiService) CreateOrderStoreOrderJsonExecute(r ApiCreateOrderStoreOrderJsonRequest) (string, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  string
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue string
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrdersApiService.CreateOrderStoreOrderJson")
@@ -836,8 +841,8 @@ func (a *OrdersApiService) CreateOrderStoreOrderJsonExecute(r ApiCreateOrderStor
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 422 {
@@ -847,8 +852,8 @@ func (a *OrdersApiService) CreateOrderStoreOrderJsonExecute(r ApiCreateOrderStor
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -866,10 +871,10 @@ func (a *OrdersApiService) CreateOrderStoreOrderJsonExecute(r ApiCreateOrderStor
 }
 
 type ApiCreateShipmentCancelbulkRequest struct {
-	ctx context.Context
-	ApiService *OrdersApiService
+	ctx              context.Context
+	ApiService       *OrdersApiService
 	shipbobChannelId *int32
-	cancelShipments *CancelShipments
+	cancelShipments  *CancelShipments
 }
 
 // Channel ID for Operation
@@ -890,24 +895,25 @@ func (r ApiCreateShipmentCancelbulkRequest) Execute() (*CanceledShipments, *http
 /*
 CreateShipmentCancelbulk Cancel multiple Shipments by Shipment Id
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateShipmentCancelbulkRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateShipmentCancelbulkRequest
 */
 func (a *OrdersApiService) CreateShipmentCancelbulk(ctx context.Context) ApiCreateShipmentCancelbulkRequest {
 	return ApiCreateShipmentCancelbulkRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return CanceledShipments
+//
+//	@return CanceledShipments
 func (a *OrdersApiService) CreateShipmentCancelbulkExecute(r ApiCreateShipmentCancelbulkRequest) (*CanceledShipments, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *CanceledShipments
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CanceledShipments
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrdersApiService.CreateShipmentCancelbulk")
@@ -973,8 +979,8 @@ func (a *OrdersApiService) CreateShipmentCancelbulkExecute(r ApiCreateShipmentCa
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -984,8 +990,8 @@ func (a *OrdersApiService) CreateShipmentCancelbulkExecute(r ApiCreateShipmentCa
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -1003,9 +1009,9 @@ func (a *OrdersApiService) CreateShipmentCancelbulkExecute(r ApiCreateShipmentCa
 }
 
 type ApiGetOrderRequest struct {
-	ctx context.Context
-	ApiService *OrdersApiService
-	orderId int32
+	ctx              context.Context
+	ApiService       *OrdersApiService
+	orderId          int32
 	shipbobChannelId *int32
 }
 
@@ -1022,26 +1028,27 @@ func (r ApiGetOrderRequest) Execute() (*Order, *http.Response, error) {
 /*
 GetOrder Get Order
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param orderId 
- @return ApiGetOrderRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param orderId
+	@return ApiGetOrderRequest
 */
 func (a *OrdersApiService) GetOrder(ctx context.Context, orderId int32) ApiGetOrderRequest {
 	return ApiGetOrderRequest{
 		ApiService: a,
-		ctx: ctx,
-		orderId: orderId,
+		ctx:        ctx,
+		orderId:    orderId,
 	}
 }
 
 // Execute executes the request
-//  @return Order
+//
+//	@return Order
 func (a *OrdersApiService) GetOrderExecute(r ApiGetOrderRequest) (*Order, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *Order
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *Order
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrdersApiService.GetOrder")
@@ -1105,8 +1112,8 @@ func (a *OrdersApiService) GetOrderExecute(r ApiGetOrderRequest) (*Order, *http.
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -1125,10 +1132,10 @@ func (a *OrdersApiService) GetOrderExecute(r ApiGetOrderRequest) (*Order, *http.
 }
 
 type ApiGetOrderShipmentRequest struct {
-	ctx context.Context
-	ApiService *OrdersApiService
-	orderId int32
-	shipmentId int32
+	ctx              context.Context
+	ApiService       *OrdersApiService
+	orderId          int32
+	shipmentId       int32
 	shipbobChannelId *int32
 }
 
@@ -1145,28 +1152,29 @@ func (r ApiGetOrderShipmentRequest) Execute() (*Shipment, *http.Response, error)
 /*
 GetOrderShipment Get one Shipment by Order Id and Shipment Id
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param orderId The order id to get the shipment for
- @param shipmentId The shipment id to get
- @return ApiGetOrderShipmentRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param orderId The order id to get the shipment for
+	@param shipmentId The shipment id to get
+	@return ApiGetOrderShipmentRequest
 */
 func (a *OrdersApiService) GetOrderShipment(ctx context.Context, orderId int32, shipmentId int32) ApiGetOrderShipmentRequest {
 	return ApiGetOrderShipmentRequest{
 		ApiService: a,
-		ctx: ctx,
-		orderId: orderId,
+		ctx:        ctx,
+		orderId:    orderId,
 		shipmentId: shipmentId,
 	}
 }
 
 // Execute executes the request
-//  @return Shipment
+//
+//	@return Shipment
 func (a *OrdersApiService) GetOrderShipmentExecute(r ApiGetOrderShipmentRequest) (*Shipment, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *Shipment
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *Shipment
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrdersApiService.GetOrderShipment")
@@ -1231,8 +1239,8 @@ func (a *OrdersApiService) GetOrderShipmentExecute(r ApiGetOrderShipmentRequest)
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -1251,10 +1259,10 @@ func (a *OrdersApiService) GetOrderShipmentExecute(r ApiGetOrderShipmentRequest)
 }
 
 type ApiGetOrderShipmentLogsRequest struct {
-	ctx context.Context
-	ApiService *OrdersApiService
-	orderId int32
-	shipmentId int32
+	ctx              context.Context
+	ApiService       *OrdersApiService
+	orderId          int32
+	shipmentId       int32
 	shipbobChannelId *int32
 }
 
@@ -1271,28 +1279,29 @@ func (r ApiGetOrderShipmentLogsRequest) Execute() ([]ShipmentLog, *http.Response
 /*
 GetOrderShipmentLogs Get logs for one Shipment by Order Id and Shipment Id
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param orderId The order id to get the shipment for
- @param shipmentId The shipment id to get
- @return ApiGetOrderShipmentLogsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param orderId The order id to get the shipment for
+	@param shipmentId The shipment id to get
+	@return ApiGetOrderShipmentLogsRequest
 */
 func (a *OrdersApiService) GetOrderShipmentLogs(ctx context.Context, orderId int32, shipmentId int32) ApiGetOrderShipmentLogsRequest {
 	return ApiGetOrderShipmentLogsRequest{
 		ApiService: a,
-		ctx: ctx,
-		orderId: orderId,
+		ctx:        ctx,
+		orderId:    orderId,
 		shipmentId: shipmentId,
 	}
 }
 
 // Execute executes the request
-//  @return []ShipmentLog
+//
+//	@return []ShipmentLog
 func (a *OrdersApiService) GetOrderShipmentLogsExecute(r ApiGetOrderShipmentLogsRequest) ([]ShipmentLog, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  []ShipmentLog
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue []ShipmentLog
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrdersApiService.GetOrderShipmentLogs")
@@ -1357,8 +1366,8 @@ func (a *OrdersApiService) GetOrderShipmentLogsExecute(r ApiGetOrderShipmentLogs
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -1377,10 +1386,10 @@ func (a *OrdersApiService) GetOrderShipmentLogsExecute(r ApiGetOrderShipmentLogs
 }
 
 type ApiGetOrderShipmentTimelinesRequest struct {
-	ctx context.Context
-	ApiService *OrdersApiService
-	orderId int32
-	shipmentId int32
+	ctx              context.Context
+	ApiService       *OrdersApiService
+	orderId          int32
+	shipmentId       int32
 	shipbobChannelId *int32
 }
 
@@ -1397,28 +1406,29 @@ func (r ApiGetOrderShipmentTimelinesRequest) Execute() ([]ShipmentLog, *http.Res
 /*
 GetOrderShipmentTimelines Get one Shipment's status timeline by Order Id and Shipment Id
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param orderId The order id to get the shipment for
- @param shipmentId The shipment id to get
- @return ApiGetOrderShipmentTimelinesRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param orderId The order id to get the shipment for
+	@param shipmentId The shipment id to get
+	@return ApiGetOrderShipmentTimelinesRequest
 */
 func (a *OrdersApiService) GetOrderShipmentTimelines(ctx context.Context, orderId int32, shipmentId int32) ApiGetOrderShipmentTimelinesRequest {
 	return ApiGetOrderShipmentTimelinesRequest{
 		ApiService: a,
-		ctx: ctx,
-		orderId: orderId,
+		ctx:        ctx,
+		orderId:    orderId,
 		shipmentId: shipmentId,
 	}
 }
 
 // Execute executes the request
-//  @return []ShipmentLog
+//
+//	@return []ShipmentLog
 func (a *OrdersApiService) GetOrderShipmentTimelinesExecute(r ApiGetOrderShipmentTimelinesRequest) ([]ShipmentLog, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  []ShipmentLog
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue []ShipmentLog
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrdersApiService.GetOrderShipmentTimelines")
@@ -1483,8 +1493,8 @@ func (a *OrdersApiService) GetOrderShipmentTimelinesExecute(r ApiGetOrderShipmen
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -1503,9 +1513,9 @@ func (a *OrdersApiService) GetOrderShipmentTimelinesExecute(r ApiGetOrderShipmen
 }
 
 type ApiGetOrderShipmentsRequest struct {
-	ctx context.Context
-	ApiService *OrdersApiService
-	orderId int32
+	ctx              context.Context
+	ApiService       *OrdersApiService
+	orderId          int32
 	shipbobChannelId *int32
 }
 
@@ -1522,26 +1532,27 @@ func (r ApiGetOrderShipmentsRequest) Execute() ([]Shipment, *http.Response, erro
 /*
 GetOrderShipments Get all Shipments for Order
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param orderId The order id to get shipments for
- @return ApiGetOrderShipmentsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param orderId The order id to get shipments for
+	@return ApiGetOrderShipmentsRequest
 */
 func (a *OrdersApiService) GetOrderShipments(ctx context.Context, orderId int32) ApiGetOrderShipmentsRequest {
 	return ApiGetOrderShipmentsRequest{
 		ApiService: a,
-		ctx: ctx,
-		orderId: orderId,
+		ctx:        ctx,
+		orderId:    orderId,
 	}
 }
 
 // Execute executes the request
-//  @return []Shipment
+//
+//	@return []Shipment
 func (a *OrdersApiService) GetOrderShipmentsExecute(r ApiGetOrderShipmentsRequest) ([]Shipment, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  []Shipment
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue []Shipment
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrdersApiService.GetOrderShipments")
@@ -1605,8 +1616,8 @@ func (a *OrdersApiService) GetOrderShipmentsExecute(r ApiGetOrderShipmentsReques
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -1625,9 +1636,9 @@ func (a *OrdersApiService) GetOrderShipmentsExecute(r ApiGetOrderShipmentsReques
 }
 
 type ApiGetOrderStoreOrderJsonsRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *OrdersApiService
-	orderId int32
+	orderId    int32
 }
 
 func (r ApiGetOrderStoreOrderJsonsRequest) Execute() (string, *http.Response, error) {
@@ -1637,26 +1648,27 @@ func (r ApiGetOrderStoreOrderJsonsRequest) Execute() (string, *http.Response, er
 /*
 GetOrderStoreOrderJsons Get Order Store Json
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param orderId The order ID to Get the JSON Stored
- @return ApiGetOrderStoreOrderJsonsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param orderId The order ID to Get the JSON Stored
+	@return ApiGetOrderStoreOrderJsonsRequest
 */
 func (a *OrdersApiService) GetOrderStoreOrderJsons(ctx context.Context, orderId int32) ApiGetOrderStoreOrderJsonsRequest {
 	return ApiGetOrderStoreOrderJsonsRequest{
 		ApiService: a,
-		ctx: ctx,
-		orderId: orderId,
+		ctx:        ctx,
+		orderId:    orderId,
 	}
 }
 
 // Execute executes the request
-//  @return string
+//
+//	@return string
 func (a *OrdersApiService) GetOrderStoreOrderJsonsExecute(r ApiGetOrderStoreOrderJsonsRequest) (string, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  string
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue string
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrdersApiService.GetOrderStoreOrderJsons")
@@ -1717,8 +1729,8 @@ func (a *OrdersApiService) GetOrderStoreOrderJsonsExecute(r ApiGetOrderStoreOrde
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 422 {
@@ -1728,8 +1740,8 @@ func (a *OrdersApiService) GetOrderStoreOrderJsonsExecute(r ApiGetOrderStoreOrde
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -1747,26 +1759,26 @@ func (a *OrdersApiService) GetOrderStoreOrderJsonsExecute(r ApiGetOrderStoreOrde
 }
 
 type ApiGetOrdersRequest struct {
-	ctx context.Context
-	ApiService *OrdersApiService
-	page *int32
-	limit *int32
-	iDs *[]int32
-	referenceIds *[]string
-	startDate *time.Time
-	endDate *time.Time
-	sortOrder *string
-	hasTracking *bool
-	lastUpdateStartDate *time.Time
-	lastUpdateEndDate *time.Time
-	isTrackingUploaded *bool
+	ctx                         context.Context
+	ApiService                  *OrdersApiService
+	page                        *int32
+	limit                       *int32
+	iDs                         *[]int32
+	referenceIds                *[]string
+	startDate                   *time.Time
+	endDate                     *time.Time
+	sortOrder                   *string
+	hasTracking                 *bool
+	lastUpdateStartDate         *time.Time
+	lastUpdateEndDate           *time.Time
+	isTrackingUploaded          *bool
 	lastTrackingUpdateStartDate *time.Time
-	lastTrackingUpdateEndDate *time.Time
-	deliveryStartDate *time.Time
-	deliveryEndDate *time.Time
-	fulfillmentStartDate *time.Time
-	fulfillmentEndDate *time.Time
-	shipbobChannelId *int32
+	lastTrackingUpdateEndDate   *time.Time
+	deliveryStartDate           *time.Time
+	deliveryEndDate             *time.Time
+	fulfillmentStartDate        *time.Time
+	fulfillmentEndDate          *time.Time
+	shipbobChannelId            *int32
 }
 
 // Page of orders to get
@@ -1886,24 +1898,25 @@ GetOrders Get Orders
 
 All parameters are AND filters
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetOrdersRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetOrdersRequest
 */
 func (a *OrdersApiService) GetOrders(ctx context.Context) ApiGetOrdersRequest {
 	return ApiGetOrdersRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return []Order
+//
+//	@return []Order
 func (a *OrdersApiService) GetOrdersExecute(r ApiGetOrdersRequest) ([]Order, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  []Order
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue []Order
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrdersApiService.GetOrders")
@@ -2033,8 +2046,8 @@ func (a *OrdersApiService) GetOrdersExecute(r ApiGetOrdersRequest) ([]Order, *ht
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -2053,9 +2066,9 @@ func (a *OrdersApiService) GetOrdersExecute(r ApiGetOrdersRequest) ([]Order, *ht
 }
 
 type ApiGetShipmentRequest struct {
-	ctx context.Context
-	ApiService *OrdersApiService
-	shipmentId int32
+	ctx              context.Context
+	ApiService       *OrdersApiService
+	shipmentId       int32
 	shipbobChannelId *int32
 }
 
@@ -2072,26 +2085,27 @@ func (r ApiGetShipmentRequest) Execute() (*Shipment, *http.Response, error) {
 /*
 GetShipment Get one Shipment by Shipment Id
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param shipmentId The shipment id to get
- @return ApiGetShipmentRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param shipmentId The shipment id to get
+	@return ApiGetShipmentRequest
 */
 func (a *OrdersApiService) GetShipment(ctx context.Context, shipmentId int32) ApiGetShipmentRequest {
 	return ApiGetShipmentRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 		shipmentId: shipmentId,
 	}
 }
 
 // Execute executes the request
-//  @return Shipment
+//
+//	@return Shipment
 func (a *OrdersApiService) GetShipmentExecute(r ApiGetShipmentRequest) (*Shipment, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *Shipment
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *Shipment
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrdersApiService.GetShipment")
@@ -2155,8 +2169,8 @@ func (a *OrdersApiService) GetShipmentExecute(r ApiGetShipmentRequest) (*Shipmen
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -2175,9 +2189,9 @@ func (a *OrdersApiService) GetShipmentExecute(r ApiGetShipmentRequest) (*Shipmen
 }
 
 type ApiGetShipmentLogsRequest struct {
-	ctx context.Context
-	ApiService *OrdersApiService
-	shipmentId int32
+	ctx              context.Context
+	ApiService       *OrdersApiService
+	shipmentId       int32
 	shipbobChannelId *int32
 }
 
@@ -2194,26 +2208,27 @@ func (r ApiGetShipmentLogsRequest) Execute() ([]ShipmentLog, *http.Response, err
 /*
 GetShipmentLogs Get logs for one Shipment by Shipment Id
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param shipmentId The shipment id to get
- @return ApiGetShipmentLogsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param shipmentId The shipment id to get
+	@return ApiGetShipmentLogsRequest
 */
 func (a *OrdersApiService) GetShipmentLogs(ctx context.Context, shipmentId int32) ApiGetShipmentLogsRequest {
 	return ApiGetShipmentLogsRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 		shipmentId: shipmentId,
 	}
 }
 
 // Execute executes the request
-//  @return []ShipmentLog
+//
+//	@return []ShipmentLog
 func (a *OrdersApiService) GetShipmentLogsExecute(r ApiGetShipmentLogsRequest) ([]ShipmentLog, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  []ShipmentLog
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue []ShipmentLog
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrdersApiService.GetShipmentLogs")
@@ -2277,8 +2292,8 @@ func (a *OrdersApiService) GetShipmentLogsExecute(r ApiGetShipmentLogsRequest) (
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -2297,9 +2312,9 @@ func (a *OrdersApiService) GetShipmentLogsExecute(r ApiGetShipmentLogsRequest) (
 }
 
 type ApiGetShipmentTimelinesRequest struct {
-	ctx context.Context
-	ApiService *OrdersApiService
-	shipmentId int32
+	ctx              context.Context
+	ApiService       *OrdersApiService
+	shipmentId       int32
 	shipbobChannelId *int32
 }
 
@@ -2316,26 +2331,27 @@ func (r ApiGetShipmentTimelinesRequest) Execute() ([]ShipmentLog, *http.Response
 /*
 GetShipmentTimelines Get one Shipment's status timeline by Shipment Id
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param shipmentId The shipment id to get
- @return ApiGetShipmentTimelinesRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param shipmentId The shipment id to get
+	@return ApiGetShipmentTimelinesRequest
 */
 func (a *OrdersApiService) GetShipmentTimelines(ctx context.Context, shipmentId int32) ApiGetShipmentTimelinesRequest {
 	return ApiGetShipmentTimelinesRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 		shipmentId: shipmentId,
 	}
 }
 
 // Execute executes the request
-//  @return []ShipmentLog
+//
+//	@return []ShipmentLog
 func (a *OrdersApiService) GetShipmentTimelinesExecute(r ApiGetShipmentTimelinesRequest) ([]ShipmentLog, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  []ShipmentLog
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue []ShipmentLog
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrdersApiService.GetShipmentTimelines")
@@ -2399,8 +2415,8 @@ func (a *OrdersApiService) GetShipmentTimelinesExecute(r ApiGetShipmentTimelines
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -2419,10 +2435,10 @@ func (a *OrdersApiService) GetShipmentTimelinesExecute(r ApiGetShipmentTimelines
 }
 
 type ApiGetShippingmethodsRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *OrdersApiService
-	page *int32
-	limit *int32
+	page       *int32
+	limit      *int32
 }
 
 // Page of orders to get
@@ -2446,24 +2462,25 @@ GetShippingmethods Get shipping methods
 
 Get all merchants shipping methods
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetShippingmethodsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetShippingmethodsRequest
 */
 func (a *OrdersApiService) GetShippingmethods(ctx context.Context) ApiGetShippingmethodsRequest {
 	return ApiGetShippingmethodsRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return []ShipMethodDetail
+//
+//	@return []ShipMethodDetail
 func (a *OrdersApiService) GetShippingmethodsExecute(r ApiGetShippingmethodsRequest) ([]ShipMethodDetail, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  []ShipMethodDetail
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue []ShipMethodDetail
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrdersApiService.GetShippingmethods")
@@ -2529,8 +2546,8 @@ func (a *OrdersApiService) GetShippingmethodsExecute(r ApiGetShippingmethodsRequ
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 422 {
@@ -2540,8 +2557,8 @@ func (a *OrdersApiService) GetShippingmethodsExecute(r ApiGetShippingmethodsRequ
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}

@@ -20,8 +20,8 @@ var _ MappedNullable = &OrganizationRole{}
 // OrganizationRole struct for OrganizationRole
 type OrganizationRole struct {
 	Description NullableString `json:"description,omitempty"`
-	Id *string `json:"id,omitempty"`
-	Name NullableString `json:"name,omitempty"`
+	Id          *string        `json:"id,omitempty"`
+	Name        NullableString `json:"name,omitempty"`
 }
 
 // NewOrganizationRole instantiates a new OrganizationRole object
@@ -73,6 +73,7 @@ func (o *OrganizationRole) HasDescription() bool {
 func (o *OrganizationRole) SetDescription(v string) {
 	o.Description.Set(&v)
 }
+
 // SetDescriptionNil sets the value for Description to be an explicit nil
 func (o *OrganizationRole) SetDescriptionNil() {
 	o.Description.Set(nil)
@@ -147,6 +148,7 @@ func (o *OrganizationRole) HasName() bool {
 func (o *OrganizationRole) SetName(v string) {
 	o.Name.Set(&v)
 }
+
 // SetNameNil sets the value for Name to be an explicit nil
 func (o *OrganizationRole) SetNameNil() {
 	o.Name.Set(nil)
@@ -158,7 +160,7 @@ func (o *OrganizationRole) UnsetName() {
 }
 
 func (o OrganizationRole) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -214,5 +216,3 @@ func (v *NullableOrganizationRole) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

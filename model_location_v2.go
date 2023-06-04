@@ -22,9 +22,9 @@ var _ MappedNullable = &LocationV2{}
 // LocationV2 struct for LocationV2
 type LocationV2 struct {
 	Location
-	OrganizationId *string `json:"organization_id,omitempty"`
-	OwnerId NullableString `json:"owner_id,omitempty"`
-	ParentId NullableString `json:"parent_id,omitempty"`
+	OrganizationId       *string        `json:"organization_id,omitempty"`
+	OwnerId              NullableString `json:"owner_id,omitempty"`
+	ParentId             NullableString `json:"parent_id,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -112,6 +112,7 @@ func (o *LocationV2) HasOwnerId() bool {
 func (o *LocationV2) SetOwnerId(v string) {
 	o.OwnerId.Set(&v)
 }
+
 // SetOwnerIdNil sets the value for OwnerId to be an explicit nil
 func (o *LocationV2) SetOwnerIdNil() {
 	o.OwnerId.Set(nil)
@@ -154,6 +155,7 @@ func (o *LocationV2) HasParentId() bool {
 func (o *LocationV2) SetParentId(v string) {
 	o.ParentId.Set(&v)
 }
+
 // SetParentIdNil sets the value for ParentId to be an explicit nil
 func (o *LocationV2) SetParentIdNil() {
 	o.ParentId.Set(nil)
@@ -165,7 +167,7 @@ func (o *LocationV2) UnsetParentId() {
 }
 
 func (o LocationV2) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -201,9 +203,9 @@ func (o LocationV2) ToMap() (map[string]interface{}, error) {
 
 func (o *LocationV2) UnmarshalJSON(bytes []byte) (err error) {
 	type LocationV2WithoutEmbeddedStruct struct {
-		OrganizationId *string `json:"organization_id,omitempty"`
-		OwnerId NullableString `json:"owner_id,omitempty"`
-		ParentId NullableString `json:"parent_id,omitempty"`
+		OrganizationId *string        `json:"organization_id,omitempty"`
+		OwnerId        NullableString `json:"owner_id,omitempty"`
+		ParentId       NullableString `json:"parent_id,omitempty"`
 	}
 
 	varLocationV2WithoutEmbeddedStruct := LocationV2WithoutEmbeddedStruct{}
@@ -294,5 +296,3 @@ func (v *NullableLocationV2) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

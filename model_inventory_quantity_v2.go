@@ -174,6 +174,7 @@ func (o *InventoryQuantityV2) HasSku() bool {
 func (o *InventoryQuantityV2) SetSku(v string) {
 	o.Sku.Set(&v)
 }
+
 // SetSkuNil sets the value for Sku to be an explicit nil
 func (o *InventoryQuantityV2) SetSkuNil() {
 	o.Sku.Set(nil)
@@ -185,7 +186,7 @@ func (o *InventoryQuantityV2) UnsetSku() {
 }
 
 func (o InventoryQuantityV2) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -244,5 +245,3 @@ func (v *NullableInventoryQuantityV2) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

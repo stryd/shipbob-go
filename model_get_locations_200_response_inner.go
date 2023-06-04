@@ -18,8 +18,8 @@ import (
 // GetLocations200ResponseInner - struct for GetLocations200ResponseInner
 type GetLocations200ResponseInner struct {
 	GetLocations200ResponseInnerOneOf *GetLocations200ResponseInnerOneOf
-	InternalLocation *InternalLocation
-	InternalLocationV2 *InternalLocationV2
+	InternalLocation                  *InternalLocation
+	InternalLocationV2                *InternalLocationV2
 }
 
 // GetLocations200ResponseInnerOneOfAsGetLocations200ResponseInner is a convenience function that returns GetLocations200ResponseInnerOneOf wrapped in GetLocations200ResponseInner
@@ -42,7 +42,6 @@ func InternalLocationV2AsGetLocations200ResponseInner(v *InternalLocationV2) Get
 		InternalLocationV2: v,
 	}
 }
-
 
 // Unmarshal JSON data into one of the pointers in the struct
 func (dst *GetLocations200ResponseInner) UnmarshalJSON(data []byte) error {
@@ -119,7 +118,7 @@ func (src GetLocations200ResponseInner) MarshalJSON() ([]byte, error) {
 }
 
 // Get the actual instance
-func (obj *GetLocations200ResponseInner) GetActualInstance() (interface{}) {
+func (obj *GetLocations200ResponseInner) GetActualInstance() interface{} {
 	if obj == nil {
 		return nil
 	}
@@ -174,5 +173,3 @@ func (v *NullableGetLocations200ResponseInner) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

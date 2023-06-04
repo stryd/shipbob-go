@@ -90,6 +90,7 @@ func (o *AddProductToOrderByReferenceId) HasExternalLineId() bool {
 func (o *AddProductToOrderByReferenceId) SetExternalLineId(v int32) {
 	o.ExternalLineId.Set(&v)
 }
+
 // SetExternalLineIdNil sets the value for ExternalLineId to be an explicit nil
 func (o *AddProductToOrderByReferenceId) SetExternalLineIdNil() {
 	o.ExternalLineId.Set(nil)
@@ -308,6 +309,7 @@ func (o *AddProductToOrderByReferenceId) HasUnitPrice() bool {
 func (o *AddProductToOrderByReferenceId) SetUnitPrice(v float64) {
 	o.UnitPrice.Set(&v)
 }
+
 // SetUnitPriceNil sets the value for UnitPrice to be an explicit nil
 func (o *AddProductToOrderByReferenceId) SetUnitPriceNil() {
 	o.UnitPrice.Set(nil)
@@ -351,7 +353,7 @@ func (o *AddProductToOrderByReferenceId) SetUpc(v string) {
 }
 
 func (o AddProductToOrderByReferenceId) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -421,5 +423,3 @@ func (v *NullableAddProductToOrderByReferenceId) UnmarshalJSON(src []byte) error
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

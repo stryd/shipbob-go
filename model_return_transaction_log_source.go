@@ -20,9 +20,9 @@ type ReturnTransactionLogSource string
 
 // List of ReturnTransactionLogSource
 const (
-	RETURN_LABEL_INVOICE ReturnTransactionLogSource = "ReturnLabelInvoice"
+	RETURN_LABEL_INVOICE  ReturnTransactionLogSource = "ReturnLabelInvoice"
 	RETURN_PROCESSING_FEE ReturnTransactionLogSource = "ReturnProcessingFee"
-	RETURN_TO_SENDER_FEE ReturnTransactionLogSource = "ReturnToSenderFee"
+	RETURN_TO_SENDER_FEE  ReturnTransactionLogSource = "ReturnToSenderFee"
 )
 
 // All allowed values of ReturnTransactionLogSource enum
@@ -110,4 +110,3 @@ func (v *NullableReturnTransactionLogSource) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

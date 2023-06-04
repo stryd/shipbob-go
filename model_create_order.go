@@ -30,14 +30,14 @@ type CreateOrder struct {
 	// Products included in the order. Products identified by reference_id must also include the product name if there is no matching ShipBob product.
 	Products []AddProductToOrder `json:"products"`
 	// Date this order was purchase by the end user
-	PurchaseDate NullableTime `json:"purchase_date,omitempty"`
-	Recipient RecipientInfo `json:"recipient"`
+	PurchaseDate NullableTime  `json:"purchase_date,omitempty"`
+	Recipient    RecipientInfo `json:"recipient"`
 	// Unique and immutable order identifier from your upstream system
-	ReferenceId string `json:"reference_id"`
+	ReferenceId         string               `json:"reference_id"`
 	RetailerProgramData *RetailerProgramData `json:"retailer_program_data,omitempty"`
 	// Client-defined shipping method matching what the user has listed as the shipping method on the Ship Option Mapping setup page in the ShipBob Merchant Portal. If they don't match, we will create a new one and default it to Standard
-	ShippingMethod string `json:"shipping_method"`
-	ShippingTerms *ShippingTerms `json:"shipping_terms,omitempty"`
+	ShippingMethod string         `json:"shipping_method"`
+	ShippingTerms  *ShippingTerms `json:"shipping_terms,omitempty"`
 	// Key value pair array to store extra information at the order level for API purposes. ShipBob won't display the info in the ShipBob Merchant Portal or react based on this data.
 	Tags []Tag `json:"tags,omitempty"`
 	// Defaults to Direct to Consumer (DTC) if not provided. Note: B2B is not supported at this time
@@ -161,6 +161,7 @@ func (o *CreateOrder) HasLocationId() bool {
 func (o *CreateOrder) SetLocationId(v int32) {
 	o.LocationId.Set(&v)
 }
+
 // SetLocationIdNil sets the value for LocationId to be an explicit nil
 func (o *CreateOrder) SetLocationIdNil() {
 	o.LocationId.Set(nil)
@@ -259,6 +260,7 @@ func (o *CreateOrder) HasPurchaseDate() bool {
 func (o *CreateOrder) SetPurchaseDate(v time.Time) {
 	o.PurchaseDate.Set(&v)
 }
+
 // SetPurchaseDateNil sets the value for PurchaseDate to be an explicit nil
 func (o *CreateOrder) SetPurchaseDateNil() {
 	o.PurchaseDate.Set(nil)
@@ -470,7 +472,7 @@ func (o *CreateOrder) SetType(v string) {
 }
 
 func (o CreateOrder) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -548,5 +550,3 @@ func (v *NullableCreateOrder) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

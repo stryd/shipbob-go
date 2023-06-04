@@ -34,13 +34,13 @@ type Location struct {
 	// Indicates if the shipping is enabled for FC
 	IsShippingEnabled *bool `json:"is_shipping_enabled,omitempty"`
 	// Name of the location. Follows the naming convention City (State Code) for domestic FCs and City (Country Code) for international FCs
-	Name NullableString `json:"name,omitempty"`
+	Name   NullableString           `json:"name,omitempty"`
 	Region *FulfillmentCenterRegion `json:"region,omitempty"`
 	// Services provided by the location
 	Services []LocationService `json:"services,omitempty"`
 	// Time zone of the location
 	Timezone NullableString `json:"timezone,omitempty"`
-	Ttype string `json:"ttype"`
+	Ttype    string         `json:"ttype"`
 }
 
 // NewLocation instantiates a new Location object
@@ -93,6 +93,7 @@ func (o *Location) HasAbbreviation() bool {
 func (o *Location) SetAbbreviation(v string) {
 	o.Abbreviation.Set(&v)
 }
+
 // SetAbbreviationNil sets the value for Abbreviation to be an explicit nil
 func (o *Location) SetAbbreviationNil() {
 	o.Abbreviation.Set(nil)
@@ -328,6 +329,7 @@ func (o *Location) HasName() bool {
 func (o *Location) SetName(v string) {
 	o.Name.Set(&v)
 }
+
 // SetNameNil sets the value for Name to be an explicit nil
 func (o *Location) SetNameNil() {
 	o.Name.Set(nil)
@@ -435,6 +437,7 @@ func (o *Location) HasTimezone() bool {
 func (o *Location) SetTimezone(v string) {
 	o.Timezone.Set(&v)
 }
+
 // SetTimezoneNil sets the value for Timezone to be an explicit nil
 func (o *Location) SetTimezoneNil() {
 	o.Timezone.Set(nil)
@@ -470,7 +473,7 @@ func (o *Location) SetTtype(v string) {
 }
 
 func (o Location) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -551,5 +554,3 @@ func (v *NullableLocation) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

@@ -27,7 +27,6 @@ func FcTypeV2AsInternalLocationAllOfFulfillmentCenterType(v *FcTypeV2) InternalL
 	}
 }
 
-
 // Unmarshal JSON data into one of the pointers in the struct
 func (dst *InternalLocationAllOfFulfillmentCenterType) UnmarshalJSON(data []byte) error {
 	var err error
@@ -72,7 +71,7 @@ func (src InternalLocationAllOfFulfillmentCenterType) MarshalJSON() ([]byte, err
 }
 
 // Get the actual instance
-func (obj *InternalLocationAllOfFulfillmentCenterType) GetActualInstance() (interface{}) {
+func (obj *InternalLocationAllOfFulfillmentCenterType) GetActualInstance() interface{} {
 	if obj == nil {
 		return nil
 	}
@@ -119,5 +118,3 @@ func (v *NullableInternalLocationAllOfFulfillmentCenterType) UnmarshalJSON(src [
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

@@ -20,10 +20,10 @@ type ReturnAction string
 
 // List of ReturnAction
 const (
-	DEFAULT ReturnAction = "Default"
-	RESTOCK ReturnAction = "Restock"
+	DEFAULT    ReturnAction = "Default"
+	RESTOCK    ReturnAction = "Restock"
 	QUARANTINE ReturnAction = "Quarantine"
-	DISPOSE ReturnAction = "Dispose"
+	DISPOSE    ReturnAction = "Dispose"
 )
 
 // All allowed values of ReturnAction enum
@@ -112,4 +112,3 @@ func (v *NullableReturnAction) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

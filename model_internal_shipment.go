@@ -37,15 +37,15 @@ type InternalShipment struct {
 	// Monetary amount that this shipment was insured for
 	InsuranceValue NullableFloat64 `json:"insurance_value,omitempty"`
 	// Monetary amount that was invoiced for this shipment
-	InvoiceAmount NullableFloat64 `json:"invoice_amount,omitempty"`
-	InvoiceCurrencyCode *string `json:"invoice_currency_code,omitempty"`
+	InvoiceAmount       NullableFloat64 `json:"invoice_amount,omitempty"`
+	InvoiceCurrencyCode *string         `json:"invoice_currency_code,omitempty"`
 	// Indicates whether the Shipment was marked with tracking information uploaded to a third-party system where the order originated.
 	IsTrackingUploaded *bool `json:"is_tracking_uploaded,omitempty"`
 	// Timestamp for the last time this shipment had a tracking update
 	LastTrackingUpdateAt NullableTime `json:"last_tracking_update_at,omitempty"`
 	// Date this shipment was last updated
-	LastUpdateAt NullableTime `json:"last_update_at,omitempty"`
-	Location *FulfillmentCenter `json:"location,omitempty"`
+	LastUpdateAt NullableTime       `json:"last_update_at,omitempty"`
+	Location     *FulfillmentCenter `json:"location,omitempty"`
 	Measurements *OrderMeasurements `json:"measurements,omitempty"`
 	// Id of the order this shipment belongs to
 	OrderId *int32 `json:"order_id,omitempty"`
@@ -54,8 +54,8 @@ type InternalShipment struct {
 	// Carton information for this shipment
 	ParentCartons []ParentCarton `json:"parent_cartons,omitempty"`
 	// Information about the products contained in this shipment
-	Products []ShipmentProduct `json:"products,omitempty"`
-	Recipient *Recipient `json:"recipient,omitempty"`
+	Products  []ShipmentProduct `json:"products,omitempty"`
+	Recipient *Recipient        `json:"recipient,omitempty"`
 	// Client-defined external unique id of the order this shipment belongs to
 	ReferenceId *string `json:"reference_id,omitempty"`
 	// If a shipment requires signature
@@ -67,8 +67,8 @@ type InternalShipment struct {
 	// Additional details about the shipment status
 	StatusDetails []OrderStatusDetail `json:"status_details,omitempty"`
 	// Unique store order id of the shipment
-	StoreOrderId *string `json:"store_order_id,omitempty"`
-	Tracking *Tracking `json:"tracking,omitempty"`
+	StoreOrderId *string   `json:"store_order_id,omitempty"`
+	Tracking     *Tracking `json:"tracking,omitempty"`
 }
 
 // NewInternalShipment instantiates a new InternalShipment object
@@ -120,6 +120,7 @@ func (o *InternalShipment) HasActualFulfillmentDate() bool {
 func (o *InternalShipment) SetActualFulfillmentDate(v time.Time) {
 	o.ActualFulfillmentDate.Set(&v)
 }
+
 // SetActualFulfillmentDateNil sets the value for ActualFulfillmentDate to be an explicit nil
 func (o *InternalShipment) SetActualFulfillmentDateNil() {
 	o.ActualFulfillmentDate.Set(nil)
@@ -162,6 +163,7 @@ func (o *InternalShipment) HasCreatedDate() bool {
 func (o *InternalShipment) SetCreatedDate(v time.Time) {
 	o.CreatedDate.Set(&v)
 }
+
 // SetCreatedDateNil sets the value for CreatedDate to be an explicit nil
 func (o *InternalShipment) SetCreatedDateNil() {
 	o.CreatedDate.Set(nil)
@@ -204,6 +206,7 @@ func (o *InternalShipment) HasDeliveryDate() bool {
 func (o *InternalShipment) SetDeliveryDate(v time.Time) {
 	o.DeliveryDate.Set(&v)
 }
+
 // SetDeliveryDateNil sets the value for DeliveryDate to be an explicit nil
 func (o *InternalShipment) SetDeliveryDateNil() {
 	o.DeliveryDate.Set(nil)
@@ -246,6 +249,7 @@ func (o *InternalShipment) HasEstimatedFulfillmentDate() bool {
 func (o *InternalShipment) SetEstimatedFulfillmentDate(v time.Time) {
 	o.EstimatedFulfillmentDate.Set(&v)
 }
+
 // SetEstimatedFulfillmentDateNil sets the value for EstimatedFulfillmentDate to be an explicit nil
 func (o *InternalShipment) SetEstimatedFulfillmentDateNil() {
 	o.EstimatedFulfillmentDate.Set(nil)
@@ -384,6 +388,7 @@ func (o *InternalShipment) HasInsuranceValue() bool {
 func (o *InternalShipment) SetInsuranceValue(v float64) {
 	o.InsuranceValue.Set(&v)
 }
+
 // SetInsuranceValueNil sets the value for InsuranceValue to be an explicit nil
 func (o *InternalShipment) SetInsuranceValueNil() {
 	o.InsuranceValue.Set(nil)
@@ -426,6 +431,7 @@ func (o *InternalShipment) HasInvoiceAmount() bool {
 func (o *InternalShipment) SetInvoiceAmount(v float64) {
 	o.InvoiceAmount.Set(&v)
 }
+
 // SetInvoiceAmountNil sets the value for InvoiceAmount to be an explicit nil
 func (o *InternalShipment) SetInvoiceAmountNil() {
 	o.InvoiceAmount.Set(nil)
@@ -532,6 +538,7 @@ func (o *InternalShipment) HasLastTrackingUpdateAt() bool {
 func (o *InternalShipment) SetLastTrackingUpdateAt(v time.Time) {
 	o.LastTrackingUpdateAt.Set(&v)
 }
+
 // SetLastTrackingUpdateAtNil sets the value for LastTrackingUpdateAt to be an explicit nil
 func (o *InternalShipment) SetLastTrackingUpdateAtNil() {
 	o.LastTrackingUpdateAt.Set(nil)
@@ -574,6 +581,7 @@ func (o *InternalShipment) HasLastUpdateAt() bool {
 func (o *InternalShipment) SetLastUpdateAt(v time.Time) {
 	o.LastUpdateAt.Set(&v)
 }
+
 // SetLastUpdateAtNil sets the value for LastUpdateAt to be an explicit nil
 func (o *InternalShipment) SetLastUpdateAtNil() {
 	o.LastUpdateAt.Set(nil)
@@ -1033,7 +1041,7 @@ func (o *InternalShipment) SetTracking(v Tracking) {
 }
 
 func (o InternalShipment) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -1161,5 +1169,3 @@ func (v *NullableInternalShipment) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

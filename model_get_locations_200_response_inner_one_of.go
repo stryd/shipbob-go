@@ -27,7 +27,6 @@ func InternalLocationV2AsGetLocations200ResponseInnerOneOf(v *InternalLocationV2
 	}
 }
 
-
 // Unmarshal JSON data into one of the pointers in the struct
 func (dst *GetLocations200ResponseInnerOneOf) UnmarshalJSON(data []byte) error {
 	var err error
@@ -67,7 +66,7 @@ func (src GetLocations200ResponseInnerOneOf) MarshalJSON() ([]byte, error) {
 }
 
 // Get the actual instance
-func (obj *GetLocations200ResponseInnerOneOf) GetActualInstance() (interface{}) {
+func (obj *GetLocations200ResponseInnerOneOf) GetActualInstance() interface{} {
 	if obj == nil {
 		return nil
 	}
@@ -114,5 +113,3 @@ func (v *NullableGetLocations200ResponseInnerOneOf) UnmarshalJSON(src []byte) er
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

@@ -19,10 +19,10 @@ var _ MappedNullable = &FcTypeV2AllOf{}
 
 // FcTypeV2AllOf struct for FcTypeV2AllOf
 type FcTypeV2AllOf struct {
-	IsChild *bool `json:"is_child,omitempty"`
-	OrganizationRoles []OrganizationRole `json:"organization_roles,omitempty"`
-	OrganizationTypeId *string `json:"organization_type_id,omitempty"`
-	OrganizationTypeName NullableString `json:"organization_type_name,omitempty"`
+	IsChild              *bool              `json:"is_child,omitempty"`
+	OrganizationRoles    []OrganizationRole `json:"organization_roles,omitempty"`
+	OrganizationTypeId   *string            `json:"organization_type_id,omitempty"`
+	OrganizationTypeName NullableString     `json:"organization_type_name,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -174,6 +174,7 @@ func (o *FcTypeV2AllOf) HasOrganizationTypeName() bool {
 func (o *FcTypeV2AllOf) SetOrganizationTypeName(v string) {
 	o.OrganizationTypeName.Set(&v)
 }
+
 // SetOrganizationTypeNameNil sets the value for OrganizationTypeName to be an explicit nil
 func (o *FcTypeV2AllOf) SetOrganizationTypeNameNil() {
 	o.OrganizationTypeName.Set(nil)
@@ -185,7 +186,7 @@ func (o *FcTypeV2AllOf) UnsetOrganizationTypeName() {
 }
 
 func (o FcTypeV2AllOf) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -269,5 +270,3 @@ func (v *NullableFcTypeV2AllOf) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

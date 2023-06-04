@@ -35,7 +35,7 @@ type Inventory struct {
 	// True if this inventory item is organized into lots
 	IsLot *bool `json:"isLot,omitempty"`
 	// Name of the inventory item
-	Name NullableString `json:"name,omitempty"`
+	Name               NullableString      `json:"name,omitempty"`
 	PackagingAttribute *PackagingAttribute `json:"packagingAttribute,omitempty"`
 	// Total quantity in unreceived receiving orders for this inventory item
 	TotalAwaitingQuantity *int32 `json:"totalAwaitingQuantity,omitempty"`
@@ -362,6 +362,7 @@ func (o *Inventory) HasName() bool {
 func (o *Inventory) SetName(v string) {
 	o.Name.Set(&v)
 }
+
 // SetNameNil sets the value for Name to be an explicit nil
 func (o *Inventory) SetNameNil() {
 	o.Name.Set(nil)
@@ -661,7 +662,7 @@ func (o *Inventory) SetTotalSellableQuantity(v int32) {
 }
 
 func (o Inventory) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -762,5 +763,3 @@ func (v *NullableInventory) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

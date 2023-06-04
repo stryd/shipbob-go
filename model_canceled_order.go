@@ -17,11 +17,11 @@ import (
 // checks if the CanceledOrder type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &CanceledOrder{}
 
-// CanceledOrder 
+// CanceledOrder
 type CanceledOrder struct {
 	// Results of canceling the shipments associated with the order
 	CanceledShipmentResults []CanceledShipment `json:"canceled_shipment_results,omitempty"`
-	Order *Order `json:"order,omitempty"`
+	Order                   *Order             `json:"order,omitempty"`
 	// The ID of the canceled order
 	OrderId *int32 `json:"order_id,omitempty"`
 	// The overall result of canceling the shipments associated with the order
@@ -174,7 +174,7 @@ func (o *CanceledOrder) SetStatus(v string) {
 }
 
 func (o CanceledOrder) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -233,5 +233,3 @@ func (v *NullableCanceledOrder) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
