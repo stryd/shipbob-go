@@ -161,7 +161,7 @@ def add_operation_ids(path: str, path_schema: dict):
     """
     operation_id = ""
     for part in path.split("/"):
-        if "{" not in part:
+        if "{" not in part and "1.0" not in part:
             operation_id += part[:1].upper() + part[1:]
     op_map = {
         "get": "get",

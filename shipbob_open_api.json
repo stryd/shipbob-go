@@ -3357,7 +3357,7 @@
   "paths": {
     "/1.0/channel": {
       "get": {
-        "operationId": "get1.0Channels",
+        "operationId": "getChannels",
         "responses": {
           "200": {
             "content": {
@@ -3410,7 +3410,7 @@
     },
     "/1.0/fulfillmentCenter": {
       "get": {
-        "operationId": "get1.0FulfillmentCenters",
+        "operationId": "getFulfillmentCenters",
         "responses": {
           "200": {
             "content": {
@@ -3447,7 +3447,7 @@
     },
     "/1.0/inventory": {
       "get": {
-        "operationId": "get1.0Inventories",
+        "operationId": "getInventories",
         "parameters": [
           {
             "description": "Page of inventory items to get",
@@ -3595,7 +3595,7 @@
     },
     "/1.0/inventory/{inventoryId}": {
       "get": {
-        "operationId": "get1.0Inventory",
+        "operationId": "getInventory",
         "parameters": [
           {
             "description": "The inventory id to get",
@@ -3667,7 +3667,7 @@
     },
     "/1.0/location": {
       "get": {
-        "operationId": "get1.0Locations",
+        "operationId": "getLocations",
         "parameters": [
           {
             "description": "Whether the inactive locations should be included or not",
@@ -3751,7 +3751,7 @@
     "/1.0/order": {
       "get": {
         "description": "All parameters are AND filters",
-        "operationId": "get1.0Orders",
+        "operationId": "getOrders",
         "parameters": [
           {
             "description": "Page of orders to get",
@@ -3985,7 +3985,7 @@
         ]
       },
       "post": {
-        "operationId": "create1.0Order",
+        "operationId": "createOrder",
         "parameters": [
           {
             "description": "Channel Id for Operation",
@@ -4073,7 +4073,7 @@
     "/1.0/order/estimate": {
       "post": {
         "description": "This endpoint will provide, where possible, an estimate of pricing and fulfillment center assignment of a potential standard (direct to consumer) order. \r\nKeep in mind that there are ways for the merchant to change FC assignment or product configuration after order creation that could invalidate this estimate. \r\nEstimates cannot be returned for items that are unknown, out of stock, or too large for fulfillment using standard box sizes. \r\nAdditional services such as high-pick fees, shipping insurance, auto-splitting or auto-adding items to orders, and signature required are not included in this estimate.",
-        "operationId": "create1.0OrderEstimate",
+        "operationId": "createOrderEstimate",
         "parameters": [
           {
             "description": "Channel Id for Operation",
@@ -4160,7 +4160,7 @@
     },
     "/1.0/order/{orderId}": {
       "get": {
-        "operationId": "get1.0Order",
+        "operationId": "getOrder",
         "parameters": [
           {
             "description": "",
@@ -4235,7 +4235,7 @@
     },
     "/1.0/order/{orderId}/cancel": {
       "post": {
-        "operationId": "cancel1.0Order",
+        "operationId": "cancelOrder",
         "parameters": [
           {
             "description": "The order ID to cancel",
@@ -4342,7 +4342,7 @@
     },
     "/1.0/order/{orderId}/shipment": {
       "get": {
-        "operationId": "get1.0OrderShipments",
+        "operationId": "getOrderShipments",
         "parameters": [
           {
             "description": "The order id to get shipments for",
@@ -4420,7 +4420,7 @@
     },
     "/1.0/order/{orderId}/shipment/{shipmentId}": {
       "get": {
-        "operationId": "get1.0OrderShipment",
+        "operationId": "getOrderShipment",
         "parameters": [
           {
             "description": "The order id to get the shipment for",
@@ -4505,7 +4505,7 @@
     },
     "/1.0/order/{orderId}/shipment/{shipmentId}/cancel": {
       "post": {
-        "operationId": "cancel1.0OrderShipment",
+        "operationId": "cancelOrderShipment",
         "parameters": [
           {
             "description": "The shipment id to get",
@@ -4620,7 +4620,7 @@
     },
     "/1.0/order/{orderId}/shipment/{shipmentId}/logs": {
       "get": {
-        "operationId": "get1.0OrderShipmentLogs",
+        "operationId": "getOrderShipmentLogs",
         "parameters": [
           {
             "description": "The order id to get the shipment for",
@@ -4708,7 +4708,7 @@
     },
     "/1.0/order/{orderId}/shipment/{shipmentId}/timeline": {
       "get": {
-        "operationId": "get1.0OrderShipmentTimelines",
+        "operationId": "getOrderShipmentTimelines",
         "parameters": [
           {
             "description": "The order id to get the shipment for",
@@ -4796,7 +4796,7 @@
     },
     "/1.0/order/{orderId}/storeOrderJson": {
       "get": {
-        "operationId": "get1.0OrderStoreOrderJsons",
+        "operationId": "getOrderStoreOrderJsons",
         "parameters": [
           {
             "description": "The order ID to Get the JSON Stored",
@@ -4878,7 +4878,7 @@
         ]
       },
       "post": {
-        "operationId": "create1.0OrderStoreOrderJson",
+        "operationId": "createOrderStoreOrderJson",
         "parameters": [
           {
             "description": "The order ID to Store",
@@ -4968,7 +4968,7 @@
     },
     "/1.0/product": {
       "get": {
-        "operationId": "get1.0Products",
+        "operationId": "getProducts",
         "parameters": [
           {
             "description": "Page of products to get\r\n- Valid Range is 0 to integer max with a default of 1",
@@ -5141,7 +5141,7 @@
         ]
       },
       "post": {
-        "operationId": "create1.0Product",
+        "operationId": "createProduct",
         "parameters": [
           {
             "description": "Channel Id for Operation",
@@ -5229,7 +5229,7 @@
     },
     "/1.0/product/batch": {
       "post": {
-        "operationId": "create1.0ProductBatch",
+        "operationId": "createProductBatch",
         "parameters": [
           {
             "description": "Channel Id for Operation",
@@ -5324,7 +5324,7 @@
     },
     "/1.0/product/{productId}": {
       "get": {
-        "operationId": "get1.0Product",
+        "operationId": "getProduct",
         "parameters": [
           {
             "description": "Unique identifier of the product",
@@ -5403,7 +5403,7 @@
         ]
       },
       "put": {
-        "operationId": "update1.0Product",
+        "operationId": "updateProduct",
         "parameters": [
           {
             "description": "Unique identifier of the product to modify",
@@ -5511,7 +5511,7 @@
     },
     "/1.0/product/{productId}/inventory": {
       "get": {
-        "operationId": "get1.0ProductInventories",
+        "operationId": "getProductInventories",
         "parameters": [
           {
             "description": "The product id to get inventory for",
@@ -5596,7 +5596,7 @@
     "/1.0/receiving": {
       "get": {
         "description": "This endpoint is deprecated. Please use /2.0/receiving?purchaseorderNumber={value}",
-        "operationId": "get1.0Receivings",
+        "operationId": "getReceivings",
         "parameters": [
           {
             "description": "Purchase order number of the receiving order",
@@ -5649,7 +5649,7 @@
       },
       "post": {
         "description": "This endpoint is deprecated. Please use /2.0/receiving",
-        "operationId": "create1.0Receiving",
+        "operationId": "createReceiving",
         "requestBody": {
           "content": {
             "application/json": {
@@ -5720,7 +5720,7 @@
     "/1.0/receiving/{id}": {
       "get": {
         "description": "This endpoint is deprecated. Please use /2.0/receiving/{id}",
-        "operationId": "get1.0Receiving",
+        "operationId": "getReceiving",
         "parameters": [
           {
             "description": "Id of the receiving order",
@@ -5777,7 +5777,7 @@
     "/1.0/receiving/{id}/cancel": {
       "post": {
         "description": "This endpoint is deprecated. Please use /2.0/receiving/{id}/cancel",
-        "operationId": "cancel1.0Receiving",
+        "operationId": "cancelReceiving",
         "parameters": [
           {
             "description": "Id of the receiving order to cancel",
@@ -5843,7 +5843,7 @@
     "/1.0/receiving/{id}/labels": {
       "get": {
         "description": "This endpoint is deprecated. Please use /2.0/receiving/{id}/labels",
-        "operationId": "get1.0ReceivingLabels",
+        "operationId": "getReceivingLabels",
         "parameters": [
           {
             "description": "Id of the receiving order",
@@ -5910,7 +5910,7 @@
     },
     "/1.0/return": {
       "get": {
-        "operationId": "get1.0Returns",
+        "operationId": "getReturns",
         "parameters": [
           {
             "description": "Page of return orders to get",
@@ -6116,7 +6116,7 @@
         ]
       },
       "post": {
-        "operationId": "create1.0Return",
+        "operationId": "createReturn",
         "parameters": [
           {
             "description": "Channel Id for Operation",
@@ -6192,7 +6192,7 @@
     },
     "/1.0/return/{id}": {
       "get": {
-        "operationId": "get1.0Return",
+        "operationId": "getReturn",
         "parameters": [
           {
             "description": "Id of the return order",
@@ -6255,7 +6255,7 @@
         ]
       },
       "put": {
-        "operationId": "update1.0Return",
+        "operationId": "updateReturn",
         "parameters": [
           {
             "description": "Channel Id for Operation",
@@ -6341,7 +6341,7 @@
     },
     "/1.0/return/{id}/cancel": {
       "post": {
-        "operationId": "cancel1.0Return",
+        "operationId": "cancelReturn",
         "parameters": [
           {
             "description": "Id of the return order",
@@ -6417,7 +6417,7 @@
     },
     "/1.0/return/{id}/statushistory": {
       "get": {
-        "operationId": "get1.0ReturnStatushistory",
+        "operationId": "getReturnStatushistory",
         "parameters": [
           {
             "description": "Id of the return order",
@@ -6485,7 +6485,7 @@
     },
     "/1.0/shipment/cancelbulk": {
       "post": {
-        "operationId": "create1.0ShipmentCancelbulk",
+        "operationId": "createShipmentCancelbulk",
         "parameters": [
           {
             "description": "Channel ID for Operation",
@@ -6573,7 +6573,7 @@
     },
     "/1.0/shipment/{shipmentId}": {
       "get": {
-        "operationId": "get1.0Shipment",
+        "operationId": "getShipment",
         "parameters": [
           {
             "description": "The shipment id to get",
@@ -6648,7 +6648,7 @@
     },
     "/1.0/shipment/{shipmentId}/cancel": {
       "post": {
-        "operationId": "cancel1.0Shipment",
+        "operationId": "cancelShipment",
         "parameters": [
           {
             "description": "The shipment id to get",
@@ -6755,7 +6755,7 @@
     },
     "/1.0/shipment/{shipmentId}/logs": {
       "get": {
-        "operationId": "get1.0ShipmentLogs",
+        "operationId": "getShipmentLogs",
         "parameters": [
           {
             "description": "The shipment id to get",
@@ -6833,7 +6833,7 @@
     },
     "/1.0/shipment/{shipmentId}/timeline": {
       "get": {
-        "operationId": "get1.0ShipmentTimelines",
+        "operationId": "getShipmentTimelines",
         "parameters": [
           {
             "description": "The shipment id to get",
@@ -6912,7 +6912,7 @@
     "/1.0/shippingmethod": {
       "get": {
         "description": "Get all merchants shipping methods",
-        "operationId": "get1.0Shippingmethods",
+        "operationId": "getShippingmethods",
         "parameters": [
           {
             "description": "Page of orders to get",
@@ -7002,7 +7002,7 @@
     "/1.0/webhook": {
       "get": {
         "description": "All parameters are AND filters",
-        "operationId": "get1.0Webhooks",
+        "operationId": "getWebhooks",
         "parameters": [
           {
             "description": "Topic of the webhooks requested",
@@ -7127,7 +7127,7 @@
         ]
       },
       "post": {
-        "operationId": "create1.0Webhook",
+        "operationId": "createWebhook",
         "parameters": [
           {
             "description": "",
@@ -7214,7 +7214,7 @@
     },
     "/1.0/webhook/{id}": {
       "delete": {
-        "operationId": "delete1.0Webhook",
+        "operationId": "deleteWebhook",
         "parameters": [
           {
             "description": "",
