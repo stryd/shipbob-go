@@ -19,7 +19,7 @@ var _ MappedNullable = &CanceledOrder{}
 
 // CanceledOrder
 type CanceledOrder struct {
-	// Results of camceling the shipments associated with the order
+	// Results of canceling the shipments associated with the order
 	CanceledShipmentResults []CanceledShipment `json:"canceled_shipment_results,omitempty"`
 	Order                   *Order             `json:"order,omitempty"`
 	// The ID of the canceled order

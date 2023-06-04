@@ -93,7 +93,7 @@ func NewConfiguration() *Configuration {
 		Debug:         false,
 		Servers: ServerConfigurations{
 			{
-				URL:         "https://api.shipbob.com/1.0",
+				URL:         "https://api.shipbob.com",
 				Description: "No description provided",
 			},
 		},

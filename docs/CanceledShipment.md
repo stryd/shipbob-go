@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Action** | Pointer to **string** |  | [optional] 
-**IsSuccess** | Pointer to **bool** | If the cancel action was successfull | [optional] 
+**IsSuccess** | Pointer to **bool** | If the cancel action was successful | [optional] 
 **Reason** | Pointer to **string** | The reason the cancellation result | [optional] 
 **ShipmentId** | Pointer to **int64** | The ID of the shipment | [optional] 
 

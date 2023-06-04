@@ -1,10 +1,10 @@
 # \ChannelsApi
 
-All URIs are relative to *https://api.shipbob.com/1.0*
+All URIs are relative to *https://api.shipbob.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**GetChannels**](ChannelsApi.md#GetChannels) | **Get** /channel | Get user-authorized channel info
+[**GetChannels**](ChannelsApi.md#GetChannels) | **Get** /1.0/channel | Get user-authorized channel info
 
 
 

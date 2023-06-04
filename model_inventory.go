@@ -21,37 +21,38 @@ var _ MappedNullable = &Inventory{}
 type Inventory struct {
 	Dimensions *Dimension `json:"dimensions,omitempty"`
 	// Fulfillable quantity of this inventory item broken down by fulfillment center location
-	FulfillableQuantityByFulfillmentCenter []InventoryFulfillmentCenterQuantity `json:"fulfillable_quantity_by_fulfillment_center,omitempty"`
+	FulfillableQuantityByFulfillmentCenter []InventoryFulfillmentCenterQuantity `json:"fulfillableQuantityByFulfillmentCenter,omitempty"`
 	// Fulfillable quantity of this inventory item broken down by lot
-	FulfillableQuantityByLot []InventoryLotQuantity `json:"fulfillable_quantity_by_lot,omitempty"`
+	FulfillableQuantityByLot []InventoryLotQuantity `json:"fulfillableQuantityByLot,omitempty"`
 	// Unique id of the inventory item
-	Id *int32 `json:"id,omitempty"`
+	InventoryId *int32 `json:"inventoryId,omitempty"`
 	// Whether the inventory is active or not
-	IsActive *bool `json:"is_active,omitempty"`
+	IsActive *bool `json:"isActive,omitempty"`
 	// True if the inventory item is marked as case pick
-	IsCasePick *bool `json:"is_case_pick,omitempty"`
+	IsCasePick *bool `json:"isCasePick,omitempty"`
 	// True if the inventory item is marked as a digital item
-	IsDigital *bool `json:"is_digital,omitempty"`
+	IsDigital *bool `json:"isDigital,omitempty"`
 	// True if this inventory item is organized into lots
-	IsLot *bool `json:"is_lot,omitempty"`
+	IsLot *bool `json:"isLot,omitempty"`
 	// Name of the inventory item
-	Name *string `json:"name,omitempty"`
-	// Attribute influencing the packaging requirements of this inventory item
-	PackagingAttribute *string `json:"packaging_attribute,omitempty"`
+	Name               NullableString      `json:"name,omitempty"`
+	PackagingAttribute *PackagingAttribute `json:"packagingAttribute,omitempty"`
 	// Total quantity in unreceived receiving orders for this inventory item
-	TotalAwaitingQuantity *int32 `json:"total_awaiting_quantity,omitempty"`
+	TotalAwaitingQuantity *int32 `json:"totalAwaitingQuantity,omitempty"`
 	// The amount of the item you need to send to ShipBob to fulfill all exception orders containing  the item. This is the exception_quantity less the fulfillable_quantity of the item.
-	TotalBackorderedQuantity *int32 `json:"total_backordered_quantity,omitempty"`
+	TotalBackorderedQuantity *int32 `json:"totalBackorderedQuantity,omitempty"`
 	// Total committed quantity of this inventory item
-	TotalCommittedQuantity *int32 `json:"total_committed_quantity,omitempty"`
+	TotalCommitedQuantity *int32 `json:"totalCommitedQuantity,omitempty"`
 	// The total quantity of all items that are contained within orders that are in exception/out of stock status. Out of stock orders have not been processed and therefore do not have lot or fulfillment centers assigned.
-	TotalExceptionQuantity *int32 `json:"total_exception_quantity,omitempty"`
+	TotalExceptionQuantity *int32 `json:"totalExceptionQuantity,omitempty"`
 	// Total fulfillable quantity of this inventory item
-	TotalFulfillableQuantity *int32 `json:"total_fulfillable_quantity,omitempty"`
+	TotalFulfillableQuantity *int32 `json:"totalFulfillableQuantity,omitempty"`
 	// The total quantity of all items that are in the process of internal transit  between ShipBob fulfillment centers. These items are not pickable or fulfillable until they have been received and moved to the \"On Hand\" quantity of the destination FC. Internal transit quantities for each FC represent the incoming transfer stock for that specific location.
-	TotalInternalTransferQuantity *int32 `json:"total_internal_transfer_quantity,omitempty"`
+	TotalInternalTransferQuantity *int32 `json:"totalInternalTransferQuantity,omitempty"`
 	// Total onhand quantity of this inventory item
-	TotalOnhandQuantity *int32 `json:"total_onhand_quantity,omitempty"`
+	TotalOnHandQuantity *int32 `json:"totalOnHandQuantity,omitempty"`
+	// Total quantity that can be sold without overselling the inventory item. This is calculated by subtracting the total exception quantity from the fulfillable quantity.
+	TotalSellableQuantity *int32 `json:"totalSellableQuantity,omitempty"`
 }
 
 // NewInventory instantiates a new Inventory object
@@ -103,9 +104,9 @@ func (o *Inventory) SetDimensions(v Dimension) {
 	o.Dimensions = &v
 }
 
-// GetFulfillableQuantityByFulfillmentCenter returns the FulfillableQuantityByFulfillmentCenter field value if set, zero value otherwise.
+// GetFulfillableQuantityByFulfillmentCenter returns the FulfillableQuantityByFulfillmentCenter field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *Inventory) GetFulfillableQuantityByFulfillmentCenter() []InventoryFulfillmentCenterQuantity {
-	if o == nil || IsNil(o.FulfillableQuantityByFulfillmentCenter) {
+	if o == nil {
 		var ret []InventoryFulfillmentCenterQuantity
 		return ret
 	}
@@ -114,6 +115,7 @@ func (o *Inventory) GetFulfillableQuantityByFulfillmentCenter() []InventoryFulfi
 
 // GetFulfillableQuantityByFulfillmentCenterOk returns a tuple with the FulfillableQuantityByFulfillmentCenter field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *Inventory) GetFulfillableQuantityByFulfillmentCenterOk() ([]InventoryFulfillmentCenterQuantity, bool) {
 	if o == nil || IsNil(o.FulfillableQuantityByFulfillmentCenter) {
 		return nil, false
@@ -123,7 +125,7 @@ func (o *Inventory) GetFulfillableQuantityByFulfillmentCenterOk() ([]InventoryFu
 
 // HasFulfillableQuantityByFulfillmentCenter returns a boolean if a field has been set.
 func (o *Inventory) HasFulfillableQuantityByFulfillmentCenter() bool {
-	if o != nil && !IsNil(o.FulfillableQuantityByFulfillmentCenter) {
+	if o != nil && IsNil(o.FulfillableQuantityByFulfillmentCenter) {
 		return true
 	}
 
@@ -135,9 +137,9 @@ func (o *Inventory) SetFulfillableQuantityByFulfillmentCenter(v []InventoryFulfi
 	o.FulfillableQuantityByFulfillmentCenter = v
 }
 
-// GetFulfillableQuantityByLot returns the FulfillableQuantityByLot field value if set, zero value otherwise.
+// GetFulfillableQuantityByLot returns the FulfillableQuantityByLot field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *Inventory) GetFulfillableQuantityByLot() []InventoryLotQuantity {
-	if o == nil || IsNil(o.FulfillableQuantityByLot) {
+	if o == nil {
 		var ret []InventoryLotQuantity
 		return ret
 	}
@@ -146,6 +148,7 @@ func (o *Inventory) GetFulfillableQuantityByLot() []InventoryLotQuantity {
 
 // GetFulfillableQuantityByLotOk returns a tuple with the FulfillableQuantityByLot field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *Inventory) GetFulfillableQuantityByLotOk() ([]InventoryLotQuantity, bool) {
 	if o == nil || IsNil(o.FulfillableQuantityByLot) {
 		return nil, false
@@ -155,7 +158,7 @@ func (o *Inventory) GetFulfillableQuantityByLotOk() ([]InventoryLotQuantity, boo
 
 // HasFulfillableQuantityByLot returns a boolean if a field has been set.
 func (o *Inventory) HasFulfillableQuantityByLot() bool {
-	if o != nil && !IsNil(o.FulfillableQuantityByLot) {
+	if o != nil && IsNil(o.FulfillableQuantityByLot) {
 		return true
 	}
 
@@ -167,36 +170,36 @@ func (o *Inventory) SetFulfillableQuantityByLot(v []InventoryLotQuantity) {
 	o.FulfillableQuantityByLot = v
 }
 
-// GetId returns the Id field value if set, zero value otherwise.
-func (o *Inventory) GetId() int32 {
-	if o == nil || IsNil(o.Id) {
+// GetInventoryId returns the InventoryId field value if set, zero value otherwise.
+func (o *Inventory) GetInventoryId() int32 {
+	if o == nil || IsNil(o.InventoryId) {
 		var ret int32
 		return ret
 	}
-	return *o.Id
+	return *o.InventoryId
 }
 
-// GetIdOk returns a tuple with the Id field value if set, nil otherwise
+// GetInventoryIdOk returns a tuple with the InventoryId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Inventory) GetIdOk() (*int32, bool) {
-	if o == nil || IsNil(o.Id) {
+func (o *Inventory) GetInventoryIdOk() (*int32, bool) {
+	if o == nil || IsNil(o.InventoryId) {
 		return nil, false
 	}
-	return o.Id, true
+	return o.InventoryId, true
 }
 
-// HasId returns a boolean if a field has been set.
-func (o *Inventory) HasId() bool {
-	if o != nil && !IsNil(o.Id) {
+// HasInventoryId returns a boolean if a field has been set.
+func (o *Inventory) HasInventoryId() bool {
+	if o != nil && !IsNil(o.InventoryId) {
 		return true
 	}
 
 	return false
 }
 
-// SetId gets a reference to the given int32 and assigns it to the Id field.
-func (o *Inventory) SetId(v int32) {
-	o.Id = &v
+// SetInventoryId gets a reference to the given int32 and assigns it to the InventoryId field.
+func (o *Inventory) SetInventoryId(v int32) {
+	o.InventoryId = &v
 }
 
 // GetIsActive returns the IsActive field value if set, zero value otherwise.
@@ -327,42 +330,53 @@ func (o *Inventory) SetIsLot(v bool) {
 	o.IsLot = &v
 }
 
-// GetName returns the Name field value if set, zero value otherwise.
+// GetName returns the Name field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *Inventory) GetName() string {
-	if o == nil || IsNil(o.Name) {
+	if o == nil || IsNil(o.Name.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.Name
+	return *o.Name.Get()
 }
 
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *Inventory) GetNameOk() (*string, bool) {
-	if o == nil || IsNil(o.Name) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Name, true
+	return o.Name.Get(), o.Name.IsSet()
 }
 
 // HasName returns a boolean if a field has been set.
 func (o *Inventory) HasName() bool {
-	if o != nil && !IsNil(o.Name) {
+	if o != nil && o.Name.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetName gets a reference to the given string and assigns it to the Name field.
+// SetName gets a reference to the given NullableString and assigns it to the Name field.
 func (o *Inventory) SetName(v string) {
-	o.Name = &v
+	o.Name.Set(&v)
+}
+
+// SetNameNil sets the value for Name to be an explicit nil
+func (o *Inventory) SetNameNil() {
+	o.Name.Set(nil)
+}
+
+// UnsetName ensures that no value is present for Name, not even an explicit nil
+func (o *Inventory) UnsetName() {
+	o.Name.Unset()
 }
 
 // GetPackagingAttribute returns the PackagingAttribute field value if set, zero value otherwise.
-func (o *Inventory) GetPackagingAttribute() string {
+func (o *Inventory) GetPackagingAttribute() PackagingAttribute {
 	if o == nil || IsNil(o.PackagingAttribute) {
-		var ret string
+		var ret PackagingAttribute
 		return ret
 	}
 	return *o.PackagingAttribute
@@ -370,7 +384,7 @@ func (o *Inventory) GetPackagingAttribute() string {
 
 // GetPackagingAttributeOk returns a tuple with the PackagingAttribute field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Inventory) GetPackagingAttributeOk() (*string, bool) {
+func (o *Inventory) GetPackagingAttributeOk() (*PackagingAttribute, bool) {
 	if o == nil || IsNil(o.PackagingAttribute) {
 		return nil, false
 	}
@@ -386,8 +400,8 @@ func (o *Inventory) HasPackagingAttribute() bool {
 	return false
 }
 
-// SetPackagingAttribute gets a reference to the given string and assigns it to the PackagingAttribute field.
-func (o *Inventory) SetPackagingAttribute(v string) {
+// SetPackagingAttribute gets a reference to the given PackagingAttribute and assigns it to the PackagingAttribute field.
+func (o *Inventory) SetPackagingAttribute(v PackagingAttribute) {
 	o.PackagingAttribute = &v
 }
 
@@ -455,36 +469,36 @@ func (o *Inventory) SetTotalBackorderedQuantity(v int32) {
 	o.TotalBackorderedQuantity = &v
 }
 
-// GetTotalCommittedQuantity returns the TotalCommittedQuantity field value if set, zero value otherwise.
-func (o *Inventory) GetTotalCommittedQuantity() int32 {
-	if o == nil || IsNil(o.TotalCommittedQuantity) {
+// GetTotalCommitedQuantity returns the TotalCommitedQuantity field value if set, zero value otherwise.
+func (o *Inventory) GetTotalCommitedQuantity() int32 {
+	if o == nil || IsNil(o.TotalCommitedQuantity) {
 		var ret int32
 		return ret
 	}
-	return *o.TotalCommittedQuantity
+	return *o.TotalCommitedQuantity
 }
 
-// GetTotalCommittedQuantityOk returns a tuple with the TotalCommittedQuantity field value if set, nil otherwise
+// GetTotalCommitedQuantityOk returns a tuple with the TotalCommitedQuantity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Inventory) GetTotalCommittedQuantityOk() (*int32, bool) {
-	if o == nil || IsNil(o.TotalCommittedQuantity) {
+func (o *Inventory) GetTotalCommitedQuantityOk() (*int32, bool) {
+	if o == nil || IsNil(o.TotalCommitedQuantity) {
 		return nil, false
 	}
-	return o.TotalCommittedQuantity, true
+	return o.TotalCommitedQuantity, true
 }
 
-// HasTotalCommittedQuantity returns a boolean if a field has been set.
-func (o *Inventory) HasTotalCommittedQuantity() bool {
-	if o != nil && !IsNil(o.TotalCommittedQuantity) {
+// HasTotalCommitedQuantity returns a boolean if a field has been set.
+func (o *Inventory) HasTotalCommitedQuantity() bool {
+	if o != nil && !IsNil(o.TotalCommitedQuantity) {
 		return true
 	}
 
 	return false
 }
 
-// SetTotalCommittedQuantity gets a reference to the given int32 and assigns it to the TotalCommittedQuantity field.
-func (o *Inventory) SetTotalCommittedQuantity(v int32) {
-	o.TotalCommittedQuantity = &v
+// SetTotalCommitedQuantity gets a reference to the given int32 and assigns it to the TotalCommitedQuantity field.
+func (o *Inventory) SetTotalCommitedQuantity(v int32) {
+	o.TotalCommitedQuantity = &v
 }
 
 // GetTotalExceptionQuantity returns the TotalExceptionQuantity field value if set, zero value otherwise.
@@ -583,36 +597,68 @@ func (o *Inventory) SetTotalInternalTransferQuantity(v int32) {
 	o.TotalInternalTransferQuantity = &v
 }
 
-// GetTotalOnhandQuantity returns the TotalOnhandQuantity field value if set, zero value otherwise.
-func (o *Inventory) GetTotalOnhandQuantity() int32 {
-	if o == nil || IsNil(o.TotalOnhandQuantity) {
+// GetTotalOnHandQuantity returns the TotalOnHandQuantity field value if set, zero value otherwise.
+func (o *Inventory) GetTotalOnHandQuantity() int32 {
+	if o == nil || IsNil(o.TotalOnHandQuantity) {
 		var ret int32
 		return ret
 	}
-	return *o.TotalOnhandQuantity
+	return *o.TotalOnHandQuantity
 }
 
-// GetTotalOnhandQuantityOk returns a tuple with the TotalOnhandQuantity field value if set, nil otherwise
+// GetTotalOnHandQuantityOk returns a tuple with the TotalOnHandQuantity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Inventory) GetTotalOnhandQuantityOk() (*int32, bool) {
-	if o == nil || IsNil(o.TotalOnhandQuantity) {
+func (o *Inventory) GetTotalOnHandQuantityOk() (*int32, bool) {
+	if o == nil || IsNil(o.TotalOnHandQuantity) {
 		return nil, false
 	}
-	return o.TotalOnhandQuantity, true
+	return o.TotalOnHandQuantity, true
 }
 
-// HasTotalOnhandQuantity returns a boolean if a field has been set.
-func (o *Inventory) HasTotalOnhandQuantity() bool {
-	if o != nil && !IsNil(o.TotalOnhandQuantity) {
+// HasTotalOnHandQuantity returns a boolean if a field has been set.
+func (o *Inventory) HasTotalOnHandQuantity() bool {
+	if o != nil && !IsNil(o.TotalOnHandQuantity) {
 		return true
 	}
 
 	return false
 }
 
-// SetTotalOnhandQuantity gets a reference to the given int32 and assigns it to the TotalOnhandQuantity field.
-func (o *Inventory) SetTotalOnhandQuantity(v int32) {
-	o.TotalOnhandQuantity = &v
+// SetTotalOnHandQuantity gets a reference to the given int32 and assigns it to the TotalOnHandQuantity field.
+func (o *Inventory) SetTotalOnHandQuantity(v int32) {
+	o.TotalOnHandQuantity = &v
+}
+
+// GetTotalSellableQuantity returns the TotalSellableQuantity field value if set, zero value otherwise.
+func (o *Inventory) GetTotalSellableQuantity() int32 {
+	if o == nil || IsNil(o.TotalSellableQuantity) {
+		var ret int32
+		return ret
+	}
+	return *o.TotalSellableQuantity
+}
+
+// GetTotalSellableQuantityOk returns a tuple with the TotalSellableQuantity field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Inventory) GetTotalSellableQuantityOk() (*int32, bool) {
+	if o == nil || IsNil(o.TotalSellableQuantity) {
+		return nil, false
+	}
+	return o.TotalSellableQuantity, true
+}
+
+// HasTotalSellableQuantity returns a boolean if a field has been set.
+func (o *Inventory) HasTotalSellableQuantity() bool {
+	if o != nil && !IsNil(o.TotalSellableQuantity) {
+		return true
+	}
+
+	return false
+}
+
+// SetTotalSellableQuantity gets a reference to the given int32 and assigns it to the TotalSellableQuantity field.
+func (o *Inventory) SetTotalSellableQuantity(v int32) {
+	o.TotalSellableQuantity = &v
 }
 
 func (o Inventory) MarshalJSON() ([]byte, error) {
@@ -628,53 +674,56 @@ func (o Inventory) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Dimensions) {
 		toSerialize["dimensions"] = o.Dimensions
 	}
-	if !IsNil(o.FulfillableQuantityByFulfillmentCenter) {
-		toSerialize["fulfillable_quantity_by_fulfillment_center"] = o.FulfillableQuantityByFulfillmentCenter
+	if o.FulfillableQuantityByFulfillmentCenter != nil {
+		toSerialize["fulfillableQuantityByFulfillmentCenter"] = o.FulfillableQuantityByFulfillmentCenter
 	}
-	if !IsNil(o.FulfillableQuantityByLot) {
-		toSerialize["fulfillable_quantity_by_lot"] = o.FulfillableQuantityByLot
+	if o.FulfillableQuantityByLot != nil {
+		toSerialize["fulfillableQuantityByLot"] = o.FulfillableQuantityByLot
 	}
-	if !IsNil(o.Id) {
-		toSerialize["id"] = o.Id
+	if !IsNil(o.InventoryId) {
+		toSerialize["inventoryId"] = o.InventoryId
 	}
 	if !IsNil(o.IsActive) {
-		toSerialize["is_active"] = o.IsActive
+		toSerialize["isActive"] = o.IsActive
 	}
 	if !IsNil(o.IsCasePick) {
-		toSerialize["is_case_pick"] = o.IsCasePick
+		toSerialize["isCasePick"] = o.IsCasePick
 	}
 	if !IsNil(o.IsDigital) {
-		toSerialize["is_digital"] = o.IsDigital
+		toSerialize["isDigital"] = o.IsDigital
 	}
 	if !IsNil(o.IsLot) {
-		toSerialize["is_lot"] = o.IsLot
+		toSerialize["isLot"] = o.IsLot
 	}
-	if !IsNil(o.Name) {
-		toSerialize["name"] = o.Name
+	if o.Name.IsSet() {
+		toSerialize["name"] = o.Name.Get()
 	}
 	if !IsNil(o.PackagingAttribute) {
-		toSerialize["packaging_attribute"] = o.PackagingAttribute
+		toSerialize["packagingAttribute"] = o.PackagingAttribute
 	}
 	if !IsNil(o.TotalAwaitingQuantity) {
-		toSerialize["total_awaiting_quantity"] = o.TotalAwaitingQuantity
+		toSerialize["totalAwaitingQuantity"] = o.TotalAwaitingQuantity
 	}
 	if !IsNil(o.TotalBackorderedQuantity) {
-		toSerialize["total_backordered_quantity"] = o.TotalBackorderedQuantity
+		toSerialize["totalBackorderedQuantity"] = o.TotalBackorderedQuantity
 	}
-	if !IsNil(o.TotalCommittedQuantity) {
-		toSerialize["total_committed_quantity"] = o.TotalCommittedQuantity
+	if !IsNil(o.TotalCommitedQuantity) {
+		toSerialize["totalCommitedQuantity"] = o.TotalCommitedQuantity
 	}
 	if !IsNil(o.TotalExceptionQuantity) {
-		toSerialize["total_exception_quantity"] = o.TotalExceptionQuantity
+		toSerialize["totalExceptionQuantity"] = o.TotalExceptionQuantity
 	}
 	if !IsNil(o.TotalFulfillableQuantity) {
-		toSerialize["total_fulfillable_quantity"] = o.TotalFulfillableQuantity
+		toSerialize["totalFulfillableQuantity"] = o.TotalFulfillableQuantity
 	}
 	if !IsNil(o.TotalInternalTransferQuantity) {
-		toSerialize["total_internal_transfer_quantity"] = o.TotalInternalTransferQuantity
+		toSerialize["totalInternalTransferQuantity"] = o.TotalInternalTransferQuantity
 	}
-	if !IsNil(o.TotalOnhandQuantity) {
-		toSerialize["total_onhand_quantity"] = o.TotalOnhandQuantity
+	if !IsNil(o.TotalOnHandQuantity) {
+		toSerialize["totalOnHandQuantity"] = o.TotalOnHandQuantity
+	}
+	if !IsNil(o.TotalSellableQuantity) {
+		toSerialize["totalSellableQuantity"] = o.TotalSellableQuantity
 	}
 	return toSerialize, nil
 }

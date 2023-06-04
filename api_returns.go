@@ -72,7 +72,7 @@ func (a *ReturnsApiService) CancelReturnExecute(r ApiCancelReturnRequest) (*Retu
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/return/{id}/cancel"
+	localVarPath := localBasePath + "/1.0/return/{id}/cancel"
 	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -210,7 +210,7 @@ func (a *ReturnsApiService) CreateReturnExecute(r ApiCreateReturnRequest) (*Retu
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/return"
+	localVarPath := localBasePath + "/1.0/return"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -345,7 +345,7 @@ func (a *ReturnsApiService) GetReturnExecute(r ApiGetReturnRequest) (*ReturnOrde
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/return/{id}"
+	localVarPath := localBasePath + "/1.0/return/{id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -432,7 +432,7 @@ func (r ApiGetReturnStatushistoryRequest) ShipbobChannelId(shipbobChannelId int3
 	return r
 }
 
-func (r ApiGetReturnStatushistoryRequest) Execute() (*ReturnOrderStatusHistory, *http.Response, error) {
+func (r ApiGetReturnStatushistoryRequest) Execute() ([]ReturnOrderStatusHistory, *http.Response, error) {
 	return r.ApiService.GetReturnStatushistoryExecute(r)
 }
 
@@ -453,13 +453,13 @@ func (a *ReturnsApiService) GetReturnStatushistory(ctx context.Context, id int32
 
 // Execute executes the request
 //
-//	@return ReturnOrderStatusHistory
-func (a *ReturnsApiService) GetReturnStatushistoryExecute(r ApiGetReturnStatushistoryRequest) (*ReturnOrderStatusHistory, *http.Response, error) {
+//	@return []ReturnOrderStatusHistory
+func (a *ReturnsApiService) GetReturnStatushistoryExecute(r ApiGetReturnStatushistoryRequest) ([]ReturnOrderStatusHistory, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *ReturnOrderStatusHistory
+		localVarReturnValue []ReturnOrderStatusHistory
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ReturnsApiService.GetReturnStatushistory")
@@ -467,7 +467,7 @@ func (a *ReturnsApiService) GetReturnStatushistoryExecute(r ApiGetReturnStatushi
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/return/{id}/statushistory"
+	localVarPath := localBasePath + "/1.0/return/{id}/statushistory"
 	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -669,7 +669,7 @@ func (a *ReturnsApiService) GetReturnsExecute(r ApiGetReturnsRequest) ([]ReturnO
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/return"
+	localVarPath := localBasePath + "/1.0/return"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -879,7 +879,7 @@ func (a *ReturnsApiService) UpdateReturnExecute(r ApiUpdateReturnRequest) (*Retu
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/return/{id}"
+	localVarPath := localBasePath + "/1.0/return/{id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 
 	localVarHeaderParams := make(map[string]string)

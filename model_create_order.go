@@ -20,15 +20,26 @@ var _ MappedNullable = &CreateOrder{}
 
 // CreateOrder struct for CreateOrder
 type CreateOrder struct {
+	Financials *Financials `json:"financials,omitempty"`
+	// Gift message associated with the order
+	GiftMessage *string `json:"gift_message,omitempty"`
+	// Desired Fulfillment Center Location ID. If not specified, ShipBob will determine the location that fulfills this order.
+	LocationId NullableInt32 `json:"location_id,omitempty"`
 	// User friendly orderId or store order number that will be shown on the Orders Page. If not provided, referenceId will be used
-	OrderNumber *string             `json:"order_number,omitempty"`
-	Products    []AddProductToOrder `json:"products"`
+	OrderNumber *string `json:"order_number,omitempty"`
+	// Products included in the order. Products identified by reference_id must also include the product name if there is no matching ShipBob product.
+	Products []AddProductToOrder `json:"products"`
 	// Date this order was purchase by the end user
-	PurchaseDate   NullableTime  `json:"purchase_date,omitempty"`
-	Recipient      RecipientInfo `json:"recipient"`
-	ReferenceId    string        `json:"reference_id"`
-	ShippingMethod string        `json:"shipping_method"`
-	Tags           []Tag         `json:"tags,omitempty"`
+	PurchaseDate NullableTime  `json:"purchase_date,omitempty"`
+	Recipient    RecipientInfo `json:"recipient"`
+	// Unique and immutable order identifier from your upstream system
+	ReferenceId         string               `json:"reference_id"`
+	RetailerProgramData *RetailerProgramData `json:"retailer_program_data,omitempty"`
+	// Client-defined shipping method matching what the user has listed as the shipping method on the Ship Option Mapping setup page in the ShipBob Merchant Portal. If they don't match, we will create a new one and default it to Standard
+	ShippingMethod string         `json:"shipping_method"`
+	ShippingTerms  *ShippingTerms `json:"shipping_terms,omitempty"`
+	// Key value pair array to store extra information at the order level for API purposes. ShipBob won't display the info in the ShipBob Merchant Portal or react based on this data.
+	Tags []Tag `json:"tags,omitempty"`
 	// Defaults to Direct to Consumer (DTC) if not provided. Note: B2B is not supported at this time
 	Type *string `json:"type,omitempty"`
 }
@@ -52,6 +63,113 @@ func NewCreateOrder(products []AddProductToOrder, recipient RecipientInfo, refer
 func NewCreateOrderWithDefaults() *CreateOrder {
 	this := CreateOrder{}
 	return &this
+}
+
+// GetFinancials returns the Financials field value if set, zero value otherwise.
+func (o *CreateOrder) GetFinancials() Financials {
+	if o == nil || IsNil(o.Financials) {
+		var ret Financials
+		return ret
+	}
+	return *o.Financials
+}
+
+// GetFinancialsOk returns a tuple with the Financials field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateOrder) GetFinancialsOk() (*Financials, bool) {
+	if o == nil || IsNil(o.Financials) {
+		return nil, false
+	}
+	return o.Financials, true
+}
+
+// HasFinancials returns a boolean if a field has been set.
+func (o *CreateOrder) HasFinancials() bool {
+	if o != nil && !IsNil(o.Financials) {
+		return true
+	}
+
+	return false
+}
+
+// SetFinancials gets a reference to the given Financials and assigns it to the Financials field.
+func (o *CreateOrder) SetFinancials(v Financials) {
+	o.Financials = &v
+}
+
+// GetGiftMessage returns the GiftMessage field value if set, zero value otherwise.
+func (o *CreateOrder) GetGiftMessage() string {
+	if o == nil || IsNil(o.GiftMessage) {
+		var ret string
+		return ret
+	}
+	return *o.GiftMessage
+}
+
+// GetGiftMessageOk returns a tuple with the GiftMessage field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateOrder) GetGiftMessageOk() (*string, bool) {
+	if o == nil || IsNil(o.GiftMessage) {
+		return nil, false
+	}
+	return o.GiftMessage, true
+}
+
+// HasGiftMessage returns a boolean if a field has been set.
+func (o *CreateOrder) HasGiftMessage() bool {
+	if o != nil && !IsNil(o.GiftMessage) {
+		return true
+	}
+
+	return false
+}
+
+// SetGiftMessage gets a reference to the given string and assigns it to the GiftMessage field.
+func (o *CreateOrder) SetGiftMessage(v string) {
+	o.GiftMessage = &v
+}
+
+// GetLocationId returns the LocationId field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *CreateOrder) GetLocationId() int32 {
+	if o == nil || IsNil(o.LocationId.Get()) {
+		var ret int32
+		return ret
+	}
+	return *o.LocationId.Get()
+}
+
+// GetLocationIdOk returns a tuple with the LocationId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *CreateOrder) GetLocationIdOk() (*int32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.LocationId.Get(), o.LocationId.IsSet()
+}
+
+// HasLocationId returns a boolean if a field has been set.
+func (o *CreateOrder) HasLocationId() bool {
+	if o != nil && o.LocationId.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetLocationId gets a reference to the given NullableInt32 and assigns it to the LocationId field.
+func (o *CreateOrder) SetLocationId(v int32) {
+	o.LocationId.Set(&v)
+}
+
+// SetLocationIdNil sets the value for LocationId to be an explicit nil
+func (o *CreateOrder) SetLocationIdNil() {
+	o.LocationId.Set(nil)
+}
+
+// UnsetLocationId ensures that no value is present for LocationId, not even an explicit nil
+func (o *CreateOrder) UnsetLocationId() {
+	o.LocationId.Unset()
 }
 
 // GetOrderNumber returns the OrderNumber field value if set, zero value otherwise.
@@ -201,6 +319,38 @@ func (o *CreateOrder) SetReferenceId(v string) {
 	o.ReferenceId = v
 }
 
+// GetRetailerProgramData returns the RetailerProgramData field value if set, zero value otherwise.
+func (o *CreateOrder) GetRetailerProgramData() RetailerProgramData {
+	if o == nil || IsNil(o.RetailerProgramData) {
+		var ret RetailerProgramData
+		return ret
+	}
+	return *o.RetailerProgramData
+}
+
+// GetRetailerProgramDataOk returns a tuple with the RetailerProgramData field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateOrder) GetRetailerProgramDataOk() (*RetailerProgramData, bool) {
+	if o == nil || IsNil(o.RetailerProgramData) {
+		return nil, false
+	}
+	return o.RetailerProgramData, true
+}
+
+// HasRetailerProgramData returns a boolean if a field has been set.
+func (o *CreateOrder) HasRetailerProgramData() bool {
+	if o != nil && !IsNil(o.RetailerProgramData) {
+		return true
+	}
+
+	return false
+}
+
+// SetRetailerProgramData gets a reference to the given RetailerProgramData and assigns it to the RetailerProgramData field.
+func (o *CreateOrder) SetRetailerProgramData(v RetailerProgramData) {
+	o.RetailerProgramData = &v
+}
+
 // GetShippingMethod returns the ShippingMethod field value
 func (o *CreateOrder) GetShippingMethod() string {
 	if o == nil {
@@ -223,6 +373,38 @@ func (o *CreateOrder) GetShippingMethodOk() (*string, bool) {
 // SetShippingMethod sets field value
 func (o *CreateOrder) SetShippingMethod(v string) {
 	o.ShippingMethod = v
+}
+
+// GetShippingTerms returns the ShippingTerms field value if set, zero value otherwise.
+func (o *CreateOrder) GetShippingTerms() ShippingTerms {
+	if o == nil || IsNil(o.ShippingTerms) {
+		var ret ShippingTerms
+		return ret
+	}
+	return *o.ShippingTerms
+}
+
+// GetShippingTermsOk returns a tuple with the ShippingTerms field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateOrder) GetShippingTermsOk() (*ShippingTerms, bool) {
+	if o == nil || IsNil(o.ShippingTerms) {
+		return nil, false
+	}
+	return o.ShippingTerms, true
+}
+
+// HasShippingTerms returns a boolean if a field has been set.
+func (o *CreateOrder) HasShippingTerms() bool {
+	if o != nil && !IsNil(o.ShippingTerms) {
+		return true
+	}
+
+	return false
+}
+
+// SetShippingTerms gets a reference to the given ShippingTerms and assigns it to the ShippingTerms field.
+func (o *CreateOrder) SetShippingTerms(v ShippingTerms) {
+	o.ShippingTerms = &v
 }
 
 // GetTags returns the Tags field value if set, zero value otherwise.
@@ -299,6 +481,15 @@ func (o CreateOrder) MarshalJSON() ([]byte, error) {
 
 func (o CreateOrder) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Financials) {
+		toSerialize["financials"] = o.Financials
+	}
+	if !IsNil(o.GiftMessage) {
+		toSerialize["gift_message"] = o.GiftMessage
+	}
+	if o.LocationId.IsSet() {
+		toSerialize["location_id"] = o.LocationId.Get()
+	}
 	if !IsNil(o.OrderNumber) {
 		toSerialize["order_number"] = o.OrderNumber
 	}
@@ -308,7 +499,13 @@ func (o CreateOrder) ToMap() (map[string]interface{}, error) {
 	}
 	toSerialize["recipient"] = o.Recipient
 	toSerialize["reference_id"] = o.ReferenceId
+	if !IsNil(o.RetailerProgramData) {
+		toSerialize["retailer_program_data"] = o.RetailerProgramData
+	}
 	toSerialize["shipping_method"] = o.ShippingMethod
+	if !IsNil(o.ShippingTerms) {
+		toSerialize["shipping_terms"] = o.ShippingTerms
+	}
 	if !IsNil(o.Tags) {
 		toSerialize["tags"] = o.Tags
 	}

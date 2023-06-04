@@ -33,6 +33,7 @@ type ApiGetInventoriesRequest struct {
 	iDs              *[]int32
 	sort             *string
 	search           *string
+	locationType     *string
 	shipbobChannelId *int32
 }
 
@@ -78,6 +79,12 @@ func (r ApiGetInventoriesRequest) Search(search string) ApiGetInventoriesRequest
 	return r
 }
 
+// LocationType is valid for hub, spoke, or lts. LocationType will default to all locations.
+func (r ApiGetInventoriesRequest) LocationType(locationType string) ApiGetInventoriesRequest {
+	r.locationType = &locationType
+	return r
+}
+
 // Channel Id for Operation
 func (r ApiGetInventoriesRequest) ShipbobChannelId(shipbobChannelId int32) ApiGetInventoriesRequest {
 	r.shipbobChannelId = &shipbobChannelId
@@ -117,7 +124,7 @@ func (a *InventoryApiService) GetInventoriesExecute(r ApiGetInventoriesRequest) 
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/inventory"
+	localVarPath := localBasePath + "/1.0/inventory"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -151,6 +158,9 @@ func (a *InventoryApiService) GetInventoriesExecute(r ApiGetInventoriesRequest) 
 	}
 	if r.search != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "Search", r.search, "")
+	}
+	if r.locationType != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "LocationType", r.locationType, "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -204,6 +214,16 @@ func (a *InventoryApiService) GetInventoriesExecute(r ApiGetInventoriesRequest) 
 			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v ProblemDetails
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -261,7 +281,7 @@ func (a *InventoryApiService) GetInventoryExecute(r ApiGetInventoryRequest) (*In
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/inventory/{inventoryId}"
+	localVarPath := localBasePath + "/1.0/inventory/{inventoryId}"
 	localVarPath = strings.Replace(localVarPath, "{"+"inventoryId"+"}", url.PathEscape(parameterValueToString(r.inventoryId, "inventoryId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -317,6 +337,16 @@ func (a *InventoryApiService) GetInventoryExecute(r ApiGetInventoryRequest) (*In
 			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v ProblemDetails
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -381,7 +411,7 @@ func (a *InventoryApiService) GetProductInventoriesExecute(r ApiGetProductInvent
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/product/{productId}/inventory"
+	localVarPath := localBasePath + "/1.0/product/{productId}/inventory"
 	localVarPath = strings.Replace(localVarPath, "{"+"productId"+"}", url.PathEscape(parameterValueToString(r.productId, "productId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -440,6 +470,16 @@ func (a *InventoryApiService) GetProductInventoriesExecute(r ApiGetProductInvent
 			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v ProblemDetails
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}

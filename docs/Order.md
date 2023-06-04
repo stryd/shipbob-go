@@ -6,14 +6,18 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Channel** | Pointer to [**ChannelInfo**](ChannelInfo.md) |  | [optional] 
 **CreatedDate** | Pointer to **NullableTime** | Date this order was created | [optional] 
+**Financials** | Pointer to [**Financials**](Financials.md) |  | [optional] 
+**GiftMessage** | Pointer to **string** | Gift message associated with the order | [optional] 
 **Id** | Pointer to **int32** | Unique id of the order | [optional] 
 **OrderNumber** | Pointer to **string** | User friendly orderId or store order number that will be shown on the Orders Page. If not provided, referenceId will be used | [optional] 
 **Products** | Pointer to [**[]ProductInfo**](ProductInfo.md) | List of products included in the order | [optional] 
 **PurchaseDate** | Pointer to **NullableTime** | Date this order was purchase by the end user | [optional] 
 **Recipient** | Pointer to [**RecipientInfo**](RecipientInfo.md) |  | [optional] 
 **ReferenceId** | Pointer to **string** | Client-defined external unique id of the order | [optional] 
+**RetailerProgramData** | Pointer to [**RetailerProgramData**](RetailerProgramData.md) |  | [optional] 
 **Shipments** | Pointer to [**[]Shipment**](Shipment.md) | Shipments affiliated with the order | [optional] 
 **ShippingMethod** | Pointer to **string** | Client-defined shipping method | [optional] 
+**ShippingTerms** | Pointer to [**ShippingTerms**](ShippingTerms.md) |  | [optional] 
 **Status** | Pointer to **string** | The order status | [optional] 
 **Tags** | Pointer to [**[]Tag**](Tag.md) | Client-defined order tags | [optional] 
 **Type** | Pointer to **string** | Shipment type of the order | [optional] 
@@ -97,6 +101,56 @@ HasCreatedDate returns a boolean if a field has been set.
 `func (o *Order) UnsetCreatedDate()`
 
 UnsetCreatedDate ensures that no value is present for CreatedDate, not even an explicit nil
+### GetFinancials
+
+`func (o *Order) GetFinancials() Financials`
+
+GetFinancials returns the Financials field if non-nil, zero value otherwise.
+
+### GetFinancialsOk
+
+`func (o *Order) GetFinancialsOk() (*Financials, bool)`
+
+GetFinancialsOk returns a tuple with the Financials field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFinancials
+
+`func (o *Order) SetFinancials(v Financials)`
+
+SetFinancials sets Financials field to given value.
+
+### HasFinancials
+
+`func (o *Order) HasFinancials() bool`
+
+HasFinancials returns a boolean if a field has been set.
+
+### GetGiftMessage
+
+`func (o *Order) GetGiftMessage() string`
+
+GetGiftMessage returns the GiftMessage field if non-nil, zero value otherwise.
+
+### GetGiftMessageOk
+
+`func (o *Order) GetGiftMessageOk() (*string, bool)`
+
+GetGiftMessageOk returns a tuple with the GiftMessage field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetGiftMessage
+
+`func (o *Order) SetGiftMessage(v string)`
+
+SetGiftMessage sets GiftMessage field to given value.
+
+### HasGiftMessage
+
+`func (o *Order) HasGiftMessage() bool`
+
+HasGiftMessage returns a boolean if a field has been set.
+
 ### GetId
 
 `func (o *Order) GetId() int32`
@@ -257,6 +311,31 @@ SetReferenceId sets ReferenceId field to given value.
 
 HasReferenceId returns a boolean if a field has been set.
 
+### GetRetailerProgramData
+
+`func (o *Order) GetRetailerProgramData() RetailerProgramData`
+
+GetRetailerProgramData returns the RetailerProgramData field if non-nil, zero value otherwise.
+
+### GetRetailerProgramDataOk
+
+`func (o *Order) GetRetailerProgramDataOk() (*RetailerProgramData, bool)`
+
+GetRetailerProgramDataOk returns a tuple with the RetailerProgramData field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRetailerProgramData
+
+`func (o *Order) SetRetailerProgramData(v RetailerProgramData)`
+
+SetRetailerProgramData sets RetailerProgramData field to given value.
+
+### HasRetailerProgramData
+
+`func (o *Order) HasRetailerProgramData() bool`
+
+HasRetailerProgramData returns a boolean if a field has been set.
+
 ### GetShipments
 
 `func (o *Order) GetShipments() []Shipment`
@@ -306,6 +385,31 @@ SetShippingMethod sets ShippingMethod field to given value.
 `func (o *Order) HasShippingMethod() bool`
 
 HasShippingMethod returns a boolean if a field has been set.
+
+### GetShippingTerms
+
+`func (o *Order) GetShippingTerms() ShippingTerms`
+
+GetShippingTerms returns the ShippingTerms field if non-nil, zero value otherwise.
+
+### GetShippingTermsOk
+
+`func (o *Order) GetShippingTermsOk() (*ShippingTerms, bool)`
+
+GetShippingTermsOk returns a tuple with the ShippingTerms field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetShippingTerms
+
+`func (o *Order) SetShippingTerms(v ShippingTerms)`
+
+SetShippingTerms sets ShippingTerms field to given value.
+
+### HasShippingTerms
+
+`func (o *Order) HasShippingTerms() bool`
+
+HasShippingTerms returns a boolean if a field has been set.
 
 ### GetStatus
 

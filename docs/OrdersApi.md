@@ -1,25 +1,27 @@
 # \OrdersApi
 
-All URIs are relative to *https://api.shipbob.com/1.0*
+All URIs are relative to *https://api.shipbob.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CancelOrder**](OrdersApi.md#CancelOrder) | **Post** /order/{orderId}/cancel | Cancel single Order by Order ID
-[**CancelOrderShipment**](OrdersApi.md#CancelOrderShipment) | **Post** /order/{orderId}/shipment/{shipmentId}/cancel | Cancel one Shipment by Order Id and Shipment Id
-[**CancelShipment**](OrdersApi.md#CancelShipment) | **Post** /shipment/{shipmentId}/cancel | Cancel one Shipment by Shipment Id
-[**CreateOrder**](OrdersApi.md#CreateOrder) | **Post** /order | Create Order
-[**CreateOrderEstimate**](OrdersApi.md#CreateOrderEstimate) | **Post** /order/estimate | Estimate Fulfillment Cost For Order
-[**CreateShipmentCancelbulk**](OrdersApi.md#CreateShipmentCancelbulk) | **Post** /shipment/cancelbulk | Cancel multiple Shipments by Shipment Id
-[**GetOrder**](OrdersApi.md#GetOrder) | **Get** /order/{orderId} | Get Order
-[**GetOrderShipment**](OrdersApi.md#GetOrderShipment) | **Get** /order/{orderId}/shipment/{shipmentId} | Get one Shipment by Order Id and Shipment Id
-[**GetOrderShipmentLogs**](OrdersApi.md#GetOrderShipmentLogs) | **Get** /order/{orderId}/shipment/{shipmentId}/logs | Get logs for one Shipment by Order Id and Shipment Id
-[**GetOrderShipmentTimelines**](OrdersApi.md#GetOrderShipmentTimelines) | **Get** /order/{orderId}/shipment/{shipmentId}/timeline | Get one Shipment&#39;s status timeline by Order Id and Shipment Id
-[**GetOrderShipments**](OrdersApi.md#GetOrderShipments) | **Get** /order/{orderId}/shipment | Get all Shipments for Order
-[**GetOrders**](OrdersApi.md#GetOrders) | **Get** /order | Get Orders
-[**GetShipment**](OrdersApi.md#GetShipment) | **Get** /shipment/{shipmentId} | Get one Shipment by Shipment Id
-[**GetShipmentLogs**](OrdersApi.md#GetShipmentLogs) | **Get** /shipment/{shipmentId}/logs | Get logs for one Shipment by Shipment Id
-[**GetShipmentTimelines**](OrdersApi.md#GetShipmentTimelines) | **Get** /shipment/{shipmentId}/timeline | Get one Shipment&#39;s status timeline by Shipment Id
-[**GetShippingmethods**](OrdersApi.md#GetShippingmethods) | **Get** /shippingmethod | Get shipping methods
+[**CancelOrder**](OrdersApi.md#CancelOrder) | **Post** /1.0/order/{orderId}/cancel | Cancel single Order by Order ID
+[**CancelOrderShipment**](OrdersApi.md#CancelOrderShipment) | **Post** /1.0/order/{orderId}/shipment/{shipmentId}/cancel | Cancel one Shipment by Order Id and Shipment Id
+[**CancelShipment**](OrdersApi.md#CancelShipment) | **Post** /1.0/shipment/{shipmentId}/cancel | Cancel one Shipment by Shipment Id
+[**CreateOrder**](OrdersApi.md#CreateOrder) | **Post** /1.0/order | Create Order
+[**CreateOrderEstimate**](OrdersApi.md#CreateOrderEstimate) | **Post** /1.0/order/estimate | Estimate Fulfillment Cost For Order
+[**CreateOrderStoreOrderJson**](OrdersApi.md#CreateOrderStoreOrderJson) | **Post** /1.0/order/{orderId}/storeOrderJson | Save the Store Order Json
+[**CreateShipmentCancelbulk**](OrdersApi.md#CreateShipmentCancelbulk) | **Post** /1.0/shipment/cancelbulk | Cancel multiple Shipments by Shipment Id
+[**GetOrder**](OrdersApi.md#GetOrder) | **Get** /1.0/order/{orderId} | Get Order
+[**GetOrderShipment**](OrdersApi.md#GetOrderShipment) | **Get** /1.0/order/{orderId}/shipment/{shipmentId} | Get one Shipment by Order Id and Shipment Id
+[**GetOrderShipmentLogs**](OrdersApi.md#GetOrderShipmentLogs) | **Get** /1.0/order/{orderId}/shipment/{shipmentId}/logs | Get logs for one Shipment by Order Id and Shipment Id
+[**GetOrderShipmentTimelines**](OrdersApi.md#GetOrderShipmentTimelines) | **Get** /1.0/order/{orderId}/shipment/{shipmentId}/timeline | Get one Shipment&#39;s status timeline by Order Id and Shipment Id
+[**GetOrderShipments**](OrdersApi.md#GetOrderShipments) | **Get** /1.0/order/{orderId}/shipment | Get all Shipments for Order
+[**GetOrderStoreOrderJsons**](OrdersApi.md#GetOrderStoreOrderJsons) | **Get** /1.0/order/{orderId}/storeOrderJson | Get Order Store Json
+[**GetOrders**](OrdersApi.md#GetOrders) | **Get** /1.0/order | Get Orders
+[**GetShipment**](OrdersApi.md#GetShipment) | **Get** /1.0/shipment/{shipmentId} | Get one Shipment by Shipment Id
+[**GetShipmentLogs**](OrdersApi.md#GetShipmentLogs) | **Get** /1.0/shipment/{shipmentId}/logs | Get logs for one Shipment by Shipment Id
+[**GetShipmentTimelines**](OrdersApi.md#GetShipmentTimelines) | **Get** /1.0/shipment/{shipmentId}/timeline | Get one Shipment&#39;s status timeline by Shipment Id
+[**GetShippingmethods**](OrdersApi.md#GetShippingmethods) | **Get** /1.0/shippingmethod | Get shipping methods
 
 
 
@@ -256,7 +258,7 @@ import (
 
 func main() {
     shipbobChannelId := int32(56) // int32 | Channel Id for Operation
-    createOrder := *openapiclient.NewCreateOrder([]openapiclient.AddProductToOrder{openapiclient.AddProductToOrder{AddProductToOrderByProductId: openapiclient.NewAddProductToOrderByProductId(int32(123), int32(123))}}, *openapiclient.NewRecipientInfo(*openapiclient.NewOrderAddress("100 Nowhere Blvd", "Gotham City", "US"), "John Doe"), "ReferenceId_example", "ShippingMethod_example") // CreateOrder |  (optional)
+    createOrder := *openapiclient.NewCreateOrder([]openapiclient.AddProductToOrder{openapiclient.AddProductToOrder{AddProductToOrderByProductId: openapiclient.NewAddProductToOrderByProductId(int32(123), int32(123))}}, *openapiclient.NewRecipientInfo(*openapiclient.NewRetailerProgramDataAddress("100 Nowhere Blvd", "Gotham City", "US", "Type_example"), "John Doe"), "ReferenceId_example", "Free 2-day Shipping") // CreateOrder |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -355,6 +357,76 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**OrderEstimate**](OrderEstimate.md)
+
+### Authorization
+
+[oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## CreateOrderStoreOrderJson
+
+> string CreateOrderStoreOrderJson(ctx, orderId).AddStoreOrderJson(addStoreOrderJson).Execute()
+
+Save the Store Order Json
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/stryd/shipbob-go"
+)
+
+func main() {
+    orderId := int32(56) // int32 | The order ID to Store
+    addStoreOrderJson := *openapiclient.NewAddStoreOrderJson("OrderJson_example") // AddStoreOrderJson |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.OrdersApi.CreateOrderStoreOrderJson(context.Background(), orderId).AddStoreOrderJson(addStoreOrderJson).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `OrdersApi.CreateOrderStoreOrderJson``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `CreateOrderStoreOrderJson`: string
+    fmt.Fprintf(os.Stdout, "Response from `OrdersApi.CreateOrderStoreOrderJson`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**orderId** | **int32** | The order ID to Store | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCreateOrderStoreOrderJsonRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **addStoreOrderJson** | [**AddStoreOrderJson**](AddStoreOrderJson.md) |  | 
+
+### Return type
+
+**string**
 
 ### Authorization
 
@@ -795,9 +867,77 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## GetOrderStoreOrderJsons
+
+> string GetOrderStoreOrderJsons(ctx, orderId).Execute()
+
+Get Order Store Json
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/stryd/shipbob-go"
+)
+
+func main() {
+    orderId := int32(56) // int32 | The order ID to Get the JSON Stored
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.OrdersApi.GetOrderStoreOrderJsons(context.Background(), orderId).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `OrdersApi.GetOrderStoreOrderJsons``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetOrderStoreOrderJsons`: string
+    fmt.Fprintf(os.Stdout, "Response from `OrdersApi.GetOrderStoreOrderJsons`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**orderId** | **int32** | The order ID to Get the JSON Stored | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetOrderStoreOrderJsonsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+**string**
+
+### Authorization
+
+[oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## GetOrders
 
-> []Order GetOrders(ctx).Page(page).Limit(limit).IDs(iDs).ReferenceIds(referenceIds).StartDate(startDate).EndDate(endDate).SortOrder(sortOrder).HasTracking(hasTracking).LastUpdateStartDate(lastUpdateStartDate).LastUpdateEndDate(lastUpdateEndDate).ShipbobChannelId(shipbobChannelId).Execute()
+> []Order GetOrders(ctx).Page(page).Limit(limit).IDs(iDs).ReferenceIds(referenceIds).StartDate(startDate).EndDate(endDate).SortOrder(sortOrder).HasTracking(hasTracking).LastUpdateStartDate(lastUpdateStartDate).LastUpdateEndDate(lastUpdateEndDate).IsTrackingUploaded(isTrackingUploaded).LastTrackingUpdateStartDate(lastTrackingUpdateStartDate).LastTrackingUpdateEndDate(lastTrackingUpdateEndDate).DeliveryStartDate(deliveryStartDate).DeliveryEndDate(deliveryEndDate).FulfillmentStartDate(fulfillmentStartDate).FulfillmentEndDate(fulfillmentEndDate).ShipbobChannelId(shipbobChannelId).Execute()
 
 Get Orders
 
@@ -819,19 +959,26 @@ import (
 func main() {
     page := int32(56) // int32 | Page of orders to get (optional)
     limit := int32(56) // int32 | Amount of orders per page to request (optional)
-    iDs := []int32{int32(123)} // []int32 | order ids to filter by (optional)
-    referenceIds := []string{"Inner_example"} // []string | Reference ids to filter by (optional)
+    iDs := []int32{int32(123)} // []int32 | order ids to filter by, comma separated (optional)
+    referenceIds := []string{"Inner_example"} // []string | Reference ids to filter by, comma separated (optional)
     startDate := time.Now() // time.Time | Start date to filter orders inserted later than (optional)
     endDate := time.Now() // time.Time | End date to filter orders inserted earlier than (optional)
     sortOrder := "sortOrder_example" // string | Order to sort results in (optional)
     hasTracking := true // bool | Has any portion of this order been assigned a tracking number (optional)
     lastUpdateStartDate := time.Now() // time.Time | Start date to filter orders updated later than (optional)
     lastUpdateEndDate := time.Now() // time.Time | End date to filter orders updated later than (optional)
+    isTrackingUploaded := true // bool | Filter orders that their tracking information was fully uploaded (optional)
+    lastTrackingUpdateStartDate := time.Now() // time.Time | Start date to filter orders with tracking updates later than the supplied date. Will only return orders that have tracking information (optional)
+    lastTrackingUpdateEndDate := time.Now() // time.Time | End date to filter orders updated later than the supplied date. Will only return orders that have tracking information (optional)
+    deliveryStartDate := time.Now() // time.Time | Start date to filter orders with delivery date later than the supplied date. Will only return orders that have tracking information (optional)
+    deliveryEndDate := time.Now() // time.Time | End date to filter orders delivery date later than the supplied date. Will only return orders that have tracking information (optional)
+    fulfillmentStartDate := time.Now() // time.Time | Start date to filter orders with fulfillment date later than the supplied date. Will only return orders that have tracking information (optional)
+    fulfillmentEndDate := time.Now() // time.Time | End date to filter orders fulfillment date  later than the supplied date. Will only return orders that have tracking information (optional)
     shipbobChannelId := int32(56) // int32 | Channel Id for Operation (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.OrdersApi.GetOrders(context.Background()).Page(page).Limit(limit).IDs(iDs).ReferenceIds(referenceIds).StartDate(startDate).EndDate(endDate).SortOrder(sortOrder).HasTracking(hasTracking).LastUpdateStartDate(lastUpdateStartDate).LastUpdateEndDate(lastUpdateEndDate).ShipbobChannelId(shipbobChannelId).Execute()
+    resp, r, err := apiClient.OrdersApi.GetOrders(context.Background()).Page(page).Limit(limit).IDs(iDs).ReferenceIds(referenceIds).StartDate(startDate).EndDate(endDate).SortOrder(sortOrder).HasTracking(hasTracking).LastUpdateStartDate(lastUpdateStartDate).LastUpdateEndDate(lastUpdateEndDate).IsTrackingUploaded(isTrackingUploaded).LastTrackingUpdateStartDate(lastTrackingUpdateStartDate).LastTrackingUpdateEndDate(lastTrackingUpdateEndDate).DeliveryStartDate(deliveryStartDate).DeliveryEndDate(deliveryEndDate).FulfillmentStartDate(fulfillmentStartDate).FulfillmentEndDate(fulfillmentEndDate).ShipbobChannelId(shipbobChannelId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `OrdersApi.GetOrders``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -854,14 +1001,21 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **page** | **int32** | Page of orders to get | 
  **limit** | **int32** | Amount of orders per page to request | 
- **iDs** | **[]int32** | order ids to filter by | 
- **referenceIds** | **[]string** | Reference ids to filter by | 
+ **iDs** | **[]int32** | order ids to filter by, comma separated | 
+ **referenceIds** | **[]string** | Reference ids to filter by, comma separated | 
  **startDate** | **time.Time** | Start date to filter orders inserted later than | 
  **endDate** | **time.Time** | End date to filter orders inserted earlier than | 
  **sortOrder** | **string** | Order to sort results in | 
  **hasTracking** | **bool** | Has any portion of this order been assigned a tracking number | 
  **lastUpdateStartDate** | **time.Time** | Start date to filter orders updated later than | 
  **lastUpdateEndDate** | **time.Time** | End date to filter orders updated later than | 
+ **isTrackingUploaded** | **bool** | Filter orders that their tracking information was fully uploaded | 
+ **lastTrackingUpdateStartDate** | **time.Time** | Start date to filter orders with tracking updates later than the supplied date. Will only return orders that have tracking information | 
+ **lastTrackingUpdateEndDate** | **time.Time** | End date to filter orders updated later than the supplied date. Will only return orders that have tracking information | 
+ **deliveryStartDate** | **time.Time** | Start date to filter orders with delivery date later than the supplied date. Will only return orders that have tracking information | 
+ **deliveryEndDate** | **time.Time** | End date to filter orders delivery date later than the supplied date. Will only return orders that have tracking information | 
+ **fulfillmentStartDate** | **time.Time** | Start date to filter orders with fulfillment date later than the supplied date. Will only return orders that have tracking information | 
+ **fulfillmentEndDate** | **time.Time** | End date to filter orders fulfillment date  later than the supplied date. Will only return orders that have tracking information | 
  **shipbobChannelId** | **int32** | Channel Id for Operation | 
 
 ### Return type

@@ -30,6 +30,8 @@ type Product struct {
 	FulfillableInventoryItems []ProductInventoryItem `json:"fulfillable_inventory_items,omitempty"`
 	// Fulfillable quantity of this product broken down by fulfillment center location
 	FulfillableQuantityByFulfillmentCenter []ProductFulfillmentCenterQuantity `json:"fulfillable_quantity_by_fulfillment_center,omitempty"`
+	// Global Trade Item Number - unique and internationally recognized identifier assigned to item by company GS1.
+	Gtin NullableString `json:"gtin,omitempty"`
 	// Unique identifier of the product
 	Id *int32 `json:"id,omitempty"`
 	// The name of the product
@@ -44,6 +46,10 @@ type Product struct {
 	TotalFulfillableQuantity *int32 `json:"total_fulfillable_quantity,omitempty"`
 	// Total on hand quantity of this product
 	TotalOnhandQuantity *int32 `json:"total_onhand_quantity,omitempty"`
+	// The price of one unit
+	UnitPrice NullableFloat64 `json:"unit_price,omitempty"`
+	// Universal Product Code - Unique external identifier
+	Upc NullableString `json:"upc,omitempty"`
 }
 
 // NewProduct instantiates a new Product object
@@ -277,6 +283,49 @@ func (o *Product) HasFulfillableQuantityByFulfillmentCenter() bool {
 // SetFulfillableQuantityByFulfillmentCenter gets a reference to the given []ProductFulfillmentCenterQuantity and assigns it to the FulfillableQuantityByFulfillmentCenter field.
 func (o *Product) SetFulfillableQuantityByFulfillmentCenter(v []ProductFulfillmentCenterQuantity) {
 	o.FulfillableQuantityByFulfillmentCenter = v
+}
+
+// GetGtin returns the Gtin field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *Product) GetGtin() string {
+	if o == nil || IsNil(o.Gtin.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.Gtin.Get()
+}
+
+// GetGtinOk returns a tuple with the Gtin field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *Product) GetGtinOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Gtin.Get(), o.Gtin.IsSet()
+}
+
+// HasGtin returns a boolean if a field has been set.
+func (o *Product) HasGtin() bool {
+	if o != nil && o.Gtin.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetGtin gets a reference to the given NullableString and assigns it to the Gtin field.
+func (o *Product) SetGtin(v string) {
+	o.Gtin.Set(&v)
+}
+
+// SetGtinNil sets the value for Gtin to be an explicit nil
+func (o *Product) SetGtinNil() {
+	o.Gtin.Set(nil)
+}
+
+// UnsetGtin ensures that no value is present for Gtin, not even an explicit nil
+func (o *Product) UnsetGtin() {
+	o.Gtin.Unset()
 }
 
 // GetId returns the Id field value if set, zero value otherwise.
@@ -536,6 +585,92 @@ func (o *Product) SetTotalOnhandQuantity(v int32) {
 	o.TotalOnhandQuantity = &v
 }
 
+// GetUnitPrice returns the UnitPrice field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *Product) GetUnitPrice() float64 {
+	if o == nil || IsNil(o.UnitPrice.Get()) {
+		var ret float64
+		return ret
+	}
+	return *o.UnitPrice.Get()
+}
+
+// GetUnitPriceOk returns a tuple with the UnitPrice field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *Product) GetUnitPriceOk() (*float64, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.UnitPrice.Get(), o.UnitPrice.IsSet()
+}
+
+// HasUnitPrice returns a boolean if a field has been set.
+func (o *Product) HasUnitPrice() bool {
+	if o != nil && o.UnitPrice.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetUnitPrice gets a reference to the given NullableFloat64 and assigns it to the UnitPrice field.
+func (o *Product) SetUnitPrice(v float64) {
+	o.UnitPrice.Set(&v)
+}
+
+// SetUnitPriceNil sets the value for UnitPrice to be an explicit nil
+func (o *Product) SetUnitPriceNil() {
+	o.UnitPrice.Set(nil)
+}
+
+// UnsetUnitPrice ensures that no value is present for UnitPrice, not even an explicit nil
+func (o *Product) UnsetUnitPrice() {
+	o.UnitPrice.Unset()
+}
+
+// GetUpc returns the Upc field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *Product) GetUpc() string {
+	if o == nil || IsNil(o.Upc.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.Upc.Get()
+}
+
+// GetUpcOk returns a tuple with the Upc field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *Product) GetUpcOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Upc.Get(), o.Upc.IsSet()
+}
+
+// HasUpc returns a boolean if a field has been set.
+func (o *Product) HasUpc() bool {
+	if o != nil && o.Upc.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetUpc gets a reference to the given NullableString and assigns it to the Upc field.
+func (o *Product) SetUpc(v string) {
+	o.Upc.Set(&v)
+}
+
+// SetUpcNil sets the value for Upc to be an explicit nil
+func (o *Product) SetUpcNil() {
+	o.Upc.Set(nil)
+}
+
+// UnsetUpc ensures that no value is present for Upc, not even an explicit nil
+func (o *Product) UnsetUpc() {
+	o.Upc.Unset()
+}
+
 func (o Product) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -564,6 +699,9 @@ func (o Product) ToMap() (map[string]interface{}, error) {
 	if o.FulfillableQuantityByFulfillmentCenter != nil {
 		toSerialize["fulfillable_quantity_by_fulfillment_center"] = o.FulfillableQuantityByFulfillmentCenter
 	}
+	if o.Gtin.IsSet() {
+		toSerialize["gtin"] = o.Gtin.Get()
+	}
 	if !IsNil(o.Id) {
 		toSerialize["id"] = o.Id
 	}
@@ -584,6 +722,12 @@ func (o Product) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.TotalOnhandQuantity) {
 		toSerialize["total_onhand_quantity"] = o.TotalOnhandQuantity
+	}
+	if o.UnitPrice.IsSet() {
+		toSerialize["unit_price"] = o.UnitPrice.Get()
+	}
+	if o.Upc.IsSet() {
+		toSerialize["upc"] = o.Upc.Get()
 	}
 	return toSerialize, nil
 }

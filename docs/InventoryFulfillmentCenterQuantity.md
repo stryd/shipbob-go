@@ -7,10 +7,10 @@ Name | Type | Description | Notes
 **AwaitingQuantity** | Pointer to **int32** | Amount of quantity awaiting arrival of a receiving order at this fulfillment center | [optional] 
 **CommittedQuantity** | Pointer to **int32** | Amount of committed quantity at this fulfillment center | [optional] 
 **FulfillableQuantity** | Pointer to **int32** | Amount of fulfillable quantity at this fulfillment center | [optional] 
-**Id** | Pointer to **int32** | Unique id of the fulfillment center | [optional] 
+**FulfillmentCenterId** | Pointer to **int32** | Unique id of the fulfillment center | [optional] 
 **InternalTransferQuantity** | Pointer to **int32** | The quantity of items that are in the process of internal transit  between ShipBob fulfillment centers, with a destination of this fulfillment center. These items are not pickable or fulfillable until they have been received and moved  to the \&quot;On Hand\&quot; quantity of the destination FC. | [optional] 
-**Name** | Pointer to **string** | Name of the fulfillment center | [optional] 
-**OnhandQuantity** | Pointer to **int32** | Amount of onhand quantity at this fulfillment center | [optional] 
+**Name** | Pointer to **NullableString** | Name of the fulfillment center | [optional] 
+**OnHandQuantity** | Pointer to **int32** | Amount of onhand quantity at this fulfillment center | [optional] 
 
 ## Methods
 
@@ -106,30 +106,30 @@ SetFulfillableQuantity sets FulfillableQuantity field to given value.
 
 HasFulfillableQuantity returns a boolean if a field has been set.
 
-### GetId
+### GetFulfillmentCenterId
 
-`func (o *InventoryFulfillmentCenterQuantity) GetId() int32`
+`func (o *InventoryFulfillmentCenterQuantity) GetFulfillmentCenterId() int32`
 
-GetId returns the Id field if non-nil, zero value otherwise.
+GetFulfillmentCenterId returns the FulfillmentCenterId field if non-nil, zero value otherwise.
 
-### GetIdOk
+### GetFulfillmentCenterIdOk
 
-`func (o *InventoryFulfillmentCenterQuantity) GetIdOk() (*int32, bool)`
+`func (o *InventoryFulfillmentCenterQuantity) GetFulfillmentCenterIdOk() (*int32, bool)`
 
-GetIdOk returns a tuple with the Id field if it's non-nil, zero value otherwise
+GetFulfillmentCenterIdOk returns a tuple with the FulfillmentCenterId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetId
+### SetFulfillmentCenterId
 
-`func (o *InventoryFulfillmentCenterQuantity) SetId(v int32)`
+`func (o *InventoryFulfillmentCenterQuantity) SetFulfillmentCenterId(v int32)`
 
-SetId sets Id field to given value.
+SetFulfillmentCenterId sets FulfillmentCenterId field to given value.
 
-### HasId
+### HasFulfillmentCenterId
 
-`func (o *InventoryFulfillmentCenterQuantity) HasId() bool`
+`func (o *InventoryFulfillmentCenterQuantity) HasFulfillmentCenterId() bool`
 
-HasId returns a boolean if a field has been set.
+HasFulfillmentCenterId returns a boolean if a field has been set.
 
 ### GetInternalTransferQuantity
 
@@ -181,30 +181,40 @@ SetName sets Name field to given value.
 
 HasName returns a boolean if a field has been set.
 
-### GetOnhandQuantity
+### SetNameNil
 
-`func (o *InventoryFulfillmentCenterQuantity) GetOnhandQuantity() int32`
+`func (o *InventoryFulfillmentCenterQuantity) SetNameNil(b bool)`
 
-GetOnhandQuantity returns the OnhandQuantity field if non-nil, zero value otherwise.
+ SetNameNil sets the value for Name to be an explicit nil
 
-### GetOnhandQuantityOk
+### UnsetName
+`func (o *InventoryFulfillmentCenterQuantity) UnsetName()`
 
-`func (o *InventoryFulfillmentCenterQuantity) GetOnhandQuantityOk() (*int32, bool)`
+UnsetName ensures that no value is present for Name, not even an explicit nil
+### GetOnHandQuantity
 
-GetOnhandQuantityOk returns a tuple with the OnhandQuantity field if it's non-nil, zero value otherwise
+`func (o *InventoryFulfillmentCenterQuantity) GetOnHandQuantity() int32`
+
+GetOnHandQuantity returns the OnHandQuantity field if non-nil, zero value otherwise.
+
+### GetOnHandQuantityOk
+
+`func (o *InventoryFulfillmentCenterQuantity) GetOnHandQuantityOk() (*int32, bool)`
+
+GetOnHandQuantityOk returns a tuple with the OnHandQuantity field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetOnhandQuantity
+### SetOnHandQuantity
 
-`func (o *InventoryFulfillmentCenterQuantity) SetOnhandQuantity(v int32)`
+`func (o *InventoryFulfillmentCenterQuantity) SetOnHandQuantity(v int32)`
 
-SetOnhandQuantity sets OnhandQuantity field to given value.
+SetOnHandQuantity sets OnHandQuantity field to given value.
 
-### HasOnhandQuantity
+### HasOnHandQuantity
 
-`func (o *InventoryFulfillmentCenterQuantity) HasOnhandQuantity() bool`
+`func (o *InventoryFulfillmentCenterQuantity) HasOnHandQuantity() bool`
 
-HasOnhandQuantity returns a boolean if a field has been set.
+HasOnHandQuantity returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

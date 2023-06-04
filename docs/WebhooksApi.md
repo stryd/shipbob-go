@@ -1,12 +1,12 @@
 # \WebhooksApi
 
-All URIs are relative to *https://api.shipbob.com/1.0*
+All URIs are relative to *https://api.shipbob.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CreateWebhook**](WebhooksApi.md#CreateWebhook) | **Post** /webhook | Create a new webhook subscription
-[**DeleteWebhook**](WebhooksApi.md#DeleteWebhook) | **Delete** /webhook/{id} | Delete an existing webhook subscription
-[**GetWebhooks**](WebhooksApi.md#GetWebhooks) | **Get** /webhook | Get Webhooks
+[**CreateWebhook**](WebhooksApi.md#CreateWebhook) | **Post** /1.0/webhook | Create a new webhook subscription
+[**DeleteWebhook**](WebhooksApi.md#DeleteWebhook) | **Delete** /1.0/webhook/{id} | Delete an existing webhook subscription
+[**GetWebhooks**](WebhooksApi.md#GetWebhooks) | **Get** /1.0/webhook | Get Webhooks
 
 
 

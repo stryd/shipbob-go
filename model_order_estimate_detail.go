@@ -19,11 +19,15 @@ var _ MappedNullable = &OrderEstimateDetail{}
 
 // OrderEstimateDetail struct for OrderEstimateDetail
 type OrderEstimateDetail struct {
+	// Estimated local currency code
+	EstimatedCurrencyCode *string `json:"estimated_currency_code,omitempty"`
 	// Estimated price in dollars for the provided shipping method
 	EstimatedPrice    *float64           `json:"estimated_price,omitempty"`
 	FulfillmentCenter *FulfillmentCenter `json:"fulfillment_center,omitempty"`
 	// Provided shipping method. Maps to ship option in ShipBob.
 	ShippingMethod *string `json:"shipping_method,omitempty"`
+	// Total weight of items in cart including packaging.
+	TotalWeightOz *float64 `json:"total_weight_oz,omitempty"`
 }
 
 // NewOrderEstimateDetail instantiates a new OrderEstimateDetail object
@@ -41,6 +45,38 @@ func NewOrderEstimateDetail() *OrderEstimateDetail {
 func NewOrderEstimateDetailWithDefaults() *OrderEstimateDetail {
 	this := OrderEstimateDetail{}
 	return &this
+}
+
+// GetEstimatedCurrencyCode returns the EstimatedCurrencyCode field value if set, zero value otherwise.
+func (o *OrderEstimateDetail) GetEstimatedCurrencyCode() string {
+	if o == nil || IsNil(o.EstimatedCurrencyCode) {
+		var ret string
+		return ret
+	}
+	return *o.EstimatedCurrencyCode
+}
+
+// GetEstimatedCurrencyCodeOk returns a tuple with the EstimatedCurrencyCode field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *OrderEstimateDetail) GetEstimatedCurrencyCodeOk() (*string, bool) {
+	if o == nil || IsNil(o.EstimatedCurrencyCode) {
+		return nil, false
+	}
+	return o.EstimatedCurrencyCode, true
+}
+
+// HasEstimatedCurrencyCode returns a boolean if a field has been set.
+func (o *OrderEstimateDetail) HasEstimatedCurrencyCode() bool {
+	if o != nil && !IsNil(o.EstimatedCurrencyCode) {
+		return true
+	}
+
+	return false
+}
+
+// SetEstimatedCurrencyCode gets a reference to the given string and assigns it to the EstimatedCurrencyCode field.
+func (o *OrderEstimateDetail) SetEstimatedCurrencyCode(v string) {
+	o.EstimatedCurrencyCode = &v
 }
 
 // GetEstimatedPrice returns the EstimatedPrice field value if set, zero value otherwise.
@@ -139,6 +175,38 @@ func (o *OrderEstimateDetail) SetShippingMethod(v string) {
 	o.ShippingMethod = &v
 }
 
+// GetTotalWeightOz returns the TotalWeightOz field value if set, zero value otherwise.
+func (o *OrderEstimateDetail) GetTotalWeightOz() float64 {
+	if o == nil || IsNil(o.TotalWeightOz) {
+		var ret float64
+		return ret
+	}
+	return *o.TotalWeightOz
+}
+
+// GetTotalWeightOzOk returns a tuple with the TotalWeightOz field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *OrderEstimateDetail) GetTotalWeightOzOk() (*float64, bool) {
+	if o == nil || IsNil(o.TotalWeightOz) {
+		return nil, false
+	}
+	return o.TotalWeightOz, true
+}
+
+// HasTotalWeightOz returns a boolean if a field has been set.
+func (o *OrderEstimateDetail) HasTotalWeightOz() bool {
+	if o != nil && !IsNil(o.TotalWeightOz) {
+		return true
+	}
+
+	return false
+}
+
+// SetTotalWeightOz gets a reference to the given float64 and assigns it to the TotalWeightOz field.
+func (o *OrderEstimateDetail) SetTotalWeightOz(v float64) {
+	o.TotalWeightOz = &v
+}
+
 func (o OrderEstimateDetail) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -149,6 +217,9 @@ func (o OrderEstimateDetail) MarshalJSON() ([]byte, error) {
 
 func (o OrderEstimateDetail) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.EstimatedCurrencyCode) {
+		toSerialize["estimated_currency_code"] = o.EstimatedCurrencyCode
+	}
 	if !IsNil(o.EstimatedPrice) {
 		toSerialize["estimated_price"] = o.EstimatedPrice
 	}
@@ -157,6 +228,9 @@ func (o OrderEstimateDetail) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.ShippingMethod) {
 		toSerialize["shipping_method"] = o.ShippingMethod
+	}
+	if !IsNil(o.TotalWeightOz) {
+		toSerialize["total_weight_oz"] = o.TotalWeightOz
 	}
 	return toSerialize, nil
 }

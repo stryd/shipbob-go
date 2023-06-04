@@ -20,7 +20,11 @@ var _ MappedNullable = &ReturnOrder{}
 
 // ReturnOrder struct for ReturnOrder
 type ReturnOrder struct {
-	Channel           *ReturnChannelInfo       `json:"channel,omitempty"`
+	Channel *ReturnChannelInfo `json:"channel,omitempty"`
+	// Completed date for a return order.
+	CompletedDate NullableTime `json:"completed_date,omitempty"`
+	// Customer name from the related shipment.
+	CustomerName      NullableString           `json:"customer_name,omitempty"`
 	FulfillmentCenter *ReturnFulfillmentCenter `json:"fulfillment_center,omitempty"`
 	// Unique id of the Return Order
 	Id *int32 `json:"id,omitempty"`
@@ -36,6 +40,8 @@ type ReturnOrder struct {
 	ReferenceId NullableString `json:"reference_id,omitempty"`
 	ReturnType  *ReturnType    `json:"return_type,omitempty"`
 	Status      *ReturnStatus  `json:"status,omitempty"`
+	// Store order for the related shipment.
+	StoreOrderId NullableString `json:"store_order_id,omitempty"`
 	// Tracking number of the return shipment
 	TrackingNumber NullableString `json:"tracking_number,omitempty"`
 	// Array of transactions affiliated with the return order
@@ -89,6 +95,92 @@ func (o *ReturnOrder) HasChannel() bool {
 // SetChannel gets a reference to the given ReturnChannelInfo and assigns it to the Channel field.
 func (o *ReturnOrder) SetChannel(v ReturnChannelInfo) {
 	o.Channel = &v
+}
+
+// GetCompletedDate returns the CompletedDate field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ReturnOrder) GetCompletedDate() time.Time {
+	if o == nil || IsNil(o.CompletedDate.Get()) {
+		var ret time.Time
+		return ret
+	}
+	return *o.CompletedDate.Get()
+}
+
+// GetCompletedDateOk returns a tuple with the CompletedDate field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ReturnOrder) GetCompletedDateOk() (*time.Time, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.CompletedDate.Get(), o.CompletedDate.IsSet()
+}
+
+// HasCompletedDate returns a boolean if a field has been set.
+func (o *ReturnOrder) HasCompletedDate() bool {
+	if o != nil && o.CompletedDate.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetCompletedDate gets a reference to the given NullableTime and assigns it to the CompletedDate field.
+func (o *ReturnOrder) SetCompletedDate(v time.Time) {
+	o.CompletedDate.Set(&v)
+}
+
+// SetCompletedDateNil sets the value for CompletedDate to be an explicit nil
+func (o *ReturnOrder) SetCompletedDateNil() {
+	o.CompletedDate.Set(nil)
+}
+
+// UnsetCompletedDate ensures that no value is present for CompletedDate, not even an explicit nil
+func (o *ReturnOrder) UnsetCompletedDate() {
+	o.CompletedDate.Unset()
+}
+
+// GetCustomerName returns the CustomerName field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ReturnOrder) GetCustomerName() string {
+	if o == nil || IsNil(o.CustomerName.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.CustomerName.Get()
+}
+
+// GetCustomerNameOk returns a tuple with the CustomerName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ReturnOrder) GetCustomerNameOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.CustomerName.Get(), o.CustomerName.IsSet()
+}
+
+// HasCustomerName returns a boolean if a field has been set.
+func (o *ReturnOrder) HasCustomerName() bool {
+	if o != nil && o.CustomerName.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetCustomerName gets a reference to the given NullableString and assigns it to the CustomerName field.
+func (o *ReturnOrder) SetCustomerName(v string) {
+	o.CustomerName.Set(&v)
+}
+
+// SetCustomerNameNil sets the value for CustomerName to be an explicit nil
+func (o *ReturnOrder) SetCustomerNameNil() {
+	o.CustomerName.Set(nil)
+}
+
+// UnsetCustomerName ensures that no value is present for CustomerName, not even an explicit nil
+func (o *ReturnOrder) UnsetCustomerName() {
+	o.CustomerName.Unset()
 }
 
 // GetFulfillmentCenter returns the FulfillmentCenter field value if set, zero value otherwise.
@@ -424,6 +516,49 @@ func (o *ReturnOrder) SetStatus(v ReturnStatus) {
 	o.Status = &v
 }
 
+// GetStoreOrderId returns the StoreOrderId field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ReturnOrder) GetStoreOrderId() string {
+	if o == nil || IsNil(o.StoreOrderId.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.StoreOrderId.Get()
+}
+
+// GetStoreOrderIdOk returns a tuple with the StoreOrderId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ReturnOrder) GetStoreOrderIdOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.StoreOrderId.Get(), o.StoreOrderId.IsSet()
+}
+
+// HasStoreOrderId returns a boolean if a field has been set.
+func (o *ReturnOrder) HasStoreOrderId() bool {
+	if o != nil && o.StoreOrderId.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetStoreOrderId gets a reference to the given NullableString and assigns it to the StoreOrderId field.
+func (o *ReturnOrder) SetStoreOrderId(v string) {
+	o.StoreOrderId.Set(&v)
+}
+
+// SetStoreOrderIdNil sets the value for StoreOrderId to be an explicit nil
+func (o *ReturnOrder) SetStoreOrderIdNil() {
+	o.StoreOrderId.Set(nil)
+}
+
+// UnsetStoreOrderId ensures that no value is present for StoreOrderId, not even an explicit nil
+func (o *ReturnOrder) UnsetStoreOrderId() {
+	o.StoreOrderId.Unset()
+}
+
 // GetTrackingNumber returns the TrackingNumber field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ReturnOrder) GetTrackingNumber() string {
 	if o == nil || IsNil(o.TrackingNumber.Get()) {
@@ -513,6 +648,12 @@ func (o ReturnOrder) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Channel) {
 		toSerialize["channel"] = o.Channel
 	}
+	if o.CompletedDate.IsSet() {
+		toSerialize["completed_date"] = o.CompletedDate.Get()
+	}
+	if o.CustomerName.IsSet() {
+		toSerialize["customer_name"] = o.CustomerName.Get()
+	}
 	if !IsNil(o.FulfillmentCenter) {
 		toSerialize["fulfillment_center"] = o.FulfillmentCenter
 	}
@@ -539,6 +680,9 @@ func (o ReturnOrder) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Status) {
 		toSerialize["status"] = o.Status
+	}
+	if o.StoreOrderId.IsSet() {
+		toSerialize["store_order_id"] = o.StoreOrderId.Get()
 	}
 	if o.TrackingNumber.IsSet() {
 		toSerialize["tracking_number"] = o.TrackingNumber.Get()

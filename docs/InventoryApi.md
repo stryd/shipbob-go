@@ -1,18 +1,18 @@
 # \InventoryApi
 
-All URIs are relative to *https://api.shipbob.com/1.0*
+All URIs are relative to *https://api.shipbob.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**GetInventories**](InventoryApi.md#GetInventories) | **Get** /inventory | List inventory items
-[**GetInventory**](InventoryApi.md#GetInventory) | **Get** /inventory/{inventoryId} | Get an inventory item
-[**GetProductInventories**](InventoryApi.md#GetProductInventories) | **Get** /product/{productId}/inventory | Get a list of inventory items by product id
+[**GetInventories**](InventoryApi.md#GetInventories) | **Get** /1.0/inventory | List inventory items
+[**GetInventory**](InventoryApi.md#GetInventory) | **Get** /1.0/inventory/{inventoryId} | Get an inventory item
+[**GetProductInventories**](InventoryApi.md#GetProductInventories) | **Get** /1.0/product/{productId}/inventory | Get a list of inventory items by product id
 
 
 
 ## GetInventories
 
-> []Inventory GetInventories(ctx).Page(page).Limit(limit).IsActive(isActive).IsDigital(isDigital).IDs(iDs).Sort(sort).Search(search).ShipbobChannelId(shipbobChannelId).Execute()
+> []Inventory GetInventories(ctx).Page(page).Limit(limit).IsActive(isActive).IsDigital(isDigital).IDs(iDs).Sort(sort).Search(search).LocationType(locationType).ShipbobChannelId(shipbobChannelId).Execute()
 
 List inventory items
 
@@ -36,11 +36,12 @@ func main() {
     iDs := []int32{int32(123)} // []int32 | Comma separated inventory ids to filter by (optional)
     sort := "sort_example" // string | Sort will default to ascending order for each field.  To sort in descending order please pass a \"-\" in front of the field name.  For example, Sort=-onHand,name will sort by onHand descending (optional)
     search := "search_example" // string | Search is available for 2 fields, Inventory ID and Name - 1. Expected behavior for search by Inventory ID is exact match 2. Expected behavior for search by Inventory Name is partial match, i.e. does not have to be start of word,  but must be consecutive characters. This is not case sensitive. (optional)
+    locationType := "locationType_example" // string | LocationType is valid for hub, spoke, or lts. LocationType will default to all locations. (optional)
     shipbobChannelId := int32(56) // int32 | Channel Id for Operation (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.InventoryApi.GetInventories(context.Background()).Page(page).Limit(limit).IsActive(isActive).IsDigital(isDigital).IDs(iDs).Sort(sort).Search(search).ShipbobChannelId(shipbobChannelId).Execute()
+    resp, r, err := apiClient.InventoryApi.GetInventories(context.Background()).Page(page).Limit(limit).IsActive(isActive).IsDigital(isDigital).IDs(iDs).Sort(sort).Search(search).LocationType(locationType).ShipbobChannelId(shipbobChannelId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `InventoryApi.GetInventories``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -68,6 +69,7 @@ Name | Type | Description  | Notes
  **iDs** | **[]int32** | Comma separated inventory ids to filter by | 
  **sort** | **string** | Sort will default to ascending order for each field.  To sort in descending order please pass a \&quot;-\&quot; in front of the field name.  For example, Sort&#x3D;-onHand,name will sort by onHand descending | 
  **search** | **string** | Search is available for 2 fields, Inventory ID and Name - 1. Expected behavior for search by Inventory ID is exact match 2. Expected behavior for search by Inventory Name is partial match, i.e. does not have to be start of word,  but must be consecutive characters. This is not case sensitive. | 
+ **locationType** | **string** | LocationType is valid for hub, spoke, or lts. LocationType will default to all locations. | 
  **shipbobChannelId** | **int32** | Channel Id for Operation | 
 
 ### Return type

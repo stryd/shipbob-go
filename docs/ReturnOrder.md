@@ -5,6 +5,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Channel** | Pointer to [**ReturnChannelInfo**](ReturnChannelInfo.md) |  | [optional] 
+**CompletedDate** | Pointer to **NullableTime** | Completed date for a return order. | [optional] 
+**CustomerName** | Pointer to **NullableString** | Customer name from the related shipment. | [optional] 
 **FulfillmentCenter** | Pointer to [**ReturnFulfillmentCenter**](ReturnFulfillmentCenter.md) |  | [optional] 
 **Id** | Pointer to **int32** | Unique id of the Return Order | [optional] 
 **InsertDate** | Pointer to **NullableTime** | Date this return order was created | [optional] 
@@ -14,6 +16,7 @@ Name | Type | Description | Notes
 **ReferenceId** | Pointer to **NullableString** | Client-defined external unique id of the return order | [optional] 
 **ReturnType** | Pointer to [**ReturnType**](ReturnType.md) |  | [optional] 
 **Status** | Pointer to [**ReturnStatus**](ReturnStatus.md) |  | [optional] 
+**StoreOrderId** | Pointer to **NullableString** | Store order for the related shipment. | [optional] 
 **TrackingNumber** | Pointer to **NullableString** | Tracking number of the return shipment | [optional] 
 **Transactions** | Pointer to [**[]ReturnTransaction**](ReturnTransaction.md) | Array of transactions affiliated with the return order | [optional] 
 
@@ -61,6 +64,76 @@ SetChannel sets Channel field to given value.
 
 HasChannel returns a boolean if a field has been set.
 
+### GetCompletedDate
+
+`func (o *ReturnOrder) GetCompletedDate() time.Time`
+
+GetCompletedDate returns the CompletedDate field if non-nil, zero value otherwise.
+
+### GetCompletedDateOk
+
+`func (o *ReturnOrder) GetCompletedDateOk() (*time.Time, bool)`
+
+GetCompletedDateOk returns a tuple with the CompletedDate field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCompletedDate
+
+`func (o *ReturnOrder) SetCompletedDate(v time.Time)`
+
+SetCompletedDate sets CompletedDate field to given value.
+
+### HasCompletedDate
+
+`func (o *ReturnOrder) HasCompletedDate() bool`
+
+HasCompletedDate returns a boolean if a field has been set.
+
+### SetCompletedDateNil
+
+`func (o *ReturnOrder) SetCompletedDateNil(b bool)`
+
+ SetCompletedDateNil sets the value for CompletedDate to be an explicit nil
+
+### UnsetCompletedDate
+`func (o *ReturnOrder) UnsetCompletedDate()`
+
+UnsetCompletedDate ensures that no value is present for CompletedDate, not even an explicit nil
+### GetCustomerName
+
+`func (o *ReturnOrder) GetCustomerName() string`
+
+GetCustomerName returns the CustomerName field if non-nil, zero value otherwise.
+
+### GetCustomerNameOk
+
+`func (o *ReturnOrder) GetCustomerNameOk() (*string, bool)`
+
+GetCustomerNameOk returns a tuple with the CustomerName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCustomerName
+
+`func (o *ReturnOrder) SetCustomerName(v string)`
+
+SetCustomerName sets CustomerName field to given value.
+
+### HasCustomerName
+
+`func (o *ReturnOrder) HasCustomerName() bool`
+
+HasCustomerName returns a boolean if a field has been set.
+
+### SetCustomerNameNil
+
+`func (o *ReturnOrder) SetCustomerNameNil(b bool)`
+
+ SetCustomerNameNil sets the value for CustomerName to be an explicit nil
+
+### UnsetCustomerName
+`func (o *ReturnOrder) UnsetCustomerName()`
+
+UnsetCustomerName ensures that no value is present for CustomerName, not even an explicit nil
 ### GetFulfillmentCenter
 
 `func (o *ReturnOrder) GetFulfillmentCenter() ReturnFulfillmentCenter`
@@ -336,6 +409,41 @@ SetStatus sets Status field to given value.
 
 HasStatus returns a boolean if a field has been set.
 
+### GetStoreOrderId
+
+`func (o *ReturnOrder) GetStoreOrderId() string`
+
+GetStoreOrderId returns the StoreOrderId field if non-nil, zero value otherwise.
+
+### GetStoreOrderIdOk
+
+`func (o *ReturnOrder) GetStoreOrderIdOk() (*string, bool)`
+
+GetStoreOrderIdOk returns a tuple with the StoreOrderId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStoreOrderId
+
+`func (o *ReturnOrder) SetStoreOrderId(v string)`
+
+SetStoreOrderId sets StoreOrderId field to given value.
+
+### HasStoreOrderId
+
+`func (o *ReturnOrder) HasStoreOrderId() bool`
+
+HasStoreOrderId returns a boolean if a field has been set.
+
+### SetStoreOrderIdNil
+
+`func (o *ReturnOrder) SetStoreOrderIdNil(b bool)`
+
+ SetStoreOrderIdNil sets the value for StoreOrderId to be an explicit nil
+
+### UnsetStoreOrderId
+`func (o *ReturnOrder) UnsetStoreOrderId()`
+
+UnsetStoreOrderId ensures that no value is present for StoreOrderId, not even an explicit nil
 ### GetTrackingNumber
 
 `func (o *ReturnOrder) GetTrackingNumber() string`

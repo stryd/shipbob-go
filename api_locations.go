@@ -47,7 +47,7 @@ func (r ApiGetLocationsRequest) AccessGranted(accessGranted bool) ApiGetLocation
 	return r
 }
 
-func (r ApiGetLocationsRequest) Execute() ([]Location, *http.Response, error) {
+func (r ApiGetLocationsRequest) Execute() ([]GetLocations200ResponseInner, *http.Response, error) {
 	return r.ApiService.GetLocationsExecute(r)
 }
 
@@ -66,13 +66,13 @@ func (a *LocationsApiService) GetLocations(ctx context.Context) ApiGetLocationsR
 
 // Execute executes the request
 //
-//	@return []Location
-func (a *LocationsApiService) GetLocationsExecute(r ApiGetLocationsRequest) ([]Location, *http.Response, error) {
+//	@return []GetLocations200ResponseInner
+func (a *LocationsApiService) GetLocationsExecute(r ApiGetLocationsRequest) ([]GetLocations200ResponseInner, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue []Location
+		localVarReturnValue []GetLocations200ResponseInner
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "LocationsApiService.GetLocations")
@@ -80,7 +80,7 @@ func (a *LocationsApiService) GetLocationsExecute(r ApiGetLocationsRequest) ([]L
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/location"
+	localVarPath := localBasePath + "/1.0/location"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}

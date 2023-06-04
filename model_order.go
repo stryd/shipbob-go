@@ -23,6 +23,9 @@ type Order struct {
 	Channel *ChannelInfo `json:"channel,omitempty"`
 	// Date this order was created
 	CreatedDate NullableTime `json:"created_date,omitempty"`
+	Financials  *Financials  `json:"financials,omitempty"`
+	// Gift message associated with the order
+	GiftMessage *string `json:"gift_message,omitempty"`
 	// Unique id of the order
 	Id *int32 `json:"id,omitempty"`
 	// User friendly orderId or store order number that will be shown on the Orders Page. If not provided, referenceId will be used
@@ -33,11 +36,13 @@ type Order struct {
 	PurchaseDate NullableTime   `json:"purchase_date,omitempty"`
 	Recipient    *RecipientInfo `json:"recipient,omitempty"`
 	// Client-defined external unique id of the order
-	ReferenceId *string `json:"reference_id,omitempty"`
+	ReferenceId         *string              `json:"reference_id,omitempty"`
+	RetailerProgramData *RetailerProgramData `json:"retailer_program_data,omitempty"`
 	// Shipments affiliated with the order
 	Shipments []Shipment `json:"shipments,omitempty"`
 	// Client-defined shipping method
-	ShippingMethod *string `json:"shipping_method,omitempty"`
+	ShippingMethod *string        `json:"shipping_method,omitempty"`
+	ShippingTerms  *ShippingTerms `json:"shipping_terms,omitempty"`
 	// The order status
 	Status *string `json:"status,omitempty"`
 	// Client-defined order tags
@@ -136,6 +141,70 @@ func (o *Order) SetCreatedDateNil() {
 // UnsetCreatedDate ensures that no value is present for CreatedDate, not even an explicit nil
 func (o *Order) UnsetCreatedDate() {
 	o.CreatedDate.Unset()
+}
+
+// GetFinancials returns the Financials field value if set, zero value otherwise.
+func (o *Order) GetFinancials() Financials {
+	if o == nil || IsNil(o.Financials) {
+		var ret Financials
+		return ret
+	}
+	return *o.Financials
+}
+
+// GetFinancialsOk returns a tuple with the Financials field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Order) GetFinancialsOk() (*Financials, bool) {
+	if o == nil || IsNil(o.Financials) {
+		return nil, false
+	}
+	return o.Financials, true
+}
+
+// HasFinancials returns a boolean if a field has been set.
+func (o *Order) HasFinancials() bool {
+	if o != nil && !IsNil(o.Financials) {
+		return true
+	}
+
+	return false
+}
+
+// SetFinancials gets a reference to the given Financials and assigns it to the Financials field.
+func (o *Order) SetFinancials(v Financials) {
+	o.Financials = &v
+}
+
+// GetGiftMessage returns the GiftMessage field value if set, zero value otherwise.
+func (o *Order) GetGiftMessage() string {
+	if o == nil || IsNil(o.GiftMessage) {
+		var ret string
+		return ret
+	}
+	return *o.GiftMessage
+}
+
+// GetGiftMessageOk returns a tuple with the GiftMessage field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Order) GetGiftMessageOk() (*string, bool) {
+	if o == nil || IsNil(o.GiftMessage) {
+		return nil, false
+	}
+	return o.GiftMessage, true
+}
+
+// HasGiftMessage returns a boolean if a field has been set.
+func (o *Order) HasGiftMessage() bool {
+	if o != nil && !IsNil(o.GiftMessage) {
+		return true
+	}
+
+	return false
+}
+
+// SetGiftMessage gets a reference to the given string and assigns it to the GiftMessage field.
+func (o *Order) SetGiftMessage(v string) {
+	o.GiftMessage = &v
 }
 
 // GetId returns the Id field value if set, zero value otherwise.
@@ -341,6 +410,38 @@ func (o *Order) SetReferenceId(v string) {
 	o.ReferenceId = &v
 }
 
+// GetRetailerProgramData returns the RetailerProgramData field value if set, zero value otherwise.
+func (o *Order) GetRetailerProgramData() RetailerProgramData {
+	if o == nil || IsNil(o.RetailerProgramData) {
+		var ret RetailerProgramData
+		return ret
+	}
+	return *o.RetailerProgramData
+}
+
+// GetRetailerProgramDataOk returns a tuple with the RetailerProgramData field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Order) GetRetailerProgramDataOk() (*RetailerProgramData, bool) {
+	if o == nil || IsNil(o.RetailerProgramData) {
+		return nil, false
+	}
+	return o.RetailerProgramData, true
+}
+
+// HasRetailerProgramData returns a boolean if a field has been set.
+func (o *Order) HasRetailerProgramData() bool {
+	if o != nil && !IsNil(o.RetailerProgramData) {
+		return true
+	}
+
+	return false
+}
+
+// SetRetailerProgramData gets a reference to the given RetailerProgramData and assigns it to the RetailerProgramData field.
+func (o *Order) SetRetailerProgramData(v RetailerProgramData) {
+	o.RetailerProgramData = &v
+}
+
 // GetShipments returns the Shipments field value if set, zero value otherwise.
 func (o *Order) GetShipments() []Shipment {
 	if o == nil || IsNil(o.Shipments) {
@@ -403,6 +504,38 @@ func (o *Order) HasShippingMethod() bool {
 // SetShippingMethod gets a reference to the given string and assigns it to the ShippingMethod field.
 func (o *Order) SetShippingMethod(v string) {
 	o.ShippingMethod = &v
+}
+
+// GetShippingTerms returns the ShippingTerms field value if set, zero value otherwise.
+func (o *Order) GetShippingTerms() ShippingTerms {
+	if o == nil || IsNil(o.ShippingTerms) {
+		var ret ShippingTerms
+		return ret
+	}
+	return *o.ShippingTerms
+}
+
+// GetShippingTermsOk returns a tuple with the ShippingTerms field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Order) GetShippingTermsOk() (*ShippingTerms, bool) {
+	if o == nil || IsNil(o.ShippingTerms) {
+		return nil, false
+	}
+	return o.ShippingTerms, true
+}
+
+// HasShippingTerms returns a boolean if a field has been set.
+func (o *Order) HasShippingTerms() bool {
+	if o != nil && !IsNil(o.ShippingTerms) {
+		return true
+	}
+
+	return false
+}
+
+// SetShippingTerms gets a reference to the given ShippingTerms and assigns it to the ShippingTerms field.
+func (o *Order) SetShippingTerms(v ShippingTerms) {
+	o.ShippingTerms = &v
 }
 
 // GetStatus returns the Status field value if set, zero value otherwise.
@@ -517,6 +650,12 @@ func (o Order) ToMap() (map[string]interface{}, error) {
 	if o.CreatedDate.IsSet() {
 		toSerialize["created_date"] = o.CreatedDate.Get()
 	}
+	if !IsNil(o.Financials) {
+		toSerialize["financials"] = o.Financials
+	}
+	if !IsNil(o.GiftMessage) {
+		toSerialize["gift_message"] = o.GiftMessage
+	}
 	if !IsNil(o.Id) {
 		toSerialize["id"] = o.Id
 	}
@@ -535,11 +674,17 @@ func (o Order) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ReferenceId) {
 		toSerialize["reference_id"] = o.ReferenceId
 	}
+	if !IsNil(o.RetailerProgramData) {
+		toSerialize["retailer_program_data"] = o.RetailerProgramData
+	}
 	if !IsNil(o.Shipments) {
 		toSerialize["shipments"] = o.Shipments
 	}
 	if !IsNil(o.ShippingMethod) {
 		toSerialize["shipping_method"] = o.ShippingMethod
+	}
+	if !IsNil(o.ShippingTerms) {
+		toSerialize["shipping_terms"] = o.ShippingTerms
 	}
 	if !IsNil(o.Status) {
 		toSerialize["status"] = o.Status

@@ -9,8 +9,8 @@ Name | Type | Description | Notes
 **Instance** | Pointer to **NullableString** |  | [optional] 
 **Status** | Pointer to **NullableInt32** |  | [optional] 
 **Title** | Pointer to **NullableString** |  | [optional] 
-**Type** | Pointer to **NullableString** |  | [optional] 
 **Ttype** | **string** |  | 
+**Type** | Pointer to **NullableString** |  | [optional] 
 
 ## Methods
 
@@ -206,6 +206,26 @@ HasTitle returns a boolean if a field has been set.
 `func (o *ProblemDetails) UnsetTitle()`
 
 UnsetTitle ensures that no value is present for Title, not even an explicit nil
+### GetTtype
+
+`func (o *ProblemDetails) GetTtype() string`
+
+GetTtype returns the Ttype field if non-nil, zero value otherwise.
+
+### GetTtypeOk
+
+`func (o *ProblemDetails) GetTtypeOk() (*string, bool)`
+
+GetTtypeOk returns a tuple with the Ttype field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTtype
+
+`func (o *ProblemDetails) SetTtype(v string)`
+
+SetTtype sets Ttype field to given value.
+
+
 ### GetType
 
 `func (o *ProblemDetails) GetType() string`
@@ -241,26 +261,6 @@ HasType returns a boolean if a field has been set.
 `func (o *ProblemDetails) UnsetType()`
 
 UnsetType ensures that no value is present for Type, not even an explicit nil
-### GetTtype
-
-`func (o *ProblemDetails) GetTtype() string`
-
-GetTtype returns the Ttype field if non-nil, zero value otherwise.
-
-### GetTtypeOk
-
-`func (o *ProblemDetails) GetTtypeOk() (*string, bool)`
-
-GetTtypeOk returns a tuple with the Ttype field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetTtype
-
-`func (o *ProblemDetails) SetTtype(v string)`
-
-SetTtype sets Ttype field to given value.
-
-
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

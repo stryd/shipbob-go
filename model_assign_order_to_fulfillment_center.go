@@ -17,7 +17,7 @@ import (
 // checks if the AssignOrderToFulfillmentCenter type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AssignOrderToFulfillmentCenter{}
 
-// AssignOrderToFulfillmentCenter Model containing information that assigns a receiving order to a fulfillment center
+// AssignOrderToFulfillmentCenter Model containing information that assigns a receiving order to a fulfillment center. If the fulfillment center provided is in a receiving hub region, then the response will be the receiving hub location.
 type AssignOrderToFulfillmentCenter struct {
 	// ID of the fulfillment center to assign this receiving order to
 	Id int32 `json:"id"`
