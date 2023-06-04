@@ -3341,6 +3341,10 @@
           }
         },
         "type": "oauth2"
+      },
+      "pat": {
+        "scheme": "bearer",
+        "type": "http"
       }
     }
   },

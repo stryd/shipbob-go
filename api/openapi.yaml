@@ -6822,3 +6822,6 @@ components:
             webhooks_write: Access write operations
           tokenUrl: https://auth.shipbob.com/connect/token
       type: oauth2
+    pat:
+      scheme: bearer
+      type: http
