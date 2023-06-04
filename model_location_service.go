@@ -21,7 +21,7 @@ var _ MappedNullable = &LocationService{}
 type LocationService struct {
 	Address *LocationAddress `json:"address,omitempty"`
 	// Indicates if the user is authorized to access this service at the location
-	Enabled     *bool                    `json:"enabled,omitempty"`
+	Enabled *bool `json:"enabled,omitempty"`
 	ServiceType *LocationServiceTypeEnum `json:"service_type,omitempty"`
 }
 
@@ -139,7 +139,7 @@ func (o *LocationService) SetServiceType(v LocationServiceTypeEnum) {
 }
 
 func (o LocationService) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -195,3 +195,5 @@ func (v *NullableLocationService) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

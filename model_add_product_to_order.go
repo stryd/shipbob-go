@@ -17,7 +17,7 @@ import (
 
 // AddProductToOrder - struct for AddProductToOrder
 type AddProductToOrder struct {
-	AddProductToOrderByProductId   *AddProductToOrderByProductId
+	AddProductToOrderByProductId *AddProductToOrderByProductId
 	AddProductToOrderByReferenceId *AddProductToOrderByReferenceId
 }
 
@@ -34,6 +34,7 @@ func AddProductToOrderByReferenceIdAsAddProductToOrder(v *AddProductToOrderByRef
 		AddProductToOrderByReferenceId: v,
 	}
 }
+
 
 // Unmarshal JSON data into one of the pointers in the struct
 func (dst *AddProductToOrder) UnmarshalJSON(data []byte) error {
@@ -92,7 +93,7 @@ func (src AddProductToOrder) MarshalJSON() ([]byte, error) {
 }
 
 // Get the actual instance
-func (obj *AddProductToOrder) GetActualInstance() interface{} {
+func (obj *AddProductToOrder) GetActualInstance() (interface{}) {
 	if obj == nil {
 		return nil
 	}
@@ -143,3 +144,5 @@ func (v *NullableAddProductToOrder) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

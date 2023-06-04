@@ -19,7 +19,7 @@ var _ MappedNullable = &RecipientInfo{}
 
 // RecipientInfo Information about the recipient of an order
 type RecipientInfo struct {
-	Address OrderAddress `json:"address"`
+	Address RetailerProgramDataAddress `json:"address"`
 	// Email address of the recipient
 	Email *string `json:"email,omitempty"`
 	// Name of the recipient
@@ -32,7 +32,7 @@ type RecipientInfo struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRecipientInfo(address OrderAddress, name string) *RecipientInfo {
+func NewRecipientInfo(address RetailerProgramDataAddress, name string) *RecipientInfo {
 	this := RecipientInfo{}
 	this.Address = address
 	this.Name = name
@@ -48,9 +48,9 @@ func NewRecipientInfoWithDefaults() *RecipientInfo {
 }
 
 // GetAddress returns the Address field value
-func (o *RecipientInfo) GetAddress() OrderAddress {
+func (o *RecipientInfo) GetAddress() RetailerProgramDataAddress {
 	if o == nil {
-		var ret OrderAddress
+		var ret RetailerProgramDataAddress
 		return ret
 	}
 
@@ -59,7 +59,7 @@ func (o *RecipientInfo) GetAddress() OrderAddress {
 
 // GetAddressOk returns a tuple with the Address field value
 // and a boolean to check if the value has been set.
-func (o *RecipientInfo) GetAddressOk() (*OrderAddress, bool) {
+func (o *RecipientInfo) GetAddressOk() (*RetailerProgramDataAddress, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -67,7 +67,7 @@ func (o *RecipientInfo) GetAddressOk() (*OrderAddress, bool) {
 }
 
 // SetAddress sets field value
-func (o *RecipientInfo) SetAddress(v OrderAddress) {
+func (o *RecipientInfo) SetAddress(v RetailerProgramDataAddress) {
 	o.Address = v
 }
 
@@ -160,7 +160,7 @@ func (o *RecipientInfo) SetPhoneNumber(v string) {
 }
 
 func (o RecipientInfo) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -215,3 +215,5 @@ func (v *NullableRecipientInfo) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

@@ -20,7 +20,7 @@ var _ MappedNullable = &ReturnTransaction{}
 // ReturnTransaction struct for ReturnTransaction
 type ReturnTransaction struct {
 	// Transaction amount in dollars
-	Amount          *float64                    `json:"amount,omitempty"`
+	Amount *float64 `json:"amount,omitempty"`
 	TransactionType *ReturnTransactionLogSource `json:"transaction_type,omitempty"`
 }
 
@@ -106,7 +106,7 @@ func (o *ReturnTransaction) SetTransactionType(v ReturnTransactionLogSource) {
 }
 
 func (o ReturnTransaction) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -159,3 +159,5 @@ func (v *NullableReturnTransaction) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

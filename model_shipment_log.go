@@ -209,7 +209,6 @@ func (o *ShipmentLog) HasTimestamp() bool {
 func (o *ShipmentLog) SetTimestamp(v time.Time) {
 	o.Timestamp.Set(&v)
 }
-
 // SetTimestampNil sets the value for Timestamp to be an explicit nil
 func (o *ShipmentLog) SetTimestampNil() {
 	o.Timestamp.Set(nil)
@@ -221,7 +220,7 @@ func (o *ShipmentLog) UnsetTimestamp() {
 }
 
 func (o ShipmentLog) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -283,3 +282,5 @@ func (v *NullableShipmentLog) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

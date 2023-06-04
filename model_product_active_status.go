@@ -20,8 +20,8 @@ type ProductActiveStatus string
 
 // List of ProductActiveStatus
 const (
-	ANY      ProductActiveStatus = "Any"
-	ACTIVE   ProductActiveStatus = "Active"
+	ANY ProductActiveStatus = "Any"
+	ACTIVE ProductActiveStatus = "Active"
 	INACTIVE ProductActiveStatus = "Inactive"
 )
 
@@ -110,3 +110,4 @@ func (v *NullableProductActiveStatus) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

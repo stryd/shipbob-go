@@ -17,7 +17,7 @@ import (
 // checks if the AssignOrderToFulfillmentCenter type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AssignOrderToFulfillmentCenter{}
 
-// AssignOrderToFulfillmentCenter Model containing information that assigns a receiving order to a fulfillment center
+// AssignOrderToFulfillmentCenter Model containing information that assigns a receiving order to a fulfillment center. If the fulfillment center provided is in a receiving hub region, then the response will be the receiving hub location.
 type AssignOrderToFulfillmentCenter struct {
 	// ID of the fulfillment center to assign this receiving order to
 	Id int32 `json:"id"`
@@ -66,7 +66,7 @@ func (o *AssignOrderToFulfillmentCenter) SetId(v int32) {
 }
 
 func (o AssignOrderToFulfillmentCenter) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -114,3 +114,5 @@ func (v *NullableAssignOrderToFulfillmentCenter) UnmarshalJSON(src []byte) error
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

@@ -20,10 +20,11 @@ type Topics string
 
 // List of Topics
 const (
-	ORDER_SHIPPED      Topics = "order_shipped"
+	ORDER_SHIPPED Topics = "order_shipped"
 	SHIPMENT_DELIVERED Topics = "shipment_delivered"
 	SHIPMENT_EXCEPTION Topics = "shipment_exception"
-	SHIPMENT_ONHOLD    Topics = "shipment_onhold"
+	SHIPMENT_ONHOLD Topics = "shipment_onhold"
+	SHIPMENT_CANCELLED Topics = "shipment_cancelled"
 )
 
 // All allowed values of Topics enum
@@ -32,6 +33,7 @@ var AllowedTopicsEnumValues = []Topics{
 	"shipment_delivered",
 	"shipment_exception",
 	"shipment_onhold",
+	"shipment_cancelled",
 }
 
 func (v *Topics) UnmarshalJSON(src []byte) error {
@@ -112,3 +114,4 @@ func (v *NullableTopics) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

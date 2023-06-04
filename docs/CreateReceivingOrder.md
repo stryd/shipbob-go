@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **ExpectedArrivalDate** | **NullableTime** | Expected arrival date of all the box shipments in this receiving order | 
 **FulfillmentCenter** | [**AssignOrderToFulfillmentCenter**](AssignOrderToFulfillmentCenter.md) |  | 
 **PackageType** | [**PackageType**](PackageType.md) |  | 
+**PurchaseOrderNumber** | Pointer to **NullableString** | Purchase order number for this receiving order | [optional] 
 
 ## Methods
 
@@ -149,6 +150,41 @@ and a boolean to check if the value has been set.
 SetPackageType sets PackageType field to given value.
 
 
+### GetPurchaseOrderNumber
+
+`func (o *CreateReceivingOrder) GetPurchaseOrderNumber() string`
+
+GetPurchaseOrderNumber returns the PurchaseOrderNumber field if non-nil, zero value otherwise.
+
+### GetPurchaseOrderNumberOk
+
+`func (o *CreateReceivingOrder) GetPurchaseOrderNumberOk() (*string, bool)`
+
+GetPurchaseOrderNumberOk returns a tuple with the PurchaseOrderNumber field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPurchaseOrderNumber
+
+`func (o *CreateReceivingOrder) SetPurchaseOrderNumber(v string)`
+
+SetPurchaseOrderNumber sets PurchaseOrderNumber field to given value.
+
+### HasPurchaseOrderNumber
+
+`func (o *CreateReceivingOrder) HasPurchaseOrderNumber() bool`
+
+HasPurchaseOrderNumber returns a boolean if a field has been set.
+
+### SetPurchaseOrderNumberNil
+
+`func (o *CreateReceivingOrder) SetPurchaseOrderNumberNil(b bool)`
+
+ SetPurchaseOrderNumberNil sets the value for PurchaseOrderNumber to be an explicit nil
+
+### UnsetPurchaseOrderNumber
+`func (o *CreateReceivingOrder) UnsetPurchaseOrderNumber()`
+
+UnsetPurchaseOrderNumber ensures that no value is present for PurchaseOrderNumber, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

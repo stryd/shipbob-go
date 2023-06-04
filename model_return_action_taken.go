@@ -107,7 +107,6 @@ func (o *ReturnActionTaken) HasActionReason() bool {
 func (o *ReturnActionTaken) SetActionReason(v string) {
 	o.ActionReason.Set(&v)
 }
-
 // SetActionReasonNil sets the value for ActionReason to be an explicit nil
 func (o *ReturnActionTaken) SetActionReasonNil() {
 	o.ActionReason.Set(nil)
@@ -151,7 +150,7 @@ func (o *ReturnActionTaken) SetQuantityProcessed(v int32) {
 }
 
 func (o ReturnActionTaken) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -207,3 +206,5 @@ func (v *NullableReturnActionTaken) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

@@ -21,7 +21,7 @@ type LocationServiceTypeEnum string
 // List of LocationServiceTypeEnum
 const (
 	RECEIVING LocationServiceTypeEnum = "Receiving"
-	RETURNS   LocationServiceTypeEnum = "Returns"
+	RETURNS LocationServiceTypeEnum = "Returns"
 )
 
 // All allowed values of LocationServiceTypeEnum enum
@@ -108,3 +108,4 @@ func (v *NullableLocationServiceTypeEnum) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

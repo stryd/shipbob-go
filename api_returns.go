@@ -16,18 +16,19 @@ import (
 	"io"
 	"net/http"
 	"net/url"
-	"reflect"
 	"strings"
 	"time"
+	"reflect"
 )
+
 
 // ReturnsApiService ReturnsApi service
 type ReturnsApiService service
 
 type ApiCancelReturnRequest struct {
-	ctx              context.Context
-	ApiService       *ReturnsApiService
-	id               int32
+	ctx context.Context
+	ApiService *ReturnsApiService
+	id int32
 	shipbobChannelId *int32
 }
 
@@ -44,27 +45,26 @@ func (r ApiCancelReturnRequest) Execute() (*ReturnOrder, *http.Response, error) 
 /*
 CancelReturn Cancel Return Order
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id Id of the return order
-	@return ApiCancelReturnRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id Id of the return order
+ @return ApiCancelReturnRequest
 */
 func (a *ReturnsApiService) CancelReturn(ctx context.Context, id int32) ApiCancelReturnRequest {
 	return ApiCancelReturnRequest{
 		ApiService: a,
-		ctx:        ctx,
-		id:         id,
+		ctx: ctx,
+		id: id,
 	}
 }
 
 // Execute executes the request
-//
-//	@return ReturnOrder
+//  @return ReturnOrder
 func (a *ReturnsApiService) CancelReturnExecute(r ApiCancelReturnRequest) (*ReturnOrder, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *ReturnOrder
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ReturnOrder
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ReturnsApiService.CancelReturn")
@@ -72,7 +72,7 @@ func (a *ReturnsApiService) CancelReturnExecute(r ApiCancelReturnRequest) (*Retu
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/return/{id}/cancel"
+	localVarPath := localBasePath + "/1.0/return/{id}/cancel"
 	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -129,8 +129,8 @@ func (a *ReturnsApiService) CancelReturnExecute(r ApiCancelReturnRequest) (*Retu
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 422 {
@@ -140,8 +140,8 @@ func (a *ReturnsApiService) CancelReturnExecute(r ApiCancelReturnRequest) (*Retu
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -159,10 +159,10 @@ func (a *ReturnsApiService) CancelReturnExecute(r ApiCancelReturnRequest) (*Retu
 }
 
 type ApiCreateReturnRequest struct {
-	ctx              context.Context
-	ApiService       *ReturnsApiService
+	ctx context.Context
+	ApiService *ReturnsApiService
 	shipbobChannelId *int32
-	createReturn     *CreateReturn
+	createReturn *CreateReturn
 }
 
 // Channel Id for Operation
@@ -184,25 +184,24 @@ func (r ApiCreateReturnRequest) Execute() (*ReturnOrder, *http.Response, error) 
 /*
 CreateReturn Create Return Order
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateReturnRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreateReturnRequest
 */
 func (a *ReturnsApiService) CreateReturn(ctx context.Context) ApiCreateReturnRequest {
 	return ApiCreateReturnRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return ReturnOrder
+//  @return ReturnOrder
 func (a *ReturnsApiService) CreateReturnExecute(r ApiCreateReturnRequest) (*ReturnOrder, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *ReturnOrder
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ReturnOrder
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ReturnsApiService.CreateReturn")
@@ -210,7 +209,7 @@ func (a *ReturnsApiService) CreateReturnExecute(r ApiCreateReturnRequest) (*Retu
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/return"
+	localVarPath := localBasePath + "/1.0/return"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -268,8 +267,8 @@ func (a *ReturnsApiService) CreateReturnExecute(r ApiCreateReturnRequest) (*Retu
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 422 {
@@ -279,8 +278,8 @@ func (a *ReturnsApiService) CreateReturnExecute(r ApiCreateReturnRequest) (*Retu
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -298,9 +297,9 @@ func (a *ReturnsApiService) CreateReturnExecute(r ApiCreateReturnRequest) (*Retu
 }
 
 type ApiGetReturnRequest struct {
-	ctx              context.Context
-	ApiService       *ReturnsApiService
-	id               int32
+	ctx context.Context
+	ApiService *ReturnsApiService
+	id int32
 	shipbobChannelId *int32
 }
 
@@ -317,27 +316,26 @@ func (r ApiGetReturnRequest) Execute() (*ReturnOrder, *http.Response, error) {
 /*
 GetReturn Get Return Order
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id Id of the return order
-	@return ApiGetReturnRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id Id of the return order
+ @return ApiGetReturnRequest
 */
 func (a *ReturnsApiService) GetReturn(ctx context.Context, id int32) ApiGetReturnRequest {
 	return ApiGetReturnRequest{
 		ApiService: a,
-		ctx:        ctx,
-		id:         id,
+		ctx: ctx,
+		id: id,
 	}
 }
 
 // Execute executes the request
-//
-//	@return ReturnOrder
+//  @return ReturnOrder
 func (a *ReturnsApiService) GetReturnExecute(r ApiGetReturnRequest) (*ReturnOrder, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *ReturnOrder
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ReturnOrder
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ReturnsApiService.GetReturn")
@@ -345,7 +343,7 @@ func (a *ReturnsApiService) GetReturnExecute(r ApiGetReturnRequest) (*ReturnOrde
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/return/{id}"
+	localVarPath := localBasePath + "/1.0/return/{id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -401,8 +399,8 @@ func (a *ReturnsApiService) GetReturnExecute(r ApiGetReturnRequest) (*ReturnOrde
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -420,9 +418,9 @@ func (a *ReturnsApiService) GetReturnExecute(r ApiGetReturnRequest) (*ReturnOrde
 }
 
 type ApiGetReturnStatushistoryRequest struct {
-	ctx              context.Context
-	ApiService       *ReturnsApiService
-	id               int32
+	ctx context.Context
+	ApiService *ReturnsApiService
+	id int32
 	shipbobChannelId *int32
 }
 
@@ -432,34 +430,33 @@ func (r ApiGetReturnStatushistoryRequest) ShipbobChannelId(shipbobChannelId int3
 	return r
 }
 
-func (r ApiGetReturnStatushistoryRequest) Execute() (*ReturnOrderStatusHistory, *http.Response, error) {
+func (r ApiGetReturnStatushistoryRequest) Execute() ([]ReturnOrderStatusHistory, *http.Response, error) {
 	return r.ApiService.GetReturnStatushistoryExecute(r)
 }
 
 /*
 GetReturnStatushistory Get One Return's status history
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id Id of the return order
-	@return ApiGetReturnStatushistoryRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id Id of the return order
+ @return ApiGetReturnStatushistoryRequest
 */
 func (a *ReturnsApiService) GetReturnStatushistory(ctx context.Context, id int32) ApiGetReturnStatushistoryRequest {
 	return ApiGetReturnStatushistoryRequest{
 		ApiService: a,
-		ctx:        ctx,
-		id:         id,
+		ctx: ctx,
+		id: id,
 	}
 }
 
 // Execute executes the request
-//
-//	@return ReturnOrderStatusHistory
-func (a *ReturnsApiService) GetReturnStatushistoryExecute(r ApiGetReturnStatushistoryRequest) (*ReturnOrderStatusHistory, *http.Response, error) {
+//  @return []ReturnOrderStatusHistory
+func (a *ReturnsApiService) GetReturnStatushistoryExecute(r ApiGetReturnStatushistoryRequest) ([]ReturnOrderStatusHistory, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *ReturnOrderStatusHistory
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  []ReturnOrderStatusHistory
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ReturnsApiService.GetReturnStatushistory")
@@ -467,7 +464,7 @@ func (a *ReturnsApiService) GetReturnStatushistoryExecute(r ApiGetReturnStatushi
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/return/{id}/statushistory"
+	localVarPath := localBasePath + "/1.0/return/{id}/statushistory"
 	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -523,8 +520,8 @@ func (a *ReturnsApiService) GetReturnStatushistoryExecute(r ApiGetReturnStatushi
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -542,21 +539,21 @@ func (a *ReturnsApiService) GetReturnStatushistoryExecute(r ApiGetReturnStatushi
 }
 
 type ApiGetReturnsRequest struct {
-	ctx                  context.Context
-	ApiService           *ReturnsApiService
-	page                 *int32
-	limit                *int32
-	sortOrder            *SortOrder
-	startDate            *time.Time
-	endDate              *time.Time
-	iDs                  *[]int32
-	referenceIds         *[]string
-	status               *[]ReturnStatus
+	ctx context.Context
+	ApiService *ReturnsApiService
+	page *int32
+	limit *int32
+	sortOrder *SortOrder
+	startDate *time.Time
+	endDate *time.Time
+	iDs *[]int32
+	referenceIds *[]string
+	status *[]ReturnStatus
 	fulfillmentCenterIds *[]int32
-	trackingNumbers      *[]string
-	originalShipmentIds  *[]int32
-	inventoryIds         *[]int32
-	shipbobChannelId     *int32
+	trackingNumbers *[]string
+	originalShipmentIds *[]int32
+	inventoryIds *[]int32
+	shipbobChannelId *int32
 }
 
 // Page of return orders to get
@@ -643,25 +640,24 @@ func (r ApiGetReturnsRequest) Execute() ([]ReturnOrder, *http.Response, error) {
 /*
 GetReturns Get Return Orders
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetReturnsRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetReturnsRequest
 */
 func (a *ReturnsApiService) GetReturns(ctx context.Context) ApiGetReturnsRequest {
 	return ApiGetReturnsRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return []ReturnOrder
+//  @return []ReturnOrder
 func (a *ReturnsApiService) GetReturnsExecute(r ApiGetReturnsRequest) ([]ReturnOrder, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue []ReturnOrder
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  []ReturnOrder
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ReturnsApiService.GetReturns")
@@ -669,7 +665,7 @@ func (a *ReturnsApiService) GetReturnsExecute(r ApiGetReturnsRequest) ([]ReturnO
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/return"
+	localVarPath := localBasePath + "/1.0/return"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -825,11 +821,11 @@ func (a *ReturnsApiService) GetReturnsExecute(r ApiGetReturnsRequest) ([]ReturnO
 }
 
 type ApiUpdateReturnRequest struct {
-	ctx              context.Context
-	ApiService       *ReturnsApiService
+	ctx context.Context
+	ApiService *ReturnsApiService
 	shipbobChannelId *int32
-	id               int32
-	createReturn     *CreateReturn
+	id int32
+	createReturn *CreateReturn
 }
 
 // Channel Id for Operation
@@ -851,27 +847,26 @@ func (r ApiUpdateReturnRequest) Execute() (*ReturnOrder, *http.Response, error) 
 /*
 UpdateReturn Modify Return Order
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id Id of the return order
-	@return ApiUpdateReturnRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id Id of the return order
+ @return ApiUpdateReturnRequest
 */
 func (a *ReturnsApiService) UpdateReturn(ctx context.Context, id int32) ApiUpdateReturnRequest {
 	return ApiUpdateReturnRequest{
 		ApiService: a,
-		ctx:        ctx,
-		id:         id,
+		ctx: ctx,
+		id: id,
 	}
 }
 
 // Execute executes the request
-//
-//	@return ReturnOrder
+//  @return ReturnOrder
 func (a *ReturnsApiService) UpdateReturnExecute(r ApiUpdateReturnRequest) (*ReturnOrder, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPut
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *ReturnOrder
+		localVarHTTPMethod   = http.MethodPut
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ReturnOrder
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ReturnsApiService.UpdateReturn")
@@ -879,7 +874,7 @@ func (a *ReturnsApiService) UpdateReturnExecute(r ApiUpdateReturnRequest) (*Retu
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/return/{id}"
+	localVarPath := localBasePath + "/1.0/return/{id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -938,8 +933,8 @@ func (a *ReturnsApiService) UpdateReturnExecute(r ApiUpdateReturnRequest) (*Retu
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 422 {
@@ -949,8 +944,8 @@ func (a *ReturnsApiService) UpdateReturnExecute(r ApiUpdateReturnRequest) (*Retu
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}

@@ -4,18 +4,24 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ActualFulfillmentDate** | Pointer to **NullableTime** | The datetime of ShipBob&#39;s completion of the fulfillment operation as promised.  Currently, this means the shipment has been picked, packed, and label has been printed. | [optional] 
+**ActualFulfillmentDate** | Pointer to **NullableTime** | The datetime of ShipBob&#39;s completion of the fulfillment operation as promised. Currently, this means the shipment has been picked, packed, and label has been printed. | [optional] 
 **CreatedDate** | Pointer to **NullableTime** | Date this shipment was created | [optional] 
-**EstimatedFulfillmentDate** | Pointer to **NullableTime** | The datetime of ShipBob&#39;s commitment for completing  the shipment and handing to the carrier for delivery. | [optional] 
+**DeliveryDate** | Pointer to **NullableTime** | The datetime of Shipment delivered to customer. | [optional] 
+**EstimatedFulfillmentDate** | Pointer to **NullableTime** | The datetime of ShipBob&#39;s commitment for completing the shipment and handing to the carrier for delivery. | [optional] 
 **EstimatedFulfillmentDateStatus** | Pointer to **string** | Status of ShipBob&#39;s completion of the fulfillment operation. | [optional] 
+**GiftMessage** | Pointer to **string** | Gift message associated with the shipment | [optional] 
 **Id** | Pointer to **int32** | Unique id of the shipment | [optional] 
 **InsuranceValue** | Pointer to **NullableFloat64** | Monetary amount that this shipment was insured for | [optional] 
 **InvoiceAmount** | Pointer to **NullableFloat64** | Monetary amount that was invoiced for this shipment | [optional] 
+**InvoiceCurrencyCode** | Pointer to **string** |  | [optional] 
+**IsTrackingUploaded** | Pointer to **bool** | Indicates whether the Shipment was marked with tracking information uploaded to a third-party system where the order originated. | [optional] 
+**LastTrackingUpdateAt** | Pointer to **NullableTime** | Timestamp for the last time this shipment had a tracking update | [optional] 
 **LastUpdateAt** | Pointer to **NullableTime** | Date this shipment was last updated | [optional] 
 **Location** | Pointer to [**FulfillmentCenter**](FulfillmentCenter.md) |  | [optional] 
 **Measurements** | Pointer to [**OrderMeasurements**](OrderMeasurements.md) |  | [optional] 
 **OrderId** | Pointer to **int32** | Id of the order this shipment belongs to | [optional] 
 **PackageMaterialType** | Pointer to **string** | Container type for the shipment | [optional] 
+**ParentCartons** | Pointer to [**[]ParentCarton**](ParentCarton.md) | Carton information for this shipment | [optional] 
 **Products** | Pointer to [**[]ShipmentProduct**](ShipmentProduct.md) | Information about the products contained in this shipment | [optional] 
 **Recipient** | Pointer to [**Recipient**](Recipient.md) |  | [optional] 
 **ReferenceId** | Pointer to **string** | Client-defined external unique id of the order this shipment belongs to | [optional] 
@@ -23,6 +29,7 @@ Name | Type | Description | Notes
 **ShipOption** | Pointer to **string** | Name of the shipping option used for this shipment | [optional] 
 **Status** | Pointer to **string** | The shipment status | [optional] 
 **StatusDetails** | Pointer to [**[]OrderStatusDetail**](OrderStatusDetail.md) | Additional details about the shipment status | [optional] 
+**StoreOrderId** | Pointer to **string** | Unique store order id of the shipment | [optional] 
 **Tracking** | Pointer to [**Tracking**](Tracking.md) |  | [optional] 
 
 ## Methods
@@ -114,6 +121,41 @@ HasCreatedDate returns a boolean if a field has been set.
 `func (o *Shipment) UnsetCreatedDate()`
 
 UnsetCreatedDate ensures that no value is present for CreatedDate, not even an explicit nil
+### GetDeliveryDate
+
+`func (o *Shipment) GetDeliveryDate() time.Time`
+
+GetDeliveryDate returns the DeliveryDate field if non-nil, zero value otherwise.
+
+### GetDeliveryDateOk
+
+`func (o *Shipment) GetDeliveryDateOk() (*time.Time, bool)`
+
+GetDeliveryDateOk returns a tuple with the DeliveryDate field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDeliveryDate
+
+`func (o *Shipment) SetDeliveryDate(v time.Time)`
+
+SetDeliveryDate sets DeliveryDate field to given value.
+
+### HasDeliveryDate
+
+`func (o *Shipment) HasDeliveryDate() bool`
+
+HasDeliveryDate returns a boolean if a field has been set.
+
+### SetDeliveryDateNil
+
+`func (o *Shipment) SetDeliveryDateNil(b bool)`
+
+ SetDeliveryDateNil sets the value for DeliveryDate to be an explicit nil
+
+### UnsetDeliveryDate
+`func (o *Shipment) UnsetDeliveryDate()`
+
+UnsetDeliveryDate ensures that no value is present for DeliveryDate, not even an explicit nil
 ### GetEstimatedFulfillmentDate
 
 `func (o *Shipment) GetEstimatedFulfillmentDate() time.Time`
@@ -173,6 +215,31 @@ SetEstimatedFulfillmentDateStatus sets EstimatedFulfillmentDateStatus field to g
 `func (o *Shipment) HasEstimatedFulfillmentDateStatus() bool`
 
 HasEstimatedFulfillmentDateStatus returns a boolean if a field has been set.
+
+### GetGiftMessage
+
+`func (o *Shipment) GetGiftMessage() string`
+
+GetGiftMessage returns the GiftMessage field if non-nil, zero value otherwise.
+
+### GetGiftMessageOk
+
+`func (o *Shipment) GetGiftMessageOk() (*string, bool)`
+
+GetGiftMessageOk returns a tuple with the GiftMessage field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetGiftMessage
+
+`func (o *Shipment) SetGiftMessage(v string)`
+
+SetGiftMessage sets GiftMessage field to given value.
+
+### HasGiftMessage
+
+`func (o *Shipment) HasGiftMessage() bool`
+
+HasGiftMessage returns a boolean if a field has been set.
 
 ### GetId
 
@@ -269,6 +336,91 @@ HasInvoiceAmount returns a boolean if a field has been set.
 `func (o *Shipment) UnsetInvoiceAmount()`
 
 UnsetInvoiceAmount ensures that no value is present for InvoiceAmount, not even an explicit nil
+### GetInvoiceCurrencyCode
+
+`func (o *Shipment) GetInvoiceCurrencyCode() string`
+
+GetInvoiceCurrencyCode returns the InvoiceCurrencyCode field if non-nil, zero value otherwise.
+
+### GetInvoiceCurrencyCodeOk
+
+`func (o *Shipment) GetInvoiceCurrencyCodeOk() (*string, bool)`
+
+GetInvoiceCurrencyCodeOk returns a tuple with the InvoiceCurrencyCode field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetInvoiceCurrencyCode
+
+`func (o *Shipment) SetInvoiceCurrencyCode(v string)`
+
+SetInvoiceCurrencyCode sets InvoiceCurrencyCode field to given value.
+
+### HasInvoiceCurrencyCode
+
+`func (o *Shipment) HasInvoiceCurrencyCode() bool`
+
+HasInvoiceCurrencyCode returns a boolean if a field has been set.
+
+### GetIsTrackingUploaded
+
+`func (o *Shipment) GetIsTrackingUploaded() bool`
+
+GetIsTrackingUploaded returns the IsTrackingUploaded field if non-nil, zero value otherwise.
+
+### GetIsTrackingUploadedOk
+
+`func (o *Shipment) GetIsTrackingUploadedOk() (*bool, bool)`
+
+GetIsTrackingUploadedOk returns a tuple with the IsTrackingUploaded field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsTrackingUploaded
+
+`func (o *Shipment) SetIsTrackingUploaded(v bool)`
+
+SetIsTrackingUploaded sets IsTrackingUploaded field to given value.
+
+### HasIsTrackingUploaded
+
+`func (o *Shipment) HasIsTrackingUploaded() bool`
+
+HasIsTrackingUploaded returns a boolean if a field has been set.
+
+### GetLastTrackingUpdateAt
+
+`func (o *Shipment) GetLastTrackingUpdateAt() time.Time`
+
+GetLastTrackingUpdateAt returns the LastTrackingUpdateAt field if non-nil, zero value otherwise.
+
+### GetLastTrackingUpdateAtOk
+
+`func (o *Shipment) GetLastTrackingUpdateAtOk() (*time.Time, bool)`
+
+GetLastTrackingUpdateAtOk returns a tuple with the LastTrackingUpdateAt field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLastTrackingUpdateAt
+
+`func (o *Shipment) SetLastTrackingUpdateAt(v time.Time)`
+
+SetLastTrackingUpdateAt sets LastTrackingUpdateAt field to given value.
+
+### HasLastTrackingUpdateAt
+
+`func (o *Shipment) HasLastTrackingUpdateAt() bool`
+
+HasLastTrackingUpdateAt returns a boolean if a field has been set.
+
+### SetLastTrackingUpdateAtNil
+
+`func (o *Shipment) SetLastTrackingUpdateAtNil(b bool)`
+
+ SetLastTrackingUpdateAtNil sets the value for LastTrackingUpdateAt to be an explicit nil
+
+### UnsetLastTrackingUpdateAt
+`func (o *Shipment) UnsetLastTrackingUpdateAt()`
+
+UnsetLastTrackingUpdateAt ensures that no value is present for LastTrackingUpdateAt, not even an explicit nil
 ### GetLastUpdateAt
 
 `func (o *Shipment) GetLastUpdateAt() time.Time`
@@ -403,6 +555,31 @@ SetPackageMaterialType sets PackageMaterialType field to given value.
 `func (o *Shipment) HasPackageMaterialType() bool`
 
 HasPackageMaterialType returns a boolean if a field has been set.
+
+### GetParentCartons
+
+`func (o *Shipment) GetParentCartons() []ParentCarton`
+
+GetParentCartons returns the ParentCartons field if non-nil, zero value otherwise.
+
+### GetParentCartonsOk
+
+`func (o *Shipment) GetParentCartonsOk() (*[]ParentCarton, bool)`
+
+GetParentCartonsOk returns a tuple with the ParentCartons field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetParentCartons
+
+`func (o *Shipment) SetParentCartons(v []ParentCarton)`
+
+SetParentCartons sets ParentCartons field to given value.
+
+### HasParentCartons
+
+`func (o *Shipment) HasParentCartons() bool`
+
+HasParentCartons returns a boolean if a field has been set.
 
 ### GetProducts
 
@@ -578,6 +755,31 @@ SetStatusDetails sets StatusDetails field to given value.
 `func (o *Shipment) HasStatusDetails() bool`
 
 HasStatusDetails returns a boolean if a field has been set.
+
+### GetStoreOrderId
+
+`func (o *Shipment) GetStoreOrderId() string`
+
+GetStoreOrderId returns the StoreOrderId field if non-nil, zero value otherwise.
+
+### GetStoreOrderIdOk
+
+`func (o *Shipment) GetStoreOrderIdOk() (*string, bool)`
+
+GetStoreOrderIdOk returns a tuple with the StoreOrderId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStoreOrderId
+
+`func (o *Shipment) SetStoreOrderId(v string)`
+
+SetStoreOrderId sets StoreOrderId field to given value.
+
+### HasStoreOrderId
+
+`func (o *Shipment) HasStoreOrderId() bool`
+
+HasStoreOrderId returns a boolean if a field has been set.
 
 ### GetTracking
 

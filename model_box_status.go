@@ -20,11 +20,11 @@ type BoxStatus string
 
 // List of BoxStatus
 const (
-	AWAITING  BoxStatus = "Awaiting"
-	ARRIVED   BoxStatus = "Arrived"
+	AWAITING BoxStatus = "Awaiting"
+	ARRIVED BoxStatus = "Arrived"
 	COMPLETED BoxStatus = "Completed"
-	COUNTING  BoxStatus = "Counting"
-	STOWING   BoxStatus = "Stowing"
+	COUNTING BoxStatus = "Counting"
+	STOWING BoxStatus = "Stowing"
 	CANCELLED BoxStatus = "Cancelled"
 )
 
@@ -116,3 +116,4 @@ func (v *NullableBoxStatus) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

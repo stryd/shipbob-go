@@ -20,8 +20,8 @@ type PackageType string
 
 // List of PackageType
 const (
-	PACKAGE                PackageType = "Package"
-	PALLET                 PackageType = "Pallet"
+	PACKAGE PackageType = "Package"
+	PALLET PackageType = "Pallet"
 	FLOOR_LOADED_CONTAINER PackageType = "FloorLoadedContainer"
 )
 
@@ -110,3 +110,4 @@ func (v *NullablePackageType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

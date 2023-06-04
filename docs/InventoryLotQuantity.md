@@ -10,8 +10,8 @@ Name | Type | Description | Notes
 **FulfillableQuantity** | Pointer to **int32** | Fulfillable quantity of inventory items belonging to this lot | [optional] 
 **FulfillableQuantityByFulfillmentCenter** | Pointer to [**[]InventoryFulfillmentCenterQuantity**](InventoryFulfillmentCenterQuantity.md) | Fulfillable quantity of inventory items belonging to this lot broken down by fulfillment center location | [optional] 
 **InternalTransferQuantity** | Pointer to **int32** | The quantity of all items belonging to this lot that are in the process of internal transit  between ShipBob fulfillment centers. These items are not pickable or fulfillable until they have been received and moved to the \&quot;On Hand\&quot; quantity of the destination FC. Internal transit quantities for each FC represent the incoming transfer stock for that specific location. | [optional] 
-**LotNumber** | Pointer to **string** | Identification number of this lot | [optional] 
-**OnhandQuantity** | Pointer to **int32** | OnHand quantity of inventory items belonging to this lot | [optional] 
+**LotNumber** | Pointer to **NullableString** | Identification number of this lot | [optional] 
+**OnHandQuantity** | Pointer to **int32** | OnHand quantity of inventory items belonging to this lot | [optional] 
 
 ## Methods
 
@@ -167,6 +167,16 @@ SetFulfillableQuantityByFulfillmentCenter sets FulfillableQuantityByFulfillmentC
 
 HasFulfillableQuantityByFulfillmentCenter returns a boolean if a field has been set.
 
+### SetFulfillableQuantityByFulfillmentCenterNil
+
+`func (o *InventoryLotQuantity) SetFulfillableQuantityByFulfillmentCenterNil(b bool)`
+
+ SetFulfillableQuantityByFulfillmentCenterNil sets the value for FulfillableQuantityByFulfillmentCenter to be an explicit nil
+
+### UnsetFulfillableQuantityByFulfillmentCenter
+`func (o *InventoryLotQuantity) UnsetFulfillableQuantityByFulfillmentCenter()`
+
+UnsetFulfillableQuantityByFulfillmentCenter ensures that no value is present for FulfillableQuantityByFulfillmentCenter, not even an explicit nil
 ### GetInternalTransferQuantity
 
 `func (o *InventoryLotQuantity) GetInternalTransferQuantity() int32`
@@ -217,30 +227,40 @@ SetLotNumber sets LotNumber field to given value.
 
 HasLotNumber returns a boolean if a field has been set.
 
-### GetOnhandQuantity
+### SetLotNumberNil
 
-`func (o *InventoryLotQuantity) GetOnhandQuantity() int32`
+`func (o *InventoryLotQuantity) SetLotNumberNil(b bool)`
 
-GetOnhandQuantity returns the OnhandQuantity field if non-nil, zero value otherwise.
+ SetLotNumberNil sets the value for LotNumber to be an explicit nil
 
-### GetOnhandQuantityOk
+### UnsetLotNumber
+`func (o *InventoryLotQuantity) UnsetLotNumber()`
 
-`func (o *InventoryLotQuantity) GetOnhandQuantityOk() (*int32, bool)`
+UnsetLotNumber ensures that no value is present for LotNumber, not even an explicit nil
+### GetOnHandQuantity
 
-GetOnhandQuantityOk returns a tuple with the OnhandQuantity field if it's non-nil, zero value otherwise
+`func (o *InventoryLotQuantity) GetOnHandQuantity() int32`
+
+GetOnHandQuantity returns the OnHandQuantity field if non-nil, zero value otherwise.
+
+### GetOnHandQuantityOk
+
+`func (o *InventoryLotQuantity) GetOnHandQuantityOk() (*int32, bool)`
+
+GetOnHandQuantityOk returns a tuple with the OnHandQuantity field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetOnhandQuantity
+### SetOnHandQuantity
 
-`func (o *InventoryLotQuantity) SetOnhandQuantity(v int32)`
+`func (o *InventoryLotQuantity) SetOnHandQuantity(v int32)`
 
-SetOnhandQuantity sets OnhandQuantity field to given value.
+SetOnHandQuantity sets OnHandQuantity field to given value.
 
-### HasOnhandQuantity
+### HasOnHandQuantity
 
-`func (o *InventoryLotQuantity) HasOnhandQuantity() bool`
+`func (o *InventoryLotQuantity) HasOnHandQuantity() bool`
 
-HasOnhandQuantity returns a boolean if a field has been set.
+HasOnHandQuantity returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

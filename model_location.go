@@ -34,20 +34,22 @@ type Location struct {
 	// Indicates if the shipping is enabled for FC
 	IsShippingEnabled *bool `json:"is_shipping_enabled,omitempty"`
 	// Name of the location. Follows the naming convention City (State Code) for domestic FCs and City (Country Code) for international FCs
-	Name   NullableString  `json:"name,omitempty"`
-	Region *LocationRegion `json:"region,omitempty"`
+	Name NullableString `json:"name,omitempty"`
+	Region *FulfillmentCenterRegion `json:"region,omitempty"`
 	// Services provided by the location
 	Services []LocationService `json:"services,omitempty"`
 	// Time zone of the location
 	Timezone NullableString `json:"timezone,omitempty"`
+	Ttype string `json:"ttype"`
 }
 
 // NewLocation instantiates a new Location object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewLocation() *Location {
+func NewLocation(ttype string) *Location {
 	this := Location{}
+	this.Ttype = ttype
 	return &this
 }
 
@@ -91,7 +93,6 @@ func (o *Location) HasAbbreviation() bool {
 func (o *Location) SetAbbreviation(v string) {
 	o.Abbreviation.Set(&v)
 }
-
 // SetAbbreviationNil sets the value for Abbreviation to be an explicit nil
 func (o *Location) SetAbbreviationNil() {
 	o.Abbreviation.Set(nil)
@@ -327,7 +328,6 @@ func (o *Location) HasName() bool {
 func (o *Location) SetName(v string) {
 	o.Name.Set(&v)
 }
-
 // SetNameNil sets the value for Name to be an explicit nil
 func (o *Location) SetNameNil() {
 	o.Name.Set(nil)
@@ -339,9 +339,9 @@ func (o *Location) UnsetName() {
 }
 
 // GetRegion returns the Region field value if set, zero value otherwise.
-func (o *Location) GetRegion() LocationRegion {
+func (o *Location) GetRegion() FulfillmentCenterRegion {
 	if o == nil || IsNil(o.Region) {
-		var ret LocationRegion
+		var ret FulfillmentCenterRegion
 		return ret
 	}
 	return *o.Region
@@ -349,7 +349,7 @@ func (o *Location) GetRegion() LocationRegion {
 
 // GetRegionOk returns a tuple with the Region field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Location) GetRegionOk() (*LocationRegion, bool) {
+func (o *Location) GetRegionOk() (*FulfillmentCenterRegion, bool) {
 	if o == nil || IsNil(o.Region) {
 		return nil, false
 	}
@@ -365,8 +365,8 @@ func (o *Location) HasRegion() bool {
 	return false
 }
 
-// SetRegion gets a reference to the given LocationRegion and assigns it to the Region field.
-func (o *Location) SetRegion(v LocationRegion) {
+// SetRegion gets a reference to the given FulfillmentCenterRegion and assigns it to the Region field.
+func (o *Location) SetRegion(v FulfillmentCenterRegion) {
 	o.Region = &v
 }
 
@@ -435,7 +435,6 @@ func (o *Location) HasTimezone() bool {
 func (o *Location) SetTimezone(v string) {
 	o.Timezone.Set(&v)
 }
-
 // SetTimezoneNil sets the value for Timezone to be an explicit nil
 func (o *Location) SetTimezoneNil() {
 	o.Timezone.Set(nil)
@@ -446,8 +445,32 @@ func (o *Location) UnsetTimezone() {
 	o.Timezone.Unset()
 }
 
+// GetTtype returns the Ttype field value
+func (o *Location) GetTtype() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Ttype
+}
+
+// GetTtypeOk returns a tuple with the Ttype field value
+// and a boolean to check if the value has been set.
+func (o *Location) GetTtypeOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Ttype, true
+}
+
+// SetTtype sets field value
+func (o *Location) SetTtype(v string) {
+	o.Ttype = v
+}
+
 func (o Location) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -489,6 +512,7 @@ func (o Location) ToMap() (map[string]interface{}, error) {
 	if o.Timezone.IsSet() {
 		toSerialize["timezone"] = o.Timezone.Get()
 	}
+	toSerialize["ttype"] = o.Ttype
 	return toSerialize, nil
 }
 
@@ -527,3 +551,5 @@ func (v *NullableLocation) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

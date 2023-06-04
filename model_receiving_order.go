@@ -21,21 +21,23 @@ var _ MappedNullable = &ReceivingOrder{}
 // ReceivingOrder Information about a receiving order
 type ReceivingOrder struct {
 	// URL to the packing slip to be included in each box shipment for this receiving order
-	BoxLabelsUri     NullableString `json:"box_labels_uri,omitempty"`
-	BoxPackagingType *PackingType   `json:"box_packaging_type,omitempty"`
+	BoxLabelsUri NullableString `json:"box_labels_uri,omitempty"`
+	BoxPackagingType *PackingType `json:"box_packaging_type,omitempty"`
 	// Information about the boxes being shipped in this receiving order
 	Boxes []Box `json:"boxes,omitempty"`
 	// Expected date that all packages will have arrived
-	ExpectedArrivalDate NullableTime                `json:"expected_arrival_date,omitempty"`
-	FulfillmentCenter   *ReceivingFulfillmentCenter `json:"fulfillment_center,omitempty"`
+	ExpectedArrivalDate NullableTime `json:"expected_arrival_date,omitempty"`
+	FulfillmentCenter *ReceivingFulfillmentCenter `json:"fulfillment_center,omitempty"`
 	// Unique id of the warehouse receiving order
 	Id *int32 `json:"id,omitempty"`
 	// Insert date of the receiving order
 	InsertDate NullableTime `json:"insert_date,omitempty"`
 	// Last date the receiving order was updated
-	LastUpdatedDate NullableTime     `json:"last_updated_date,omitempty"`
-	PackageType     *PackageType     `json:"package_type,omitempty"`
-	Status          *ReceivingStatus `json:"status,omitempty"`
+	LastUpdatedDate NullableTime `json:"last_updated_date,omitempty"`
+	PackageType *PackageType `json:"package_type,omitempty"`
+	// Purchase order number for a receiving order
+	PurchaseOrderNumber NullableString `json:"purchase_order_number,omitempty"`
+	Status *ReceivingStatus `json:"status,omitempty"`
 }
 
 // NewReceivingOrder instantiates a new ReceivingOrder object
@@ -87,7 +89,6 @@ func (o *ReceivingOrder) HasBoxLabelsUri() bool {
 func (o *ReceivingOrder) SetBoxLabelsUri(v string) {
 	o.BoxLabelsUri.Set(&v)
 }
-
 // SetBoxLabelsUriNil sets the value for BoxLabelsUri to be an explicit nil
 func (o *ReceivingOrder) SetBoxLabelsUriNil() {
 	o.BoxLabelsUri.Set(nil)
@@ -195,7 +196,6 @@ func (o *ReceivingOrder) HasExpectedArrivalDate() bool {
 func (o *ReceivingOrder) SetExpectedArrivalDate(v time.Time) {
 	o.ExpectedArrivalDate.Set(&v)
 }
-
 // SetExpectedArrivalDateNil sets the value for ExpectedArrivalDate to be an explicit nil
 func (o *ReceivingOrder) SetExpectedArrivalDateNil() {
 	o.ExpectedArrivalDate.Set(nil)
@@ -302,7 +302,6 @@ func (o *ReceivingOrder) HasInsertDate() bool {
 func (o *ReceivingOrder) SetInsertDate(v time.Time) {
 	o.InsertDate.Set(&v)
 }
-
 // SetInsertDateNil sets the value for InsertDate to be an explicit nil
 func (o *ReceivingOrder) SetInsertDateNil() {
 	o.InsertDate.Set(nil)
@@ -345,7 +344,6 @@ func (o *ReceivingOrder) HasLastUpdatedDate() bool {
 func (o *ReceivingOrder) SetLastUpdatedDate(v time.Time) {
 	o.LastUpdatedDate.Set(&v)
 }
-
 // SetLastUpdatedDateNil sets the value for LastUpdatedDate to be an explicit nil
 func (o *ReceivingOrder) SetLastUpdatedDateNil() {
 	o.LastUpdatedDate.Set(nil)
@@ -388,6 +386,48 @@ func (o *ReceivingOrder) SetPackageType(v PackageType) {
 	o.PackageType = &v
 }
 
+// GetPurchaseOrderNumber returns the PurchaseOrderNumber field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ReceivingOrder) GetPurchaseOrderNumber() string {
+	if o == nil || IsNil(o.PurchaseOrderNumber.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.PurchaseOrderNumber.Get()
+}
+
+// GetPurchaseOrderNumberOk returns a tuple with the PurchaseOrderNumber field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ReceivingOrder) GetPurchaseOrderNumberOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.PurchaseOrderNumber.Get(), o.PurchaseOrderNumber.IsSet()
+}
+
+// HasPurchaseOrderNumber returns a boolean if a field has been set.
+func (o *ReceivingOrder) HasPurchaseOrderNumber() bool {
+	if o != nil && o.PurchaseOrderNumber.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetPurchaseOrderNumber gets a reference to the given NullableString and assigns it to the PurchaseOrderNumber field.
+func (o *ReceivingOrder) SetPurchaseOrderNumber(v string) {
+	o.PurchaseOrderNumber.Set(&v)
+}
+// SetPurchaseOrderNumberNil sets the value for PurchaseOrderNumber to be an explicit nil
+func (o *ReceivingOrder) SetPurchaseOrderNumberNil() {
+	o.PurchaseOrderNumber.Set(nil)
+}
+
+// UnsetPurchaseOrderNumber ensures that no value is present for PurchaseOrderNumber, not even an explicit nil
+func (o *ReceivingOrder) UnsetPurchaseOrderNumber() {
+	o.PurchaseOrderNumber.Unset()
+}
+
 // GetStatus returns the Status field value if set, zero value otherwise.
 func (o *ReceivingOrder) GetStatus() ReceivingStatus {
 	if o == nil || IsNil(o.Status) {
@@ -421,7 +461,7 @@ func (o *ReceivingOrder) SetStatus(v ReceivingStatus) {
 }
 
 func (o ReceivingOrder) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -456,6 +496,9 @@ func (o ReceivingOrder) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.PackageType) {
 		toSerialize["package_type"] = o.PackageType
+	}
+	if o.PurchaseOrderNumber.IsSet() {
+		toSerialize["purchase_order_number"] = o.PurchaseOrderNumber.Get()
 	}
 	if !IsNil(o.Status) {
 		toSerialize["status"] = o.Status
@@ -498,3 +541,5 @@ func (v *NullableReceivingOrder) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

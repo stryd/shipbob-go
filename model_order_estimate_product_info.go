@@ -77,7 +77,6 @@ func (o *OrderEstimateProductInfo) HasId() bool {
 func (o *OrderEstimateProductInfo) SetId(v int32) {
 	o.Id.Set(&v)
 }
-
 // SetIdNil sets the value for Id to be an explicit nil
 func (o *OrderEstimateProductInfo) SetIdNil() {
 	o.Id.Set(nil)
@@ -145,7 +144,7 @@ func (o *OrderEstimateProductInfo) SetReferenceId(v string) {
 }
 
 func (o OrderEstimateProductInfo) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -199,3 +198,5 @@ func (v *NullableOrderEstimateProductInfo) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

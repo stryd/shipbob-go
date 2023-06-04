@@ -7,20 +7,21 @@ Name | Type | Description | Notes
 **Dimensions** | Pointer to [**Dimension**](Dimension.md) |  | [optional] 
 **FulfillableQuantityByFulfillmentCenter** | Pointer to [**[]InventoryFulfillmentCenterQuantity**](InventoryFulfillmentCenterQuantity.md) | Fulfillable quantity of this inventory item broken down by fulfillment center location | [optional] 
 **FulfillableQuantityByLot** | Pointer to [**[]InventoryLotQuantity**](InventoryLotQuantity.md) | Fulfillable quantity of this inventory item broken down by lot | [optional] 
-**Id** | Pointer to **int32** | Unique id of the inventory item | [optional] 
+**InventoryId** | Pointer to **int32** | Unique id of the inventory item | [optional] 
 **IsActive** | Pointer to **bool** | Whether the inventory is active or not | [optional] 
 **IsCasePick** | Pointer to **bool** | True if the inventory item is marked as case pick | [optional] 
 **IsDigital** | Pointer to **bool** | True if the inventory item is marked as a digital item | [optional] 
 **IsLot** | Pointer to **bool** | True if this inventory item is organized into lots | [optional] 
-**Name** | Pointer to **string** | Name of the inventory item | [optional] 
-**PackagingAttribute** | Pointer to **string** | Attribute influencing the packaging requirements of this inventory item | [optional] 
+**Name** | Pointer to **NullableString** | Name of the inventory item | [optional] 
+**PackagingAttribute** | Pointer to [**PackagingAttribute**](PackagingAttribute.md) |  | [optional] 
 **TotalAwaitingQuantity** | Pointer to **int32** | Total quantity in unreceived receiving orders for this inventory item | [optional] 
 **TotalBackorderedQuantity** | Pointer to **int32** | The amount of the item you need to send to ShipBob to fulfill all exception orders containing  the item. This is the exception_quantity less the fulfillable_quantity of the item. | [optional] 
-**TotalCommittedQuantity** | Pointer to **int32** | Total committed quantity of this inventory item | [optional] 
+**TotalCommitedQuantity** | Pointer to **int32** | Total committed quantity of this inventory item | [optional] 
 **TotalExceptionQuantity** | Pointer to **int32** | The total quantity of all items that are contained within orders that are in exception/out of stock status. Out of stock orders have not been processed and therefore do not have lot or fulfillment centers assigned. | [optional] 
 **TotalFulfillableQuantity** | Pointer to **int32** | Total fulfillable quantity of this inventory item | [optional] 
 **TotalInternalTransferQuantity** | Pointer to **int32** | The total quantity of all items that are in the process of internal transit  between ShipBob fulfillment centers. These items are not pickable or fulfillable until they have been received and moved to the \&quot;On Hand\&quot; quantity of the destination FC. Internal transit quantities for each FC represent the incoming transfer stock for that specific location. | [optional] 
-**TotalOnhandQuantity** | Pointer to **int32** | Total onhand quantity of this inventory item | [optional] 
+**TotalOnHandQuantity** | Pointer to **int32** | Total onhand quantity of this inventory item | [optional] 
+**TotalSellableQuantity** | Pointer to **int32** | Total quantity that can be sold without overselling the inventory item. This is calculated by subtracting the total exception quantity from the fulfillable quantity. | [optional] 
 
 ## Methods
 
@@ -91,6 +92,16 @@ SetFulfillableQuantityByFulfillmentCenter sets FulfillableQuantityByFulfillmentC
 
 HasFulfillableQuantityByFulfillmentCenter returns a boolean if a field has been set.
 
+### SetFulfillableQuantityByFulfillmentCenterNil
+
+`func (o *Inventory) SetFulfillableQuantityByFulfillmentCenterNil(b bool)`
+
+ SetFulfillableQuantityByFulfillmentCenterNil sets the value for FulfillableQuantityByFulfillmentCenter to be an explicit nil
+
+### UnsetFulfillableQuantityByFulfillmentCenter
+`func (o *Inventory) UnsetFulfillableQuantityByFulfillmentCenter()`
+
+UnsetFulfillableQuantityByFulfillmentCenter ensures that no value is present for FulfillableQuantityByFulfillmentCenter, not even an explicit nil
 ### GetFulfillableQuantityByLot
 
 `func (o *Inventory) GetFulfillableQuantityByLot() []InventoryLotQuantity`
@@ -116,30 +127,40 @@ SetFulfillableQuantityByLot sets FulfillableQuantityByLot field to given value.
 
 HasFulfillableQuantityByLot returns a boolean if a field has been set.
 
-### GetId
+### SetFulfillableQuantityByLotNil
 
-`func (o *Inventory) GetId() int32`
+`func (o *Inventory) SetFulfillableQuantityByLotNil(b bool)`
 
-GetId returns the Id field if non-nil, zero value otherwise.
+ SetFulfillableQuantityByLotNil sets the value for FulfillableQuantityByLot to be an explicit nil
 
-### GetIdOk
+### UnsetFulfillableQuantityByLot
+`func (o *Inventory) UnsetFulfillableQuantityByLot()`
 
-`func (o *Inventory) GetIdOk() (*int32, bool)`
+UnsetFulfillableQuantityByLot ensures that no value is present for FulfillableQuantityByLot, not even an explicit nil
+### GetInventoryId
 
-GetIdOk returns a tuple with the Id field if it's non-nil, zero value otherwise
+`func (o *Inventory) GetInventoryId() int32`
+
+GetInventoryId returns the InventoryId field if non-nil, zero value otherwise.
+
+### GetInventoryIdOk
+
+`func (o *Inventory) GetInventoryIdOk() (*int32, bool)`
+
+GetInventoryIdOk returns a tuple with the InventoryId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetId
+### SetInventoryId
 
-`func (o *Inventory) SetId(v int32)`
+`func (o *Inventory) SetInventoryId(v int32)`
 
-SetId sets Id field to given value.
+SetInventoryId sets InventoryId field to given value.
 
-### HasId
+### HasInventoryId
 
-`func (o *Inventory) HasId() bool`
+`func (o *Inventory) HasInventoryId() bool`
 
-HasId returns a boolean if a field has been set.
+HasInventoryId returns a boolean if a field has been set.
 
 ### GetIsActive
 
@@ -266,22 +287,32 @@ SetName sets Name field to given value.
 
 HasName returns a boolean if a field has been set.
 
+### SetNameNil
+
+`func (o *Inventory) SetNameNil(b bool)`
+
+ SetNameNil sets the value for Name to be an explicit nil
+
+### UnsetName
+`func (o *Inventory) UnsetName()`
+
+UnsetName ensures that no value is present for Name, not even an explicit nil
 ### GetPackagingAttribute
 
-`func (o *Inventory) GetPackagingAttribute() string`
+`func (o *Inventory) GetPackagingAttribute() PackagingAttribute`
 
 GetPackagingAttribute returns the PackagingAttribute field if non-nil, zero value otherwise.
 
 ### GetPackagingAttributeOk
 
-`func (o *Inventory) GetPackagingAttributeOk() (*string, bool)`
+`func (o *Inventory) GetPackagingAttributeOk() (*PackagingAttribute, bool)`
 
 GetPackagingAttributeOk returns a tuple with the PackagingAttribute field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPackagingAttribute
 
-`func (o *Inventory) SetPackagingAttribute(v string)`
+`func (o *Inventory) SetPackagingAttribute(v PackagingAttribute)`
 
 SetPackagingAttribute sets PackagingAttribute field to given value.
 
@@ -341,30 +372,30 @@ SetTotalBackorderedQuantity sets TotalBackorderedQuantity field to given value.
 
 HasTotalBackorderedQuantity returns a boolean if a field has been set.
 
-### GetTotalCommittedQuantity
+### GetTotalCommitedQuantity
 
-`func (o *Inventory) GetTotalCommittedQuantity() int32`
+`func (o *Inventory) GetTotalCommitedQuantity() int32`
 
-GetTotalCommittedQuantity returns the TotalCommittedQuantity field if non-nil, zero value otherwise.
+GetTotalCommitedQuantity returns the TotalCommitedQuantity field if non-nil, zero value otherwise.
 
-### GetTotalCommittedQuantityOk
+### GetTotalCommitedQuantityOk
 
-`func (o *Inventory) GetTotalCommittedQuantityOk() (*int32, bool)`
+`func (o *Inventory) GetTotalCommitedQuantityOk() (*int32, bool)`
 
-GetTotalCommittedQuantityOk returns a tuple with the TotalCommittedQuantity field if it's non-nil, zero value otherwise
+GetTotalCommitedQuantityOk returns a tuple with the TotalCommitedQuantity field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetTotalCommittedQuantity
+### SetTotalCommitedQuantity
 
-`func (o *Inventory) SetTotalCommittedQuantity(v int32)`
+`func (o *Inventory) SetTotalCommitedQuantity(v int32)`
 
-SetTotalCommittedQuantity sets TotalCommittedQuantity field to given value.
+SetTotalCommitedQuantity sets TotalCommitedQuantity field to given value.
 
-### HasTotalCommittedQuantity
+### HasTotalCommitedQuantity
 
-`func (o *Inventory) HasTotalCommittedQuantity() bool`
+`func (o *Inventory) HasTotalCommitedQuantity() bool`
 
-HasTotalCommittedQuantity returns a boolean if a field has been set.
+HasTotalCommitedQuantity returns a boolean if a field has been set.
 
 ### GetTotalExceptionQuantity
 
@@ -441,30 +472,55 @@ SetTotalInternalTransferQuantity sets TotalInternalTransferQuantity field to giv
 
 HasTotalInternalTransferQuantity returns a boolean if a field has been set.
 
-### GetTotalOnhandQuantity
+### GetTotalOnHandQuantity
 
-`func (o *Inventory) GetTotalOnhandQuantity() int32`
+`func (o *Inventory) GetTotalOnHandQuantity() int32`
 
-GetTotalOnhandQuantity returns the TotalOnhandQuantity field if non-nil, zero value otherwise.
+GetTotalOnHandQuantity returns the TotalOnHandQuantity field if non-nil, zero value otherwise.
 
-### GetTotalOnhandQuantityOk
+### GetTotalOnHandQuantityOk
 
-`func (o *Inventory) GetTotalOnhandQuantityOk() (*int32, bool)`
+`func (o *Inventory) GetTotalOnHandQuantityOk() (*int32, bool)`
 
-GetTotalOnhandQuantityOk returns a tuple with the TotalOnhandQuantity field if it's non-nil, zero value otherwise
+GetTotalOnHandQuantityOk returns a tuple with the TotalOnHandQuantity field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetTotalOnhandQuantity
+### SetTotalOnHandQuantity
 
-`func (o *Inventory) SetTotalOnhandQuantity(v int32)`
+`func (o *Inventory) SetTotalOnHandQuantity(v int32)`
 
-SetTotalOnhandQuantity sets TotalOnhandQuantity field to given value.
+SetTotalOnHandQuantity sets TotalOnHandQuantity field to given value.
 
-### HasTotalOnhandQuantity
+### HasTotalOnHandQuantity
 
-`func (o *Inventory) HasTotalOnhandQuantity() bool`
+`func (o *Inventory) HasTotalOnHandQuantity() bool`
 
-HasTotalOnhandQuantity returns a boolean if a field has been set.
+HasTotalOnHandQuantity returns a boolean if a field has been set.
+
+### GetTotalSellableQuantity
+
+`func (o *Inventory) GetTotalSellableQuantity() int32`
+
+GetTotalSellableQuantity returns the TotalSellableQuantity field if non-nil, zero value otherwise.
+
+### GetTotalSellableQuantityOk
+
+`func (o *Inventory) GetTotalSellableQuantityOk() (*int32, bool)`
+
+GetTotalSellableQuantityOk returns a tuple with the TotalSellableQuantity field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTotalSellableQuantity
+
+`func (o *Inventory) SetTotalSellableQuantity(v int32)`
+
+SetTotalSellableQuantity sets TotalSellableQuantity field to given value.
+
+### HasTotalSellableQuantity
+
+`func (o *Inventory) HasTotalSellableQuantity() bool`
+
+HasTotalSellableQuantity returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
