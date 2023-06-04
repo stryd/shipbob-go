@@ -109,7 +109,7 @@ def replace_if_present(name: str, word: str, replace: str) -> str:
 
 
 def remove_single_oneof_properties(schema):
-    if "oneOf" in schema:
+    if "oneOf" in schema and len(schema) == 1:
         if len(schema["oneOf"]) == 1 and "$ref" in schema["oneOf"][0]:
             schema["$ref"] = schema["oneOf"][0]["$ref"]
             del schema["oneOf"]
@@ -157,10 +157,10 @@ def fix_technical_properties(schema):
         schema = replace_if_present(schema, 'â', '"')
         schema = replace_if_present(schema, 'â', '-')
         schema = replace_if_present(schema, 'â', '\'')
-        schema = remove_if_present(schema, '\\r\\n')
-        schema = remove_if_present(schema, '\r\n')
-        schema = remove_if_present(schema, '\n\n')
-        schema = remove_if_present(schema, '\\n\\n')
+        schema = replace_if_present(schema, '\\r\\n', ' ')
+        schema = replace_if_present(schema, '\r\n', ' ')
+        schema = replace_if_present(schema, '\n\n', ' ')
+        schema = replace_if_present(schema, '\\n\\n', ' ')
         return schema
     return schema
 
@@ -173,7 +173,7 @@ def add_operation_ids(path: str, path_schema: dict):
     operation_id = ""
     suffix = ""
     for part in path.split("/"):
-        if "{" not in part and "1.0" not in part:
+        if "{" not in part and ".0" not in part:
             operation_id += part[:1].upper() + part[1:]
         if "2.0" in part:
             suffix = "V2"
