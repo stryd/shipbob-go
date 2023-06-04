@@ -174,7 +174,7 @@
       },
       "AssignOrderToFulfillmentCenter": {
         "additionalProperties": false,
-        "description": "Model containing information that assigns a receiving order to a fulfillment center.\r\nIf the fulfillment center provided is in a receiving hub region, then the response will be the receiving hub location.",
+        "description": "Model containing information that assigns a receiving order to a fulfillment center. If the fulfillment center provided is in a receiving hub region, then the response will be the receiving hub location.",
         "properties": {
           "id": {
             "description": "ID of the fulfillment center to assign this receiving order to",
@@ -546,7 +546,7 @@
             "$ref": "#/components/schemas/RetailerProgramData"
           },
           "shipping_method": {
-            "description": "Client-defined shipping method matching what the user has listed as the shipping method on the Ship Option Mapping setup page in the ShipBob Merchant Portal. If they don\u2019t match, we will create a new one and default it to Standard",
+            "description": "Client-defined shipping method matching what the user has listed as the shipping method on the Ship Option Mapping setup page in the ShipBob Merchant Portal. If they don't match, we will create a new one and default it to Standard",
             "example": "Free 2-day Shipping",
             "type": "string"
           },
@@ -750,21 +750,6 @@
           }
         },
         "type": "object"
-      },
-      "Domain.s.PackagingAttribute": {
-        "enum": [
-          "None",
-          "Fragile",
-          "Foldable",
-          "Stackable",
-          "Book",
-          "CustomPackaging",
-          "CustomDunnage",
-          "MarketingInsert",
-          "Poster"
-        ],
-        "format": "int32",
-        "type": "integer"
       },
       "EstimationAddress": {
         "additionalProperties": false,
@@ -1002,7 +987,7 @@
                 ]
               },
               "id": {
-                "description": "Id of the location in ShipBob\u2019s database",
+                "description": "Id of the location in ShipBob's database",
                 "format": "int32",
                 "type": "integer"
               },
@@ -1022,7 +1007,7 @@
                 "type": "boolean"
               },
               "name": {
-                "description": "Name of the location. Follows the naming convention City (State Code)\r\nfor domestic FCs and City (Country Code) for international FCs",
+                "description": "Name of the location. Follows the naming convention City (State Code) for domestic FCs and City (Country Code) for international FCs",
                 "nullable": true,
                 "type": "string"
               },
@@ -1065,7 +1050,7 @@
         "additionalProperties": false,
         "properties": {
           "actual_fulfillment_date": {
-            "description": "The datetime of ShipBob\u2019s completion of the fulfillment operation as promised.\r\nCurrently, this means the shipment has been picked, packed, and label has been printed.",
+            "description": "The datetime of ShipBob's completion of the fulfillment operation as promised. Currently, this means the shipment has been picked, packed, and label has been printed.",
             "format": "date-time",
             "nullable": true,
             "type": "string"
@@ -1083,13 +1068,13 @@
             "type": "string"
           },
           "estimated_fulfillment_date": {
-            "description": "The datetime of ShipBob\u2019s commitment for completing\r\nthe shipment and handing to the carrier for delivery.",
+            "description": "The datetime of ShipBob's commitment for completing the shipment and handing to the carrier for delivery.",
             "format": "date-time",
             "nullable": true,
             "type": "string"
           },
           "estimated_fulfillment_date_status": {
-            "description": "Status of ShipBob\u2019s completion of the fulfillment operation.",
+            "description": "Status of ShipBob's completion of the fulfillment operation.",
             "enum": [
               "AwaitingInventoryAllocation",
               "AwaitingReset",
@@ -1127,7 +1112,7 @@
             "type": "string"
           },
           "is_tracking_uploaded": {
-            "description": "Indicates whether the Shipment was marked with tracking information\r\nuploaded to a third-party system where the order originated.",
+            "description": "Indicates whether the Shipment was marked with tracking information uploaded to a third-party system where the order originated.",
             "type": "boolean"
           },
           "last_tracking_update_at": {
@@ -1284,7 +1269,7 @@
             "type": "string"
           },
           "packagingAttribute": {
-            "$ref": "#/components/schemas/Domain.s.PackagingAttribute"
+            "$ref": "#/components/schemas/PackagingAttribute"
           },
           "totalAwaitingQuantity": {
             "description": "Total quantity in unreceived receiving orders for this inventory item",
@@ -1292,7 +1277,7 @@
             "type": "integer"
           },
           "totalBackorderedQuantity": {
-            "description": "The amount of the item you need to send to ShipBob to fulfill all exception orders containing \r\nthe item. This is the exception_quantity less the fulfillable_quantity of the item.",
+            "description": "The amount of the item you need to send to ShipBob to fulfill all exception orders containing  the item. This is the exception_quantity less the fulfillable_quantity of the item.",
             "format": "int32",
             "type": "integer"
           },
@@ -1302,7 +1287,7 @@
             "type": "integer"
           },
           "totalExceptionQuantity": {
-            "description": "The total quantity of all items that are contained within orders that\r\nare in exception/out of stock status. Out of stock orders have not been\r\nprocessed and therefore do not have lot or fulfillment centers assigned.",
+            "description": "The total quantity of all items that are contained within orders that are in exception/out of stock status. Out of stock orders have not been processed and therefore do not have lot or fulfillment centers assigned.",
             "format": "int32",
             "type": "integer"
           },
@@ -1312,7 +1297,7 @@
             "type": "integer"
           },
           "totalInternalTransferQuantity": {
-            "description": "The total quantity of all items that are in the process of internal transit \r\nbetween ShipBob fulfillment centers. These items are not pickable or fulfillable\r\nuntil they have been received and moved to the \"On Hand\" quantity of the destination FC.\r\nInternal transit quantities for each FC represent the incoming transfer stock\r\nfor that specific location.",
+            "description": "The total quantity of all items that are in the process of internal transit  between ShipBob fulfillment centers. These items are not pickable or fulfillable until they have been received and moved to the \"On Hand\" quantity of the destination FC. Internal transit quantities for each FC represent the incoming transfer stock for that specific location.",
             "format": "int32",
             "type": "integer"
           },
@@ -1322,7 +1307,7 @@
             "type": "integer"
           },
           "totalSellableQuantity": {
-            "description": "Total quantity that can be sold without overselling the inventory item.\r\nThis is calculated by subtracting the total exception quantity from the\r\nfulfillable quantity.",
+            "description": "Total quantity that can be sold without overselling the inventory item. This is calculated by subtracting the total exception quantity from the fulfillable quantity.",
             "format": "int32",
             "type": "integer"
           }
@@ -1354,7 +1339,7 @@
             "type": "integer"
           },
           "internalTransferQuantity": {
-            "description": "The quantity of items that are in the process of internal transit \r\nbetween ShipBob fulfillment centers, with a destination of this fulfillment center.\r\nThese items are not pickable or fulfillable until they have been received and moved \r\nto the \"On Hand\" quantity of the destination FC.",
+            "description": "The quantity of items that are in the process of internal transit  between ShipBob fulfillment centers, with a destination of this fulfillment center. These items are not pickable or fulfillable until they have been received and moved  to the \"On Hand\" quantity of the destination FC.",
             "format": "int32",
             "type": "integer"
           },
@@ -1406,7 +1391,7 @@
             "type": "array"
           },
           "internalTransferQuantity": {
-            "description": "The quantity of all items belonging to this lot that are in the process of internal transit \r\nbetween ShipBob fulfillment centers. These items are not pickable or fulfillable\r\nuntil they have been received and moved to the \"On Hand\" quantity of the destination FC.\r\nInternal transit quantities for each FC represent the incoming transfer stock\r\nfor that specific location.",
+            "description": "The quantity of all items belonging to this lot that are in the process of internal transit  between ShipBob fulfillment centers. These items are not pickable or fulfillable until they have been received and moved to the \"On Hand\" quantity of the destination FC. Internal transit quantities for each FC represent the incoming transfer stock for that specific location.",
             "format": "int32",
             "type": "integer"
           },
@@ -1448,7 +1433,7 @@
             "type": "array"
           },
           "id": {
-            "description": "Id of the location in ShipBob\u2019s database",
+            "description": "Id of the location in ShipBob's database",
             "format": "int32",
             "type": "integer"
           },
@@ -1465,7 +1450,7 @@
             "type": "boolean"
           },
           "name": {
-            "description": "Name of the location. Follows the naming convention City (State Code)\r\nfor domestic FCs and City (Country Code) for international FCs",
+            "description": "Name of the location. Follows the naming convention City (State Code) for domestic FCs and City (Country Code) for international FCs",
             "nullable": true,
             "type": "string"
           },
@@ -1701,11 +1686,7 @@
         "type": "object"
       },
       "OrderAddress": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/RetailerProgramDataAddress"
-          }
-        ]
+        "$ref": "#/components/schemas/RetailerProgramDataAddress"
       },
       "OrderEstimate": {
         "additionalProperties": false,
@@ -1761,7 +1742,7 @@
             "type": "array"
           },
           "shipping_methods": {
-            "description": "Array of strings specifying shipping methods for which to fetch estimates.\r\n\r\nIf this field is omitted we will return estimates for all shipping methods defined in ShipBob",
+            "description": "Array of strings specifying shipping methods for which to fetch estimates.  If this field is omitted we will return estimates for all shipping methods defined in ShipBob",
             "items": {
               "type": "string"
             },
@@ -1933,6 +1914,21 @@
           "FloorLoadedContainer"
         ],
         "type": "string"
+      },
+      "PackagingAttribute": {
+        "enum": [
+          "None",
+          "Fragile",
+          "Foldable",
+          "Stackable",
+          "Book",
+          "CustomPackaging",
+          "CustomDunnage",
+          "MarketingInsert",
+          "Poster"
+        ],
+        "format": "int32",
+        "type": "integer"
       },
       "PackingType": {
         "enum": [
@@ -2455,7 +2451,7 @@
         "description": "Contains properties that needs to be used for fulfilling B2B/Dropship orders.",
         "properties": {
           "addresses": {
-            "description": "Ship From - Certain retailers want to display the ship from address as their return facility, not Shipbob\u2019s warehouse address        /// \r\nMark For Address - Final destination address",
+            "description": "Ship From - Certain retailers want to display the ship from address as their return facility, not Shipbob's warehouse address        ///  Mark For Address - Final destination address",
             "items": {
               "$ref": "#/components/schemas/RetailerProgramDataAddress"
             },
@@ -2533,7 +2529,7 @@
             "type": "string"
           },
           "type": {
-            "description": "Specifies the type of address:\r\nShipFrom\r\nMarkFor",
+            "description": "Specifies the type of address: ShipFrom MarkFor",
             "enum": [
               "MarkFor",
               "ShipFrom"
@@ -2877,7 +2873,7 @@
             "type": "integer"
           },
           "name": {
-            "description": "Name of the ship method as selected by the merchant and saved in ShipBob\u2019s database (i.e. \u201cground\u201d). Corresponds to the shipping_method field in the Orders API.",
+            "description": "Name of the ship method as selected by the merchant and saved in ShipBob's database (i.e. \"ground\"). Corresponds to the shipping_method field in the Orders API.",
             "type": "string"
           },
           "service_level": {
@@ -2887,12 +2883,8 @@
         "type": "object"
       },
       "Shipment": {
-        "description": "Information about a shipment",
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/InternalShipment"
-          }
-        ]
+        "$ref": "#/components/schemas/InternalShipment",
+        "description": "Information about a shipment"
       },
       "ShipmentLog": {
         "additionalProperties": false,
@@ -2965,7 +2957,7 @@
         "description": "Contains shipping properties that need to be used for fulfilling an order.",
         "properties": {
           "carrier_type": {
-            "description": "Identifies whether to ship parcel or freight.\r\n            \r\nParcel: Smaller, light weight boxes.\r\n            \r\nFreight: Larger boxes, usually transported by truckload.",
+            "description": "Identifies whether to ship parcel or freight.              Parcel: Smaller, light weight boxes.              Freight: Larger boxes, usually transported by truckload.",
             "enum": [
               "Parcel",
               "Freight"
@@ -2974,7 +2966,7 @@
             "type": "string"
           },
           "payment_term": {
-            "description": "Identifies the party responsible for shipping charges.\r\n            \r\nCollect: The person/entity receiving the product pays the shipping charges.\r\n            \r\nThirdParty: Another party pays for the shipping charges (not Shipbob) [parcel only].\r\n            \r\nPrepaid: The shipper pays the shipping charges (Shipbob or merchant).\r\n            \r\nMerchantResponsible: The merchant will be responsible for uploading shipping labels or booking freight transportation.",
+            "description": "Identifies the party responsible for shipping charges.              Collect: The person/entity receiving the product pays the shipping charges.              ThirdParty: Another party pays for the shipping charges (not Shipbob) [parcel only].              Prepaid: The shipper pays the shipping charges (Shipbob or merchant).              MerchantResponsible: The merchant will be responsible for uploading shipping labels or booking freight transportation.",
             "enum": [
               "Collect",
               "ThirdParty",
@@ -3500,7 +3492,7 @@
             }
           },
           {
-            "description": "Sort will default to ascending order for each field. \r\nTo sort in descending order please pass a \"-\" in front of the field name. \r\nFor example, Sort=-onHand,name will sort by onHand descending",
+            "description": "Sort will default to ascending order for each field.  To sort in descending order please pass a \"-\" in front of the field name.  For example, Sort=-onHand,name will sort by onHand descending",
             "in": "query",
             "name": "Sort",
             "schema": {
@@ -3508,7 +3500,7 @@
             }
           },
           {
-            "description": "Search is available for 2 fields, Inventory ID and Name -\r\n1. Expected behavior for search by Inventory ID is exact match\r\n2. Expected behavior for search by Inventory Name is partial match, i.e. does not have to be start of word, \r\nbut must be consecutive characters. This is not case sensitive.",
+            "description": "Search is available for 2 fields, Inventory ID and Name - 1. Expected behavior for search by Inventory ID is exact match 2. Expected behavior for search by Inventory Name is partial match, i.e. does not have to be start of word,  but must be consecutive characters. This is not case sensitive.",
             "in": "query",
             "name": "Search",
             "schema": {
@@ -3516,7 +3508,7 @@
             }
           },
           {
-            "description": "LocationType is valid for hub, spoke, or lts.\r\nLocationType will default to all locations.",
+            "description": "LocationType is valid for hub, spoke, or lts. LocationType will default to all locations.",
             "in": "query",
             "name": "LocationType",
             "schema": {
@@ -4072,7 +4064,7 @@
     },
     "/1.0/order/estimate": {
       "post": {
-        "description": "This endpoint will provide, where possible, an estimate of pricing and fulfillment center assignment of a potential standard (direct to consumer) order. \r\nKeep in mind that there are ways for the merchant to change FC assignment or product configuration after order creation that could invalidate this estimate. \r\nEstimates cannot be returned for items that are unknown, out of stock, or too large for fulfillment using standard box sizes. \r\nAdditional services such as high-pick fees, shipping insurance, auto-splitting or auto-adding items to orders, and signature required are not included in this estimate.",
+        "description": "This endpoint will provide, where possible, an estimate of pricing and fulfillment center assignment of a potential standard (direct to consumer) order.  Keep in mind that there are ways for the merchant to change FC assignment or product configuration after order creation that could invalidate this estimate.  Estimates cannot be returned for items that are unknown, out of stock, or too large for fulfillment using standard box sizes.  Additional services such as high-pick fees, shipping insurance, auto-splitting or auto-adding items to orders, and signature required are not included in this estimate.",
         "operationId": "createOrderEstimate",
         "parameters": [
           {
@@ -4971,7 +4963,7 @@
         "operationId": "getProducts",
         "parameters": [
           {
-            "description": "Page of products to get\r\n- Valid Range is 0 to integer max with a default of 1",
+            "description": "Page of products to get - Valid Range is 0 to integer max with a default of 1",
             "in": "query",
             "name": "Page",
             "schema": {
@@ -4982,7 +4974,7 @@
             }
           },
           {
-            "description": "Amount of products per page to request\r\n- Valid Range is 1 to 250 with a default of 50",
+            "description": "Amount of products per page to request - Valid Range is 1 to 250 with a default of 50",
             "in": "query",
             "name": "Limit",
             "schema": {
@@ -5016,7 +5008,7 @@
             }
           },
           {
-            "description": "Search is available for 2 fields of the inventory record related to the product: Inventory ID and Name -\r\n1. Expected behavior for search by Inventory ID is exact match\r\n2. Expected behavior for search by Inventory Name is partial match, i.e. does not have to be start of word, \r\nbut must be consecutive characters. This is not case sensitive.",
+            "description": "Search is available for 2 fields of the inventory record related to the product: Inventory ID and Name - 1. Expected behavior for search by Inventory ID is exact match 2. Expected behavior for search by Inventory Name is partial match, i.e. does not have to be start of word,  but must be consecutive characters. This is not case sensitive.",
             "in": "query",
             "name": "Search",
             "schema": {
@@ -5024,7 +5016,7 @@
             }
           },
           {
-            "description": "Status filter for products:\r\n- Any: Include both active and inactive\r\n- Active: Filter products that are Active\r\n- Inactive: Filter products that are Inactive",
+            "description": "Status filter for products: - Any: Include both active and inactive - Active: Filter products that are Active - Inactive: Filter products that are Inactive",
             "in": "query",
             "name": "ActiveStatus",
             "schema": {
@@ -5032,7 +5024,7 @@
             }
           },
           {
-            "description": "Bundle filter for products:\r\n- Any: Don't filter and consider products that are bundles or not bundles\r\n- Bundle: Filter by products that are bundles\r\n- NotBundle: Filter by products that are not bundles",
+            "description": "Bundle filter for products: - Any: Don't filter and consider products that are bundles or not bundles - Bundle: Filter by products that are bundles - NotBundle: Filter by products that are not bundles",
             "in": "query",
             "name": "BundleStatus",
             "schema": {
@@ -7262,7 +7254,7 @@
     },
     "/2.0/receiving": {
       "get": {
-        "operationId": "get2.0Receivings",
+        "operationId": "get2.0ReceivingsV2",
         "parameters": [
           {
             "description": "Page of WROs to get",
@@ -7425,7 +7417,7 @@
         ]
       },
       "post": {
-        "operationId": "create2.0Receiving",
+        "operationId": "create2.0ReceivingV2",
         "requestBody": {
           "content": {
             "application/json": {
@@ -7495,7 +7487,7 @@
     },
     "/2.0/receiving/{id}": {
       "get": {
-        "operationId": "get2.0Receiving",
+        "operationId": "get2.0ReceivingV2",
         "parameters": [
           {
             "description": "Id of the receiving order",
@@ -7551,7 +7543,7 @@
     },
     "/2.0/receiving/{id}/cancel": {
       "post": {
-        "operationId": "cancel2.0Receiving",
+        "operationId": "cancel2.0ReceivingV2",
         "parameters": [
           {
             "description": "Id of the receiving order to cancel",
@@ -7623,7 +7615,7 @@
     },
     "/2.0/receiving/{id}/labels": {
       "get": {
-        "operationId": "get2.0ReceivingLabels",
+        "operationId": "get2.0ReceivingLabelsV2",
         "parameters": [
           {
             "description": "Id of the receiving order",
@@ -7696,27 +7688,27 @@
   ],
   "tags": [
     {
-      "description": " >  Note: The orderId in the API response will not match the Id displayed in the ShipBob Merchant Portal when you navigate to the Orders page. ShipBob is currently undergoing a schema migration and the Id displayed in the ShipBob Merchant Portal is the shipmentId not the orderId. In the future, the portal will display both orderId(s) and shipmentId(s). \n\n Use the Orders Resource to create and retrieve orders in ShipBob. \n\n An order a digital record of a complete purchase that comes from an upstream source (i.e. Shopify) and is intended for ShipBob to fulfill. The order object includes products purchased, shipping address details, shipping method selected etc. Orders are created in ShipBob via a channel. \n\n When ShipBob fulfills the order, one or more shipments are created for that order. A shipment is a record of the physical package(s) sent out via a carrier. If an order is shipped in multiple packages then 2 or more shipments can be created for that order. \n\n ### Tips for creating orders in ShipBob via the POST Order endpoint: \n\n * Populate the referenceId with a unique and immutable order identifier from your upstream system. This field was created to allow you to tieback records in ShipBob with your upstream system. \n\n * Ensure that the <em> shipping method </em> passed in the API request matches exactly what the user has listed as the <em> shipping method </em> on the <em>  Ship Option Mapping </em> setup page in the ShipBob Merchant Portal. If they don\u2019t match, ShipBob will assume that the user wants to leverage ShipBob\u2019s default shipping method. \n\n * You can leverage either productId (the ShipBob productId) or the product referenceId (your system's  unique Identifier for products) when creating an order. \n\n Use the Shipments endpoints to retrieve fulfillment information for shipments or orders. \n\n A shipment is an object that is the result of a fulfillment of an order. An order can have one or more shipments. Say Shopify order #122323 contains 3 different products, shipped in two separate packages, there would be 2 shipments for that order. \n\n  Serial numbers are unique identifiers for an individual item (e.g. your specific iPhone X that you bought at the Apple Store). No inventory item can possess duplicate serial numbers. Merchants can request \u201cserial scan\u201d, which means ShipBob will capture the serial number(s) upon sending a shipment so the merchant knows which customer received which individual item(s).",
+      "description": " >  Note: The orderId in the API response will not match the Id displayed in the ShipBob Merchant Portal when you navigate to the Orders page. ShipBob is currently undergoing a schema migration and the Id displayed in the ShipBob Merchant Portal is the shipmentId not the orderId. In the future, the portal will display both orderId(s) and shipmentId(s).   Use the Orders Resource to create and retrieve orders in ShipBob.   An order a digital record of a complete purchase that comes from an upstream source (i.e. Shopify) and is intended for ShipBob to fulfill. The order object includes products purchased, shipping address details, shipping method selected etc. Orders are created in ShipBob via a channel.   When ShipBob fulfills the order, one or more shipments are created for that order. A shipment is a record of the physical package(s) sent out via a carrier. If an order is shipped in multiple packages then 2 or more shipments can be created for that order.   ### Tips for creating orders in ShipBob via the POST Order endpoint:   * Populate the referenceId with a unique and immutable order identifier from your upstream system. This field was created to allow you to tieback records in ShipBob with your upstream system.   * Ensure that the <em> shipping method </em> passed in the API request matches exactly what the user has listed as the <em> shipping method </em> on the <em>  Ship Option Mapping </em> setup page in the ShipBob Merchant Portal. If they don't match, ShipBob will assume that the user wants to leverage ShipBob's default shipping method.   * You can leverage either productId (the ShipBob productId) or the product referenceId (your system's  unique Identifier for products) when creating an order.   Use the Shipments endpoints to retrieve fulfillment information for shipments or orders.   A shipment is an object that is the result of a fulfillment of an order. An order can have one or more shipments. Say Shopify order #122323 contains 3 different products, shipped in two separate packages, there would be 2 shipments for that order.    Serial numbers are unique identifiers for an individual item (e.g. your specific iPhone X that you bought at the Apple Store). No inventory item can possess duplicate serial numbers. Merchants can request \"serial scan\", which means ShipBob will capture the serial number(s) upon sending a shipment so the merchant knows which customer received which individual item(s).",
       "name": "Orders"
     },
     {
-      "description": "Use the Products Resource to retrieve and create product records in ShipBob. \n\n A product is a virtual record created in ShipBob\u2019s system via a channel. Say a merchant has two Shopify stores (each store would have its own channel), Kevin\u2019s Shopify Store #133 and Kevin\u2019s Shopify store #134. If the same SKU was sold on both stores, two products would be created for that SKU, one product would be created to represent the SKU sold on Store #133 and one to represent it on Store on #134, with productIds 3884009 and 3884008 respectively. \n\n While a product is a virtual record, the inventory item is a representation of a physical good. So in the above example, as product 3884009 and product 3884008 represent the same SKU sold on different channels, the same inventory item will be mapped to both products. Every product will have one or more inventory items mapped to it. Bundle products, a set of products that are sold to consumers as one combined package, think gift or multi packs, may have 2 or more inventory items mapped to them. \n\n ### Tips for creating products in ShipBob via the POST Product endpoints: \n\n * ShipBob needs products to be created at the lowest level. So if a product has 3 variants, small, medium and large, a separate product needs to be created in ShipBob for all three.\n\n * Populate the referenceId with a unique and immutable product identifier from your upstream system. This field was created to allow you to tie back records in ShipBob with your upstream system. \n\n * Use specific and/or unique names to describe each product so they can be easily identified by users in the ShipBob Merchant Portal. In particular, when creating variants, please give them distinguishable names i.e. for a Blue shirt that comes in two sizes, small and medium, strong product names would be Blue shirt size:small and Blue shirt size:medium. \n\n > **NOTE:** The productId returned in the API response will not match the id displayed in the ShipBob Merchant Portal when you navigate to Inventory > Products. ShipBob is currently undergoing a schema migration and the Id displayed in the ShipBob Merchant Portal is the inventoryId not the productId. In the future, the portal will display both productId(s) and inventoryId(s)",
+      "description": "Use the Products Resource to retrieve and create product records in ShipBob.   A product is a virtual record created in ShipBob's system via a channel. Say a merchant has two Shopify stores (each store would have its own channel), Kevin's Shopify Store #133 and Kevin's Shopify store #134. If the same SKU was sold on both stores, two products would be created for that SKU, one product would be created to represent the SKU sold on Store #133 and one to represent it on Store on #134, with productIds 3884009 and 3884008 respectively.   While a product is a virtual record, the inventory item is a representation of a physical good. So in the above example, as product 3884009 and product 3884008 represent the same SKU sold on different channels, the same inventory item will be mapped to both products. Every product will have one or more inventory items mapped to it. Bundle products, a set of products that are sold to consumers as one combined package, think gift or multi packs, may have 2 or more inventory items mapped to them.   ### Tips for creating products in ShipBob via the POST Product endpoints:   * ShipBob needs products to be created at the lowest level. So if a product has 3 variants, small, medium and large, a separate product needs to be created in ShipBob for all three.  * Populate the referenceId with a unique and immutable product identifier from your upstream system. This field was created to allow you to tie back records in ShipBob with your upstream system.   * Use specific and/or unique names to describe each product so they can be easily identified by users in the ShipBob Merchant Portal. In particular, when creating variants, please give them distinguishable names i.e. for a Blue shirt that comes in two sizes, small and medium, strong product names would be Blue shirt size:small and Blue shirt size:medium.   > **NOTE:** The productId returned in the API response will not match the id displayed in the ShipBob Merchant Portal when you navigate to Inventory > Products. ShipBob is currently undergoing a schema migration and the Id displayed in the ShipBob Merchant Portal is the inventoryId not the productId. In the future, the portal will display both productId(s) and inventoryId(s)",
       "name": "Products"
     },
     {
-      "description": " Use the Inventory Resource to retrieve ShipBob  inventory items and quantities. \n\n An inventory item is a representation of a physical good, that may or may not have physical stock in ShipBob\u2019s fulfillment centers. Every product will have one or more inventory items mapped to it. A bundle product (a set of products that are sold as one combined package - e.g.  gift or multi packs) is an example of a product that has  2 or more inventory items mapped to it. \n\n Lot items are physical items that have expiration dates or batch numbers that should be fulfilled in a FIFO (first in, first out) manner. Most food items are lot items. Quantities by lot # and/or expiration date are also listed in the Inventory object.",
+      "description": " Use the Inventory Resource to retrieve ShipBob  inventory items and quantities.   An inventory item is a representation of a physical good, that may or may not have physical stock in ShipBob's fulfillment centers. Every product will have one or more inventory items mapped to it. A bundle product (a set of products that are sold as one combined package - e.g.  gift or multi packs) is an example of a product that has  2 or more inventory items mapped to it.   Lot items are physical items that have expiration dates or batch numbers that should be fulfilled in a FIFO (first in, first out) manner. Most food items are lot items. Quantities by lot # and/or expiration date are also listed in the Inventory object.",
       "name": "Inventory"
     },
     {
-      "description": "Use the Channel Resource to list \u201cchannels\u201d which you have access to. You will use this channelId for subsequent API calls made to ShipBob endpoints. \n\n A channel is a specific installation of an application built by a vendor on top of our API \u2013 e.g. Kevin\u2019s Shopify Store #133432.  All write and most read endpoints require a channel to be passed in the header to complete the request. The channel is used to Identify where the data originally came from.  \n\n Applications that are granted multi-channel permissions will be able to read data from all channels that belong to a user. However, multi-channel applications will only be able to write on behalf of their own channel.",
+      "description": "Use the Channel Resource to list \"channels\" which you have access to. You will use this channelId for subsequent API calls made to ShipBob endpoints.   A channel is a specific installation of an application built by a vendor on top of our API - e.g. Kevin's Shopify Store #133432.  All write and most read endpoints require a channel to be passed in the header to complete the request. The channel is used to Identify where the data originally came from.    Applications that are granted multi-channel permissions will be able to read data from all channels that belong to a user. However, multi-channel applications will only be able to write on behalf of their own channel.",
       "name": "Channels"
     },
     {
-      "description": "Use the Returns resource to retrieve, create, edit and cancel return records in ShipBob. \n\n A return is a request for ShipBob to perform an action on inventory that is coming back into our fulfillment centers. Typically, the return is a result of an order being requested to be refunded or exchanged. ShipBob does not handle refunds or exchanges - we simply process the inventory according to the merchant specifications. \n\n Returns can only be **modified** or **cancelled** when they are in the Awaiting Arrival status. Returns that are being Processed or have been Completed cannot be modified or cancelled. \n\n ### Tips for creating return orders: \n\n * Populate the referenceId with a unique and immutable return identifier from your upstream system. This field was created to allow you to tie back records in ShipBob with your upstream system. \n\n *Include each inventoryId exactly once in the inventory object. If an inventoryId is included more than once, the call will return an error code \n\n * Provide a tracking # when submitting a return, while it is not a required field, it is the the most surefire way for ShipBob staff to properly and quickly identify the return package when it reaches our fulfillment center. \n\n * Only include inventory items to the return record that will be returned in the same box i.e. if InventoryId 12232 and InventoryId 12039 will be returned in two seperate boxes, two return orders should be created. \n\n * ShipBob does not process returns for digital items or bundle inventory items. Return calls that include digital inventory  items (e.g. ebooks) or bundle inventory items (i.e. multipacks, combination of multiple inventory items)  will return an error code. \n\n * If you choose to provide a requested action (it is an optional field), only provide one requested action per inventory item. So if  you have more than 1 quantity of a given item being returned within the same box, all quantities of the item have to have the same action associated with them. If you don\u2019t provide a requested action, it will default to the action the User set for that inventory item in the ShipBob Merchant portal.",
+      "description": "Use the Returns resource to retrieve, create, edit and cancel return records in ShipBob.   A return is a request for ShipBob to perform an action on inventory that is coming back into our fulfillment centers. Typically, the return is a result of an order being requested to be refunded or exchanged. ShipBob does not handle refunds or exchanges - we simply process the inventory according to the merchant specifications.   Returns can only be **modified** or **cancelled** when they are in the Awaiting Arrival status. Returns that are being Processed or have been Completed cannot be modified or cancelled.   ### Tips for creating return orders:   * Populate the referenceId with a unique and immutable return identifier from your upstream system. This field was created to allow you to tie back records in ShipBob with your upstream system.   *Include each inventoryId exactly once in the inventory object. If an inventoryId is included more than once, the call will return an error code   * Provide a tracking # when submitting a return, while it is not a required field, it is the the most surefire way for ShipBob staff to properly and quickly identify the return package when it reaches our fulfillment center.   * Only include inventory items to the return record that will be returned in the same box i.e. if InventoryId 12232 and InventoryId 12039 will be returned in two seperate boxes, two return orders should be created.   * ShipBob does not process returns for digital items or bundle inventory items. Return calls that include digital inventory  items (e.g. ebooks) or bundle inventory items (i.e. multipacks, combination of multiple inventory items)  will return an error code.   * If you choose to provide a requested action (it is an optional field), only provide one requested action per inventory item. So if  you have more than 1 quantity of a given item being returned within the same box, all quantities of the item have to have the same action associated with them. If you don't provide a requested action, it will default to the action the User set for that inventory item in the ShipBob Merchant portal.",
       "name": "Returns"
     },
     {
-      "description": "Note: 1.0/receiving endpoints have been deprecated. Please use 2.0/receiving instead. \n\n Use the Receiving Resource to retrieve, create and cancel Warehouse Receiving Orders (WROs). \n\n A WRO is a request form that tells ShipBob's fulfillment centers what inventory should be received and stocked. Some other solutions call this an \u201cASN\u201d or Advanced Ship Notice. WROs may include multiple inventory items with specific quantities. More details on creating a WRO can be found [here](https://support.shipbob.com/s/article/New-Send-Inventory-to-ShipBob-WRO). \n\n A WRO can only be **canceled** if it is in the Awaiting status. WROs in Awaiting status are considered to still be in transit to ShipBob FCs. WROs that have Partially Arrived, have been Processed or are Completed, cannot be canceled.",
+      "description": "Note: 1.0/receiving endpoints have been deprecated. Please use 2.0/receiving instead.   Use the Receiving Resource to retrieve, create and cancel Warehouse Receiving Orders (WROs).   A WRO is a request form that tells ShipBob's fulfillment centers what inventory should be received and stocked. Some other solutions call this an \"ASN\" or Advanced Ship Notice. WROs may include multiple inventory items with specific quantities. More details on creating a WRO can be found [here](https://support.shipbob.com/s/article/New-Send-Inventory-to-ShipBob-WRO).   A WRO can only be **canceled** if it is in the Awaiting status. WROs in Awaiting status are considered to still be in transit to ShipBob FCs. WROs that have Partially Arrived, have been Processed or are Completed, cannot be canceled.",
       "name": "Receiving"
     },
     {
@@ -7724,7 +7716,7 @@
       "name": "Webhooks"
     },
     {
-      "description": "Use this API to interact with the physical locations across ShipBob's fulfillment network. \n\n An active ShipBob location is operational for fulfillment processes, including receiving inventory and processing returns. It's important to note that some locations, access is granted to all merchants by default, while some locations require special request for merchants to be granted access. \n\n For each location, determine if it can be leveraged for the user by viewing the access_granted & receiving_enabled fields.",
+      "description": "Use this API to interact with the physical locations across ShipBob's fulfillment network.   An active ShipBob location is operational for fulfillment processes, including receiving inventory and processing returns. It's important to note that some locations, access is granted to all merchants by default, while some locations require special request for merchants to be granted access.   For each location, determine if it can be leveraged for the user by viewing the access_granted & receiving_enabled fields.",
       "name": "Locations"
     }
   ]

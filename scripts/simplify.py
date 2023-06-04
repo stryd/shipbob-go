@@ -45,6 +45,7 @@ def rename_verbose_names(name: str) -> str:
     name = remove_if_present(name, 'Presentation.Models.')
     name = remove_if_present(name, 'Presentation.ViewModels.')
     name = remove_if_present(name, 'Common.Models.')
+    name = remove_if_present(name, 'Domain.Models.')
     name = remove_if_present(name, 'Integrations.')
 
     # remove common schema suffixes
@@ -145,11 +146,18 @@ def fix_technical_properties(schema):
             schema[i] = fix_technical_properties(schema[i])
     elif isinstance(schema, str):
         schema = replace_if_present(schema, '$type', 'ttype')
+        schema = replace_if_present(schema, '\u201c', '"')
+        schema = replace_if_present(schema, '\u201d', '"')
+        schema = replace_if_present(schema, '\u2019', '\'')
+        schema = replace_if_present(schema, '\u2013', '-')
         schema = replace_if_present(schema, 'â', '"')
         schema = replace_if_present(schema, 'â', '"')
         schema = replace_if_present(schema, 'â', '-')
         schema = replace_if_present(schema, 'â', '\'')
         schema = replace_if_present(schema, '\\r\\n', ' ')
+        schema = replace_if_present(schema, '\r\n', ' ')
+        schema = replace_if_present(schema, '\n\n', ' ')
+        schema = replace_if_present(schema, '\\n\\n', ' ')
         return schema
     return schema
 
@@ -160,9 +168,12 @@ def add_operation_ids(path: str, path_schema: dict):
     generated openapi client methods much cleaner.
     """
     operation_id = ""
+    suffix = ""
     for part in path.split("/"):
         if "{" not in part and "1.0" not in part:
             operation_id += part[:1].upper() + part[1:]
+        if "2.0" in part:
+            suffix = "V2"
     op_map = {
         "get": "get",
         "post": "create",
@@ -184,6 +195,8 @@ def add_operation_ids(path: str, path_schema: dict):
                 method_schema[op_id_key] = method_schema[op_id_key][:-1] + "ies"
             elif not operation_id.endswith("s"):
                 method_schema[op_id_key] += "s"
+        if suffix:
+            method_schema[op_id_key] += suffix
 
 
 def process_openapi_schema(file_path):
@@ -194,6 +207,8 @@ def process_openapi_schema(file_path):
         schema = clean_up_schema_name_references(schema)
         schema = fix_technical_properties(schema)
 
+        for n, comp in schema["components"]["schemas"].items():
+            remove_single_oneof_properties(comp)
         for path, endpoint in schema["paths"].items():
             add_operation_ids(path, endpoint)
             for m, method in endpoint.items():
