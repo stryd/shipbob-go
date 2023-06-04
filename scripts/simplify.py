@@ -209,7 +209,11 @@ def add_missing_security_schema(schema):
     Old version of the generator generated all possible security mechanisms but has since been
     updated to only generate what was specified in the spec.
     """
-    if "bearer" not in schema:
+    included = False
+    for s, sec in schema.items():
+        if "type" in sec and sec["type"] == "http" and "scheme" in sec and sec["scheme"] == "bearer":
+            included = True
+    if not included:
         schema["pat"] = {
             "type": "http",
             "scheme": "bearer",
