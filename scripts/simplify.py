@@ -141,7 +141,8 @@ def fix_technical_properties(schema):
                 schema["description"] = '\n'.join([f"{name}({i})." for i, name in enumerate(schema["enum"])])
                 schema["enum"] = list(range(len(schema["enum"])))
         if "$type" in schema:
-            schema["ttype"] = schema["$type"]
+            # just delete. It is more headache to deal with than worth it (for me). Can revisit if anyone
+            # starts using this library and says they need it.
             del schema["$type"]
         if "type" in schema and schema["type"] == "int":
             schema["type"] = "integer"

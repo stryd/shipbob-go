@@ -826,9 +826,6 @@
             "description": "Name of the fc type",
             "nullable": true,
             "type": "string"
-          },
-          "ttype": {
-            "type": "string"
           }
         },
         "required": [
@@ -1495,9 +1492,6 @@
             "description": "Time zone of the location",
             "nullable": true,
             "type": "string"
-          },
-          "ttype": {
-            "type": "string"
           }
         },
         "required": [
@@ -2020,9 +2014,6 @@
           },
           "title": {
             "nullable": true,
-            "type": "string"
-          },
-          "ttype": {
             "type": "string"
           },
           "type": {
