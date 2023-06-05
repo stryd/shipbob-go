@@ -242,4 +242,12 @@ model_warehouse_receiving_order_v2.go
 model_webhook.go
 model_webhook_subscription.go
 response.go
+test/api_channels_test.go
+test/api_inventory_test.go
+test/api_locations_test.go
+test/api_orders_test.go
+test/api_products_test.go
+test/api_receiving_test.go
+test/api_returns_test.go
+test/api_webhooks_test.go
 utils.go
