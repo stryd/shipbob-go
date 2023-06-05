@@ -20,9 +20,9 @@ type ReturnTransactionLogSource string
 
 // List of ReturnTransactionLogSource
 const (
-	RETURN_LABEL_INVOICE  ReturnTransactionLogSource = "ReturnLabelInvoice"
-	RETURN_PROCESSING_FEE ReturnTransactionLogSource = "ReturnProcessingFee"
-	RETURN_TO_SENDER_FEE  ReturnTransactionLogSource = "ReturnToSenderFee"
+	RETURNTRANSACTIONLOGSOURCE_RETURN_LABEL_INVOICE  ReturnTransactionLogSource = "ReturnLabelInvoice"
+	RETURNTRANSACTIONLOGSOURCE_RETURN_PROCESSING_FEE ReturnTransactionLogSource = "ReturnProcessingFee"
+	RETURNTRANSACTIONLOGSOURCE_RETURN_TO_SENDER_FEE  ReturnTransactionLogSource = "ReturnToSenderFee"
 )
 
 // All allowed values of ReturnTransactionLogSource enum

@@ -135,6 +135,11 @@ def remove_unneeded_response_schemas(schema):
 
 def fix_technical_properties(schema):
     if isinstance(schema, dict):
+        if "enum" in schema and "type" in schema and schema["type"] == "integer":
+            if isinstance(schema["enum"][0], str):
+                # go generator is not happy with these types of schemas
+                schema["description"] = '\n'.join([f"{name}({i})." for i, name in enumerate(schema["enum"])])
+                schema["enum"] = list(range(len(schema["enum"])))
         if "$type" in schema:
             schema["ttype"] = schema["$type"]
             del schema["$type"]

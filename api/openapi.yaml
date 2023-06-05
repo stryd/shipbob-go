@@ -5244,16 +5244,26 @@ components:
       - FloorLoadedContainer
       type: string
     PackagingAttribute:
+      description: |-
+        None(0).
+        Fragile(1).
+        Foldable(2).
+        Stackable(3).
+        Book(4).
+        CustomPackaging(5).
+        CustomDunnage(6).
+        MarketingInsert(7).
+        Poster(8).
       enum:
-      - null
-      - null
-      - null
-      - null
-      - null
-      - null
-      - null
-      - null
-      - null
+      - 0
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      - 6
+      - 7
+      - 8
       format: int32
       type: integer
     PackingType:

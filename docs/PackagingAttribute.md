@@ -3,23 +3,23 @@
 ## Enum
 
 
-* `_null` (value: `null`)
+* `_0` (value: `0`)
 
-* `_null` (value: `null`)
+* `_1` (value: `1`)
 
-* `_null` (value: `null`)
+* `_2` (value: `2`)
 
-* `_null` (value: `null`)
+* `_3` (value: `3`)
 
-* `_null` (value: `null`)
+* `_4` (value: `4`)
 
-* `_null` (value: `null`)
+* `_5` (value: `5`)
 
-* `_null` (value: `null`)
+* `_6` (value: `6`)
 
-* `_null` (value: `null`)
+* `_7` (value: `7`)
 
-* `_null` (value: `null`)
+* `_8` (value: `8`)
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

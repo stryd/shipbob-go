@@ -20,8 +20,8 @@ type LocationServiceTypeEnum string
 
 // List of LocationServiceTypeEnum
 const (
-	RECEIVING LocationServiceTypeEnum = "Receiving"
-	RETURNS   LocationServiceTypeEnum = "Returns"
+	LOCATIONSERVICETYPEENUM_RECEIVING LocationServiceTypeEnum = "Receiving"
+	LOCATIONSERVICETYPEENUM_RETURNS   LocationServiceTypeEnum = "Returns"
 )
 
 // All allowed values of LocationServiceTypeEnum enum

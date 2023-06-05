@@ -20,8 +20,8 @@ type ReturnType string
 
 // List of ReturnType
 const (
-	REGULAR          ReturnType = "Regular"
-	RETURN_TO_SENDER ReturnType = "ReturnToSender"
+	RETURNTYPE_REGULAR          ReturnType = "Regular"
+	RETURNTYPE_RETURN_TO_SENDER ReturnType = "ReturnToSender"
 )
 
 // All allowed values of ReturnType enum

@@ -20,13 +20,13 @@ type ReceivingStatus string
 
 // List of ReceivingStatus
 const (
-	AWAITING          ReceivingStatus = "Awaiting"
-	PROCESSING        ReceivingStatus = "Processing"
-	COMPLETED         ReceivingStatus = "Completed"
-	CANCELLED         ReceivingStatus = "Cancelled"
-	INCOMPLETE        ReceivingStatus = "Incomplete"
-	ARRIVED           ReceivingStatus = "Arrived"
-	PARTIALLY_ARRIVED ReceivingStatus = "PartiallyArrived"
+	RECEIVINGSTATUS_AWAITING          ReceivingStatus = "Awaiting"
+	RECEIVINGSTATUS_PROCESSING        ReceivingStatus = "Processing"
+	RECEIVINGSTATUS_COMPLETED         ReceivingStatus = "Completed"
+	RECEIVINGSTATUS_CANCELLED         ReceivingStatus = "Cancelled"
+	RECEIVINGSTATUS_INCOMPLETE        ReceivingStatus = "Incomplete"
+	RECEIVINGSTATUS_ARRIVED           ReceivingStatus = "Arrived"
+	RECEIVINGSTATUS_PARTIALLY_ARRIVED ReceivingStatus = "PartiallyArrived"
 )
 
 // All allowed values of ReceivingStatus enum

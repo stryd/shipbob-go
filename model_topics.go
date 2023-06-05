@@ -20,11 +20,11 @@ type Topics string
 
 // List of Topics
 const (
-	ORDER_SHIPPED      Topics = "order_shipped"
-	SHIPMENT_DELIVERED Topics = "shipment_delivered"
-	SHIPMENT_EXCEPTION Topics = "shipment_exception"
-	SHIPMENT_ONHOLD    Topics = "shipment_onhold"
-	SHIPMENT_CANCELLED Topics = "shipment_cancelled"
+	TOPICS_ORDER_SHIPPED      Topics = "order_shipped"
+	TOPICS_SHIPMENT_DELIVERED Topics = "shipment_delivered"
+	TOPICS_SHIPMENT_EXCEPTION Topics = "shipment_exception"
+	TOPICS_SHIPMENT_ONHOLD    Topics = "shipment_onhold"
+	TOPICS_SHIPMENT_CANCELLED Topics = "shipment_cancelled"
 )
 
 // All allowed values of Topics enum

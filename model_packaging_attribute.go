@@ -15,33 +15,33 @@ import (
 	"fmt"
 )
 
-// PackagingAttribute the model 'PackagingAttribute'
+// PackagingAttribute None(0). Fragile(1). Foldable(2). Stackable(3). Book(4). CustomPackaging(5). CustomDunnage(6). MarketingInsert(7). Poster(8).
 type PackagingAttribute int32
 
 // List of PackagingAttribute
 const (
-	_null PackagingAttribute = null
-	_null PackagingAttribute = null
-	_null PackagingAttribute = null
-	_null PackagingAttribute = null
-	_null PackagingAttribute = null
-	_null PackagingAttribute = null
-	_null PackagingAttribute = null
-	_null PackagingAttribute = null
-	_null PackagingAttribute = null
+	PACKAGINGATTRIBUTE__0 PackagingAttribute = 0
+	PACKAGINGATTRIBUTE__1 PackagingAttribute = 1
+	PACKAGINGATTRIBUTE__2 PackagingAttribute = 2
+	PACKAGINGATTRIBUTE__3 PackagingAttribute = 3
+	PACKAGINGATTRIBUTE__4 PackagingAttribute = 4
+	PACKAGINGATTRIBUTE__5 PackagingAttribute = 5
+	PACKAGINGATTRIBUTE__6 PackagingAttribute = 6
+	PACKAGINGATTRIBUTE__7 PackagingAttribute = 7
+	PACKAGINGATTRIBUTE__8 PackagingAttribute = 8
 )
 
 // All allowed values of PackagingAttribute enum
 var AllowedPackagingAttributeEnumValues = []PackagingAttribute{
-	null,
-	null,
-	null,
-	null,
-	null,
-	null,
-	null,
-	null,
-	null,
+	0,
+	1,
+	2,
+	3,
+	4,
+	5,
+	6,
+	7,
+	8,
 }
 
 func (v *PackagingAttribute) UnmarshalJSON(src []byte) error {
