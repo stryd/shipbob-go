@@ -22,17 +22,15 @@ type FcType struct {
 	// Unique Id for the fulfillment center type
 	Id *int32 `json:"id,omitempty"`
 	// Name of the fc type
-	Name  NullableString `json:"name,omitempty"`
-	Ttype string         `json:"ttype"`
+	Name NullableString `json:"name,omitempty"`
 }
 
 // NewFcType instantiates a new FcType object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewFcType(ttype string) *FcType {
+func NewFcType() *FcType {
 	this := FcType{}
-	this.Ttype = ttype
 	return &this
 }
 
@@ -119,30 +117,6 @@ func (o *FcType) UnsetName() {
 	o.Name.Unset()
 }
 
-// GetTtype returns the Ttype field value
-func (o *FcType) GetTtype() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Ttype
-}
-
-// GetTtypeOk returns a tuple with the Ttype field value
-// and a boolean to check if the value has been set.
-func (o *FcType) GetTtypeOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Ttype, true
-}
-
-// SetTtype sets field value
-func (o *FcType) SetTtype(v string) {
-	o.Ttype = v
-}
-
 func (o FcType) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -159,7 +133,6 @@ func (o FcType) ToMap() (map[string]interface{}, error) {
 	if o.Name.IsSet() {
 		toSerialize["name"] = o.Name.Get()
 	}
-	toSerialize["ttype"] = o.Ttype
 	return toSerialize, nil
 }
 

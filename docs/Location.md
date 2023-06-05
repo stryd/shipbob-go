@@ -15,13 +15,12 @@ Name | Type | Description | Notes
 **Region** | Pointer to [**FulfillmentCenterRegion**](FulfillmentCenterRegion.md) |  | [optional] 
 **Services** | Pointer to [**[]LocationService**](LocationService.md) | Services provided by the location | [optional] 
 **Timezone** | Pointer to **NullableString** | Time zone of the location | [optional] 
-**Ttype** | **string** |  | 
 
 ## Methods
 
 ### NewLocation
 
-`func NewLocation(ttype string, ) *Location`
+`func NewLocation() *Location`
 
 NewLocation instantiates a new Location object
 This constructor will assign default values to properties that have it defined,
@@ -361,26 +360,6 @@ HasTimezone returns a boolean if a field has been set.
 `func (o *Location) UnsetTimezone()`
 
 UnsetTimezone ensures that no value is present for Timezone, not even an explicit nil
-### GetTtype
-
-`func (o *Location) GetTtype() string`
-
-GetTtype returns the Ttype field if non-nil, zero value otherwise.
-
-### GetTtypeOk
-
-`func (o *Location) GetTtypeOk() (*string, bool)`
-
-GetTtypeOk returns a tuple with the Ttype field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetTtype
-
-`func (o *Location) SetTtype(v string)`
-
-SetTtype sets Ttype field to given value.
-
-
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

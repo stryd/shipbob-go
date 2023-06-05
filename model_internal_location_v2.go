@@ -58,9 +58,8 @@ type _InternalLocationV2 InternalLocationV2
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewInternalLocationV2(ttype string) *InternalLocationV2 {
+func NewInternalLocationV2() *InternalLocationV2 {
 	this := InternalLocationV2{}
-	this.Ttype = ttype
 	return &this
 }
 

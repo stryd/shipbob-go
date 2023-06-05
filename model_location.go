@@ -40,16 +40,14 @@ type Location struct {
 	Services []LocationService `json:"services,omitempty"`
 	// Time zone of the location
 	Timezone NullableString `json:"timezone,omitempty"`
-	Ttype    string         `json:"ttype"`
 }
 
 // NewLocation instantiates a new Location object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewLocation(ttype string) *Location {
+func NewLocation() *Location {
 	this := Location{}
-	this.Ttype = ttype
 	return &this
 }
 
@@ -448,30 +446,6 @@ func (o *Location) UnsetTimezone() {
 	o.Timezone.Unset()
 }
 
-// GetTtype returns the Ttype field value
-func (o *Location) GetTtype() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Ttype
-}
-
-// GetTtypeOk returns a tuple with the Ttype field value
-// and a boolean to check if the value has been set.
-func (o *Location) GetTtypeOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Ttype, true
-}
-
-// SetTtype sets field value
-func (o *Location) SetTtype(v string) {
-	o.Ttype = v
-}
-
 func (o Location) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -515,7 +489,6 @@ func (o Location) ToMap() (map[string]interface{}, error) {
 	if o.Timezone.IsSet() {
 		toSerialize["timezone"] = o.Timezone.Get()
 	}
-	toSerialize["ttype"] = o.Ttype
 	return toSerialize, nil
 }
 

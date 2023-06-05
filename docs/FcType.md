@@ -6,13 +6,12 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | Pointer to **int32** | Unique Id for the fulfillment center type | [optional] 
 **Name** | Pointer to **NullableString** | Name of the fc type | [optional] 
-**Ttype** | **string** |  | 
 
 ## Methods
 
 ### NewFcType
 
-`func NewFcType(ttype string, ) *FcType`
+`func NewFcType() *FcType`
 
 NewFcType instantiates a new FcType object
 This constructor will assign default values to properties that have it defined,
@@ -87,26 +86,6 @@ HasName returns a boolean if a field has been set.
 `func (o *FcType) UnsetName()`
 
 UnsetName ensures that no value is present for Name, not even an explicit nil
-### GetTtype
-
-`func (o *FcType) GetTtype() string`
-
-GetTtype returns the Ttype field if non-nil, zero value otherwise.
-
-### GetTtypeOk
-
-`func (o *FcType) GetTtypeOk() (*string, bool)`
-
-GetTtypeOk returns a tuple with the Ttype field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetTtype
-
-`func (o *FcType) SetTtype(v string)`
-
-SetTtype sets Ttype field to given value.
-
-
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

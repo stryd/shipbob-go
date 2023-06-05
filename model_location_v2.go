@@ -34,9 +34,8 @@ type _LocationV2 LocationV2
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewLocationV2(ttype string) *LocationV2 {
+func NewLocationV2() *LocationV2 {
 	this := LocationV2{}
-	this.Ttype = ttype
 	return &this
 }
 

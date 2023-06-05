@@ -15,7 +15,6 @@ Name | Type | Description | Notes
 **Region** | Pointer to [**FulfillmentCenterRegion**](FulfillmentCenterRegion.md) |  | [optional] 
 **Services** | Pointer to [**[]LocationService**](LocationService.md) | Services provided by the location | [optional] 
 **Timezone** | Pointer to **NullableString** | Time zone of the location | [optional] 
-**Ttype** | **string** |  | 
 **OrganizationId** | Pointer to **string** |  | [optional] 
 **OwnerId** | Pointer to **NullableString** |  | [optional] 
 **ParentId** | Pointer to **NullableString** |  | [optional] 
@@ -27,7 +26,7 @@ Name | Type | Description | Notes
 
 ### NewGetLocations200ResponseInner
 
-`func NewGetLocations200ResponseInner(ttype string, ) *GetLocations200ResponseInner`
+`func NewGetLocations200ResponseInner() *GetLocations200ResponseInner`
 
 NewGetLocations200ResponseInner instantiates a new GetLocations200ResponseInner object
 This constructor will assign default values to properties that have it defined,
@@ -367,26 +366,6 @@ HasTimezone returns a boolean if a field has been set.
 `func (o *GetLocations200ResponseInner) UnsetTimezone()`
 
 UnsetTimezone ensures that no value is present for Timezone, not even an explicit nil
-### GetTtype
-
-`func (o *GetLocations200ResponseInner) GetTtype() string`
-
-GetTtype returns the Ttype field if non-nil, zero value otherwise.
-
-### GetTtypeOk
-
-`func (o *GetLocations200ResponseInner) GetTtypeOk() (*string, bool)`
-
-GetTtypeOk returns a tuple with the Ttype field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetTtype
-
-`func (o *GetLocations200ResponseInner) SetTtype(v string)`
-
-SetTtype sets Ttype field to given value.
-
-
 ### GetOrganizationId
 
 `func (o *GetLocations200ResponseInner) GetOrganizationId() string`

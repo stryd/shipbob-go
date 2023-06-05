@@ -4229,8 +4229,6 @@ components:
           description: Name of the fc type
           nullable: true
           type: string
-        ttype:
-          type: string
       required:
       - ttype
       type: object
@@ -4789,8 +4787,6 @@ components:
           description: Time zone of the location
           nullable: true
           type: string
-        ttype:
-          type: string
       required:
       - ttype
       type: object
@@ -5314,8 +5310,6 @@ components:
           type: integer
         title:
           nullable: true
-          type: string
-        ttype:
           type: string
         type:
           nullable: true
