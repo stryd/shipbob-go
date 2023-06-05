@@ -1942,16 +1942,17 @@
         "type": "string"
       },
       "PackagingAttribute": {
+        "description": "None(0).\nFragile(1).\nFoldable(2).\nStackable(3).\nBook(4).\nCustomPackaging(5).\nCustomDunnage(6).\nMarketingInsert(7).\nPoster(8).",
         "enum": [
-          "None",
-          "Fragile",
-          "Foldable",
-          "Stackable",
-          "Book",
-          "CustomPackaging",
-          "CustomDunnage",
-          "MarketingInsert",
-          "Poster"
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
         ],
         "format": "int32",
         "type": "integer"

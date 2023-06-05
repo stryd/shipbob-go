@@ -20,9 +20,9 @@ type ProductActiveStatus string
 
 // List of ProductActiveStatus
 const (
-	ANY      ProductActiveStatus = "Any"
-	ACTIVE   ProductActiveStatus = "Active"
-	INACTIVE ProductActiveStatus = "Inactive"
+	PRODUCTACTIVESTATUS_ANY      ProductActiveStatus = "Any"
+	PRODUCTACTIVESTATUS_ACTIVE   ProductActiveStatus = "Active"
+	PRODUCTACTIVESTATUS_INACTIVE ProductActiveStatus = "Inactive"
 )
 
 // All allowed values of ProductActiveStatus enum

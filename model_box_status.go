@@ -20,12 +20,12 @@ type BoxStatus string
 
 // List of BoxStatus
 const (
-	AWAITING  BoxStatus = "Awaiting"
-	ARRIVED   BoxStatus = "Arrived"
-	COMPLETED BoxStatus = "Completed"
-	COUNTING  BoxStatus = "Counting"
-	STOWING   BoxStatus = "Stowing"
-	CANCELLED BoxStatus = "Cancelled"
+	BOXSTATUS_AWAITING  BoxStatus = "Awaiting"
+	BOXSTATUS_ARRIVED   BoxStatus = "Arrived"
+	BOXSTATUS_COMPLETED BoxStatus = "Completed"
+	BOXSTATUS_COUNTING  BoxStatus = "Counting"
+	BOXSTATUS_STOWING   BoxStatus = "Stowing"
+	BOXSTATUS_CANCELLED BoxStatus = "Cancelled"
 )
 
 // All allowed values of BoxStatus enum

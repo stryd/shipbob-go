@@ -20,11 +20,11 @@ type ReturnStatus string
 
 // List of ReturnStatus
 const (
-	AWAITING_ARRIVAL ReturnStatus = "AwaitingArrival"
-	ARRIVED          ReturnStatus = "Arrived"
-	PROCESSING       ReturnStatus = "Processing"
-	COMPLETED        ReturnStatus = "Completed"
-	CANCELLED        ReturnStatus = "Cancelled"
+	RETURNSTATUS_AWAITING_ARRIVAL ReturnStatus = "AwaitingArrival"
+	RETURNSTATUS_ARRIVED          ReturnStatus = "Arrived"
+	RETURNSTATUS_PROCESSING       ReturnStatus = "Processing"
+	RETURNSTATUS_COMPLETED        ReturnStatus = "Completed"
+	RETURNSTATUS_CANCELLED        ReturnStatus = "Cancelled"
 )
 
 // All allowed values of ReturnStatus enum

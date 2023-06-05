@@ -20,8 +20,8 @@ type SortOrder string
 
 // List of SortOrder
 const (
-	NEWEST SortOrder = "Newest"
-	OLDEST SortOrder = "Oldest"
+	SORTORDER_NEWEST SortOrder = "Newest"
+	SORTORDER_OLDEST SortOrder = "Oldest"
 )
 
 // All allowed values of SortOrder enum

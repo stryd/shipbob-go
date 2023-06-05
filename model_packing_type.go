@@ -20,9 +20,9 @@ type PackingType string
 
 // List of PackingType
 const (
-	EVERYTHING_IN_ONE_BOX PackingType = "EverythingInOneBox"
-	ONE_SKU_PER_BOX       PackingType = "OneSkuPerBox"
-	MULTIPLE_SKU_PER_BOX  PackingType = "MultipleSkuPerBox"
+	PACKINGTYPE_EVERYTHING_IN_ONE_BOX PackingType = "EverythingInOneBox"
+	PACKINGTYPE_ONE_SKU_PER_BOX       PackingType = "OneSkuPerBox"
+	PACKINGTYPE_MULTIPLE_SKU_PER_BOX  PackingType = "MultipleSkuPerBox"
 )
 
 // All allowed values of PackingType enum

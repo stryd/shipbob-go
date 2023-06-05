@@ -20,9 +20,9 @@ type PackageType string
 
 // List of PackageType
 const (
-	PACKAGE                PackageType = "Package"
-	PALLET                 PackageType = "Pallet"
-	FLOOR_LOADED_CONTAINER PackageType = "FloorLoadedContainer"
+	PACKAGETYPE_PACKAGE                PackageType = "Package"
+	PACKAGETYPE_PALLET                 PackageType = "Pallet"
+	PACKAGETYPE_FLOOR_LOADED_CONTAINER PackageType = "FloorLoadedContainer"
 )
 
 // All allowed values of PackageType enum

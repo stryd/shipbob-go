@@ -20,8 +20,8 @@ type ReturnActionSource string
 
 // List of ReturnActionSource
 const (
-	INVENTORY_DEFAULT ReturnActionSource = "InventoryDefault"
-	OVERRIDE          ReturnActionSource = "Override"
+	RETURNACTIONSOURCE_INVENTORY_DEFAULT ReturnActionSource = "InventoryDefault"
+	RETURNACTIONSOURCE_OVERRIDE          ReturnActionSource = "Override"
 )
 
 // All allowed values of ReturnActionSource enum

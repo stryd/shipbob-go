@@ -20,9 +20,9 @@ type ProductBundleStatus string
 
 // List of ProductBundleStatus
 const (
-	ANY        ProductBundleStatus = "Any"
-	BUNDLE     ProductBundleStatus = "Bundle"
-	NOT_BUNDLE ProductBundleStatus = "NotBundle"
+	PRODUCTBUNDLESTATUS_ANY        ProductBundleStatus = "Any"
+	PRODUCTBUNDLESTATUS_BUNDLE     ProductBundleStatus = "Bundle"
+	PRODUCTBUNDLESTATUS_NOT_BUNDLE ProductBundleStatus = "NotBundle"
 )
 
 // All allowed values of ProductBundleStatus enum

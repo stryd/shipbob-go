@@ -20,10 +20,10 @@ type ReturnAction string
 
 // List of ReturnAction
 const (
-	DEFAULT    ReturnAction = "Default"
-	RESTOCK    ReturnAction = "Restock"
-	QUARANTINE ReturnAction = "Quarantine"
-	DISPOSE    ReturnAction = "Dispose"
+	RETURNACTION_DEFAULT    ReturnAction = "Default"
+	RETURNACTION_RESTOCK    ReturnAction = "Restock"
+	RETURNACTION_QUARANTINE ReturnAction = "Quarantine"
+	RETURNACTION_DISPOSE    ReturnAction = "Dispose"
 )
 
 // All allowed values of ReturnAction enum
